@@ -1,0 +1,10 @@
+.DS_Store
+.classpath
+.factorypath
+.project
+.settings
+target
+frontend/node_modules
+frontend/package-lock.json
+src/main/resources/static/*
+src/main/resources/templates/*
