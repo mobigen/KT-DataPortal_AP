@@ -1,0 +1,19 @@
+html {
+  font-size: $base-font-size;
+}
+
+body {
+  @include font-family;
+  @include font-size('12');
+  color: $text-01;
+  background-color: $ui-01;
+  line-height: 1;
+}
+
+code {
+  font-family: $font-family-mono;
+}
+
+strong {
+  font-weight: 700;
+}

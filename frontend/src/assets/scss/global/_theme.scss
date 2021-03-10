@@ -1,0 +1,86 @@
+// Color Theme Variables
+$ui-01: $white-0 !default;
+$ui-02: $gray-10 !default;
+$ui-03: #eeeeee !default;
+$ui-04: $cool-gray-30 !default;
+$interactive-01: $cyan-50 !default;
+$interactive-02: $white-0 !default;
+$text-01: $gray-100 !default;
+$text-02: $cool-gray-60 !default;
+$text-03: $navy-gray-40 !default;
+$text-04: $white-0 !default;
+$text-05: $navy-gray-30 !default;
+$link: $cyan-50 !default;
+$icon-01: $cool-gray-70 !default;
+$icon-02: $navy-gray-40 !default;
+$icon-03: $cyan-30 !default;
+$field-01: $white-0 !default;
+$overlay-01: rgba($gray-20, .5) !default;
+
+// suppport Color Variables
+$support-01: $green-40 !default;
+$support-02: $cyan-50 !default;
+$support-03: $orange-60 !default;
+$support-04: $red-50 !default;
+
+// Interactive Color Variables
+$hover-primary: $cyan-60 !default;
+$hover-secondary: $cool-gray-10 !default;
+$hover-icon: $navy-gray-60 !default;
+$hover-danger: $red-60 !default;
+$hover-ui: $cool-gray-10 !default;
+$hover-ui-accent: $cyan-10 !default;
+$hover-row: $cyan-10 !default;
+$hover-field-border: $cyan-50 !default;
+
+$active-primary: $cyan-70 !default;
+$active-secondary: $cool-gray-20 !default;
+$active-icon: $navy-gray-60 !default;
+$active-danger: $red-70 !default;
+$active-ui: #e5e8ef !default;
+$active-ui-accent: $cyan-20 !default;
+
+$selected-ui-accent: #E5E8EF !default;
+$visited-link: $purple-60 !default;
+$disabled-01: $gray-10 !default;
+$disabled-02: $gray-30 !default;
+
+// Header and Navigation Color Variables
+// ----------------------------------------------
+// Dark style
+// ----------------------------------------------
+// $nav-logo-bg-01: $gray-90 !default;
+// $nav-logo-bg-02: $gray-80 !default;
+// $nav-logo-text-01: $white-0 !default;
+// $nav-top-bg-01: $gray-90 !default;
+// $nav-top-bg-02: $gray-80 !default;
+// $nav-top-border-01: $gray-90 !default;
+// $nav-top-text-01: $gray-30 !default;
+// $nav-top-text-02: $white-0 !default;
+// $nav-bg-01: $white-0 !default;
+// $nav-bg-02: $cool-gray-10 !default;
+// $nav-bg-03: #E5E8EF !default;
+// $nav-text-01: $cool-gray-60 !default;
+// $nav-text-02: $gray-100 !default;
+// $nav-text-03: $cool-gray-50 !default;
+// $nav-text-04: $cool-gray-60 !default;
+// $nav-accent-01: $cyan-50 !default;
+// ----------------------------------------------
+// IRIS style
+// ----------------------------------------------
+$nav-logo-bg-01: $cyan-50 !default;
+$nav-logo-bg-02: $cyan-60 !default;
+$nav-logo-text-01: $white-0 !default;
+$nav-top-bg-01: $cyan-50 !default;
+$nav-top-bg-02: $cyan-60 !default;
+$nav-top-border-01: $cyan-60 !default;
+$nav-top-text-01: $cyan-10 !default;
+$nav-top-text-02: $white-0 !default;
+$nav-bg-01: $white-0 !default;
+$nav-bg-02: $cyan-10 !default;
+$nav-bg-03: $white-0 !default;
+$nav-text-01: $cyan-90 !default;
+$nav-text-02: $cyan-60 !default;
+$nav-text-03: $red-30 !default;
+$nav-text-04: $cyan-40 !default;
+$nav-accent-01: $white-0 !default;
