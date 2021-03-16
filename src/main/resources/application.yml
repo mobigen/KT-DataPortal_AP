@@ -82,10 +82,14 @@ properties:
   iris:
     security:
       ignores: /css/**, /fonts/**, /img/**, /js/**, /favicon.ico
-      permit-alls: /, /h2-console/**, /sample/authenticate, /error
+      permit-alls: /, /h2-console/**, /sample/authenticate, /error, /test
       redirect-url: /
       iframe-option: disable #disable, same-origin, deny
-      cors-allowed-origins: "*"
+      cors:
+        pattern: /** #/auth/**
+        allowed-origins: "*" #http://server-name:port
+        allowed-methods: "*" #PUT,DELETE,GET,POST ...
+        allowed-headers: "*" #Context-Type, ...
       same-site: Lax #None, Lax, Strict
     token:
       name: x-access-token

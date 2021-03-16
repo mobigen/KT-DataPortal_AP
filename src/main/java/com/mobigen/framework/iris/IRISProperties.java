@@ -64,7 +64,16 @@ public class IRISProperties {
         private String[] permitAlls;
         private String redirectUrl;
         private String iframeOption;
-        private String[] corsAllowedOrigins;
         private String sameSite;
+        private CorsProperties cors;
+    }
+
+    @Data
+    @ConfigurationProperties(prefix = "cors")
+    public static class CorsProperties {
+        private String pattern;
+        private String[] allowedOrigins;
+        private String[] allowedMethods;
+        private String[] allowedHeaders;
     }
 }
