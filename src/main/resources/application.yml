@@ -57,13 +57,14 @@ server:
         name: msf-session-id
     encoding:
       charset: UTF-8
+    context-path: /
   compression:
     enabled: true
   tomcat:
     uri-encoding: UTF-8
   error:
     whitelabel:
-      enabled: true
+      enabled: false
 
 i18n:
   basenames: i18n/messages, i18n/exception, i18n/validation
