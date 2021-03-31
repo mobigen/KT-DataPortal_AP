@@ -6,28 +6,29 @@ import Page1 from "@modules/app/pages/page1.vue";
 import Page2 from "@modules/app/pages/page2.vue";
 
 Vue.use(VueRouter);
-
-const routes = [{
-        path: "/app",
-        component: Page1,
-    },
-    {
-        path: "/app/page1",
-        component: Page1,
-    },
-    {
-        path: "/app/page2",
-        component: Page2,
-    },
-    {
-        path: "*",
-        component: Error,
-    },
+const routes = [
+  {
+    path: "/",
+    component: Page1
+  },
+  {
+    path: "/app/page1",
+    component: Page1
+  },
+  {
+    path: "/app/page2",
+    component: Page2
+  },
+  {
+    path: "*",
+    component: Error
+  }
 ];
 
 const router = new VueRouter({
-    mode: "history",
-    routes,
+  mode: "history",
+  base: process.env.VUE_APP_PUBLIC_PATH,
+  routes
 });
 
 export default router;

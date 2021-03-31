@@ -188,11 +188,11 @@ public class Token {
 
         String message = (String) body.get("message");
         switch (message) {
-            case "token_fine":
-                return token;
-            case "refresh_success":
-                String xAccessToken = headers.get("x-access-token").get(0);
-                return xAccessToken;
+        case "token_fine":
+            return token;
+        case "refresh_success":
+            String xAccessToken = headers.get("x-access-token").get(0);
+            return xAccessToken;
         }
 
         return null;
@@ -210,11 +210,11 @@ public class Token {
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT jwt = verifier.verify(xAccessToken);
             jwt.getExpiresAt();
-            return true;
+            return false;
         } catch (Exception e) {
         }
 
-        return false;
+        return true;
     }
 
     /**

@@ -53,7 +53,7 @@ export default {
         method: "POST"
       }).then(data => {
         this.$cookie.set("x-access-token", data);
-        window.location.href = "/app";
+        window.location.href = "app";
       });
     }
   },

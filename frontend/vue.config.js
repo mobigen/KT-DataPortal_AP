@@ -12,7 +12,7 @@ module.exports = {
     proxy: "http://localhost:8888",
     port: 8000
   },
-  publicPath: "/",
+  publicPath: process.env.VUE_APP_PUBLIC_PATH,
   outputDir: "../src/main/resources/static",
   pages: {
     index: {
@@ -26,7 +26,8 @@ module.exports = {
       entry: "src/modules/app/app.js",
       template: "public/app.html",
       filename: process.env.VUE_APP_PAGES_APP_FILENAME,
-      title: "IRIS Web software development kit - APP"
+      title: "IRIS Web software development kit - APP",
+      chunks: ["chunk-vendors", "chunk-common", "app"]
     },
     error: {
       entry: "src/modules/error/error.js",

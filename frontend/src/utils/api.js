@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let __config = {
-  // baseURL: process.env.VUE_APP_BASE_URL
+  baseURL: process.env.VUE_APP_AXIOS_BASE_URL
   // timeout: 0,
   // withCredentials: false,
   // maxContentLength: 2000,
