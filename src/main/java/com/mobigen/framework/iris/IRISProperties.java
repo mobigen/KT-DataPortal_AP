@@ -14,12 +14,21 @@ public class IRISProperties {
     private UrlProperties url;
     private RouteProperties route;
     private SecurityProperties security;
+    private TestProperties test;
 
     @Data
     @ConfigurationProperties(prefix = "token")
     public static class TokenProperties {
         private String name;
         private String secret;
+    }
+
+    @Data
+    @ConfigurationProperties(prefix = "test")
+    public static class TestProperties {
+        private String brickUsername;
+        private String brickPassword;
+        private Boolean localForceLoginEnable;
     }
 
     @Data
