@@ -25,7 +25,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.client.RestTemplate;
@@ -38,7 +41,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HttpClientConfiguration {
     @Autowired
     private Messages message;
-    
+
     @Value("${http-client-configuration.max-total}")
     private int maxTotal = 0;
 
@@ -131,7 +134,21 @@ public class HttpClientConfiguration {
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         requestFactory.setHttpClient(this.httpClient());
-        return new RestTemplate(requestFactory);
+
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        List<MediaType> supportedMediaTypes = new ArrayList<MediaType>();
+        supportedMediaTypes.add(MediaType.APPLICATION_JSON);
+        supportedMediaTypes.add(MediaType.APPLICATION_FORM_URLENCODED);
+        supportedMediaTypes.add(MediaType.TEXT_HTML);
+
+        converter.setSupportedMediaTypes(supportedMediaTypes);
+        messageConverters.add(converter);
+
+        RestTemplate restTemplate = new RestTemplate(requestFactory);
+        restTemplate.setMessageConverters(messageConverters);
+
+        return restTemplate;
     }
 
     @Bean
@@ -149,7 +166,8 @@ public class HttpClientConfiguration {
                     log.info(message.get("HttpClientConfiguration.idleConnectionMonitor") + "={}",
                             connectionManager.getTotalStats().getAvailable());
                 } catch (Exception e) {
-                    log.error(message.get("com.mobigen.framework.configuration.HttpClientConfiguration") + "={}, e={}", e.getMessage(), e);
+                    log.error(message.get("com.mobigen.framework.configuration.HttpClientConfiguration") + "={}, e={}",
+                            e.getMessage(), e);
                 }
             }
         };
