@@ -83,7 +83,7 @@ properties:
   iris:
     security:
       ignores: /css/**, /fonts/**, /img/**, /js/**, /favicon.ico
-      permit-alls: /, /h2-console/**, /sample/authenticate, /error, /test, /api/**
+      permit-alls: /, /h2-console/**, /sample/public-key, /sample/authenticate, /error, /test, /api/**
       redirect-url: /
       iframe-option: disable #disable, same-origin, deny
       cors:
@@ -108,7 +108,9 @@ properties:
         token-check: "${properties.iris.server.angora}/ping"
     route:
       locales: ko,en,zh,ja
+    auth:
+      rsa-enabled: true
     test:
       brick-username: root
       brick-password: "!Biris.test202"
-      local-force-login-enable: true
+      local-force-login-enabled: false

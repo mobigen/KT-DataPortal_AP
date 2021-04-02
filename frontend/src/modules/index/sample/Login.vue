@@ -29,6 +29,7 @@
 </template>
 
 <script type="text/javascript">
+import RSA from "rsajs";
 export default {
   name: "Login",
   extends: {},
@@ -43,18 +44,48 @@ export default {
   components: {},
   watch: {},
   methods: {
-    submit: function() {
-      this.$api({
-        url: "/sample/authenticate",
-        data: {
-          username: this.username,
-          password: this.password
-        },
-        method: "POST"
-      }).then(data => {
-        this.$cookie.set("x-access-token", data);
+    async submit() {
+      let publicKey = await this.getPublicKey();
+      let password = this.password;
+
+      if (publicKey && publicKey != "") {
+        password = this.encrypt(publicKey, this.password);
+      }
+
+      let xAccessToken = await this.auth(this.username, password);
+      console.log(publicKey, xAccessToken);
+
+      if (xAccessToken && xAccessToken != "") {
+        this.$cookie.set("x-access-token", xAccessToken);
         window.location.href = "app";
-      });
+      }
+    },
+    async getPublicKey() {
+      let data = null;
+      try {
+        data = await this.$api.get("/sample/authenticate/key");
+      } catch (e) {
+        console.error(e);
+      }
+      return data;
+    },
+    async auth(username, password) {
+      let data = null;
+      try {
+        data = await this.$api.post("/sample/authenticate", {
+          username: username,
+          password: password
+        });
+      } catch (e) {
+        console.error(e);
+      }
+      return data;
+    },
+    encrypt(key, source) {
+      const encrypt = new RSA();
+      encrypt.setKey(key);
+
+      return encrypt.encrypt(source);
     }
   },
   beforeCreate() {},

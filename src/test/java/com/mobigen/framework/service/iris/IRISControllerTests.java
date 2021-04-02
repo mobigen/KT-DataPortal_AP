@@ -22,8 +22,8 @@ public class IRISControllerTests extends AbstractRestDocTest {
     private IRISProperties properties;
 
     private String getXAccessToken() throws Exception {
-        String username = "root";
-        String password = "!Biris.test202";
+        String username = properties.getTest().getBrickUsername();
+        String password = properties.getTest().getBrickPassword();
         String xAccessToken = token.getXAccessToken(username, password);
         return xAccessToken;
     }

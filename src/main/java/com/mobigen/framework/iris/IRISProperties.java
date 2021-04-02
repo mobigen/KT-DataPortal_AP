@@ -14,6 +14,7 @@ public class IRISProperties {
     private UrlProperties url;
     private RouteProperties route;
     private SecurityProperties security;
+    private AuthProperties auth;
     private TestProperties test;
 
     @Data
@@ -28,7 +29,7 @@ public class IRISProperties {
     public static class TestProperties {
         private String brickUsername;
         private String brickPassword;
-        private Boolean localForceLoginEnable;
+        private Boolean localForceLoginEnabled;
     }
 
     @Data
@@ -75,6 +76,12 @@ public class IRISProperties {
         private String iframeOption;
         private String sameSite;
         private CorsProperties cors;
+    }
+
+    @Data
+    @ConfigurationProperties(prefix = "auth")
+    public static class AuthProperties {
+        private Boolean rsaEnabled;
     }
 
     @Data

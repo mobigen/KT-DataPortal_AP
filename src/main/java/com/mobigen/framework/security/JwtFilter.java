@@ -28,7 +28,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private final IRISProperties properties;
 
     private Boolean isLocal(HttpServletRequest request) {
-        if (!properties.getTest().getLocalForceLoginEnable()) {
+        if (!properties.getTest().getLocalForceLoginEnabled()) {
             return false;
         }
 
