@@ -1,6 +1,7 @@
 <template lang="html">
   <div id="app">
     <h1>Hello!! IRIS Web Developement Framework World!!</h1>
+    <a href="/sample/logout"> LOG OUT!!! </a>
     <ul>
       <li>
         <router-link to="/app/page1">Page1</router-link>

@@ -12,20 +12,22 @@ import com.mobigen.framework.iris.IRISProperties;
 import com.mobigen.framework.iris.Token;
 import com.mobigen.framework.iris.User;
 
-import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Component
-@AllArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
-    private final Token token;
-    private final SessionManager sessionManager;
-    private final IRISProperties properties;
+    private Token token;
+    private SessionManager sessionManager;
+    private IRISProperties properties;
+
+    public JwtFilter(Token token, SessionManager sessionManager, IRISProperties properties) {
+        this.token = token;
+        this.sessionManager = sessionManager;
+        this.properties = properties;
+    }
 
     private Boolean isLocal(HttpServletRequest request) {
         if (!properties.getTest().getLocalForceLoginEnabled()) {
@@ -83,6 +85,7 @@ public class JwtFilter extends OncePerRequestFilter {
                         xAccessTokenCookie.setHttpOnly(true);
                         response.addCookie(xAccessTokenCookie);
                         user = token.getUserByXAccessToken(xAccessToken);
+                        log.debug("MAKE SESSION (LOCAL): {}", xAccessToken);
                     } else {
                         user = token.getUserByHttpServletRequest(request);
                     }

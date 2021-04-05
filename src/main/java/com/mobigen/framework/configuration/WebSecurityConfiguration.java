@@ -3,8 +3,9 @@ package com.mobigen.framework.configuration;
 import java.util.Arrays;
 
 import com.mobigen.framework.iris.IRISProperties;
+import com.mobigen.framework.iris.Token;
 import com.mobigen.framework.security.JwtAuthenticationEntryPoint;
-import com.mobigen.framework.security.JwtFilter;
+import com.mobigen.framework.security.SessionManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +15,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -29,7 +29,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
 	@Autowired
-	private JwtFilter jwtFilter;
+	private Token token;
+
+	@Autowired
+	private SessionManager sessionManager;
 
 	@Autowired
 	private IRISProperties properties;
@@ -74,7 +77,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		}
 
 		// add JWT token filter
-		http = http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+		http.apply(new JWTSecurityConfiguration(token, sessionManager, properties));
 	}
 
 	@Bean

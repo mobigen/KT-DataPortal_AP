@@ -113,4 +113,4 @@ properties:
     test:
       brick-username: root
       brick-password: "!Biris.test202"
-      local-force-login-enabled: false
+      local-force-login-enabled: true

@@ -12,7 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
@@ -20,8 +19,6 @@ import lombok.AllArgsConstructor;
 @Component
 @AllArgsConstructor
 public class SessionManager {
-	private final SecurityContextRepository repository;
-
 	/**
 	 * 계정 정보를 직접 전달하여 세션 생성
 	 * 
@@ -43,9 +40,10 @@ public class SessionManager {
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user, null,
 				grantedAuths);
 		authenticationToken.setDetails(user);
-		SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
-		repository.saveContext(SecurityContextHolder.getContext(), request, response);
+		SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+		// repository.saveContext(SecurityContextHolder.getContext(), request,
+		// response);
 
 		return user;
 	}
