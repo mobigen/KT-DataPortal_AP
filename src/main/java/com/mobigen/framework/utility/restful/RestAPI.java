@@ -19,6 +19,12 @@ public class RestAPI extends Rest {
         return result;
     }
 
+    private JsonResult getErrorJsonResult(Exception e) {
+        JsonResult result = new JsonResult();
+        result.setErrorMessage(e);
+        return result;
+    }
+
     public JsonResult get(String url) {
         return this.get(url, false);
     }
@@ -36,7 +42,7 @@ public class RestAPI extends Rest {
         try {
             r = super.methodGet(url, parameter, extraHeaders, isResponseEntity);
         } catch (Exception e) {
-            return new JsonResult(e);
+            return getErrorJsonResult(e);
         }
 
         return getJsonResult(r, isResponseEntity);
@@ -51,7 +57,7 @@ public class RestAPI extends Rest {
         try {
             r = super.methodPost(url, parameter, null, isResponseEntity);
         } catch (Exception e) {
-            return new JsonResult(e);
+            return getErrorJsonResult(e);
         }
 
         return getJsonResult(r, isResponseEntity);
@@ -62,7 +68,7 @@ public class RestAPI extends Rest {
         try {
             r = super.methodPost(url, parameter, extraHeaders, isResponseEntity);
         } catch (Exception e) {
-            return new JsonResult(e);
+            return getErrorJsonResult(e);
         }
 
         return getJsonResult(r, isResponseEntity);
@@ -73,7 +79,7 @@ public class RestAPI extends Rest {
         try {
             r = super.methodPut(url, parameter, isResponseEntity);
         } catch (Exception e) {
-            return new JsonResult(e);
+            return getErrorJsonResult(e);
         }
 
         return getJsonResult(r, isResponseEntity);
@@ -84,7 +90,7 @@ public class RestAPI extends Rest {
         try {
             r = super.methodDelete(url, parameter, isResponseEntity);
         } catch (Exception e) {
-            return new JsonResult(e);
+            return getErrorJsonResult(e);
         }
 
         return getJsonResult(r, isResponseEntity);
