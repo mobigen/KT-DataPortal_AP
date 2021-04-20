@@ -57,7 +57,7 @@ module.exports = {
     loaderOptions: {
       sass: {
         prependData: `
-          @import '@/assets/scss/global/_vars.scss';
+          @import '@/assets/main.scss';
         `
       }
     }
