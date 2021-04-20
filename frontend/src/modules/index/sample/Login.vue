@@ -1,9 +1,9 @@
 <template lang="html">
   <div>
-    <form class="login_form" @submit.prevent="submit">
+    <form class="form login-form" @submit.prevent="submit">
       <label for="username">사용자명:</label><br />
       <input
-        class="login_form-label"
+        class="text-input"
         type="text"
         id="username"
         v-model="username"
@@ -12,7 +12,7 @@
       /><br />
       <label for="password">비밀번호:</label><br />
       <input
-        class="login_form-password"
+        class="text-input"
         type="password"
         id="password"
         v-model="password"
@@ -23,7 +23,7 @@
         <option value="korean">한국어</option>
         <option value="English">English</option> </select
       ><br />
-      <input type="submit" class="login_form-submit" value="로그인" />
+      <button type="submit" class="button button--primary button--lg w-12_12">로그인</button>
     </form>
   </div>
 </template>
@@ -94,5 +94,5 @@ export default {
 </script>
 
 <style lang="scss">
-// @import ""
+@import "Login.scss";
 </style>
