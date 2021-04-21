@@ -1,7 +1,8 @@
 <template lang="html">
   <div>
     <form class="form login-form" @submit.prevent="submit">
-      <label for="username">사용자명:</label><br />
+      <icon data="@icon/user-setting.svg"></icon
+      ><label for="username"> 사용자명:</label><br />
       <input
         class="text-input"
         type="text"
@@ -10,6 +11,7 @@
         maxlength="10"
         required
       /><br />
+      <icon data="@icon/key.svg"></icon>
       <label for="password">비밀번호:</label><br />
       <input
         class="text-input"
@@ -23,7 +25,9 @@
         <option value="korean">한국어</option>
         <option value="English">English</option> </select
       ><br />
-      <button type="submit" class="button button--primary button--lg w-12_12">로그인</button>
+      <button type="submit" class="button button--primary button--lg w-12_12">
+        로그인
+      </button>
     </form>
   </div>
 </template>
