@@ -1,4 +1,4 @@
-[submodule "frontend/src/assets/style-core"]
-	path = frontend/src/assets/style-core
+[submodule "source/frontend/src/assets/style-core"]
+	path = source/frontend/src/assets/style-core
 	url = https://github.com/mobigen/IRIS-Design-Core
 	branch = dev
