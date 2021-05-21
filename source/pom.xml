@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mobigen.iris</groupId>
-    <artifactId>IrisWdfs</artifactId>
+    <artifactId>iris-wdfs</artifactId>
     <version>3.0.0</version>
     <packaging>jar</packaging>
 
@@ -22,7 +22,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.boot.mainclass>com.mobigen.sample.SampleApplication</spring.boot.mainclass>
         <java.version>11</java.version>
-        <finalName>IrisWdfs</finalName>
+        <finalName>iris-wdfs</finalName>
     </properties>
 
     <dependencies>
