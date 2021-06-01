@@ -39,14 +39,35 @@ distSourceDir=$baseDir/dist-source
 # docker config 정보 불러오기
 source $templateSvcDir/docker-conf/docker.conf
 
+set +e
+
 ## docker image tag 를 위한 정보
-# current date YYYYMMdd
-today=$(date +%Y%m%d)
-## load version
-newVersion="v2"
+# release version
+git fetch --all --tags
+# ex) v3.0.0
+verRelease=$(git describe --tags --abbrev=0 2> /dev/null)
+# version tag가 없을 수도 있음.
+if [ -z "$verRelease" ]; then
+    verRelease="no_version"
+fi
+
+today=$(date +%Y%m%d) # YYYYMMdd
+# TODO: 빌드 회수만큼 카운트 증가
+buildCnt="0"
 headHash=$(git rev-parse --short=7 HEAD)
-dataFormat=`date +%Y`
-newVersion=${newVersion}.${today}.0-${headHash}
+
+# NOTE: 단일 노드 docker 버전을 위해 유지
+# ex) v3.0.0-c452bc2
+imageTag="${verRelease}_${headHash}"
+# ex) v3.0.0-RC20210601.0
+verRC="${verRelease}-RC${today}.${buildCnt}"
+
+# ex) repo.iris.tools/iris/<service_id>
+harborRepo="repo.iris.tools/iris/${appId}"
+# ex) v3.0.0-RC20210601.0-c452bc2
+harborTag="${verRC}-${headHash}"
+
+set -e
 
 function check() {
     echo "========================================================="
@@ -134,7 +155,7 @@ function build() {
         --build-arg SERVICE_ID=${SERVICE_ID} \
         --build-arg CONTAINER_HOME=${CONTAINER_HOME} \
         --build-arg SERVICE_HOME=${SERVICE_HOME} \
-        -t $IMAGE_NAME:$newVersion \
+        -t $harborRepo:$harborTag \
         $dockerDir
 
     cd $baseDir
@@ -202,7 +223,7 @@ function package() {
     fnSet 6 IMAGE_NAME=$IMAGE_NAME $targetSvcDir/install/$appId.sh
 
     # output docker image
-    docker save -o $targetSvcDir/images/$appId.tar.gz $IMAGE_NAME:$newVersion
+    docker save -o $targetSvcDir/images/$appId.tar.gz $IMAGE_NAME:$harborTag
 
     if [ $? != 0 ]; then
         echo "[ERROR] docker save failed."
@@ -211,10 +232,10 @@ function package() {
 
     # Tar all the results
     cd $targetDir
-    tar cvzf $appId-dist-$newVersion-$today.tar.gz service
+    tar cvzf $appId-dist-$harborTag-$today.tar.gz service
 
     mkdir $distDockerDir
-    mv $targetDir/$appId-dist-$newVersion-$today.tar.gz $distDockerDir
+    mv $targetDir/$appId-dist-$harborTag-$today.tar.gz $distDockerDir
 
     cd $baseDir
 
@@ -240,7 +261,7 @@ else
     echo "## Docker Build End"
     echo "========================================================="
 
-    echo "target: $IMAGE_NAME:$newVersion"
+    echo "target: $IMAGE_NAME:$harborTag"
     echo "result: `docker images | grep ${IMAGE_NAME} | awk '{print $1":"$2}'`"
 
     echo ''
