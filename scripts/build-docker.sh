@@ -151,7 +151,8 @@ function build() {
     # NOTE: docker build 는 Dockerfile 경로를 지정하거나 파일과 같은 위치에서 수행해야 한다.
     cd $dockerDir
 
-    docker build \
+    docker buildx build \
+        --platform=linux/amd64 \
         --build-arg SERVICE_ID=${SERVICE_ID} \
         --build-arg CONTAINER_HOME=${CONTAINER_HOME} \
         --build-arg SERVICE_HOME=${SERVICE_HOME} \
