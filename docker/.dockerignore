@@ -36,7 +36,6 @@ node_modules/
 
 ### Eclipse ###
 .metadata
-/bin
 *.tmp
 *.bak
 *.swp
@@ -60,9 +59,6 @@ node_modules/
 # Java annotation processor (APT)
 .factorypath
 
-# sbteclipse plugin
-.target
-target/
 
 # STS (Spring Tool Suite)
 .springBeans
@@ -96,7 +92,7 @@ mvnw.cmd
 
 
 ### Visual Studio Code ###
-.vscode/
+.vscode/*
 
 
 ### SublimeText ###
@@ -128,17 +124,7 @@ nbdist/
 
 
 ### IRIS Web Development Framework
-# docker build
-/dist-source/
-/dist-docker/
-/docker/target/
-
-# frontend
-/source/frontend/src/assets/style-product/images/compiled-svg-icons/
-
-# backend
-/source/src/main/resources/static/
-/source/src/main/resources/templates/
+template/
 
 
 ### Only this project ###
