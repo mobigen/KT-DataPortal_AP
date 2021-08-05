@@ -1,13 +1,13 @@
 package com.mobigen.framework.exception;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.aop.ThrowsAdvice;
 import org.springframework.stereotype.Component;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Aspect
 @Component
@@ -19,16 +19,21 @@ public class ControllerThrowAdvice implements ThrowsAdvice {
 		Object[] args = null;
 
 		if (ex instanceof JsonResultException) {
-			messageKey = ((JsonResultException)ex).getMessageKey();
-			args = ((JsonResultException)ex).getArgs();
+			messageKey = ((JsonResultException) ex).getMessageKey();
+			args = ((JsonResultException) ex).getArgs();
 		}
 
-		if (messageKey == "") {
+		if ("".equals(messageKey)) {
 			messageKey = getMessageKey(thisJoinPoint);
 		}
-		
-		JsonResultException exception = new JsonResultException(messageKey, args, ex);
-		throw exception;
+
+		throw new JsonResultException(messageKey, args, ex);
+	}
+
+	@AfterThrowing(pointcut = "@annotation(com.mobigen.framework.result.annotation.ResponseJsonResult)", throwing = "ex")
+	public void throwingHandler(JoinPoint thisJoinPoint, Exception ex) throws JsonResultException {
+		String messageKey = getMessageKey(thisJoinPoint);
+		throw new JsonResultException(messageKey, null, ex);
 	}
 
 	private String getMessageKey(JoinPoint thisJoinPoint) {
@@ -39,7 +44,7 @@ public class ControllerThrowAdvice implements ThrowsAdvice {
 		if (!matcher.find()) {
 			return "";
 		}
-		
+
 		path = matcher.group(0);
 		return path;
 	}
