@@ -1,5 +1,8 @@
 package com.mobigen.framework.exception;
 
+import com.mobigen.framework.component.Messages;
+import com.mobigen.framework.result.JsonResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
@@ -10,11 +13,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.mobigen.framework.component.Messages;
-import com.mobigen.framework.result.JsonResult;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
@@ -65,8 +63,13 @@ public class GlobalExceptionHandler {
         return getExceptionJsonResult(e);
     }
 
-    private String getMessageKey(FieldError e) {
-        String errorCode = e.getCodes()[0];
+    private String getMessageKey(FieldError error) {
+        String errorCode = "";
+        String[] codes = error.getCodes();
+        if (codes != null && codes.length > 0) {
+            errorCode = codes[0];
+        }
+
         return errorCode;
     }
 
@@ -82,14 +85,14 @@ public class GlobalExceptionHandler {
             msg = ((Exception) e).getMessage();
         }
 
-        if (msg == null || "".equals("")) {
+        if (msg == null || "".equals(msg)) {
             msg = message.get("com.mobigen.framework.exception.GlobalExceptionHandler");
         }
 
         return msg;
     }
 
-    private Object[] getArguments(Object e) throws Exception {
+    private Object[] getArguments(Object e) {
         Object[] arguments = null;
         if (e instanceof FieldError) {
             arguments = ((FieldError) e).getArguments();
@@ -100,7 +103,7 @@ public class GlobalExceptionHandler {
         return arguments;
     }
 
-    private String getMessageKey(Object e) throws Exception {
+    private String getMessageKey(Object e) {
         String key = "";
 
         if (e instanceof FieldError) {
@@ -124,7 +127,7 @@ public class GlobalExceptionHandler {
             Object[] arguments = getArguments(error);
             msg = message.get(key, arguments);
 
-            if (msg == null || "".equals(msg)) {
+            if (msg == null || key.equals(msg) || "".equals(msg)) {
                 msg = getDefaultMessage(error);
             }
         } catch (Exception e) {
