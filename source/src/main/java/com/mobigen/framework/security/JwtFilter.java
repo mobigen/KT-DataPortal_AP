@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mobigen.framework.iris.IRISProperties;
+import com.mobigen.framework.iris.IRISProperties.TestProperties;
 import com.mobigen.framework.iris.Token;
 import com.mobigen.framework.iris.User;
 
@@ -30,7 +31,8 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
     private Boolean isLocal(HttpServletRequest request) {
-        if (!properties.getTest().getLocalForceLoginEnabled()) {
+        TestProperties testProp = properties.getTest();
+        if (null == testProp || true != testProp.getLocalForceLoginEnabled()) {
             return false;
         }
 
@@ -93,6 +95,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 }
             } catch (Exception e) {
                 log.error(e.getMessage());
+                e.printStackTrace();
             }
         }
 
