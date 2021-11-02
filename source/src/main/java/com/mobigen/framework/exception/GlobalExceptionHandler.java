@@ -2,6 +2,7 @@ package com.mobigen.framework.exception;
 
 import com.mobigen.framework.component.Messages;
 import com.mobigen.framework.result.JsonResult;
+import io.sentry.Sentry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
@@ -26,7 +27,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public JsonResult bindExceptionHandler(BindException e) {
         log.error(message.get("com.mobigen.framework.exception.GlobalExceptionHandler.bindExceptionHandler"), e);
-        return getExceptionJsonResult(e.getFieldError());
+        return getExceptionJsonResult(e, e.getFieldError());
     }
 
     // JSON Validation
@@ -36,7 +37,7 @@ public class GlobalExceptionHandler {
         log.error(message.get("com.mobigen.framework.exception.GlobalExceptionHandler.methodArgumentNotValidExceptionHandler"), e);
 
         BindingResult bindingResult = e.getBindingResult();
-        return getExceptionJsonResult(bindingResult.getFieldError());
+        return getExceptionJsonResult(e, bindingResult.getFieldError());
     }
 
     // Controller
@@ -44,7 +45,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public JsonResult jsonResultExceptionHandler(JsonResultException e) {
         log.error(message.get("com.mobigen.framework.exception.GlobalExceptionHandler.jsonResultExceptionHandler"), e);
-        return getExceptionJsonResult(e);
+        return getExceptionJsonResult(e, e);
     }
 
     // Authentication
@@ -52,7 +53,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public JsonResult accessDeniedExceptionHandler(AccessDeniedException e) {
         log.error(message.get("com.mobigen.framework.exception.GlobalExceptionHandler.accessDeniedExceptionHandler"), e);
-        return getExceptionJsonResult(e);
+        return getExceptionJsonResult(e, e);
     }
 
     // Unknown
@@ -60,7 +61,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public JsonResult unknownExceptionHandler(Exception e) {
         log.error(message.get("com.mobigen.framework.exception.GlobalExceptionHandler.unknownExceptionHandler"), e);
-        return getExceptionJsonResult(e);
+        return getExceptionJsonResult(e, e);
     }
 
     private String getMessageKey(FieldError error) {
@@ -120,8 +121,8 @@ public class GlobalExceptionHandler {
         return key;
     }
 
-    private JsonResult getExceptionJsonResult(Object error) {
-        String msg = "";
+    private JsonResult getExceptionJsonResult(Exception exception, Object error) {
+        String msg;
         try {
             String key = getMessageKey(error);
             Object[] arguments = getArguments(error);
@@ -137,6 +138,8 @@ public class GlobalExceptionHandler {
         JsonResult js = new JsonResult();
         js.setErrorMessage(msg);
 
+        // sentry
+        Sentry.captureException(exception, msg);
         return js;
     }
 

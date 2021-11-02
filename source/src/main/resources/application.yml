@@ -8,7 +8,7 @@ spring:
 
   output:
     ansi:
-      enabled: always
+      enabled: detect
 
   devtools:
     livereload:
@@ -77,6 +77,10 @@ http-client-configuration:
   connection-timeout: 3000
   socket-timeout: -1
   idle-timeout: 60
+
+sentry:
+  dsn: https://c10f0211c0bb41af973f1f5ebf7fda60@o924939.ingest.sentry.io/6044951
+  traces-sample-rate: 1.0
 
 # 사용자 정의 설정들
 properties:
