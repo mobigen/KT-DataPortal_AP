@@ -11,13 +11,10 @@ export default {
     foo: {},
     fooBar: {}
   },
-  data() {},
   computed: {},
   components: {},
   watch: {},
-  methods: {},
-  beforeCreate() {},
-  mounted() {}
+  methods: {}
 };
 </script>
 

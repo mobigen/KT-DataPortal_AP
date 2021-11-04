@@ -7,6 +7,7 @@
 
 <script type="text/javascript">
 import Login from "./sample/Login";
+
 export default {
   name: "Index",
   extends: {},
@@ -21,9 +22,7 @@ export default {
     Login
   },
   watch: {},
-  methods: {},
-  beforeCreate() {},
-  mounted() {}
+  methods: {}
 };
 </script>
 
