@@ -1,12 +1,13 @@
 package com.mobigen.framework.iris;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.stereotype.Component;
 
 @Data
 @Component
+@ConfigurationPropertiesScan
 @ConfigurationProperties(prefix = "properties.iris")
 public class IRISProperties {
     private TokenProperties token;
@@ -22,6 +23,7 @@ public class IRISProperties {
     public static class TokenProperties {
         private String name;
         private String secret;
+        private int maxAge;
     }
 
     @Data

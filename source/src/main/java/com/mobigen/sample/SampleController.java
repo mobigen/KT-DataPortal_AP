@@ -10,6 +10,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @Slf4j
@@ -33,7 +35,7 @@ public class SampleController {
 
     @ResponseJsonResult
     @PostMapping("/authenticate")
-    public Object authenticate(@RequestBody Map<String, String> param) throws Exception {
+    public Object authenticate(@RequestBody Map<String, String> param, HttpServletRequest request, HttpServletResponse response) throws Exception {
         String username = param.get("username");
         String password = param.get("password");
 
@@ -44,7 +46,7 @@ public class SampleController {
         }
         log.debug("== AFTER RSA Password[{}]", password);
 
-        return sampleService.authenticate(username, password);
+        return sampleService.authenticate(request, response, username, password);
     }
 
     @ResponseJsonResult

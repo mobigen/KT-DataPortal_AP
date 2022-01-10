@@ -33,6 +33,11 @@ spring:
     console:
       enabled: true
 
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+
 #   datasource:
 #     hikari:
 #       jdbc-url: jdbc:mariadb://192.168.102.112:3308/was
@@ -65,6 +70,7 @@ server:
   error:
     whitelabel:
       enabled: false
+    path: /error
 
 i18n:
   basenames: i18n/messages, i18n/exception, i18n/validation
@@ -80,7 +86,9 @@ http-client-configuration:
 
 sentry:
   dsn: https://c10f0211c0bb41af973f1f5ebf7fda60@o924939.ingest.sentry.io/6044951
-  traces-sample-rate: 1.0
+  traces-sample-rate: 1
+  logging:
+    enabled: off
 
 # 사용자 정의 설정들
 properties:
@@ -99,6 +107,7 @@ properties:
     token:
       name: x-access-token
       secret: jwt-secrect-b-iris
+      max-age: 3600
     server:
       brick: http://192.168.102.202
       angora: http://192.168.102.202:6036/angora
@@ -117,4 +126,3 @@ properties:
     test:
       brick-username: root
       brick-password: "!Biris.test202"
-      local-force-login-enabled: true

@@ -136,7 +136,7 @@ public class GlobalExceptionHandler {
         }
 
         JsonResult js = new JsonResult();
-        js.setErrorMessage(msg);
+        js.setErrorMessage("[IWDF] " + msg);
 
         // sentry
         Sentry.captureException(exception, msg);

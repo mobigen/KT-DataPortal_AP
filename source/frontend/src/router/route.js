@@ -8,6 +8,10 @@ import Page2 from "@modules/app/pages/page2.vue";
 Vue.use(VueRouter);
 const routes = [
   {
+    path: "/",
+    redirect: "./app"
+  },
+  {
     path: "/app",
     component: Page1
   },

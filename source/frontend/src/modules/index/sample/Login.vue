@@ -23,7 +23,7 @@
       /><br />
       <select id="locale" class="login_form-locale">
         <option value="korean">한국어</option>
-        <option value="English">English</option> </select
+        <option value="English">English</option></select
       ><br />
       <button type="submit" class="button button--primary button--lg w-12_12">
         로그인
@@ -33,7 +33,7 @@
 </template>
 
 <script type="text/javascript">
-import RSA from "rsajs";
+import jsEncrypt from "rsajs";
 
 export default {
   name: "Login",
@@ -61,24 +61,21 @@ export default {
       console.info(publicKey, xAccessToken);
 
       if (xAccessToken && xAccessToken !== "") {
-        this.$cookie.set("x-access-token", xAccessToken);
         window.location.href = "app";
       }
     },
     async getPublicKey() {
-      return await this.$api.get("/api/authenticate/key");
+      return this.$api.get("/api/authenticate/key");
     },
     async auth(username, password) {
-      return await this.$api.post("/api/authenticate", {
+      return this.$api.post("/api/authenticate", {
         username: username,
         password: password
       });
     },
     encrypt(key, source) {
-      const encrypt = new RSA();
-      encrypt.setKey(key);
-
-      return encrypt.encrypt(source);
+      jsEncrypt.setKey(key);
+      return jsEncrypt.encrypt(source);
     }
   }
 };
