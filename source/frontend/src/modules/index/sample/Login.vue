@@ -1,8 +1,8 @@
 <template lang="html">
   <div>
     <form class="form login-form" @submit.prevent="submit">
-      <icon data="@icon/user-setting.svg"></icon
-      ><label for="username"> 사용자명:</label><br />
+      <icon data="@icon/user-setting.svg"></icon>
+      <label for="username"> 사용자명1:</label><br />
       <input
         class="text-input"
         type="text"
@@ -23,7 +23,7 @@
       /><br />
       <select id="locale" class="login_form-locale">
         <option value="korean">한국어</option>
-        <option value="English">English</option> </select
+        <option value="English">English</option></select
       ><br />
       <button type="submit" class="button button--primary button--lg w-12_12">
         로그인
@@ -33,7 +33,8 @@
 </template>
 
 <script type="text/javascript">
-import RSA from "rsajs";
+import jsEncrypt from "rsajs";
+
 export default {
   name: "Login",
   extends: {},
@@ -52,48 +53,31 @@ export default {
       let publicKey = await this.getPublicKey();
       let password = this.password;
 
-      if (publicKey && publicKey != "") {
+      if (publicKey && publicKey !== "") {
         password = this.encrypt(publicKey, this.password);
       }
 
       let xAccessToken = await this.auth(this.username, password);
-      console.log(publicKey, xAccessToken);
+      console.info(publicKey, xAccessToken);
 
-      if (xAccessToken && xAccessToken != "") {
-        this.$cookie.set("x-access-token", xAccessToken);
+      if (xAccessToken && xAccessToken !== "") {
         window.location.href = "app";
       }
     },
     async getPublicKey() {
-      let data = null;
-      try {
-        data = await this.$api.get("/sample/authenticate/key");
-      } catch (e) {
-        console.error(e);
-      }
-      return data;
+      return this.$api.get("/api/authenticate/key");
     },
     async auth(username, password) {
-      let data = null;
-      try {
-        data = await this.$api.post("/sample/authenticate", {
-          username: username,
-          password: password
-        });
-      } catch (e) {
-        console.error(e);
-      }
-      return data;
+      return this.$api.post("/api/authenticate", {
+        username: username,
+        password: password
+      });
     },
     encrypt(key, source) {
-      const encrypt = new RSA();
-      encrypt.setKey(key);
-
-      return encrypt.encrypt(source);
+      jsEncrypt.setKey(key);
+      return jsEncrypt.encrypt(source);
     }
-  },
-  beforeCreate() {},
-  mounted() {}
+  }
 };
 </script>
 

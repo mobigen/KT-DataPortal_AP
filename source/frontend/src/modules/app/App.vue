@@ -19,14 +19,9 @@ export default {
   name: "App",
   extends: {},
   props: {},
-  data: function() {
-    return {};
-  },
   computed: {},
   components: {},
   watch: {},
-  methods: {},
-  beforeCreate() {},
-  mounted() {}
+  methods: {}
 };
 </script>

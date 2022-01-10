@@ -6,5 +6,5 @@ Vue.config.productionTip = false;
 
 new Vue({
   i18n,
-  render: h => h(Error)
+  render: (h) => h(Error)
 }).$mount("#error");

@@ -1,22 +1,21 @@
 package com.mobigen.sample;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import javax.servlet.http.Cookie;
-
 import com.mobigen.framework.iris.IRISProperties;
 import com.mobigen.framework.iris.Token;
 import com.mobigen.framework.test.AbstractRestDocTest;
-
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class SampleApplicationTests extends AbstractRestDocTest {
+import javax.servlet.http.Cookie;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+class SampleApplicationTests extends AbstractRestDocTest {
     @Autowired
     private Token token;
 
@@ -31,12 +30,12 @@ public class SampleApplicationTests extends AbstractRestDocTest {
     }
 
     @Test
-    public void testGetUser() throws Exception {
+    void testGetUser() throws Exception {
         // given
         String xAccessToken = getXAccessToken();
 
         // when
-        ResultActions result = this.mockMvc.perform(get("/sample/user").accept(MediaType.APPLICATION_JSON)
+        ResultActions result = this.mockMvc.perform(get("/api/user").accept(MediaType.APPLICATION_JSON)
                 .header(properties.getToken().getName(), xAccessToken));
         String content = result.andReturn().getResponse().getContentAsString();
         result.andExpect(status().isOk()).andDo(print());
@@ -46,13 +45,13 @@ public class SampleApplicationTests extends AbstractRestDocTest {
     }
 
     @Test
-    public void testGetusername() throws Exception {
+    void testGetusername() throws Exception {
         // given
         String xAccessToken = getXAccessToken();
-        String username = "admin";
+        String username = "root";
 
         // when
-        ResultActions result = this.mockMvc.perform(get("/sample/user/{username}", username)
+        ResultActions result = this.mockMvc.perform(get("/api/user/{username}", username)
                 .accept(MediaType.APPLICATION_JSON).header(properties.getToken().getName(), xAccessToken));
         String content = result.andReturn().getResponse().getContentAsString();
         result.andExpect(status().isOk()).andDo(print());
@@ -62,14 +61,14 @@ public class SampleApplicationTests extends AbstractRestDocTest {
     }
 
     @Test
-    public void testLocale() throws Exception {
+    void testLocale() throws Exception {
         // TEST ENGLISH =====================
         // given
         Cookie cookie = new Cookie("locale", "en");
         String xAccessToken = getXAccessToken();
 
         // when
-        ResultActions result = this.mockMvc.perform(get("/sample/message").accept(MediaType.APPLICATION_JSON)
+        ResultActions result = this.mockMvc.perform(get("/api/message").accept(MediaType.APPLICATION_JSON)
                 .cookie(cookie).header(properties.getToken().getName(), xAccessToken).session(this.mockSession));
         String content = result.andReturn().getResponse().getContentAsString();
         result.andExpect(status().isOk()).andDo(print());
@@ -84,7 +83,7 @@ public class SampleApplicationTests extends AbstractRestDocTest {
 
         // when
         result = this.mockMvc.perform(
-                get("/sample/message").accept(MediaType.APPLICATION_JSON).cookie(cookie).session(this.mockSession));
+                get("/api/message").accept(MediaType.APPLICATION_JSON).cookie(cookie).session(this.mockSession));
         content = result.andReturn().getResponse().getContentAsString();
         result.andExpect(status().isOk()).andDo(print());
 

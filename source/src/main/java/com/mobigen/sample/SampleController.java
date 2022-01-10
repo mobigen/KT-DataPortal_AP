@@ -1,25 +1,21 @@
 package com.mobigen.sample;
 
-import java.util.Map;
-
 import com.mobigen.framework.iris.IRISProperties;
 import com.mobigen.framework.iris.User;
 import com.mobigen.framework.result.annotation.ResponseJsonResult;
 import com.mobigen.framework.utility.RSA;
-
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @Slf4j
-@RequestMapping("/sample")
+@RequestMapping("/api")
 @Controller
 @AllArgsConstructor
 public class SampleController {
@@ -31,7 +27,7 @@ public class SampleController {
     @GetMapping("/authenticate/key")
     public Object publicKey() throws Exception {
         String base64PublicKey = null;
-        if (properties.getAuth().getRsaEnabled()) {
+        if (Boolean.TRUE.equals(properties.getAuth().getRsaEnabled())) {
             base64PublicKey = rsa.getBase64PublicKeyFromKeyPair(rsa.getKeyPair());
         }
         return base64PublicKey;
@@ -39,17 +35,18 @@ public class SampleController {
 
     @ResponseJsonResult
     @PostMapping("/authenticate")
-    public Object authenticate(@RequestBody Map<String, String> param) throws Exception {
+    public Object authenticate(@RequestBody Map<String, String> param, HttpServletRequest request, HttpServletResponse response) throws Exception {
         String username = param.get("username");
         String password = param.get("password");
 
         log.debug("== BEFORE RSA Password[{}]", password);
-        if (properties.getAuth().getRsaEnabled()) {
+        Boolean result = properties.getAuth().getRsaEnabled();
+        if (Boolean.TRUE.equals(result)) {
             password = rsa.decryptRSA(password, rsa.getKeyPair().getPrivate());
         }
         log.debug("== AFTER RSA Password[{}]", password);
 
-        return sampleService.authenticate(username, password);
+        return sampleService.authenticate(request, response, username, password);
     }
 
     @ResponseJsonResult

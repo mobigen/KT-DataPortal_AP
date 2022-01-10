@@ -9,4 +9,4 @@
 "com.mobigen.framework.security.SessionManager": "Session Manager Error"
 "com.mobigen.framework.security.SessionManager.changeLocale": "Change Session Locale Error"
 "com.mobigen.framework.utility.restful.RestAPI": "RestAPI Error"
-"com.mobigen.framework.iris.Token.getXAccessToken": "ログインに失敗しました。ユーザー情報を再度確認してください。"
+"com.mobigen.sample.SampleController.authenticate": "ログインに失敗しました。ユーザー情報を再度確認してください。"

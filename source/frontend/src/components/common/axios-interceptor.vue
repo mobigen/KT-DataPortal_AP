@@ -44,7 +44,7 @@ export default {
       this.hideLoader();
 
       let data = response.data;
-      if (data.hasOwnProperty("result") && data.result == 0) {
+      if (data.hasOwnProperty("result") && data.result === 0) {
         alert(this.getErrorMessage(data.errorMessage));
         return Promise.reject(response);
       }
@@ -60,7 +60,7 @@ export default {
       if (config.noLoader) {
         return;
       }
-      if (this.requestCount == 0) {
+      if (this.requestCount === 0) {
         this.loader = this.$loading.show({
           //container: this.$refs.loadingContainer,
           //canCancel: true, // default false
@@ -79,7 +79,7 @@ export default {
     },
     hideLoader() {
       this.requestCount--;
-      if (this.requestCount == 0) {
+      if (this.requestCount === 0) {
         this.loader.hide();
       }
     }

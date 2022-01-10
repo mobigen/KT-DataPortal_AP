@@ -1,13 +1,13 @@
 package com.mobigen.framework.iris;
 
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @Data
 @ToString
@@ -37,7 +37,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -62,7 +62,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.userPass;
+        return null;
     }
 
     @Override
