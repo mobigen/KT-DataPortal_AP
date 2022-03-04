@@ -33,7 +33,7 @@
 </template>
 
 <script type="text/javascript">
-import jsEncrypt from "rsajs";
+import RSA from "rsajs";
 
 export default {
   name: "Login",
@@ -64,18 +64,20 @@ export default {
         window.location.href = "app";
       }
     },
-    async getPublicKey() {
+    getPublicKey() {
       return this.$api.get("/api/authenticate/key");
     },
-    async auth(username, password) {
+    auth(username, password) {
       return this.$api.post("/api/authenticate", {
         username: username,
         password: password
       });
     },
     encrypt(key, source) {
-      jsEncrypt.setKey(key);
-      return jsEncrypt.encrypt(source);
+      const encrypt = new RSA();
+      encrypt.setKey(key);
+
+      return encrypt.encrypt(source);
     }
   }
 };
