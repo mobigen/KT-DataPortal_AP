@@ -66,4 +66,10 @@ public class SampleController {
     public Object getUser(@PathVariable String username) throws Exception {
         return sampleService.getUser(username);
     }
+
+    @ResponseJsonResult
+    @GetMapping("/sample-images")
+    public Object getSampleImages(int count) throws Exception {
+        return sampleService.getSampleImages(count);
+    }
 }

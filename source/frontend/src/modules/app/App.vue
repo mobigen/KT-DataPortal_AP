@@ -4,13 +4,14 @@
     <a href="/sample/logout"> LOG OUT!!! </a>
     <ul>
       <li>
-        <router-link to="/app/page1">Page1</router-link>
+        <router-link to="/app/form-sample">Form Sample</router-link>
       </li>
       <li>
-        <router-link to="/app/page2">Page2</router-link>
+        <router-link to="/app/image-list-sample">Image List Sample</router-link>
       </li>
     </ul>
     <router-view></router-view>
+    <axios-interceptor />
   </div>
 </template>
 

@@ -2,8 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Error from "@modules/error/Error.vue";
-import Page1 from "@modules/app/pages/page1.vue";
-import Page2 from "@modules/app/pages/page2.vue";
+import FormSample from "@modules/app/pages/form-sample.vue";
+import ImageListSample from "@modules/app/pages/image-list-sample.vue";
 
 Vue.use(VueRouter);
 const routes = [
@@ -13,15 +13,15 @@ const routes = [
   },
   {
     path: "/app",
-    component: Page1
+    component: FormSample
   },
   {
-    path: "/app/page1",
-    component: Page1
+    path: "/app/form-sample",
+    component: FormSample
   },
   {
-    path: "/app/page2",
-    component: Page2
+    path: "/app/image-list-sample",
+    component: ImageListSample
   },
   {
     path: "*",

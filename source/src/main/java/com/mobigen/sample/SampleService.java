@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -29,5 +33,16 @@ public class SampleService {
         String xAccessToken = token.getXAccessToken(username, password);
         sessionManager.addTokenToResponse(request, response, xAccessToken);
         return xAccessToken;
+    }
+
+    public Object getSampleImages(int count) throws Exception {
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            Map<String, Object> image = new HashMap<>();
+            image.put("id", i);
+            image.put("src", "https://i.pravatar.cc/300?img=" + (i + 1));
+            list.add(image);
+        }
+        return list;
     }
 }
