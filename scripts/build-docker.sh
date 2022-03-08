@@ -106,10 +106,9 @@ function clear() {
     # docker image 제거
     echo '-remove docker image'
     imageIds=`docker images -a | grep $appId | awk '{print $3}' | uniq`
-    for imgId in $imageIds
-    do
-        docker rmi $imgId 2> /dev/null
-    done
+    if [[ ! -z $imageIds ]]; then
+        docker rmi -f $imageIds
+    fi
 
     echo '-remove directory'
     if [[ -d $distDockerDir ]]; then
