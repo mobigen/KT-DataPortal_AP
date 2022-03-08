@@ -22,6 +22,7 @@ export default {
   },
   created() {
     Vue.use(LoadingOverlay);
+
     let api = Vue.prototype.$api;
     api.interceptors.request.use(this.requestSuccess, this.requestError);
     api.interceptors.response.use(this.responseSuccess, this.responseError);

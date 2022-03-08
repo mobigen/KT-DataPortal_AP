@@ -10,7 +10,7 @@
           class="form-control"
           v-model="user.email"
           minlength="4"
-          maxlength="12"
+          maxlength="30"
           required
         />
       </div>
@@ -96,31 +96,31 @@
       <div class="card-body">
         <h4 class="card-title">Form Data</h4>
         <p>
-          Mail: <b>{{ user.email }}</b>
+          Mail: <strong>{{ user.email }}</strong>
         </p>
         <p>
-          Password: <b>{{ user.password }}</b>
+          Password: <strong>{{ user.password }}</strong>
         </p>
         <p>
-          Satisfaction: <b>{{ user.satisfaction }}</b>
+          Satisfaction: <strong>{{ user.satisfaction }}</strong>
         </p>
         <p style="white-space: pre">
-          Message: <b>{{ message }}</b>
+          Message: <strong>{{ message }}</strong>
         </p>
         <p>Checkbox Options:</p>
         <ul>
           <li v-for="item in checkboxOptions" :key="item">
-            <b>{{ item }}</b>
+            <strong>{{ item }}</strong>
           </li>
         </ul>
         <p>
-          Gender: <b>{{ radioBoxOption }}</b>
+          Gender: <strong>{{ radioBoxOption }}</strong>
         </p>
         <p>
-          Priority: <b>{{ selectedPriority }}</b>
+          Priority: <strong>{{ selectedPriority }}</strong>
         </p>
         <p>
-          Switched: <b>{{ customSwitch }}</b>
+          Switched: <strong>{{ customSwitch }}</strong>
         </p>
       </div>
     </div>
@@ -128,8 +128,10 @@
 </template>
 
 <script type="text/javascript">
+import { mapMutations } from "vuex";
+
 export default {
-  name: "Page1",
+  name: "FormSample",
   extends: {},
   props: {},
   data: function () {
@@ -151,60 +153,17 @@ export default {
   components: {},
   watch: {},
   methods: {
+    ...mapMutations("sample", ["setName"]),
     submitted(e) {
       this.isSubmitted = true;
+      this.setName(this.user.email);
+
       e.preventDefault();
     }
   }
 };
 </script>
 
-<style>
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-control {
-  display: block;
-  width: 400px;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.btn {
-  display: inline-block;
-  font-weight: 400;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  margin-top: 10px;
-}
-
-btn:not(:disabled):not(.disabled) {
-  cursor: pointer;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-}
+<style lang="css">
+@import "./form-sample.css";
 </style>

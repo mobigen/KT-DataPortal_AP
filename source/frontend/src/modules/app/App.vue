@@ -2,6 +2,9 @@
   <div id="app">
     <h1>Hello!! IRIS Web Developement Framework World!!</h1>
     <a href="/sample/logout"> LOG OUT!!! </a>
+    <br />
+    <img :src="userPhoto" />
+    <h2>{{ name }}</h2>
     <ul>
       <li>
         <router-link to="/app/form-sample">Form Sample</router-link>
@@ -16,11 +19,15 @@
 </template>
 
 <script type="text/javascript">
+import { mapGetters } from "vuex";
+
 export default {
   name: "App",
   extends: {},
   props: {},
-  computed: {},
+  computed: {
+    ...mapGetters("sample", ["userPhoto", "name"])
+  },
   components: {},
   watch: {},
   methods: {}

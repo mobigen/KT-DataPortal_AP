@@ -16,29 +16,41 @@
     </form>
     <br />
     <br />
-    <img v-for="image in images" :src="image.src" :key="image.id" />
+    <img
+      v-for="image in userPhotoList"
+      :src="image.src"
+      :key="image.id"
+      @click="clickImage(image.src)"
+    />
   </div>
 </template>
 
 <script type="text/javascript">
+import { mapActions, mapGetters, mapMutations } from "vuex";
+
 export default {
-  name: "Page2",
+  name: "ImageListSample",
   extends: {},
   props: {},
   data: function () {
     return {
-      images: [],
-      count: 0
+      count: 5
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters("sample", ["userPhotoList"])
+  },
   components: {},
   watch: {},
   methods: {
-    async getImages() {
-      this.images = await this.$api.get(
-        "/api/sample-images?count=" + this.count
-      );
+    ...mapActions("sample", ["getUserPhotos"]),
+    ...mapMutations("sample", ["setPhoto"]),
+    getImages(e) {
+      e.preventDefault();
+      this.getUserPhotos(this.count);
+    },
+    clickImage(src) {
+      this.setPhoto(src);
     }
   }
 };
