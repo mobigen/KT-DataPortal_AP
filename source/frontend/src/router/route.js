@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import Error from "@modules/error/Error.vue";
 import FormSample from "@modules/app/sample/form-sample.vue";
 import ImageListSample from "@modules/app/sample/image-list-sample.vue";
+import SearchTemplate from "@modules/app/pages/search-template.vue";
 
 Vue.use(VueRouter);
 const routes = [
@@ -22,6 +23,10 @@ const routes = [
   {
     path: "/app/image-list-sample",
     component: ImageListSample
+  },
+  {
+    path: "/app/search-template",
+    component: SearchTemplate
   },
   {
     path: "*",

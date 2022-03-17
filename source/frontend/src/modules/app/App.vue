@@ -12,6 +12,9 @@
       <li>
         <router-link to="/app/image-list-sample">Image List Sample</router-link>
       </li>
+      <li>
+        <router-link to="/app/search-template">Search Template Sample</router-link>
+      </li>
     </ul>
     <router-view></router-view>
     <axios-interceptor />
@@ -33,3 +36,8 @@ export default {
   methods: {}
 };
 </script>
+<style>
+#app{
+  background-color: #f7f9fc;
+}
+</style>

@@ -11,7 +11,6 @@ import App from "@modules/app/App.vue";
 
 // svg-icon
 import { VueSvgIcon } from "@yzfe/vue-svgicon";
-import "@yzfe/svgicon/lib/svgicon.css";
 
 Vue.config.productionTip = false;
 
