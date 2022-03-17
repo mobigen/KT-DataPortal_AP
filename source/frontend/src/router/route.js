@@ -2,9 +2,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Error from "@modules/error/Error.vue";
-import FormSample from "@modules/app/sample/form-sample.vue";
-import ImageListSample from "@modules/app/sample/image-list-sample.vue";
-import SearchTemplate from "@modules/app/pages/search-template.vue";
+import FormSample from "@modules/app/sample/form/form-sample.vue";
+import ImageListSample from "@modules/app/sample/image-list/image-list-sample.vue";
+import SearchTemplate from "@modules/app/sample/search/search-template.vue";
 
 Vue.use(VueRouter);
 const routes = [

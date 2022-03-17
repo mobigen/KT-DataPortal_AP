@@ -1,9 +1,7 @@
 <template lang="html">
   <div class="search">
     <div class="search-head">
-      <h3 class="search-head__title">
-        매체별 검색
-      </h3>
+      <h3 class="search-head__title">매체별 검색</h3>
       <div class="search-head__breadcrumb">
         <div class="breadcrumb">
           <span class="breadcrumb__text"> Depth1 </span>
@@ -17,8 +15,8 @@
 </template>
 
 <script type="text/javascript">
-import SearchFilter from "../sample/search-filter.vue"
-import SearchResult from "../sample/search-result.vue"
+import SearchFilter from "./search-filter.vue";
+import SearchResult from "./search-result.vue";
 
 export default {
   name: "SearchTemplate",
@@ -39,5 +37,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./search-template"
+@import "./search-template";
 </style>
