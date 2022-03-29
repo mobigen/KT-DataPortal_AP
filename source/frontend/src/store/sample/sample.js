@@ -3,8 +3,8 @@ import Vue from "vue";
 const sample = {
   namespaced: true,
   state: {
-    name: "orangutan",
-    photo: "https://avatars.githubusercontent.com/u/25652173?v=4",
+    name: "cat",
+    photo: "https://a.wattpad.com/useravatar/Sundew_01.256.440713.jpg",
     images: []
   },
   getters: {
