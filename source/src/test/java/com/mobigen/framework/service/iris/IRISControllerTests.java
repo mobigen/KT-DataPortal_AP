@@ -6,14 +6,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.mobigen.framework.iris.IRISProperties;
 import com.mobigen.framework.iris.Token;
 import com.mobigen.framework.test.AbstractRestDocTest;
-import com.mobigen.sample.SampleApplication;
+import com.mobigen.dataPortal.DataPortalApplication;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.ResultActions;
 
-@ContextConfiguration(classes = SampleApplication.class)
+@ContextConfiguration(classes = DataPortalApplication.class)
 public class IRISControllerTests extends AbstractRestDocTest {
     @Autowired
     private Token token;

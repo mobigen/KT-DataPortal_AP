@@ -19,21 +19,35 @@ module.exports = {
       entry: "src/modules/index/index.js",
       template: "public/index.html",
       filename: process.env.VUE_APP_PAGES_INDEX_FILENAME,
-      title: "IRIS Web software development kit - INDEX",
+      title: "DataPorter - INDEX",
       chunks: ["chunk-vendors", "chunk-common", "index"]
     },
     app: {
-      entry: "src/modules/app/app.js",
+      entry: "src/modules/app/main.js",
       template: "public/app.html",
       filename: process.env.VUE_APP_PAGES_APP_FILENAME,
-      title: "IRIS Web software development kit - APP",
+      title: "DataPorter - APP",
       chunks: ["chunk-vendors", "chunk-common", "app"]
     },
     error: {
       entry: "src/modules/error/error.js",
       template: "public/error.html",
       filename: process.env.VUE_APP_PAGES_ERROR_FILENAME,
-      title: "IRIS Web software development kit - Error"
+      title: "DataPorter - Error"
+    },
+    superAdmin: {
+      entry: "src/modules/superAdmin/main.js",
+      template: "public/superAdmin.html",
+      filename: process.env.VUE_APP_PAGES_SUPER_ADMIN_FILENAME,
+      title: "DataPorter - SUPER ADMIN",
+      chunks: ["chunk-vendors", "chunk-common", "superAdmin"]
+    },
+    admin: {
+      entry: "src/modules/admin/main.js",
+      template: "public/admin.html",
+      filename: process.env.VUE_APP_PAGES_ADMIN_FILENAME,
+      title: "DataPorter - ADMIN",
+      chunks: ["chunk-vendors", "chunk-common", "admin"]
     }
   },
   configureWebpack: {

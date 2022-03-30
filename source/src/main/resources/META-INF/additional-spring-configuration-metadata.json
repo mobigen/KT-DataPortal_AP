@@ -63,6 +63,16 @@
     {
       "name": "properties",
       "description": "각종 속성값들"
+    },
+    {
+      "name": "spring.autoconfigure.datasource.hikari.jdbc-url",
+      "type": "java.lang.String",
+      "description": "Description for spring.autoconfigure.datasource.hikari.jdbc-url."
+    },
+    {
+      "name": "spring.servlet.datasource.hikari.username",
+      "type": "java.lang.String",
+      "description": "Description for spring.servlet.datasource.hikari.username."
     }
   ]
 }

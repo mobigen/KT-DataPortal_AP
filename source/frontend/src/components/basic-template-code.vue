@@ -7,14 +7,13 @@ export default {
   name: "BasicTemplate",
   extends: {},
   props: {
-    bar: {},
-    foo: {},
-    fooBar: {}
+    sampleProps: {}
   },
   computed: {},
   components: {},
   watch: {},
-  methods: {}
+  methods: {},
+  created() {}
 };
 </script>
 

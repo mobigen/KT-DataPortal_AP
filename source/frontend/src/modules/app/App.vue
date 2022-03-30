@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="app">
     <h1>Hello!! IRIS Web Developement Framework World!!</h1>
-    <a href="/sample/logout"> LOG OUT!!! </a>
+    <a href="/dataPortal/logout"> LOG OUT!!! </a>
     <br />
     <img :src="userPhoto" />
     <h2>{{ name }}</h2>

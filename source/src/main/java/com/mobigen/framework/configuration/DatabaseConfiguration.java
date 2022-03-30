@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages = { "com.mobigen", "com.sample" })
+@MapperScan(basePackages = { "com.mobigen", "com.dataPortal" })
 public class DatabaseConfiguration {
     @Bean(name = "hikariTransactionManager")
     public DataSourceTransactionManager hikariTransactionManager(@Qualifier("hikariDataSource") DataSource dataSource) {

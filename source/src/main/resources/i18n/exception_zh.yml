@@ -9,4 +9,4 @@
 "com.mobigen.framework.security.SessionManager": "Session Manager Error"
 "com.mobigen.framework.security.SessionManager.changeLocale": "Change Session Locale Error"
 "com.mobigen.framework.utility.restful.RestAPI": "RestAPI Error"
-"com.mobigen.sample.SampleController.authenticate": "登录失败请再次检查您的用户信息。"
+"com.mobigen.dataPortal.DataPortalController.authenticate": "登录失败请再次检查您的用户信息。"

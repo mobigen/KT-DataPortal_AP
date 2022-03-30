@@ -1,21 +1,47 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import sample from "./sample/sample";
+import admin from "./admin/admin";
+import app from "./app/app";
+import superAdmin from "./superAdmin/superAdmin";
+import constants from "@/constants/constants";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   modules: {
-    sample: sample
+    constants: constants,
+    sample: sample,
+    admin: admin,
+    app: app,
+    superAdmin: superAdmin
   }
 });
 
 if (module.hot) {
   module.hot.accept(["./sample/sample"], () => {
-    const sample = require("./sample/sample").default;
+    const dataPortal = require("./sample/sample").default;
     store.hotUpdate({
       modules: {
-        sample
+        dataPortal
+      }
+    });
+  });
+
+  module.hot.accept(["./superAdmin/superAdmin"], () => {
+    const dataPortal = require("./superAdmin/superAdmin").default;
+    store.hotUpdate({
+      modules: {
+        dataPortal
+      }
+    });
+  });
+
+  module.hot.accept(["./admin/admin"], () => {
+    const dataPortal = require("./admin/admin").default;
+    store.hotUpdate({
+      modules: {
+        dataPortal
       }
     });
   });
