@@ -28,7 +28,7 @@ spring:
       password: dhub.12#
       driver-class-name: org.postgresql.Driver
       maximumPoolSize: 3
-      connection-test-query: SELECT 1r
+      connection-test-query: SELECT 1
 
   autoconfigure:
     exclude:
