@@ -7,12 +7,12 @@ public class SQLResult {
     public SQLResult() {
     }
 
-    private Object data = null;
+    private Object body = null;
     private Object header = null;
 
     public SQLResult(Object header, Object data) {
         this.setHeader(header);
-        this.setData(data);
+        this.setBody(data);
     }
 
     public Object getHeader() {
@@ -23,11 +23,11 @@ public class SQLResult {
         header = value;
     }
 
-    public Object getData() {
-        return data;
+    public Object getBody() {
+        return body;
     }
 
-    public void setData(Object value) {
-        data = value;
+    public void setBody(Object value) {
+        this.body = value;
     }
 }
