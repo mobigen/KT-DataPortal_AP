@@ -4,6 +4,7 @@
 <!--suppress ALL -->
 <mapper namespace="com.mobigen.dataPortal.mapper.MetaManagementMapper">
     <select id="getMetaNameList" resultType="java.util.Map">
-        SELECT * FROM tb_biz_meta_name;
+        SELECT *
+        FROM tb_biz_meta_name;
     </select>
 </mapper>
