@@ -54,6 +54,10 @@ const routes = [
       {
         path: "/superAdmin/page2",
         component: () => import("@modules/superAdmin/pages/page2")
+      },
+      {
+        path: "/superAdmin/metaName",
+        component: () => import("@modules/superAdmin/pages/metaName")
       }
     ]
   },
