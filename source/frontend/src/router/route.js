@@ -40,6 +40,10 @@ const routes = [
       {
         path: "page2",
         component: () => import("@modules/admin/pages/page2")
+      },
+      {
+        path: "metaList",
+        component: () => import("@modules/admin/pages/metaList")
       }
     ]
   },

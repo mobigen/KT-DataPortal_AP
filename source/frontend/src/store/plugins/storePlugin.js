@@ -40,7 +40,6 @@ export function storePlugin(store) {
         body: newBody
       };
 
-      console.log(d);
       store.commit(mutation.type, d);
     }
   });
