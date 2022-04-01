@@ -2,10 +2,10 @@ const sample = {
   namespaced: true,
 
   state: {
-    name: ""
+    metaList: []
   },
   getters: {
-    name(state) {
+    metaList(state) {
       return state.name;
     }
   },

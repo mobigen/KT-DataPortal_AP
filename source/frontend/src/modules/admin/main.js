@@ -8,6 +8,8 @@ import store from "@/store/app";
 //import { Integrations } from "@sentry/tracing";
 import AxiosInterceptor from "@/components/common/axios-interceptor.vue";
 import App from "@modules/admin/Admin.vue";
+// import vuexMixin from "@/mixins/vuexMixin";
+// Vue.mixin(vuexMixin);
 
 // svg-icon
 import { VueSvgIcon } from "@yzfe/vue-svgicon";

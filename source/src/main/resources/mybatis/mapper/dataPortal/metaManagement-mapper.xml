@@ -7,4 +7,39 @@
         SELECT *
         FROM tb_biz_meta_name;
     </select>
+    <!-- meta form 형식 조회 -->
+    <select id="getBizMetaForm" resultType="java.util.Map">
+        select item_id, kor_name, eng_name, tbmm.name_id, reference_table, type
+        from metasch.tb_biz_meta_map tbmm
+                 left join metasch.tb_biz_meta_name tbmn on tbmm.name_id = tbmn.name_id
+        ;
+    </select>
+
+    <!-- 단일 meta 조회 -->
+    <select id="getBizMeta" resultType="java.util.Map">
+        select *
+        from metasch.tb_biz_meta tbm
+                 left join metasch.tb_biz_meta_map tbmm on tbm.item_id = tbmm.item_id
+                 left join metasch.tb_biz_meta_name tbmn on tbmm.name_id = tbmn.name_id
+        where biz_dataset_id = #{dataSetId}
+        order by tbm.item_id;
+    </select>
+
+    <!-- meta form list 목록 조회-->
+    <select id="getBizMetaList" resultType="java.util.Map">
+        select T.biz_dataset_id,
+               array_agg(T.item_val) as data,
+               array_agg(T.item_id)  as columnKey
+        from (
+                 select biz_dataset_id, tbm.item_id, tbm.item_val, tbmm.name_id, kor_name, eng_name
+                 from metasch.tb_biz_meta tbm
+                          right join metasch.tb_biz_meta_map tbmm on tbm.item_id = tbmm.item_id
+                          left join metasch.tb_biz_meta_name tbmn on tbmm.name_id = tbmn.name_id
+                 order by biz_dataset_id, item_id
+             ) T
+        group by biz_dataset_id
+        order by biz_dataset_id;
+    </select>
+
+
 </mapper>

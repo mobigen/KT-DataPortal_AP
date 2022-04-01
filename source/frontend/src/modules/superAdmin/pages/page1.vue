@@ -2,29 +2,31 @@
   <div>
     <div>super admin page1</div>
     <div>
-      {{ metaName }}
+      {{ bizMetaList }}
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
+// import vuexMixin from "@/mixins/vuexMixin";
 
 export default {
   name: "super-admin-page1",
+  // mixins: [vuexMixin],
   extends: {},
   props: {},
   computed: {
-    ...mapGetters("superAdmin", ["metaName"])
+    ...mapGetters("metaForm", ["bizMetaList"])
   },
   components: {},
   watch: {},
   methods: {
-    ...mapActions("superAdmin", ["getMetaNameList"])
+    ...mapActions("metaForm", ["getBizMetaList"])
   },
   created() {
-    this.getMetaNameList();
-    this.getMetaList();
+    this.getBizMetaList();
+    // this.commonMixin_ConvertSql(this.bizMetaList);
   }
 };
 </script>

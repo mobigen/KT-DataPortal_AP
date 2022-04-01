@@ -1,4 +1,4 @@
-package com.mobigen.dataPortal.utils;
+package com.mobigen.dataPortal.utils.SQLHeader;
 
 import com.mobigen.dataPortal.mapper.SQLViewMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,7 +17,7 @@ public class SQLHeaderAdvice {
         this.sqlViewMapper = sqlViewMapper;
     }
 
-    @Around("@annotation(com.mobigen.dataPortal.utils.SQLHeader)")
+    @Around("@annotation(com.mobigen.dataPortal.utils.SQLHeader.SQLHeader)")
     private Object getSQLHeader(ProceedingJoinPoint point) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) point.getSignature();
         SQLHeader sqlHeader = methodSignature.getMethod().getAnnotation(SQLHeader.class);
