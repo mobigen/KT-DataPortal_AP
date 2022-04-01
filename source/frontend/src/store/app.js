@@ -4,6 +4,7 @@ import sample from "./sample/sample";
 import admin from "./admin/admin";
 import app from "./app/app";
 import superAdmin from "./superAdmin/superAdmin";
+import metaName from "./superAdmin/metaName";
 import constants from "@/constants/constants";
 
 Vue.use(Vuex);
@@ -14,7 +15,8 @@ const store = new Vuex.Store({
     sample: sample,
     admin: admin,
     app: app,
-    superAdmin: superAdmin
+    superAdmin: superAdmin,
+    metaName: metaName
   }
 });
 
