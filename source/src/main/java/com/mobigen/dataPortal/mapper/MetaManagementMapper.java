@@ -6,5 +6,11 @@ import java.util.ArrayList;
 
 @Repository("metaManagementMapper")
 public interface MetaManagementMapper {
-    ArrayList<Object> getMetaNameList() throws Exception;
+    ArrayList<Object> getMetaNameList();
+
+    Object getBizMetaForm();
+
+    Object getBizMeta();
+
+    ArrayList<Object> getBizMetaList();
 }

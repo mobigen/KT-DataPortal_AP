@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <div>super admin page1</div>
+    <div>admin meta list</div>
     <div>
       <basic-table
         componentId="metaList"
@@ -23,11 +23,9 @@
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
 import BasicTable from "@/components/basic/basic-table.vue";
-// import vuexMixin from "@/mixins/vuexMixin";
 
 export default {
-  name: "super-admin-page1",
-  // mixins: [vuexMixin],
+  name: "super-admin-list",
   extends: {},
   props: {},
   computed: {

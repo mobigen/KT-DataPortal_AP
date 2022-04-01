@@ -4,19 +4,24 @@ import sample from "./sample/sample";
 import admin from "./admin/admin";
 import app from "./app/app";
 import superAdmin from "./superAdmin/superAdmin";
+import metaForm from "./superAdmin/metaForm";
 import metaName from "./superAdmin/metaName";
 import constants from "@/constants/constants";
+
+import { storePlugin } from "./plugins/storePlugin";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
+  plugins: [storePlugin],
   modules: {
     constants: constants,
     sample: sample,
     admin: admin,
     app: app,
     superAdmin: superAdmin,
-    metaName: metaName
+    metaName: metaName,
+    metaForm: metaForm
   }
 });
 

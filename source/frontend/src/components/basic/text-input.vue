@@ -4,6 +4,8 @@
       type="text"
       class="text-input text-input--sm"
       :placeholder="placeholder"
+      v-model="input"
+      @keyup="dataChanged"
     />
   </div>
 </template>
@@ -12,15 +14,34 @@
 export default {
   name: "text-input",
   extends: {},
+  data() {
+    return {
+      input: null
+    };
+  },
   props: {
+    labelName: {
+      type: String
+    },
+    inputData: {
+      type: null
+    },
     placeholder: {
       type: String
     }
   },
   computed: {},
   components: {},
-  watch: {},
-  methods: {},
+  watch: {
+    inputData(data) {
+      this.input = data;
+    }
+  },
+  methods: {
+    dataChanged() {
+      this.$emit("input", this.labelName, this.input);
+    }
+  },
   created() {}
 };
 </script>

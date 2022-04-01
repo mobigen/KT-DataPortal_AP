@@ -1,4 +1,4 @@
-package com.mobigen.dataPortal.utils;
+package com.mobigen.dataPortal.utils.SQLHeader;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Inherited;
@@ -10,4 +10,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SQLHeader {
     String tableName();
+    boolean useRebuildBody() default false;
 }

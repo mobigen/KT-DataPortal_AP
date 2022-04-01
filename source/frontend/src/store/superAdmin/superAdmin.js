@@ -15,6 +15,7 @@ const superAdmin = {
 
   mutations: {
     setMetaName(state, data) {
+      console.log("mutation");
       state.metaName = data;
     }
   },
@@ -22,6 +23,7 @@ const superAdmin = {
   actions: {
     getMetaNameList({ _, commit }) {
       Vue.prototype.$api.get("/api/meta/metaNameList").then((d) => {
+        console.log("actions");
         commit("setMetaName", d);
       });
     }

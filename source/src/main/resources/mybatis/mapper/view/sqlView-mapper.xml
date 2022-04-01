@@ -4,7 +4,7 @@
 <!--suppress ALL -->
 <mapper namespace="com.mobigen.dataPortal.mapper.SQLViewMapper">
     <select id="getViewTableColumn" parameterType="String" resultType="java.util.Map">
-        select column_name
+        select *
         from ${tableName};
     </select>
 </mapper>

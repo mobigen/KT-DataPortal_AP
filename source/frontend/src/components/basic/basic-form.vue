@@ -1,49 +1,70 @@
 <template lang="html">
   <div>
-    <!-- 
-    <div
-      v-for="(data, i) in columnList"
-      :key="'input_box_' + i"
-      class="input-box"
-    >
-      <simple-label>{{ columnList[i] }}</simple-label>
-      <text-input
-        placeholder="내용을 입력해주세요"
-        :inputData="formData[columnList[i]]"
-      ></text-input>
-    </div>
-    -->
+    dataObject:{{ dataObject }} changeDataObject : {{ changeDataObject }}
     <div>
-      <div class="input-box">
-        <basic-label>컬럼리스트</basic-label>
-        <text-input :placeholder="placeholder"></text-input>
+      <div
+        class="input-box"
+        v-for="(data, i) in headerList"
+        :key="'input_box_' + i"
+      >
+        <basic-label>{{ data["column_name"] }}</basic-label>
+        <text-input
+          :placeholder="placeholder"
+          :labelName="data['column_name']"
+          :inputData="changeDataObject[data['column_name']]"
+          @input="changeData"
+        ></text-input>
       </div>
-
-      <basic-button @click="add" buttonCss="text-button">저장</basic-button>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
-import BasicButton from "@/components/basic/basic-button.vue";
 import BasicLabel from "@/components/basic/basic-label.vue";
 import TextInput from "@/components/basic/text-input.vue";
+
+import Vue from "vue";
+
 export default {
   name: "basic-form",
   extends: {},
+  data() {
+    return {
+      changeDataObject: {}
+    };
+  },
   props: {
+    headerList: {
+      type: Array,
+      require: true
+    },
+    dataObject: {
+      type: Object,
+      require: true
+    },
     placeholder: {
       type: String,
       default: "내용을 입력해주세요."
+    },
+    mainKey: {
+      type: String,
+      require: true
     }
   },
   computed: {},
-  components: { BasicButton, BasicLabel, TextInput },
-  watch: {},
+  components: { BasicLabel, TextInput },
+  watch: {
+    dataObject(data) {
+      this.changeDataObject = data;
+    }
+  },
   methods: {
-    add() {
-      alert("add");
-      //this.addMetaName(data);
+    changeData(label, input) {
+      this.changeDataObject[label] = input;
+      this.$emit("changeData", this.changeDataObject);
+
+      // this.$set(this.changeDataObject, label, input);
+      // console.log(this.changeDataObject);
     }
   },
   created() {}
@@ -54,5 +75,11 @@ export default {
 .input-box {
   display: flex;
   margin: 10px 0px;
+  div:first-child {
+    width: 20%;
+  }
+  div:last-child {
+    width: 20%;
+  }
 }
 </style>
