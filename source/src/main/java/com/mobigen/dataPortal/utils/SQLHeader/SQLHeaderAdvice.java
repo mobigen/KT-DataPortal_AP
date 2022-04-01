@@ -5,7 +5,12 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @Aspect
 @Component
@@ -23,9 +28,11 @@ public class SQLHeaderAdvice {
         SQLHeader sqlHeader = methodSignature.getMethod().getAnnotation(SQLHeader.class);
 
         String tableName = sqlHeader.tableName();
-        Object viewResult = sqlViewMapper.getViewTableColumn(tableName);
-        Object value = point.proceed();
+        Object header = sqlViewMapper.getViewTableColumn(tableName);
 
-        return new SQLResult(viewResult, value);
+        boolean useRebuildBody = sqlHeader.useRebuildBody();
+        Object body = point.proceed();
+
+        return new SQLResult(header, body, useRebuildBody);
     }
 }

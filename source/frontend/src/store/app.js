@@ -8,9 +8,12 @@ import metaForm from "./superAdmin/metaForm";
 import metaName from "./superAdmin/metaName";
 import constants from "@/constants/constants";
 
+import { storePlugin } from "./plugins/storePlugin";
+
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
+  plugins: [storePlugin],
   modules: {
     constants: constants,
     sample: sample,

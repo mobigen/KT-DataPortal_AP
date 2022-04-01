@@ -2,13 +2,27 @@
   <div>
     <div>super admin page1</div>
     <div>
-      {{ bizMetaList }}
+      <basic-table
+        componentId="metaList"
+        :headerList="bizMetaList.header"
+        :dataList="bizMetaList.body"
+        mainKey="rowId"
+        :numHeaderUse="false"
+        numHeaderText="No."
+        :buttonHeaderUse="false"
+        buttonHeaderText="삭제"
+        @buttonAction="none"
+        @columnAction="none"
+        keyAction="{}"
+        atcionText="[]"
+      />
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
+import BasicTable from "@/components/basic/basic-table.vue";
 // import vuexMixin from "@/mixins/vuexMixin";
 
 export default {
@@ -19,14 +33,14 @@ export default {
   computed: {
     ...mapGetters("metaForm", ["bizMetaList"])
   },
-  components: {},
+  components: { BasicTable },
   watch: {},
   methods: {
-    ...mapActions("metaForm", ["getBizMetaList"])
+    ...mapActions("metaForm", ["getBizMetaList"]),
+    none() {}
   },
   created() {
     this.getBizMetaList();
-    // this.commonMixin_ConvertSql(this.bizMetaList);
   }
 };
 </script>

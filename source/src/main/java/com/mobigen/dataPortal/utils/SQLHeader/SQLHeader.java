@@ -10,4 +10,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SQLHeader {
     String tableName();
+    boolean useRebuildBody() default false;
 }
