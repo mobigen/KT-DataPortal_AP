@@ -4,7 +4,7 @@ import sample from "./sample/sample";
 import admin from "./admin/admin";
 import app from "./app/app";
 import superAdmin from "./superAdmin/superAdmin";
-import metaForm from "./superAdmin/metaForm";
+import metaList from "./admin/metaList";
 import metaName from "./superAdmin/metaName";
 import constants from "@/constants/constants";
 
@@ -21,7 +21,7 @@ const store = new Vuex.Store({
     app: app,
     superAdmin: superAdmin,
     metaName: metaName,
-    metaForm: metaForm
+    metaForm: metaList
   }
 });
 

@@ -1,9 +1,9 @@
 export function storePlugin(store) {
   // called when the store is initialized
+
   store.subscribe((mutation, _) => {
     // called after every mutation.
     // The mutation comes in the format of `{ type, payload }`.
-
     if (
       // useRebuildBody를 가지고 있고, useRebuildBody가 true인 값만 정제한다.
       Object.prototype.hasOwnProperty.call(
@@ -23,7 +23,6 @@ export function storePlugin(store) {
           rowId: b.rowid
         };
         _header.forEach((h, i) => {
-          console.log(h);
           obj[h.kor_name] = b.data[i];
         });
         newBody.push(obj);
