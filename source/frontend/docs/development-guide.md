@@ -1,6 +1,6 @@
 ## 개요
-- 이 문서는 AI 플랫폼 연구팀 에서 IRIS Web Developement Framework 를 기반으로 구현한 KT-DATA Platform을 기준으로 작성되었습니다.
-- 본 문서에서는 KT-DATA Platform을 사용할때 필요한 데이터 형식이나, 데이터의 rebuild, 사용법에 관해서 기술되어 있습니다.
+- 이 문서는 AI 플랫폼 연구팀 에서 IRIS Web Developement Framework 를 기반으로 구현한 KT-DATA Portal 기준으로 작성되었습니다.
+- 본 문서에서는 KT-DATA Portal을 사용할때 필요한 데이터 형식이나, 데이터의 rebuild, 사용법에 관해서 기술되어 있습니다.
 
 ### Store-plugins
 
