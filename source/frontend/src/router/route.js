@@ -29,21 +29,18 @@ const routes = [
     component: SearchTemplate
   },
   {
-    path: "/admin",
-    component: () => import("@modules/admin/pages/main.vue"),
+    path: "/admin/meta",
+    redirect: { name: "metaList" },
+    component: () => import("@modules/admin/meta/main.vue"),
     children: [
       {
-        path: "page1",
-        name: "a-page1",
-        component: () => import("@modules/admin/pages/page1")
-      },
-      {
-        path: "page2",
-        component: () => import("@modules/admin/pages/page2")
-      },
-      {
         path: "metaList",
-        component: () => import("@modules/admin/pages/metaList")
+        name: "metaList",
+        component: () => import("@modules/admin/meta/metaList")
+      },
+      {
+        path: "metaAdd/:rowKey",
+        component: () => import("@modules/admin/meta/metaAdd")
       }
     ]
   },
