@@ -31,12 +31,12 @@ export default {
   extends: {},
   props: {},
   computed: {
-    ...mapGetters("metaForm", ["bizMetaList"])
+    ...mapGetters("bizMeta", ["bizMetaList"])
   },
   components: { BasicTable },
   watch: {},
   methods: {
-    ...mapActions("metaForm", ["getBizMetaList"]),
+    ...mapActions("bizMeta", ["getBizMetaList"]),
     none() {}
   },
   created() {

@@ -8,11 +8,9 @@
         :dataList="bizMetaList.body"
         mainKey="rowId"
         :numHeaderUse="false"
-        numHeaderText="No."
         :buttonHeaderUse="false"
-        buttonHeaderText="삭제"
         @buttonAction="none"
-        @columnAction="none"
+        @columnAction="viewMetaInfo"
         keyAction="{}"
         atcionText="[]"
       />
@@ -25,16 +23,19 @@ import { mapActions, mapGetters } from "vuex";
 import BasicTable from "@/components/basic/basic-table.vue";
 
 export default {
-  name: "super-admin-list",
+  name: "admin-list",
   extends: {},
   props: {},
   computed: {
-    ...mapGetters("metaForm", ["bizMetaList"])
+    ...mapGetters("bizMeta", ["bizMetaList"])
   },
   components: { BasicTable },
   watch: {},
   methods: {
-    ...mapActions("metaForm", ["getBizMetaList"]),
+    ...mapActions("bizMeta", ["getBizMetaList"]),
+    viewMetaInfo(rowKey, componentId) {
+      console.log("view");
+    },
     none() {}
   },
   created() {

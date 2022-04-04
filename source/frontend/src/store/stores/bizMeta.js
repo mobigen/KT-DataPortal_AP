@@ -1,11 +1,12 @@
 import Vue from "vue";
 
-const metaName = {
+const bizMeta = {
   namespaced: true,
 
   state: {
     metaNameList: [],
-    metaName: {}
+    metaName: {},
+    bizMetaList: []
   },
 
   getters: {
@@ -14,6 +15,9 @@ const metaName = {
     },
     metaName(state) {
       return state.metaName;
+    },
+    bizMetaList(state) {
+      return state.bizMetaList;
     }
   },
 
@@ -23,6 +27,9 @@ const metaName = {
     },
     setMetaName(state, data) {
       state.metaName = data;
+    },
+    setBizMetaList(state, data) {
+      state.bizMetaList = data;
     }
   },
 
@@ -60,8 +67,13 @@ const metaName = {
     editMetaName({ commit }, obj) {
       alert("edit");
       console.log(obj);
+    },
+    getBizMetaList({ _, commit }) {
+      Vue.prototype.$api.get("/api/meta/getBizMetaList").then((d) => {
+        commit("setBizMetaList", d);
+      });
     }
   }
 };
 
-export default metaName;
+export default bizMeta;
