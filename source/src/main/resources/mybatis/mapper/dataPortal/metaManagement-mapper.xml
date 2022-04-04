@@ -28,7 +28,6 @@
     <!-- meta form list 목록 조회-->
     <select id="getBizMetaList" resultType="java.util.Map">
         select T.biz_dataset_id      as rowId,
-               'biz_dataset_id'      as rowIdColumnName,
                array_agg(T.item_val) as data,
                array_agg(T.item_id)  as columnKey
         from (
