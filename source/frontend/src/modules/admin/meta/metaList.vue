@@ -9,10 +9,7 @@
         mainKey="rowId"
         :numHeaderUse="false"
         :buttonHeaderUse="false"
-        @buttonAction="none"
         @columnAction="viewMetaInfo"
-        keyAction="{}"
-        atcionText="[]"
       />
     </div>
   </div>
@@ -34,7 +31,8 @@ export default {
   methods: {
     ...mapActions("bizMeta", ["getBizMetaList"]),
     viewMetaInfo(rowKey, componentId) {
-      console.log("view");
+      console.log("view : " + rowKey); // m1abc 를 가지고 view 화면으로 페이지 이동.
+      this.$router.push({ name: "" });
     },
     none() {}
   },
