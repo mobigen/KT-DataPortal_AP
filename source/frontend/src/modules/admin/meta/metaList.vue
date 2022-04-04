@@ -32,7 +32,7 @@ export default {
     ...mapActions("bizMeta", ["getBizMetaList"]),
     viewMetaInfo(rowKey, componentId) {
       console.log("view : " + rowKey); // m1abc 를 가지고 view 화면으로 페이지 이동.
-      this.$router.push({ name: "" });
+      // this.$router.push({ name: "" });
     },
     none() {}
   },
