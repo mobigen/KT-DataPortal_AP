@@ -23,8 +23,6 @@
 import BasicLabel from "@/components/basic/basic-label.vue";
 import TextInput from "@/components/basic/text-input.vue";
 
-import Vue from "vue";
-
 export default {
   name: "basic-form",
   extends: {},
@@ -60,11 +58,8 @@ export default {
   },
   methods: {
     changeData(label, input) {
-      this.changeDataObject[label] = input;
+      this.$set(this.changeDataObject, label, input);
       this.$emit("changeData", this.changeDataObject);
-
-      // this.$set(this.changeDataObject, label, input);
-      // console.log(this.changeDataObject);
     }
   },
   created() {}
