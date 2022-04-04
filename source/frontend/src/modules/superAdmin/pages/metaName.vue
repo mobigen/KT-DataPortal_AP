@@ -105,6 +105,7 @@ export default {
       ) {
         this.editMetaName(this.changeData);
       }
+      this.changeData = {};
     },
     setChangeData(data) {
       this.changeData = data;
