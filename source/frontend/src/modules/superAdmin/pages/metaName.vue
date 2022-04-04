@@ -1,14 +1,14 @@
 <template lang="html">
   <div>
     <h2>super admin metaName</h2>
-
+    metaName : {{ metaName }} changeData : {{ changeData }}
     <h1>META 정보</h1>
     <div>
       <h3>simple-table</h3>
       <basic-table
         componentId="metaName1"
-        :headerList="metaName.header"
-        :dataList="metaName.body"
+        :headerList="metaNameList.header"
+        :dataList="metaNameList.body"
         mainKey="name_id"
         numHeaderUse
         numHeaderText="No."
@@ -32,8 +32,20 @@
 
     <div>
       <h3>form</h3>
-      <basic-form />
+      <basic-form
+        mainKey="name_id"
+        :headerList="metaNameList.header"
+        :dataObject="changeData"
+        @changeData="setChangeData"
+      />
     </div>
+
+    <basic-button
+      componentId="metaName1"
+      @click="addObject"
+      buttonCss="text-button"
+      >저장</basic-button
+    >
   </div>
 </template>
 
@@ -46,38 +58,56 @@ export default {
   name: "super-admin-metaName",
   extends: {},
   data() {
-    return {};
+    return {
+      changeData: {}
+    };
   },
   props: {},
   computed: {
-    ...mapGetters("bizMeta", ["metaName"])
+    ...mapGetters("bizMeta", ["metaName", "metaNameList"])
   },
   components: { BasicTable, BasicForm, BasicButton },
-  watch: {},
+  watch: {
+    metaName(data) {
+      this.changeData = data;
+    }
+  },
   methods: {
     ...mapActions("bizMeta", [
       "getMetaNameList",
       "getMetaName",
       "addMetaName",
-      "removeMetaName"
+      "removeMetaName",
+      "editMetaName"
     ]),
-    getObject(id, componentId) {
+    getObject(key, componentId) {
       if (componentId === "metaName1") {
-        this.getMetaName(id);
+        this.getMetaName(key);
       }
     },
-    removeObject(id, componentId) {
+    removeObject(key, componentId) {
       if (componentId === "metaName1") {
-        this.removeMetaName(id);
+        this.removeMetaName(key);
       }
     },
     reset() {
-      alert("초기화");
+      this.changeData = {};
     },
     addObject(componentId) {
-      if (componentId === "metaName1") {
-        this.addMetaName("add!");
+      if (
+        componentId === "metaName1" &&
+        Object.keys(this.metaName).length === 0
+      ) {
+        this.addMetaName(this.changeData);
+      } else if (
+        componentId === "metaName1" &&
+        Object.keys(this.metaName).length !== 0
+      ) {
+        this.editMetaName(this.changeData);
       }
+    },
+    setChangeData(data) {
+      this.changeData = data;
     }
   },
   created() {
