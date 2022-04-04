@@ -15,7 +15,6 @@ const store = new Vuex.Store({
   modules: {
     constants: constants,
     sample: sample,
-    admin: admin,
     app: app,
     bizMeta: bizMeta
   }
