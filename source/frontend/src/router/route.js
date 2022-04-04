@@ -48,20 +48,16 @@ const routes = [
     ]
   },
   {
-    path: "/superAdmin",
+    path: "/superAdmin/meta",
     component: () => import("@modules/superAdmin/pages/main.vue"),
     children: [
       {
-        path: "/superAdmin/page1",
-        component: () => import("@modules/superAdmin/pages/page1")
+        path: "/superAdmin/meta/metaList",
+        component: () => import("@modules/superAdmin/pages/metaList")
       },
       {
-        path: "/superAdmin/page2",
-        component: () => import("@modules/superAdmin/pages/page2")
-      },
-      {
-        path: "/superAdmin/metaName",
-        component: () => import("@modules/superAdmin/pages/metaName")
+        path: "/superAdmin/meta/metaForm/:rowKey?",
+        component: () => import("@modules/superAdmin/pages/metaForm")
       }
     ]
   },

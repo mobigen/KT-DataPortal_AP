@@ -7,9 +7,14 @@
           <th v-for="(h, hi) in headerList" :key="'header_' + hi">
             {{ h["column_name"] }}
           </th>
-          <th v-if="buttonHeaderUse">
-            {{ buttonHeaderText }}
-          </th>
+          <template v-if="buttonHeaderUse">
+            <th
+              v-for="(b, bi) in buttonHeaderText"
+              :key="'header_button_' + bi"
+            >
+              {{ buttonHeaderText[bi]["buttonName"] }}
+            </th>
+          </template>
         </tr>
       </thead>
 
@@ -17,21 +22,27 @@
         <tr
           v-for="(data, i) in dataList"
           :key="'table_body_' + i"
-          @click="rowClick(data[mainKey])"
+          @click="rowClick(data[rowKey])"
         >
           <td v-if="numHeaderUse">{{ i + 1 }}</td>
 
           <td v-for="(h, hi) in headerList" :key="'header_' + hi">
             {{ data[h["column_name"]] }}
           </td>
-
-          <td v-if="buttonHeaderUse" @click.stop>
-            <basic-button
-              @click="buttonClick(data[mainKey])"
-              buttonCss="icon-button"
-              ><icon data="@icon/minus.svg" aria-hidden="true"></icon
-            ></basic-button>
-          </td>
+          <template v-for="(b, bi) in buttonHeaderText">
+            <td @click.stop v-if="buttonHeaderUse" :key="'header_button_' + bi">
+              <basic-button
+                @click="
+                  buttonClick(
+                    data[rowKey],
+                    buttonHeaderText[bi]['buttonAction']
+                  )
+                "
+                :buttonCss="buttonHeaderText[bi]['buttonCss']"
+                ><icon data="@icon/minus.svg" aria-hidden="true"></icon
+              ></basic-button>
+            </td>
+          </template>
         </tr>
       </tbody>
     </table>
@@ -67,14 +78,13 @@ export default {
       default: false
     },
     buttonHeaderText: {
-      type: String,
-      default: ""
+      type: Array
     },
     componentId: {
       type: String,
       require: true
     },
-    mainKey: {
+    rowKey: {
       type: String,
       require: true
     }
@@ -83,11 +93,11 @@ export default {
   components: { BasicButton },
   watch: {},
   methods: {
-    buttonClick(key) {
-      this.$emit("buttonAction", key, this.componentId);
+    buttonClick(rowKey, btnAction) {
+      this.$emit("buttonAction", rowKey, this.componentId, btnAction);
     },
-    rowClick(key) {
-      this.$emit("columnAction", key, this.componentId);
+    rowClick(rowKey) {
+      this.$emit("columnAction", rowKey, this.componentId);
     }
   },
   created() {}

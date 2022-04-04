@@ -44,7 +44,7 @@ export default {
       type: String,
       default: "내용을 입력해주세요."
     },
-    mainKey: {
+    rowKey: {
       type: String,
       require: true
     }
