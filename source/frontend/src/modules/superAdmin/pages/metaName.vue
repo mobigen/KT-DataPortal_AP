@@ -64,8 +64,7 @@ export default {
   },
   props: {},
   computed: {
-    ...mapGetters("metaName", ["metaNameList"]),
-    ...mapGetters("metaName", ["metaName"])
+    ...mapGetters("bizMeta", ["metaName", "metaNameList"])
   },
   components: { BasicTable, BasicForm, BasicButton },
   watch: {
@@ -74,7 +73,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("metaName", [
+    ...mapActions("bizMeta", [
       "getMetaNameList",
       "getMetaName",
       "addMetaName",
