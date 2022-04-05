@@ -53,16 +53,22 @@ const bizMeta = {
         commit("setMetaNameList", d);
       });
     },
-    getMetaName({ commit }, id) {
-      console.log("get : " + id);
+    getMetaName({ commit }, rowKey) {
+      let d = {};
 
-      const d = {
+      if (rowKey === undefined) {
+        // const empObj = {};
+        commit("setMetaName", d);
+        return;
+      }
+
+      d = {
         kor_name: "지역",
         eng_name: "region",
         show_order: 3,
         type: 0,
         reference_table: null,
-        name_id: id
+        name_id: rowKey
       };
 
       commit("setMetaName", d);
@@ -75,8 +81,8 @@ const bizMeta = {
       alert("add");
       console.log(obj);
     },
-    removeMetaName({ commit }, id) {
-      alert("remove : " + id);
+    removeMetaName({ commit }, rowKey) {
+      alert("remove : " + rowKey);
     },
     editMetaName({ commit }, obj) {
       alert("edit");

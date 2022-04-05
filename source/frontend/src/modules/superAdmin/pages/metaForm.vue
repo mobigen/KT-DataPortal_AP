@@ -12,6 +12,8 @@
       />
     </div>
 
+    <basic-button @click="cancel" buttonCss="text-button">취소</basic-button>
+
     <basic-button
       componentId="metaName1"
       @click="addObject"
@@ -60,13 +62,14 @@ export default {
     },
     setChangeData(data) {
       this.changeData = data;
+    },
+    cancel() {
+      this.$router.go(-1);
     }
   },
   created() {
     this.getMetaNameList();
-    if (this.$route.params.rowKey) {
-      this.getMetaName(this.$route.params.rowKey);
-    }
+    this.getMetaName(this.$route.params.rowKey);
   }
 };
 </script>
