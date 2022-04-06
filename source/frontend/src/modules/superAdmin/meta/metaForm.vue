@@ -2,13 +2,16 @@
   <div>
     <div>
       <h3>form</h3>
-      <basic-form
+      <meta-form
         rowKey="name_id"
         :headerList="metaNameList.header"
         :dataObject="metaName"
         @changeData="setChangeData"
+        :formInputType="formInputType"
       />
     </div>
+
+    <!-- <radio-button :radioButtonList="radioButtonList()"></radio-button> -->
 
     <div class="button-box">
       <basic-button @click="cancel" buttonCss="text-button">취소</basic-button>
@@ -25,21 +28,29 @@
 
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
-import BasicForm from "@/components/basic/basic-form.vue";
+import MetaForm from "@/components/meta/meta-form.vue";
 import BasicButton from "@/components/basic/basic-button.vue";
+/* import RadioButton from "@/components/basic/radio-button.vue"; */
 export default {
   name: "super-admin-metaForm",
   extends: {},
   data() {
     return {
-      changeData: {}
+      changeData: {},
+      formInputType: {
+        kor_name: "text",
+        eng_name: "text",
+        show_order: "number",
+        name_id: "text",
+        type: "number"
+      }
     };
   },
   props: {},
   computed: {
     ...mapGetters("bizMeta", ["metaNameList", "metaName"])
   },
-  components: { BasicForm, BasicButton },
+  components: { MetaForm, BasicButton /* RadioButton  */ },
   watch: {},
   methods: {
     ...mapActions("bizMeta", [
@@ -63,8 +74,8 @@ export default {
     },
     cancel() {
       this.$router.go(-1);
-    },
-    radioButtonList() {
+    }
+    /*     radioButtonList() {
       const values = [
         { value: "rb1", label: "radio 1" },
         { value: "rb2", label: "radio 2" },
@@ -74,7 +85,7 @@ export default {
         { value: "rb6", label: "radio 6" }
       ];
       return values;
-    }
+    } */
   },
   created() {
     this.getMetaNameList();

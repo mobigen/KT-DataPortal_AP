@@ -1,19 +1,17 @@
 <template lang="html">
   <div>
-    {{ inputType }}
     <input
-      :type="inputType"
+      type="text"
       class="text-input text-input--sm"
       :placeholder="placeholder"
       v-model="input"
-      @keyup="dataChanged"
     />
   </div>
 </template>
 
 <script type="text/javascript">
 export default {
-  name: "basic-input",
+  name: "text-input",
   extends: {},
   data() {
     return {
@@ -29,11 +27,6 @@ export default {
     },
     placeholder: {
       type: String
-    },
-    inputType: {
-      type: String,
-      require: true,
-      default: "text"
     }
   },
   computed: {},
@@ -41,13 +34,12 @@ export default {
   watch: {
     inputData(data) {
       this.input = data;
+    },
+    input(data) {
+      this.$emit("input", this.labelName, data);
     }
   },
-  methods: {
-    dataChanged() {
-      this.$emit("input", this.labelName, this.input);
-    }
-  },
+  methods: {},
   created() {}
 };
 </script>
