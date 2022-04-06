@@ -12,7 +12,8 @@
 
     <select id="getMetaNameList" resultType="java.util.Map">
         SELECT *
-        FROM tb_biz_meta_name;
+        FROM tb_biz_meta_name
+        order by name_id;
     </select>
     <!-- meta form 형식 조회 -->
     <select id="getBizMetaForm" resultType="java.util.Map">
@@ -58,6 +59,34 @@
         group by biz_dataset_id
         order by biz_dataset_id;
     </select>
+    
+    <!-- metaName 조회 -->
+    <select id="getMetaName" parameterType="String" resultType="java.util.Map">
+    	select *
+    	from tb_biz_meta_name tbmn
+    	where name_id = #{nameId}
+    </select>
+    
+    <!-- metaName 추가 -->
+    <insert id="insertMetaName" parameterType="Object">
+    	insert into tb_biz_meta_name (kor_name, eng_name, show_order, name_id, type)
+    	values ( #{korName}, #{engName}, 0, (select concat('i',cast(substring(max(name_id),2) as int)+1) as name_id from tb_biz_meta_name) , 0)
+    </insert>
+    
+    <!-- metaName 수정 -->
+	<update id="updateMetaName" parameterType="Object">
+		update tb_biz_meta_name
+		set kor_name = #{korName},
+			eng_name = #{engName},
+			show_order = #{showOrder},
+			type= #{type}
+		where name_id = #{nameId}
+	</update>
 
+	<!-- metaName 삭제 -->
+	<delete id="deleteMetaName" parameterType="String">
+		delete from tb_biz_meta_name
+		where name_id = #{nameId}
+	</delete>
 
 </mapper>

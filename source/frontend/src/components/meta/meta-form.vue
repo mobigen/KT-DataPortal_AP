@@ -1,17 +1,31 @@
 <template lang="html">
   <div>
+    <!-- dataObject : {{ dataObject }} changeDataObject :
+    {{ changeDataObject }} formInputType: {{ formInputType }} -->
     <div
       class="input-box"
       v-for="(data, i) in headerList"
       :key="'input_box_' + i"
     >
       <basic-label>{{ data["column_name"] }}</basic-label>
-      <text-input
-        :placeholder="placeholder"
-        :labelName="data['column_name']"
-        :inputData="changeDataObject[data['column_name']]"
-        @input="changeData"
-      ></text-input>
+      <template v-if="formInputType[data['column_name']] === 'text'">
+        <text-input
+          :placeholder="placeholder"
+          :labelName="data['column_name']"
+          :inputData="changeDataObject[data['column_name']]"
+          @input="changeData"
+          :inputType="formInputType[data['column_name']]"
+        ></text-input>
+      </template>
+      <template v-else-if="formInputType[data['column_name']] === 'number'">
+        <number-input
+          :placeholder="placeholder"
+          :labelName="data['column_name']"
+          :inputData="changeDataObject[data['column_name']]"
+          @input="changeData"
+          :inputType="formInputType[data['column_name']]"
+        ></number-input>
+      </template>
     </div>
   </div>
 </template>
@@ -19,9 +33,10 @@
 <script type="text/javascript">
 import BasicLabel from "@/components/basic/basic-label.vue";
 import TextInput from "@/components/basic/text-input.vue";
+import NumberInput from "@/components/basic/number-input.vue";
 
 export default {
-  name: "basic-form",
+  name: "meta-form",
   extends: {},
   data() {
     return {
@@ -44,10 +59,13 @@ export default {
     rowKey: {
       type: String,
       require: true
+    },
+    formInputType: {
+      type: Object
     }
   },
   computed: {},
-  components: { BasicLabel, TextInput },
+  components: { BasicLabel, TextInput, NumberInput },
   watch: {
     dataObject(data) {
       this.changeDataObject = data;

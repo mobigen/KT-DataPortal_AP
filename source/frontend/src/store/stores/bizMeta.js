@@ -49,44 +49,49 @@ const bizMeta = {
 
   actions: {
     getMetaNameList({ _, commit }) {
+      console.log("getMetaNameList");
       Vue.prototype.$api.get("/api/meta/metaNameList").then((d) => {
         commit("setMetaNameList", d);
       });
     },
     getMetaName({ commit }, rowKey) {
-      let d = {};
-
       if (rowKey === undefined) {
-        // const empObj = {};
-        commit("setMetaName", d);
+        const empObj = {};
+        commit("setMetaName", empObj);
         return;
       }
 
-      d = {
-        kor_name: "지역",
-        eng_name: "region",
-        show_order: 3,
-        type: 0,
-        reference_table: null,
-        name_id: rowKey
-      };
-
-      commit("setMetaName", d);
+      Vue.prototype.$api
+        .get("/api/meta/getMetaName", { params: { nameId: rowKey } })
+        .then((d) => {
+          console.log(d);
+          commit("setMetaName", d);
+        });
     },
-    addMetaName({ commit }, obj) {
+    addMetaName({}, obj) {
       if (Object.keys(obj).length === 0) {
-        alert("저장할 객체가 없습니다!");
+        console.log("저장할 Data 없음");
         return;
       }
-      alert("add");
-      console.log(obj);
+      Vue.prototype.$api.post("/api/meta/insertMetaName", obj).then(() => {});
     },
-    removeMetaName({ commit }, rowKey) {
-      alert("remove : " + rowKey);
+    removeMetaName({ dispatch }, rowKey) {
+      Vue.prototype.$api
+        .delete("/api/meta/deleteMetaName", { params: { nameId: rowKey } })
+        .then((d) => {
+          dispatch("getMetaNameList");
+        });
     },
-    editMetaName({ commit }, obj) {
-      alert("edit");
+    async editMetaName({}, obj) {
+      if (Object.keys(obj).length === 0) {
+        console.log("변경된 Data 없음");
+        return;
+      }
+
       console.log(obj);
+      await Vue.prototype.$api
+        .put("/api/meta/updateMetaName", obj)
+        .then((d) => {});
     },
     getBizMetaList({ commit }) {
       Vue.prototype.$api.get("/api/meta/getBizMetaList").then((d) => {

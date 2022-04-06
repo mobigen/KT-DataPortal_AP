@@ -1,10 +1,10 @@
 <template lang="html">
   <div>
     <input
-      type="text"
+      type="number"
       class="text-input text-input--sm"
       :placeholder="placeholder"
-      v-model="input"
+      v-model.number="input"
     />
   </div>
 </template>

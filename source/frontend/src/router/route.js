@@ -51,22 +51,22 @@ const routes = [
   },
   {
     path: "/superAdmin/meta",
-    component: () => import("@modules/superAdmin/pages/main.vue"),
+    component: () => import("@modules/superAdmin/meta/main.vue"),
     children: [
       {
         path: "metaList",
         name: "sa-metaList",
-        component: () => import("@modules/superAdmin/pages/metaList")
+        component: () => import("@modules/superAdmin/meta/metaList")
       },
       {
         path: "metaForm/:rowKey?",
         name: "sa-metaForm",
-        component: () => import("@modules/superAdmin/pages/metaForm")
+        component: () => import("@modules/superAdmin/meta/metaForm")
       },
       {
         path: "metaView/:rowKey",
         name: "sa-metaView",
-        component: () => import("@modules/superAdmin/pages/metaView")
+        component: () => import("@modules/superAdmin/meta/metaView")
       }
     ]
   },

@@ -36,6 +36,9 @@ export default {
   padding: 0;
   margin: 2px;
 }
+.text-button {
+  margin: 0px 5px;
+}
 button:hover {
   cursor: pointer;
 }
