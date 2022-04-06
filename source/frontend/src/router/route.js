@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "@/store/app";
 
 import Error from "@modules/error/Error.vue";
 import FormSample from "@modules/app/sample/form/form-sample.vue";
@@ -79,6 +80,10 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.VUE_APP_PUBLIC_PATH,
   routes
+});
+
+router.afterEach(() => {
+  store.dispatch("common/setDevJsonReset");
 });
 
 export default router;

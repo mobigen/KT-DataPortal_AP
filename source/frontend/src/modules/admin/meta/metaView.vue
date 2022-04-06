@@ -12,7 +12,7 @@
 
       <div class="add-button">
         <basic-button
-          componentId="metaName1"
+          componentId="metaViewBtn"
           @click="buttonOk"
           buttonCss="text-button"
           >확인</basic-button

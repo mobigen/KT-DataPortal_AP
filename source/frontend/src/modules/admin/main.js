@@ -4,8 +4,6 @@ import i18n from "@/utils/i18n";
 import cookie from "vue-cookies";
 import router from "@/router/route";
 import store from "@/store/app";
-//import * as Sentry from "@sentry/vue";
-//import { Integrations } from "@sentry/tracing";
 import AxiosInterceptor from "@/components/common/axios-interceptor.vue";
 import App from "@modules/admin/Admin.vue";
 // import vuexMixin from "@/mixins/vuexMixin";
@@ -13,6 +11,9 @@ import App from "@modules/admin/Admin.vue";
 
 // svg-icon
 import { VueSvgIcon } from "@yzfe/vue-svgicon";
+
+// axios json-viwer
+import JsonViewer from "@/components/basic/basic-jsonViewer";
 
 Vue.config.productionTip = false;
 
@@ -23,7 +24,7 @@ Vue.prototype.$api = api;
 
 Vue.component("axios-interceptor", AxiosInterceptor);
 Vue.component("icon", VueSvgIcon);
-
+Vue.component("json-viwer", JsonViewer);
 // Sentry.init({
 //   Vue,
 //   dsn: "https://c10f0211c0bb41af973f1f5ebf7fda60@o924939.ingest.sentry.io/6044951",

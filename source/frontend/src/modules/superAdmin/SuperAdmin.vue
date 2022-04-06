@@ -2,6 +2,7 @@
   <div id="superAdmin">
     <router-view></router-view>
     <axios-interceptor />
+    <json-viwer />
   </div>
 </template>
 
