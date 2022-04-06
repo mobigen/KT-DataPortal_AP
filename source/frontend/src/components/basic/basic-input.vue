@@ -1,7 +1,8 @@
 <template lang="html">
   <div>
+    {{ inputType }}
     <input
-      type="text"
+      :type="inputType"
       class="text-input text-input--sm"
       :placeholder="placeholder"
       v-model="input"
@@ -12,7 +13,7 @@
 
 <script type="text/javascript">
 export default {
-  name: "text-input",
+  name: "basic-input",
   extends: {},
   data() {
     return {
@@ -28,6 +29,11 @@ export default {
     },
     placeholder: {
       type: String
+    },
+    inputType: {
+      type: String,
+      require: true,
+      default: "text"
     }
   },
   computed: {},

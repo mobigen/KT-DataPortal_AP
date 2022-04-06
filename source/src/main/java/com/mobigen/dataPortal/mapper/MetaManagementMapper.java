@@ -13,4 +13,12 @@ public interface MetaManagementMapper {
     Object getBizMeta();
 
     ArrayList<Object> getBizMetaList();
+
+    Object getMetaName(String nameId);
+
+    int insertMetaName(Object metaName);
+
+    int updateMetaName(Object metaName);
+
+    int deleteMetaName(String nameId);
 }

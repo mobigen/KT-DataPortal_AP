@@ -1,25 +1,25 @@
 <template lang="html">
   <div>
-    metaName : {{ metaName }} changeData :
-    {{ changeData }}
     <div>
       <h3>form</h3>
       <basic-form
         rowKey="name_id"
         :headerList="metaNameList.header"
-        :dataObject="changeData"
+        :dataObject="metaName"
         @changeData="setChangeData"
       />
     </div>
 
-    <basic-button @click="cancel" buttonCss="text-button">취소</basic-button>
+    <div class="button-box">
+      <basic-button @click="cancel" buttonCss="text-button">취소</basic-button>
 
-    <basic-button
-      componentId="metaName1"
-      @click="addObject"
-      buttonCss="text-button"
-      >저장</basic-button
-    >
+      <basic-button
+        componentId="metaName1"
+        @click="addObject"
+        buttonCss="text-button"
+        >저장</basic-button
+      >
+    </div>
   </div>
 </template>
 
@@ -40,11 +40,7 @@ export default {
     ...mapGetters("bizMeta", ["metaNameList", "metaName"])
   },
   components: { BasicForm, BasicButton },
-  watch: {
-    metaName(data) {
-      this.changeData = data;
-    }
-  },
+  watch: {},
   methods: {
     ...mapActions("bizMeta", [
       "getMetaNameList",
@@ -52,19 +48,32 @@ export default {
       "addMetaName",
       "editMetaName"
     ]),
-    addObject() {
+    async addObject() {
       if (Object.keys(this.metaName).length === 0) {
-        this.addMetaName(this.changeData);
+        await this.addMetaName(this.changeData);
         this.changeData = {};
       } else if (Object.keys(this.metaName).length !== 0) {
-        this.editMetaName(this.changeData);
+        await this.editMetaName(this.changeData);
       }
+
+      this.$router.push({ path: "/superAdmin/meta/metaList" });
     },
     setChangeData(data) {
       this.changeData = data;
     },
     cancel() {
       this.$router.go(-1);
+    },
+    radioButtonList() {
+      const values = [
+        { value: "rb1", label: "radio 1" },
+        { value: "rb2", label: "radio 2" },
+        { value: "rb3", label: "radio 3" },
+        { value: "rb4", label: "radio 4" },
+        { value: "rb5", label: "radio 5" },
+        { value: "rb6", label: "radio 6" }
+      ];
+      return values;
     }
   },
   created() {
@@ -75,5 +84,8 @@ export default {
 </script>
 
 <style lang="scss">
-// @import ""
+.button-box {
+  display: flex;
+  justify-content: flex-end;
+}
 </style>

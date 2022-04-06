@@ -72,12 +72,10 @@ export default {
     },
     addForm(componentId) {
       if (componentId === "metaName1") {
-        alert("metaName 등록");
         this.$router.push({ path: "/superAdmin/meta/metaForm" });
       }
     },
     editForm(rowKey, componentid) {
-      alert("수정");
       if (componentid === "metaName1") {
         this.$router
           .push({
@@ -107,6 +105,6 @@ export default {
 .add-button {
   display: flex;
   justify-content: flex-end;
-  margin: 10px 0px;
+  margin: 10px -5px;
 }
 </style>

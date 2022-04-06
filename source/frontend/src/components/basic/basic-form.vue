@@ -1,6 +1,5 @@
 <template lang="html">
   <div>
-    dataObject:{{ dataObject }} changeDataObject : {{ changeDataObject }}
     <div>
       <div
         class="input-box"
@@ -8,12 +7,12 @@
         :key="'input_box_' + i"
       >
         <basic-label>{{ data["column_name"] }}</basic-label>
-        <text-input
+        <basic-input
           :placeholder="placeholder"
           :labelName="data['column_name']"
           :inputData="changeDataObject[data['column_name']]"
           @input="changeData"
-        ></text-input>
+        ></basic-input>
       </div>
     </div>
   </div>
@@ -21,7 +20,7 @@
 
 <script type="text/javascript">
 import BasicLabel from "@/components/basic/basic-label.vue";
-import TextInput from "@/components/basic/text-input.vue";
+import BasicInput from "@/components/basic/basic-input.vue";
 
 export default {
   name: "basic-form",
@@ -50,7 +49,7 @@ export default {
     }
   },
   computed: {},
-  components: { BasicLabel, TextInput },
+  components: { BasicLabel, BasicInput },
   watch: {
     dataObject(data) {
       this.changeDataObject = data;

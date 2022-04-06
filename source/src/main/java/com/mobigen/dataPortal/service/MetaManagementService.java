@@ -28,4 +28,20 @@ public class MetaManagementService {
     public Object getBizMetaList() throws Exception {
         return mapper.getBizMetaList();
     }
+
+    public Object getMetaName(String nameId) {
+        return mapper.getMetaName(nameId);
+    }
+
+    public int insertMetaName(Object metaName) {
+        return mapper.insertMetaName(metaName);
+    }
+
+    public int updateMetaName(Object metaName) {
+        return mapper.updateMetaName(metaName);
+    }
+
+    public int deleteMetaName(String nameId) {
+        return mapper.deleteMetaName(nameId);
+    }
 }
