@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @RequestMapping("/api/meta")
@@ -16,21 +17,27 @@ public class MetaManagementController {
     private final MetaManagementService service;
 
     @ResponseJsonResult
+    @GetMapping("/getMetaNameDetail")
+    public Object getMetaNameDetail(@RequestParam String nameId) {
+        return service.getMetaNameDetail(nameId);
+    }
+
+    @ResponseJsonResult
     @GetMapping("/metaNameList")
-    public Object getMetaNameList() throws Exception {
+    public Object getMetaNameList() {
         return service.getMetaNameList();
     }
 
     @ResponseJsonResult
     @GetMapping("/bizMetaForm")
-    public Object getBizMetaForm() throws Exception {
+    public Object getBizMetaForm() {
         return service.getBizMetaForm();
     }
 
     @ResponseJsonResult
-    @GetMapping("/getBizMeta")
-    public Object getBizMeta() throws Exception {
-        return service.getBizMeta();
+    @GetMapping("/getBizMetaDetail")
+    public Object getBizMetaDetail(@RequestParam String datasetId) {
+        return service.getBizMetaDetail(datasetId);
     }
 
     @ResponseJsonResult

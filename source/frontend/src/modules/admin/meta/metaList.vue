@@ -6,7 +6,7 @@
         componentId="metaList"
         :headerList="bizMetaList.header"
         :dataList="bizMetaList.body"
-        mainKey="rowId"
+        rowKey="rowId"
         :numHeaderUse="false"
         :buttonHeaderUse="false"
         @columnAction="viewMetaInfo"
@@ -30,9 +30,8 @@ export default {
   watch: {},
   methods: {
     ...mapActions("bizMeta", ["getBizMetaList"]),
-    viewMetaInfo(rowKey, componentId) {
-      console.log("view : " + rowKey); // m1abc 를 가지고 view 화면으로 페이지 이동.
-      // this.$router.push({ name: "" });
+    viewMetaInfo(rowKey) {
+      this.$router.push({ path: "metaView/" + rowKey });
     },
     none() {}
   },

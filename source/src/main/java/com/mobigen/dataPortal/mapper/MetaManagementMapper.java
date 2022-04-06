@@ -6,11 +6,13 @@ import java.util.ArrayList;
 
 @Repository("metaManagementMapper")
 public interface MetaManagementMapper {
+    ArrayList<Object> getMetaNameDetail(String nameId);
+
     ArrayList<Object> getMetaNameList();
 
     Object getBizMetaForm();
 
-    Object getBizMeta();
+    ArrayList<Object> getBizMetaDetail(String datasetId);
 
     ArrayList<Object> getBizMetaList();
 }

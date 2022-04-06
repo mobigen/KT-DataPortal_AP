@@ -24,7 +24,7 @@
         buttonHeaderUse
         :buttonHeaderText="this.buttonList"
         @buttonAction="tableButtonClick"
-        @columnAction="detailObject"
+        @columnAction="rowClick"
         keyAction="{}"
         atcionText="[]"
       />
@@ -81,7 +81,7 @@ export default {
       if (componentid === "metaName1") {
         this.$router
           .push({
-            path: "/superAdmin/meta/metaForm/" + rowKey
+            path: "metaForm/" + rowKey
           })
           .catch(() => {});
       }
@@ -93,8 +93,8 @@ export default {
         this.editForm(rowKey, componentId);
       }
     },
-    detailObject(rowKey, componentId) {
-      console.log("rowKey : " + rowKey + ", componentId : " + componentId);
+    rowClick(rowKey, componentId) {
+      this.$router.push({ path: `metaView/${rowKey}` });
     }
   },
   created() {
@@ -107,6 +107,6 @@ export default {
 .add-button {
   display: flex;
   justify-content: flex-end;
-  margin: 10px 0px;
+  margin: 10px 0;
 }
 </style>
