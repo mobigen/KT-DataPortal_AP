@@ -3,6 +3,7 @@
     <h1>ADMIN.vue</h1>
     <router-view></router-view>
     <axios-interceptor />
+    <json-viwer />
   </div>
 </template>
 

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mobigen.dataPortal.service.MetaManagementService;
 import com.mobigen.framework.result.annotation.ResponseJsonResult;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +23,12 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class MetaManagementController {
     private final MetaManagementService service;
+
+    @ResponseJsonResult
+    @GetMapping("/getMetaNameDetail")
+    public Object getMetaNameDetail(@RequestParam String nameId) throws Exception {
+        return service.getMetaNameDetail(nameId);
+    }
 
     @ResponseJsonResult
     @GetMapping("/metaNameList")
@@ -38,9 +43,9 @@ public class MetaManagementController {
     }
 
     @ResponseJsonResult
-    @GetMapping("/getBizMeta")
-    public Object getBizMeta() throws Exception {
-        return service.getBizMeta();
+    @GetMapping("/getBizMetaDetail")
+    public Object getBizMetaDetail(@RequestParam String datasetId) {
+        return service.getBizMetaDetail(datasetId);
     }
 
     @ResponseJsonResult

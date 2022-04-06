@@ -6,6 +6,11 @@
 export default {
   name: "BasicTemplate",
   extends: {},
+  data() {
+    return {
+      sampleData: {}
+    };
+  },
   props: {
     sampleProps: {}
   },

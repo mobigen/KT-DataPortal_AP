@@ -6,7 +6,9 @@ const bizMeta = {
   state: {
     metaNameList: [],
     metaName: {},
-    bizMetaList: []
+    bizMetaList: [],
+    metaNameDetail: {},
+    bizMetaDetail: {}
   },
 
   getters: {
@@ -18,6 +20,12 @@ const bizMeta = {
     },
     bizMetaList(state) {
       return state.bizMetaList;
+    },
+    metaNameDetail(state) {
+      return state.metaNameDetail;
+    },
+    bizMetaDetail(state) {
+      return state.bizMetaDetail;
     }
   },
 
@@ -30,6 +38,12 @@ const bizMeta = {
     },
     setBizMetaList(state, data) {
       state.bizMetaList = data;
+    },
+    setMetaNameDetail(state, data) {
+      state.metaNameDetail = data;
+    },
+    setBizMetaDetail(state, data) {
+      state.bizMetaDetail = data;
     }
   },
 
@@ -79,10 +93,24 @@ const bizMeta = {
         .put("/api/meta/updateMetaName", obj)
         .then((d) => {});
     },
-    getBizMetaList({ _, commit }) {
+    getBizMetaList({ commit }) {
       Vue.prototype.$api.get("/api/meta/getBizMetaList").then((d) => {
         commit("setBizMetaList", d);
       });
+    },
+    getMetaNameDetail({ commit }, rowId) {
+      Vue.prototype.$api
+        .get("/api/meta/getMetaNameDetail?nameId=" + rowId)
+        .then((d) => {
+          commit("setMetaNameDetail", d);
+        });
+    },
+    getBizMetaDetail({ commit }, rowId) {
+      Vue.prototype.$api
+        .get("/api/meta/getBizMetaDetail?datasetId=" + rowId)
+        .then((d) => {
+          commit("setBizMetaDetail", d);
+        });
     }
   }
 };
