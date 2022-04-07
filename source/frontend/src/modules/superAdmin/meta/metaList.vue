@@ -6,16 +6,12 @@
       <h3>simple-table</h3>
 
       <div class="add-button">
-        <basic-button
-          componentId="metaName1"
-          @click="addForm"
-          buttonCss="text-button"
+        <basic-button @click="addForm" buttonCss="text-button"
           >등록</basic-button
         >
       </div>
 
       <basic-table
-        componentId="metaName1"
         :headerList="metaNameList.header"
         :dataList="metaNameList.body"
         rowKey="name_id"
@@ -65,33 +61,27 @@ export default {
   watch: {},
   methods: {
     ...mapActions("bizMeta", ["getMetaNameList", "removeMetaName"]),
-    removeObject(rowKey, componentId) {
-      if (componentId === "metaName1") {
-        this.removeMetaName(rowKey);
-      }
+    removeObject(rowKey) {
+      this.removeMetaName(rowKey);
     },
-    addForm(componentId) {
-      if (componentId === "metaName1") {
-        this.$router.push({ path: "/superAdmin/meta/metaForm" });
-      }
+    addForm() {
+      this.$router.push({ path: "/superAdmin/meta/metaForm" });
     },
-    editForm(rowKey, componentid) {
-      if (componentid === "metaName1") {
-        this.$router
-          .push({
-            path: "metaForm/" + rowKey
-          })
-          .catch(() => {});
-      }
+    editForm(rowKey) {
+      this.$router
+        .push({
+          path: "metaForm/" + rowKey
+        })
+        .catch(() => {});
     },
-    tableButtonClick(rowKey, componentId, btnAction) {
+    tableButtonClick(rowKey, btnAction) {
       if (btnAction === "remove") {
-        this.removeObject(rowKey, componentId);
+        this.removeObject(rowKey);
       } else if (btnAction === "edit") {
-        this.editForm(rowKey, componentId);
+        this.editForm(rowKey);
       }
     },
-    rowClick(rowKey, componentId) {
+    rowClick(rowKey) {
       this.$router.push({ path: `metaView/${rowKey}` });
     }
   },

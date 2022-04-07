@@ -15,7 +15,8 @@ export default {
       type: String
     },
     componentId: {
-      type: String
+      type: String,
+      require: false
     }
   },
   computed: {},

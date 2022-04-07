@@ -49,7 +49,6 @@ const bizMeta = {
 
   actions: {
     getMetaNameList({ _, commit }) {
-      console.log("getMetaNameList");
       Vue.prototype.$api.get("/api/meta/metaNameList").then((d) => {
         commit("setMetaNameList", d);
       });
@@ -64,7 +63,6 @@ const bizMeta = {
       Vue.prototype.$api
         .get("/api/meta/getMetaName", { params: { nameId: rowKey } })
         .then((d) => {
-          console.log(d);
           commit("setMetaName", d);
         });
     },
@@ -73,12 +71,12 @@ const bizMeta = {
         console.log("저장할 Data 없음");
         return;
       }
-      Vue.prototype.$api.post("/api/meta/insertMetaName", obj).then(() => {});
+      Vue.prototype.$api.post("/api/meta/insertMetaName", obj);
     },
     removeMetaName({ dispatch }, rowKey) {
       Vue.prototype.$api
         .delete("/api/meta/deleteMetaName", { params: { nameId: rowKey } })
-        .then((d) => {
+        .then(() => {
           dispatch("getMetaNameList");
         });
     },
@@ -88,10 +86,7 @@ const bizMeta = {
         return;
       }
 
-      console.log(obj);
-      await Vue.prototype.$api
-        .put("/api/meta/updateMetaName", obj)
-        .then((d) => {});
+      await Vue.prototype.$api.put("/api/meta/updateMetaName", obj);
     },
     getBizMetaList({ commit }) {
       Vue.prototype.$api.get("/api/meta/getBizMetaList").then((d) => {

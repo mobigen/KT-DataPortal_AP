@@ -1,11 +1,8 @@
 <template lang="html">
   <div class="json-viwer">
-    <basic-button
-      componentId="jsonViwer"
-      @click="buttonOk"
-      buttonCss="text-button"
-      >{{ jsonViewerShow ? "JSON 숨김" : "JSON 표시" }}</basic-button
-    >
+    <basic-button @click="buttonOk" buttonCss="text-button">{{
+      jsonViewerShow ? "JSON 숨김" : "JSON 표시"
+    }}</basic-button>
     <pre v-show="jsonViewerShow" v-if="isDevMode">{{ devJsonObject }}</pre>
   </div>
 </template>

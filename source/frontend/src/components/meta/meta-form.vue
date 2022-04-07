@@ -1,31 +1,35 @@
 <template lang="html">
   <div>
-    <!-- dataObject : {{ dataObject }} changeDataObject :
-    {{ changeDataObject }} formInputType: {{ formInputType }} -->
     <div
       class="input-box"
       v-for="(data, i) in headerList"
       :key="'input_box_' + i"
     >
       <basic-label>{{ data["column_name"] }}</basic-label>
-      <template v-if="formInputType[data['column_name']] === 'text'">
-        <text-input
-          :placeholder="placeholder"
-          :labelName="data['column_name']"
-          :inputData="changeDataObject[data['column_name']]"
-          @input="changeData"
-          :inputType="formInputType[data['column_name']]"
-        ></text-input>
-      </template>
-      <template v-else-if="formInputType[data['column_name']] === 'number'">
-        <number-input
-          :placeholder="placeholder"
-          :labelName="data['column_name']"
-          :inputData="changeDataObject[data['column_name']]"
-          @input="changeData"
-          :inputType="formInputType[data['column_name']]"
-        ></number-input>
-      </template>
+
+      <text-input
+        v-if="formInputType[data['column_name']] === 'text'"
+        :placeholder="placeholder"
+        :labelName="data['column_name']"
+        :inputData="changeDataObject[data['column_name']]"
+        @input="changeData"
+      ></text-input>
+
+      <number-input
+        v-else-if="formInputType[data['column_name']] === 'number'"
+        :placeholder="placeholder"
+        :labelName="data['column_name']"
+        :inputData="changeDataObject[data['column_name']]"
+        @input="changeData"
+      ></number-input>
+
+      <radio-button
+        v-else-if="formInputType[data['column_name']] === 'radio'"
+        :radioButtonList="metaTypeList"
+        :labelName="data['column_name']"
+        :inputData="changeDataObject[data['column_name']]"
+        @input="changeData"
+      ></radio-button>
     </div>
   </div>
 </template>
@@ -34,13 +38,19 @@
 import BasicLabel from "@/components/basic/basic-label.vue";
 import TextInput from "@/components/basic/text-input.vue";
 import NumberInput from "@/components/basic/number-input.vue";
+import RadioButton from "@/components/basic/radio-button.vue";
 
 export default {
   name: "meta-form",
   extends: {},
   data() {
     return {
-      changeDataObject: {}
+      changeDataObject: {},
+      metaTypeList: [
+        { value: 0, label: "text" },
+        { value: 1, label: "int" },
+        { value: 2, label: "binary" }
+      ]
     };
   },
   props: {
@@ -65,7 +75,7 @@ export default {
     }
   },
   computed: {},
-  components: { BasicLabel, TextInput, NumberInput },
+  components: { BasicLabel, TextInput, NumberInput, RadioButton },
   watch: {
     dataObject(data) {
       this.changeDataObject = data;
@@ -73,7 +83,9 @@ export default {
   },
   methods: {
     changeData(label, input) {
+      // Object나 Array의 변동사항을 감지하기 위해 this.$set 사용
       this.$set(this.changeDataObject, label, input);
+
       this.$emit("changeData", this.changeDataObject);
     }
   },
@@ -85,11 +97,11 @@ export default {
 .input-box {
   display: flex;
   margin: 10px 0px;
-  div:first-child {
+  > div:first-child {
     width: 20%;
   }
-  div:last-child {
-    width: 20%;
+  > div:last-child {
+    width: 40%;
   }
 }
 </style>

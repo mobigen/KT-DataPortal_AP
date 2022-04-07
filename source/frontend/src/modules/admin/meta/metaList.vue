@@ -3,7 +3,6 @@
     <div>admin meta list</div>
     <div>
       <basic-table
-        componentId="metaList"
         :headerList="bizMetaList.header"
         :dataList="bizMetaList.body"
         rowKey="rowId"
