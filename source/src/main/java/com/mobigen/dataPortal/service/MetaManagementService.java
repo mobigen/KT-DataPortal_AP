@@ -53,4 +53,9 @@ public class MetaManagementService {
     public int deleteMetaName(String nameId) {
         return mapper.deleteMetaName(nameId);
     }
+
+    @SQLHeader(tableName = "v_biz_meta_map")
+    public Object getMetaMapList() {
+        return mapper.getMetaMapList();
+    }
 }

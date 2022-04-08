@@ -25,8 +25,8 @@ public class MetaManagementController {
     private final MetaManagementService service;
 
     /**
-     * MetaName 상세 정보 조회 (1건)
-     * 초기설정
+     * MetaName 상세 정보 조회 (1건) 초기설정
+     * 
      * @param nameId
      * @return
      * @throws Exception
@@ -38,8 +38,8 @@ public class MetaManagementController {
     }
 
     /**
-     * MetaName 목록 조회
-     * 초기설정
+     * MetaName 목록 조회 초기설정
+     * 
      * @return
      * @throws Exception
      */
@@ -50,8 +50,8 @@ public class MetaManagementController {
     }
 
     /**
-     * MetaName 단건 조회
-     * 초기 설정
+     * MetaName 단건 조회 초기 설정
+     * 
      * @param nameId
      * @return
      * @throws Exception
@@ -62,10 +62,9 @@ public class MetaManagementController {
         return service.getMetaName(nameId);
     }
 
-
     /**
-     * MetaName 등록
-     * 초기설정
+     * MetaName 등록 초기설정
+     * 
      * @param param
      * @return
      * @throws Exception
@@ -84,8 +83,8 @@ public class MetaManagementController {
     }
 
     /**
-     * MetaName 수정
-     * 초기설정
+     * MetaName 수정 초기설정
+     * 
      * @param param
      * @return
      * @throws Exception
@@ -105,8 +104,8 @@ public class MetaManagementController {
     }
 
     /**
-     * MetaName 삭제
-     * 초기설정
+     * MetaName 삭제 초기설정
+     * 
      * @param nameId
      * @return
      * @throws Exception
@@ -118,8 +117,20 @@ public class MetaManagementController {
     }
 
     /**
-     * Meta 등록폼에 사용하는 Label 및 Value Type 조회
-     * 개발자 전용
+     * MetaMap 목록 조회 초기설정
+     * 
+     * @return
+     * @throws Exception
+     */
+    @ResponseJsonResult
+    @GetMapping("/metaMapList")
+    public Object getMetaMapList() throws Exception {
+        return service.getMetaMapList();
+    }
+
+    /**
+     * Meta 등록폼에 사용하는 Label 및 Value Type 조회 개발자 전용
+     * 
      * @return
      * @throws Exception
      */
@@ -130,8 +141,8 @@ public class MetaManagementController {
     }
 
     /**
-     * 등록이 완료된 Biz Meta 정보 상세 조회 (1건)
-     * 개발자 전용
+     * 등록이 완료된 Biz Meta 정보 상세 조회 (1건) 개발자 전용
+     * 
      * @param datasetId
      * @return
      */
@@ -142,8 +153,8 @@ public class MetaManagementController {
     }
 
     /**
-     * 등록이 완료된 Biz Meta 목록 조회
-     * 개발자 전용
+     * 등록이 완료된 Biz Meta 목록 조회 개발자 전용
+     * 
      * @return
      * @throws Exception
      */
