@@ -19,7 +19,7 @@ export default {
   watch: {},
   methods: {},
   created() {
-    console.log(this.CONSTANTS);
+    // console.log(this.CONSTANTS);
   }
 };
 </script>

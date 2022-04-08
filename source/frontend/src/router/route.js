@@ -40,7 +40,7 @@ const routes = [
         component: () => import("@modules/admin/meta/metaList")
       },
       {
-        path: "metaAdd/:rowKey",
+        path: "metaAdd/:rowKey?",
         component: () => import("@modules/admin/meta/metaAdd")
       },
       {

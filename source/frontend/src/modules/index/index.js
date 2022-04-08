@@ -23,8 +23,7 @@ Vue.component("icon", VueSvgIcon);
 
 Sentry.init({
   Vue,
-  dsn:
-    "https://c10f0211c0bb41af973f1f5ebf7fda60@o924939.ingest.sentry.io/6044951",
+  dsn: "https://c10f0211c0bb41af973f1f5ebf7fda60@o924939.ingest.sentry.io/6044951",
   integrations: [
     new Integrations.BrowserTracing({
       tracingOrigins: [/^\//]

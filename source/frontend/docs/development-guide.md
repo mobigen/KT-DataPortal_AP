@@ -40,3 +40,20 @@
     - ** 지금은 kor_name으로 하드 코딩 되어있는 상태입니다. 
       - Locale 처리를 위해서 위의 부분은 변경될 수 있습니다.
     - ** json 형태는 basic-table.vue 에 바로 적용 할 수 있는 형태입니다.
+
+### View Component
+- 이 챕터에서는 basic-viewTable.vue 컴포넌트 사용에 관련된 내용을 기술합니다.
+---
+- key 값을 router에 parameter로 추가해주어야 합니다.
+- parameter는 2개입니다.
+  - useTableHead : table Head의 사용 여부 (default false)
+  - viewDetail : table 표시 json 데이터
+    - ```
+      {
+        Header : [{},{}...],
+        Body : [{}]
+      }
+      ```
+  - Backend에서 @SQLHeader를 이용하여 데이터 처리를 합니다. (Header이 추가됨)
+    - storePlugin.js에서 body를 배열로 정의했기 때문에, backend에서 데이터를 조회할때 Array로 처리해야 합니다.
+      - MetaManagementService.java의 'getBizMetaDetail' method 참고.

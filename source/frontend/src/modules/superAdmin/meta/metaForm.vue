@@ -63,7 +63,7 @@ export default {
         this.changeData = {};
       }
 
-      this.$router.push({ path: "/superAdmin/meta/metaList" });
+      this.$router.push({ path: "metaList" });
     },
     setChangeData(data) {
       this.changeData = data;
@@ -76,7 +76,7 @@ export default {
     this.rowKey = this.$route.params.rowKey;
 
     this.getMetaNameList();
-    this.getMetaName(this.$route.params.rowKey);
+    this.getMetaName(this.rowKey);
   }
 };
 </script>

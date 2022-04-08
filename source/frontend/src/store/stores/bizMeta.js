@@ -30,6 +30,9 @@ const bizMeta = {
     },
     metaMapList(state) {
       return state.metaMapList;
+    },
+    bizMetaForm(state) {
+      return state.bizMetaForm;
     }
   },
 
@@ -51,6 +54,9 @@ const bizMeta = {
     },
     setMetaMapList(state, data) {
       state.metaMapList = data;
+    },
+    setBizMetaForm(state, data) {
+      state.bizMetaForm = data;
     }
   },
 
@@ -117,6 +123,16 @@ const bizMeta = {
     getMetaMapList({ commit }) {
       Vue.prototype.$api.get("/api/meta/metaMapList").then((d) => {
         commit("setMetaMapList", d);
+      });
+    },
+    getBizMetaForm({ commit }) {
+      Vue.prototype.$api.get("/api/meta/getBizMetaForm").then((d) => {
+        commit("setBizMetaForm", d);
+      });
+    },
+    removeBizMeta({ commit }, rowKey) {
+      Vue.prototype.$api.get("/api/meta/removeBizMeta", {
+        params: { nameId: rowKey }
       });
     }
   }

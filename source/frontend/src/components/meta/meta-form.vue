@@ -96,8 +96,8 @@ export default {
 <style lang="scss">
 .input-box {
   display: flex;
-  margin: 10px 0px;
-  > div:first-child {
+  margin: 10px 0;
+  div:first-child {
     width: 20%;
   }
   > div:last-child {
