@@ -36,6 +36,10 @@ export default {
       this.input = data;
     },
     input(data) {
+      if (data === "") {
+        data = null;
+      }
+
       this.$emit("input", this.labelName, data);
     }
   },

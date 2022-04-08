@@ -37,6 +37,7 @@ public class MetaManagementService {
         return mapper.getBizMetaList();
     }
 
+    // @SQLHeader(tableName = "v_biz_meta_name")
     public Object getMetaName(String nameId) {
         return mapper.getMetaName(nameId);
     }

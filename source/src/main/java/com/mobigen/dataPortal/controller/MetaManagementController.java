@@ -77,6 +77,8 @@ public class MetaManagementController {
 
         metaName.put("korName", param.get("kor_name"));
         metaName.put("engName", param.get("eng_name"));
+        metaName.put("showOrder", param.get("show_order"));
+        metaName.put("type", param.get("type"));
 
         return service.insertMetaName(metaName);
     }
@@ -97,7 +99,6 @@ public class MetaManagementController {
         metaName.put("engName", param.get("eng_name"));
         metaName.put("nameId", param.get("name_id"));
         metaName.put("showOrder", param.get("show_order"));
-        metaName.put("referenceTable", param.get("reference_table"));
         metaName.put("type", param.get("type"));
 
         return service.updateMetaName(metaName);
@@ -112,7 +113,7 @@ public class MetaManagementController {
      */
     @ResponseJsonResult
     @DeleteMapping("/deleteMetaName")
-    public Object deleteNetaName(@RequestParam String nameId) throws Exception {
+    public Object deleteMetaName(@RequestParam String nameId) throws Exception {
         return service.deleteMetaName(nameId);
     }
 

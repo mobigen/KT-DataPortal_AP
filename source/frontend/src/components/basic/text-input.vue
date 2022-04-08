@@ -4,7 +4,8 @@
       type="text"
       class="text-input text-input--sm"
       :placeholder="placeholder"
-      v-model="input"
+      @input="typing"
+      :value="input"
     />
   </div>
 </template>
@@ -34,12 +35,14 @@ export default {
   watch: {
     inputData(data) {
       this.input = data;
-    },
-    input(data) {
-      this.$emit("input", this.labelName, data);
     }
   },
-  methods: {},
+  methods: {
+    typing(e) {
+      this.input = e.target.value;
+      this.$emit("input", this.labelName, this.input);
+    }
+  },
   created() {}
 };
 </script>

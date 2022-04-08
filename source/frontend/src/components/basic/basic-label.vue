@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="simple-label">
-    <label><slot></slot></label>
+    <label :for="forProperty"><slot></slot></label>
   </div>
 </template>
 
@@ -8,7 +8,12 @@
 export default {
   name: "basic-label",
   extends: {},
-  props: {},
+  props: {
+    forProperty: {
+      type: String,
+      require: false
+    }
+  },
   computed: {},
   components: {},
   watch: {},

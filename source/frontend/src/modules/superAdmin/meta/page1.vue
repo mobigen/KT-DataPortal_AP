@@ -3,7 +3,6 @@
     <div>super admin page1</div>
     <div>
       <basic-table
-        componentId="metaList"
         :headerList="bizMetaList.header"
         :dataList="bizMetaList.body"
         mainKey="rowId"
