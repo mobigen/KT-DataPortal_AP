@@ -5,19 +5,37 @@
 <mapper namespace="com.mobigen.dataPortal.mapper.MetaManagementMapper">
     <!-- 단일 meta name 상세 조회-->
     <select id="getMetaNameDetail" resultType="java.util.Map">
-        select *
+        select kor_name,
+               eng_name,
+               show_order,
+               name_id,
+               (case 
+                    when type=0 then 'text'
+                    when type=1 then 'int'
+                    when type=2 then 'binary'
+                end
+               ) as type
         from metasch.tb_biz_meta_name
         where name_id = #{nameId};
     </select>
 
     <select id="getMetaNameList" resultType="java.util.Map">
-        SELECT *
+        SELECT kor_name,
+               eng_name,
+               show_order,
+               name_id,
+               (case 
+                    when type=0 then 'text'
+                    when type=1 then 'int'
+                    when type=2 then 'binary'
+                end
+               ) as type
         FROM tb_biz_meta_name
         order by name_id;
     </select>
     <!-- meta form 형식 조회 -->
     <select id="getBizMetaForm" resultType="java.util.Map">
-        select item_id, kor_name, eng_name, tbmm.name_id, reference_table, type
+        select item_id, kor_name, eng_name, tbmm.name_id, type
         from metasch.tb_biz_meta_map tbmm
                  left join metasch.tb_biz_meta_name tbmn on tbmm.name_id = tbmn.name_id
         ;
@@ -70,7 +88,7 @@
     <!-- metaName 추가 -->
     <insert id="insertMetaName" parameterType="Object">
     	insert into tb_biz_meta_name (kor_name, eng_name, show_order, name_id, type)
-    	values ( #{korName}, #{engName}, 0, (select concat('i',cast(substring(max(name_id),2) as int)+1) as name_id from tb_biz_meta_name) , 0)
+    	values ( #{korName}, #{engName}, #{showOrder}, (select concat('i',cast(substring(max(name_id),2) as int)+1) as name_id from tb_biz_meta_name) , #{type})
     </insert>
     
     <!-- metaName 수정 -->

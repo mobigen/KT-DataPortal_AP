@@ -5,16 +5,10 @@
     <div>
       <h3>simple-viewTable</h3>
 
-      <basic-viewTable
-        componentId="metaDetail2"
-        :viewDetail="bizMetaDetail"
-      ></basic-viewTable>
+      <basic-viewTable :viewDetail="bizMetaDetail"></basic-viewTable>
 
       <div class="add-button">
-        <basic-button
-          componentId="metaViewBtn"
-          @click="buttonOk"
-          buttonCss="text-button"
+        <basic-button @click="buttonOk" buttonCss="text-button"
           >확인</basic-button
         >
       </div>

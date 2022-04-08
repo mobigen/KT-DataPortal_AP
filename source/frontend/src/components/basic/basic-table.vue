@@ -82,7 +82,7 @@ export default {
     },
     componentId: {
       type: String,
-      require: true
+      require: false
     },
     rowKey: {
       type: String,
@@ -94,10 +94,10 @@ export default {
   watch: {},
   methods: {
     buttonClick(rowKey, btnAction) {
-      this.$emit("buttonAction", rowKey, this.componentId, btnAction);
+      this.$emit("buttonAction", rowKey, btnAction);
     },
     rowClick(rowKey) {
-      this.$emit("columnAction", rowKey, this.componentId);
+      this.$emit("columnAction", rowKey);
     }
   },
   created() {}

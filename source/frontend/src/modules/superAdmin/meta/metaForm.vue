@@ -11,15 +11,10 @@
       />
     </div>
 
-    <!-- <radio-button :radioButtonList="radioButtonList()"></radio-button> -->
-
     <div class="button-box">
       <basic-button @click="cancel" buttonCss="text-button">취소</basic-button>
 
-      <basic-button
-        componentId="metaName1"
-        @click="addObject"
-        buttonCss="text-button"
+      <basic-button @click="addObject" buttonCss="text-button"
         >저장</basic-button
       >
     </div>
@@ -30,19 +25,20 @@
 import { mapActions, mapGetters } from "vuex";
 import MetaForm from "@/components/meta/meta-form.vue";
 import BasicButton from "@/components/basic/basic-button.vue";
-/* import RadioButton from "@/components/basic/radio-button.vue"; */
+
 export default {
   name: "super-admin-metaForm",
   extends: {},
   data() {
     return {
+      rowKey: null,
       changeData: {},
       formInputType: {
         kor_name: "text",
         eng_name: "text",
         show_order: "number",
         name_id: "text",
-        type: "number"
+        type: "radio"
       }
     };
   },
@@ -50,7 +46,7 @@ export default {
   computed: {
     ...mapGetters("bizMeta", ["metaNameList", "metaName"])
   },
-  components: { MetaForm, BasicButton /* RadioButton  */ },
+  components: { MetaForm, BasicButton },
   watch: {},
   methods: {
     ...mapActions("bizMeta", [
@@ -60,11 +56,11 @@ export default {
       "editMetaName"
     ]),
     async addObject() {
-      if (Object.keys(this.metaName).length === 0) {
+      if (this.rowKey) {
+        await this.editMetaName(this.changeData);
+      } else {
         await this.addMetaName(this.changeData);
         this.changeData = {};
-      } else if (Object.keys(this.metaName).length !== 0) {
-        await this.editMetaName(this.changeData);
       }
 
       this.$router.push({ path: "/superAdmin/meta/metaList" });
@@ -75,19 +71,10 @@ export default {
     cancel() {
       this.$router.go(-1);
     }
-    /*     radioButtonList() {
-      const values = [
-        { value: "rb1", label: "radio 1" },
-        { value: "rb2", label: "radio 2" },
-        { value: "rb3", label: "radio 3" },
-        { value: "rb4", label: "radio 4" },
-        { value: "rb5", label: "radio 5" },
-        { value: "rb6", label: "radio 6" }
-      ];
-      return values;
-    } */
   },
   created() {
+    this.rowKey = this.$route.params.rowKey;
+
     this.getMetaNameList();
     this.getMetaName(this.$route.params.rowKey);
   }

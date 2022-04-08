@@ -40,7 +40,9 @@ export default {
     }
   },
   methods: {},
-  created() {}
+  created() {
+    this.input = this.inputData;
+  }
 };
 </script>
 
