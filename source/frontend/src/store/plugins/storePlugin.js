@@ -10,7 +10,7 @@ export function storePlugin(store) {
 
   // called after every mutation.
   // The mutation comes in the format of `{ type, payload }`.
-  store.subscribe((mutation) => {
+  store.subscribe((mutation, state) => {
     // subscribed 한 후에 다시 돌아온 경우, 그대로 return 한다.
     if (mutation.payload.subscribed) {
       return;
@@ -28,14 +28,17 @@ export function storePlugin(store) {
     }
 
     if (
-      // useRebuildBody를 가지고 있고, useRebuildBody가 true인 값만 rebuild.
+      /**
+       * RebuildBody Use Only GRID(LIST)
+       * useRebuildBody를 가지고 있고, useRebuildBody가 true인 값만 rebuild.
+       */
       Object.prototype.hasOwnProperty.call(
         mutation.payload,
         "useRebuildBody"
       ) &&
       mutation.payload.useRebuildBody
     ) {
-      console.log("mutation subscribed");
+      // console.log("mutation subscribed");
 
       let obj = {};
       let newBody = [];
@@ -43,7 +46,7 @@ export function storePlugin(store) {
       let defaultColumnName = "column_name";
       if (Object.keys(_header[0]).indexOf("column_name") === -1) {
         // column_name이 default가 아닌 경우, kor_name으로 임의처리한다.
-        defaultColumnName = "kor_name";
+        defaultColumnName = state.constants.constants.DEFAULT_NAME_COLUMN;
       }
 
       mutation.payload.body.forEach((b) => {
@@ -59,7 +62,7 @@ export function storePlugin(store) {
       let newHeader = [];
 
       mutation.payload.header.forEach((h) => {
-        newHeader.push({ column_name: h.kor_name });
+        newHeader.push({ column_name: h[defaultColumnName] });
       });
 
       const d = {

@@ -31,11 +31,13 @@ import { mapActions, mapGetters } from "vuex";
 import MetaForm from "@/components/meta/meta-form.vue";
 import BasicButton from "@/components/basic/basic-button.vue";
 /* import RadioButton from "@/components/basic/radio-button.vue"; */
+
 export default {
   name: "super-admin-metaForm",
   extends: {},
   data() {
     return {
+      rowKey: null,
       changeData: {},
       formInputType: {
         kor_name: "text",
@@ -60,14 +62,13 @@ export default {
       "editMetaName"
     ]),
     async addObject() {
-      if (Object.keys(this.metaName).length === 0) {
-        await this.addMetaName(this.changeData);
-        this.changeData = {};
-      } else if (Object.keys(this.metaName).length !== 0) {
+      if (this.rowKey) {
         await this.editMetaName(this.changeData);
+      } else {
+        await this.addMetaName(this.changeData);
       }
 
-      this.$router.push({ path: "/superAdmin/meta/metaList" });
+      this.$router.push({ path: "metaList" });
     },
     setChangeData(data) {
       this.changeData = data;
@@ -87,9 +88,15 @@ export default {
       return values;
     } */
   },
+  // beforeCreate() {
+  //   console.log("before");
+  //   this.changeData = {};
+  // },
   created() {
+    this.rowKey = this.$route.params.rowKey;
+
     this.getMetaNameList();
-    this.getMetaName(this.$route.params.rowKey);
+    this.getMetaName(this.rowKey);
   }
 };
 </script>

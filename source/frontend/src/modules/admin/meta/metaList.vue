@@ -2,13 +2,23 @@
   <div>
     <div>admin meta list</div>
     <div>
+      <div class="add-button">
+        <basic-button
+          componentId="metaFormAddBtn"
+          @click="addMeta"
+          buttonCss="text-button"
+          >등록</basic-button
+        >
+      </div>
       <basic-table
         componentId="metaList"
         :headerList="bizMetaList.header"
         :dataList="bizMetaList.body"
         rowKey="rowId"
         :numHeaderUse="false"
-        :buttonHeaderUse="false"
+        :buttonHeaderUse="true"
+        :buttonHeaderText="this.buttonList"
+        @buttonAction="tableButtonClick"
         @columnAction="viewMetaInfo"
       />
     </div>
@@ -18,24 +28,53 @@
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
 import BasicTable from "@/components/basic/basic-table.vue";
+import BasicButton from "@/components/basic/basic-button.vue";
 
 export default {
   name: "admin-list",
   extends: {},
+  data() {
+    return {
+      buttonList: []
+    };
+  },
   props: {},
   computed: {
-    ...mapGetters("bizMeta", ["bizMetaList"])
+    ...mapGetters("bizMeta", ["bizMetaList"]),
+    ...mapGetters("constants", ["CONSTANTS"])
   },
-  components: { BasicTable },
+  components: { BasicTable, BasicButton },
   watch: {},
   methods: {
-    ...mapActions("bizMeta", ["getBizMetaList"]),
+    ...mapActions("bizMeta", ["getBizMetaList", "removeBizMeta"]),
     viewMetaInfo(rowKey) {
       this.$router.push({ path: "metaView/" + rowKey });
+    },
+    addMeta() {
+      this.$router.push({ path: "metaAdd" });
+    },
+    editMeta(rowKey) {
+      this.$router.push({ path: "metaAdd/" + rowKey });
+    },
+    removeMeta(rowKey) {
+      this.removeMeta(rowKey);
+    },
+    setTableBtn() {
+      this.buttonList.push(this.CONSTANTS.BUTTONS.TABLE.EDIT_BTN);
+      this.buttonList.push(this.CONSTANTS.BUTTONS.TABLE.DELETE_BTN);
+    },
+    tableButtonClick(rowKey, componentId, btnAction) {
+      console.log(rowKey);
+      if (btnAction === this.CONSTANTS.BUTTONS.ACTION_NAME.EDIT) {
+        this.editMeta(rowKey);
+      } else if (btnAction === this.CONSTANTS.BUTTONS.ACTION_NAME.REMOVE) {
+        this.removeMeta(rowKey);
+      }
     },
     none() {}
   },
   created() {
+    this.setTableBtn();
     this.getBizMetaList();
   }
 };

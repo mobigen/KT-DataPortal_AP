@@ -68,6 +68,7 @@ export default {
   components: { BasicLabel, TextInput, NumberInput },
   watch: {
     dataObject(data) {
+      console.log("watch");
       this.changeDataObject = data;
     }
   },
@@ -84,7 +85,7 @@ export default {
 <style lang="scss">
 .input-box {
   display: flex;
-  margin: 10px 0px;
+  margin: 10px 0;
   div:first-child {
     width: 20%;
   }

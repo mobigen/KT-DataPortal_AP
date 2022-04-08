@@ -26,6 +26,9 @@ const bizMeta = {
     },
     bizMetaDetail(state) {
       return state.bizMetaDetail;
+    },
+    bizMetaForm(state) {
+      return state.bizMetaForm;
     }
   },
 
@@ -44,6 +47,9 @@ const bizMeta = {
     },
     setBizMetaDetail(state, data) {
       state.bizMetaDetail = data;
+    },
+    setBizMetaForm(state, data) {
+      state.bizMetaForm = data;
     }
   },
 
@@ -111,6 +117,16 @@ const bizMeta = {
         .then((d) => {
           commit("setBizMetaDetail", d);
         });
+    },
+    getBizMetaForm({ commit }) {
+      Vue.prototype.$api.get("/api/meta/getBizMetaForm").then((d) => {
+        commit("setBizMetaForm", d);
+      });
+    },
+    removeBizMeta({ commit }, rowKey) {
+      Vue.prototype.$api.get("/api/meta/removeBizMeta", {
+        params: { nameId: rowKey }
+      });
     }
   }
 };

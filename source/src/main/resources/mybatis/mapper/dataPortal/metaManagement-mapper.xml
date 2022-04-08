@@ -17,9 +17,10 @@
     </select>
     <!-- meta form 형식 조회 -->
     <select id="getBizMetaForm" resultType="java.util.Map">
-        select item_id, kor_name, eng_name, tbmm.name_id, reference_table, type
+        select item_id, kor_name, eng_name, tbmm.name_id, type as value_type
         from metasch.tb_biz_meta_map tbmm
                  left join metasch.tb_biz_meta_name tbmn on tbmm.name_id = tbmn.name_id
+        order by item_id
         ;
     </select>
 
@@ -59,7 +60,7 @@
         group by biz_dataset_id
         order by biz_dataset_id;
     </select>
-    
+
     <!-- metaName 조회 -->
     <select id="getMetaName" parameterType="String" resultType="java.util.Map">
     	select *

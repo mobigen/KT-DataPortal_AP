@@ -10,7 +10,7 @@ public interface MetaManagementMapper {
 
     ArrayList<Object> getMetaNameList();
 
-    Object getBizMetaForm();
+    ArrayList<Object> getBizMetaForm();
 
     ArrayList<Object> getBizMetaDetail(String datasetId);
 

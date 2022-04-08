@@ -2,28 +2,63 @@
   <div>
     <div>meta-add</div>
     <div>
-      <!--      {{ metaName }}-->
+      <basic-table-form
+        :viewDetail="bizMetaForm"
+        :rowValues="bizMetaDetail.body"
+      ></basic-table-form>
+
+      <basic-button @click="cancel" buttonCss="text-button">취소</basic-button>
+
+      <basic-button
+        componentId="metaName1"
+        @click="addObject"
+        buttonCss="text-button"
+        >저장</basic-button
+      >
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
-// import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import BasicTableForm from "@/components/basic/basic-table-form";
+import BasicButton from "@/components/basic/basic-button.vue";
 
 export default {
   name: "meta-add",
   extends: {},
+  data() {
+    return {
+      rowKey: {}
+    };
+  },
   props: {},
   computed: {
-    // ...mapGetters("superAdmin", ["metaName"])
+    ...mapGetters("bizMeta", ["bizMetaForm", "bizMetaDetail"])
   },
-  components: {},
+  components: { BasicTableForm, BasicButton },
   watch: {},
   methods: {
-    // ...mapActions("superAdmin", ["getMetaNameList"])
+    ...mapActions("bizMeta", ["getBizMetaForm", "getBizMetaDetail"]),
+    cancel() {
+      this.$router.go(-1);
+    },
+    addObject() {
+      if (this.rowKey) {
+        console.log("update");
+      } else {
+        console.log("insert");
+      }
+    }
   },
   created() {
-    // this.getMetaNameList();
+    this.rowKey = this.$route.params.rowKey;
+
+    this.getBizMetaForm();
+    // rowKey가 있으면 '수정' 모드 이기 때문에 기존 데이터를 조회한다.
+    if (this.rowKey) {
+      this.getBizMetaDetail(this.rowKey);
+    }
   }
 };
 </script>

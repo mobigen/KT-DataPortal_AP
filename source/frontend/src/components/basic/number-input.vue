@@ -11,7 +11,7 @@
 
 <script type="text/javascript">
 export default {
-  name: "text-input",
+  name: "number-input",
   extends: {},
   data() {
     return {

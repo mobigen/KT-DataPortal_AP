@@ -6,7 +6,7 @@
       <h3>simple-viewTable</h3>
 
       <basic-viewTable
-        componentId="metaDetail2"
+        componentId="metaDetail"
         :viewDetail="bizMetaDetail"
       ></basic-viewTable>
 
