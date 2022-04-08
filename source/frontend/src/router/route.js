@@ -67,6 +67,11 @@ const routes = [
         path: "metaView/:rowKey",
         name: "sa-metaView",
         component: () => import("@modules/superAdmin/meta/metaView")
+      },
+      {
+        path: "metaMapList",
+        name: "sa-metaMApList",
+        component: () => import("@modules/superAdmin/meta/metaMapList")
       }
     ]
   },

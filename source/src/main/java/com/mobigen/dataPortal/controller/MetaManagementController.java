@@ -93,4 +93,10 @@ public class MetaManagementController {
         return service.deleteMetaName(nameId);
     }
 
+    @ResponseJsonResult
+    @GetMapping("/metaMapList")
+    public Object getMetaMapList() throws Exception {
+        return service.getMetaMapList();
+    }
+
 }

@@ -106,5 +106,12 @@
 		delete from tb_biz_meta_name
 		where name_id = #{nameId}
 	</delete>
+	
+	<!-- metaMap list 조회 -->
+	<select id="getMetaMapList" resultType="java.util.Map">
+	   select tbmn.kor_name, tbmn.eng_name, tbmm.item_id , tbmm.name_id 
+	   from tb_biz_meta_name tbmn
+	           join tb_biz_meta_map tbmm on tbmn.name_id = tbmm.name_id
+	</select>
 
 </mapper>

@@ -66,7 +66,7 @@ export default {
     numHeaderUse: {
       type: Boolean,
       require: false,
-      default: true
+      default: false
     },
     numHeaderText: {
       type: String,

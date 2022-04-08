@@ -23,4 +23,6 @@ public interface MetaManagementMapper {
     int updateMetaName(Object metaName);
 
     int deleteMetaName(String nameId);
+
+    ArrayList<Object> getMetaMapList();
 }

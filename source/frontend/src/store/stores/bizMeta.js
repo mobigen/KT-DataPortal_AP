@@ -8,7 +8,8 @@ const bizMeta = {
     metaName: {},
     bizMetaList: [],
     metaNameDetail: {},
-    bizMetaDetail: {}
+    bizMetaDetail: {},
+    metaMapList: []
   },
 
   getters: {
@@ -26,6 +27,9 @@ const bizMeta = {
     },
     bizMetaDetail(state) {
       return state.bizMetaDetail;
+    },
+    metaMapList(state) {
+      return state.metaMapList;
     }
   },
 
@@ -44,6 +48,9 @@ const bizMeta = {
     },
     setBizMetaDetail(state, data) {
       state.bizMetaDetail = data;
+    },
+    setMetaMapList(state, data) {
+      state.metaMapList = data;
     }
   },
 
@@ -106,6 +113,11 @@ const bizMeta = {
         .then((d) => {
           commit("setBizMetaDetail", d);
         });
+    },
+    getMetaMapList({ commit }) {
+      Vue.prototype.$api.get("/api/meta/metaMapList").then((d) => {
+        commit("setMetaMapList", d);
+      });
     }
   }
 };
