@@ -36,13 +36,15 @@ export default {
       this.input = data;
     },
     input(data) {
+      if (data === "") {
+        data = null;
+      }
+
       this.$emit("input", this.labelName, data);
     }
   },
   methods: {},
-  created() {
-    this.input = this.inputData;
-  }
+  created() {}
 };
 </script>
 
