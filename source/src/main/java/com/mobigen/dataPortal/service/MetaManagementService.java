@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -57,5 +58,18 @@ public class MetaManagementService {
     @SQLHeader(tableName = "v_biz_meta_map")
     public Object getMetaMapList() {
         return mapper.getMetaMapList();
+    }
+
+    public Object getUseMetaNameList() {
+        return mapper.getUseMetaNameList();
+    }
+
+    public int insertListOfMetaMap(List<Object> param) {
+        return mapper.insertListOfMetaMap(param);
+    }
+
+    public void deleteAllMetaMap() {
+        mapper.deleteAllMetaMap();
+        
     }
 }

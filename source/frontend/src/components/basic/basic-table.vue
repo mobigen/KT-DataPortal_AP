@@ -39,8 +39,25 @@
                   )
                 "
                 :buttonCss="buttonHeaderText[bi]['buttonCss']"
-                ><icon data="@icon/minus.svg" aria-hidden="true"></icon
-              ></basic-button>
+              >
+                <template v-if="buttonHeaderText[bi]['iconData']">
+                  <icon data="@icon/minus.svg" aria-hidden="true"></icon
+                ></template>
+
+                <template v-else-if="buttonHeaderText[bi]['textData']">
+                  <template v-if="buttonHeaderText[bi]['selectButtonList']">{{
+                    buttonHeaderText[bi]["selectButtonList"].includes(
+                      data[rowKey]
+                    )
+                      ? buttonHeaderText[bi]["textData"][0]
+                      : buttonHeaderText[bi]["textData"][1]
+                  }}</template>
+
+                  <template v-else>{{
+                    buttonHeaderText[bi]["textData"]
+                  }}</template>
+                </template>
+              </basic-button>
             </td>
           </template>
         </tr>

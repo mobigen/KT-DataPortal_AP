@@ -12,7 +12,9 @@
       />
 
       <div class="edit-button">
-        <basic-button @click="editTable">수정</basic-button>
+        <basic-button @click="editTable" buttonCss="text-button"
+          >수정</basic-button
+        >
       </div>
     </div>
   </div>
@@ -40,7 +42,7 @@ export default {
   methods: {
     ...mapActions("bizMeta", ["getMetaMapList"]),
     editTable() {
-      alert("수정");
+      this.$router.push({ path: "/superAdmin/meta/metaMapModify" });
     }
   },
   created() {
@@ -53,6 +55,6 @@ export default {
 .edit-button {
   display: flex;
   justify-content: flex-end;
-  margin: 10px 0px;
+  margin: 10px -5px;
 }
 </style>

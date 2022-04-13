@@ -3,6 +3,7 @@ package com.mobigen.dataPortal.mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository("metaManagementMapper")
 public interface MetaManagementMapper {
@@ -25,4 +26,10 @@ public interface MetaManagementMapper {
     int deleteMetaName(String nameId);
 
     ArrayList<Object> getMetaMapList();
+
+    ArrayList<Object> getUseMetaNameList();
+
+    int insertListOfMetaMap(List<Object> param);
+
+    void deleteAllMetaMap();
 }
