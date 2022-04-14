@@ -29,7 +29,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["~plugin/defaultPlugin.js"],
+  plugins: ["~plugin/defaultPlugin.js", "~plugin/route.js"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
