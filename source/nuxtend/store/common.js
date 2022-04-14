@@ -17,6 +17,9 @@ export const mutations = {
   },
   setDevJsonReset(state) {
     state.devJsonObject = {};
+  },
+  setDevJsonObjByKeyValue(state, { key, value }) {
+    state.devJsonObject[key] = value;
   }
 };
 
@@ -31,6 +34,9 @@ export const actions = {
     commit("setDevJsonReset", {
       subscribed: true
     });
+  },
+  setDevJsonObjByKeyValue({ commit }, param) {
+    commit("setDevJsonObjByKeyValue", param);
   }
 };
 

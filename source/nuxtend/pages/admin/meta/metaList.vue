@@ -9,6 +9,12 @@
           buttonCss="text-button"
           >등록</basic-button
         >
+        <basic-button
+          componentId="metaFormAddBtn"
+          @click="addJson"
+          buttonCss="text-button"
+          >json추가</basic-button
+        >
       </div>
 
       <basic-table
@@ -47,6 +53,8 @@ export default {
   watch: {},
   methods: {
     ...mapActions("bizMeta", ["getBizMetaList", "removeBizMeta"]),
+    ...mapActions("common", ["setDevJsonObjByKeyValue"]),
+
     viewMetaInfo(rowKey) {
       this.$router.push({
         path: "/admin/meta/metaView",
@@ -76,7 +84,12 @@ export default {
         this.removeMeta(rowKey);
       }
     },
-    none() {}
+    addJson() {
+      this.setDevJsonObjByKeyValue({
+        key: "newJsonKey",
+        value: "newJsonValue"
+      });
+    }
   },
   created() {
     this.setTableBtn();
