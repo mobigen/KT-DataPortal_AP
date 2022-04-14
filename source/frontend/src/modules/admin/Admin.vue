@@ -1,6 +1,5 @@
 <template lang="html">
   <div id="admin">
-    <h1>ADMIN.vue</h1>
     <router-view></router-view>
     <axios-interceptor />
     <json-viwer />
@@ -21,7 +20,5 @@ export default {
 <style>
 #admin {
   background-color: #f7f9fc;
-  width: 70%;
-  margin: auto;
 }
 </style>
