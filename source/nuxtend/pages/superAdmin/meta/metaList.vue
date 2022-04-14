@@ -68,11 +68,10 @@ export default {
       this.$router.push({ path: "/superAdmin/meta/metaForm" });
     },
     editForm(rowKey) {
-      this.$router
-        .push({
-          path: "metaForm/" + rowKey
-        })
-        .catch(() => {});
+      this.$router.push({
+        path: "/superAdmin/meta/metaForm",
+        query: { metaNameId: rowKey }
+      });
     },
     tableButtonClick(rowKey, btnAction) {
       if (btnAction === "remove") {
@@ -82,8 +81,10 @@ export default {
       }
     },
     rowClick(rowKey) {
-      console.log(rowKey)
-      this.$router.push({ path: "metaView", query: { metaNameId: rowKey } });
+      this.$router.push({
+        path: "/superAdmin/meta/metaView",
+        query: { metaNameId: rowKey }
+      });
 
       // this.$router.push({
       //   path: `metaView`,
