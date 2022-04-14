@@ -48,13 +48,19 @@ export default {
   methods: {
     ...mapActions("bizMeta", ["getBizMetaList", "removeBizMeta"]),
     viewMetaInfo(rowKey) {
-      this.$router.push({ path: "metaView", query: { metaNameId: rowKey } });
+      this.$router.push({
+        path: "/admin/meta/metaView",
+        query: { metaNameId: rowKey }
+      });
     },
     addMeta() {
-      this.$router.push({ path: "metaAdd" });
+      this.$router.push({ path: "/admin/meta/metaAdd" });
     },
     editMeta(rowKey) {
-      this.$router.push({ path: "metaAdd", query: { metaNameId: rowKey } });
+      this.$router.push({
+        path: "/admin/meta/metaForm",
+        query: { metaNameId: rowKey }
+      });
     },
     removeMeta(rowKey) {
       this.removeMeta(rowKey);

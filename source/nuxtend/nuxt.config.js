@@ -2,6 +2,14 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
 
+  router: {
+    base: "/dataPortal/"
+  },
+  app: {
+    base: "/dataPortal/",
+    buildAssetsPath: "/_nuxt/"
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "nuxtend",
@@ -32,10 +40,12 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/axios", "@nuxtjs/proxy"],
   axios: {
+    // baseURL: process.env.NODE_ENV !== "production" ? "http://localhost:8888/dataPortal/api/" : "",
+    baseURL: "http://localhost:8888/dataPortal/api/",
     proxy: true
   },
   proxy: {
-    "/dataPortal/api": {
+    "/dataPortal/api/": {
       target: "http://localhost:8888",
       changeOrigin: true // cross origin 허용
     }
