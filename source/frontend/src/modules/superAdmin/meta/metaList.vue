@@ -21,8 +21,6 @@
         :buttonHeaderText="this.buttonList"
         @buttonAction="tableButtonClick"
         @columnAction="rowClick"
-        keyAction="{}"
-        atcionText="[]"
       />
     </div>
   </div>

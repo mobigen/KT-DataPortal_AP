@@ -9,6 +9,8 @@
         :headerList="headerList"
         :dataList="metaMapList.body"
         rowKey="item_id"
+        :keyActionText="{ eng_name: 'keyActionTest01' }"
+        @keyAction="keyClick"
       />
 
       <div class="edit-button">
@@ -43,6 +45,9 @@ export default {
     ...mapActions("bizMeta", ["getMetaMapList"]),
     editTable() {
       this.$router.push({ path: "/superAdmin/meta/metaMapModify" });
+    },
+    keyClick(keyAction) {
+      alert(keyAction);
     }
   },
   created() {

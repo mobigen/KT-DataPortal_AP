@@ -97,7 +97,7 @@ export default {
 .input-box {
   display: flex;
   margin: 10px 0;
-  div:first-child {
+  > div:first-child {
     width: 20%;
   }
   > div:last-child {

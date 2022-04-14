@@ -27,7 +27,21 @@
           <td v-if="numHeaderUse">{{ i + 1 }}</td>
 
           <td v-for="(h, hi) in headerList" :key="'header_' + hi">
-            {{ data[h["column_name"]] }}
+            <template
+              v-if="
+                keyActionText &&
+                Object.keys(keyActionText).includes(h['column_name'])
+              "
+            >
+              <basic-button
+                buttonCss="link-button"
+                underline
+                hoverColor
+                @click="keyClick(keyActionText[h['column_name']])"
+                >{{ data[h["column_name"]] }}</basic-button
+              >
+            </template>
+            <template v-else>{{ data[h["column_name"]] }}</template>
           </td>
           <template v-for="(b, bi) in buttonHeaderText">
             <td @click.stop v-if="buttonHeaderUse" :key="'header_button_' + bi">
@@ -104,6 +118,10 @@ export default {
     rowKey: {
       type: String,
       require: true
+    },
+    keyActionText: {
+      type: Object,
+      require: false
     }
   },
   computed: {},
@@ -115,6 +133,9 @@ export default {
     },
     rowClick(rowKey) {
       this.$emit("columnAction", rowKey);
+    },
+    keyClick(keyAction) {
+      this.$emit("keyAction", keyAction);
     }
   },
   created() {}
