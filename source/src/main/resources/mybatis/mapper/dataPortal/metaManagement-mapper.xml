@@ -33,6 +33,26 @@
         FROM tb_biz_meta_name
         order by name_id;
     </select>
+    
+    <!-- metaMap 등록 유무 포함한 metaName 목록 조회 -->
+    <select id="getUseMetaNameList" resultType="java.util.Map">
+        select tbmn.kor_name,
+               tbmn.eng_name,
+               tbmn.show_order,
+               tbmn.name_id,
+               case
+                    when tbmn.type=0 then 'text'
+                    when tbmn.type=1 then 'int'
+                    when tbmn.type=2 then 'binary'
+               end as type,
+               case 
+                    when (select tbmm.name_id from tb_biz_meta_map tbmm where tbmn.name_id = tbmm.name_id) is null then 0
+                    else 1
+               end as use_meta
+        from tb_biz_meta_name tbmn
+        order by tbmn.name_id;
+    </select>
+    
     <!-- meta form 형식 조회 -->
     <select id="getBizMetaForm" resultType="java.util.Map">
         select item_id, kor_name, eng_name, tbmm.name_id, type as value_type
@@ -110,9 +130,23 @@
 	
 	<!-- metaMap list 조회 -->
 	<select id="getMetaMapList" resultType="java.util.Map">
-	   select tbmn.kor_name, tbmn.eng_name, tbmm.item_id , tbmm.name_id 
-	   from tb_biz_meta_name tbmn
+	    select tbmn.kor_name, tbmn.eng_name, tbmm.item_id , tbmm.name_id 
+	    from tb_biz_meta_name tbmn
 	           join tb_biz_meta_map tbmm on tbmn.name_id = tbmm.name_id
 	</select>
+	
+	<!-- 다중 metaMap 추가 -->
+	<insert id="insertListOfMetaMap" parameterType="java.util.List">
+	   insert into tb_biz_meta_map (item_id, name_id)
+	   values
+	   <foreach collection="list" item="item" separator=",">
+	   ( cast(#{item.itemId} AS text), #{item.nameId})
+	   </foreach>
+	</insert>
+	
+	<!-- metaMap 모두 삭제 -->
+	<delete id="deleteAllMetaMap">
+	   truncate table tb_biz_meta_map
+	</delete>
 
 </mapper>

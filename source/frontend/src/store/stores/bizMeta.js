@@ -5,6 +5,7 @@ const bizMeta = {
 
   state: {
     metaNameList: [],
+    useMetaNameList: [],
     metaName: {},
     bizMetaList: [],
     metaNameDetail: {},
@@ -15,6 +16,9 @@ const bizMeta = {
   getters: {
     metaNameList(state) {
       return state.metaNameList;
+    },
+    useMetaNameList(state) {
+      return state.useMetaNameList;
     },
     metaName(state) {
       return state.metaName;
@@ -40,6 +44,9 @@ const bizMeta = {
     setMetaNameList(state, data) {
       state.metaNameList = data;
     },
+    setUseMetaNameList(state, data) {
+      state.useMetaNameList = data;
+    },
     setMetaName(state, data) {
       state.metaName = data;
     },
@@ -64,6 +71,11 @@ const bizMeta = {
     getMetaNameList({ _, commit }) {
       Vue.prototype.$api.get("/api/meta/metaNameList").then((d) => {
         commit("setMetaNameList", d);
+      });
+    },
+    getUseMetaNameList({ commit }) {
+      Vue.prototype.$api.get("/api/meta/useMetaNameList").then((d) => {
+        commit("setUseMetaNameList", d);
       });
     },
     getMetaName({ commit }, rowKey) {
@@ -120,11 +132,6 @@ const bizMeta = {
           commit("setBizMetaDetail", d);
         });
     },
-    getMetaMapList({ commit }) {
-      Vue.prototype.$api.get("/api/meta/metaMapList").then((d) => {
-        commit("setMetaMapList", d);
-      });
-    },
     getBizMetaForm({ commit }) {
       Vue.prototype.$api.get("/api/meta/getBizMetaForm").then((d) => {
         commit("setBizMetaForm", d);
@@ -134,6 +141,24 @@ const bizMeta = {
       Vue.prototype.$api.get("/api/meta/removeBizMeta", {
         params: { nameId: rowKey }
       });
+    },
+    getMetaMapList({ commit }) {
+      Vue.prototype.$api.get("/api/meta/metaMapList").then((d) => {
+        commit("setMetaMapList", d);
+      });
+    },
+    async addMetaMap({}, list) {
+      let dataList = [];
+
+      list.sort();
+      list.forEach((data, i) => {
+        let obj = {};
+        obj.itemId = i + 1;
+        obj.nameId = data;
+        dataList.push(obj);
+      });
+
+      await Vue.prototype.$api.post("/api/meta/insertMetaMap", dataList);
     }
   }
 };

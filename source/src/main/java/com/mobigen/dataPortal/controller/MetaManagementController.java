@@ -1,6 +1,7 @@
 package com.mobigen.dataPortal.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mobigen.dataPortal.service.MetaManagementService;
 import com.mobigen.framework.result.annotation.ResponseJsonResult;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,6 +49,18 @@ public class MetaManagementController {
     @GetMapping("/metaNameList")
     public Object getMetaNameList() throws Exception {
         return service.getMetaNameList();
+    }
+
+    /**
+     * MetaMap 등록 유무 포함한 MetaName 목록 조회 초기설정
+     * 
+     * @return
+     * @throws Exception
+     */
+    @ResponseJsonResult
+    @GetMapping("/useMetaNameList")
+    public Object getUseMetaNameList() throws Exception {
+        return service.getUseMetaNameList();
     }
 
     /**
@@ -126,6 +140,20 @@ public class MetaManagementController {
     @GetMapping("/metaMapList")
     public Object getMetaMapList() throws Exception {
         return service.getMetaMapList();
+    }
+
+    /**
+     * 다중 MetaMap 등록 초기설정
+     * 
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    @ResponseJsonResult
+    @PostMapping("/insertMetaMap")
+    public Object insertMetaMap(@RequestBody List<Object> param) throws Exception {
+        service.deleteAllMetaMap();
+        return param.isEmpty() ? 1 : service.insertListOfMetaMap(param);
     }
 
     /**

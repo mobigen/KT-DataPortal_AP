@@ -70,8 +70,13 @@ const routes = [
       },
       {
         path: "metaMapList",
-        name: "sa-metaMApList",
+        name: "sa-metaMapList",
         component: () => import("@modules/superAdmin/meta/metaMapList")
+      },
+      {
+        path: "metaMapModify",
+        name: "sa-metaMapModify",
+        component: () => import("@modules/superAdmin/meta/metaMapModify")
       }
     ]
   },
