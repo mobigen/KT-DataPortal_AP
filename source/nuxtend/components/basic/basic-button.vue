@@ -1,6 +1,10 @@
 <template lang="html">
   <div>
-    <button :class="buttonCss" type="button" @click="buttonClick">
+    <button
+      :class="[buttonCss, { underline }, { hoverColor }]"
+      type="button"
+      @click="buttonClick"
+    >
       <slot></slot>
     </button>
   </div>
@@ -17,6 +21,16 @@ export default {
     componentId: {
       type: String,
       require: false
+    },
+    underline: {
+      type: Boolean,
+      require: false,
+      default: false
+    },
+    hoverColor: {
+      type: Boolean,
+      require: false,
+      default: false
     }
   },
   computed: {},
@@ -39,6 +53,17 @@ export default {
 }
 .text-button {
   margin: 0 5px;
+}
+.link-button {
+  padding: 0;
+  border: none;
+  background: none;
+}
+.underline {
+  text-decoration: underline;
+}
+.hoverColor:hover {
+  color: red;
 }
 button:hover {
   cursor: pointer;

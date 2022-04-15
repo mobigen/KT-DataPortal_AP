@@ -27,7 +27,21 @@
           <td v-if="numHeaderUse">{{ i + 1 }}</td>
 
           <td v-for="(h, hi) in headerList" :key="'header_' + hi">
-            {{ data[h["column_name"]] }}
+            <template
+              v-if="
+                keyActionText &&
+                Object.keys(keyActionText).includes(h['column_name'])
+              "
+            >
+              <basic-button
+                buttonCss="link-button"
+                underline
+                hoverColor
+                @click="keyClick(keyActionText[h['column_name']])"
+                >{{ data[h["column_name"]] }}</basic-button
+              >
+            </template>
+            <template v-else>{{ data[h["column_name"]] }}</template>
           </td>
           <template v-for="(b, bi) in buttonHeaderText">
             <td @click.stop v-if="buttonHeaderUse" :key="'header_button_' + bi">
@@ -40,9 +54,25 @@
                 "
                 :buttonCss="buttonHeaderText[bi]['buttonCss']"
               >
-                {{ data[rowKey] }}
-                <!-- <icon data="@icon/minus.svg" aria-hidden="true"></icon>-->
-                <!-- svg icon not working with nuxt-->
+                <template v-if="buttonHeaderText[bi]['iconData']">
+                  {{ data[rowKey] }}
+                  <!-- <icon data="@icon/minus.svg" aria-hidden="true"></icon>-->
+                  <!-- svg icon not working with nuxt-->
+                </template>
+
+                <template v-else-if="buttonHeaderText[bi]['textData']">
+                  <template v-if="buttonHeaderText[bi]['selectButtonList']">{{
+                    buttonHeaderText[bi]["selectButtonList"].includes(
+                      data[rowKey]
+                    )
+                      ? buttonHeaderText[bi]["textData"][0]
+                      : buttonHeaderText[bi]["textData"][1]
+                  }}</template>
+
+                  <template v-else>{{
+                    buttonHeaderText[bi]["textData"]
+                  }}</template>
+                </template>
               </basic-button>
             </td>
           </template>
@@ -70,7 +100,7 @@ export default {
     numHeaderUse: {
       type: Boolean,
       require: false,
-      default: true
+      default: false
     },
     numHeaderText: {
       type: String,
@@ -91,6 +121,10 @@ export default {
     rowKey: {
       type: String,
       require: true
+    },
+    keyActionText: {
+      type: Object,
+      require: false
     }
   },
   computed: {},
@@ -102,6 +136,9 @@ export default {
     },
     rowClick(rowKey) {
       this.$emit("columnAction", rowKey);
+    },
+    keyClick(keyAction) {
+      this.$emit("keyAction", keyAction);
     }
   },
   created() {}
