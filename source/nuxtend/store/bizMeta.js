@@ -3,15 +3,20 @@ import Vue from "vue";
 
 export const state = () => ({
   metaNameList: [],
+  useMetaNameList: [],
   metaName: {},
   bizMetaList: [],
   metaNameDetail: {},
-  bizMetaDetail: {}
+  bizMetaDetail: {},
+  metaMapList: []
 });
 
 export const getters = {
   metaNameList(state) {
     return state.metaNameList;
+  },
+  useMetaNameList(state) {
+    return state.useMetaNameList;
   },
   metaName(state) {
     return state.metaName;
@@ -27,11 +32,17 @@ export const getters = {
   },
   bizMetaForm(state) {
     return state.bizMetaForm;
+  },
+  metaMapList(state) {
+    return state.metaMapList;
   }
 };
 export const mutations = {
   setMetaNameList(state, data) {
     state.metaNameList = data;
+  },
+  setUseMetaNameList(state, data) {
+    state.useMetaNameList = data;
   },
   setMetaName(state, data) {
     state.metaName = data;
@@ -47,12 +58,20 @@ export const mutations = {
   },
   setBizMetaForm(state, data) {
     state.bizMetaForm = data;
+  },
+  setMetaMapList(state, data) {
+    state.metaMapList = data;
   }
 };
 export const actions = {
   getMetaNameList({ _, commit }) {
     Vue.prototype.$api.get("/api/meta/metaNameList").then((d) => {
       commit("setMetaNameList", d);
+    });
+  },
+  getUseMetaNameList({ commit }) {
+    Vue.prototype.$api.get("/api/meta/useMetaNameList").then((d) => {
+      commit("setUseMetaNameList", d);
     });
   },
   getMetaName({ commit }, rowKey) {
@@ -118,5 +137,23 @@ export const actions = {
     Vue.prototype.$api.get("/api/meta/removeBizMeta", {
       params: { nameId: rowKey }
     });
+  },
+  getMetaMapList({ commit }) {
+    Vue.prototype.$api.get("/api/meta/metaMapList").then((d) => {
+      commit("setMetaMapList", d);
+    });
+  },
+  async addMetaMap({}, list) {
+    let dataList = [];
+
+    list.sort();
+    list.forEach((data, i) => {
+      let obj = {};
+      obj.itemId = i + 1;
+      obj.nameId = data;
+      dataList.push(obj);
+    });
+
+    await Vue.prototype.$api.post("/api/meta/insertMetaMap", dataList);
   }
 };
