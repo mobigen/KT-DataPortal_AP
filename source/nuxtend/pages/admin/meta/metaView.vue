@@ -4,10 +4,18 @@
     <div>
       <h3>simple-viewTable</h3>
 
-      <basic-viewTable :viewDetail="bizMetaDetail"></basic-viewTable>
+      <basic-viewTable
+        :useTableHead="false"
+        :viewDetail="bizMetaDetail"
+      ></basic-viewTable>
 
       <div class="add-button">
-        <basic-button @click="buttonOk" buttonCss="text-button"
+        <basic-button
+          componentId=""
+          @click="buttonOk"
+          buttonCss="text-button"
+          :underline="false"
+          :hoverColor="false"
           >확인</basic-button
         >
       </div>

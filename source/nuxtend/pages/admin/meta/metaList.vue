@@ -5,27 +5,35 @@
       <div class="add-button">
         <basic-button
           componentId="metaFormAddBtn"
-          @click="addMeta"
           buttonCss="text-button"
+          :underline="false"
+          :hoverColor="false"
+          @click="addMeta"
           >등록</basic-button
         >
         <basic-button
           componentId="metaFormAddBtn"
-          @click="addJson"
           buttonCss="text-button"
+          :underline="false"
+          :hoverColor="false"
+          @click="addJson"
           >json추가</basic-button
         >
       </div>
 
       <basic-table
+        componentId=""
         :headerList="bizMetaList.header"
         :dataList="bizMetaList.body"
         rowKey="rowId"
         :numHeaderUse="false"
+        numHeaderText=""
         :buttonHeaderUse="true"
         :buttonHeaderText="this.buttonList"
         @buttonAction="tableButtonClick"
         @columnAction="viewMetaInfo"
+        keyActionText=""
+        @keyAction=""
       />
     </div>
   </div>
@@ -41,7 +49,7 @@ export default {
   extends: {},
   data() {
     return {
-      buttonList: []
+      buttonList: {}
     };
   },
   props: {},
@@ -74,8 +82,8 @@ export default {
       this.removeMeta(rowKey);
     },
     setTableBtn() {
-      this.buttonList.push(this.CONSTANTS.BUTTONS.TABLE.EDIT_BTN);
-      this.buttonList.push(this.CONSTANTS.BUTTONS.TABLE.DELETE_BTN);
+      Object.assign(this.buttonList, this.CONSTANTS.BUTTONS.TABLE.EDIT_BTN);
+      Object.assign(this.buttonList, this.CONSTANTS.BUTTONS.TABLE.DELETE_BTN);
     },
     tableButtonClick(rowKey, btnAction) {
       if (btnAction === this.CONSTANTS.BUTTONS.ACTION_NAME.EDIT) {

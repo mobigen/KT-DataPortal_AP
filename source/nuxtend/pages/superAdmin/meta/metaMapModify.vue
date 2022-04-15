@@ -5,16 +5,26 @@
     <div>
       <h3>simple-table</h3>
       <basic-table
+        componentId=""
         :headerList="headerList"
         :dataList="useMetaNameList"
         rowKey="name_id"
-        buttonHeaderUse
+        :numHeaderUse="false"
+        numHeaderText=""
+        :buttonHeaderUse="true"
         :buttonHeaderText="this.buttonList"
         @buttonAction="tableButtonClick"
+        keyActionText=""
+        @keyAction=""
       />
 
       <div class="add-button">
-        <basic-button @click="addObject" buttonCss="text-button"
+        <basic-button
+          componentId=""
+          buttonCss="text-button"
+          :underline="false"
+          :hoverColor="false"
+          @click="addObject"
           >저장</basic-button
         >
       </div>
@@ -31,17 +41,17 @@ export default {
   extends: {},
   data() {
     return {
-      // 임시
+      // TODO : 임시
       headerList: [{ column_name: "kor_name" }, { column_name: "eng_name" }],
-      buttonList: [
-        {
+      buttonList: {
+        textChange: {
+          buttonType: "text",
           buttonName: "설정",
           buttonCss: "text-button",
           textData: ["선택취소", "선택"],
-          buttonAction: "textChange",
           selectButtonList: []
         }
-      ]
+      }
     };
   },
   props: {},
@@ -52,7 +62,7 @@ export default {
     useMetaNameList(data) {
       data.forEach((d) => {
         if (d["use_meta"]) {
-          this.buttonList[0]["selectButtonList"].push(d["name_id"]);
+          this.buttonList["textChange"]["selectButtonList"].push(d["name_id"]);
         }
       });
     }
@@ -61,12 +71,12 @@ export default {
   methods: {
     ...mapActions("bizMeta", ["getUseMetaNameList", "addMetaMap"]),
     async addObject() {
-      await this.addMetaMap(this.buttonList[0]["selectButtonList"]);
+      await this.addMetaMap(this.buttonList["textChange"]["selectButtonList"]);
       this.$router.go(-1);
     },
     tableButtonClick(rowKey, btnAction) {
       if (btnAction === "textChange") {
-        let selectButtonList = this.buttonList[0]["selectButtonList"];
+        let selectButtonList = this.buttonList[btnAction]["selectButtonList"];
         if (!selectButtonList.includes(rowKey)) {
           selectButtonList.push(rowKey);
         } else {

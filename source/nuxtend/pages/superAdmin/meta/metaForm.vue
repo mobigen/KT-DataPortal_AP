@@ -6,15 +6,28 @@
         rowKey="name_id"
         :headerList="metaNameList.header"
         :dataObject="metaName"
-        @changeData="setChangeData"
         :formInputType="formInputType"
+        @changeData="setChangeData"
+        placeholder="내용을 입력해주세요"
       />
     </div>
 
     <div class="button-box">
-      <basic-button @click="cancel" buttonCss="text-button">취소</basic-button>
+      <basic-button
+        componentId=""
+        buttonCss="text-button"
+        :underline="false"
+        :hoverColor="false"
+        @click="cancel"
+        >취소</basic-button
+      >
 
-      <basic-button @click="addObject" buttonCss="text-button"
+      <basic-button
+        componentId=""
+        buttonCss="text-button"
+        :underline="false"
+        :hoverColor="false"
+        @click="addObject"
         >저장</basic-button
       >
     </div>
@@ -74,7 +87,7 @@ export default {
   },
   created() {
     this.rowKey = this.$route.query.metaNameId;
-    console.log(this.rowKey)
+    console.log(this.rowKey);
 
     this.getMetaNameList();
     this.getMetaName(this.rowKey);

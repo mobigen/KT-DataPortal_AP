@@ -5,7 +5,7 @@
       v-for="(data, i) in headerList"
       :key="'input_box_' + i"
     >
-      <basic-label>{{ data["column_name"] }}</basic-label>
+      <basic-label forProperty="">{{ data["column_name"] }}</basic-label>
 
       <text-input
         v-if="formInputType[data['column_name']] === 'text'"
@@ -64,6 +64,7 @@ export default {
     },
     placeholder: {
       type: String,
+      require: false,
       default: "내용을 입력해주세요."
     },
     rowKey: {
@@ -71,7 +72,8 @@ export default {
       require: true
     },
     formInputType: {
-      type: Object
+      type: Object,
+      require: true
     }
   },
   computed: {},
