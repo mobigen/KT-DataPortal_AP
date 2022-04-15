@@ -1,7 +1,7 @@
 <script>
 import Vue from "vue";
-// import LoadingOverlay from "vue-loading-overlay";
-// import "vue-loading-overlay/dist/vue-loading.css";
+import LoadingOverlay from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 /**
  * AXIOS의 Interceptor 설정 및
@@ -11,7 +11,7 @@ import Vue from "vue";
 export default {
   name: "AxiosInterceptor",
   components: {
-    // "loading-overlay": LoadingOverlay
+    "loading-overlay": LoadingOverlay
   },
   template: " ",
   data() {
@@ -21,7 +21,7 @@ export default {
     };
   },
   created() {
-    // Vue.use(LoadingOverlay);
+    Vue.use(LoadingOverlay);
     let api = Vue.prototype.$api;
     api.interceptors.request.use(this.requestSuccess, this.requestError);
     api.interceptors.response.use(this.responseSuccess, this.responseError);
@@ -60,32 +60,30 @@ export default {
       return Promise.reject(error);
     },
     showLoader(config) {
-      // if (config.noLoader) {
-      //   return;
-      // }
-      // if (this.requestCount === 0) {
-      //   this.loader = this.$loading.show({
-      //     //container: this.$refs.loadingContainer,
-      //     //canCancel: true, // default false
-      //     //onCancel: this.yourMethodName,
-      //     //color: "#000000",
-      //     //width: 64,
-      //     //height: 64,
-      //     //backgroundColor: "#ffffff",
-      //     //opacity: 0.5,
-      //     //zIndex: 999,
-      //     loader: "spinner"
-      //   });
-      // }
-      // console.log("showLoader");
-      // this.requestCount++;
+      if (config.noLoader) {
+        return;
+      }
+      if (this.requestCount === 0) {
+        this.loader = this.$loading.show({
+          container: this.$refs.loadingContainer,
+          canCancel: true, // default false
+          onCancel: this.yourMethodName,
+          color: "#000000",
+          width: 64,
+          height: 64,
+          backgroundColor: "#ffffff",
+          opacity: 0.5,
+          zIndex: 999,
+          loader: "spinner"
+        });
+      }
+      this.requestCount++;
     },
     hideLoader() {
-      // console.log("hideLoader");
-      // this.requestCount--;
-      // if (this.requestCount === 0) {
-      //   this.loader.hide();
-      // }
+      this.requestCount--;
+      if (this.requestCount === 0) {
+        this.loader.hide();
+      }
     }
   }
 };
