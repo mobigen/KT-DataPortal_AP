@@ -15,7 +15,6 @@
                 @input="changeData"
               ></text-input>
             </template>
-            <!--              :inputData="rowValues[row[CONSTANTS.DEFAULT_NAME_COLUMN]]"-->
             <template v-else-if="row.value_type === 1">
               <number-input
                 :placeholder="placeholder"
@@ -27,9 +26,6 @@
           </td>
         </tr>
       </tbody>
-      {{
-        rowValues
-      }}
     </table>
   </div>
 </template>
@@ -48,7 +44,7 @@ export default {
       require: true
     },
     rowValues: {
-      type: Array,
+      type: Object,
       require: false
     },
     placeholder: {

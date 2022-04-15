@@ -8,7 +8,8 @@ export const state = () => ({
   bizMetaList: [],
   metaNameDetail: {},
   bizMetaDetail: {},
-  metaMapList: []
+  metaMapList: [],
+  bizMetaForm: []
 });
 
 export const getters = {
@@ -69,8 +70,8 @@ export const actions = {
       commit("setMetaNameList", d);
     });
   },
-  getUseMetaNameList({ commit }) {
-    Vue.prototype.$api.get("/api/meta/useMetaNameList").then((d) => {
+  async getUseMetaNameList({ commit }) {
+    await Vue.prototype.$api.get("/api/meta/useMetaNameList").then((d) => {
       commit("setUseMetaNameList", d);
     });
   },
@@ -121,15 +122,15 @@ export const actions = {
         commit("setMetaNameDetail", d);
       });
   },
-  getBizMetaDetail({ commit }, rowId) {
-    Vue.prototype.$api
+  async getBizMetaDetail({ commit }, rowId) {
+    await Vue.prototype.$api
       .get("/api/meta/getBizMetaDetail?datasetId=" + rowId)
       .then((d) => {
         commit("setBizMetaDetail", d);
       });
   },
-  getBizMetaForm({ commit }) {
-    Vue.prototype.$api.get("/api/meta/getBizMetaForm").then((d) => {
+  async getBizMetaForm({ commit }) {
+    await Vue.prototype.$api.get("/api/meta/getBizMetaForm").then((d) => {
       commit("setBizMetaForm", d);
     });
   },

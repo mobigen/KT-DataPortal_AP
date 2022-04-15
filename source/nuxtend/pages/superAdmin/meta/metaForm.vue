@@ -69,12 +69,11 @@ export default {
       this.changeData = data;
     },
     cancel() {
-      this.$router.go(-1);
+      this.$router.push({ path: "/superAdmin/meta/metaList" });
     }
   },
   created() {
     this.rowKey = this.$route.query.metaNameId;
-    console.log(this.rowKey)
 
     this.getMetaNameList();
     this.getMetaName(this.rowKey);
