@@ -47,7 +47,7 @@ export default {
   methods: {
     ...mapActions("bizMeta", ["getMetaNameDetail"]),
     buttonOk() {
-      this.$router.go(-1);
+      this.$router.push({ path: "/superAdmin/meta/metaList" });
     }
   },
   created() {

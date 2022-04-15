@@ -13,7 +13,7 @@
         :numHeaderUse="false"
         numHeaderText=""
         :buttonHeaderUse="false"
-        buttonHeaderText=""
+        :buttonHeaderText="{}"
         @buttonAction=""
         @columnAction=""
         :keyActionText="{ eng_name: 'keyActionTest01' }"

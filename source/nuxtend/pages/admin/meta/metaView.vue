@@ -46,7 +46,7 @@ export default {
   methods: {
     ...mapActions("bizMeta", ["getBizMetaDetail"]),
     buttonOk() {
-      this.$router.go(-1);
+      this.$router.push({ path: "/admin/meta/metaList" });
     }
   },
   created() {

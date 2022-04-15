@@ -27,7 +27,7 @@
         :buttonHeaderText="this.buttonList"
         @buttonAction="tableButtonClick"
         @columnAction="rowClick"
-        keyActionText=""
+        :keyActionText="{}"
         @keyAction=""
       />
     </div>

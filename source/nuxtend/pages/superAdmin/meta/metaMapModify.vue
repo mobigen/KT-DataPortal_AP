@@ -14,7 +14,7 @@
         :buttonHeaderUse="true"
         :buttonHeaderText="this.buttonList"
         @buttonAction="tableButtonClick"
-        keyActionText=""
+        :keyActionText="{}"
         @keyAction=""
       />
 
@@ -33,7 +33,7 @@
 </template>
 
 <script type="text/javascript">
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import BasicTable from "@/components/basic/basic-table.vue";
 import BasicButton from "@/components/basic/basic-button.vue";
 export default {
@@ -56,32 +56,41 @@ export default {
   },
   props: {},
   computed: {
-    ...mapGetters("bizMeta", ["useMetaNameList"])
-  },
-  watch: {
-    useMetaNameList(data) {
-      data.forEach((d) => {
-        if (d["use_meta"]) {
-          this.buttonList["textChange"]["selectButtonList"].push(d["name_id"]);
-        }
-      });
+    useMetaNameList: {
+      get() {
+        const data = this.$store.getters["bizMeta/useMetaNameList"];
+
+        // selectButtonList setting
+        let selectButtonList = [];
+        data.forEach((d) => {
+          if (d["use_meta"]) {
+            selectButtonList.push(d["name_id"]);
+          }
+        });
+        this.buttonList.textChange.selectButtonList = selectButtonList;
+
+        return data;
+      }
     }
   },
   components: { BasicTable, BasicButton },
   methods: {
     ...mapActions("bizMeta", ["getUseMetaNameList", "addMetaMap"]),
     async addObject() {
-      await this.addMetaMap(this.buttonList["textChange"]["selectButtonList"]);
-      this.$router.go(-1);
+      await this.addMetaMap(
+        this.buttonList["textChange"]["selectButtonList"]
+      ).then(() => {
+        this.$router.push({ path: "/superAdmin/meta/metaMapList" });
+      });
     },
     tableButtonClick(rowKey, btnAction) {
       if (btnAction === "textChange") {
         let selectButtonList = this.buttonList[btnAction]["selectButtonList"];
-        if (!selectButtonList.includes(rowKey)) {
-          selectButtonList.push(rowKey);
-        } else {
+        if (selectButtonList.includes(rowKey)) {
           const index = selectButtonList.indexOf(rowKey);
           selectButtonList.splice(index, 1);
+        } else {
+          selectButtonList.push(rowKey);
         }
       }
     }
@@ -96,6 +105,6 @@ export default {
 .add-button {
   display: flex;
   justify-content: flex-end;
-  margin: 10px 0px;
+  margin: 10px 0;
 }
 </style>
