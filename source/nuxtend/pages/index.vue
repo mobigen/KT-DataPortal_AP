@@ -1,5 +1,10 @@
 <template>
-  <div>SUPER-MAIN</div>
+  <div>
+    <h3>SUPER-MAIN</h3>
+    <div style="border: 1px solid red; width: 100px">
+      <icon data="@icon/minus.svg" aria-hidden="true"></icon>
+    </div>
+  </div>
 </template>
 
 <script>
