@@ -6,23 +6,29 @@
       <h3>simple-table</h3>
 
       <div class="add-button">
-        <basic-button @click="addForm" buttonCss="text-button"
+        <basic-button
+          componentId=""
+          buttonCss="text-button"
+          :underline="false"
+          :hoverColor="false"
+          @click="addForm"
           >등록</basic-button
         >
       </div>
 
       <basic-table
+        componentId=""
         :headerList="metaNameList.header"
         :dataList="metaNameList.body"
         rowKey="name_id"
-        numHeaderUse
+        :numHeaderUse="true"
         numHeaderText="No."
-        buttonHeaderUse
+        :buttonHeaderUse="true"
         :buttonHeaderText="this.buttonList"
         @buttonAction="tableButtonClick"
         @columnAction="rowClick"
-        keyAction="{}"
-        atcionText="[]"
+        :keyActionText="{}"
+        @keyAction=""
       />
     </div>
   </div>
@@ -37,20 +43,29 @@ export default {
   extends: {},
   data() {
     return {
-      buttonList: [
-        {
+      buttonList: {
+        edit: {
+          buttonType: "icon",
           buttonName: "수정",
           buttonCss: "icon-button",
-          iconData: "@icon/minus.svg",
-          buttonAction: "edit"
+          iconData: "@icon/minus.svg"
         },
-        {
+        remove: {
+          buttonType: "icon",
           buttonName: "삭제",
           buttonCss: "icon-button",
-          iconData: "@icon/minus.svg",
-          buttonAction: "remove"
+          iconData: "@icon/minus.svg"
         }
-      ]
+        /*         
+        sample : buttonType : text    
+        sample: {      
+          buttonType: "text",
+          buttonName: "설정",
+          buttonCss: "text-button",
+          textData: ["선택취소", "선택"],
+          selectButtonList: []
+        } */
+      }
     };
   },
   props: {},
@@ -75,6 +90,9 @@ export default {
     },
     tableButtonClick(rowKey, btnAction) {
       if (btnAction === "remove") {
+        if (!confirm("삭제 하시겠습니까?")) {
+          return;
+        }
         this.removeObject(rowKey);
       } else if (btnAction === "edit") {
         this.editForm(rowKey);

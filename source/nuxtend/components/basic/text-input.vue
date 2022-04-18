@@ -21,13 +21,16 @@ export default {
   },
   props: {
     labelName: {
-      type: String
+      type: String,
+      require: true
     },
     inputData: {
-      type: null
+      type: null,
+      require: false
     },
     placeholder: {
-      type: String
+      type: String,
+      require: false
     }
   },
   computed: {},

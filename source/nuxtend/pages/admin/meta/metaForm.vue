@@ -5,14 +5,24 @@
       <basic-table-form
         :viewDetail="bizMetaForm"
         :rowValues="bizMetaDetail"
+        placeholder="내용을 입력해주세요"
       ></basic-table-form>
 
-      <basic-button @click="cancel" buttonCss="text-button">취소</basic-button>
+      <basic-button
+        componentId=""
+        buttonCss="text-button"
+        :underline="false"
+        :hoverColor="false"
+        @click="cancel"
+        >취소</basic-button
+      >
 
       <basic-button
         componentId="metaName1"
-        @click="addObject"
         buttonCss="text-button"
+        :underline="false"
+        :hoverColor="false"
+        @click="addObject"
         >저장</basic-button
       >
     </div>
