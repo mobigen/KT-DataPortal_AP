@@ -4,7 +4,7 @@
       <h3>form</h3>
       <meta-form
         rowKey="name_id"
-        :headerList="metaNameList.header"
+        :labelList="metaNameList.header"
         :dataObject="metaName"
         :formInputType="formInputType"
         @changeData="setChangeData"

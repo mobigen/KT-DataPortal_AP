@@ -2,7 +2,7 @@
   <div>
     <div
       class="input-box"
-      v-for="(data, i) in headerList"
+      v-for="(data, i) in labelList"
       :key="'input_box_' + i"
     >
       <basic-label forProperty="">{{ data["column_name"] }}</basic-label>
@@ -54,7 +54,7 @@ export default {
     };
   },
   props: {
-    headerList: {
+    labelList: {
       type: Array,
       require: true
     },
