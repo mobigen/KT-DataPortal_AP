@@ -14,16 +14,20 @@ export const state = () => ({
       },
       TABLE: {
         EDIT_BTN: {
-          buttonName: "수정",
-          buttonCss: "icon-button",
-          iconData: "@icon/minus.svg",
-          buttonAction: "edit"
+          edit: {
+            buttonType: "icon",
+            buttonName: "수정",
+            buttonCss: "icon-button",
+            iconData: "@icon/minus.svg"
+          }
         },
         DELETE_BTN: {
-          buttonName: "삭제",
-          buttonCss: "icon-button",
-          iconData: "@icon/minus.svg",
-          buttonAction: "remove"
+          remove: {
+            buttonType: "icon",
+            buttonName: "삭제",
+            buttonCss: "icon-button",
+            iconData: "@icon/minus.svg"
+          }
         }
       }
     },

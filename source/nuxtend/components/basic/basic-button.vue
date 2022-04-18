@@ -16,7 +16,9 @@ export default {
   extends: {},
   props: {
     buttonCss: {
-      type: String
+      type: String,
+      require: false,
+      default: "text-button"
     },
     componentId: {
       type: String,

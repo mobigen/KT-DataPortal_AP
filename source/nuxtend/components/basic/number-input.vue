@@ -20,13 +20,16 @@ export default {
   },
   props: {
     labelName: {
-      type: String
+      type: String,
+      require: true
     },
     inputData: {
-      type: null
+      type: null,
+      require: true
     },
     placeholder: {
-      type: String
+      type: String,
+      require: false
     }
   },
   computed: {},

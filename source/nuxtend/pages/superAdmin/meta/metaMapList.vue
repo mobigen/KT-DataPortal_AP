@@ -6,15 +6,27 @@
       <h3>simple-table</h3>
 
       <basic-table
+        componentId=""
         :headerList="headerList"
         :dataList="metaMapList.body"
         rowKey="item_id"
+        :numHeaderUse="false"
+        numHeaderText=""
+        :buttonHeaderUse="false"
+        :buttonHeaderText="{}"
+        @buttonAction=""
+        @columnAction=""
         :keyActionText="{ eng_name: 'keyActionTest01' }"
         @keyAction="keyClick"
       />
 
       <div class="edit-button">
-        <basic-button @click="editTable" buttonCss="text-button"
+        <basic-button
+          componentId=""
+          buttonCss="text-button"
+          :underline="false"
+          :hoverColor="false"
+          @click="editTable"
           >수정</basic-button
         >
       </div>

@@ -5,10 +5,18 @@
     <div>
       <h3>simple-viewTable</h3>
 
-      <basic-viewTable :viewDetail="metaNameDetail"></basic-viewTable>
+      <basic-viewTable
+        :useTableHead="false"
+        :viewDetail="metaNameDetail"
+      ></basic-viewTable>
 
       <div class="add-button">
-        <basic-button @click="buttonOk" buttonCss="text-button"
+        <basic-button
+          componentId=""
+          @click="buttonOk"
+          buttonCss="text-button"
+          :underline="false"
+          :hoverColor="false"
           >확인</basic-button
         >
       </div>

@@ -9,10 +9,10 @@
           </th>
           <template v-if="buttonHeaderUse">
             <th
-              v-for="(b, bi) in buttonHeaderText"
-              :key="'header_button_' + bi"
+              v-for="(value, key, index) in buttonHeaderText"
+              :key="'header_button_' + key"
             >
-              {{ buttonHeaderText[bi]["buttonName"] }}
+              {{ buttonHeaderText[key]["buttonName"] }}
             </th>
           </template>
         </tr>
@@ -43,34 +43,36 @@
             </template>
             <template v-else>{{ data[h["column_name"]] }}</template>
           </td>
-          <template v-for="(b, bi) in buttonHeaderText">
-            <td @click.stop v-if="buttonHeaderUse" :key="'header_button_' + bi">
+          <template v-for="(value, key, index) in buttonHeaderText">
+            <td
+              @click.stop
+              v-if="buttonHeaderUse"
+              :key="'header_button_' + key"
+            >
               <basic-button
-                @click="
-                  buttonClick(
-                    data[rowKey],
-                    buttonHeaderText[bi]['buttonAction']
-                  )
-                "
-                :buttonCss="buttonHeaderText[bi]['buttonCss']"
+                @click="buttonClick(data[rowKey], key)"
+                :buttonCss="buttonHeaderText[key]['buttonCss']"
               >
-                <template v-if="buttonHeaderText[bi]['iconData']">
+                <template v-if="buttonHeaderText[key]['buttonType'] === 'icon'">
                   {{ data[rowKey] }}
                   <!-- <icon data="@icon/minus.svg" aria-hidden="true"></icon>-->
                   <!-- svg icon not working with nuxt-->
                 </template>
 
-                <template v-else-if="buttonHeaderText[bi]['textData']">
-                  <template v-if="buttonHeaderText[bi]['selectButtonList']">{{
-                    buttonHeaderText[bi]["selectButtonList"].includes(
-                      data[rowKey]
-                    )
-                      ? buttonHeaderText[bi]["textData"][0]
-                      : buttonHeaderText[bi]["textData"][1]
-                  }}</template>
+                <template
+                  v-else-if="buttonHeaderText[key]['buttonType'] === 'text'"
+                >
+                  <template
+                    v-if="buttonHeaderText[key]['textData'].length === 1"
+                    >{{ buttonHeaderText[key]["textData"][0] }}</template
+                  >
 
                   <template v-else>{{
-                    buttonHeaderText[bi]["textData"]
+                    buttonHeaderText[key]["selectButtonList"].includes(
+                      data[rowKey]
+                    )
+                      ? buttonHeaderText[key]["textData"][0]
+                      : buttonHeaderText[key]["textData"][1]
                   }}</template>
                 </template>
               </basic-button>
@@ -104,6 +106,7 @@ export default {
     },
     numHeaderText: {
       type: String,
+      default: false,
       default: ""
     },
     buttonHeaderUse: {
@@ -112,7 +115,8 @@ export default {
       default: false
     },
     buttonHeaderText: {
-      type: Array
+      type: Object,
+      require: false
     },
     componentId: {
       type: String,
