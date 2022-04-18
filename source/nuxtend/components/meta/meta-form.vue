@@ -80,7 +80,7 @@ export default {
   components: { BasicLabel, TextInput, NumberInput, RadioButton },
   watch: {
     dataObject(data) {
-      this.changeDataObject = data;
+      this.changeDataObject = JSON.parse(JSON.stringify(data));
     }
   },
   methods: {
