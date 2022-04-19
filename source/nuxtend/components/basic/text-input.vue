@@ -25,7 +25,7 @@ export default {
       require: true
     },
     inputData: {
-      type: null,
+      type: String,
       require: false
     },
     placeholder: {

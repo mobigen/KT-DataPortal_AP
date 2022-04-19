@@ -65,6 +65,7 @@ export default {
   display: flex;
   #radio-button {
     display: flex;
+    width: 100px;
     input {
       z-index: 1;
       margin: 0px -10px 0px 0px;

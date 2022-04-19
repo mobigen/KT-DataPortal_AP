@@ -7,38 +7,21 @@
     >
       <basic-label forProperty="">{{ data["column_name"] }}</basic-label>
 
-      <text-input
-        v-if="formInputType[data['column_name']] === 'text'"
-        :placeholder="placeholder"
-        :labelName="data['column_name']"
-        :inputData="changeDataObject[data['column_name']]"
-        @input="changeData"
-      ></text-input>
-
-      <number-input
-        v-else-if="formInputType[data['column_name']] === 'number'"
-        :placeholder="placeholder"
-        :labelName="data['column_name']"
-        :inputData="changeDataObject[data['column_name']]"
-        @input="changeData"
-      ></number-input>
-
-      <radio-button
-        v-else-if="formInputType[data['column_name']] === 'radio'"
+      <basic-input
+        :formInputType="formInputType[data['column_name']]"
         :radioButtonList="metaTypeList"
         :labelName="data['column_name']"
         :inputData="changeDataObject[data['column_name']]"
-        @input="changeData"
-      ></radio-button>
+        :placeholder="placeholder"
+        @changeData="changeData"
+      ></basic-input>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
 import BasicLabel from "@/components/basic/basic-label.vue";
-import TextInput from "@/components/basic/text-input.vue";
-import NumberInput from "@/components/basic/number-input.vue";
-import RadioButton from "@/components/basic/radio-button.vue";
+import BasicInput from "@/components/basic/basic-input.vue";
 
 export default {
   name: "meta-form",
@@ -77,7 +60,7 @@ export default {
     }
   },
   computed: {},
-  components: { BasicLabel, TextInput, NumberInput, RadioButton },
+  components: { BasicLabel, BasicInput },
   watch: {
     dataObject(data) {
       this.changeDataObject = JSON.parse(JSON.stringify(data));

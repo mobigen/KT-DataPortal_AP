@@ -24,7 +24,7 @@ export default {
       require: true
     },
     inputData: {
-      type: null,
+      type: Number,
       require: true
     },
     placeholder: {
