@@ -1,3 +1,4 @@
+import axios from "axios";
 import Vue from "vue";
 // import Vuex from "vuex";
 
@@ -156,5 +157,10 @@ export const actions = {
     });
 
     await Vue.prototype.$api.post("/api/meta/insertMetaMap", dataList);
+  },
+  getTestData({}) {
+    axios.post("/remote_command").then((d) => {
+      console.log(d);
+    });
   }
 };
