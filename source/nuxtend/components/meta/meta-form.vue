@@ -28,7 +28,6 @@ export default {
   extends: {},
   data() {
     return {
-      changeDataObject: {},
       metaTypeList: [
         { value: 0, label: "text" },
         { value: 1, label: "int" },
@@ -59,13 +58,15 @@ export default {
       require: true
     }
   },
-  computed: {},
-  components: { BasicLabel, BasicInput },
-  watch: {
-    dataObject(data) {
-      this.changeDataObject = JSON.parse(JSON.stringify(data));
+  computed: {
+    changeDataObject: {
+      get() {
+        return JSON.parse(JSON.stringify(this.dataObject));
+      }
     }
   },
+  components: { BasicLabel, BasicInput },
+  watch: {},
   methods: {
     changeData(label, input) {
       // Object나 Array의 변동사항을 감지하기 위해 this.$set 사용

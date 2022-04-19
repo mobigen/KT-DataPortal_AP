@@ -10,6 +10,7 @@
         :id="labelName + '_' + radioButtonList[i]['label']"
         :value="radioButtonList[i]['value']"
         v-model="radioValue"
+        :name="'group_' + labelName"
       />
       <basic-label
         :forProperty="labelName + '_' + radioButtonList[i]['label']"
@@ -25,9 +26,7 @@ export default {
   name: "radio-button",
   extends: {},
   data() {
-    return {
-      radioValue: null
-    };
+    return {};
   },
   props: {
     radioButtonList: {
@@ -43,20 +42,20 @@ export default {
       require: true
     }
   },
-  computed: {},
-  components: { BasicLabel },
-  watch: {
-    inputData(data) {
-      this.radioValue = data;
-    },
-    radioValue(data) {
-      this.$emit("input", this.labelName, data);
+  computed: {
+    radioValue: {
+      get() {
+        return this.inputData;
+      },
+      set(newValue) {
+        this.$emit("input", this.labelName, newValue);
+      }
     }
   },
+  components: { BasicLabel },
+  watch: {},
   methods: {},
-  created() {
-    this.radioValue = this.inputData;
-  }
+  created() {}
 };
 </script>
 
