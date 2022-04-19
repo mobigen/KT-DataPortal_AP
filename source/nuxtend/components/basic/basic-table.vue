@@ -54,8 +54,8 @@
                 :buttonCss="buttonHeaderText[key]['buttonCss']"
               >
                 <template v-if="buttonHeaderText[key]['buttonType'] === 'icon'">
-                  {{ data[rowKey] }}
-                  <!-- <icon data="@icon/minus.svg" aria-hidden="true"></icon>-->
+                  <!--                  {{ data[rowKey] }}-->
+                  <icon data="assets/icon/minus.svg" aria-hidden="true"></icon>
                   <!-- svg icon not working with nuxt-->
                 </template>
 
