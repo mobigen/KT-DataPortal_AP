@@ -192,18 +192,16 @@ public class MetaManagementController {
         return service.getBizMetaList();
     }
 
+    /**
+     * Biz Meta 등록 초기설정
+     * 
+     * @param param
+     * @return
+     * @throws Exception
+     */
     @ResponseJsonResult
-    @PutMapping("/insertBizMeta")
-    public Object insertBizMeta(@RequestBody Map<String, Object> param) throws Exception {
-//        Map<String, Object> metaName = new HashMap<>();
-//
-//        metaName.put("korName", param.get("kor_name"));
-//        metaName.put("engName", param.get("eng_name"));
-//        metaName.put("nameId", param.get("name_id"));
-//        metaName.put("showOrder", param.get("show_order"));
-//        metaName.put("referenceTable", param.get("reference_table"));
-//        metaName.put("type", param.get("type"));
-
-        return service.updateMetaName(null);
+    @PostMapping("/insertBizMeta")
+    public Object insertBizMeta(@RequestBody List<Object> param) throws Exception {
+        return service.insertListOfBizMeta(param);
     }
 }

@@ -148,5 +148,14 @@
 	<delete id="deleteAllMetaMap">
 	   truncate table tb_biz_meta_map
 	</delete>
+	
+	<!-- bizMeta 추가 -->
+	<insert id="insertListOfBizMeta" parameterType="java.util.List">
+	   insert into tb_biz_meta (biz_dataset_id, item_id, item_val)
+       values
+       <foreach collection="list" item="item" separator=",">
+       ( (select concat('m',cast(max(substring(REVERSE(substring(biz_dataset_id, 2)),4))as int)+1,'abc') as biz_dataset_id from tb_biz_meta), #{item.itemId}, #{item.itemVal})
+       </foreach>
+	</insert>
 
 </mapper>

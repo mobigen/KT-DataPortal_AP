@@ -73,7 +73,6 @@ export default {
         await this.editMetaName(this.changeData);
       } else {
         await this.addMetaName(this.changeData);
-        this.changeData = {};
       }
 
       this.$router.push({ path: "/superAdmin/meta/metaList" });
@@ -87,8 +86,12 @@ export default {
   },
   created() {
     this.rowKey = this.$route.query.metaNameId;
+
     this.getMetaNameList();
-    this.getMetaName(this.rowKey);
+
+    if (this.rowKey) {
+      this.getMetaName(this.rowKey);
+    }
   }
 };
 </script>

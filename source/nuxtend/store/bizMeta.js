@@ -140,6 +140,18 @@ export const actions = {
       params: { nameId: rowKey }
     });
   },
+  async addBizMeta({}, obj) {
+    let dataList = [];
+
+    for (var key in obj) {
+      let setObj = {};
+      setObj.itemId = key;
+      setObj.itemVal = obj[key];
+
+      dataList.push(setObj);
+    }
+    await Vue.prototype.$api.post("/api/meta/insertBizMeta", dataList);
+  },
   getMetaMapList({ commit }) {
     Vue.prototype.$api.get("/api/meta/metaMapList").then((d) => {
       commit("setMetaMapList", d);

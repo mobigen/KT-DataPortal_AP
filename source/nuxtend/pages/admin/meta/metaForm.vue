@@ -6,6 +6,7 @@
         :viewDetail="bizMetaForm"
         :rowValues="bizMetaDetail"
         placeholder="내용을 입력해주세요"
+        @changeData="setChangeData"
       ></basic-table-form>
 
       <basic-button
@@ -39,7 +40,8 @@ export default {
   extends: {},
   data() {
     return {
-      rowKey: {}
+      rowKey: {},
+      changeData: {}
     };
   },
   props: {},
@@ -60,16 +62,25 @@ export default {
   components: { BasicTableForm, BasicButton },
   watch: {},
   methods: {
-    ...mapActions("bizMeta", ["getBizMetaForm", "getBizMetaDetail"]),
+    ...mapActions("bizMeta", [
+      "getBizMetaForm",
+      "getBizMetaDetail",
+      "addBizMeta"
+    ]),
     cancel() {
       this.$router.push({ path: "/admin/meta/metaList" });
     },
-    addObject() {
+    async addObject() {
       if (this.rowKey) {
         console.log("update");
       } else {
-        console.log("insert");
+        await this.addBizMeta(this.changeData);
       }
+
+      this.$router.push({ path: "/admin/meta/metaList" });
+    },
+    setChangeData(data) {
+      this.changeData = data;
     }
   },
   created() {
