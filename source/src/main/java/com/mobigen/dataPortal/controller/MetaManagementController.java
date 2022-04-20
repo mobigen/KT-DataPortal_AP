@@ -217,4 +217,11 @@ public class MetaManagementController {
     public Object deleteBizMeta(@RequestParam String bizDatasetId) throws Exception {
         return service.deleteBizMeta(bizDatasetId);
     }
+
+    @ResponseJsonResult
+    @GetMapping("/getCategoryList")
+    public Object getCategoryList() throws Exception {
+        return service.getCategoryList();
+    }
+
 }

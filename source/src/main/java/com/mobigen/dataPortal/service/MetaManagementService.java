@@ -71,7 +71,11 @@ public class MetaManagementService {
 
     public void deleteAllMetaMap() {
         mapper.deleteAllMetaMap();
-        
+
+    }
+
+    public Object getCategoryList() {
+        return mapper.getCategoryList();
     }
 
     public int insertListOfBizMeta(List<Object> param) {
