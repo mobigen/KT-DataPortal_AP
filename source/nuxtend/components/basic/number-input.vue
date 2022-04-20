@@ -14,9 +14,7 @@ export default {
   name: "number-input",
   extends: {},
   data() {
-    return {
-      input: null
-    };
+    return {};
   },
   props: {
     labelName: {
@@ -24,7 +22,7 @@ export default {
       require: true
     },
     inputData: {
-      type: null,
+      type: Number,
       require: true
     },
     placeholder: {
@@ -32,20 +30,22 @@ export default {
       require: false
     }
   },
-  computed: {},
-  components: {},
-  watch: {
-    inputData(data) {
-      this.input = data;
-    },
-    input(data) {
-      if (data === "") {
-        data = null;
-      }
+  computed: {
+    input: {
+      get() {
+        return this.inputData;
+      },
+      set(newValue) {
+        if (newValue === "") {
+          newValue = null;
+        }
 
-      this.$emit("input", this.labelName, data);
+        this.$emit("input", this.labelName, newValue);
+      }
     }
   },
+  components: {},
+  watch: {},
   methods: {},
   created() {}
 };

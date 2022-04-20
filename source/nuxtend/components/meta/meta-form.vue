@@ -2,50 +2,32 @@
   <div>
     <div
       class="input-box"
-      v-for="(data, i) in headerList"
+      v-for="(data, i) in labelList"
       :key="'input_box_' + i"
     >
       <basic-label forProperty="">{{ data["column_name"] }}</basic-label>
 
-      <text-input
-        v-if="formInputType[data['column_name']] === 'text'"
-        :placeholder="placeholder"
-        :labelName="data['column_name']"
-        :inputData="changeDataObject[data['column_name']]"
-        @input="changeData"
-      ></text-input>
-
-      <number-input
-        v-else-if="formInputType[data['column_name']] === 'number'"
-        :placeholder="placeholder"
-        :labelName="data['column_name']"
-        :inputData="changeDataObject[data['column_name']]"
-        @input="changeData"
-      ></number-input>
-
-      <radio-button
-        v-else-if="formInputType[data['column_name']] === 'radio'"
+      <basic-input
+        :formInputType="formInputType[data['column_name']]"
         :radioButtonList="metaTypeList"
         :labelName="data['column_name']"
         :inputData="changeDataObject[data['column_name']]"
-        @input="changeData"
-      ></radio-button>
+        :placeholder="placeholder"
+        @changeData="changeData"
+      ></basic-input>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
 import BasicLabel from "@/components/basic/basic-label.vue";
-import TextInput from "@/components/basic/text-input.vue";
-import NumberInput from "@/components/basic/number-input.vue";
-import RadioButton from "@/components/basic/radio-button.vue";
+import BasicInput from "@/components/basic/basic-input.vue";
 
 export default {
   name: "meta-form",
   extends: {},
   data() {
     return {
-      changeDataObject: {},
       metaTypeList: [
         { value: 0, label: "text" },
         { value: 1, label: "int" },
@@ -54,7 +36,7 @@ export default {
     };
   },
   props: {
-    headerList: {
+    labelList: {
       type: Array,
       require: true
     },
@@ -76,13 +58,15 @@ export default {
       require: true
     }
   },
-  computed: {},
-  components: { BasicLabel, TextInput, NumberInput, RadioButton },
-  watch: {
-    dataObject(data) {
-      this.changeDataObject = JSON.parse(JSON.stringify(data));
+  computed: {
+    changeDataObject: {
+      get() {
+        return JSON.parse(JSON.stringify(this.dataObject));
+      }
     }
   },
+  components: { BasicLabel, BasicInput },
+  watch: {},
   methods: {
     changeData(label, input) {
       // Object나 Array의 변동사항을 감지하기 위해 this.$set 사용

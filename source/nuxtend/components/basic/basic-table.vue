@@ -3,16 +3,16 @@
     <table>
       <thead>
         <tr>
-          <th v-if="numHeaderUse">{{ numHeaderText }}</th>
+          <th v-if="serialNumUse">{{ serialNumText }}</th>
           <th v-for="(h, hi) in headerList" :key="'header_' + hi">
             {{ h["column_name"] }}
           </th>
-          <template v-if="buttonHeaderUse">
+          <template v-if="tableButtonUse">
             <th
-              v-for="(value, key, index) in buttonHeaderText"
+              v-for="(value, key, index) in tableButtonText"
               :key="'header_button_' + key"
             >
-              {{ buttonHeaderText[key]["buttonName"] }}
+              {{ tableButtonText[key]["buttonName"] }}
             </th>
           </template>
         </tr>
@@ -24,7 +24,7 @@
           :key="'table_body_' + i"
           @click="rowClick(data[rowKey])"
         >
-          <td v-if="numHeaderUse">{{ i + 1 }}</td>
+          <td v-if="serialNumUse">{{ i + 1 }}</td>
 
           <td v-for="(h, hi) in headerList" :key="'header_' + hi">
             <template
@@ -37,42 +37,38 @@
                 buttonCss="link-button"
                 underline
                 hoverColor
-                @click="keyClick(keyActionText[h['column_name']])"
+                @click="keyClick(data[rowKey], keyActionText[h['column_name']])"
                 >{{ data[h["column_name"]] }}</basic-button
               >
             </template>
             <template v-else>{{ data[h["column_name"]] }}</template>
           </td>
-          <template v-for="(value, key, index) in buttonHeaderText">
-            <td
-              @click.stop
-              v-if="buttonHeaderUse"
-              :key="'header_button_' + key"
-            >
+          <template v-for="(value, key, index) in tableButtonText">
+            <td @click.stop v-if="tableButtonUse" :key="'header_button_' + key">
               <basic-button
                 @click="buttonClick(data[rowKey], key)"
-                :buttonCss="buttonHeaderText[key]['buttonCss']"
+                :buttonCss="tableButtonText[key]['buttonCss']"
               >
-                <template v-if="buttonHeaderText[key]['buttonType'] === 'icon'">
+                <template v-if="tableButtonText[key]['buttonType'] === 'icon'">
                   {{ data[rowKey] }}
                   <!-- <icon data="@icon/minus.svg" aria-hidden="true"></icon>-->
                   <!-- svg icon not working with nuxt-->
                 </template>
 
                 <template
-                  v-else-if="buttonHeaderText[key]['buttonType'] === 'text'"
+                  v-else-if="tableButtonText[key]['buttonType'] === 'text'"
                 >
                   <template
-                    v-if="buttonHeaderText[key]['textData'].length === 1"
-                    >{{ buttonHeaderText[key]["textData"][0] }}</template
+                    v-if="tableButtonText[key]['textData'].length === 1"
+                    >{{ tableButtonText[key]["textData"][0] }}</template
                   >
 
                   <template v-else>{{
-                    buttonHeaderText[key]["selectButtonList"].includes(
+                    tableButtonText[key]["selectButtonList"].includes(
                       data[rowKey]
                     )
-                      ? buttonHeaderText[key]["textData"][0]
-                      : buttonHeaderText[key]["textData"][1]
+                      ? tableButtonText[key]["textData"][0]
+                      : tableButtonText[key]["textData"][1]
                   }}</template>
                 </template>
               </basic-button>
@@ -81,7 +77,7 @@
         </tr>
       </tbody>
     </table>
-    <!--    {{ buttonHeaderText }}-->
+    <!--    {{ tableButtonText }}-->
   </div>
 </template>
 
@@ -99,22 +95,22 @@ export default {
       type: Array,
       require: true
     },
-    numHeaderUse: {
+    serialNumUse: {
       type: Boolean,
       require: false,
       default: false
     },
-    numHeaderText: {
+    serialNumText: {
       type: String,
-      default: false,
+      require: false,
       default: ""
     },
-    buttonHeaderUse: {
+    tableButtonUse: {
       type: Boolean,
       require: false,
       default: false
     },
-    buttonHeaderText: {
+    tableButtonText: {
       type: Object,
       require: false
     },
@@ -141,8 +137,8 @@ export default {
     rowClick(rowKey) {
       this.$emit("columnAction", rowKey);
     },
-    keyClick(keyAction) {
-      this.$emit("keyAction", keyAction);
+    keyClick(rowKey, keyAction) {
+      this.$emit("keyAction", rowKey, keyAction);
     }
   },
   created() {}
@@ -161,6 +157,8 @@ export default {
       background-color: lightgray;
       border-top: solid 1px rgb(192, 190, 190);
       border-bottom: solid 1px rgb(192, 190, 190);
+      position: sticky;
+      top: 0px;
     }
     tr,
     td {
