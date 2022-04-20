@@ -135,10 +135,14 @@ export const actions = {
       commit("setBizMetaForm", d);
     });
   },
-  removeBizMeta({ commit }, rowKey) {
-    Vue.prototype.$api.get("/api/meta/removeBizMeta", {
-      params: { nameId: rowKey }
-    });
+  removeBizMeta({ dispatch }, rowKey) {
+    Vue.prototype.$api
+      .delete("/api/meta/deleteBizMeta", {
+        params: { bizDatasetId: rowKey }
+      })
+      .then(() => {
+        dispatch("getBizMetaList");
+      });
   },
   async addBizMeta({}, obj) {
     let dataList = [];

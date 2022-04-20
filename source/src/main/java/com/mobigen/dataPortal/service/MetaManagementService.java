@@ -77,4 +77,8 @@ public class MetaManagementService {
     public int insertListOfBizMeta(List<Object> param) {
         return mapper.insertListOfBizMeta(param);
     }
+
+    public int deleteBizMeta(String bizDatasetId) {
+        return mapper.deleteBizMeta(bizDatasetId);
+    }
 }

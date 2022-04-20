@@ -69,7 +69,7 @@ export default {
       });
     },
     removeMeta(rowKey) {
-      this.removeMeta(rowKey);
+      this.removeBizMeta(rowKey);
     },
     setTableBtn() {
       Object.assign(this.buttonList, this.CONSTANTS.BUTTONS.TABLE.EDIT_BTN);

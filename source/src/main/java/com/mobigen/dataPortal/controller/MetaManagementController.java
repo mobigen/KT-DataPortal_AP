@@ -204,4 +204,17 @@ public class MetaManagementController {
     public Object insertBizMeta(@RequestBody List<Object> param) throws Exception {
         return service.insertListOfBizMeta(param);
     }
+    
+    /**
+     * Biz Meta 삭제 초기설정
+     * 
+     * @param bizDatasetId
+     * @return
+     * @throws Exception
+     */
+    @ResponseJsonResult
+    @DeleteMapping("/deleteBizMeta")
+    public Object deleteBizMeta(@RequestParam String bizDatasetId) throws Exception {
+        return service.deleteBizMeta(bizDatasetId);
+    }
 }
