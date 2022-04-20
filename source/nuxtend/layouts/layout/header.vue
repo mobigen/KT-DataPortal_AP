@@ -17,7 +17,8 @@ export default {
       menuList: [
         { menuName: "SuperAdmin-MetaName", url: "/superAdmin/meta/metaList" },
         { menuName: "SuperAdmin-MetaMap", url: "/superAdmin/meta/metaMapList" },
-        { menuName: "Admin-MetaName", url: "/admin/meta/metaList" }
+        { menuName: "Admin-MetaName", url: "/admin/meta/metaList" },
+        { menuName: "Admin-MetaTree", url: "/admin/meta/metaTree" }
       ]
     };
   },

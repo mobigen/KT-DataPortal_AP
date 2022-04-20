@@ -32,4 +32,6 @@ public interface MetaManagementMapper {
     int insertListOfMetaMap(List<Object> param);
 
     void deleteAllMetaMap();
+
+    ArrayList<Object> getCategoryList();
 }

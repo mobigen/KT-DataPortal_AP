@@ -206,4 +206,11 @@ public class MetaManagementController {
 
         return service.updateMetaName(null);
     }
+
+    @ResponseJsonResult
+    @GetMapping("/getCategoryList")
+    public Object getCategoryList() throws Exception {
+        return service.getCategoryList();
+    }
+
 }

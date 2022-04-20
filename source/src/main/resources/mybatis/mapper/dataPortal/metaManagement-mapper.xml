@@ -33,7 +33,7 @@
         FROM tb_biz_meta_name
         order by name_id;
     </select>
-    
+
     <!-- metaMap 등록 유무 포함한 metaName 목록 조회 -->
     <select id="getUseMetaNameList" resultType="java.util.Map">
         select tbmn.kor_name,
@@ -52,7 +52,7 @@
         from tb_biz_meta_name tbmn
         order by tbmn.name_id;
     </select>
-    
+
     <!-- meta form 형식 조회 -->
     <select id="getBizMetaForm" resultType="java.util.Map">
         select item_id, kor_name, eng_name, tbmm.name_id, type as value_type
@@ -148,5 +148,13 @@
 	<delete id="deleteAllMetaMap">
 	   truncate table tb_biz_meta_map
 	</delete>
+
+
+    <!-- category 목록 조회-->
+    <select id="getCategoryList" resultType="java.util.Map">
+        select *
+        from metasch.tb_category_test
+        order by depth, parent_id, node_id;
+    </select>
 
 </mapper>

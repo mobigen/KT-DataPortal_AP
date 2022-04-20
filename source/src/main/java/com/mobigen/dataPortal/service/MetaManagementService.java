@@ -70,6 +70,10 @@ public class MetaManagementService {
 
     public void deleteAllMetaMap() {
         mapper.deleteAllMetaMap();
-        
+
+    }
+
+    public Object getCategoryList() {
+        return mapper.getCategoryList();
     }
 }
