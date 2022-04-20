@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -71,5 +72,9 @@ public class MetaManagementService {
     public void deleteAllMetaMap() {
         mapper.deleteAllMetaMap();
         
+    }
+
+    public int insertListOfBizMeta(List<Object> param) {
+        return mapper.insertListOfBizMeta(param);
     }
 }

@@ -38,6 +38,11 @@ import { mapGetters } from "vuex";
 export default {
   name: "basic-viewForm",
   extends: {},
+  data() {
+    return {
+      changeDataObject: {}
+    };
+  },
   props: {
     viewDetail: {
       type: Array,
@@ -66,7 +71,11 @@ export default {
   components: { TextInput, NumberInput },
   watch: {},
   methods: {
-    changeData() {}
+    changeData(label, input) {
+      this.$set(this.changeDataObject, label, input);
+
+      this.$emit("changeData", this.changeDataObject);
+    }
   },
   created() {}
 };
