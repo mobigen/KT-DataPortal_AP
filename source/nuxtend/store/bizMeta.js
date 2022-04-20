@@ -1,3 +1,4 @@
+import axios from "axios";
 import Vue from "vue";
 // import Vuex from "vuex";
 
@@ -134,10 +135,26 @@ export const actions = {
       commit("setBizMetaForm", d);
     });
   },
-  removeBizMeta({ commit }, rowKey) {
-    Vue.prototype.$api.get("/api/meta/removeBizMeta", {
-      params: { nameId: rowKey }
-    });
+  removeBizMeta({ dispatch }, rowKey) {
+    Vue.prototype.$api
+      .delete("/api/meta/deleteBizMeta", {
+        params: { bizDatasetId: rowKey }
+      })
+      .then(() => {
+        dispatch("getBizMetaList");
+      });
+  },
+  async addBizMeta({}, obj) {
+    let dataList = [];
+
+    for (var key in obj) {
+      let setObj = {};
+      setObj.itemId = key;
+      setObj.itemVal = obj[key];
+
+      dataList.push(setObj);
+    }
+    await Vue.prototype.$api.post("/api/meta/insertBizMeta", dataList);
   },
   getMetaMapList({ commit }) {
     Vue.prototype.$api.get("/api/meta/metaMapList").then((d) => {
@@ -156,5 +173,10 @@ export const actions = {
     });
 
     await Vue.prototype.$api.post("/api/meta/insertMetaMap", dataList);
+  },
+  getTestData({}) {
+    axios.post("/remote_command").then((d) => {
+      console.log(d);
+    });
   }
 };

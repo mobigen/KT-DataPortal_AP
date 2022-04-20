@@ -10,10 +10,10 @@
         :headerList="headerList"
         :dataList="metaMapList.body"
         rowKey="item_id"
-        :numHeaderUse="false"
-        numHeaderText=""
-        :buttonHeaderUse="false"
-        :buttonHeaderText="{}"
+        :serialNumUse="false"
+        serialNumText=""
+        :tableButtonUse="false"
+        :tableButtonText="{}"
         @buttonAction=""
         @columnAction=""
         :keyActionText="{ eng_name: 'keyActionTest01' }"
@@ -58,8 +58,8 @@ export default {
     editTable() {
       this.$router.push({ path: "/superAdmin/meta/metaMapModify" });
     },
-    keyClick(keyAction) {
-      alert(keyAction);
+    keyClick(rowKey, keyAction) {
+      alert("rowKey: " + rowKey + ",keyAction: " + keyAction);
     }
   },
   created() {

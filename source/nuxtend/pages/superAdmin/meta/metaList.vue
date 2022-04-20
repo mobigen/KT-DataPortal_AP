@@ -21,14 +21,17 @@
         :headerList="metaNameList.header"
         :dataList="metaNameList.body"
         rowKey="name_id"
-        :numHeaderUse="true"
-        numHeaderText="No."
-        :buttonHeaderUse="true"
-        :buttonHeaderText="this.buttonList"
+        :serialNumUse="true"
+        serialNumText="No."
+        :tableButtonUse="true"
+        :tableButtonText="this.buttonList"
         @buttonAction="tableButtonClick"
         @columnAction="rowClick"
-        :keyActionText="{}"
-        @keyAction=""
+        :keyActionText="{
+          eng_name: 'testAction01',
+          show_order: 'testAction02'
+        }"
+        @keyAction="testAction"
       />
     </div>
   </div>
@@ -56,9 +59,9 @@ export default {
           buttonCss: "icon-button",
           iconData: "@icon/minus.svg"
         }
-        /*         
-        sample : buttonType : text    
-        sample: {      
+        /*
+        sample : buttonType : text
+        sample: {
           buttonType: "text",
           buttonName: "설정",
           buttonCss: "text-button",
@@ -90,10 +93,11 @@ export default {
     },
     tableButtonClick(rowKey, btnAction) {
       if (btnAction === "remove") {
-        if (!confirm("삭제 하시겠습니까?")) {
+        if (confirm("삭제 하시겠습니까?")) {
+          this.removeObject(rowKey);
+        } else {
           return;
         }
-        this.removeObject(rowKey);
       } else if (btnAction === "edit") {
         this.editForm(rowKey);
       }
@@ -110,6 +114,9 @@ export default {
       //     metaNameId: rowKey
       //   }
       // });
+    },
+    testAction(rowKey, keyAction) {
+      alert("rowKey: " + rowKey + ",keyAction: " + keyAction);
     }
   },
   created() {

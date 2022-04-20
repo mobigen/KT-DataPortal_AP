@@ -15,9 +15,7 @@ export default {
   name: "text-input",
   extends: {},
   data() {
-    return {
-      input: null
-    };
+    return {};
   },
   props: {
     labelName: {
@@ -25,7 +23,7 @@ export default {
       require: true
     },
     inputData: {
-      type: null,
+      type: String,
       require: false
     },
     placeholder: {
@@ -33,17 +31,21 @@ export default {
       require: false
     }
   },
-  computed: {},
-  components: {},
-  watch: {
-    inputData(data) {
-      this.input = data;
+  computed: {
+    input: {
+      get() {
+        return this.inputData;
+      },
+      set(newValue) {
+        this.$emit("input", this.labelName, newValue);
+      }
     }
   },
+  components: {},
+  watch: {},
   methods: {
     typing(e) {
       this.input = e.target.value;
-      this.$emit("input", this.labelName, this.input);
     }
   },
   created() {}

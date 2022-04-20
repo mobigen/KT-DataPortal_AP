@@ -79,6 +79,10 @@ export default {
     "/dataPortal/api/": {
       target: "http://localhost:8888",
       changeOrigin: true // cross origin 허용
+    },
+    "/remote_command": {
+      target: "http://192.168.101.43:8000",
+      changeOrigin: true
     }
   },
   server: {

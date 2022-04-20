@@ -18,10 +18,10 @@
         :headerList="bizMetaList.header"
         :dataList="bizMetaList.body"
         rowKey="rowId"
-        :numHeaderUse="false"
-        numHeaderText=""
-        :buttonHeaderUse="true"
-        :buttonHeaderText="this.buttonList"
+        :serialNumUse="false"
+        serialNumText=""
+        :tableButtonUse="true"
+        :tableButtonText="this.buttonList"
         @buttonAction="tableButtonClick"
         @columnAction="viewMetaInfo"
         :keyActionText="{}"
@@ -69,7 +69,7 @@ export default {
       });
     },
     removeMeta(rowKey) {
-      this.removeMeta(rowKey);
+      this.removeBizMeta(rowKey);
     },
     setTableBtn() {
       Object.assign(this.buttonList, this.CONSTANTS.BUTTONS.TABLE.EDIT_BTN);
