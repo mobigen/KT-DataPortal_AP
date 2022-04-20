@@ -3,7 +3,7 @@
     <table>
       <thead>
         <tr>
-          <th v-if="seriorNumUse">{{ seriorNumText }}</th>
+          <th v-if="serialNumUse">{{ serialNumText }}</th>
           <th v-for="(h, hi) in headerList" :key="'header_' + hi">
             {{ h["column_name"] }}
           </th>
@@ -24,7 +24,7 @@
           :key="'table_body_' + i"
           @click="rowClick(data[rowKey])"
         >
-          <td v-if="seriorNumUse">{{ i + 1 }}</td>
+          <td v-if="serialNumUse">{{ i + 1 }}</td>
 
           <td v-for="(h, hi) in headerList" :key="'header_' + hi">
             <template
@@ -95,12 +95,12 @@ export default {
       type: Array,
       require: true
     },
-    seriorNumUse: {
+    serialNumUse: {
       type: Boolean,
       require: false,
       default: false
     },
-    seriorNumText: {
+    serialNumText: {
       type: String,
       require: false,
       default: ""
