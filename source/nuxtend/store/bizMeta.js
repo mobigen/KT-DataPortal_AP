@@ -124,6 +124,11 @@ export const actions = {
       });
   },
   async getBizMetaDetail({ commit }, rowId) {
+    if (rowId === undefined) {
+      const empObj = {};
+      commit("setBizMetaDetail", empObj);
+      return;
+    }
     await Vue.prototype.$api
       .get("/api/meta/getBizMetaDetail?datasetId=" + rowId)
       .then((d) => {
@@ -144,17 +149,23 @@ export const actions = {
         dispatch("getBizMetaList");
       });
   },
-  async addBizMeta({}, obj) {
-    let dataList = [];
-
-    for (var key in obj) {
-      let setObj = {};
-      setObj.itemId = key;
-      setObj.itemVal = obj[key];
-
-      dataList.push(setObj);
+  async addBizMeta({}, dataList) {
+    if (dataList.length === 0) {
+      console.log("저장할 Data 없음");
+      return;
     }
     await Vue.prototype.$api.post("/api/meta/insertBizMeta", dataList);
+  },
+  async editBizMeta({}, { rowKey, dataList }) {
+    if (dataList.length === 0) {
+      console.log("변경된 Data 없음");
+      return;
+    }
+
+    await Vue.prototype.$api.put("/api/meta/updateBizMeta", {
+      bizDatasetId: rowKey,
+      dataList: dataList
+    });
   },
   getMetaMapList({ commit }) {
     Vue.prototype.$api.get("/api/meta/metaMapList").then((d) => {

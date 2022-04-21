@@ -163,5 +163,14 @@
 	   delete from tb_biz_meta
        where biz_dataset_id = #{bizDatasetId}
 	</delete>
+	
+	<!-- bizMeta 수정 -->
+	<update id="updateListOfBizMeta" parameterType="Object">
+       <foreach collection="dataList" item="item" separator=";">
+	   update tb_biz_meta 
+       set item_val = #{item.itemVal}
+       where biz_dataset_id= #{bizDatasetId} and item_id= #{item.itemId}
+       </foreach>
+	</update>
 
 </mapper>

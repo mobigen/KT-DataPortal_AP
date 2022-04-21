@@ -217,4 +217,22 @@ public class MetaManagementController {
     public Object deleteBizMeta(@RequestParam String bizDatasetId) throws Exception {
         return service.deleteBizMeta(bizDatasetId);
     }
+    
+    /**
+     * Biz Meta 수정 초기설정
+     * 
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    @ResponseJsonResult
+    @PutMapping("/updateBizMeta")
+    public Object updateBizMeta(@RequestBody Map<String, Object> param) throws Exception {
+        Map<String, Object> bizMeta = new HashMap<>();
+
+        bizMeta.put("bizDatasetId", param.get("bizDatasetId"));
+        bizMeta.put("dataList", param.get("dataList"));
+
+        return service.updateListOfBizMeta(bizMeta);
+    }
 }

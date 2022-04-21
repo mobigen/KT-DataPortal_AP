@@ -89,9 +89,7 @@ export default {
 
     this.getMetaNameList();
 
-    if (this.rowKey) {
-      this.getMetaName(this.rowKey);
-    }
+    this.getMetaName(this.rowKey);
   }
 };
 </script>
