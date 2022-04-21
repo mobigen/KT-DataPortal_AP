@@ -65,19 +65,36 @@ export default {
     ...mapActions("bizMeta", [
       "getBizMetaForm",
       "getBizMetaDetail",
-      "addBizMeta"
+      "addBizMeta",
+      "editBizMeta"
     ]),
     cancel() {
       this.$router.push({ path: "/admin/meta/metaList" });
     },
     async addObject() {
+      const dataList = this.setDataList();
+
       if (this.rowKey) {
-        console.log("update");
+        await this.editBizMeta({ rowKey: this.rowKey, dataList: dataList });
       } else {
-        await this.addBizMeta(this.changeData);
+        await this.addBizMeta(dataList);
       }
 
       this.$router.push({ path: "/admin/meta/metaList" });
+    },
+    setDataList() {
+      let dataList = [];
+      const obj = this.changeData;
+
+      for (var key in obj) {
+        let setObj = {};
+        setObj.itemId = key;
+        setObj.itemVal = obj[key];
+
+        dataList.push(setObj);
+      }
+
+      return dataList;
     },
     setChangeData(data) {
       this.changeData = data;
@@ -87,10 +104,8 @@ export default {
     this.rowKey = this.$route.query.metaNameId;
 
     this.getBizMetaForm();
-    // rowKey가 있으면 '수정' 모드 이기 때문에 기존 데이터를 조회한다.
-    if (this.rowKey) {
-      this.getBizMetaDetail(this.rowKey);
-    }
+
+    this.getBizMetaDetail(this.rowKey);
   }
 };
 </script>
