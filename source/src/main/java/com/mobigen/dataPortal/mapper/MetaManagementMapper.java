@@ -33,6 +33,8 @@ public interface MetaManagementMapper {
 
     void deleteAllMetaMap();
 
+    ArrayList<Object> getCategoryList();
+
     int insertListOfBizMeta(List<Object> param);
 
     int deleteBizMeta(String bizDatasetId);

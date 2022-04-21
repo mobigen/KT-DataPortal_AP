@@ -1,12 +1,21 @@
 <template>
-  <div>SUPER-MAIN</div>
+  <div>
+    <h3>SUPER-MAIN</h3>
+<!--    <img src="@/assets/style-core/images/icon/minus.svg" />-->
+    <div style="border: 1px solid red; width: 100px">
+      <icon
+        data="@icon/minus.svg"
+        aria-hidden="true"
+      ></icon>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "IndexPage",
   created() {
-    console.log(process.env.NODE_ENV);
+    // console.log(process.env.NODE_ENV);
   }
 };
 </script>

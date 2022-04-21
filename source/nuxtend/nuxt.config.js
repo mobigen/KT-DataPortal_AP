@@ -1,3 +1,5 @@
+import { resolve } from "path";
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
@@ -9,6 +11,16 @@ export default {
     base: "/dataPortal/",
     buildAssetsPath: "/_nuxt/"
   },
+
+  // default alias
+  // alias: {
+  //   '~~': `<rootDir>`,
+  //   '@@': `<rootDir>`,
+  //   '~': `<srcDir>`,
+  //   '@': `<srcDir>`,
+  //   'assets': `<srcDir>/assets`, // (unless you have set a custom `dir.assets`)
+  //   'static': `<srcDir>/static`, // (unless you have set a custom `dir.static`)
+  // },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -26,7 +38,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ["@/assets/main.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ["~plugin/defaultPlugin.js", "~plugin/route.js"],
@@ -38,7 +50,26 @@ export default {
   buildModules: ["@nuxtjs/dotenv"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios", "@nuxtjs/proxy"],
+  modules: [
+    "@nuxtjs/axios",
+    "@nuxtjs/proxy",
+    [
+      "nuxt-svgicon",
+      {
+        sourcePath: "assets/style-core/images/icon",
+        targetPath: "assets/svg/bundle",
+        subDir: "assets/style-core/images/icon",
+        ext: "js",
+        es6: false,
+        tpl: "",
+        idSP: "_",
+        svgo: null, // use default vue-svgicon config
+        renameStyles: false,
+        tagName: "svgIcon",
+        usePolyfill: true
+      }
+    ]
+  ],
   axios: {
     // baseURL: process.env.NODE_ENV !== "production" ? "http://localhost:8888/dataPortal/api/" : "",
     baseURL: "http://localhost:8888/dataPortal/api/",
@@ -72,40 +103,5 @@ export default {
       // );
       // config.plugins.splice(hmrIndex, 1);
     }
-    // extend (config, ctx) {
-    //   // svgicon [BEGIN]
-    //   const svgFilePath = path.join(__dirname, 'icons')
-    //   const imageLoaderRule = config.module.rules.find(rule => rule.test && rule.test.test('.svg'))
-    //   imageLoaderRule.test = /\.(png|jpe?g|gif|webp)$/
-    //
-    //   config.module.rules.push({
-    //     test: /\.svg$/,
-    //     include: [svgFilePath],
-    //     use: [
-    //       {
-    //         loader: '@yzfe/svgicon-loader',
-    //         options: {
-    //           svgFilePath: [svgFilePath],
-    //           svgoConfig: null // Custom svgo configuration
-    //         }
-    //       }
-    //     ]
-    //   })
-    //
-    //   // Recommended configuration transformAssetUrls
-    //   const vueRule = config.module.rules.find(
-    //     (rule) => rule.use ? rule.use.some(
-    //       (use) => use.loader === 'vue-loader'
-    //     ) : rule.loader === 'vue-loader'
-    //   )
-    //
-    //   vueRule.options.transformAssetUrls = vueRule.options.transformAssetUrls || {}
-    //
-    //   vueRule.options.transformAssetUrls['icon'] = 'data'
-    //
-    //   // Recommended configuration alias
-    //   config.resolve.alias['@icon'] = svgFilePath
-    //   // svgicon [END]
-    // },
   }
 };

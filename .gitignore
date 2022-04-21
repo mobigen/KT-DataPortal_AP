@@ -144,3 +144,4 @@ nbdist/
 
 
 ### Only this project ###
+/source/nuxtend/assets/svg/
