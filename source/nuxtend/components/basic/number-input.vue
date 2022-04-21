@@ -4,7 +4,7 @@
       type="number"
       class="text-input text-input--sm"
       :placeholder="placeholder"
-      v-model.number="input"
+      v-model="input"
     />
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
           newValue = null;
         }
 
-        this.$emit("input", this.labelName, newValue);
+        this.$emit("input", this.labelName, Number(newValue));
       }
     }
   },
