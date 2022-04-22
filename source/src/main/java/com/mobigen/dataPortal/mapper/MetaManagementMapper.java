@@ -38,4 +38,6 @@ public interface MetaManagementMapper {
     int insertListOfBizMeta(List<Object> param);
 
     int deleteBizMeta(String bizDatasetId);
+
+    int updateListOfBizMeta(Object bizMeta);
 }

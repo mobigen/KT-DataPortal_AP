@@ -85,4 +85,8 @@ public class MetaManagementService {
     public int deleteBizMeta(String bizDatasetId) {
         return mapper.deleteBizMeta(bizDatasetId);
     }
+
+    public int updateListOfBizMeta(Object bizMeta) {
+        return mapper.updateListOfBizMeta(bizMeta);
+    }
 }
