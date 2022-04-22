@@ -1,7 +1,8 @@
 import axios from "axios";
 
 let __config = {
-  baseURL: `http://localhost:${process.env.VUE_APP_AXIOS_BASE_PORT}/${process.env.VUE_APP_AXIOS_BASE_URL}`
+  // nuxt.config.js 에 설정 추가
+  // baseURL: `http://localhost:${process.env.VUE_APP_AXIOS_BASE_PORT}`
   // timeout: 0,
   // withCredentials: false,
   // maxContentLength: 2000,

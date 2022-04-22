@@ -1,6 +1,4 @@
-import axios from "axios";
 import Vue from "vue";
-// import Vuex from "vuex";
 
 export const state = () => ({
   metaNameList: [],
@@ -236,7 +234,7 @@ export const actions = {
     commit("setSelectedNodeList", param);
   },
   getTestData({}) {
-    axios.post("/remote_command").then((d) => {
+    Vue.prototype.$api.post("/remote/remote_command").then((d) => {
       console.log(d);
     });
   }

@@ -1,14 +1,12 @@
-import { resolve } from "path";
-
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
 
   router: {
-    base: "/dataPortal/"
+    // router 설정이 필요할때 추가.
+    // base: "/dataPortal/"
   },
   app: {
-    base: "/dataPortal/",
     buildAssetsPath: "/_nuxt/"
   },
 
@@ -38,7 +36,9 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["@/assets/main.scss"],
+  css: [
+    // "@/assets/main.scss"
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ["~plugin/defaultPlugin.js", "~plugin/route.js"],
@@ -52,37 +52,39 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     "@nuxtjs/axios",
-    "@nuxtjs/proxy",
-    [
-      "nuxt-svgicon",
-      {
-        sourcePath: "assets/style-core/images/icon",
-        targetPath: "assets/svg/bundle",
-        subDir: "assets/style-core/images/icon",
-        ext: "js",
-        es6: false,
-        tpl: "",
-        idSP: "_",
-        svgo: null, // use default vue-svgicon config
-        renameStyles: false,
-        tagName: "svgIcon",
-        usePolyfill: true
-      }
-    ]
+    "@nuxtjs/proxy"
+    // [
+    //   "nuxt-svgicon",
+    //   {
+    //     sourcePath: "assets/style-core/images/icon",
+    //     targetPath: "assets/svg/bundle",
+    //     subDir: "assets/style-core/images/icon",
+    //     ext: "js",
+    //     es6: false,
+    //     tpl: "",
+    //     idSP: "_",
+    //     svgo: null, // use default vue-svgicon config
+    //     renameStyles: false,
+    //     tagName: "svgIcon",
+    //     usePolyfill: true
+    //   }
+    // ]
   ],
   axios: {
     // baseURL: process.env.NODE_ENV !== "production" ? "http://localhost:8888/dataPortal/api/" : "",
-    baseURL: "http://localhost:8888/dataPortal/api/",
+    baseURL: `http://localhost:${process.env.VUE_APP_AXIOS_BASE_PORT}`,
     proxy: true
   },
   proxy: {
-    "/dataPortal/api/": {
-      target: "http://localhost:8888",
+    "/api/": {
+      target: "http://localhost:8888/",
+      pathRewrite: { "/api": "/dataPortal/api" },
       changeOrigin: true // cross origin 허용
     },
-    "/remote_command": {
+    "/remote/": {
       target: "http://192.168.101.43:8000",
-      changeOrigin: true
+      pathRewrite: { "/remote": "" }
+      // , changeOrigin: true
     }
   },
   server: {
