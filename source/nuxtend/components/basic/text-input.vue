@@ -6,6 +6,7 @@
       :placeholder="placeholder"
       @input="typing"
       :value="input"
+      @keyup.enter="enterEvent"
     />
   </div>
 </template>
@@ -20,7 +21,7 @@ export default {
   props: {
     labelName: {
       type: String,
-      require: true
+      require: false
     },
     inputData: {
       type: String,
@@ -46,6 +47,9 @@ export default {
   methods: {
     typing(e) {
       this.input = e.target.value;
+    },
+    enterEvent() {
+      this.$emit("enterEvent");
     }
   },
   created() {}
