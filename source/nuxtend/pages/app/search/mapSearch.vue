@@ -1,10 +1,12 @@
 <template lang="html">
-  <div></div>
+  <div>
+    <h5>데이터 맵 검색</h5>
+  </div>
 </template>
 
 <script type="text/javascript">
 export default {
-  name: "BasicTemplate",
+  name: "app-search-map",
   extends: {},
   props: {
     bar: {},

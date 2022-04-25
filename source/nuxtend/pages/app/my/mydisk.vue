@@ -1,10 +1,12 @@
 <template lang="html">
-  <div></div>
+  <div>
+    <h5>마이디스크</h5>
+  </div>
 </template>
 
 <script type="text/javascript">
 export default {
-  name: "BasicTemplate",
+  name: "app-my-mydisk",
   extends: {},
   props: {
     bar: {},

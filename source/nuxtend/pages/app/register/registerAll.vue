@@ -1,10 +1,12 @@
 <template lang="html">
-  <div></div>
+  <div>
+    <h5>데이터 일괄 등록 요청</h5>
+  </div>
 </template>
 
 <script type="text/javascript">
 export default {
-  name: "BasicTemplate",
+  name: "app-register-all",
   extends: {},
   props: {
     bar: {},

@@ -1,10 +1,13 @@
 <template lang="html">
-  <div></div>
+  <div>
+    <h5>마이페이지</h5>
+    <nuxt-child />
+  </div>
 </template>
 
 <script type="text/javascript">
 export default {
-  name: "BasicTemplate",
+  name: "app-my",
   extends: {},
   props: {
     bar: {},

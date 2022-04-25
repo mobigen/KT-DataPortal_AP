@@ -1,10 +1,12 @@
 <template lang="html">
-  <div></div>
+  <div>
+    <h5>개인정보관리</h5>
+  </div>
 </template>
 
 <script type="text/javascript">
 export default {
-  name: "BasicTemplate",
+  name: "app-my-info",
   extends: {},
   props: {
     bar: {},

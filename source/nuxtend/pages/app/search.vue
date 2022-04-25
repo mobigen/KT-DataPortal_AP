@@ -1,10 +1,13 @@
 <template lang="html">
-  <div></div>
+  <div>
+    <h5>데이터 검색</h5>
+    <nuxt-child />
+  </div>
 </template>
 
 <script type="text/javascript">
 export default {
-  name: "BasicTemplate",
+  name: "app-search",
   extends: {},
   props: {
     bar: {},
