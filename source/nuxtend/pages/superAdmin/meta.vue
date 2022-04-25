@@ -1,8 +1,6 @@
 <template lang="html">
   <div id="superAdmin">
-    <axios-interceptor />
     <nuxt-child />
-    <json-viwer />
   </div>
 </template>
 
