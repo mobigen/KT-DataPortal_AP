@@ -10,8 +10,6 @@ export const state = () => ({
   bizMetaDetail: {},
   metaMapList: [],
   bizMetaForm: [],
-  categoryObject: {},
-  selectedNodeList: {}
 });
 
 export const getters = {
@@ -39,12 +37,6 @@ export const getters = {
   metaMapList(state) {
     return state.metaMapList;
   },
-  categoryObject(state) {
-    return state.categoryObject;
-  },
-  selectedNodeList(state) {
-    return state.selectedNodeList;
-  }
 };
 export const mutations = {
   setMetaNameList(state, data) {
@@ -71,20 +63,6 @@ export const mutations = {
   setMetaMapList(state, data) {
     state.metaMapList = data;
   },
-  setCategoryObject(state, data) {
-    state.categoryObject = data;
-  },
-  setSelectedNodeList(state, { key, node, bool }) {
-    if (bool) {
-      const _node = JSON.parse(JSON.stringify(node));
-      delete _node["children"];
-      state.selectedNodeList[key] = _node;
-    } else {
-      delete state.selectedNodeList[key];
-    }
-    state.selectedNodeList = JSON.parse(JSON.stringify(state.selectedNodeList));
-    // console.log(state.selectedNodeList);
-  }
 };
 export const actions = {
   getMetaNameList({ _, commit }) {
@@ -179,43 +157,4 @@ export const actions = {
 
     await Vue.prototype.$api.post("/api/meta/insertMetaMap", dataList);
   },
-
-  getCategoryObject({ commit }, param) {
-    Vue.prototype.$api.get("/api/meta/getCategoryList").then((d) => {
-      // ArrayList 형태의 데이터를, children 형태의 데이터로 변경처리한다.
-      let depthHelper = {};
-
-      // 조회한 목록을 역순으로 설정한 후에, 끝에서 처음까지 돌면서 부모별로 자식들을 Object-array로 정리해둔다.
-      // 원래 데이터와 분리하기 위해 깊은 복사를 진행한다.
-      let reversed = JSON.parse(JSON.stringify(d));
-      const reverseD = reversed.reverse();
-
-      reverseD.forEach((el) => {
-        // console.log(el.node_id);
-        if (
-          Object.prototype.hasOwnProperty.call(depthHelper, el[param.nodeId])
-        ) {
-          el.children = depthHelper[el[param.nodeId]];
-          delete depthHelper[el[param.nodeId]];
-        }
-
-        if (
-          !Object.prototype.hasOwnProperty.call(depthHelper, el[param.parentId])
-        ) {
-          depthHelper[el[param.parentId]] = [];
-        }
-        depthHelper[el[param.parentId]].push(el);
-      });
-
-      // root는 무조건 1개만 나오는 데이터로 가정.
-      // db에서 조회한 데이터의 첫번째 row가 root node 로, 이 id를 기준으로 데이터가 정제되어 있다.
-      let newD = depthHelper[d[0][param.nodeId]][0];
-      newD.subscribed = true;
-      commit("setCategoryObject", newD);
-    });
-  },
-  setSelectedNodeList({ commit }, param) {
-    param.subscribed = true;
-    commit("setSelectedNodeList", param);
-  }
 };
