@@ -1,58 +1,45 @@
 <template lang="html">
-  <div class="tree_cont" :key="treeData[nodeId]">
+  <div class="tree_cont">
     <div>
       <span v-if="isOpen" @click="toggle">[{{ open ? "-" : "+" }}]</span>
-      {{ treeData[nodeTitle] }}
 
-      <div class="tree-buttons">
-        <basic-button
-          v-if="useSelection"
-          componentId="nodeSelect"
-          buttonCss="text-button"
-          :underline="false"
-          :hoverColor="false"
-          @click="selectionChange(treeData)"
+      <template v-if="treeMode === 'EDITOR'">
+        <span
+          :class="[spanSelected ? 'span-selected' : '']"
+          @click="spanEdit(treeData)"
+          >{{ treeData[nodeTitle] }}</span
         >
-          {{
-            selectionBtnText[
-              Object.prototype.hasOwnProperty.call(
-                selectedNodeList,
-                treeData[nodeId]
-              )
-                ? 0
-                : 1
-            ]
-          }}
-        </basic-button>
         <basic-button
-          componentId="childAdd"
+          style="display: inline"
           buttonCss="text-button"
           :underline="false"
           :hoverColor="false"
-          @click="addRow"
+          @click="addChildren(treeData)"
           >+</basic-button
         >
-        <basic-button
-          componentId="childRemove"
-          buttonCss="text-button"
-          :underline="false"
-          :hoverColor="false"
-          @click="deleteRow"
-          >-</basic-button
+      </template>
+      <template v-else>
+        <span
+          :class="[spanSelected ? 'span-selected' : '']"
+          @click="spanClick(treeData, $event)"
+          >{{ treeData[nodeTitle] }}</span
         >
-      </div>
+      </template>
     </div>
     <ul v-if="isOpen" v-show="open">
       <item
         v-for="(data, index) in treeData.children"
+        :tree-type="treeType"
+        :checked="checked"
         :treeData="data"
         :key="index"
         :nodeTitle="nodeTitle"
-        :nodeId="nodeId"
-        :useSelection="true"
-        :selectedNodeList="selectedNodeList"
+        :nodeIdText="nodeIdText"
+        :parentIdText="parentIdText"
+        :tree-mode="treeMode"
         @selectionChange="selectionChange"
-        :selectionBtnText="selectionBtnText"
+        :parentsIds="pId"
+        @setEditForm="setEditForm"
       ></item>
     </ul>
   </div>
@@ -60,11 +47,28 @@
 
 <script type="text/javascript">
 import BasicButton from "@/components/basic/basic-button.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "item",
   extends: {},
   props: {
+    /**
+     * Tree Type.
+     * ALL : You can select Every Node.
+     * LEAF : You can select ONLY Leaf NODE. AND available  checkbox that name is "auto select parent Node.".
+     * @values ALL, LEAF
+     */
+    treeType: {
+      type: String,
+      require: false,
+      defaults: "ALL" // ALL, LEAF
+    },
+    checked: {
+      type: Boolean,
+      require: false,
+      defaults: false
+    },
     treeData: {
       type: Object,
       require: true
@@ -73,60 +77,121 @@ export default {
       type: String,
       require: true
     },
-    nodeId: {
+    nodeIdText: {
       type: String,
       require: true
     },
-    useEditor: {
-      // 데이터의 추가/수정/삭제 가능여부
-      type: Boolean,
-      require: false,
-      defaults: false
-    },
-    useSelection: {
-      type: Boolean,
-      require: false,
-      defaults: false
-    },
-    selectedNodeList: {
-      type: Object,
+    parentIdText: {
+      type: String,
       require: true
     },
-    selectionBtnText: {
+    treeMode: {
+      type: String,
+      require: true,
+      defaults: "VIEW"
+    },
+    // 내부 재귀 루틴에서만 쓰임.
+    parentsIds: {
       type: Array,
       require: false,
-      defaults: ["선택함", "선택안함"]
+      defaults: []
     }
   },
   data() {
     return {
-      open: false
+      open: false,
+      // spanSelected: false,
+      pId: []
     };
   },
   computed: {
+    ...mapGetters("tree", ["categoryObjectByKey"]),
     isOpen() {
       return this.treeData.children && this.treeData.children.length;
+    },
+    spanSelected() {
+      const selectedNodeList = this.$store.getters["tree/selectedNodeList"];
+      return Object.prototype.hasOwnProperty.call(
+        selectedNodeList,
+        this.treeData[this.nodeIdText]
+      );
     }
   },
   components: { BasicButton },
   watch: {},
-  created() {},
+  created() {
+    this.setParentIds();
+  },
   methods: {
+    clickOn() {
+      console.log("clickOn");
+    },
+    setParentIds() {
+      const parentId = this.treeData[this.parentIdText];
+      if (parentId === undefined || this.parentsIds === undefined) {
+        return;
+      }
+      this.pId = this.parentsIds.concat([parentId]);
+    },
     toggle() {
       this.open = !this.open;
     },
-    selectionChange(nodeData) {
-      const oldValue = Object.prototype.hasOwnProperty.call(
-        this.selectedNodeList,
-        nodeData[this.nodeId]
-      );
-      this.$emit("selectionChange", nodeData, !oldValue);
+    spanClick(treeNode) {
+      if (this.treeType === "LEAF") {
+        // LEAF 일 경우, 가장 마지막 노드만 선택 가능함.
+
+        if (Object.prototype.hasOwnProperty.call(treeNode, "children")) {
+          // children을 가지고 있으면 하위노드가 아님. return한다.
+          return;
+        }
+        if (treeNode.children >= 1) {
+          // children을 가지고 있어도 그 갯수가 1개 이상이면 하위노드가 아님. return 한다.
+          return;
+        }
+      }
+
+      const nodeSelected = !this.spanSelected;
+
+      // ALL인 경우, 모든 노드 선택 가능함.
+      // 상위자동선택에 체크되어있는 경우, 자기보다 위의 노드를 모드 선택한다.
+      if (this.checked) {
+        const me = this;
+        // 자기 자신 노드를 포함한다.
+        this.pId.push(treeNode[this.nodeIdText]);
+        this.pId.forEach((parentId) => {
+          this.selectionChange({
+            bool: nodeSelected,
+            nodeData: me.getNode(parentId)
+          });
+        });
+      } else {
+        // 상위 자동선택 미체크. 자신것만 체크한다.
+        this.selectionChange({
+          bool: nodeSelected,
+          nodeData: treeNode
+        });
+      }
     },
-    addRow() {
-      console.log("addRow");
+    getNode(key) {
+      return this.categoryObjectByKey[key];
     },
-    deleteRow() {
-      console.log("deleteRow");
+    selectionChange(param) {
+      this.$emit("selectionChange", param);
+    },
+    spanEdit(treeData) {
+      this.setEditForm({
+        clickMode: "edit",
+        nodeData: treeData
+      });
+    },
+    addChildren(treeData) {
+      this.setEditForm({
+        clickMode: "addChild",
+        nodeData: treeData
+      });
+    },
+    setEditForm(param) {
+      this.$emit("setEditForm", param);
     }
   }
 };
@@ -145,5 +210,8 @@ ul {
 
 .tree-buttons {
   display: inline-flex;
+}
+span.span-selected {
+  background-color: red;
 }
 </style>

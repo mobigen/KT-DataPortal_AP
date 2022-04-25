@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="basic-tag-wrap">
     <template v-for="(obj, key, i) in selectedNodeList">
-      <div class="basic-tag" :key="'tag_' + i" :id="obj[nodeId]">
+      <div class="basic-tag" :key="'tag_' + i" :id="obj[nodeIdText]">
         <span>
           {{ obj[nodeTitle] }}
         </span>
@@ -23,7 +23,7 @@ export default {
       type: String,
       require: true
     },
-    nodeId: {
+    nodeIdText: {
       type: String,
       require: true
     }
