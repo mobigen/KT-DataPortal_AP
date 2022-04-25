@@ -41,10 +41,6 @@ export default {
       type: String,
       require: false,
       default: "내용을 입력해주세요."
-    },
-    rowKey: {
-      type: String,
-      require: true
     }
   },
   computed: {},

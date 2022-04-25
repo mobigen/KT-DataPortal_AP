@@ -1,10 +1,6 @@
 <template lang="html">
   <div id="admin">
-    <h1>ADMIN.vue</h1>
-    <axios-interceptor />
-    <!-- axios interceptor은 nuxt-child보다 위에 있어야 함-->
     <nuxt-child />
-    <json-viwer />
   </div>
 </template>
 
