@@ -2,7 +2,7 @@
   <div id="searchBox">
     <text-input
       labelName=""
-      inputData=""
+      :inputData="tagData"
       placeholder="검색어를 입력해주세요"
       @input="setInputData"
       @enterEvent="search"
@@ -30,7 +30,12 @@ export default {
       inputData: ""
     };
   },
-  props: {},
+  props: {
+    tagData: {
+      type: String,
+      require: false
+    }
+  },
   computed: {},
   components: { TextInput, BasicButton },
   watch: {},
