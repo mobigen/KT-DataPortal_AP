@@ -5,7 +5,7 @@
     <!-- top-->
     <div class="search-box">
       <div>검색바 component</div>
-      <basic-search-box :tagData="tagData" />
+      <basic-search-box @search="search" :tagData="tagData" />
       <div>추천검색어 component</div>
       <recommend-search-tag
         tagLabel="추천검색어"
@@ -55,6 +55,9 @@ export default {
   components: { BasicSearchBox, RecommendSearchTag },
   watch: {},
   methods: {
+    search(searchWord) {
+      alert(searchWord);
+    },
     tagClick(tagName) {
       this.tagData = tagName;
     }

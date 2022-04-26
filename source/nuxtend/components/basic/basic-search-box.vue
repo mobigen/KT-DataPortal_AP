@@ -41,7 +41,7 @@ export default {
   watch: {},
   methods: {
     search() {
-      alert(this.inputData);
+      this.$emit("search", this.inputData);
     },
     setInputData(labelName, input) {
       this.inputData = input;
