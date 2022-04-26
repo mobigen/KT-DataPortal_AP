@@ -4,7 +4,7 @@
       <div>tree component mode : {{ treeMode }}</div>
 
       <basic-single-checkbox
-        v-if="useSingleCheckbox && treeMode === 'VIEW'"
+        v-if="useSingleCheckbox && treeMode === CONSTANTS.TREE.TREE_MODE.VIEW"
         :checkbox-label="checkboxLabel"
         label-name="selectNodeAll"
         @changeData="checkboxChange"
@@ -12,7 +12,7 @@
     </div>
 
     <basic-tree
-      :tree-type="treeType"
+      :tree-select-type="treeSelectType"
       :tree-data="categoryObject"
       :tree-mode="treeMode"
       :checked="checked"
@@ -24,14 +24,19 @@
     ></basic-tree>
 
     <basic-tag
-      v-if="treeMode === 'VIEW'"
+      v-if="treeMode === CONSTANTS.TREE.TREE_MODE.VIEW"
       :selectedNodeList="selectedNodeList"
       :nodeTitle="treeKey.nodeName"
       :nodeIdText="treeKey.nodeIdText"
     >
     </basic-tag>
 
-    <div v-if="treeMode === 'EDITOR' && selectNodeName !== null">
+    <div
+      v-if="
+        treeMode === CONSTANTS.TREE.TREE_MODE.EDITOR &&
+        selectedNode[treeKey.nodeName] !== undefined
+      "
+    >
       <basic-label> {{ notyTitle }}</basic-label>
       <basic-form
         :header-list="headerList"
@@ -42,7 +47,7 @@
         buttonCss="text-button"
         :underline="false"
         :hoverColor="false"
-        @click="addChildren"
+        @click="addBtnClick"
         >등록</basic-button
       >
     </div>
@@ -81,7 +86,7 @@ export default {
       type: Object,
       require: true
     },
-    treeType: {
+    treeSelectType: {
       type: String,
       require: true,
       defaults: "ALL"
@@ -98,18 +103,21 @@ export default {
       clickMode: "EDIT", // or addChild
       headerList: [],
       dataObject: {},
-      selectNodeName: null,
+      selectedNode: {},
       nodeName: null
     };
   },
   computed: {
+    ...mapGetters("constants", ["CONSTANTS"]),
     ...mapGetters("tree", ["categoryObject", "selectedNodeList"]),
     notyTitle() {
       return (
         "[" +
-        this.selectNodeName +
+        this.selectedNode[this.treeKey.nodeName] +
         "] " +
-        (this.clickMode === "edit" ? "노드 수정" : "하위 노드 추가")
+        (this.clickMode === this.CONSTANTS.TREE.CLICK_MODE.EDIT
+          ? "노드 수정"
+          : "하위 노드 추가")
       );
     }
   },
@@ -123,7 +131,12 @@ export default {
   },
   watch: {},
   methods: {
-    ...mapActions("tree", ["getCategoryObject", "setSelectedNodeList"]),
+    ...mapActions("tree", [
+      "getCategoryObject",
+      "setSelectedNodeList",
+      "updateNodeInfo",
+      "addNewChild"
+    ]),
     checkboxChange(checked) {
       this.checked = checked;
     },
@@ -139,12 +152,26 @@ export default {
     },
     editNode({ clickMode, nodeData }) {
       this.clickMode = clickMode;
-      this.selectNodeName = nodeData[this.treeKey.nodeName];
+      this.selectedNode = nodeData;
     },
-    addChildren() {
-      console.log(
-        this.selectNodeName + ", " + this.clickMode + ", " + this.nodeName
-      );
+    async addBtnClick() {
+      let params = {};
+
+      if (this.clickMode === this.CONSTANTS.TREE.CLICK_MODE.EDIT) {
+        // node edit
+        params[this.treeKey.parentIdText] = this.selectedNode.parentIdText;
+        params[this.treeKey.nodeIdText] = this.selectedNode.nodeIdText;
+        params[this.treeKey.nodeName] = this.nodeName;
+
+        await this.updateNodeInfo(params);
+      } else {
+        // add child
+        params[this.treeKey.parentIdText] = this.selectedNode.nodeIdText;
+        params[this.treeKey.nodeIdText] = this.selectedNode.nodeIdText;
+        params[this.treeKey.nodeName] = this.nodeName;
+
+        await this.addNewChild(params);
+      }
     },
     updateFormData(formData) {
       // 만약 노드 수정/하위노드 추가 form에서 복수개의 parmeter를 전달받아야 한다면, Object 형태로 구현해야 함.

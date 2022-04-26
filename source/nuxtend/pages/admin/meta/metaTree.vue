@@ -7,8 +7,8 @@
       :use-single-checkbox="true"
       :checkbox-label="checkboxLabel"
       :tree-key="treeKey"
-      tree-type="ALL"
-      tree-mode="EDITOR"
+      :tree-mode="CONSTANTS.TREE.TREE_MODE.VIEW"
+      :tree-select-type="CONSTANTS.TREE.TREE_TYPE.ALL"
     >
     </complex-tree>
   </div>
@@ -16,6 +16,7 @@
 
 <script type="text/javascript">
 import complexTree from "@/components/group/complex-tree";
+import { mapGetters } from "vuex";
 
 export default {
   name: "admin-tree",
@@ -27,13 +28,14 @@ export default {
       treeKey: {
         nodeName: "node_name", // node title
         nodeIdText: "node_id", // node key
-        parentIdText: "parent_id", // parent key
-        depth: "depth" // node depth
+        parentIdText: "parent_id" // parent key
       }
     };
   },
   props: {},
-  computed: {},
+  computed: {
+    ...mapGetters("constants", ["CONSTANTS"])
+  },
   components: { complexTree },
   watch: {},
   methods: {}

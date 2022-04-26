@@ -33,6 +33,20 @@ export const state = () => ({
     },
     MSG: {
       PLACEHOLDER: "값을 입력해 주세요."
+    },
+    TREE: {
+      TREE_TYPE: {
+        ALL: "ALL",
+        LEAF: "LEAF"
+      },
+      TREE_MODE: {
+        VIEW: "VIEW",
+        EDITOR: "EDITOR"
+      },
+      CLICK_MODE: {
+        EDIT: "edit",
+        ADD_CHILD: "addChild"
+      }
     }
   })
 });

@@ -41,7 +41,7 @@ export const actions = {
   getCategoryObject({ commit }, param) {
     Vue.prototype.$api.get(param.api).then((d) => {
       // ArrayList 형태의 데이터를, children 형태의 데이터로 변경처리한다.
-      let depthHelper = {};
+      let jsonHelper = {};
 
       // 조회한 목록을 역순으로 설정한 후에, 끝에서 처음까지 돌면서 부모별로 자식들을 Object-array로 정리해둔다.
       // 원래 데이터와 분리하기 위해 깊은 복사를 진행한다.
@@ -54,31 +54,28 @@ export const actions = {
         objectByKey[el[param.nodeIdText]] = el;
 
         if (
-          Object.prototype.hasOwnProperty.call(
-            depthHelper,
-            el[param.nodeIdText]
-          )
+          Object.prototype.hasOwnProperty.call(jsonHelper, el[param.nodeIdText])
         ) {
-          el.children = depthHelper[el[param.nodeIdText]];
-          delete depthHelper[el[param.nodeIdText]];
+          el.children = jsonHelper[el[param.nodeIdText]];
+          delete jsonHelper[el[param.nodeIdText]];
         }
 
         if (
           !Object.prototype.hasOwnProperty.call(
-            depthHelper,
+            jsonHelper,
             el[param.parentIdText]
           )
         ) {
-          depthHelper[el[param.parentIdText]] = [];
+          jsonHelper[el[param.parentIdText]] = [];
         }
-        depthHelper[el[param.parentIdText]].push(el);
+        jsonHelper[el[param.parentIdText]].push(el);
       });
 
       objectByKey.subscribed = true;
 
       // root는 무조건 1개만 나오는 데이터로 가정.
       // db에서 조회한 데이터의 첫번째 row가 root node 로, 이 id를 기준으로 데이터가 정제되어 있다.
-      let newD = depthHelper[d[0][param.nodeIdText]][0];
+      let newD = jsonHelper[d[0][param.nodeIdText]][0];
       newD.subscribed = true;
       commit("setCategoryObject", newD);
       commit("setCategoryObjectByKey", objectByKey);
@@ -87,5 +84,13 @@ export const actions = {
   setSelectedNodeList({ commit }, param) {
     param.subscribed = true;
     commit("setSelectedNodeList", param);
+  },
+
+  updateNodeInfo({ commit }, param) {
+    console.log(param);
+  },
+
+  addNewChild({ commit }, param) {
+    console.log(param);
   }
 };

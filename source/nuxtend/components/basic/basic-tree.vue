@@ -3,7 +3,7 @@
     <div>
       <span v-if="isOpen" @click="toggle">[{{ open ? "-" : "+" }}]</span>
 
-      <template v-if="treeMode === 'EDITOR'">
+      <template v-if="treeMode === CONSTANTS.TREE.TREE_MODE.EDITOR">
         <span
           :class="[spanSelected ? 'span-selected' : '']"
           @click="spanEdit(treeData)"
@@ -29,7 +29,7 @@
     <ul v-if="isOpen" v-show="open">
       <item
         v-for="(data, index) in treeData.children"
-        :tree-type="treeType"
+        :tree-select-type="treeSelectType"
         :checked="checked"
         :treeData="data"
         :key="index"
@@ -59,7 +59,7 @@ export default {
      * LEAF : You can select ONLY Leaf NODE. AND available  checkbox that name is "auto select parent Node.".
      * @values ALL, LEAF
      */
-    treeType: {
+    treeSelectType: {
       type: String,
       require: false,
       defaults: "ALL" // ALL, LEAF
@@ -105,6 +105,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters("constants", ["CONSTANTS"]),
     ...mapGetters("tree", ["categoryObjectByKey"]),
     isOpen() {
       return this.treeData.children && this.treeData.children.length;
@@ -123,9 +124,6 @@ export default {
     this.setParentIds();
   },
   methods: {
-    clickOn() {
-      console.log("clickOn");
-    },
     setParentIds() {
       const parentId = this.treeData[this.parentIdText];
       if (parentId === undefined || this.parentsIds === undefined) {
@@ -137,7 +135,7 @@ export default {
       this.open = !this.open;
     },
     spanClick(treeNode) {
-      if (this.treeType === "LEAF") {
+      if (this.treeSelectType === this.CONSTANTS.TREE.TREE_TYPE.LEAF) {
         // LEAF 일 경우, 가장 마지막 노드만 선택 가능함.
 
         if (Object.prototype.hasOwnProperty.call(treeNode, "children")) {
@@ -180,13 +178,13 @@ export default {
     },
     spanEdit(treeData) {
       this.setEditForm({
-        clickMode: "edit",
+        clickMode: this.CONSTANTS.TREE.CLICK_MODE.EDIT,
         nodeData: treeData
       });
     },
     addChildren(treeData) {
       this.setEditForm({
-        clickMode: "addChild",
+        clickMode: this.CONSTANTS.TREE.CLICK_MODE.ADD_CHILD,
         nodeData: treeData
       });
     },
@@ -206,10 +204,6 @@ ul {
   margin: 0.15rem 0.25rem;
   background: white;
   padding: 0.1rem 0.25rem;
-}
-
-.tree-buttons {
-  display: inline-flex;
 }
 span.span-selected {
   background-color: red;
