@@ -37,7 +37,9 @@
                 buttonCss="link-button"
                 underline
                 hoverColor
-                @click="keyClick(data[rowKey], keyActionText[h['column_name']])"
+                @click.native.stop="
+                  keyClick(data[rowKey], keyActionText[h['column_name']])
+                "
                 >{{ data[h["column_name"]] }}</basic-button
               >
             </template>

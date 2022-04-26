@@ -3,8 +3,19 @@
     <h5>데이터 통합검색</h5>
 
     <!-- top-->
-    <div>검색바 component</div>
-    <div>추천검색어 component</div>
+    <div class="search-box">
+      <div>검색바 component</div>
+      <basic-search-box @search="search" :tagData="tagData" />
+      <div>추천검색어 component</div>
+      <recommend-search-tag
+        tagLabel="추천검색어"
+        :tagList="tagList"
+        :hashTagUse="true"
+        :cancelButtonUse="true"
+        :cursorPointer="true"
+        @tagClick="tagClick"
+      ></recommend-search-tag>
+    </div>
     <div>결과 component</div>
     <div>필터 component</div>
     <!-- bottom-->
@@ -27,21 +38,30 @@
 </template>
 
 <script type="text/javascript">
+import BasicSearchBox from "@/components/basic/basic-search-box.vue";
+import RecommendSearchTag from "@/components/basic/recommend-search-tag.vue";
+
 export default {
   name: "app-search-full",
   extends: {},
-  props: {
-    bar: {},
-    foo: {},
-    fooBar: {}
-  },
+  props: {},
   data() {
-    return {};
+    return {
+      tagList: ["test01", "test02", "test03", "test04", "test05"],
+      tagData: ""
+    };
   },
   computed: {},
-  components: {},
+  components: { BasicSearchBox, RecommendSearchTag },
   watch: {},
-  methods: {},
+  methods: {
+    search(searchWord) {
+      alert(searchWord);
+    },
+    tagClick(tagName) {
+      this.tagData = tagName;
+    }
+  },
   created() {}
 };
 </script>
