@@ -31,7 +31,12 @@
     <div>필터 component</div>
     <!-- bottom-->
 
-    <div>tab component</div>
+    <h3>tab component</h3>
+    <basic-tab-menu
+      :menuList="menuList"
+      @currentTabData="currentTabData"
+    ></basic-tab-menu>
+
     <!-- bottom-left-->
     <div>검색바 component (radio가 포함된)</div>
 
@@ -52,6 +57,7 @@
 import BasicSearchBar from "@/components/basic/basic-search-bar.vue";
 import RecommendSearchTag from "@/components/basic/recommend-search-tag.vue";
 import SearchResultBox from "@/components/basic/search-result-box.vue";
+import BasicTabMenu from "@/components/basic/basic-tab-menu.vue";
 
 export default {
   name: "app-search-full",
@@ -62,11 +68,22 @@ export default {
       tagList: ["test01", "test02", "test03", "test04", "test05"],
       searchKeyword: "",
       numberOfData: null,
-      searchResultSuccess: false
+      searchResultSuccess: false,
+      menuList: [
+        { menuName: "전체", data: {}, numberOfPosts: 126 },
+        { menuName: "내부데이터", data: {}, numberOfPosts: 777 },
+        { menuName: "CKAN", data: {}, numberOfPosts: 99 },
+        { menuName: "분원데이터", data: {}, numberOfPosts: 456 }
+      ]
     };
   },
   computed: {},
-  components: { BasicSearchBar, RecommendSearchTag, SearchResultBox },
+  components: {
+    BasicSearchBar,
+    RecommendSearchTag,
+    SearchResultBox,
+    BasicTabMenu
+  },
   watch: {},
   methods: {
     searchClick(inputData) {
@@ -86,6 +103,9 @@ export default {
       }
 
       this.searchResultSuccess = true;
+    },
+    currentTabData(data) {
+      console.log(data);
     }
   },
   created() {}
