@@ -21,7 +21,7 @@ export function storePlugin(store) {
     if (process.env.NODE_ENV === "development") {
       const type = mutation.type;
       const apiResponse = mutation.payload;
-      store.dispatch("common/setDevJsonObject", {
+      store.dispatch("defaults/common/setDevJsonObject", {
         type: type,
         payload: apiResponse
       });
