@@ -3,7 +3,7 @@
     <basic-label forProperty="">{{ tagLabel }}</basic-label>
     <search-tag
       :tagList="tagList"
-      :hashTagUse="hashTagUse"
+      :previousText="previousText"
       :cancelButtonUse="cancelButtonUse"
       :cursorPointer="cursorPointer"
       @tagClick="tagClick"
@@ -30,10 +30,9 @@ export default {
       type: Array,
       require: true
     },
-    hashTagUse: {
-      type: Boolean,
-      require: false,
-      default: false
+    previousText: {
+      type: String,
+      require: false
     },
     cancelButtonUse: {
       type: Boolean,

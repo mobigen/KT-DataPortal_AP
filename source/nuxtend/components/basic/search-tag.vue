@@ -2,7 +2,7 @@
   <div id="searchTag">
     <template v-for="(data, i) in tagList">
       <div :class="['tag-item', { cursorPointer }]" @click="tagClick(data)">
-        <span class="hash-tag" v-if="hashTagUse">#</span>
+        <span class="prev-text">{{ previousText }}</span>
         <span>{{ data }}</span>
         <div @click.stop v-if="cancelButtonUse">
           <basic-button
@@ -34,10 +34,9 @@ export default {
       type: Array,
       require: true
     },
-    hashTagUse: {
-      type: Boolean,
-      require: false,
-      default: false
+    previousText: {
+      type: String,
+      require: false
     },
     cancelButtonUse: {
       type: Boolean,
@@ -75,7 +74,7 @@ export default {
     border-radius: 20px;
     padding: 0px 10px;
     margin-right: 10px;
-    .hash-tag {
+    .prev-text {
       padding: 4px 10px;
       margin-right: -15px;
     }

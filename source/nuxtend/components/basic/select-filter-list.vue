@@ -4,7 +4,7 @@
       <basic-label forProperty="">{{ data["label"] }}</basic-label>
       <search-tag
         :tagList="data['selectFilterList']"
-        :hashTagUse="hashTagUse"
+        :previousText="previousText"
         :cancelButtonUse="cancelButtonUse"
         :cursorPointer="cursorPointer"
         @tagClick="filterClick"
@@ -36,10 +36,9 @@ export default {
       type: Array,
       require: true
     },
-    hashTagUse: {
-      type: Boolean,
-      require: false,
-      default: false
+    previousText: {
+      type: String,
+      require: false
     },
     cancelButtonUse: {
       type: Boolean,

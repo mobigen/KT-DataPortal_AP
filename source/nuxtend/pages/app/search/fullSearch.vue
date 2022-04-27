@@ -10,7 +10,7 @@
       <recommend-search-tag
         tagLabel="추천검색어"
         :tagList="tagList"
-        :hashTagUse="true"
+        previousText="#"
         :cancelButtonUse="false"
         :cursorPointer="true"
         @tagClick="tagClick"
@@ -31,8 +31,7 @@
     <h3>필터 component</h3>
     <select-filter-list
       :filterData="filterData"
-      :hasTagUse="false"
-      :hashTagUse="false"
+      previousText=""
       :cancelButtonUse="true"
       :cursorPointer="false"
       @filterClick=""
