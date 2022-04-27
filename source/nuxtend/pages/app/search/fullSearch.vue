@@ -11,7 +11,7 @@
         tagLabel="추천검색어"
         :tagList="tagList"
         :hashTagUse="true"
-        :cancelButtonUse="true"
+        :cancelButtonUse="false"
         :cursorPointer="true"
         @tagClick="tagClick"
       ></recommend-search-tag>
@@ -28,7 +28,17 @@
       </search-result-box>
     </div>
 
-    <div>필터 component</div>
+    <h3>필터 component</h3>
+    <select-filter-list
+      :filterData="filterData"
+      :hasTagUse="false"
+      :hashTagUse="false"
+      :cancelButtonUse="true"
+      :cursorPointer="false"
+      @filterClick=""
+      @selectFilterReset="selectFilterReset"
+    ></select-filter-list>
+
     <!-- bottom-->
 
     <h3>tab component</h3>
@@ -58,6 +68,7 @@ import BasicSearchBar from "@/components/basic/basic-search-bar.vue";
 import RecommendSearchTag from "@/components/basic/recommend-search-tag.vue";
 import SearchResultBox from "@/components/basic/search-result-box.vue";
 import BasicTabMenu from "@/components/basic/basic-tab-menu.vue";
+import SelectFilterList from "@/components/basic/select-filter-list.vue";
 
 export default {
   name: "app-search-full",
@@ -74,6 +85,21 @@ export default {
         { menuName: "내부데이터", data: {}, numberOfPosts: 777 },
         { menuName: "CKAN", data: {}, numberOfPosts: 99 },
         { menuName: "분원데이터", data: {}, numberOfPosts: 456 }
+      ],
+      filterData: [
+        {
+          label: "카테고리",
+          selectFilterList: ["자동차부품", "자동차제조", "화물운송"]
+        },
+        {
+          label: "제공기관",
+          selectFilterList: ["국토교통부", "국토교통부", "국토교통부"]
+        },
+        { label: "데이터 타입", selectFilterList: ["파일"] },
+        {
+          label: "트리뷰",
+          selectFilterList: ["자동차부품 > 센장 > 자율차센서"]
+        }
       ]
     };
   },
@@ -82,7 +108,8 @@ export default {
     BasicSearchBar,
     RecommendSearchTag,
     SearchResultBox,
-    BasicTabMenu
+    BasicTabMenu,
+    SelectFilterList
   },
   watch: {},
   methods: {
@@ -106,6 +133,11 @@ export default {
     },
     currentTabData(data) {
       console.log(data);
+    },
+    selectFilterReset() {
+      this.filterData.forEach((data, i) => {
+        data.selectFilterList = [];
+      });
     }
   },
   created() {}

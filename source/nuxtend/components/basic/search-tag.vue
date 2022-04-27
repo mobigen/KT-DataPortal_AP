@@ -6,7 +6,7 @@
         <span>{{ data }}</span>
         <div @click.stop v-if="cancelButtonUse">
           <basic-button
-            :componentId="data"
+            :componentId="'tag_' + data + '_' + i"
             buttonCss="icon-button"
             :underline="false"
             :hoverColor="false"
@@ -55,11 +55,8 @@ export default {
   watch: {},
   methods: {
     cancel(componentId) {
-      this.tagList.forEach((data, i) => {
-        if (data === componentId) {
-          this.tagList.splice(i, 1);
-        }
-      });
+      const index = componentId.split("_").splice(-1);
+      this.tagList.splice(index, 1);
     },
     tagClick(tagName) {
       this.$emit("tagClick", tagName);
