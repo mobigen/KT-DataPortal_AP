@@ -2,7 +2,7 @@
   <div id="searchBox">
     <text-input
       labelName=""
-      :inputData="tagData"
+      :inputData="searchData"
       placeholder="검색어를 입력해주세요"
       @input="setInputData"
       @enterEvent="search"
@@ -23,7 +23,7 @@
 import TextInput from "@/components/basic/text-input.vue";
 import BasicButton from "@/components/basic/basic-button.vue";
 export default {
-  name: "basic-search-box",
+  name: "basic-search-bar",
   extends: {},
   data() {
     return {
@@ -31,12 +31,19 @@ export default {
     };
   },
   props: {
-    tagData: {
+    searchKeyword: {
       type: String,
       require: false
     }
   },
-  computed: {},
+  computed: {
+    searchData: {
+      get() {
+        this.inputData = this.searchKeyword;
+        return this.searchKeyword;
+      }
+    }
+  },
   components: { TextInput, BasicButton },
   watch: {},
   methods: {
@@ -46,7 +53,8 @@ export default {
     setInputData(labelName, input) {
       this.inputData = input;
     }
-  }
+  },
+  created() {}
 };
 </script>
 

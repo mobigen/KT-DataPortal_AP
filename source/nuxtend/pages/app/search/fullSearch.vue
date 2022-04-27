@@ -1,12 +1,12 @@
 <template lang="html">
   <div>
     <h5>데이터 통합검색</h5>
-
     <!-- top-->
     <div class="search-box">
-      <div>검색바 component</div>
-      <basic-search-box @search="search" :tagData="tagData" />
-      <div>추천검색어 component</div>
+      <h3>검색바 component</h3>
+      <basic-search-bar @search="searchClick" :searchKeyword="searchKeyword" />
+
+      <h3>추천검색어 component</h3>
       <recommend-search-tag
         tagLabel="추천검색어"
         :tagList="tagList"
@@ -15,12 +15,28 @@
         :cursorPointer="true"
         @tagClick="tagClick"
       ></recommend-search-tag>
+
+      <h3>결과 component</h3>
+      <search-result-box :searchResultSuccess="searchResultSuccess">
+        <template v-slot:resultSuccessTrueText>
+          <span>"{{ searchKeyword }}"</span> 검색결과, 총 데이터
+          <span>{{ numberOfData }}</span> 입니다.
+        </template>
+        <template v-slot:resultSuccessFalseText>
+          <span>검색 결과가 없습니다.</span>
+        </template>
+      </search-result-box>
     </div>
-    <div>결과 component</div>
+
     <div>필터 component</div>
     <!-- bottom-->
 
-    <div>tab component</div>
+    <h3>tab component</h3>
+    <basic-tab-menu
+      :menuList="menuList"
+      @currentTabData="currentTabData"
+    ></basic-tab-menu>
+
     <!-- bottom-left-->
     <div>검색바 component (radio가 포함된)</div>
 
@@ -38,8 +54,10 @@
 </template>
 
 <script type="text/javascript">
-import BasicSearchBox from "@/components/basic/basic-search-box.vue";
+import BasicSearchBar from "@/components/basic/basic-search-bar.vue";
 import RecommendSearchTag from "@/components/basic/recommend-search-tag.vue";
+import SearchResultBox from "@/components/basic/search-result-box.vue";
+import BasicTabMenu from "@/components/basic/basic-tab-menu.vue";
 
 export default {
   name: "app-search-full",
@@ -48,18 +66,46 @@ export default {
   data() {
     return {
       tagList: ["test01", "test02", "test03", "test04", "test05"],
-      tagData: ""
+      searchKeyword: "",
+      numberOfData: null,
+      searchResultSuccess: false,
+      menuList: [
+        { menuName: "전체", data: {}, numberOfPosts: 126 },
+        { menuName: "내부데이터", data: {}, numberOfPosts: 777 },
+        { menuName: "CKAN", data: {}, numberOfPosts: 99 },
+        { menuName: "분원데이터", data: {}, numberOfPosts: 456 }
+      ]
     };
   },
   computed: {},
-  components: { BasicSearchBox, RecommendSearchTag },
+  components: {
+    BasicSearchBar,
+    RecommendSearchTag,
+    SearchResultBox,
+    BasicTabMenu
+  },
   watch: {},
   methods: {
-    search(searchWord) {
-      alert(searchWord);
+    searchClick(inputData) {
+      this.searchKeyword = inputData.trim();
+      this.search();
     },
     tagClick(tagName) {
-      this.tagData = tagName;
+      this.searchKeyword = tagName;
+      this.search();
+    },
+    search() {
+      this.numberOfData = 126;
+
+      if (this.searchKeyword.trim() === "") {
+        this.searchResultSuccess = false;
+        return;
+      }
+
+      this.searchResultSuccess = true;
+    },
+    currentTabData(data) {
+      console.log(data);
     }
   },
   created() {}
