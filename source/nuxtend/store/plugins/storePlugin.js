@@ -26,55 +26,7 @@ export function storePlugin(store) {
         payload: apiResponse
       });
     }
-
-    if (
-      /**
-       * RebuildBody Use Only GRID(LIST)
-       * useRebuildBody를 가지고 있고, useRebuildBody가 true인 값만 rebuild.
-       */
-      Object.prototype.hasOwnProperty.call(
-        mutation.payload,
-        "useRebuildBody"
-      ) &&
-      mutation.payload.useRebuildBody
-    ) {
-      // console.log("mutation subscribed");
-
-      let obj = {};
-      let newBody = [];
-      const _header = mutation.payload.header;
-      let defaultColumnName = "column_name";
-      if (Object.keys(_header[0]).indexOf("column_name") === -1) {
-        // column_name이 default가 아닌 경우, kor_name으로 임의처리한다.
-        defaultColumnName = state.constants.constants.DEFAULT_NAME_COLUMN;
-      }
-
-      mutation.payload.body.forEach((b) => {
-        obj = {
-          rowId: b.rowid
-        };
-        _header.forEach((h, i) => {
-          obj[h[defaultColumnName]] = b.data[i];
-        });
-        newBody.push(obj);
-      });
-
-      let newHeader = [];
-
-      mutation.payload.header.forEach((h) => {
-        newHeader.push({ column_name: h[defaultColumnName] });
-      });
-
-      const d = {
-        header: newHeader,
-        body: newBody,
-        subscribed: true
-      };
-
-      store.commit(mutation.type, d);
-    } else {
-      mutation.payload.subscribed = true;
-      store.commit(mutation.type, mutation.payload);
-    }
+    mutation.payload.subscribed = true;
+    store.commit(mutation.type, mutation.payload);
   });
 }

@@ -30,9 +30,8 @@ public class SQLHeaderAdvice {
         String tableName = sqlHeader.tableName();
         Object header = sqlViewMapper.getViewTableColumn(tableName);
 
-        boolean useRebuildBody = sqlHeader.useRebuildBody();
         Object body = point.proceed();
 
-        return new SQLResult(header, body, useRebuildBody);
+        return new SQLResult(header, body);
     }
 }

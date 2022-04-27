@@ -5,6 +5,15 @@
     <div>
       <h3>simple-table</h3>
 
+      <basic-button
+        componentId=""
+        buttonCss="text-button"
+        :underline="false"
+        :hoverColor="false"
+        @click="reloadViewTable"
+        >viewTableReload</basic-button
+      >
+
       <basic-table
         componentId=""
         :headerList="headerList"
@@ -54,12 +63,18 @@ export default {
   components: { BasicTable, BasicButton },
   watch: {},
   methods: {
-    ...mapActions("bizMeta", ["getMetaMapList"]),
+    ...mapActions("bizMeta", ["getMetaMapList", "viewReload"]),
     editTable() {
       this.$router.push({ path: "/superAdmin/meta/metaMapModify" });
     },
     keyClick(rowKey, keyAction) {
       alert("rowKey: " + rowKey + ",keyAction: " + keyAction);
+    },
+    async reloadViewTable() {
+      const returnVal = await this.viewReload();
+      alert(
+        returnVal ? "변경된 metaname 정보로 viewTable이 재설정 됨." : "Error"
+      );
     }
   },
   created() {

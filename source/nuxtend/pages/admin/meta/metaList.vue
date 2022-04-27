@@ -17,7 +17,7 @@
         componentId=""
         :headerList="bizMetaList.header"
         :dataList="bizMetaList.body"
-        rowKey="rowId"
+        rowKey="biz_dataset_id"
         :serialNumUse="false"
         serialNumText=""
         :tableButtonUse="true"

@@ -8,7 +8,7 @@ export const state = () => ({
   metaNameDetail: {},
   bizMetaDetail: {},
   metaMapList: [],
-  bizMetaForm: [],
+  bizMetaForm: []
 });
 
 export const getters = {
@@ -35,7 +35,7 @@ export const getters = {
   },
   metaMapList(state) {
     return state.metaMapList;
-  },
+  }
 };
 export const mutations = {
   setMetaNameList(state, data) {
@@ -61,7 +61,7 @@ export const mutations = {
   },
   setMetaMapList(state, data) {
     state.metaMapList = data;
-  },
+  }
 };
 export const actions = {
   getMetaNameList({ _, commit }) {
@@ -111,6 +111,15 @@ export const actions = {
   },
   getBizMetaList({ commit }) {
     Vue.prototype.$api.get("/api/meta/getBizMetaList").then((d) => {
+      d.useRebuildBody = true;
+
+      // header rebuild
+      let newHeader = [];
+      d.header.forEach((_h) => {
+        newHeader.push({ column_name: _h.eng_name });
+      });
+      d.header = newHeader;
+
       commit("setBizMetaList", d);
     });
   },
@@ -130,6 +139,7 @@ export const actions = {
     await Vue.prototype.$api
       .get("/api/meta/getBizMetaDetail?datasetId=" + rowId)
       .then((d) => {
+        d.useRebuildBody = true;
         commit("setBizMetaDetail", d);
       });
   },
@@ -187,5 +197,13 @@ export const actions = {
     Vue.prototype.$api.post("/remote/remote_command").then((d) => {
       console.log(d);
     });
+  },
+  async viewReload({}) {
+    let response = null;
+    await Vue.prototype.$api.get("/api/meta/setViewTable").then((d) => {
+      response = d;
+    });
+
+    return response.result === "success";
   }
 };

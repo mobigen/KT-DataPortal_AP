@@ -40,4 +40,10 @@ public interface MetaManagementMapper {
     int deleteBizMeta(String bizDatasetId);
 
     int updateListOfBizMeta(Object bizMeta);
+
+    void dropBizMetaViewTable();
+
+    ArrayList<Object> getMetaNameForView();
+
+    void createBizViewTable(String sql);
 }

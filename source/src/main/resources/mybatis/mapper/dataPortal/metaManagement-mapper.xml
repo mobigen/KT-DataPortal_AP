@@ -10,11 +10,11 @@
                show_order,
                name_id,
                (case
-                    when type=0 then 'text'
-                    when type=1 then 'int'
-                    when type=2 then 'binary'
-                end
-               ) as type
+                    when type = 0 then 'text'
+                    when type = 1 then 'int'
+                    when type = 2 then 'binary'
+                   end
+                   ) as type
         from metasch.tb_biz_meta_name
         where name_id = #{nameId};
     </select>
@@ -25,11 +25,11 @@
                show_order,
                name_id,
                (case
-                    when type=0 then 'text'
-                    when type=1 then 'int'
-                    when type=2 then 'binary'
-                end
-               ) as type
+                    when type = 0 then 'text'
+                    when type = 1 then 'int'
+                    when type = 2 then 'binary'
+                   end
+                   ) as type
         FROM tb_biz_meta_name
         order by name_id;
     </select>
@@ -41,14 +41,14 @@
                tbmn.show_order,
                tbmn.name_id,
                case
-                    when tbmn.type=0 then 'text'
-                    when tbmn.type=1 then 'int'
-                    when tbmn.type=2 then 'binary'
-               end as type,
-               case 
-                    when (select tbmm.name_id from tb_biz_meta_map tbmm where tbmn.name_id = tbmm.name_id) is null then 0
-                    else 1
-               end as use_meta
+                   when tbmn.type = 0 then 'text'
+                   when tbmn.type = 1 then 'int'
+                   when tbmn.type = 2 then 'binary'
+                   end as type,
+               case
+                   when (select tbmm.name_id from tb_biz_meta_map tbmm where tbmn.name_id = tbmm.name_id) is null then 0
+                   else 1
+                   end as use_meta
         from tb_biz_meta_name tbmn
         order by tbmn.name_id;
     </select>
@@ -67,17 +67,15 @@
         select T.biz_dataset_id      as rowId,
                array_agg(T.kor_name) as kor_name,
                array_agg(T.eng_name) as eng_name,
-               array_agg(T.type) as type,
+               array_agg(T.type)     as type,
                array_agg(T.item_val) as data,
                array_agg(T.item_id)  as columnKey
-        from (
-                 select biz_dataset_id, tbm.item_id, tbm.item_val, tbmm.name_id, kor_name, eng_name, type
-                 from metasch.tb_biz_meta tbm
-                          right join metasch.tb_biz_meta_map tbmm on tbm.item_id = tbmm.item_id
-                          left join metasch.tb_biz_meta_name tbmn on tbmm.name_id = tbmn.name_id
-                 where biz_dataset_id = #{datasetId}
-                 order by biz_dataset_id, item_id
-             ) T
+        from (select biz_dataset_id, tbm.item_id, tbm.item_val, tbmm.name_id, kor_name, eng_name, type
+              from metasch.tb_biz_meta tbm
+                       right join metasch.tb_biz_meta_map tbmm on tbm.item_id = tbmm.item_id
+                       left join metasch.tb_biz_meta_name tbmn on tbmm.name_id = tbmn.name_id
+              where biz_dataset_id = #{datasetId}
+              order by biz_dataset_id, item_id) T
         group by biz_dataset_id
         order by biz_dataset_id;
 
@@ -85,93 +83,89 @@
 
     <!-- meta form list 목록 조회-->
     <select id="getBizMetaList" resultType="java.util.Map">
-        select T.biz_dataset_id      as rowId,
-               array_agg(T.item_val) as data,
-               array_agg(T.item_id)  as columnKey
-        from (
-                 select biz_dataset_id, tbm.item_id, tbm.item_val, tbmm.name_id, kor_name, eng_name
-                 from metasch.tb_biz_meta tbm
-                          right join metasch.tb_biz_meta_map tbmm on tbm.item_id = tbmm.item_id
-                          left join metasch.tb_biz_meta_name tbmn on tbmm.name_id = tbmn.name_id
-                 order by biz_dataset_id, item_id
-             ) T
-        group by biz_dataset_id
-        order by biz_dataset_id;
+        select *
+        from metasch.v_biz_meta_wrap
+        ;
     </select>
 
     <!-- metaName 조회 -->
     <select id="getMetaName" parameterType="String" resultType="java.util.Map">
-    	select *
-    	from tb_biz_meta_name tbmn
-    	where name_id = #{nameId}
+        select *
+        from tb_biz_meta_name tbmn
+        where name_id = #{nameId}
     </select>
-    
+
     <!-- metaName 추가 -->
     <insert id="insertMetaName" parameterType="Object">
-    	insert into tb_biz_meta_name (kor_name, eng_name, show_order, name_id, type)
-    	values ( #{korName}, #{engName}, #{showOrder}, (select concat('i',cast(substring(max(name_id),2) as int)+1) as name_id from tb_biz_meta_name) , #{type})
+        insert into tb_biz_meta_name (kor_name, eng_name, show_order, name_id, type)
+        values (#{korName}, #{engName}, #{showOrder},
+                (select concat('i', cast(substring(max(name_id), 2) as int) + 1) as name_id from tb_biz_meta_name),
+                #{type})
     </insert>
-    
-    <!-- metaName 수정 -->
-	<update id="updateMetaName" parameterType="Object">
-		update tb_biz_meta_name
-		set kor_name = #{korName},
-			eng_name = #{engName},
-			show_order = #{showOrder},
-			type= #{type}
-		where name_id = #{nameId}
-	</update>
 
-	<!-- metaName 삭제 -->
-	<delete id="deleteMetaName" parameterType="String">
-		delete from tb_biz_meta_name
-		where name_id = #{nameId}
-	</delete>
-	
-	<!-- metaMap list 조회 -->
-	<select id="getMetaMapList" resultType="java.util.Map">
-	    select tbmn.kor_name, tbmn.eng_name, tbmm.item_id , tbmm.name_id 
-	    from tb_biz_meta_name tbmn
-	           join tb_biz_meta_map tbmm on tbmn.name_id = tbmm.name_id
-	</select>
-	
-	<!-- 다중 metaMap 추가 -->
-	<insert id="insertListOfMetaMap" parameterType="java.util.List">
-	   insert into tb_biz_meta_map (item_id, name_id)
-	   values
-	   <foreach collection="list" item="item" separator=",">
-	   ( cast(#{item.itemId} AS text), #{item.nameId})
-	   </foreach>
-	</insert>
-	
-	<!-- metaMap 모두 삭제 -->
-	<delete id="deleteAllMetaMap">
-	   truncate table tb_biz_meta_map
-	</delete>
-	
-	<!-- bizMeta 추가 -->
-	<insert id="insertListOfBizMeta" parameterType="java.util.List">
-	   insert into tb_biz_meta (biz_dataset_id, item_id, item_val)
-       values
-       <foreach collection="list" item="item" separator=",">
-       ( (select concat('m',cast(max(substring(REVERSE(substring(biz_dataset_id, 2)),4))as int)+1,'abc') as biz_dataset_id from tb_biz_meta), #{item.itemId}, #{item.itemVal})
-       </foreach>
-	</insert>
-	
-	<!-- bizMeta 삭제 -->
-	<delete id="deleteBizMeta" parameterType="String">
-	   delete from tb_biz_meta
-       where biz_dataset_id = #{bizDatasetId}
-	</delete>
-	
-	<!-- bizMeta 수정 -->
-	<update id="updateListOfBizMeta" parameterType="Object">
-       <foreach collection="dataList" item="item" separator=";">
-	   update tb_biz_meta 
-       set item_val = #{item.itemVal}
-       where biz_dataset_id= #{bizDatasetId} and item_id= #{item.itemId}
-       </foreach>
-	</update>
+    <!-- metaName 수정 -->
+    <update id="updateMetaName" parameterType="Object">
+        update tb_biz_meta_name
+        set kor_name   = #{korName},
+            eng_name   = #{engName},
+            show_order = #{showOrder},
+            type= #{type}
+        where name_id = #{nameId}
+    </update>
+
+    <!-- metaName 삭제 -->
+    <delete id="deleteMetaName" parameterType="String">
+        delete
+        from tb_biz_meta_name
+        where name_id = #{nameId}
+    </delete>
+
+    <!-- metaMap list 조회 -->
+    <select id="getMetaMapList" resultType="java.util.Map">
+        select tbmn.kor_name, tbmn.eng_name, tbmm.item_id, tbmm.name_id
+        from tb_biz_meta_name tbmn
+                 join tb_biz_meta_map tbmm on tbmn.name_id = tbmm.name_id
+    </select>
+
+    <!-- 다중 metaMap 추가 -->
+    <insert id="insertListOfMetaMap" parameterType="java.util.List">
+        insert into tb_biz_meta_map (item_id, name_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+            ( cast(#{item.itemId} AS text), #{item.nameId})
+        </foreach>
+    </insert>
+
+    <!-- metaMap 모두 삭제 -->
+    <delete id="deleteAllMetaMap">
+        truncate table tb_biz_meta_map
+    </delete>
+
+    <!-- bizMeta 추가 -->
+    <insert id="insertListOfBizMeta" parameterType="java.util.List">
+        insert into tb_biz_meta (biz_dataset_id, item_id, item_val)
+        values
+        <foreach collection="list" item="item" separator=",">
+            ( (select concat('m',cast(max(substring(REVERSE(substring(biz_dataset_id, 2)),4))as int)+1,'abc') as
+            biz_dataset_id from tb_biz_meta), #{item.itemId}, #{item.itemVal})
+        </foreach>
+    </insert>
+
+    <!-- bizMeta 삭제 -->
+    <delete id="deleteBizMeta" parameterType="String">
+        delete
+        from tb_biz_meta
+        where biz_dataset_id = #{bizDatasetId}
+    </delete>
+
+    <!-- bizMeta 수정 -->
+    <update id="updateListOfBizMeta" parameterType="Object">
+        <foreach collection="dataList" item="item" separator=";">
+            update tb_biz_meta
+            set item_val = #{item.itemVal}
+            where biz_dataset_id= #{bizDatasetId} and item_id= #{item.itemId}
+        </foreach>
+    </update>
 
 
     <!-- category 목록 조회-->
@@ -180,5 +174,29 @@
         from metasch.tb_category
         order by parent_id, node_id;
     </select>
+
+    <!--view table 생성용 meta name 정보 조회-->
+    <select id="getMetaNameForView" resultType="java.util.Map">
+        select tbmm.item_id, tbmn.kor_name, tbmn.eng_name
+        from metasch.tb_biz_meta_map tbmm
+                 left join metasch.tb_biz_meta_name tbmn on tbmn.name_id = tbmm.name_id
+        ;
+    </select>
+
+    <!--view table 삭제-->
+    <update id="dropBizMetaViewTable">
+        drop view if exists v_biz_meta_wrap
+        ;
+    </update>
+
+    <select id="createBizViewTable" parameterType="String">
+        create view metasch.v_biz_meta_wrap
+        as
+        select biz_dataset_id
+                   ${sql}
+        from metasch.tb_biz_meta
+        group by biz_dataset_id
+    </select>
+
 
 </mapper>
