@@ -35,6 +35,8 @@
       :hashTagUse="false"
       :cancelButtonUse="true"
       :cursorPointer="false"
+      @filterClick=""
+      @selectFilterReset="selectFilterReset"
     ></select-filter-list>
 
     <!-- bottom-->
@@ -87,14 +89,17 @@ export default {
       filterData: [
         {
           label: "카테고리",
-          selectList: ["자동차부품", "자동차제조", "화물운송"]
+          selectFilterList: ["자동차부품", "자동차제조", "화물운송"]
         },
         {
           label: "제공기관",
-          selectList: ["국토교통부", "국토교통부", "국토교통부"]
+          selectFilterList: ["국토교통부", "국토교통부", "국토교통부"]
         },
-        { label: "데이터 타입", selectList: ["파일"] },
-        { label: "트리뷰", selectList: ["자동차부품 > 센장 > 자율차센서"] }
+        { label: "데이터 타입", selectFilterList: ["파일"] },
+        {
+          label: "트리뷰",
+          selectFilterList: ["자동차부품 > 센장 > 자율차센서"]
+        }
       ]
     };
   },
@@ -128,6 +133,11 @@ export default {
     },
     currentTabData(data) {
       console.log(data);
+    },
+    selectFilterReset() {
+      this.filterData.forEach((data, i) => {
+        data.selectFilterList = [];
+      });
     }
   },
   created() {}
