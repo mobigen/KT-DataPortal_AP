@@ -65,7 +65,13 @@
       검색결과 요약 component (전체 몇건, sort options.. 개발 우선순위 밀림)
     </div>
     <div>검색결과 panel component</div>
-    <div>paging component</div>
+
+    <div>
+      <h5>paging component</h5>
+      <basic-pagination>
+
+      </basic-pagination>
+    </div>
   </div>
 </template>
 
@@ -76,6 +82,7 @@ import SearchResultBox from "@/components/aiPlatform/basic/search-result-box.vue
 import BasicTabMenu from "@/components/aiPlatform/basic/basic-tab-menu.vue";
 import SelectFilterList from "@/components/aiPlatform/basic/select-filter-list.vue";
 import RadioButtonSearchBar from "@/components/aiPlatform/group/radio-button-search-bar.vue";
+import BasicPagination from "@/components/aiPlatform/basic-pagination";
 
 export default {
   name: "app-search-full",
@@ -121,7 +128,8 @@ export default {
     SearchResultBox,
     BasicTabMenu,
     SelectFilterList,
-    RadioButtonSearchBar
+    RadioButtonSearchBar,
+    BasicPagination
   },
   watch: {},
   methods: {
