@@ -48,7 +48,13 @@
     ></basic-tab-menu>
 
     <!-- bottom-left-->
-    <div>검색바 component (radio가 포함된)</div>
+    <h3>검색바 component (radio가 포함된)</h3>
+    <radio-button-search-bar
+      :radioButtonList="RadioList"
+      labelName="radioSelectSearch"
+      :defaultValue="0"
+      @searchClick="radioSelectSearch"
+    ></radio-button-search-bar>
 
     <div>필터 - 체크 1단 component</div>
     <div>필터 - 체크 2단 component</div>
@@ -69,6 +75,7 @@ import RecommendSearchTag from "@/components/basic/recommend-search-tag.vue";
 import SearchResultBox from "@/components/basic/search-result-box.vue";
 import BasicTabMenu from "@/components/basic/basic-tab-menu.vue";
 import SelectFilterList from "@/components/basic/select-filter-list.vue";
+import RadioButtonSearchBar from "@/components/group/radio-button-search-bar.vue";
 
 export default {
   name: "app-search-full",
@@ -100,6 +107,10 @@ export default {
           label: "트리뷰",
           selectFilterList: ["자동차부품 > 센장 > 자율차센서"]
         }
+      ],
+      RadioList: [
+        { value: 0, label: "포함" },
+        { value: 1, label: "제외" }
       ]
     };
   },
@@ -109,7 +120,8 @@ export default {
     RecommendSearchTag,
     SearchResultBox,
     BasicTabMenu,
-    SelectFilterList
+    SelectFilterList,
+    RadioButtonSearchBar
   },
   watch: {},
   methods: {
@@ -138,6 +150,9 @@ export default {
       this.filterData.forEach((data, i) => {
         data.selectFilterList = [];
       });
+    },
+    radioSelectSearch(radioValue, searchKeyword) {
+      alert("radioValue: " + radioValue + ", searchKeyword: " + searchKeyword);
     }
   },
   created() {}

@@ -20,8 +20,8 @@
       v-else-if="formInputType === 'radio'"
       :radioButtonList="radioButtonList"
       :labelName="labelName"
-      :inputData="inputData"
-      @input="changeData"
+      :defaultValue="inputData"
+      @changeValue="changeData"
     ></radio-button>
   </div>
 </template>

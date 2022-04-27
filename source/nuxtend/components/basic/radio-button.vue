@@ -33,7 +33,7 @@ export default {
       type: Array,
       require: true
     },
-    inputData: {
+    defaultValue: {
       type: Number,
       require: true
     },
@@ -45,10 +45,10 @@ export default {
   computed: {
     radioValue: {
       get() {
-        return this.inputData;
+        return this.defaultValue;
       },
       set(newValue) {
-        this.$emit("input", this.labelName, newValue);
+        this.$emit("changeValue", this.labelName, newValue);
       }
     }
   },
