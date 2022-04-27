@@ -22,7 +22,7 @@ export default {
   },
   props: {},
   computed: {
-    ...mapGetters("common", ["devJsonObject"])
+    ...mapGetters("defaults/common", ["devJsonObject"])
   },
   components: { BasicButton },
   watch: {},

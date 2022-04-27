@@ -47,7 +47,7 @@ export default {
   props: {},
   computed: {
     ...mapGetters("bizMeta", ["bizMetaList"]),
-    ...mapGetters("constants", ["CONSTANTS"])
+    ...mapGetters("defaults/constants", ["CONSTANTS"])
   },
   components: { BasicTable, BasicButton },
   watch: {},

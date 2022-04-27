@@ -34,7 +34,7 @@ export default {
   },
   props: {},
   computed: {
-    ...mapGetters("constants", ["CONSTANTS"])
+    ...mapGetters("defaults/constants", ["CONSTANTS"])
   },
   components: { complexTree },
   watch: {},

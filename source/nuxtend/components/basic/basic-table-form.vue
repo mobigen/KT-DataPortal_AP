@@ -66,7 +66,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("constants", ["CONSTANTS"])
+    ...mapGetters("defaults/constants", ["CONSTANTS"])
   },
   components: { TextInput, NumberInput },
   watch: {},

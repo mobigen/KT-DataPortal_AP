@@ -105,13 +105,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("constants", ["CONSTANTS"]),
-    ...mapGetters("tree", ["categoryObjectByKey"]),
+    ...mapGetters("defaults/constants", ["CONSTANTS"]),
+    ...mapGetters("module/tree", ["categoryObjectByKey"]),
     isOpen() {
       return this.treeData.children && this.treeData.children.length;
     },
     spanSelected() {
-      const selectedNodeList = this.$store.getters["tree/selectedNodeList"];
+      const selectedNodeList = this.$store.getters["module/tree/selectedNodeList"];
       return Object.prototype.hasOwnProperty.call(
         selectedNodeList,
         this.treeData[this.nodeIdText]

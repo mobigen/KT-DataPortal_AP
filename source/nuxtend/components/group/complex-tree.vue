@@ -108,8 +108,8 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("constants", ["CONSTANTS"]),
-    ...mapGetters("tree", ["categoryObject", "selectedNodeList"]),
+    ...mapGetters("defaults/constants", ["CONSTANTS"]),
+    ...mapGetters("module/tree", ["categoryObject", "selectedNodeList"]),
     notyTitle() {
       return (
         "[" +
@@ -131,7 +131,7 @@ export default {
   },
   watch: {},
   methods: {
-    ...mapActions("tree", [
+    ...mapActions("module/tree", [
       "getCategoryObject",
       "setSelectedNodeList",
       "updateNodeInfo",
