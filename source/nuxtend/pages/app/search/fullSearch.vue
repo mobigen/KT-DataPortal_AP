@@ -75,7 +75,7 @@ import RecommendSearchTag from "@/components/aiPlatform/basic/recommend-search-t
 import SearchResultBox from "@/components/aiPlatform/basic/search-result-box.vue";
 import BasicTabMenu from "@/components/aiPlatform/basic/basic-tab-menu.vue";
 import SelectFilterList from "@/components/aiPlatform/basic/select-filter-list.vue";
-import RadioButtonSearchBar from "@/components/group/radio-button-search-bar.vue";
+import RadioButtonSearchBar from "@/components/aiPlatform/group/radio-button-search-bar.vue";
 
 export default {
   name: "app-search-full",
