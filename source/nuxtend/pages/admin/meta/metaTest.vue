@@ -11,7 +11,7 @@
 </template>
 
 <script type="text/javascript">
-import BasicButton from "@/components/basic/basic-button.vue";
+import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 import { mapActions } from "vuex";
 
 export default {

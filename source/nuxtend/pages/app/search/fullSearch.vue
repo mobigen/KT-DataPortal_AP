@@ -70,11 +70,11 @@
 </template>
 
 <script type="text/javascript">
-import BasicSearchBar from "@/components/basic/basic-search-bar.vue";
-import RecommendSearchTag from "@/components/basic/recommend-search-tag.vue";
-import SearchResultBox from "@/components/basic/search-result-box.vue";
-import BasicTabMenu from "@/components/basic/basic-tab-menu.vue";
-import SelectFilterList from "@/components/basic/select-filter-list.vue";
+import BasicSearchBar from "@/components/aiPlatform/basic/basic-search-bar.vue";
+import RecommendSearchTag from "@/components/aiPlatform/basic/recommend-search-tag.vue";
+import SearchResultBox from "@/components/aiPlatform/basic/search-result-box.vue";
+import BasicTabMenu from "@/components/aiPlatform/basic/basic-tab-menu.vue";
+import SelectFilterList from "@/components/aiPlatform/basic/select-filter-list.vue";
 import RadioButtonSearchBar from "@/components/group/radio-button-search-bar.vue";
 
 export default {

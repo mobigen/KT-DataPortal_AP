@@ -36,8 +36,8 @@
 
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
-import MetaForm from "@/components/meta/meta-form.vue";
-import BasicButton from "@/components/basic/basic-button.vue";
+import MetaForm from "@/components/aiPlatform/meta/meta-form.vue";
+import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 
 export default {
   name: "super-admin-metaForm",

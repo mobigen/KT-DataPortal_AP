@@ -1,5 +1,3 @@
-import Vue from "vue";
-
 export const state = () => ({
   categoryObject: {},
   selectedNodeList: {},
@@ -39,7 +37,7 @@ export const mutations = {
 
 export const actions = {
   getCategoryObject({ commit }, param) {
-    Vue.prototype.$api.get(param.api).then((d) => {
+    this.$axios.get(param.api).then((d) => {
       // ArrayList 형태의 데이터를, children 형태의 데이터로 변경처리한다.
       let jsonHelper = {};
 

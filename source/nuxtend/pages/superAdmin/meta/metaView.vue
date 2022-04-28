@@ -26,8 +26,8 @@
 
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
-import BasicButton from "@/components/basic/basic-button.vue";
-import BasicViewTable from "@/components/basic/basic-viewTable.vue";
+import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
+import BasicViewTable from "@/components/aiPlatform/basic/basic-viewTable.vue";
 
 export default {
   name: "super-admin-metaView",

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import BasicNav from "@/components/basic/basic-nav.vue";
+import BasicNav from "@/components/aiPlatform/basic/basic-nav.vue";
 export default {
   name: "layout-header",
   extends: {},
