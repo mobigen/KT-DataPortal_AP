@@ -24,6 +24,8 @@ yarn-error.log*
 ### Node.js ###
 # Dependency directories
 node_modules/
+dist/
+.nuxt/
 
 # Optional npm cache directory
 .npm
@@ -142,3 +144,4 @@ nbdist/
 
 
 ### Only this project ###
+/source/nuxtend/assets/svg/

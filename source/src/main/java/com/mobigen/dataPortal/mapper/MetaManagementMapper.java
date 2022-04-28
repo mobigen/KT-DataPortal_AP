@@ -32,4 +32,18 @@ public interface MetaManagementMapper {
     int insertListOfMetaMap(List<Object> param);
 
     void deleteAllMetaMap();
+
+    ArrayList<Object> getCategoryList();
+
+    int insertListOfBizMeta(List<Object> param);
+
+    int deleteBizMeta(String bizDatasetId);
+
+    int updateListOfBizMeta(Object bizMeta);
+
+    void dropBizMetaViewTable();
+
+    ArrayList<Object> getMetaNameForView();
+
+    void createBizViewTable(String sql);
 }

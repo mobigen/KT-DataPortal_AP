@@ -28,7 +28,7 @@ public class MetaManagementController {
 
     /**
      * MetaName 상세 정보 조회 (1건) 초기설정
-     * 
+     *
      * @param nameId
      * @return
      * @throws Exception
@@ -41,7 +41,7 @@ public class MetaManagementController {
 
     /**
      * MetaName 목록 조회 초기설정
-     * 
+     *
      * @return
      * @throws Exception
      */
@@ -53,7 +53,7 @@ public class MetaManagementController {
 
     /**
      * MetaMap 등록 유무 포함한 MetaName 목록 조회 초기설정
-     * 
+     *
      * @return
      * @throws Exception
      */
@@ -65,7 +65,7 @@ public class MetaManagementController {
 
     /**
      * MetaName 단건 조회 초기 설정
-     * 
+     *
      * @param nameId
      * @return
      * @throws Exception
@@ -78,7 +78,7 @@ public class MetaManagementController {
 
     /**
      * MetaName 등록 초기설정
-     * 
+     *
      * @param param
      * @return
      * @throws Exception
@@ -98,7 +98,7 @@ public class MetaManagementController {
 
     /**
      * MetaName 수정 초기설정
-     * 
+     *
      * @param param
      * @return
      * @throws Exception
@@ -119,7 +119,7 @@ public class MetaManagementController {
 
     /**
      * MetaName 삭제 초기설정
-     * 
+     *
      * @param nameId
      * @return
      * @throws Exception
@@ -132,7 +132,7 @@ public class MetaManagementController {
 
     /**
      * MetaMap 목록 조회 초기설정
-     * 
+     *
      * @return
      * @throws Exception
      */
@@ -144,7 +144,7 @@ public class MetaManagementController {
 
     /**
      * 다중 MetaMap 등록 초기설정
-     * 
+     *
      * @param param
      * @return
      * @throws Exception
@@ -158,7 +158,7 @@ public class MetaManagementController {
 
     /**
      * Meta 등록폼에 사용하는 Label 및 Value Type 조회 개발자 전용
-     * 
+     *
      * @return
      * @throws Exception
      */
@@ -170,7 +170,7 @@ public class MetaManagementController {
 
     /**
      * 등록이 완료된 Biz Meta 정보 상세 조회 (1건) 개발자 전용
-     * 
+     *
      * @param datasetId
      * @return
      */
@@ -182,7 +182,7 @@ public class MetaManagementController {
 
     /**
      * 등록이 완료된 Biz Meta 목록 조회 개발자 전용
-     * 
+     *
      * @return
      * @throws Exception
      */
@@ -192,18 +192,64 @@ public class MetaManagementController {
         return service.getBizMetaList();
     }
 
+    /**
+     * Biz Meta 등록 초기설정
+     *
+     * @param param
+     * @return
+     * @throws Exception
+     */
     @ResponseJsonResult
-    @PutMapping("/insertBizMeta")
-    public Object insertBizMeta(@RequestBody Map<String, Object> param) throws Exception {
-//        Map<String, Object> metaName = new HashMap<>();
-//
-//        metaName.put("korName", param.get("kor_name"));
-//        metaName.put("engName", param.get("eng_name"));
-//        metaName.put("nameId", param.get("name_id"));
-//        metaName.put("showOrder", param.get("show_order"));
-//        metaName.put("referenceTable", param.get("reference_table"));
-//        metaName.put("type", param.get("type"));
-
-        return service.updateMetaName(null);
+    @PostMapping("/insertBizMeta")
+    public Object insertBizMeta(@RequestBody List<Object> param) throws Exception {
+        return service.insertListOfBizMeta(param);
     }
+
+    /**
+     * Biz Meta 삭제 초기설정
+     *
+     * @param bizDatasetId
+     * @return
+     * @throws Exception
+     */
+    @ResponseJsonResult
+    @DeleteMapping("/deleteBizMeta")
+    public Object deleteBizMeta(@RequestParam String bizDatasetId) throws Exception {
+        return service.deleteBizMeta(bizDatasetId);
+    }
+
+    /**
+     * Biz Meta 수정 초기설정
+     *
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    @ResponseJsonResult
+    @PutMapping("/updateBizMeta")
+    public Object updateBizMeta(@RequestBody Map<String, Object> param) throws Exception {
+        Map<String, Object> bizMeta = new HashMap<>();
+
+        bizMeta.put("bizDatasetId", param.get("bizDatasetId"));
+        bizMeta.put("dataList", param.get("dataList"));
+
+        return service.updateListOfBizMeta(bizMeta);
+    }
+
+    @ResponseJsonResult
+    @GetMapping("/getCategoryList")
+    public Object getCategoryList() throws Exception {
+        return service.getCategoryList();
+    }
+
+    @ResponseJsonResult
+    @GetMapping("/setViewTable")
+    public Object setViewTable() {
+        service.setViewTable();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("result", "success");
+        return map;
+    }
+
+
 }
