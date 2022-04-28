@@ -1,8 +1,6 @@
 <template lang="html">
   <div id="admin">
-    <router-view></router-view>
-    <axios-interceptor />
-    <json-viwer />
+    <nuxt-child />
   </div>
 </template>
 

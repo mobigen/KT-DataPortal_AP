@@ -11,8 +11,8 @@
 </template>
 
 <script type="text/javascript">
-import RadioButton from "@/components/basic/radio-button.vue";
-import BasicSearchBar from "@/components/basic/basic-search-bar.vue";
+import RadioButton from "@/components/aiPlatform/basic/radio-button.vue";
+import BasicSearchBar from "@/components/aiPlatform/basic/basic-search-bar.vue";
 export default {
   name: "radio-search-bar",
   extends: {},

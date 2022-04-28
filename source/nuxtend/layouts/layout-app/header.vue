@@ -1,5 +1,6 @@
 <template>
   <div>
+    <json-viwer />
     <header>
       <div>
         <h1>Header - 모든 페이지의 제목은 구현 완료시 삭제.</h1>
@@ -71,5 +72,9 @@ header {
     width: 70%;
     margin: auto;
   }
+}
+
+body {
+  background-color: red;
 }
 </style>

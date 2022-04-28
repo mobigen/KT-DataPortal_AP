@@ -50,7 +50,7 @@ IRIS-Design-Core 저장소의 dev 브랜치를 참조해 가장 최근 커밋을
 git submodule update --remote
 From https://github.com/mobigen/IRIS-Design-Core
    bb8195d..4f903ac  dev       -> origin/dev
-Submodule path 'source/frontend/src/style-core': checked out '4f903acf48e0a5502830eeda15bdd15f6a48c60e'
+Submodule path 'source/nuxtend/assets/style-core': checked out '4f903acf48e0a5502830eeda15bdd15f6a48c60e'
 ```
 
 > **참조:** 
@@ -60,7 +60,7 @@ Submodule path 'source/frontend/src/style-core': checked out '4f903acf48e0a55028
 > 루트 디렉토리 (`IRIS-Project-Name/`)에서 아래와 같이 작성하면 style-core(IDC) 서브모듈만 콕 찝어 업데이트 할 수 있다.
 > 
 > ```bash
-> git submodule update --remote source/frontend/src/assets/style-core
+> git submodule update --remote source/nuxtend/assets/style-core
 > ```
 
 ### 변경 내용 확인하기
@@ -74,7 +74,7 @@ git diff --submodule
 위 명령어를 입력하면 새로운 화면에 아래와 같이 서브모듈로부터 업데이트 해 온 커밋명이 출력된다.
 
 ```bash
-Submodule source/frontend/src/assets/style-core bb8195d..4f903ac:
+Submodule source/nuxtend/assets/style-core bb8195d..4f903ac:
   > Merge pull request #72 from user-name/dev (커밋)
 (END)
 ```
