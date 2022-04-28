@@ -15,7 +15,7 @@
 </template>
 
 <script type="text/javascript">
-import complexTree from "@/components/group/complex-tree";
+import complexTree from "@/components/aiPlatform/group/complex-tree";
 import { mapGetters } from "vuex";
 
 export default {

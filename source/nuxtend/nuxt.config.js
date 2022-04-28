@@ -1,80 +1,128 @@
+import { resolve } from "path";
+
 export default {
+  ssr: true,
+
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
 
-  router: {
-    // router 설정이 필요할때 추가.
-    // base: "/dataPortal/"
+  // generate
+  generate: {
+    cache: false,
+    crawler: true,
+    routes: ["/"]
+    // dir: "../../src/main/resources/static"
   },
-  app: {
-    buildAssetsPath: "/_nuxt/"
-  },
-
-  // default alias
-  // alias: {
-  //   '~~': `<rootDir>`,
-  //   '@@': `<rootDir>`,
-  //   '~': `<srcDir>`,
-  //   '@': `<srcDir>`,
-  //   'assets': `<srcDir>/assets`, // (unless you have set a custom `dir.assets`)
-  //   'static': `<srcDir>/static`, // (unless you have set a custom `dir.static`)
-  // },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "nuxtend",
+    title: "KT-Dataportal",
     htmlAttrs: {
       lang: "en"
     },
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
-      { name: "format-detection", content: "telephone=no" }
+      { hid: "description", name: "description", content: "" }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    // "@/assets/main.scss"
-  ],
+  css: ["@/assets/main.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["~plugin/defaultPlugin.js", "~plugin/route.js"],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  plugins: [
+    "@/plugins/defaults.js",
+    "@/plugins/axios.js",
+    "@/plugins/route.js",
+    "@/plugins/persisted-state.client.js"
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ["@nuxtjs/dotenv"],
+  buildModules: [
+    "@nuxtjs/dotenv",
+    "@nuxtjs/proxy",
+    "@nuxtjs/axios",
+    "@nuxtjs/style-resources",
+    "@nuxtjs/svg-sprite",
+    "@nuxtjs/i18n",
+    "@nuxtjs/fontawesome"
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    "@nuxtjs/axios",
-    "@nuxtjs/proxy"
-    // [
-    //   "nuxt-svgicon",
-    //   {
-    //     sourcePath: "assets/style-core/images/icon",
-    //     targetPath: "assets/svg/bundle",
-    //     subDir: "assets/style-core/images/icon",
-    //     ext: "js",
-    //     es6: false,
-    //     tpl: "",
-    //     idSP: "_",
-    //     svgo: null, // use default vue-svgicon config
-    //     renameStyles: false,
-    //     tagName: "svgIcon",
-    //     usePolyfill: true
-    //   }
-    // ]
-  ],
+  modules: ["cookie-universal-nuxt"],
+
+  // Build Configuration: https://go.nuxtjs.dev/config-build
+  build: {
+    postcss: {
+      preset: {
+        features: {
+          "custom-properties": false
+        }
+      }
+    },
+
+    extend(config) {
+      config.resolve.alias["vue"] = "vue/dist/vue.common";
+    }
+  },
+
+  // alias
+  alias: {
+    "@component": resolve(__dirname, "./components"),
+    "@molecules": resolve(__dirname, "./components/molecules"),
+    "@organisms": resolve(__dirname, "./components/organisms")
+  },
+
+  // options
+  svgSprite: {
+    input: "./assets/style-core/images/icon"
+  },
+
   axios: {
-    // baseURL: process.env.NODE_ENV !== "production" ? "http://localhost:8888/dataPortal/api/" : "",
-    baseURL: `http://localhost:${process.env.VUE_APP_AXIOS_BASE_PORT}`,
+    baseURL:
+      process.env.ENV_TYPE === "development" ? "http://localhost:8888/" : "/",
     proxy: true
   },
+
+  i18n: {
+    locales: [
+      { code: "en", iso: "en-US", file: "en.json" },
+      { code: "ko", iso: "ko-KR", file: "ko.json" }
+    ],
+    defaultLocale: "ko",
+    vueI18n: {
+      fallbackLocale: "ko"
+    },
+    lazy: true,
+    langDir: "./locales",
+    vueI18nLoader: true
+  },
+
+  loading: {
+    color: "blue"
+  },
+
+  styleResources: {
+    scss: ["./assets/main.scss"]
+  },
+
+  fontawesome: {
+    component: "fa",
+    icons: {
+      solid: true,
+      brands: true
+    }
+  },
+
+  storybook: {
+    addons: ["@storybook/addon-actions", "@storybook/addon-controls"],
+    modules: {
+      exclude: ["svg-sprite"]
+    }
+  },
+
   proxy: {
     "/api/": {
       target: "http://localhost:8888/",
@@ -90,20 +138,5 @@ export default {
   server: {
     port: process.env.VUE_APP_AXIOS_BASE_PORT,
     listen: 80
-  },
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config) {
-      config.resolve.alias["vue"] = "vue/dist/vue.common";
-
-      // const hmrIndex = config.plugins.findIndex(
-      //   (p) => p.constructor.name === "HotModuleReplacementPlugin"
-      // );
-      // config.plugins.splice(hmrIndex, 1);
-    }
   }
 };
