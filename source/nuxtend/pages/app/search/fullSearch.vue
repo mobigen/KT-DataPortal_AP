@@ -55,8 +55,14 @@
       @searchClick="radioSelectSearch"
     ></radio-button-search-bar>
 
-    <div>필터 - 체크 1단 component</div>
-    <div>필터 - 체크 2단 component</div>
+    <h3>필터 - 체크 1단, 2단 component</h3>
+    <complex-checkbox
+      :checkboxKey="checkboxKey"
+      :complexCheckboxList="filterData"
+      :checkboxColumnCount="checkboxColumnCount"
+      @changeCheckboxList="changeCheckboxList"
+    ></complex-checkbox>
+
     <div>필터 - tree component</div>
 
     <!-- bottom-right-->
@@ -75,6 +81,7 @@ import SearchResultBox from "@/components/basic/search-result-box.vue";
 import BasicTabMenu from "@/components/basic/basic-tab-menu.vue";
 import SelectFilterList from "@/components/basic/select-filter-list.vue";
 import RadioButtonSearchBar from "@/components/group/radio-button-search-bar.vue";
+import ComplexCheckbox from "@/components/group/complex-checkbox.vue";
 
 export default {
   name: "app-search-full",
@@ -82,7 +89,13 @@ export default {
   props: {},
   data() {
     return {
-      tagList: ["test01", "test02", "test03", "test04", "test05"],
+      tagList: [
+        { itemId: 1, itemName: "tag01" },
+        { itemId: 2, itemName: "tag02" },
+        { itemId: 3, itemName: "tag03" },
+        { itemId: 4, itemName: "tag04" },
+        { itemId: 5, itemName: "tag05" }
+      ],
       searchKeyword: "",
       numberOfData: null,
       searchResultSuccess: false,
@@ -95,22 +108,63 @@ export default {
       filterData: [
         {
           label: "카테고리",
-          selectFilterList: ["자동차부품", "자동차제조", "화물운송"]
+          filterList: [
+            { itemId: 1, itemName: "자동차부품" },
+            { itemId: 2, itemName: "자동차제조" },
+            { itemId: 3, itemName: "자동차정비" },
+            { itemId: 4, itemName: "화물운송" },
+            { itemId: 5, itemName: "관제사고" },
+            { itemId: 6, itemName: "미래차산업" }
+          ],
+          selectFilterList: [
+            { itemId: 1, itemName: "자동차부품" },
+            { itemId: 2, itemName: "자동차제조" },
+            { itemId: 4, itemName: "화물운송" }
+          ]
         },
         {
           label: "제공기관",
-          selectFilterList: ["국토교통부", "국토교통부", "국토교통부"]
+          filterList: [
+            { itemId: 7, itemName: "도로교통공단" },
+            { itemId: 8, itemName: "한국지질자원연구원" },
+            { itemId: 9, itemName: "한국과학기술정보연구원" },
+            { itemId: 10, itemName: "국토교통부" },
+            { itemId: 11, itemName: "한국지질자원연구원" },
+            { itemId: 12, itemName: "도로교통공단" },
+            { itemId: 13, itemName: "한국지질자원연구원" },
+            { itemId: 14, itemName: "한국과학기술정보연구원" },
+            { itemId: 15, itemName: "도로교통공단" },
+            { itemId: 16, itemName: "한국지질자원연구원" }
+          ],
+          selectFilterList: [
+            { itemId: 10, itemName: "국토교통부" },
+            { itemId: 9, itemName: "한국과학기술정보연구원" },
+            { itemId: 7, itemName: "도로교통공단" }
+          ]
         },
-        { label: "데이터 타입", selectFilterList: ["파일"] },
+        {
+          label: "데이터 타입",
+          filterList: [
+            { itemId: 17, itemName: "데이터셋(파일)" },
+            { itemId: 18, itemName: "데이터 서비스" }
+          ],
+          selectFilterList: [{ itemId: 17, itemName: "파일" }]
+        },
         {
           label: "트리뷰",
-          selectFilterList: ["자동차부품 > 센장 > 자율차센서"]
+          filterList: [],
+          selectFilterList: []
         }
       ],
       RadioList: [
         { value: 0, label: "포함" },
         { value: 1, label: "제외" }
-      ]
+      ],
+      checkboxKey: {
+        listName: "filterList",
+        selectListName: "selectFilterList"
+      },
+      checkboxColumnCount: [1, 1, 2, 1]
     };
   },
   computed: {},
@@ -120,7 +174,8 @@ export default {
     SearchResultBox,
     BasicTabMenu,
     SelectFilterList,
-    RadioButtonSearchBar
+    RadioButtonSearchBar,
+    ComplexCheckbox
   },
   watch: {},
   methods: {
@@ -128,8 +183,8 @@ export default {
       this.searchKeyword = inputData.trim();
       this.search();
     },
-    tagClick(tagName) {
-      this.searchKeyword = tagName;
+    tagClick(tagObj) {
+      this.searchKeyword = tagObj.itemName;
       this.search();
     },
     search() {
@@ -152,6 +207,9 @@ export default {
     },
     radioSelectSearch(radioValue, searchKeyword) {
       alert("radioValue: " + radioValue + ", searchKeyword: " + searchKeyword);
+    },
+    changeCheckboxList(index, checkboxList) {
+      this.filterData[index].selectFilterList = checkboxList;
     }
   },
   created() {}

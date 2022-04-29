@@ -58,8 +58,8 @@ export default {
   components: { BasicLabel, SearchTag, BasicButton },
   watch: {},
   methods: {
-    filterClick(filterName) {
-      this.$emit("filterClick", filterName);
+    filterClick(tagObj) {
+      this.$emit("filterClick", tagObj);
     },
     selectFilterReset() {
       this.$emit("selectFilterReset");
@@ -78,8 +78,14 @@ export default {
   > div {
     display: flex;
     padding: 5px;
-    .tag-item {
-      border-radius: 0px;
+    #simple-label {
+      width: 10%;
+    }
+    #searchTag {
+      width: 90%;
+      .tag-item {
+        border-radius: 0px;
+      }
     }
   }
   .filter-reset-button {

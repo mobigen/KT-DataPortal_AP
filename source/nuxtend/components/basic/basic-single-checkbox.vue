@@ -1,18 +1,17 @@
 <template>
   <div>
     <input
-      id="single-checkbox"
+      :id="labelName"
       type="checkbox"
       :name="labelName"
-      :value="labelName"
-      @change="changeData($event)"
-    /><label for="single-checkbox">{{ checkboxLabel }}</label>
+      v-model="checkedData"
+    /><label :for="labelName">{{ checkboxLabel }}</label>
   </div>
 </template>
 
 <script type="text/javascript">
 export default {
-  name: "basic-input",
+  name: "basic-single-checkbox",
   extends: {},
   props: {
     checkboxLabel: {
@@ -22,16 +21,25 @@ export default {
     labelName: {
       type: String,
       require: true
+    },
+    checked: {
+      type: Boolean,
+      default: false
     }
   },
-  computed: {},
+  computed: {
+    checkedData: {
+      get() {
+        return this.checked;
+      },
+      set(newValue) {
+        this.$emit("changeData", newValue, this.labelName);
+      }
+    }
+  },
   components: {},
   watch: {},
-  methods: {
-    changeData(event) {
-      this.$emit("changeData", event.target.checked);
-    }
-  },
+  methods: {},
   created() {}
 };
 </script>
