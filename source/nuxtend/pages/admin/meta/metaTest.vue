@@ -7,26 +7,34 @@
       @click="reload"
       >viewReload</basic-button
     >
+    <basic-pagination
+      paging-key="fullSearchPagination"
+      :paging-object="pagingObj"
+    >
+    </basic-pagination>
   </div>
 </template>
 
 <script type="text/javascript">
+import { mapActions, mapGetters } from "vuex";
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
-import { mapActions } from "vuex";
+import BasicPagination from "@/components/aiPlatform/basic/basic-pagination";
 
 export default {
   name: "BasicTemplate",
   extends: {},
-  props: {
-    bar: {},
-    foo: {},
-    fooBar: {}
-  },
+  props: {},
   data() {
-    return {};
+    return {
+      pagingObj: {
+        visiblePages: 5
+      }
+    };
   },
-  computed: {},
-  components: { BasicButton },
+  computed: {
+    ...mapGetters("defaults/constants", ["CONSTANTS"])
+  },
+  components: { BasicButton, BasicPagination },
   watch: {},
   methods: {
     ...mapActions("bizMeta", ["viewReload"]),

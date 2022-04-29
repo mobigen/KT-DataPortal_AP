@@ -47,6 +47,12 @@ export const state = () => ({
         EDIT: "edit",
         ADD_CHILD: "addChild"
       }
+    },
+    PAGING: {
+      TOTAL_COUNT: "totalCount",
+      ITEMS_PER_PAGE: "itemsPerPage",
+      VISIBLE_PAGES: "visiblePages",
+      PAGE: "page"
     }
   })
 });
