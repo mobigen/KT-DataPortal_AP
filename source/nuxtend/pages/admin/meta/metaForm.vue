@@ -32,8 +32,8 @@
 
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
-import BasicTableForm from "@/components/basic/basic-table-form";
-import BasicButton from "@/components/basic/basic-button.vue";
+import BasicTableForm from "@/components/aiPlatform/basic/basic-table-form";
+import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 
 export default {
   name: "meta-form",

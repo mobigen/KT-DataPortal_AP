@@ -1,5 +1,3 @@
-import Vue from "vue";
-
 export const state = () => ({
   metaNameList: [],
   useMetaNameList: [],
@@ -65,12 +63,12 @@ export const mutations = {
 };
 export const actions = {
   getMetaNameList({ _, commit }) {
-    Vue.prototype.$api.get("/api/meta/metaNameList").then((d) => {
+    this.$axios.get("/api/meta/metaNameList").then((d) => {
       commit("setMetaNameList", d);
     });
   },
   async getUseMetaNameList({ commit }) {
-    await Vue.prototype.$api.get("/api/meta/useMetaNameList").then((d) => {
+    await this.$axios.get("/api/meta/useMetaNameList").then((d) => {
       commit("setUseMetaNameList", d);
     });
   },
@@ -81,7 +79,7 @@ export const actions = {
       return;
     }
 
-    Vue.prototype.$api
+    this.$axios
       .get("/api/meta/getMetaName", { params: { nameId: rowKey } })
       .then((d) => {
         commit("setMetaName", d);
@@ -92,10 +90,10 @@ export const actions = {
       console.log("저장할 Data 없음");
       return;
     }
-    await Vue.prototype.$api.post("/api/meta/insertMetaName", obj);
+    await this.$axios.post("/api/meta/insertMetaName", obj);
   },
   removeMetaName({ dispatch }, rowKey) {
-    Vue.prototype.$api
+    this.$axios
       .delete("/api/meta/deleteMetaName", { params: { nameId: rowKey } })
       .then(() => {
         dispatch("getMetaNameList");
@@ -107,10 +105,10 @@ export const actions = {
       return;
     }
 
-    await Vue.prototype.$api.put("/api/meta/updateMetaName", obj);
+    await this.$axios.put("/api/meta/updateMetaName", obj);
   },
   getBizMetaList({ commit }) {
-    Vue.prototype.$api.get("/api/meta/getBizMetaList").then((d) => {
+    this.$axios.get("/api/meta/getBizMetaList").then((d) => {
       d.useRebuildBody = true;
 
       // header rebuild
@@ -124,7 +122,7 @@ export const actions = {
     });
   },
   getMetaNameDetail({ commit }, rowId) {
-    Vue.prototype.$api
+    this.$axios
       .get("/api/meta/getMetaNameDetail?nameId=" + rowId)
       .then((d) => {
         commit("setMetaNameDetail", d);
@@ -136,7 +134,7 @@ export const actions = {
       commit("setBizMetaDetail", empObj);
       return;
     }
-    await Vue.prototype.$api
+    await this.$axios
       .get("/api/meta/getBizMetaDetail?datasetId=" + rowId)
       .then((d) => {
         d.useRebuildBody = true;
@@ -144,12 +142,12 @@ export const actions = {
       });
   },
   async getBizMetaForm({ commit }) {
-    await Vue.prototype.$api.get("/api/meta/getBizMetaForm").then((d) => {
+    await this.$axios.get("/api/meta/getBizMetaForm").then((d) => {
       commit("setBizMetaForm", d);
     });
   },
   removeBizMeta({ dispatch }, rowKey) {
-    Vue.prototype.$api
+    this.$axios
       .delete("/api/meta/deleteBizMeta", {
         params: { bizDatasetId: rowKey }
       })
@@ -162,7 +160,7 @@ export const actions = {
       console.log("저장할 Data 없음");
       return;
     }
-    await Vue.prototype.$api.post("/api/meta/insertBizMeta", dataList);
+    await this.$axios.post("/api/meta/insertBizMeta", dataList);
   },
   async editBizMeta({}, { rowKey, dataList }) {
     if (dataList.length === 0) {
@@ -170,13 +168,13 @@ export const actions = {
       return;
     }
 
-    await Vue.prototype.$api.put("/api/meta/updateBizMeta", {
+    await this.$axios.put("/api/meta/updateBizMeta", {
       bizDatasetId: rowKey,
       dataList: dataList
     });
   },
   getMetaMapList({ commit }) {
-    Vue.prototype.$api.get("/api/meta/metaMapList").then((d) => {
+    this.$axios.get("/api/meta/metaMapList").then((d) => {
       commit("setMetaMapList", d);
     });
   },
@@ -191,16 +189,16 @@ export const actions = {
       dataList.push(obj);
     });
 
-    await Vue.prototype.$api.post("/api/meta/insertMetaMap", dataList);
+    await this.$axios.post("/api/meta/insertMetaMap", dataList);
   },
   getTestData({}) {
-    Vue.prototype.$api.post("/remote/remote_command").then((d) => {
+    this.$axios.post("/remote/remote_command").then((d) => {
       console.log(d);
     });
   },
   async viewReload({}) {
     let response = null;
-    await Vue.prototype.$api.get("/api/meta/setViewTable").then((d) => {
+    await this.$axios.get("/api/meta/setViewTable").then((d) => {
       response = d;
     });
 

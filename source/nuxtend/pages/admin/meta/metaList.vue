@@ -33,8 +33,8 @@
 
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
-import BasicTable from "@/components/basic/basic-table.vue";
-import BasicButton from "@/components/basic/basic-button.vue";
+import BasicTable from "@/components/aiPlatform/basic/basic-table.vue";
+import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 
 export default {
   name: "admin-list",
@@ -47,7 +47,7 @@ export default {
   props: {},
   computed: {
     ...mapGetters("bizMeta", ["bizMetaList"]),
-    ...mapGetters("constants", ["CONSTANTS"])
+    ...mapGetters("defaults/constants", ["CONSTANTS"])
   },
   components: { BasicTable, BasicButton },
   watch: {},

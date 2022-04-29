@@ -13,7 +13,7 @@
 
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
-import BasicButton from "@/components/basic/basic-button.vue";
+import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 
 export default {
   name: "super-admin-testPage",

@@ -1,7 +1,6 @@
 <template>
   <div>
     <h3>app-index</h3>
-    <axios-interceptor />
     <nuxt-child />
     <json-viwer />
   </div>
