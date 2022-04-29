@@ -38,6 +38,7 @@ export default {
   watch: {},
   methods: {
     ...mapActions("bizMeta", ["viewReload"]),
+    ...mapActions("module/pagination", ["setTotalCount"]),
     reload() {
       this.viewReload();
     }

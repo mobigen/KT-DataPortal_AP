@@ -1,32 +1,42 @@
 export const state = () => ({
-  pagingObj: {},
-  defaultPageObj: {
-    totalCount: 0,
-    itemsPerPage: 10,
-    visiblePages: 10,
-    page: 1
-  }
+  pagingObj: {}
 });
 
 export const getters = {
   paging(state) {
     return state.pagingObj;
-  },
-  defaultPageObj(state) {
-    return state.defaultPageObj;
   }
 };
 
 export const mutations = {
   setNewPaging(state, params) {
-    const newDefaultObj = Object.assign(state.defaultPageObj, params.data);
-    state.pagingObj[params.key] = newDefaultObj;
+    // 초기 설정값. 외부에서 수정 불가능
+    const defaultObj = {
+      pageSet: 0,
+      totalCount: 0,
+      itemsPerPage: 10,
+      visiblePages: 10,
+      page: 1
+    };
+    state.pagingObj[params.key] = Object.assign(defaultObj, params.data);
   },
-  setPage(state, params) {
-    console.log(params);
-    Object.assign(state[params.key], params.data);
+  setPageObject(state, params) {
+    console.log(params.data)
+    const statePageObj = state.pagingObj[params.key];
 
-    // Object 변경사항 적용
+    params.data.pageSet = parseInt(
+      (params.data.page - 1) / statePageObj.visiblePages
+    );
+
+    // set TOTAL-Page No
+    if (Object.prototype.hasOwnProperty.call(params.data, "totalCount")) {
+      // totalCount가 변경되면, totalPageNo를 계산한다.
+      params.data.totalPage = Math.ceil(
+        statePageObj.totalCount / statePageObj.itemsPerPage
+      );
+    }
+    Object.assign(state.pagingObj[params.key], params.data);
+    // // Object 변경사항 적용
     state.pagingObj = JSON.parse(JSON.stringify(state.pagingObj));
   }
 };
@@ -35,7 +45,21 @@ export const actions = {
   setNewPagination({ commit }, params) {
     commit("setNewPaging", params);
   },
-  setPaging({ commit }, params) {
-    commit("setPage", params);
+  setPage({ commit }, { key, page }) {
+    commit("setPageObject", {
+      key: key,
+      data: {
+        page: page
+      }
+    });
+  },
+
+  setTotalCount({ commit }, { key, totalCount }) {
+    commit("setPageObject", {
+      key: key,
+      data: {
+        totalCount: totalCount
+      }
+    });
   }
 };

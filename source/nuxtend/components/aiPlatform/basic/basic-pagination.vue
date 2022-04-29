@@ -1,8 +1,5 @@
 <template lang="html">
   <div class="pagination-wrap">
-    <div>
-      {{ paging }}
-    </div>
     <div class="pagination">
       <template v-show="showGotoFirst">
         <a @click="gotoFirst">
@@ -16,9 +13,11 @@
       </template>
 
       <template v-for="vp in paging.visiblePages">
-        <a @click="gotoPage(vp)" :class="{ active: paging.page === vp }">{{
-          vp
-        }}</a>
+        <a
+          @click="gotoPage(getPageNo(vp))"
+          :class="{ active: paging.page === getPageNo(vp) }"
+          >{{ getPageNo(vp) }}</a
+        >
       </template>
 
       <template v-show="showGotoNext">
@@ -31,15 +30,6 @@
           <fa icon="angles-right" />
         </a>
       </template>
-
-      <!--      <a href="#">&laquo;</a>-->
-      <!--      <a href="#">1</a>-->
-      <!--      <a href="#" class="active">2</a>-->
-      <!--      <a href="#">3</a>-->
-      <!--      <a href="#">4</a>-->
-      <!--      <a href="#">5</a>-->
-      <!--      <a href="#">6</a>-->
-      <!--      <a href="#">&raquo;</a>-->
     </div>
   </div>
 </template>
@@ -94,18 +84,13 @@ export default {
   components: {},
   watch: {},
   methods: {
-    ...mapActions("module/pagination", ["setPaging", "setNewPagination"]),
+    ...mapActions("module/pagination", ["setPage", "setNewPagination"]),
     gotoFirst() {
       // firstPage : 1
       this.goto(1);
     },
     gotoEnd() {
-      this.goto(this.getEndPage());
-    },
-    getEndPage() {
-      // get end page no
-      // totalCount / itemsPerPage , Math.ceil
-      return Math.ceil(this.paging.totalCount / this.paging.itemsPerPage);
+      this.goto(this.page.totalPage);
     },
     gotoPrev() {
       let prevPage = this.paging.page - 1;
@@ -117,9 +102,9 @@ export default {
     gotoNext() {
       // 다음 페이지 번호가 마지막 페이지값보다 클 경우, 마지막 페이지를 가리킨다.
       let nextPage = this.paging.page + 1;
-      const endPage = this.getEndPage();
-      if (nextPage > endPage) {
-        nextPage = endPage;
+      const totalPage = this.paging.totalPage;
+      if (nextPage > totalPage) {
+        nextPage = totalPage;
       }
       this.goto(nextPage);
     },
@@ -129,12 +114,13 @@ export default {
     },
     goto(page) {
       // vuex에 값을 셋팅한다.
-      this.setPaging({
+      this.setPage({
         key: this.pagingKey,
-        data: {
-          page: page
-        }
+        page: page
       });
+    },
+    getPageNo(data) {
+      return this.paging.pageSet * this.paging.visiblePages + data;
     }
   },
   created() {

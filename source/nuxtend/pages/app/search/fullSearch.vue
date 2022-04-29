@@ -68,7 +68,8 @@
 
     <div>
       <h5>paging component</h5>
-      <!--      <basic-pagination></basic-pagination>-->
+      <basic-pagination paging-key="fullSearchPagination"
+      :paging-object="pagingObj" />
     </div>
   </div>
 </template>
@@ -80,7 +81,7 @@ import SearchResultBox from "@/components/aiPlatform/basic/search-result-box.vue
 import BasicTabMenu from "@/components/aiPlatform/basic/basic-tab-menu.vue";
 import SelectFilterList from "@/components/aiPlatform/basic/select-filter-list.vue";
 import RadioButtonSearchBar from "@/components/aiPlatform/group/radio-button-search-bar.vue";
-// import BasicPagination from "@/components/aiPlatform/basic/basic-pagination";
+import BasicPagination from "@/components/aiPlatform/basic/basic-pagination";
 
 export default {
   name: "app-search-full",
@@ -116,7 +117,11 @@ export default {
       RadioList: [
         { value: 0, label: "포함" },
         { value: 1, label: "제외" }
-      ]
+      ],
+
+      pagingObj: {
+        visiblePages: 5
+      }
     };
   },
   computed: {},
@@ -126,8 +131,8 @@ export default {
     SearchResultBox,
     BasicTabMenu,
     SelectFilterList,
-    RadioButtonSearchBar
-    // BasicPagination
+    RadioButtonSearchBar,
+    BasicPagination
   },
   watch: {},
   methods: {
