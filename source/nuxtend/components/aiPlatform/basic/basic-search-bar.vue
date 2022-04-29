@@ -60,19 +60,19 @@ export default {
 
 <style lang="scss">
 #searchBox {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 50px;
   border: 1px solid lightslategray;
   width: 400px;
   height: 40px;
   input {
     font-size: 16px;
-    width: 330px;
     padding: 10px;
     border: 0px;
     outline: none;
   }
   button {
-    width: 50px;
+    width: 100%;
     height: 100%;
     background: lightslategray;
     color: #ffffff;
