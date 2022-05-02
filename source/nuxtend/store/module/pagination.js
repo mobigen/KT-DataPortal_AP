@@ -16,16 +16,18 @@ export const mutations = {
       totalCount: 0,
       itemsPerPage: 10,
       visiblePages: 10,
-      page: 1
+      page: 1,
+      totalPage: 1
     };
+    console.log(params.data);
     state.pagingObj[params.key] = Object.assign(defaultObj, params.data);
   },
   setPageObject(state, params) {
-    console.log(params.data)
     const statePageObj = state.pagingObj[params.key];
 
     params.data.pageSet = parseInt(
-      (params.data.page - 1) / statePageObj.visiblePages
+      ((params.data.page ? params.data.page : 1) - 1) /
+        statePageObj.visiblePages
     );
 
     // set TOTAL-Page No

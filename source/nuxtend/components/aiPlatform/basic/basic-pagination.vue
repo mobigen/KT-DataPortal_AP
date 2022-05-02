@@ -31,11 +31,19 @@
         </a>
       </template>
     </div>
+
+    <div v-if="showInfoTable">
+      <basic-viewTable
+        :useTableHead="false"
+        :viewDetail="pagingViewTable"
+      ></basic-viewTable>
+    </div>
   </div>
 </template>
 
 <script type="text/javascript">
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
+import BasicViewTable from "@/components/aiPlatform/basic/basic-viewTable.vue";
 
 export default {
   name: "basic-pagination",
@@ -72,16 +80,35 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      showInfoTable: false,
+      pagingViewTable: {
+        header: [],
+        body: []
+      }
+    };
   },
   computed: {
     paging: {
       get() {
-        return this.$store.getters["module/pagination/paging"][this.pagingKey];
+        const paging =
+          this.$store.getters["module/pagination/paging"][this.pagingKey];
+
+        if (this.showInfoTable) {
+          let header = Object.keys(paging).map((h) => {
+            return { column_name: h };
+          });
+
+          this.pagingViewTable = {
+            header: header,
+            body: [paging]
+          };
+        }
+        return paging;
       }
     }
   },
-  components: {},
+  components: { BasicViewTable },
   watch: {},
   methods: {
     ...mapActions("module/pagination", ["setPage", "setNewPagination"]),
@@ -90,7 +117,7 @@ export default {
       this.goto(1);
     },
     gotoEnd() {
-      this.goto(this.page.totalPage);
+      this.goto(this.paging.totalPage);
     },
     gotoPrev() {
       let prevPage = this.paging.page - 1;
@@ -124,6 +151,7 @@ export default {
     }
   },
   created() {
+    this.showInfoTable = process.env.NODE_ENV === "development";
     /**
      * pagination Component 를 불러올때, 초기화 한다.
      * 각각의 페이지 정보를 하나의 vuex가 관리하고 있기 때문에 pageKey로 관리한다.

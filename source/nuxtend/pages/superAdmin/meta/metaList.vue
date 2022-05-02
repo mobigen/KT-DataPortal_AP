@@ -105,8 +105,6 @@ export default {
       if (btnAction === "remove") {
         if (confirm("삭제 하시겠습니까?")) {
           this.removeObject(rowKey);
-        } else {
-          return;
         }
       } else if (btnAction === "edit") {
         this.editForm(rowKey);
@@ -117,19 +115,14 @@ export default {
         path: "/superAdmin/meta/metaView",
         query: { metaNameId: rowKey }
       });
-
-      // this.$router.push({
-      //   path: `metaView`,
-      //   query: {
-      //     metaNameId: rowKey
-      //   }
-      // });
     },
     testAction(rowKey, keyAction) {
       alert("rowKey: " + rowKey + ",keyAction: " + keyAction);
     }
   },
   created() {
+    // bizMeta.js
+    // dispatch, set totalCount
     this.getMetaNameList({
       pagingKey: "bizMetaPagination"
     });

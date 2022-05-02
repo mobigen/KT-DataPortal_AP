@@ -65,16 +65,19 @@ export const actions = {
   getMetaNameList({ commit, rootGetters, dispatch }, params) {
     const pageInfo = rootGetters["module/pagination/paging"][params.pagingKey];
     console.log(pageInfo);
+    // param with pageInfo (start, end...)
 
     this.$axios.get("/api/meta/metaNameList").then((d) => {
       commit("setMetaNameList", d);
 
       // setTotalPage
       dispatch(
-        "module/pagination/setTotalCount", {
+        "module/pagination/setTotalCount",
+        {
           key: params.pagingKey,
           totalCount: 100
-        }, { root: true }
+        },
+        { root: true }
       );
     });
   },
