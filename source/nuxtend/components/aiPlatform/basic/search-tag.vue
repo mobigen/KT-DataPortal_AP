@@ -2,11 +2,11 @@
   <div id="searchTag">
     <template v-for="(data, i) in tagList">
       <div :class="['tag-item', { cursorPointer }]" @click="tagClick(data)">
-        <span class="hash-tag" v-if="hashTagUse">#</span>
-        <span>{{ data }}</span>
+        <span class="prev-text">{{ previousText }}</span>
+        <span>{{ data["itemName"] }}</span>
         <div @click.stop v-if="cancelButtonUse">
           <basic-button
-            :componentId="'tag_' + data + '_' + i"
+            :componentId="'tag_' + data['itemId']"
             buttonCss="icon-button"
             :underline="false"
             :hoverColor="false"
@@ -34,10 +34,9 @@ export default {
       type: Array,
       require: true
     },
-    hashTagUse: {
-      type: Boolean,
-      require: false,
-      default: false
+    previousText: {
+      type: String,
+      require: false
     },
     cancelButtonUse: {
       type: Boolean,
@@ -55,11 +54,12 @@ export default {
   watch: {},
   methods: {
     cancel(componentId) {
-      const index = componentId.split("_").splice(-1);
+      const itemId = Number(componentId.split("_").splice(-1));
+      const index = this.tagList.findIndex((el) => el.itemId === itemId);
       this.tagList.splice(index, 1);
     },
-    tagClick(tagName) {
-      this.$emit("tagClick", tagName);
+    tagClick(tagObj) {
+      this.$emit("tagClick", tagObj);
     }
   }
 };
@@ -68,6 +68,7 @@ export default {
 <style lang="scss">
 #searchTag {
   display: flex;
+  flex-wrap: wrap;
   .tag-item {
     display: flex;
     height: 30px;
@@ -75,7 +76,8 @@ export default {
     border-radius: 20px;
     padding: 0px 10px;
     margin-right: 10px;
-    .hash-tag {
+    margin-bottom: 10px;
+    .prev-text {
       padding: 4px 10px;
       margin-right: -15px;
     }
