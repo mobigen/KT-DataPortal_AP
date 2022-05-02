@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="tree_cont">
     <div>
-      <span v-if="isOpen" @click="toggle">[{{ open ? "-" : "+" }}]</span>
+      <span v-show="isOpen" @click="toggle">[{{ open ? "-" : "+" }}]</span>
 
       <template v-if="treeMode === CONSTANTS.TREE.TREE_MODE.EDITOR">
         <span
@@ -29,6 +29,7 @@
     <ul v-if="isOpen" v-show="open">
       <item
         v-for="(data, index) in treeData.children"
+        :component-key="componentKey"
         :tree-select-type="treeSelectType"
         :checked="checked"
         :treeData="data"
@@ -53,6 +54,10 @@ export default {
   name: "item",
   extends: {},
   props: {
+    componentKey: {
+      type: String,
+      require: true
+    },
     /**
      * Tree Type.
      * ALL : You can select Every Node.
@@ -62,43 +67,47 @@ export default {
     treeSelectType: {
       type: String,
       require: false,
-      defaults: "ALL" // ALL, LEAF
+      default: "ALL" // ALL, LEAF
     },
     checked: {
       type: Boolean,
       require: false,
-      defaults: false
+      default: false
     },
     treeData: {
       type: Object,
       require: true,
-      defaults: {}
+      default: () => {
+        return {};
+      }
     },
     nodeTitle: {
       type: String,
       require: true,
-      defaults: ""
+      default: ""
     },
     nodeIdText: {
       type: String,
       require: true,
-      defaults: ""
+      default: ""
     },
     parentIdText: {
       type: String,
       require: true,
-      defaults: ""
+      default: ""
     },
     treeMode: {
       type: String,
       require: true,
-      defaults: "VIEW"
+      default: "VIEW"
     },
     // 내부 재귀 루틴에서만 쓰임.
     parentsIds: {
       type: Array,
       require: false,
-      defaults: []
+      default: () => {
+        return [];
+      }
     }
   },
   data() {
@@ -110,17 +119,33 @@ export default {
   },
   computed: {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
-    ...mapGetters("module/tree", ["categoryObjectByKey"]),
+    // ...mapGetters("module/tree", ["categoryObjectByKey"]),
+    categoryObjectByKey() {
+      return this.$store.getters["module/tree/categoryObjectByKey"][
+        this.componentKey
+      ];
+    },
     isOpen() {
       return this.treeData.children && this.treeData.children.length;
     },
     spanSelected() {
-      const selectedNodeList =
+      let selectedNodeList =
         this.$store.getters["module/tree/selectedNodeList"];
-      return Object.prototype.hasOwnProperty.call(
-        selectedNodeList,
-        this.treeData[this.nodeIdText]
-      );
+
+      if (
+        !Object.prototype.hasOwnProperty.call(
+          selectedNodeList,
+          this.componentKey
+        )
+      ) {
+        // component key가 아예 없다면 false를 리턴한다.
+        return false;
+      } else {
+        return Object.prototype.hasOwnProperty.call(
+          selectedNodeList[this.componentKey],
+          this.treeData[this.nodeIdText]
+        );
+      }
     }
   },
   components: { BasicButton },

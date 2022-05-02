@@ -12,6 +12,7 @@
     </div>
 
     <basic-tree
+      :component-key="componentKey"
       :tree-select-type="treeSelectType"
       :tree-data="categoryObject"
       :tree-mode="treeMode"
@@ -68,6 +69,11 @@ export default {
   name: "BasicTemplate",
   extends: {},
   props: {
+    componentKey: {
+      type: String,
+      require: true,
+      default: "treeComponentKey"
+    },
     treeRestApi: {
       type: String,
       require: true
@@ -75,12 +81,12 @@ export default {
     useSingleCheckbox: {
       type: Boolean,
       require: false,
-      defaults: true
+      default: true
     },
     checkboxLabel: {
       type: String,
       require: false,
-      defaults: ""
+      default: ""
     },
     treeKey: {
       type: Object,
@@ -89,12 +95,12 @@ export default {
     treeSelectType: {
       type: String,
       require: true,
-      defaults: "ALL"
+      default: "ALL"
     },
     treeMode: {
       type: String,
       require: false,
-      defaults: "SELECT"
+      default: "SELECT"
     }
   },
   data() {
@@ -109,7 +115,16 @@ export default {
   },
   computed: {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
-    ...mapGetters("module/tree", ["categoryObject", "selectedNodeList"]),
+    categoryObject() {
+      return this.$store.getters["module/tree/categoryObject"][
+        this.componentKey
+      ];
+    },
+    selectedNodeList() {
+      return this.$store.getters["module/tree/selectedNodeList"][
+        this.componentKey
+      ];
+    },
     notyTitle() {
       return (
         "[" +
@@ -142,6 +157,7 @@ export default {
     },
     selectionChange({ bool, nodeData }) {
       this.setSelectedNodeList({
+        componentKey: this.componentKey,
         key: nodeData[this.treeKey.nodeIdText],
         node: nodeData,
         bool: bool
@@ -180,6 +196,7 @@ export default {
   },
   created() {
     this.treeKey["api"] = this.treeRestApi;
+    this.treeKey["componentKey"] = this.componentKey;
     this.getCategoryObject(this.treeKey);
 
     this.setFormDefaultsData();
