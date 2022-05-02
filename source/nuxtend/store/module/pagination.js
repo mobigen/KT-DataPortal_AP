@@ -19,7 +19,6 @@ export const mutations = {
       page: 1,
       totalPage: 1
     };
-    console.log(params.data);
     state.pagingObj[params.key] = Object.assign(defaultObj, params.data);
   },
   setPageObject(state, params) {
