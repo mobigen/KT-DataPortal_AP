@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="basic-tag-wrap">
+  <div>
     <template v-for="(obj, key, i) in selectedNodeList">
-      <div class="basic-tag" :key="'tag_' + i" :id="obj[nodeIdText]">
+      <div class="basic-tree-tag" :key="'tag_' + i" :id="obj[nodeIdText]">
         <span>
           {{ obj[nodeTitle] }}
         </span>
@@ -39,13 +39,10 @@ export default {
 </script>
 
 <style scoped>
-.basic-tag-wrap {
-  /*display: flex;*/
-}
-.basic-tag {
+.basic-tree-tag {
   padding: 5px;
 }
-.basic-tag span {
+.basic-tree-tag span {
   padding: 4px 10px;
   background-color: lightgrey;
   border-radius: 10px;

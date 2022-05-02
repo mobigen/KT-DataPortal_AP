@@ -33,6 +33,14 @@
         }"
         @keyAction="testAction"
       />
+
+      <basic-pagination
+        paging-key="bizMetaPagination"
+        :paging-object="{
+          visiblePages: 5
+        }"
+      >
+      </basic-pagination>
     </div>
   </div>
 </template>
@@ -41,6 +49,8 @@
 import { mapActions, mapGetters } from "vuex";
 import BasicTable from "@/components/aiPlatform/basic/basic-table.vue";
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
+import BasicPagination from "@/components/aiPlatform/basic/basic-pagination";
+
 export default {
   name: "super-admin-metaList",
   extends: {},
@@ -75,7 +85,7 @@ export default {
   computed: {
     ...mapGetters("bizMeta", ["metaNameList"])
   },
-  components: { BasicTable, BasicButton },
+  components: { BasicTable, BasicButton, BasicPagination },
   watch: {},
   methods: {
     ...mapActions("bizMeta", ["getMetaNameList", "removeMetaName"]),
@@ -95,8 +105,6 @@ export default {
       if (btnAction === "remove") {
         if (confirm("삭제 하시겠습니까?")) {
           this.removeObject(rowKey);
-        } else {
-          return;
         }
       } else if (btnAction === "edit") {
         this.editForm(rowKey);
@@ -107,20 +115,17 @@ export default {
         path: "/superAdmin/meta/metaView",
         query: { metaNameId: rowKey }
       });
-
-      // this.$router.push({
-      //   path: `metaView`,
-      //   query: {
-      //     metaNameId: rowKey
-      //   }
-      // });
     },
     testAction(rowKey, keyAction) {
       alert("rowKey: " + rowKey + ",keyAction: " + keyAction);
     }
   },
   created() {
-    this.getMetaNameList();
+    // bizMeta.js
+    // dispatch, set totalCount
+    this.getMetaNameList({
+      pagingKey: "bizMetaPagination"
+    });
   }
 };
 </script>

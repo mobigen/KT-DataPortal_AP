@@ -44,7 +44,7 @@ export default {
   top: 0;
   left: 0;
   background: white;
-  //width : 30%;
+  z-index: 1
 }
 pre {
   font-size: 11px;

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <json-viwer />
     <header>
       <h1>Header</h1>
       <basic-nav :menuList="menuList" />

@@ -7,7 +7,7 @@
       :use-single-checkbox="true"
       :checkbox-label="checkboxLabel"
       :tree-key="treeKey"
-      :tree-mode="CONSTANTS.TREE.TREE_MODE.VIEW"
+      :tree-mode="CONSTANTS.TREE.TREE_MODE.EDITOR"
       :tree-select-type="CONSTANTS.TREE.TREE_TYPE.ALL"
     >
     </complex-tree>

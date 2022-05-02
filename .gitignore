@@ -136,7 +136,7 @@ nbdist/
 /docker/target/
 
 # frontend
-/source/frontend/src/assets/style-product/images/compiled-svg-icons/
+/source/nuxtend/assets/style-product/images/compiled-svg-icons/
 
 # backend
 /source/src/main/resources/static/

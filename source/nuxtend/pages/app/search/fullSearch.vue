@@ -72,7 +72,12 @@
       검색결과 요약 component (전체 몇건, sort options.. 개발 우선순위 밀림)
     </div>
     <div>검색결과 panel component</div>
-    <div>paging component</div>
+
+    <div>
+      <h5>paging component</h5>
+      <basic-pagination paging-key="fullSearchPagination"
+      :paging-object="pagingObj" />
+    </div>
   </div>
 </template>
 
@@ -85,6 +90,7 @@ import BasicTabMenu from "@/components/aiPlatform/basic/basic-tab-menu.vue";
 import SelectFilterList from "@/components/aiPlatform/basic/select-filter-list.vue";
 import RadioButtonSearchBar from "@/components/aiPlatform/group/radio-button-search-bar.vue";
 import ComplexCheckbox from "@/components/aiPlatform/group/complex-checkbox.vue";
+import BasicPagination from "@/components/aiPlatform/basic/basic-pagination";
 
 export default {
   name: "app-search-full",
@@ -103,7 +109,11 @@ export default {
         listName: "filterList",
         selectListName: "selectFilterList"
       },
-      checkboxColumnCount: [1, 1, 2, 1]
+      checkboxColumnCount: [1, 1, 2, 1],
+
+      pagingObj: {
+        visiblePages: 5
+      }
     };
   },
   computed: {
@@ -122,7 +132,8 @@ export default {
     BasicTabMenu,
     SelectFilterList,
     RadioButtonSearchBar,
-    ComplexCheckbox
+    ComplexCheckbox,
+    BasicPagination
   },
   watch: {},
   methods: {

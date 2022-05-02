@@ -23,13 +23,13 @@
       @setEditForm="editNode"
     ></basic-tree>
 
-    <basic-tag
+    <basic-tree-tag
       v-show="treeMode === CONSTANTS.TREE.TREE_MODE.VIEW"
       :selectedNodeList="selectedNodeList"
       :nodeTitle="treeKey.nodeName"
       :nodeIdText="treeKey.nodeIdText"
     >
-    </basic-tag>
+    </basic-tree-tag>
 
     <div
       v-show="
@@ -58,7 +58,7 @@
 import { mapActions, mapGetters } from "vuex";
 
 import BasicTree from "@/components/aiPlatform/basic/basic-tree.vue";
-import BasicTag from "@/components/aiPlatform/basic/basic-tag.vue";
+import BasicTreeTag from "@/components/aiPlatform/basic/basic-tree-tag.vue";
 import BasicSingleCheckbox from "@/components/aiPlatform/basic/basic-single-checkbox";
 import BasicForm from "@/components/aiPlatform/basic/basic-form";
 import BasicLabel from "@/components/aiPlatform/basic/basic-label";
@@ -124,7 +124,7 @@ export default {
   components: {
     BasicSingleCheckbox,
     BasicTree,
-    BasicTag,
+    BasicTreeTag,
     BasicForm,
     BasicLabel,
     BasicButton

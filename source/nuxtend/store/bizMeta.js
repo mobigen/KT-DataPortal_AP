@@ -62,9 +62,23 @@ export const mutations = {
   }
 };
 export const actions = {
-  getMetaNameList({ _, commit }) {
+  getMetaNameList({ commit, rootGetters, dispatch }, params) {
+    const pageInfo = rootGetters["module/pagination/paging"][params.pagingKey];
+    console.log(pageInfo);
+    // param with pageInfo (start, end...)
+
     this.$axios.get("/api/meta/metaNameList").then((d) => {
       commit("setMetaNameList", d);
+
+      // setTotalPage
+      dispatch(
+        "module/pagination/setTotalCount",
+        {
+          key: params.pagingKey,
+          totalCount: 100
+        },
+        { root: true }
+      );
     });
   },
   async getUseMetaNameList({ commit }) {
@@ -122,11 +136,9 @@ export const actions = {
     });
   },
   getMetaNameDetail({ commit }, rowId) {
-    this.$axios
-      .get("/api/meta/getMetaNameDetail?nameId=" + rowId)
-      .then((d) => {
-        commit("setMetaNameDetail", d);
-      });
+    this.$axios.get("/api/meta/getMetaNameDetail?nameId=" + rowId).then((d) => {
+      commit("setMetaNameDetail", d);
+    });
   },
   async getBizMetaDetail({ commit }, rowId) {
     if (rowId === undefined) {

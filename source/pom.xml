@@ -249,7 +249,7 @@
                                 <argument>install</argument>
                                 <argument>--legacy-peer-deps</argument>
                             </arguments>
-                            <workingDirectory>./frontend</workingDirectory>
+                            <workingDirectory>./nuxtend</workingDirectory>
                         </configuration>
                     </execution>
                     <execution>
@@ -264,7 +264,7 @@
                                 <argument>run</argument>
                                 <argument>build</argument>
                             </arguments>
-                            <workingDirectory>./frontend</workingDirectory>
+                            <workingDirectory>./nuxtend</workingDirectory>
                         </configuration>
                     </execution>
                 </executions>

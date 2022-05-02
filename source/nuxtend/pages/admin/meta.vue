@@ -18,7 +18,5 @@ export default {
 <style>
 #admin {
   background-color: #f7f9fc;
-  width: 70%;
-  margin: auto;
 }
 </style>
