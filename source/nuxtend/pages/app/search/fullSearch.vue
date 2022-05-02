@@ -9,7 +9,7 @@
       <h3>추천검색어 component</h3>
       <recommend-search-tag
         tagLabel="추천검색어"
-        :tagList="tagList"
+        :tagList="searchTagList"
         previousText="#"
         :cancelButtonUse="false"
         :cursorPointer="true"
@@ -35,6 +35,7 @@
       :cancelButtonUse="true"
       :cursorPointer="false"
       @filterClick=""
+      @filterTagCancel="filterTagCancel"
       @selectFilterReset="selectFilterReset"
     ></select-filter-list>
 
@@ -42,7 +43,7 @@
 
     <h3>tab component</h3>
     <basic-tab-menu
-      :menuList="menuList"
+      :menuList="tabMenuList"
       @currentTabData="currentTabData"
     ></basic-tab-menu>
 
@@ -55,6 +56,7 @@
       @searchClick="radioSelectSearch"
     ></radio-button-search-bar>
 
+    <!-- 모두보기 버튼/닫기 버튼(버튼토글) 추가해야함-->
     <h3>필터 - 체크 1단, 2단 component</h3>
     <complex-checkbox
       :checkboxKey="checkboxKey"
@@ -75,6 +77,7 @@
 </template>
 
 <script type="text/javascript">
+import { mapActions, mapGetters } from "vuex";
 import BasicSearchBar from "@/components/aiPlatform/basic/basic-search-bar.vue";
 import RecommendSearchTag from "@/components/aiPlatform/basic/recommend-search-tag.vue";
 import SearchResultBox from "@/components/aiPlatform/basic/search-result-box.vue";
@@ -89,73 +92,9 @@ export default {
   props: {},
   data() {
     return {
-      tagList: [
-        { itemId: 1, itemName: "tag01" },
-        { itemId: 2, itemName: "tag02" },
-        { itemId: 3, itemName: "tag03" },
-        { itemId: 4, itemName: "tag04" },
-        { itemId: 5, itemName: "tag05" }
-      ],
       searchKeyword: "",
       numberOfData: null,
       searchResultSuccess: false,
-      menuList: [
-        { menuName: "전체", data: {}, numberOfPosts: 126 },
-        { menuName: "내부데이터", data: {}, numberOfPosts: 777 },
-        { menuName: "CKAN", data: {}, numberOfPosts: 99 },
-        { menuName: "분원데이터", data: {}, numberOfPosts: 456 }
-      ],
-      filterData: [
-        {
-          label: "카테고리",
-          filterList: [
-            { itemId: 1, itemName: "자동차부품" },
-            { itemId: 2, itemName: "자동차제조" },
-            { itemId: 3, itemName: "자동차정비" },
-            { itemId: 4, itemName: "화물운송" },
-            { itemId: 5, itemName: "관제사고" },
-            { itemId: 6, itemName: "미래차산업" }
-          ],
-          selectFilterList: [
-            { itemId: 1, itemName: "자동차부품" },
-            { itemId: 2, itemName: "자동차제조" },
-            { itemId: 4, itemName: "화물운송" }
-          ]
-        },
-        {
-          label: "제공기관",
-          filterList: [
-            { itemId: 7, itemName: "도로교통공단" },
-            { itemId: 8, itemName: "한국지질자원연구원" },
-            { itemId: 9, itemName: "한국과학기술정보연구원" },
-            { itemId: 10, itemName: "국토교통부" },
-            { itemId: 11, itemName: "한국지질자원연구원" },
-            { itemId: 12, itemName: "도로교통공단" },
-            { itemId: 13, itemName: "한국지질자원연구원" },
-            { itemId: 14, itemName: "한국과학기술정보연구원" },
-            { itemId: 15, itemName: "도로교통공단" },
-            { itemId: 16, itemName: "한국지질자원연구원" }
-          ],
-          selectFilterList: [
-            { itemId: 10, itemName: "국토교통부" },
-            { itemId: 9, itemName: "한국과학기술정보연구원" },
-            { itemId: 7, itemName: "도로교통공단" }
-          ]
-        },
-        {
-          label: "데이터 타입",
-          filterList: [
-            { itemId: 17, itemName: "데이터셋(파일)" },
-            { itemId: 18, itemName: "데이터 서비스" }
-          ],
-          selectFilterList: [{ itemId: 17, itemName: "파일" }]
-        },
-        {
-          label: "트리뷰",
-          filterList: [],
-          selectFilterList: []
-        }
-      ],
       RadioList: [
         { value: 0, label: "포함" },
         { value: 1, label: "제외" }
@@ -167,7 +106,15 @@ export default {
       checkboxColumnCount: [1, 1, 2, 1]
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters("app/search/search", ["searchTagList", "tabMenuList"]),
+    filterData: {
+      get() {
+        const data = this.$store.getters["app/search/search/searchFilterList"];
+        return JSON.parse(JSON.stringify(data));
+      }
+    }
+  },
   components: {
     BasicSearchBar,
     RecommendSearchTag,
@@ -179,6 +126,13 @@ export default {
   },
   watch: {},
   methods: {
+    ...mapActions("app/search/search", [
+      "getSearchTagList",
+      "getTabMenuList",
+      "getSearchFilterList",
+      "changeSearchFilterList",
+      "resetSearchFilterList"
+    ]),
     searchClick(inputData) {
       this.searchKeyword = inputData.trim();
       this.search();
@@ -201,18 +155,23 @@ export default {
       console.log(data);
     },
     selectFilterReset() {
-      this.filterData.forEach((data, i) => {
-        data.selectFilterList = [];
-      });
+      this.resetSearchFilterList();
     },
     radioSelectSearch(radioValue, searchKeyword) {
       alert("radioValue: " + radioValue + ", searchKeyword: " + searchKeyword);
     },
     changeCheckboxList(index, checkboxList) {
-      this.filterData[index].selectFilterList = checkboxList;
+      this.changeSearchFilterList({ index, changeList: checkboxList });
+    },
+    filterTagCancel(index, tagList) {
+      this.changeSearchFilterList({ index, changeList: tagList });
     }
   },
-  created() {}
+  created() {
+    this.getSearchTagList();
+    this.getTabMenuList();
+    this.getSearchFilterList();
+  }
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="searchTag">
-    <template v-for="(data, i) in tagList">
+    <template v-for="(data, i) in tagData">
       <div :class="['tag-item', { cursorPointer }]" @click="tagClick(data)">
         <span class="prev-text">{{ previousText }}</span>
         <span>{{ data["itemName"] }}</span>
@@ -30,6 +30,10 @@ export default {
     return {};
   },
   props: {
+    componentId: {
+      type: String,
+      require: false
+    },
     tagList: {
       type: Array,
       require: true
@@ -49,14 +53,22 @@ export default {
       default: true
     }
   },
-  computed: {},
+  computed: {
+    tagData: {
+      get() {
+        return this.tagList;
+      }
+    }
+  },
   components: { BasicButton },
   watch: {},
   methods: {
     cancel(componentId) {
       const itemId = Number(componentId.split("_").splice(-1));
-      const index = this.tagList.findIndex((el) => el.itemId === itemId);
-      this.tagList.splice(index, 1);
+      const index = this.tagData.findIndex((el) => el.itemId === itemId);
+      this.tagData.splice(index, 1);
+
+      this.$emit("tagCancel", this.tagData, this.componentId);
     },
     tagClick(tagObj) {
       this.$emit("tagClick", tagObj);

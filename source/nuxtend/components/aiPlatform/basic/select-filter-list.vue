@@ -3,10 +3,12 @@
     <div v-for="(data, i) in filterData">
       <basic-label forProperty="">{{ data["label"] }}</basic-label>
       <search-tag
+        :componentId="data['label'] + '_' + i"
         :tagList="data['selectFilterList']"
         :previousText="previousText"
         :cancelButtonUse="cancelButtonUse"
         :cursorPointer="cursorPointer"
+        @tagCancel="filterTagCancel"
         @tagClick="filterClick"
       ></search-tag>
     </div>
@@ -58,6 +60,11 @@ export default {
   components: { BasicLabel, SearchTag, BasicButton },
   watch: {},
   methods: {
+    filterTagCancel(tagList, componentId) {
+      const index = componentId.split("_").pop();
+
+      this.$emit("filterTagCancel", index, tagList);
+    },
     filterClick(tagObj) {
       this.$emit("filterClick", tagObj);
     },
