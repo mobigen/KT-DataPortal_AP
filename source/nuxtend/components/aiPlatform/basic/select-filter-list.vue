@@ -4,7 +4,7 @@
       <basic-label forProperty="">{{ data["label"] }}</basic-label>
       <search-tag
         :tagList="data['selectFilterList']"
-        :hashTagUse="hashTagUse"
+        :previousText="previousText"
         :cancelButtonUse="cancelButtonUse"
         :cursorPointer="cursorPointer"
         @tagClick="filterClick"
@@ -36,10 +36,9 @@ export default {
       type: Array,
       require: true
     },
-    hashTagUse: {
-      type: Boolean,
-      require: false,
-      default: false
+    previousText: {
+      type: String,
+      require: false
     },
     cancelButtonUse: {
       type: Boolean,
@@ -59,8 +58,8 @@ export default {
   components: { BasicLabel, SearchTag, BasicButton },
   watch: {},
   methods: {
-    filterClick(filterName) {
-      this.$emit("filterClick", filterName);
+    filterClick(tagObj) {
+      this.$emit("filterClick", tagObj);
     },
     selectFilterReset() {
       this.$emit("selectFilterReset");
@@ -77,7 +76,8 @@ export default {
   padding: 10px;
   position: relative;
   > div {
-    display: flex;
+    display: grid;
+    grid-template-columns: 100px 1fr;
     padding: 5px;
     .tag-item {
       border-radius: 0px;
