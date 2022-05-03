@@ -21,7 +21,7 @@ export default {
   name: "basic-checkbox",
   extends: {},
   props: {
-    componentId: {
+    checkboxKey: {
       type: String,
       require: false
     },
@@ -53,7 +53,7 @@ export default {
         return this.selectCheckboxList;
       },
       set(newValue) {
-        this.$emit("changeCheckboxList", this.componentId, newValue);
+        this.$emit("changeCheckboxList", this.checkboxKey, newValue);
       }
     },
     cssVariable() {
@@ -76,7 +76,7 @@ export default {
         this.changeCheckboxList.push({ itemId, itemName });
         this.$emit(
           "changeCheckboxList",
-          this.componentId,
+          this.checkboxKey,
           this.changeCheckboxList
         );
       } else {
