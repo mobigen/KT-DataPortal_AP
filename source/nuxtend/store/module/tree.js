@@ -81,12 +81,10 @@ export const actions = {
         jsonHelper[el[param.parentIdText]].push(el);
       });
 
-      objectByKey.subscribed = true;
 
       // root는 무조건 1개만 나오는 데이터로 가정.
       // db에서 조회한 데이터의 첫번째 row가 root node 로, 이 id를 기준으로 데이터가 정제되어 있다.
       let newD = jsonHelper[d[0][param.nodeIdText]][0];
-      newD.subscribed = true;
 
       commit("setCategoryObject", {
         componentKey: param.componentKey,
@@ -99,7 +97,6 @@ export const actions = {
     });
   },
   setSelectedNodeList({ commit }, param) {
-    param.subscribed = true;
     commit("setSelectedNodeList", param);
   },
 
