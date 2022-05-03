@@ -1,14 +1,18 @@
 <template lang="html">
   <div>
     <ul>
-      <li v-for="(data, i) in menuList" :key="'menu_' + i">
-        <router-link :to="menuList[i]['url']">
-          <span v-if="textPreviousIcon">{{ textPreviousIcon[i] }}</span>
-          {{ menuList[i]["menuName"] }}
-          <span v-if="textNextIcon">{{ textNextIcon[i] }}</span>
-        </router-link>
-        <span v-if="separatorUse(menuList.length, i)">{{ separator }}</span>
-      </li>
+      <template v-for="(data, i) in menuList">
+        <li :key="'menu_' + i">
+          <router-link :to="data['url']">
+            <span v-if="textPreviousIcon">{{ textPreviousIcon[i] }}</span>
+            {{ data["menuName"] }}
+            <span v-if="textNextIcon">{{ textNextIcon[i] }}</span>
+          </router-link>
+        </li>
+        <span v-if="separatorUse && menuList.length !== i + 1">{{
+          separator
+        }}</span>
+      </template>
     </ul>
   </div>
 </template>
@@ -21,6 +25,11 @@ export default {
     menuList: {
       type: Array,
       require: true
+    },
+    separatorUse: {
+      type: Boolean,
+      require: false,
+      default: false
     },
     separator: {
       type: String,
@@ -41,14 +50,7 @@ export default {
   computed: {},
   components: {},
   watch: {},
-  methods: {
-    separatorUse(menuListLength, index) {
-      let notEmpSeparator = false;
-      notEmpSeparator = this.separator !== undefined && this.separator !== "";
-
-      return notEmpSeparator && menuListLength !== index + 1;
-    }
-  }
+  methods: {}
 };
 </script>
 
