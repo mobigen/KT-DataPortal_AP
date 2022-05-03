@@ -2,9 +2,11 @@
   <div>
     <ul>
       <li v-for="(data, i) in menuList" :key="'menu_' + i">
-        <router-link :to="menuList[i]['url']">{{
-          menuList[i]["menuName"]
-        }}</router-link>
+        <router-link :to="menuList[i]['url']">
+          <span v-if="textPreviousIcon">{{ textPreviousIcon[i] }}</span>
+          {{ menuList[i]["menuName"] }}
+          <span v-if="textNextIcon">{{ textNextIcon[i] }}</span>
+        </router-link>
         <span v-if="separatorUse(menuList.length, i)">{{ separator }}</span>
       </li>
     </ul>
@@ -22,6 +24,14 @@ export default {
     },
     separator: {
       type: String,
+      require: false
+    },
+    textPreviousIcon: {
+      type: Array,
+      require: false
+    },
+    textNextIcon: {
+      type: Array,
       require: false
     }
   },
