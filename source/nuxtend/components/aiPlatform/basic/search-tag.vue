@@ -30,7 +30,7 @@ export default {
     return {};
   },
   props: {
-    componentId: {
+    tagKey: {
       type: String,
       require: false
     },
@@ -68,7 +68,7 @@ export default {
       const index = this.tagData.findIndex((el) => el.itemId === itemId);
       this.tagData.splice(index, 1);
 
-      this.$emit("tagCancel", this.tagData, this.componentId);
+      this.$emit("tagCancel", this.tagData, this.tagKey);
     },
     tagClick(tagObj) {
       this.$emit("tagClick", tagObj);

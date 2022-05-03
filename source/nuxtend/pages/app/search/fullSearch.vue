@@ -30,7 +30,7 @@
 
     <h3>필터 component</h3>
     <select-filter-list
-      :filterData="filterData"
+      :filterData="selectFilterData"
       previousText=""
       :cancelButtonUse="true"
       :cursorPointer="false"
@@ -59,8 +59,8 @@
     <!-- 모두보기 버튼/닫기 버튼(버튼토글) 추가해야함-->
     <h3>필터 - 체크 1단, 2단 component</h3>
     <complex-checkbox
-      :checkboxKey="checkboxKey"
       :complexCheckboxList="filterData"
+      :selectCheckboxList="selectFilterData"
       :checkboxColumnCount="checkboxColumnCount"
       @changeCheckboxList="changeCheckboxList"
     ></complex-checkbox>
@@ -75,8 +75,10 @@
 
     <div>
       <h5>paging component</h5>
-      <basic-pagination paging-key="fullSearchPagination"
-      :paging-object="pagingObj" />
+      <basic-pagination
+        paging-key="fullSearchPagination"
+        :paging-object="pagingObj"
+      />
     </div>
   </div>
 </template>
@@ -105,12 +107,7 @@ export default {
         { value: 0, label: "포함" },
         { value: 1, label: "제외" }
       ],
-      checkboxKey: {
-        listName: "filterList",
-        selectListName: "selectFilterList"
-      },
       checkboxColumnCount: [1, 1, 2, 1],
-
       pagingObj: {
         visiblePages: 5
       }
@@ -121,6 +118,19 @@ export default {
     filterData: {
       get() {
         const data = this.$store.getters["app/search/search/searchFilterList"];
+
+        // mutation subscribed 삭제 후 수정해야함
+        delete data.subscribed;
+        return JSON.parse(JSON.stringify(data));
+      }
+    },
+    selectFilterData: {
+      get() {
+        const data =
+          this.$store.getters["app/search/search/selectSearchFilterList"];
+
+        // mutation subscribed 삭제 후 수정해야함
+        delete data.subscribed;
         return JSON.parse(JSON.stringify(data));
       }
     }
@@ -142,7 +152,8 @@ export default {
       "getTabMenuList",
       "getSearchFilterList",
       "changeSearchFilterList",
-      "resetSearchFilterList"
+      "resetSearchFilterList",
+      "getSelectSearchFilterList"
     ]),
     searchClick(inputData) {
       this.searchKeyword = inputData.trim();
@@ -171,17 +182,18 @@ export default {
     radioSelectSearch(radioValue, searchKeyword) {
       alert("radioValue: " + radioValue + ", searchKeyword: " + searchKeyword);
     },
-    changeCheckboxList(index, checkboxList) {
-      this.changeSearchFilterList({ index, changeList: checkboxList });
+    changeCheckboxList(key, checkboxList) {
+      this.changeSearchFilterList({ key, changeList: checkboxList });
     },
-    filterTagCancel(index, tagList) {
-      this.changeSearchFilterList({ index, changeList: tagList });
+    filterTagCancel(key, tagList) {
+      this.changeSearchFilterList({ key, changeList: tagList });
     }
   },
   created() {
     this.getSearchTagList();
     this.getTabMenuList();
     this.getSearchFilterList();
+    this.getSelectSearchFilterList();
   }
 };
 </script>

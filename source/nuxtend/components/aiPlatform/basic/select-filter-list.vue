@@ -1,10 +1,10 @@
 <template lang="html">
   <div id="selectFilterList">
-    <div v-for="(data, i) in filterData">
-      <basic-label forProperty="">{{ data["label"] }}</basic-label>
+    <div v-for="(value, key, index) in filterData">
+      <basic-label forProperty="">{{ value["label"] }}</basic-label>
       <search-tag
-        :componentId="data['label'] + '_' + i"
-        :tagList="data['selectFilterList']"
+        :tagKey="key"
+        :tagList="value['dataList']"
         :previousText="previousText"
         :cancelButtonUse="cancelButtonUse"
         :cursorPointer="cursorPointer"
@@ -12,17 +12,15 @@
         @tagClick="filterClick"
       ></search-tag>
     </div>
-    <template>
-      <basic-button
-        class="filter-reset-button"
-        componentId=""
-        buttonCss="text-button"
-        :underline="false"
-        :hoverColor="false"
-        @click="selectFilterReset"
-        >선택 필터 초기화</basic-button
-      >
-    </template>
+    <basic-button
+      class="filter-reset-button"
+      componentId=""
+      buttonCss="text-button"
+      :underline="false"
+      :hoverColor="false"
+      @click="selectFilterReset"
+      >선택 필터 초기화</basic-button
+    >
   </div>
 </template>
 
@@ -35,7 +33,7 @@ export default {
   extends: {},
   props: {
     filterData: {
-      type: Array,
+      type: Object,
       require: true
     },
     previousText: {
@@ -60,10 +58,8 @@ export default {
   components: { BasicLabel, SearchTag, BasicButton },
   watch: {},
   methods: {
-    filterTagCancel(tagList, componentId) {
-      const index = componentId.split("_").pop();
-
-      this.$emit("filterTagCancel", index, tagList);
+    filterTagCancel(tagList, tagKey) {
+      this.$emit("filterTagCancel", tagKey, tagList);
     },
     filterClick(tagObj) {
       this.$emit("filterClick", tagObj);

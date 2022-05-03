@@ -1,7 +1,8 @@
 export const state = () => ({
-  searchTagList: [],
+  searchTagList: {},
   tabMenuList: [],
-  searchFilterList: []
+  searchFilterList: [],
+  selectSearchFilterList: {}
 });
 
 export const getters = {
@@ -13,6 +14,9 @@ export const getters = {
   },
   searchFilterList(state) {
     return state.searchFilterList;
+  },
+  selectSearchFilterList(state) {
+    return state.selectSearchFilterList;
   }
 };
 
@@ -26,13 +30,18 @@ export const mutations = {
   setSearchFilterList(state, data) {
     state.searchFilterList = data;
   },
-  setSearchFilterListByIndex(state, params) {
-    state.searchFilterList[params.index].selectFilterList = params.changeList;
+  setSearchFilterListByKey(state, params) {
+    state.selectSearchFilterList[params.key]["dataList"] = params.changeList;
   },
   resetSearchFilterList(state) {
-    state.searchFilterList.forEach((data, i) => {
-      data.selectFilterList = [];
-    });
+    const data = state.selectSearchFilterList;
+
+    for (const key in data) {
+      data[key]["dataList"] = [];
+    }
+  },
+  setSelectSearchFilterList(state, data) {
+    state.selectSearchFilterList = data;
   }
 };
 
@@ -59,26 +68,21 @@ export const actions = {
     commit("setTabMenuList", result);
   },
   getSearchFilterList({ commit }) {
-    const result = [
-      {
+    const result = {
+      category: {
         label: "카테고리",
-        filterList: [
+        dataList: [
           { itemId: 1, itemName: "자동차부품" },
           { itemId: 2, itemName: "자동차제조" },
           { itemId: 3, itemName: "자동차정비" },
           { itemId: 4, itemName: "화물운송" },
           { itemId: 5, itemName: "관제사고" },
           { itemId: 6, itemName: "미래차산업" }
-        ],
-        selectFilterList: [
-          { itemId: 1, itemName: "자동차부품" },
-          { itemId: 2, itemName: "자동차제조" },
-          { itemId: 4, itemName: "화물운송" }
         ]
       },
-      {
+      provider: {
         label: "제공기관",
-        filterList: [
+        dataList: [
           { itemId: 7, itemName: "도로교통공단" },
           { itemId: 8, itemName: "한국지질자원연구원" },
           { itemId: 9, itemName: "한국과학기술정보연구원" },
@@ -89,35 +93,58 @@ export const actions = {
           { itemId: 14, itemName: "한국과학기술정보연구원" },
           { itemId: 15, itemName: "도로교통공단" },
           { itemId: 16, itemName: "한국지질자원연구원" }
-        ],
-        selectFilterList: [
+        ]
+      },
+      dataType: {
+        label: "데이터 타입",
+        dataList: [
+          { itemId: 17, itemName: "데이터셋(파일)" },
+          { itemId: 18, itemName: "데이터 서비스" }
+        ]
+      },
+      treeView: {
+        label: "트리뷰",
+        dataList: []
+      }
+    };
+
+    commit("setSearchFilterList", result);
+  },
+  changeSearchFilterList({ commit }, { key, changeList }) {
+    commit("setSearchFilterListByKey", { key, changeList });
+  },
+  resetSearchFilterList({ commit }) {
+    // state에게 들어올 값의 타입 미리 알려주기위해 {} 입력
+    commit("resetSearchFilterList", {});
+  },
+  getSelectSearchFilterList({ commit }) {
+    const result = {
+      category: {
+        label: "카테고리",
+        dataList: [
+          { itemId: 1, itemName: "자동차부품" },
+          { itemId: 2, itemName: "자동차제조" },
+          { itemId: 4, itemName: "화물운송" }
+        ]
+      },
+      provider: {
+        label: "제공기관",
+        dataList: [
           { itemId: 10, itemName: "국토교통부" },
           { itemId: 9, itemName: "한국과학기술정보연구원" },
           { itemId: 7, itemName: "도로교통공단" }
         ]
       },
-      {
+      dataType: {
         label: "데이터 타입",
-        filterList: [
-          { itemId: 17, itemName: "데이터셋(파일)" },
-          { itemId: 18, itemName: "데이터 서비스" }
-        ],
-        selectFilterList: [{ itemId: 17, itemName: "파일" }]
+        dataList: [{ itemId: 17, itemName: "파일" }]
       },
-      {
+      treeView: {
         label: "트리뷰",
-        filterList: [],
-        selectFilterList: []
+        dataList: []
       }
-    ];
+    };
 
-    commit("setSearchFilterList", result);
-  },
-  changeSearchFilterList({ commit }, { index, changeList }) {
-    commit("setSearchFilterListByIndex", { index, changeList });
-  },
-  resetSearchFilterList({ commit }) {
-    // state에게 들어올 값의 타입 미리 알려주기위해 [] 입력
-    commit("resetSearchFilterList", []);
+    commit("setSelectSearchFilterList", result);
   }
 };
