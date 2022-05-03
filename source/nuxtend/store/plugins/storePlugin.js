@@ -11,8 +11,8 @@ export function storePlugin(store) {
   // called after every mutation.
   // The mutation comes in the format of `{ type, payload }`.
   store.subscribe((mutation, state) => {
-    // subscribed 한 후에 다시 돌아온 경우, 그대로 return 한다.
-    if (mutation.payload.subscribed) {
+    // common vuex는 Json 을 표시해줄 필요가 없음.
+    if (mutation.type.includes("defaults/common/")) {
       return;
     }
 
@@ -26,7 +26,5 @@ export function storePlugin(store) {
         payload: apiResponse
       });
     }
-    mutation.payload.subscribed = true;
-    store.commit(mutation.type, mutation.payload);
   });
 }

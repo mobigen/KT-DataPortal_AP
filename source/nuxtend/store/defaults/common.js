@@ -26,14 +26,11 @@ export const mutations = {
 export const actions = {
   setDevJsonObject({ commit }, param) {
     // mutation subscribe 를 타지 않기 위한 boolean 값
-    param.subscribed = true;
     commit("setDevJsonObject", param);
   },
   setDevJsonReset({ commit }) {
     // mutation subscribe 를 타지 않기 위한 boolean 값
-    commit("setDevJsonReset", {
-      subscribed: true
-    });
+    commit("setDevJsonReset", {});
   },
   setDevJsonObjByKeyValue({ commit }, param) {
     commit("setDevJsonObjByKeyValue", param);
