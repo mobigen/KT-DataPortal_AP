@@ -83,6 +83,17 @@
 
     <div class="component">
       <h3>필터 - tree component</h3>
+
+      <complex-tree
+        :component-key="treeObj.componentKey"
+        :tree-rest-api="treeObj.treeRestApi"
+        :use-single-checkbox="true"
+        :checkbox-label="treeObj.checkboxLabel"
+        :tree-key="treeObj.treeKey"
+        :tree-mode="CONSTANTS.TREE.TREE_MODE.VIEW"
+        :tree-select-type="CONSTANTS.TREE.TREE_TYPE.LEAF"
+      >
+      </complex-tree>
     </div>
 
     <!-- bottom-right-->
@@ -116,6 +127,7 @@ import SelectFilterList from "@/components/aiPlatform/basic/select-filter-list.v
 import RadioButtonSearchBar from "@/components/aiPlatform/group/radio-button-search-bar.vue";
 import ComplexCheckbox from "@/components/aiPlatform/group/complex-checkbox.vue";
 import BasicPagination from "@/components/aiPlatform/basic/basic-pagination";
+import ComplexTree from "@/components/aiPlatform/group/complex-tree";
 
 export default {
   name: "app-search-full",
@@ -133,10 +145,21 @@ export default {
       checkboxColumnCount: [1, 1, 2, 1],
       pagingObj: {
         visiblePages: 5
+      },
+      treeObj: {
+        componentKey: "metaTreeKey",
+        treeRestApi: "/api/meta/getCategoryList",
+        checkboxLabel: "상위자동선택",
+        treeKey: {
+          nodeName: "node_name", // node title
+          nodeIdText: "node_id", // node key
+          parentIdText: "parent_id" // parent key
+        }
       }
     };
   },
   computed: {
+    ...mapGetters("defaults/constants", ["CONSTANTS"]),
     ...mapGetters("app/search/search", ["searchTagList", "tabMenuList"]),
     filterData: {
       get() {
@@ -160,7 +183,8 @@ export default {
     SelectFilterList,
     RadioButtonSearchBar,
     ComplexCheckbox,
-    BasicPagination
+    BasicPagination,
+    ComplexTree
   },
   watch: {},
   methods: {
