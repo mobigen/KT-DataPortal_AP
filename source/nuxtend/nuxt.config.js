@@ -82,8 +82,11 @@ export default {
 
   axios: {
     baseURL:
-      process.env.ENV_TYPE === "development" ? "http://localhost:8888/" : "/",
-    proxy: true
+      // After project generated, proxy doesn't work.
+      process.env.ENV_TYPE === "development"
+        ? process.env.VUE_APP_AXIOS_BACKEND_URL + "/"
+        : process.env.VUE_APP_AXIOS_BACKEND_URL + "/dataPortal",
+    proxy: process.env.ENV_TYPE === "development"
   },
 
   i18n: {
