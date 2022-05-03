@@ -9,7 +9,7 @@
       :checkbox-label="checkboxLabel"
       :tree-key="treeKey"
       :tree-mode="CONSTANTS.TREE.TREE_MODE.VIEW"
-      :tree-select-type="CONSTANTS.TREE.TREE_TYPE.LEAF"
+      :tree-select-type="CONSTANTS.TREE.TREE_TYPE.ALL"
     >
     </complex-tree>
   </div>
@@ -20,11 +20,11 @@ import complexTree from "@/components/aiPlatform/group/complex-tree";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "admin-tree",
+  name: "admin-tree-view",
   extends: {},
   data() {
     return {
-      componentKey: "metaTreeKey",
+      componentKey: "metaViewKey",
       treeRestApi: "/api/meta/getCategoryList",
       checkboxLabel: "상위자동선택",
       treeKey: {

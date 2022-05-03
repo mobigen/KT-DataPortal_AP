@@ -3,78 +3,101 @@
     <h5>데이터 통합검색</h5>
     <!-- top-->
     <div class="search-box">
-      <h3>검색바 component</h3>
-      <basic-search-bar @search="searchClick" :searchKeyword="searchKeyword" />
+      <div class="component">
+        <h3>검색바 component</h3>
+        <basic-search-bar
+          @search="searchClick"
+          :searchKeyword="searchKeyword"
+        />
+      </div>
 
-      <h3>추천검색어 component</h3>
-      <recommend-search-tag
-        tagLabel="추천검색어"
-        :tagList="searchTagList"
-        previousText="#"
-        :cancelButtonUse="false"
-        :cursorPointer="true"
-        @tagClick="tagClick"
-      ></recommend-search-tag>
+      <div class="component">
+        <h3>추천검색어 component</h3>
+        <recommend-search-tag
+          tagLabel="추천검색어"
+          :tagList="searchTagList"
+          previousText="#"
+          :cancelButtonUse="false"
+          :cursorPointer="true"
+          @tagClick="tagClick"
+        ></recommend-search-tag>
+      </div>
 
-      <h3>결과 component</h3>
-      <search-result-box :searchResultSuccess="searchResultSuccess">
-        <template v-slot:resultSuccessTrueText>
-          <span>"{{ searchKeyword }}"</span> 검색결과, 총 데이터
-          <span>{{ numberOfData }}</span> 입니다.
-        </template>
-        <template v-slot:resultSuccessFalseText>
-          <span>검색 결과가 없습니다.</span>
-        </template>
-      </search-result-box>
+      <div class="component">
+        <h3>결과 component</h3>
+        <search-result-box :searchResultSuccess="searchResultSuccess">
+          <template v-slot:resultSuccessTrueText>
+            <span>"{{ searchKeyword }}"</span> 검색결과, 총 데이터
+            <span>{{ numberOfData }}</span> 입니다.
+          </template>
+          <template v-slot:resultSuccessFalseText>
+            <span>검색 결과가 없습니다.</span>
+          </template>
+        </search-result-box>
+      </div>
     </div>
 
-    <h3>필터 component</h3>
-    <select-filter-list
-      :filterData="selectFilterData"
-      previousText=""
-      :cancelButtonUse="true"
-      :cursorPointer="false"
-      @filterClick=""
-      @filterTagCancel="filterTagCancel"
-      @selectFilterReset="selectFilterReset"
-    ></select-filter-list>
+    <div class="component">
+      <h3>필터 component</h3>
+      <select-filter-list
+        :filterData="selectFilterData"
+        previousText=""
+        :cancelButtonUse="true"
+        :cursorPointer="false"
+        @filterClick=""
+        @filterTagCancel="filterTagCancel"
+        @selectFilterReset="selectFilterReset"
+      ></select-filter-list>
+    </div>
 
     <!-- bottom-->
-
-    <h3>tab component</h3>
-    <basic-tab-menu
-      :menuList="tabMenuList"
-      @currentTabData="currentTabData"
-    ></basic-tab-menu>
+    <div class="component">
+      <h3>tab component</h3>
+      <basic-tab-menu
+        :menuList="tabMenuList"
+        @currentTabData="currentTabData"
+      ></basic-tab-menu>
+    </div>
 
     <!-- bottom-left-->
-    <h3>검색바 component (radio가 포함된)</h3>
-    <radio-button-search-bar
-      :radioButtonList="RadioList"
-      labelName="radioSelectSearch"
-      :defaultValue="0"
-      @searchClick="radioSelectSearch"
-    ></radio-button-search-bar>
+    <div class="component">
+      <h3>검색바 component (radio가 포함된)</h3>
+      <radio-button-search-bar
+        :radioButtonList="RadioList"
+        labelName="radioSelectSearch"
+        :defaultValue="0"
+        @searchClick="radioSelectSearch"
+      ></radio-button-search-bar>
+    </div>
 
     <!-- 모두보기 버튼/닫기 버튼(버튼토글) 추가해야함-->
-    <h3>필터 - 체크 1단, 2단 component</h3>
-    <complex-checkbox
-      :complexCheckboxList="filterData"
-      :selectCheckboxList="selectFilterData"
-      :checkboxColumnCount="checkboxColumnCount"
-      @changeCheckboxList="changeCheckboxList"
-    ></complex-checkbox>
+    <div class="component">
+      <h3>필터 - 체크 1단, 2단 component</h3>
+      <complex-checkbox
+        :complexCheckboxList="filterData"
+        :selectCheckboxList="selectFilterData"
+        :checkboxColumnCount="checkboxColumnCount"
+        @changeCheckboxList="changeCheckboxList"
+      ></complex-checkbox>
+    </div>
 
-    <div>필터 - tree component</div>
+    <div class="component">
+      <div>필터 - tree component</div>
+    </div>
 
     <!-- bottom-right-->
-    <div>
-      검색결과 요약 component (전체 몇건, sort options.. 개발 우선순위 밀림)
+    <div class="component">
+      <h3>
+        검색결과 요약 component (전체 몇건, sort options.. 개발 우선순위 밀림)
+      </h3>
     </div>
-    <div>검색결과 panel component</div>
 
-    <div>
-      <h5>paging component</h5>
+    <div class="component">
+      <h3>검색결과 panel component</h3>
+    </div>
+
+    <div class="component">
+      <h3>paging component</h3>
       <basic-pagination
         paging-key="fullSearchPagination"
         :paging-object="pagingObj"
@@ -199,5 +222,9 @@ export default {
 </script>
 
 <style lang="scss">
-// @import ""
+.component {
+  padding: 20px;
+  border: 1px solid lightgrey;
+  margin: 10px;
+}
 </style>

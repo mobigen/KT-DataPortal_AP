@@ -17,21 +17,33 @@ export const getters = {
 };
 
 export const mutations = {
-  setCategoryObject(state, data) {
-    state.categoryObject = data;
+  setCategoryObject(state, { componentKey, data }) {
+    state.categoryObject[componentKey] = data;
+    state.categoryObject = JSON.parse(JSON.stringify(state.categoryObject));
   },
-  setSelectedNodeList(state, { key, node, bool }) {
+  setSelectedNodeList(state, { key, node, bool, componentKey }) {
     if (bool) {
       const _node = JSON.parse(JSON.stringify(node));
       delete _node["children"];
-      state.selectedNodeList[key] = _node;
+
+      if (
+        !Object.prototype.hasOwnProperty.call(
+          state.selectedNodeList,
+          componentKey
+        )
+      ) {
+        state.selectedNodeList[componentKey] = {};
+      }
+
+      state.selectedNodeList[componentKey][key] = _node;
     } else {
-      delete state.selectedNodeList[key];
+      delete state.selectedNodeList[componentKey][key];
     }
+    // deep copy
     state.selectedNodeList = JSON.parse(JSON.stringify(state.selectedNodeList));
   },
-  setCategoryObjectByKey(state, data) {
-    state.categoryObjectByKey = data;
+  setCategoryObjectByKey(state, { componentKey, data }) {
+    state.categoryObjectByKey[componentKey] = data;
   }
 };
 
@@ -75,8 +87,15 @@ export const actions = {
       // db에서 조회한 데이터의 첫번째 row가 root node 로, 이 id를 기준으로 데이터가 정제되어 있다.
       let newD = jsonHelper[d[0][param.nodeIdText]][0];
       newD.subscribed = true;
-      commit("setCategoryObject", newD);
-      commit("setCategoryObjectByKey", objectByKey);
+
+      commit("setCategoryObject", {
+        componentKey: param.componentKey,
+        data: newD
+      });
+      commit("setCategoryObjectByKey", {
+        componentKey: param.componentKey,
+        data: objectByKey
+      });
     });
   },
   setSelectedNodeList({ commit }, param) {

@@ -32,7 +32,7 @@
       </template>
     </div>
 
-    <div v-if="showInfoTable">
+    <div v-if="showTestTable">
       <basic-viewTable
         :useTableHead="false"
         :viewDetail="pagingViewTable"
@@ -77,11 +77,15 @@ export default {
     pagingObject: {
       type: Object,
       require: false
+    },
+    showTestTable: {
+      type: Boolean,
+      require: false,
+      defaults: false
     }
   },
   data() {
     return {
-      showInfoTable: false,
       pagingViewTable: {
         header: [],
         body: []
@@ -151,7 +155,6 @@ export default {
     }
   },
   created() {
-    this.showInfoTable = process.env.NODE_ENV === "development";
     /**
      * pagination Component 를 불러올때, 초기화 한다.
      * 각각의 페이지 정보를 하나의 vuex가 관리하고 있기 때문에 pageKey로 관리한다.
