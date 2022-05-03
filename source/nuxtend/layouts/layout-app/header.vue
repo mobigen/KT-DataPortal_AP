@@ -20,6 +20,13 @@
           >버튼 클릭시, alert 형태로 event 처리까지만 구현 (detail한 동작구현
           x)</span
         >
+        <basic-menu
+          :menuList="userMenuList"
+          separator="|"
+          :textPreviousIcon="textPreviousIcon"
+          :textNextIcon="textNextIcon"
+        >
+        </basic-menu>
       </div>
 
       <!-- menuComponent-->
@@ -30,6 +37,7 @@
 
 <script>
 import BasicNav from "@/components/aiPlatform/basic/basic-nav.vue";
+import BasicMenu from "@/components/aiPlatform/basic/basic-menu.vue";
 export default {
   name: "layout-header",
   extends: {},
@@ -53,11 +61,19 @@ export default {
         { menuName: "마이페이지", url: "/app/my" },
         { menuName: "마이디스크", url: "/app/my/mydisk" },
         { menuName: "개인정보관리", url: "/app/my/info" }
-      ]
+      ],
+      /* 임시로 url, icon 설정 */
+      userMenuList: [
+        { menuName: "로그인", url: "/app/search" },
+        { menuName: "회원가입", url: "/app/search/fullSearch" },
+        { menuName: "마이디스크", url: "/app/search/mapSearch" }
+      ],
+      textPreviousIcon: [, , "icon"],
+      textNextIcon: ["icon", ,]
     };
   },
   props: {},
-  components: { BasicNav },
+  components: { BasicNav, BasicMenu },
   computed: {},
   watch: {},
   methods: {},
