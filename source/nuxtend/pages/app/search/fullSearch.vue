@@ -82,7 +82,7 @@
     </div>
 
     <div class="component">
-      <div>필터 - tree component</div>
+      <h3>필터 - tree component</h3>
     </div>
 
     <!-- bottom-right-->
@@ -141,9 +141,6 @@ export default {
     filterData: {
       get() {
         const data = this.$store.getters["app/search/search/searchFilterList"];
-
-        // mutation subscribed 삭제 후 수정해야함
-        delete data.subscribed;
         return JSON.parse(JSON.stringify(data));
       }
     },
@@ -151,9 +148,6 @@ export default {
       get() {
         const data =
           this.$store.getters["app/search/search/selectSearchFilterList"];
-
-        // mutation subscribed 삭제 후 수정해야함
-        delete data.subscribed;
         return JSON.parse(JSON.stringify(data));
       }
     }
