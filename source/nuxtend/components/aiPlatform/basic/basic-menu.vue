@@ -9,7 +9,7 @@
             <span v-if="textNextIcon">{{ textNextIcon[i] }}</span>
           </router-link>
         </li>
-        <span v-if="separatorUse && menuList.length !== i + 1">{{
+        <span v-if="useSeparator && menuList.length !== i + 1">{{
           separator
         }}</span>
       </template>
@@ -26,7 +26,7 @@ export default {
       type: Array,
       require: true
     },
-    separatorUse: {
+    useSeparator: {
       type: Boolean,
       require: false,
       default: false

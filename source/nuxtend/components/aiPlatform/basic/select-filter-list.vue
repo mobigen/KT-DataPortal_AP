@@ -6,7 +6,7 @@
         :tagKey="key"
         :tagList="value['dataList']"
         :previousText="previousText"
-        :cancelButtonUse="cancelButtonUse"
+        :useCancelButton="useCancelButton"
         :cursorPointer="cursorPointer"
         @tagCancel="filterTagCancel"
         @tagClick="filterClick"
@@ -40,7 +40,7 @@ export default {
       type: String,
       require: false
     },
-    cancelButtonUse: {
+    useCancelButton: {
       type: Boolean,
       require: false,
       default: false
