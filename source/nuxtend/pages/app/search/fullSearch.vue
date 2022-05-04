@@ -101,6 +101,16 @@
       <h3>
         검색결과 요약 component (전체 몇건, sort options.. 개발 우선순위 밀림)
       </h3>
+
+      <h4>sort options</h4>
+      <basic-sort-options
+        :sortList="sortList"
+        :separatorUse="true"
+        separator="|"
+        :textPreviousIcon="[]"
+        :textNextIcon="[]"
+        @sortOptionsClick="sortOptionsClick"
+      ></basic-sort-options>
     </div>
 
     <div class="component">
@@ -128,6 +138,7 @@ import RadioButtonSearchBar from "@/components/aiPlatform/group/radio-button-sea
 import ComplexCheckbox from "@/components/aiPlatform/group/complex-checkbox.vue";
 import BasicPagination from "@/components/aiPlatform/basic/basic-pagination";
 import ComplexTree from "@/components/aiPlatform/group/complex-tree";
+import BasicSortOptions from "@/components/aiPlatform/basic/basic-sort-options.vue";
 
 export default {
   name: "app-search-full",
@@ -155,7 +166,13 @@ export default {
           nodeIdText: "node_id", // node key
           parentIdText: "parent_id" // parent key
         }
-      }
+      },
+      sortList: [
+        { sortName: "정확도순", orderBy: "accuracy" },
+        { sortName: "최신순", orderBy: "latest" },
+        { sortName: "다운로드순", orderBy: "download" },
+        { sortName: "조회순", orderBy: "view" }
+      ]
     };
   },
   computed: {
@@ -184,7 +201,8 @@ export default {
     RadioButtonSearchBar,
     ComplexCheckbox,
     BasicPagination,
-    ComplexTree
+    ComplexTree,
+    BasicSortOptions
   },
   watch: {},
   methods: {
@@ -228,6 +246,9 @@ export default {
     },
     filterTagCancel(key, tagList) {
       this.changeSearchFilterList({ key, changeList: tagList });
+    },
+    sortOptionsClick(orderBy) {
+      alert(orderBy);
     }
   },
   created() {

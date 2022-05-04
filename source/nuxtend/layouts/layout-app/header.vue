@@ -22,7 +22,8 @@
         >
         <basic-menu
           :menuList="userMenuList"
-          separator="|"
+          :separatorUse="false"
+          separator=""
           :textPreviousIcon="textPreviousIcon"
           :textNextIcon="textNextIcon"
         >
