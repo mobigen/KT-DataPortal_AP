@@ -211,8 +211,7 @@ export default {
       "getTabMenuList",
       "getSearchFilterList",
       "changeSearchFilterList",
-      "resetSearchFilterList",
-      "getSelectSearchFilterList"
+      "resetSearchFilterList"
     ]),
     searchClick(inputData) {
       this.searchKeyword = inputData.trim();
@@ -255,7 +254,6 @@ export default {
     this.getSearchTagList();
     this.getTabMenuList();
     this.getSearchFilterList();
-    this.getSelectSearchFilterList();
   }
 };
 </script>
