@@ -1,8 +1,15 @@
 <template>
   <nav id="basicNav">
-    <ul>
+    <ul class="depth_0">
       <li v-for="(data, i) in menuList" :key="'nav_' + i" :style="cssVariable">
         <router-link :to="data['url']">{{ data["menuName"] }}</router-link>
+        <ul v-if="data['children'].length > 0" class="depth_1">
+          <li v-for="(cdata, ci) in data['children']" :key="'nav_child_' + ci">
+            <router-link :to="cdata['url']">
+              {{ cdata["menuName"] }}
+            </router-link>
+          </li>
+        </ul>
       </li>
     </ul>
   </nav>
@@ -32,27 +39,43 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 #basicNav {
-  ul {
+  .depth_0 {
+    margin: auto;
     display: flex;
-    li {
-      display: flex;
+    > li {
+      position: relative;
       width: var(--width);
+      padding: 10px;
       a {
+        display: block;
         font-size: 1.1rem;
         text-decoration: none;
         text-align: center;
-        vertical-align: middle;
         color: inherit;
-        width: 100%;
       }
-      a:hover {
-        color: inherit;
+      .depth_1 {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        width: 100%;
+        height: 150px;
+        background-color: rgba(119, 136, 153, 0.379);
+        li {
+          padding: 10px;
+        }
       }
     }
     li:hover {
       background-color: slategrey;
+    }
+    &:hover {
+      ul {
+        display: block;
+        z-index: 999;
+      }
     }
   }
 }
