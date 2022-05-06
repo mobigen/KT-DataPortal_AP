@@ -107,12 +107,7 @@ export const actions = {
       ]
     };
 
-    const treeView = {
-      label: "트리뷰",
-      dataList: []
-    };
-
-    const result = { category, provider, dataType, treeView };
+    const result = { category, provider, dataType };
 
     commit("setSearchFilterList", result);
   },
