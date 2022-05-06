@@ -100,11 +100,11 @@ export const actions = {
     commit("setSelectedNodeList", param);
   },
 
-  updateNodeInfo({ commit }, param) {
-    console.log(param);
+  async updateNodeInfo({ commit }, param) {
+    await this.$axios.post("/api/meta/updateCategory", param);
   },
 
-  addNewChild({ commit }, param) {
-    console.log(param);
+  async addChildCategory({ commit }, param) {
+    await this.$axios.post("/api/meta/addChildCategory", param);
   }
 };

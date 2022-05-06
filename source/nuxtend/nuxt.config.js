@@ -128,14 +128,14 @@ export default {
 
   proxy: {
     "/api/": {
-      target: "http://localhost:8888/",
-      pathRewrite: { "/api": "/dataPortal/api" },
+      target: "http://192.168.101.43:19000/",
       changeOrigin: true // cross origin 허용
     },
-    "/remote/": {
-      target: "http://192.168.101.43:8000",
-      pathRewrite: { "/remote": "" }
-      // , changeOrigin: true
+    // for test,
+    "/local/": {
+      target: "http://localhost:8888/",
+      pathRewrite: { "/local": "/dataPortal/api" },
+      changeOrigin: true
     }
   },
   server: {

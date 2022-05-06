@@ -150,7 +150,7 @@ export default {
       "getCategoryObject",
       "setSelectedNodeList",
       "updateNodeInfo",
-      "addNewChild"
+      "addChildCategory"
     ]),
     checkboxChange(checked) {
       this.checked = checked;
@@ -170,23 +170,23 @@ export default {
       this.clickMode = clickMode;
       this.selectedNode = nodeData;
     },
-    async addBtnClick() {
+    addBtnClick() {
       let params = {};
 
       if (this.clickMode === this.CONSTANTS.TREE.CLICK_MODE.EDIT) {
         // node edit
-        params[this.treeKey.parentIdText] = this.selectedNode.parentIdText;
-        params[this.treeKey.nodeIdText] = this.selectedNode.nodeIdText;
+        // params[this.treeKey.parentIdText] = this.selectedNode[this.treeKey.parentIdText];
+        params[this.treeKey.nodeIdText] = this.selectedNode[this.treeKey.nodeIdText];
         params[this.treeKey.nodeName] = this.nodeName;
 
-        await this.updateNodeInfo(params);
+        this.updateNodeInfo(params);
       } else {
         // add child
-        params[this.treeKey.parentIdText] = this.selectedNode.nodeIdText;
-        params[this.treeKey.nodeIdText] = this.selectedNode.nodeIdText;
+        params[this.treeKey.parentIdText] = this.selectedNode[this.treeKey.nodeIdText];
+        // params[this.treeKey.nodeIdText] = this.selectedNode.nodeIdText;
         params[this.treeKey.nodeName] = this.nodeName;
 
-        await this.addNewChild(params);
+        this.addChildCategory(params);
       }
     },
     updateFormData(formData) {
