@@ -33,14 +33,6 @@
         }"
         @keyAction="testAction"
       />
-
-      <basic-pagination
-        paging-key="bizMetaPagination"
-        :paging-object="{
-          visiblePages: 5
-        }"
-      >
-      </basic-pagination>
     </div>
   </div>
 </template>
@@ -56,6 +48,7 @@ export default {
   extends: {},
   data() {
     return {
+      paginationKey: "bizMetaPagination",
       buttonList: {
         edit: {
           buttonType: "icon",
@@ -83,6 +76,7 @@ export default {
   },
   props: {},
   computed: {
+    ...mapGetters("defaults/constants", ["CONSTANTS"]),
     ...mapGetters("bizMeta", ["metaNameList"])
   },
   components: { BasicTable, BasicButton, BasicPagination },
@@ -118,14 +112,14 @@ export default {
     },
     testAction(rowKey, keyAction) {
       alert("rowKey: " + rowKey + ",keyAction: " + keyAction);
+    },
+    getGridData() {
+      this.getMetaNameList({});
     }
   },
-  created() {
-    // bizMeta.js
-    // dispatch, set totalCount
-    this.getMetaNameList({
-      pagingKey: "bizMetaPagination"
-    });
+  created() {},
+  mounted() {
+    this.getGridData();
   }
 };
 </script>

@@ -1,17 +1,21 @@
 <template lang="html">
   <div class="pagination-wrap">
     <div class="pagination">
+      <!-- << -->
       <template v-show="showGotoFirst">
         <a @click="gotoFirst">
           <fa icon="angles-left" />
         </a>
       </template>
+
+      <!-- < -->
       <template v-show="showGotoPrev">
         <a @click="gotoPrev">
           <fa icon="angle-left" />
         </a>
       </template>
 
+      <!-- pages -->
       <template v-for="vp in paging.visiblePages">
         <a
           @click="gotoPage(getPageNo(vp))"
@@ -20,11 +24,14 @@
         >
       </template>
 
+      <!-- > -->
       <template v-show="showGotoNext">
         <a @click="gotoNext">
           <fa icon="angle-right" />
         </a>
       </template>
+
+      <!-- >> -->
       <template v-show="showGotoEnd">
         <a @click="gotoEnd">
           <fa icon="angles-right" />
@@ -32,6 +39,7 @@
       </template>
     </div>
 
+    <!-- paging info table, for test -->
     <div v-if="showTestTable">
       <basic-viewTable
         :useTableHead="false"
@@ -93,29 +101,27 @@ export default {
     };
   },
   computed: {
-    paging: {
-      get() {
-        const paging =
-          this.$store.getters["module/pagination/paging"][this.pagingKey];
+    paging() {
+      const paging =
+        this.$store.getters["module/pagination/paging"][this.pagingKey];
 
-        if (this.showInfoTable) {
-          let header = Object.keys(paging).map((h) => {
-            return { column_name: h };
-          });
+      if (this.showTestTable) {
+        let header = Object.keys(paging).map((h) => {
+          return { column_name: h };
+        });
 
-          this.pagingViewTable = {
-            header: header,
-            body: [paging]
-          };
-        }
-        return paging;
+        this.pagingViewTable = {
+          header: header,
+          body: [paging]
+        };
       }
+      return paging;
     }
   },
   components: { BasicViewTable },
   watch: {},
   methods: {
-    ...mapActions("module/pagination", ["setPage", "setNewPagination"]),
+    ...mapActions("module/pagination", ["setNewPagination", "setPage"]),
     gotoFirst() {
       // firstPage : 1
       this.goto(1);
@@ -149,10 +155,17 @@ export default {
         key: this.pagingKey,
         page: page
       });
+
+      /**
+       * paging을 눌렀을때 grid 목록도 리로드 할수 있게
+       * 부모 component로 Noty를 준다.
+       */
+      this.$emit("pagingEvent", { page: page });
     },
     getPageNo(data) {
       return this.paging.pageSet * this.paging.visiblePages + data;
-    }
+    },
+    pagingEvent() {}
   },
   created() {
     /**
@@ -170,6 +183,7 @@ export default {
 <style lang="scss" scoped>
 .pagination-wrap {
   text-align: center;
+  margin: 20px;
 }
 .pagination {
   display: inline-block;

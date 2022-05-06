@@ -4,12 +4,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Repository("metaManagementMapper")
 public interface MetaManagementMapper {
     ArrayList<Object> getMetaNameDetail(String nameId);
 
-    ArrayList<Object> getMetaNameList();
+    ArrayList<Object> getMetaNameList(Map<String, Object> paging);
 
     ArrayList<Object> getBizMetaForm();
 

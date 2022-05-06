@@ -53,6 +53,10 @@ export const state = () => ({
       ITEMS_PER_PAGE: "itemsPerPage",
       VISIBLE_PAGES: "visiblePages",
       PAGE: "page"
+    },
+    SERIAL : {
+      WEB : "web",
+      DB : "db"
     }
   })
 });
