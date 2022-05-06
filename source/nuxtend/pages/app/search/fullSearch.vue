@@ -17,7 +17,7 @@
           tagLabel="추천검색어"
           :tagList="searchTagList"
           previousText="#"
-          :cancelButtonUse="false"
+          :useCancelButton="false"
           :cursorPointer="true"
           @tagClick="tagClick"
         ></recommend-search-tag>
@@ -42,7 +42,7 @@
       <select-filter-list
         :filterData="selectFilterData"
         previousText=""
-        :cancelButtonUse="true"
+        :useCancelButton="true"
         :cursorPointer="false"
         @filterClick=""
         @filterTagCancel="filterTagCancel"
@@ -105,7 +105,7 @@
       <h4>sort options</h4>
       <basic-sort-options
         :sortList="sortList"
-        :separatorUse="true"
+        :useSeparator="true"
         separator="|"
         :textPreviousIcon="[]"
         :textNextIcon="[]"

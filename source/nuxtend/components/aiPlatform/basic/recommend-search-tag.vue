@@ -4,7 +4,7 @@
     <search-tag
       :tagList="tagList"
       :previousText="previousText"
-      :cancelButtonUse="cancelButtonUse"
+      :useCancelButton="useCancelButton"
       :cursorPointer="cursorPointer"
       @tagClick="tagClick"
     ></search-tag>
@@ -34,7 +34,7 @@ export default {
       type: String,
       require: false
     },
-    cancelButtonUse: {
+    useCancelButton: {
       type: Boolean,
       require: false,
       default: false
