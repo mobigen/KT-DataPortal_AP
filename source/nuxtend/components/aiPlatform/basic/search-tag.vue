@@ -4,7 +4,7 @@
       <div :class="['tag-item', { cursorPointer }]" @click="tagClick(data)">
         <span class="prev-text">{{ previousText }}</span>
         <span>{{ data["itemName"] }}</span>
-        <div @click.stop v-if="cancelButtonUse">
+        <div @click.stop v-if="useCancelButton">
           <basic-button
             :componentId="'tag_' + data['itemId']"
             buttonCss="icon-button"
@@ -42,7 +42,7 @@ export default {
       type: String,
       require: false
     },
-    cancelButtonUse: {
+    useCancelButton: {
       type: Boolean,
       require: false,
       default: false

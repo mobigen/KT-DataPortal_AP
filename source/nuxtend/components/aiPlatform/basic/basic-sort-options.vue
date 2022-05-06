@@ -15,7 +15,7 @@
             <span v-if="textNextIcon">{{ textNextIcon[i] }}</span>
           </basic-button>
         </li>
-        <span v-if="separatorUse && sortList.length !== i + 1">{{
+        <span v-if="useSeparator && sortList.length !== i + 1">{{
           separator
         }}</span>
       </template>
@@ -33,7 +33,7 @@ export default {
       type: Array,
       require: true
     },
-    separatorUse: {
+    useSeparator: {
       type: Boolean,
       require: false,
       default: false
