@@ -1,12 +1,16 @@
 <template lang="html">
-  <div>
+  <div id="basicMenu">
     <ul>
       <template v-for="(data, i) in menuList">
         <li :key="'menu_' + i">
           <router-link :to="data['url']">
-            <span v-if="textPreviousIcon">{{ textPreviousIcon[i] }}</span>
-            {{ data["menuName"] }}
-            <span v-if="textNextIcon">{{ textNextIcon[i] }}</span>
+            <basic-icon-label
+              forProperty=""
+              :textPreviousIcon="textPreviousIcon[i]"
+              :textNextIcon="textNextIcon[i]"
+            >
+              {{ data["menuName"] }}
+            </basic-icon-label>
           </router-link>
         </li>
         <span v-if="useSeparator && menuList.length !== i + 1">{{
@@ -18,6 +22,8 @@
 </template>
 
 <script type="text/javascript">
+import BasicIconLabel from "@/components/aiPlatform/basic/basic-icon-label.vue";
+
 export default {
   name: "basic-menu",
   extends: {},
@@ -48,25 +54,33 @@ export default {
     return {};
   },
   computed: {},
-  components: {},
+  components: { BasicIconLabel },
   watch: {},
   methods: {}
 };
 </script>
 
-<style scoped lang="scss">
-ul {
-  list-style: none;
-  display: flex;
-  li {
-    a {
-      text-decoration: none;
-      padding: 0px 10px;
-      color: black;
-    }
-    a:hover {
-      text-decoration: underline;
-      color: red;
+<style lang="scss">
+#basicMenu {
+  ul {
+    list-style: none;
+    display: flex;
+    li {
+      a {
+        display: flex;
+        text-decoration: none;
+        padding: 0 10px;
+        color: black;
+        #basicIconLabel {
+          label {
+            cursor: pointer;
+          }
+        }
+      }
+      a:hover {
+        text-decoration: underline;
+        color: red;
+      }
     }
   }
 }

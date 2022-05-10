@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="simple-label">
+  <div id="basicLabel">
     <label :for="forProperty"><slot></slot></label>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style lang="scss">
-#simple-label {
+#basicLabel {
   padding: 0 15px;
 }
 </style>

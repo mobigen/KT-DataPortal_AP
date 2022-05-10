@@ -3,13 +3,16 @@
     <ul class="depth_0">
       <li v-for="(data, i) in menuList" :key="'nav_' + i" :style="cssVariable">
         <router-link :to="data['url']">{{ data["menuName"] }}</router-link>
-<!--        <ul v-if="data['children'].length > 0" class="depth_1">-->
-<!--          <li v-for="(cdata, ci) in data['children']" :key="'nav_child_' + ci">-->
-<!--            <router-link :to="cdata['url']">-->
-<!--              {{ cdata["menuName"] }}-->
-<!--            </router-link>-->
-<!--          </li>-->
-<!--        </ul>-->
+        <ul
+          v-if="data['children'] && data['children'].length > 0"
+          class="depth_1"
+        >
+          <li v-for="(cdata, ci) in data['children']" :key="'nav_child_' + ci">
+            <router-link :to="cdata['url']">
+              {{ cdata["menuName"] }}
+            </router-link>
+          </li>
+        </ul>
       </li>
     </ul>
   </nav>

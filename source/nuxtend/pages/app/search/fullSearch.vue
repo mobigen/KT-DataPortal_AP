@@ -97,6 +97,12 @@
 
     <div class="component">
       <h3>검색결과 panel component</h3>
+      <name-tag-list
+        :nameTagList="searchResultList"
+        @dataOfInterest="dataOfInterest"
+        @dataSharing="dataSharing"
+        @listClick="listClick"
+      ></name-tag-list>
     </div>
 
     <div class="component">
@@ -121,6 +127,7 @@ import ComplexCheckbox from "@/components/aiPlatform/group/complex-checkbox.vue"
 import BasicPagination from "@/components/aiPlatform/basic/basic-pagination";
 import BasicSortOptions from "@/components/aiPlatform/basic/basic-sort-options.vue";
 import ComplexFilter from "@/components/aiPlatform/group/complex-filter.vue";
+import NameTagList from "@/components/aiPlatform/basic/name-tag-list.vue";
 
 export default {
   name: "app-search-full",
@@ -190,7 +197,11 @@ export default {
   },
   computed: {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
-    ...mapGetters("app/search/search", ["searchTagList", "tabMenuList"])
+    ...mapGetters("app/search/search", [
+      "searchTagList",
+      "tabMenuList",
+      "searchResultList"
+    ]),
   },
   components: {
     BasicSearchBar,
@@ -201,15 +212,17 @@ export default {
     RadioButtonSearchBar,
     ComplexCheckbox,
     BasicPagination,
+    ComplexFilter,
     BasicSortOptions,
-    ComplexFilter
+    NameTagList
   },
   watch: {},
   methods: {
     ...mapActions("app/search/search", [
       "getSearchTagList",
       "getTabMenuList",
-      "getSearchFilterList"
+      "getSearchFilterList",
+      "getSearchResultList"
     ]),
     searchClick(inputData) {
       this.searchKeyword = inputData.trim();
@@ -237,12 +250,36 @@ export default {
     },
     sortOptionsClick(orderBy) {
       alert(orderBy);
+    },
+    dataOfInterest(id) {
+      alert("관심데이터/ 게시물ID: " + id);
+    },
+    dataSharing(id) {
+      alert("데이터 공유하기/ 게시물ID: " + id);
+    },
+    listClick(id) {
+      const dataList = this.searchResultList.find((el) => {
+        if (el.id === id) {
+          return true;
+        }
+      });
+
+      // dataLocationKey, path 정해지면 변경
+      if (dataList.dataLocation === "내부") {
+        this.$router.push({
+          path: "/app/search/detail",
+          query: { postId: id }
+        });
+      } else {
+        window.open("/app/search/fullSearch", "_blank");
+      }
     }
   },
   created() {
     this.getSearchTagList();
     this.getTabMenuList();
     this.getSearchFilterList(this.filterObj);
+    this.getSearchResultList();
   }
 };
 </script>
