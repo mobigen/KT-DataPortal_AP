@@ -228,6 +228,7 @@ export default {
 <style scoped>
 ul {
   padding-left: 0.5rem;
+  display: inline-grid;
 }
 
 .tree_cont {

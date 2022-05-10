@@ -38,7 +38,7 @@ export default {
 <style scoped lang="scss">
 #basicIconLabel {
   label {
-    padding: 0px 10px;
+    padding: 0 10px;
   }
 }
 </style>

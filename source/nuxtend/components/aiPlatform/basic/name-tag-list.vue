@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="nameTagList">
-    <div class="list-wrap" v-for="(data, i) in nameTagList">
+    <div class="list-wrap" v-for="(data) in nameTagList">
       <div class="list-top">
         <div>
           <basic-single-tag
@@ -19,7 +19,7 @@
         </div>
 
         <div>
-          <template v-for="(fdata, fi) in data['fileType']">
+          <template v-for="(fdata) in data['fileType']">
             <basic-icon>{{ fdata }}</basic-icon>
           </template>
           <basic-button
@@ -148,7 +148,7 @@ export default {
         display: flex;
         margin-right: 10px;
         > div {
-          padding: 0px;
+          padding: 0;
           margin-right: 10px;
         }
       }

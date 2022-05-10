@@ -69,7 +69,7 @@ export default {
       a {
         display: flex;
         text-decoration: none;
-        padding: 0px 10px;
+        padding: 0 10px;
         color: black;
         #basicIconLabel {
           label {

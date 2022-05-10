@@ -39,15 +39,13 @@
 
     <div class="component">
       <h3>필터 component</h3>
-      <select-filter-list
-        :filterData="selectFilterData"
-        previousText=""
-        :useCancelButton="true"
-        :cursorPointer="false"
-        @filterClick=""
-        @filterTagCancel="filterTagCancel"
-        @selectFilterReset="selectFilterReset"
-      ></select-filter-list>
+
+      <div class="component">
+        <complex-filter-result
+          :filter-obj="filterObj"
+          :tree-obj="treeObj"
+        />
+      </div>
     </div>
 
     <!-- bottom-->
@@ -73,27 +71,11 @@
     <!-- 모두보기 버튼/닫기 버튼(버튼토글) 추가해야함-->
     <div class="component">
       <h3>필터 - 체크 1단, 2단 component</h3>
-      <complex-checkbox
-        :complexCheckboxList="filterData"
-        :selectCheckboxList="selectFilterData"
-        :checkboxColumnCount="checkboxColumnCount"
-        @changeCheckboxList="changeCheckboxList"
-      ></complex-checkbox>
-    </div>
 
-    <div class="component">
-      <h3>필터 - tree component</h3>
-
-      <complex-tree
-        :component-key="treeObj.componentKey"
-        :tree-rest-api="treeObj.treeRestApi"
-        :use-single-checkbox="true"
-        :checkbox-label="treeObj.checkboxLabel"
-        :tree-key="treeObj.treeKey"
-        :tree-mode="CONSTANTS.TREE.TREE_MODE.VIEW"
-        :tree-select-type="CONSTANTS.TREE.TREE_TYPE.LEAF"
-      >
-      </complex-tree>
+      <complex-filter
+        :filter-obj="filterObj"
+        :tree-obj="treeObj"
+      ></complex-filter>
     </div>
 
     <!-- bottom-right-->
@@ -139,12 +121,12 @@ import BasicSearchBar from "@/components/aiPlatform/basic/basic-search-bar.vue";
 import RecommendSearchTag from "@/components/aiPlatform/basic/recommend-search-tag.vue";
 import SearchResultBox from "@/components/aiPlatform/basic/search-result-box.vue";
 import BasicTabMenu from "@/components/aiPlatform/basic/basic-tab-menu.vue";
-import SelectFilterList from "@/components/aiPlatform/basic/select-filter-list.vue";
+import ComplexFilterResult from "@/components/aiPlatform/group/complex-filter-result.vue";
 import RadioButtonSearchBar from "@/components/aiPlatform/group/radio-button-search-bar.vue";
 import ComplexCheckbox from "@/components/aiPlatform/group/complex-checkbox.vue";
 import BasicPagination from "@/components/aiPlatform/basic/basic-pagination";
-import ComplexTree from "@/components/aiPlatform/group/complex-tree";
 import BasicSortOptions from "@/components/aiPlatform/basic/basic-sort-options.vue";
+import ComplexFilter from "@/components/aiPlatform/group/complex-filter.vue";
 import NameTagList from "@/components/aiPlatform/basic/name-tag-list.vue";
 
 export default {
@@ -153,6 +135,38 @@ export default {
   props: {},
   data() {
     return {
+      /**
+       * 사용하고자 하는 filter 를 key-value(obj)의 형태로 정의한다.
+       * vuex에서 해당 key를 이용하여 데이터를 로드한다.
+       */
+      filterObj: {
+        category: {
+          label: "카테고리",
+          componentType: "checkbox",
+          columnCnt: 1
+          // restApi: "/api/filter/getCategory"
+        },
+        provider: {
+          label: "제공기관",
+          componentType: "checkbox",
+          columnCnt: 2
+          // restApi: "/api/filter/getProvider"
+        },
+        dataType: {
+          label: "데이터 타입",
+          componentType: "checkbox",
+          columnCnt: 1,
+          useViewButton: true // 모두보기 버튼 사용 여부
+          // restApi: "/api/filter/getDataType"
+        },
+        treeView: {
+          label: "트리뷰",
+          columnCnt: 1,
+          componentType: "tree",
+          restApi: "",
+          forLabel: true // tree는 다른 컴포넌트를 사용하기 때문에, 예외처리를 위하여 추가한다.
+        }
+      },
       searchKeyword: "",
       numberOfData: null,
       searchResultSuccess: false,
@@ -160,7 +174,6 @@ export default {
         { value: 0, label: "포함" },
         { value: 1, label: "제외" }
       ],
-      checkboxColumnCount: [1, 1, 2, 1],
       pagingObj: {
         visiblePages: 5
       },
@@ -189,30 +202,17 @@ export default {
       "tabMenuList",
       "searchResultList"
     ]),
-    filterData: {
-      get() {
-        const data = this.$store.getters["app/search/search/searchFilterList"];
-        return JSON.parse(JSON.stringify(data));
-      }
-    },
-    selectFilterData: {
-      get() {
-        const data =
-          this.$store.getters["app/search/search/selectSearchFilterList"];
-        return JSON.parse(JSON.stringify(data));
-      }
-    }
   },
   components: {
     BasicSearchBar,
     RecommendSearchTag,
     SearchResultBox,
     BasicTabMenu,
-    SelectFilterList,
+    ComplexFilterResult,
     RadioButtonSearchBar,
     ComplexCheckbox,
     BasicPagination,
-    ComplexTree,
+    ComplexFilter,
     BasicSortOptions,
     NameTagList
   },
@@ -222,8 +222,6 @@ export default {
       "getSearchTagList",
       "getTabMenuList",
       "getSearchFilterList",
-      "changeSearchFilterList",
-      "resetSearchFilterList",
       "getSearchResultList"
     ]),
     searchClick(inputData) {
@@ -247,17 +245,8 @@ export default {
     currentTabData(data) {
       console.log(data);
     },
-    selectFilterReset() {
-      this.resetSearchFilterList();
-    },
     radioSelectSearch(radioValue, searchKeyword) {
       alert("radioValue: " + radioValue + ", searchKeyword: " + searchKeyword);
-    },
-    changeCheckboxList(key, checkboxList) {
-      this.changeSearchFilterList({ key, changeList: checkboxList });
-    },
-    filterTagCancel(key, tagList) {
-      this.changeSearchFilterList({ key, changeList: tagList });
     },
     sortOptionsClick(orderBy) {
       alert(orderBy);
@@ -289,7 +278,7 @@ export default {
   created() {
     this.getSearchTagList();
     this.getTabMenuList();
-    this.getSearchFilterList();
+    this.getSearchFilterList(this.filterObj);
     this.getSearchResultList();
   }
 };

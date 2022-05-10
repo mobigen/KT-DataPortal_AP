@@ -35,7 +35,7 @@ export default {
   display: flex;
   height: 30px;
   background-color: lightgray;
-  padding: 0px 10px;
+  padding: 0 10px;
   margin-right: 10px;
   .prev-text {
     padding: 4px 10px;

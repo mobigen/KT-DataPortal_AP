@@ -81,7 +81,7 @@ ul {
   list-style: none;
   display: flex;
   li {
-    padding: 0px 10px;
+    padding: 0 10px;
     #basicIconLabel {
       label {
         cursor: pointer;

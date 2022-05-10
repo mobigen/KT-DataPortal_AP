@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="basicTagList">
-    <template v-for="(data, i) in tagData">
+    <template v-for="(data) in tagData">
       <div :class="['tag-item', { cursorPointer }]" @click="tagClick(data)">
         <span v-if="previousText" class="prev-text">{{ previousText }}</span>
         <span>{{ data["itemName"] }}</span>
@@ -86,7 +86,7 @@ export default {
     height: 30px;
     background-color: lightgray;
     border-radius: 20px;
-    padding: 0px 10px;
+    padding: 0 10px;
     margin-right: 10px;
     margin-bottom: 10px;
     .prev-text {
