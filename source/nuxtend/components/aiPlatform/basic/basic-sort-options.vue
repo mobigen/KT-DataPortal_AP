@@ -10,9 +10,13 @@
             :underline="false"
             @click="buttonClick"
           >
-            <span v-if="textPreviousIcon">{{ textPreviousIcon[i] }}</span>
-            {{ data["sortName"] }}
-            <span v-if="textNextIcon">{{ textNextIcon[i] }}</span>
+            <basic-icon-label
+              forProperty=""
+              :textPreviousIcon="textPreviousIcon[i]"
+              :textNextIcon="textNextIcon[i]"
+            >
+              {{ data["sortName"] }}
+            </basic-icon-label>
           </basic-button>
         </li>
         <span v-if="useSeparator && sortList.length !== i + 1">{{
@@ -25,6 +29,7 @@
 
 <script type="text/javascript">
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
+import BasicIconLabel from "@/components/aiPlatform/basic/basic-icon-label.vue";
 export default {
   name: "basic-sort-options",
   extends: {},
@@ -57,7 +62,7 @@ export default {
     };
   },
   computed: {},
-  components: { BasicButton },
+  components: { BasicButton, BasicIconLabel },
   watch: {},
   methods: {
     buttonClick(componentId) {
@@ -77,6 +82,11 @@ ul {
   display: flex;
   li {
     padding: 0px 10px;
+    #basicIconLabel {
+      label {
+        cursor: pointer;
+      }
+    }
   }
   .isActive {
     button {

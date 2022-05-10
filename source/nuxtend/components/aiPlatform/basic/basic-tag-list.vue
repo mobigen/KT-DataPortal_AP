@@ -1,8 +1,8 @@
 <template lang="html">
-  <div id="searchTag">
+  <div id="basicTagList">
     <template v-for="(data, i) in tagData">
       <div :class="['tag-item', { cursorPointer }]" @click="tagClick(data)">
-        <span class="prev-text">{{ previousText }}</span>
+        <span v-if="previousText" class="prev-text">{{ previousText }}</span>
         <span>{{ data["itemName"] }}</span>
         <div @click.stop v-if="useCancelButton">
           <basic-button
@@ -24,7 +24,7 @@
 <script type="text/javascript">
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 export default {
-  name: "search-tag",
+  name: "basic-tag-list",
   extends: {},
   data() {
     return {};
@@ -78,7 +78,7 @@ export default {
 </script>
 
 <style lang="scss">
-#searchTag {
+#basicTagList {
   display: flex;
   flex-wrap: wrap;
   .tag-item {
