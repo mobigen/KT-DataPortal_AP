@@ -53,6 +53,12 @@ export const state = () => ({
       ITEMS_PER_PAGE: "itemsPerPage",
       VISIBLE_PAGES: "visiblePages",
       PAGE: "page"
+    },
+    FILTER: {
+      TYPE: {
+        CHECKBOX: "checkbox",
+        TREE: "tree"
+      }
     }
   })
 });
