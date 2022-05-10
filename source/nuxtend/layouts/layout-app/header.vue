@@ -87,8 +87,8 @@ export default {
         { menuName: "회원가입", url: "/app/search/fullSearch" },
         { menuName: "마이디스크", url: "/app/search/mapSearch" }
       ],
-      textPreviousIcon: [, , "icon"],
-      textNextIcon: ["icon", ,]
+      textPreviousIcon: [, , "book-bookmark"],
+      textNextIcon: ["key", ,]
     };
   },
   props: {},

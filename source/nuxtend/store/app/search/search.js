@@ -2,7 +2,8 @@ export const state = () => ({
   searchTagList: {},
   tabMenuList: [],
   searchFilterList: [],
-  selectSearchFilterList: {}
+  selectSearchFilterList: {},
+  searchResultList: []
 });
 
 export const getters = {
@@ -17,6 +18,9 @@ export const getters = {
   },
   selectSearchFilterList(state) {
     return state.selectSearchFilterList;
+  },
+  searchResultList(state) {
+    return state.searchResultList;
   }
 };
 
@@ -46,6 +50,9 @@ export const mutations = {
     for (const key in data) {
       data[key]["dataList"] = [];
     }
+  },
+  setSearchResultList(state, data) {
+    state.searchResultList = data;
   }
 };
 
@@ -122,5 +129,60 @@ export const actions = {
   resetSearchFilterList({ commit }) {
     // state에게 들어올 값의 타입 미리 알려주기위해 {} 입력
     commit("resetSearchFilterList", {});
+  },
+  getSearchResultList({ commit }) {
+    const searchResultList = [
+      {
+        id: 1,
+        category: "자동차부품",
+        dataLocation: "내부",
+        dataSource: "도로교통공단",
+        fileType: ["CSV", "XML"],
+        title: "도로교통공단_결빙사고 다발지역",
+        body: "노면상태가 '서리/결빙'인 교통사고에 대한 사고다발지역 정보",
+        date: "2022-05-09",
+        download: 180,
+        hit: 200
+      },
+      {
+        id: 2,
+        category: "자동차부품",
+        dataLocation: "내부",
+        dataSource: "도로교통공단",
+        fileType: ["CSV", "XML"],
+        title: "도로교통공단_결빙사고 다발지역",
+        body: "노면상태가 '서리/결빙'인 교통사고에 대한 사고다발지역 정보",
+        date: "2022-05-09",
+        download: 180,
+        hit: 200
+      },
+      {
+        id: 3,
+        category: null,
+        dataLocation: "외부",
+        dataSource: "도로교통공단",
+        fileType: null,
+        title:
+          "Dataset for the paper Prolonged prothrombin time as an early prognostic indicator of severe",
+        body: "Predicting continental US drought levels using meteorological & soil data. The US drought monitor is a measure of drought across the US manually created by experts using a wide range of data. This datasets' aim is to help investigate if droughts could be predicted using only meteorological data, potentially leading to generalizationr",
+        date: "2022-05-09",
+        download: 180,
+        hit: 200
+      },
+      {
+        id: 4,
+        category: "자동차부품",
+        dataLocation: "내부",
+        dataSource: "도로교통공단",
+        fileType: ["CSV", "XML"],
+        title: "도로교통공단_결빙사고 다발지역",
+        body: "노면상태가 '서리/결빙'인 교통사고에 대한 사고다발지역 정보",
+        date: "2022-05-09",
+        download: 180,
+        hit: 200
+      }
+    ];
+
+    commit("setSearchResultList", searchResultList);
   }
 };
