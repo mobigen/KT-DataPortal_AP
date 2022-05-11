@@ -16,7 +16,7 @@
       </template>
 
       <!-- pages -->
-      <template v-for="vp in paging.visiblePages">
+      <template v-for="vp in paging.totalPage">
         <a
           @click="gotoPage(getPageNo(vp))"
           :class="{ active: paging.page === getPageNo(vp) }"

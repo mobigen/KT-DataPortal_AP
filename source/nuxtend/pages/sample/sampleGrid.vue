@@ -2,14 +2,6 @@
   <div>
     <h3>샘플 Grid + pagination</h3>
 
-    <div class="noty">
-      <h5>NOTY</h5>
-      <p>
-        * ROOT Component 에서 list 목록 조회를 할때는 'mounted'를
-        이용해야합니다.
-      </p>
-    </div>
-
     <basic-table
       componentId=""
       :headerList="metaNameList.header"
@@ -36,6 +28,7 @@
         [CONSTANTS.PAGING.PAGE]: 1
       }"
       @pagingEvent="getGridData"
+      :show-test-table="false"
     />
   </div>
 </template>
@@ -89,7 +82,7 @@ export default {
      * // grid default methods
      */
     getGridData(param) {
-      if (param.page) {
+      if (param !== undefined && param.page) {
         this.currentPage = param.page;
       }
 
@@ -100,7 +93,7 @@ export default {
   },
   created() {},
   mounted() {
-    this.getGridData({});
+    this.getGridData();
   }
 };
 </script>

@@ -27,7 +27,7 @@ export const actions = {
         "module/pagination/setTotalCount",
         {
           key: params.paginationKey,
-          totalCount: 100
+          totalCount: d.totalCount
         },
         { root: true }
       );
