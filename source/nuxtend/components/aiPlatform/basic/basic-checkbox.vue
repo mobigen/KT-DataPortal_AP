@@ -1,8 +1,22 @@
 <template lang="html">
   <div id="basicCheckbox">
-    <div class="checkbox-title">{{ checkboxTitle }}</div>
+    <div class="checkbox-title">
+      <span>{{ checkboxTitle }}</span>
+
+      <!-- 모두 보기 버튼 같은 특수한 상황에 사용할 버튼 컴포넌트-->
+      <template v-if="useViewButton">
+        <basic-button
+          componentId=""
+          buttonCss="text-button"
+          :underline="false"
+          :hoverColor="false"
+          @click="checkBoxButton"
+          >모두보기</basic-button
+        >
+      </template>
+    </div>
     <div class="checkbox-body" :style="cssVariable">
-      <template v-for="(data, i) in checkboxData">
+      <template v-for="(data) in checkboxData">
         <basic-single-checkbox
           :checkboxLabel="data['itemName']"
           :labelName="'ckb_' + data['itemId']"
@@ -16,6 +30,7 @@
 
 <script type="text/javascript">
 import BasicSingleCheckbox from "@/components/aiPlatform/basic/basic-single-checkbox.vue";
+import BasicButton from "@/components/aiPlatform/basic/basic-button";
 
 export default {
   name: "basic-checkbox",
@@ -42,15 +57,20 @@ export default {
       type: Number,
       require: false,
       default: "column"
+    },
+    useViewButton: {
+      type: Boolean,
+      require: false,
+      default: false
     }
   },
   data() {
     return {};
   },
   computed: {
-    changeCheckboxList: {
+    selectedCheckbox: {
       get() {
-        return this.selectCheckboxList;
+        return JSON.parse(JSON.stringify(this.selectCheckboxList));
       },
       set(newValue) {
         this.$emit("changeCheckboxList", this.checkboxKey, newValue);
@@ -62,7 +82,7 @@ export default {
       };
     }
   },
-  components: { BasicSingleCheckbox },
+  components: { BasicButton, BasicSingleCheckbox },
   watch: {},
   methods: {
     changeCheckboxData(checked, labelName) {
@@ -73,44 +93,32 @@ export default {
           (el) => el.itemId === itemId
         ).itemName;
 
-        this.changeCheckboxList.push({ itemId, itemName });
-        this.$emit(
-          "changeCheckboxList",
-          this.checkboxKey,
-          this.changeCheckboxList
+        this.selectedCheckbox.push({ itemId, itemName });
+        this.selectedCheckbox = JSON.parse(
+          JSON.stringify(this.selectedCheckbox)
         );
       } else {
-        this.changeCheckboxList = this.changeCheckboxList.filter(
+        this.selectedCheckbox = this.selectedCheckbox.filter(
           (el) => el.itemId !== itemId
         );
       }
     },
     checked(itemId) {
-      return this.selectCheckboxList.findIndex(
-        (obj) => obj.itemId === itemId
-      ) >= 0
-        ? true
-        : false;
+      return (
+        this.selectCheckboxList.findIndex((obj) => obj.itemId === itemId) >= 0
+      );
+    },
+    checkBoxButton() {
+      console.log("checkBoxButton");
     }
   },
   created() {}
 };
 </script>
 
-<style lang="scss">
-#basicCheckbox {
-  border: solid lightgrey 1px;
-  width: 300px;
-  padding: 5px;
-  margin-bottom: 20px;
-  .checkbox-title {
-    font-weight: bold;
-    margin: 5px;
-    /*  width: var(--width); */
-  }
-  .checkbox-body {
-    display: grid;
-    grid-template-columns: var(--grid-template-columns);
-  }
+<style lang="scss" scoped>
+.checkbox-body {
+  display: grid;
+  grid-template-columns: var(--grid-template-columns);
 }
 </style>

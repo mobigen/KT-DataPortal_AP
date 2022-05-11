@@ -2,7 +2,8 @@ export const state = () => ({
   searchTagList: {},
   tabMenuList: [],
   searchFilterList: [],
-  selectSearchFilterList: {}
+  selectSearchFilterList: {},
+  searchResultList: []
 });
 
 export const getters = {
@@ -17,6 +18,9 @@ export const getters = {
   },
   selectSearchFilterList(state) {
     return state.selectSearchFilterList;
+  },
+  searchResultList(state) {
+    return state.searchResultList;
   }
 };
 
@@ -29,19 +33,26 @@ export const mutations = {
   },
   setSearchFilterList(state, data) {
     state.searchFilterList = data;
+
+    // selectSearchFilterList setting
+    const setData = JSON.parse(JSON.stringify(data));
+    for (const key in setData) {
+      setData[key] = [];
+    }
+    state.selectSearchFilterList = setData;
   },
-  setSearchFilterListByKey(state, params) {
-    state.selectSearchFilterList[params.key]["dataList"] = params.changeList;
+  setSearchFilterListByKey(state, {key, changeList}) {
+    state.selectSearchFilterList[key] = changeList;
   },
   resetSearchFilterList(state) {
     const data = state.selectSearchFilterList;
 
     for (const key in data) {
-      data[key]["dataList"] = [];
+      data[key] = [];
     }
   },
-  setSelectSearchFilterList(state, data) {
-    state.selectSearchFilterList = data;
+  setSearchResultList(state, data) {
+    state.searchResultList = data;
   }
 };
 
@@ -67,84 +78,108 @@ export const actions = {
 
     commit("setTabMenuList", result);
   },
-  getSearchFilterList({ commit }) {
-    const result = {
-      category: {
-        label: "카테고리",
-        dataList: [
-          { itemId: 1, itemName: "자동차부품" },
-          { itemId: 2, itemName: "자동차제조" },
-          { itemId: 3, itemName: "자동차정비" },
-          { itemId: 4, itemName: "화물운송" },
-          { itemId: 5, itemName: "관제사고" },
-          { itemId: 6, itemName: "미래차산업" }
-        ]
-      },
-      provider: {
-        label: "제공기관",
-        dataList: [
-          { itemId: 7, itemName: "도로교통공단" },
-          { itemId: 8, itemName: "한국지질자원연구원" },
-          { itemId: 9, itemName: "한국과학기술정보연구원" },
-          { itemId: 10, itemName: "국토교통부" },
-          { itemId: 11, itemName: "한국지질자원연구원" },
-          { itemId: 12, itemName: "도로교통공단" },
-          { itemId: 13, itemName: "한국지질자원연구원" },
-          { itemId: 14, itemName: "한국과학기술정보연구원" },
-          { itemId: 15, itemName: "도로교통공단" },
-          { itemId: 16, itemName: "한국지질자원연구원" }
-        ]
-      },
-      dataType: {
-        label: "데이터 타입",
-        dataList: [
-          { itemId: 17, itemName: "데이터셋(파일)" },
-          { itemId: 18, itemName: "데이터 서비스" }
-        ]
-      },
-      treeView: {
-        label: "트리뷰",
-        dataList: []
-      }
-    };
+  async getSearchFilterList({ commit }, filterObj) {
+    // when connect API server, use this code.
+
+    // const filterKeys = Object.keys(filterObj);
+    // let result = {};
+    // await filterKeys.forEach((key) => {
+    //   this.$axios.get(filterObj[key].restApi).then((d) => {
+    //     result[key] = d;
+    //   });
+    // });
+
+    const category = [
+      { itemId: 1, itemName: "자동차부품" },
+      { itemId: 2, itemName: "자동차제조" },
+      { itemId: 3, itemName: "자동차정비" },
+      { itemId: 4, itemName: "화물운송" },
+      { itemId: 5, itemName: "관제사고" },
+      { itemId: 6, itemName: "미래차산업" }
+    ];
+
+    const provider = [
+      { itemId: 7, itemName: "도로교통공단" },
+      { itemId: 8, itemName: "한국지질자원연구원" },
+      { itemId: 9, itemName: "한국과학기술정보연구원" },
+      { itemId: 10, itemName: "국토교통부" },
+      { itemId: 11, itemName: "한국지질자원연구원" },
+      { itemId: 12, itemName: "도로교통공단" },
+      { itemId: 13, itemName: "한국지질자원연구원" },
+      { itemId: 14, itemName: "한국과학기술정보연구원" },
+      { itemId: 15, itemName: "도로교통공단" },
+      { itemId: 16, itemName: "한국지질자원연구원" }
+    ];
+
+    const dataType = [
+      { itemId: 17, itemName: "데이터셋(파일)" },
+      { itemId: 18, itemName: "데이터 서비스" }
+    ];
+
+    const result = { category, provider, dataType };
 
     commit("setSearchFilterList", result);
   },
-  changeSearchFilterList({ commit }, { key, changeList }) {
-    commit("setSearchFilterListByKey", { key, changeList });
+  changeSearchFilterList({ commit }, params) {
+    commit("setSearchFilterListByKey", params);
   },
   resetSearchFilterList({ commit }) {
     // state에게 들어올 값의 타입 미리 알려주기위해 {} 입력
     commit("resetSearchFilterList", {});
   },
-  getSelectSearchFilterList({ commit }) {
-    const result = {
-      category: {
-        label: "카테고리",
-        dataList: [
-          { itemId: 1, itemName: "자동차부품" },
-          { itemId: 2, itemName: "자동차제조" },
-          { itemId: 4, itemName: "화물운송" }
-        ]
+  getSearchResultList({ commit }) {
+    const searchResultList = [
+      {
+        id: 1,
+        category: "자동차부품",
+        dataLocation: "내부",
+        dataSource: "도로교통공단",
+        fileType: ["CSV", "XML"],
+        title: "도로교통공단_결빙사고 다발지역",
+        body: "노면상태가 '서리/결빙'인 교통사고에 대한 사고다발지역 정보",
+        date: "2022-05-09",
+        download: 180,
+        hit: 200
       },
-      provider: {
-        label: "제공기관",
-        dataList: [
-          { itemId: 10, itemName: "국토교통부" },
-          { itemId: 9, itemName: "한국과학기술정보연구원" },
-          { itemId: 7, itemName: "도로교통공단" }
-        ]
+      {
+        id: 2,
+        category: "자동차부품",
+        dataLocation: "내부",
+        dataSource: "도로교통공단",
+        fileType: ["CSV", "XML"],
+        title: "도로교통공단_결빙사고 다발지역",
+        body: "노면상태가 '서리/결빙'인 교통사고에 대한 사고다발지역 정보",
+        date: "2022-05-09",
+        download: 180,
+        hit: 200
       },
-      dataType: {
-        label: "데이터 타입",
-        dataList: [{ itemId: 17, itemName: "파일" }]
+      {
+        id: 3,
+        category: null,
+        dataLocation: "외부",
+        dataSource: "도로교통공단",
+        fileType: null,
+        title:
+          "Dataset for the paper Prolonged prothrombin time as an early prognostic indicator of severe",
+        body: "Predicting continental US drought levels using meteorological & soil data. The US drought monitor is a measure of drought across the US manually created by experts using a wide range of data. This datasets' aim is to help investigate if droughts could be predicted using only meteorological data, potentially leading to generalizationr",
+        date: "2022-05-09",
+        download: 180,
+        hit: 200
       },
-      treeView: {
-        label: "트리뷰",
-        dataList: []
+      {
+        id: 4,
+        category: "자동차부품",
+        dataLocation: "내부",
+        dataSource: "도로교통공단",
+        fileType: ["CSV", "XML"],
+        title: "도로교통공단_결빙사고 다발지역",
+        body: "노면상태가 '서리/결빙'인 교통사고에 대한 사고다발지역 정보",
+        date: "2022-05-09",
+        download: 180,
+        hit: 200
       }
-    };
+    ];
 
-    commit("setSelectSearchFilterList", result);
+    commit("setSearchResultList", searchResultList);
   }
 };

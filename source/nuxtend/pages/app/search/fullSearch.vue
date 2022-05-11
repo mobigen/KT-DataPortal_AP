@@ -17,7 +17,7 @@
           tagLabel="추천검색어"
           :tagList="searchTagList"
           previousText="#"
-          :cancelButtonUse="false"
+          :useCancelButton="false"
           :cursorPointer="true"
           @tagClick="tagClick"
         ></recommend-search-tag>
@@ -39,15 +39,13 @@
 
     <div class="component">
       <h3>필터 component</h3>
-      <select-filter-list
-        :filterData="selectFilterData"
-        previousText=""
-        :cancelButtonUse="true"
-        :cursorPointer="false"
-        @filterClick=""
-        @filterTagCancel="filterTagCancel"
-        @selectFilterReset="selectFilterReset"
-      ></select-filter-list>
+
+      <div class="component">
+        <complex-filter-result
+          :filter-obj="filterObj"
+          :tree-obj="treeObj"
+        />
+      </div>
     </div>
 
     <!-- bottom-->
@@ -73,27 +71,11 @@
     <!-- 모두보기 버튼/닫기 버튼(버튼토글) 추가해야함-->
     <div class="component">
       <h3>필터 - 체크 1단, 2단 component</h3>
-      <complex-checkbox
-        :complexCheckboxList="filterData"
-        :selectCheckboxList="selectFilterData"
-        :checkboxColumnCount="checkboxColumnCount"
-        @changeCheckboxList="changeCheckboxList"
-      ></complex-checkbox>
-    </div>
 
-    <div class="component">
-      <h3>필터 - tree component</h3>
-
-      <complex-tree
-        :component-key="treeObj.componentKey"
-        :tree-rest-api="treeObj.treeRestApi"
-        :use-single-checkbox="true"
-        :checkbox-label="treeObj.checkboxLabel"
-        :tree-key="treeObj.treeKey"
-        :tree-mode="CONSTANTS.TREE.TREE_MODE.VIEW"
-        :tree-select-type="CONSTANTS.TREE.TREE_TYPE.LEAF"
-      >
-      </complex-tree>
+      <complex-filter
+        :filter-obj="filterObj"
+        :tree-obj="treeObj"
+      ></complex-filter>
     </div>
 
     <!-- bottom-right-->
@@ -101,10 +83,26 @@
       <h3>
         검색결과 요약 component (전체 몇건, sort options.. 개발 우선순위 밀림)
       </h3>
+
+      <h4>sort options</h4>
+      <basic-sort-options
+        :sortList="sortList"
+        :useSeparator="true"
+        separator="|"
+        :textPreviousIcon="[]"
+        :textNextIcon="[]"
+        @sortOptionsClick="sortOptionsClick"
+      ></basic-sort-options>
     </div>
 
     <div class="component">
       <h3>검색결과 panel component</h3>
+      <name-tag-list
+        :nameTagList="searchResultList"
+        @dataOfInterest="dataOfInterest"
+        @dataSharing="dataSharing"
+        @listClick="listClick"
+      ></name-tag-list>
     </div>
 
     <div class="component">
@@ -123,11 +121,13 @@ import BasicSearchBar from "@/components/aiPlatform/basic/basic-search-bar.vue";
 import RecommendSearchTag from "@/components/aiPlatform/basic/recommend-search-tag.vue";
 import SearchResultBox from "@/components/aiPlatform/basic/search-result-box.vue";
 import BasicTabMenu from "@/components/aiPlatform/basic/basic-tab-menu.vue";
-import SelectFilterList from "@/components/aiPlatform/basic/select-filter-list.vue";
+import ComplexFilterResult from "@/components/aiPlatform/group/complex-filter-result.vue";
 import RadioButtonSearchBar from "@/components/aiPlatform/group/radio-button-search-bar.vue";
 import ComplexCheckbox from "@/components/aiPlatform/group/complex-checkbox.vue";
 import BasicPagination from "@/components/aiPlatform/basic/basic-pagination";
-import ComplexTree from "@/components/aiPlatform/group/complex-tree";
+import BasicSortOptions from "@/components/aiPlatform/basic/basic-sort-options.vue";
+import ComplexFilter from "@/components/aiPlatform/group/complex-filter.vue";
+import NameTagList from "@/components/aiPlatform/basic/name-tag-list.vue";
 
 export default {
   name: "app-search-full",
@@ -135,6 +135,38 @@ export default {
   props: {},
   data() {
     return {
+      /**
+       * 사용하고자 하는 filter 를 key-value(obj)의 형태로 정의한다.
+       * vuex에서 해당 key를 이용하여 데이터를 로드한다.
+       */
+      filterObj: {
+        category: {
+          label: "카테고리",
+          componentType: "checkbox",
+          columnCnt: 1
+          // restApi: "/api/filter/getCategory"
+        },
+        provider: {
+          label: "제공기관",
+          componentType: "checkbox",
+          columnCnt: 2
+          // restApi: "/api/filter/getProvider"
+        },
+        dataType: {
+          label: "데이터 타입",
+          componentType: "checkbox",
+          columnCnt: 1,
+          useViewButton: true // 모두보기 버튼 사용 여부
+          // restApi: "/api/filter/getDataType"
+        },
+        treeView: {
+          label: "트리뷰",
+          columnCnt: 1,
+          componentType: "tree",
+          restApi: "",
+          forLabel: true // tree는 다른 컴포넌트를 사용하기 때문에, 예외처리를 위하여 추가한다.
+        }
+      },
       searchKeyword: "",
       numberOfData: null,
       searchResultSuccess: false,
@@ -142,7 +174,6 @@ export default {
         { value: 0, label: "포함" },
         { value: 1, label: "제외" }
       ],
-      checkboxColumnCount: [1, 1, 2, 1],
       pagingObj: {
         visiblePages: 5
       },
@@ -155,36 +186,35 @@ export default {
           nodeIdText: "node_id", // node key
           parentIdText: "parent_id" // parent key
         }
-      }
+      },
+      sortList: [
+        { sortName: "정확도순", orderBy: "accuracy" },
+        { sortName: "최신순", orderBy: "latest" },
+        { sortName: "다운로드순", orderBy: "download" },
+        { sortName: "조회순", orderBy: "view" }
+      ]
     };
   },
   computed: {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
-    ...mapGetters("app/search/search", ["searchTagList", "tabMenuList"]),
-    filterData: {
-      get() {
-        const data = this.$store.getters["app/search/search/searchFilterList"];
-        return JSON.parse(JSON.stringify(data));
-      }
-    },
-    selectFilterData: {
-      get() {
-        const data =
-          this.$store.getters["app/search/search/selectSearchFilterList"];
-        return JSON.parse(JSON.stringify(data));
-      }
-    }
+    ...mapGetters("app/search/search", [
+      "searchTagList",
+      "tabMenuList",
+      "searchResultList"
+    ]),
   },
   components: {
     BasicSearchBar,
     RecommendSearchTag,
     SearchResultBox,
     BasicTabMenu,
-    SelectFilterList,
+    ComplexFilterResult,
     RadioButtonSearchBar,
     ComplexCheckbox,
     BasicPagination,
-    ComplexTree
+    ComplexFilter,
+    BasicSortOptions,
+    NameTagList
   },
   watch: {},
   methods: {
@@ -192,9 +222,7 @@ export default {
       "getSearchTagList",
       "getTabMenuList",
       "getSearchFilterList",
-      "changeSearchFilterList",
-      "resetSearchFilterList",
-      "getSelectSearchFilterList"
+      "getSearchResultList"
     ]),
     searchClick(inputData) {
       this.searchKeyword = inputData.trim();
@@ -217,24 +245,41 @@ export default {
     currentTabData(data) {
       console.log(data);
     },
-    selectFilterReset() {
-      this.resetSearchFilterList();
-    },
     radioSelectSearch(radioValue, searchKeyword) {
       alert("radioValue: " + radioValue + ", searchKeyword: " + searchKeyword);
     },
-    changeCheckboxList(key, checkboxList) {
-      this.changeSearchFilterList({ key, changeList: checkboxList });
+    sortOptionsClick(orderBy) {
+      alert(orderBy);
     },
-    filterTagCancel(key, tagList) {
-      this.changeSearchFilterList({ key, changeList: tagList });
+    dataOfInterest(id) {
+      alert("관심데이터/ 게시물ID: " + id);
+    },
+    dataSharing(id) {
+      alert("데이터 공유하기/ 게시물ID: " + id);
+    },
+    listClick(id) {
+      const dataList = this.searchResultList.find((el) => {
+        if (el.id === id) {
+          return true;
+        }
+      });
+
+      // dataLocationKey, path 정해지면 변경
+      if (dataList.dataLocation === "내부") {
+        this.$router.push({
+          path: "/app/search/detail",
+          query: { postId: id }
+        });
+      } else {
+        window.open("/app/search/fullSearch", "_blank");
+      }
     }
   },
   created() {
     this.getSearchTagList();
     this.getTabMenuList();
-    this.getSearchFilterList();
-    this.getSelectSearchFilterList();
+    this.getSearchFilterList(this.filterObj);
+    this.getSearchResultList();
   }
 };
 </script>

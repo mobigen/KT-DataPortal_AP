@@ -1,19 +1,19 @@
 <template lang="html">
   <div id="recommendSearchTag">
     <basic-label forProperty="">{{ tagLabel }}</basic-label>
-    <search-tag
+    <basic-tag-list
       :tagList="tagList"
       :previousText="previousText"
-      :cancelButtonUse="cancelButtonUse"
+      :useCancelButton="useCancelButton"
       :cursorPointer="cursorPointer"
       @tagClick="tagClick"
-    ></search-tag>
+    ></basic-tag-list>
   </div>
 </template>
 
 <script type="text/javascript">
 import BasicLabel from "@/components/aiPlatform/basic/basic-label.vue";
-import SearchTag from "@/components/aiPlatform/basic/search-tag.vue";
+import BasicTagList from "@/components/aiPlatform/basic/basic-tag-list.vue";
 
 export default {
   name: "recommend-search-tag",
@@ -34,7 +34,7 @@ export default {
       type: String,
       require: false
     },
-    cancelButtonUse: {
+    useCancelButton: {
       type: Boolean,
       require: false,
       default: false
@@ -46,7 +46,7 @@ export default {
     }
   },
   computed: {},
-  components: { BasicLabel, SearchTag },
+  components: { BasicLabel, BasicTagList },
   watch: {},
   methods: {
     tagClick(tagName) {

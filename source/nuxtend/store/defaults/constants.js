@@ -57,6 +57,12 @@ export const state = () => ({
     SERIAL : {
       WEB : "web",
       DB : "db"
+    },
+    FILTER: {
+      TYPE: {
+        CHECKBOX: "checkbox",
+        TREE: "tree"
+      }
     }
   })
 });

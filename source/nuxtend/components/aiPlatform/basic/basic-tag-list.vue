@@ -1,10 +1,10 @@
 <template lang="html">
-  <div id="searchTag">
-    <template v-for="(data, i) in tagData">
+  <div id="basicTagList">
+    <template v-for="(data) in tagData">
       <div :class="['tag-item', { cursorPointer }]" @click="tagClick(data)">
-        <span class="prev-text">{{ previousText }}</span>
+        <span v-if="previousText" class="prev-text">{{ previousText }}</span>
         <span>{{ data["itemName"] }}</span>
-        <div @click.stop v-if="cancelButtonUse">
+        <div @click.stop v-if="useCancelButton">
           <basic-button
             :componentId="'tag_' + data['itemId']"
             buttonCss="icon-button"
@@ -24,7 +24,7 @@
 <script type="text/javascript">
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 export default {
-  name: "search-tag",
+  name: "basic-tag-list",
   extends: {},
   data() {
     return {};
@@ -42,7 +42,7 @@ export default {
       type: String,
       require: false
     },
-    cancelButtonUse: {
+    useCancelButton: {
       type: Boolean,
       require: false,
       default: false
@@ -78,7 +78,7 @@ export default {
 </script>
 
 <style lang="scss">
-#searchTag {
+#basicTagList {
   display: flex;
   flex-wrap: wrap;
   .tag-item {
@@ -86,7 +86,7 @@ export default {
     height: 30px;
     background-color: lightgray;
     border-radius: 20px;
-    padding: 0px 10px;
+    padding: 0 10px;
     margin-right: 10px;
     margin-bottom: 10px;
     .prev-text {

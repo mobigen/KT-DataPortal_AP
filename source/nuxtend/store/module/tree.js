@@ -13,6 +13,17 @@ export const getters = {
   },
   categoryObjectByKey(state) {
     return state.categoryObjectByKey;
+  },
+  categoryObjectForTag(state) {
+    return (treeKey, nodeNameStr) => {
+      const _selectedNode = state.selectedNodeList[treeKey];
+      if (_selectedNode === undefined) {
+        return [];
+      }
+      return Object.keys(_selectedNode).map((_c) => {
+        return { itemId: _c, itemName: _selectedNode[_c][nodeNameStr] };
+      });
+    };
   }
 };
 
@@ -81,7 +92,6 @@ export const actions = {
         jsonHelper[el[param.parentIdText]].push(el);
       });
 
-
       // root는 무조건 1개만 나오는 데이터로 가정.
       // db에서 조회한 데이터의 첫번째 row가 root node 로, 이 id를 기준으로 데이터가 정제되어 있다.
       let newD = jsonHelper[d[0][param.nodeIdText]][0];
@@ -100,11 +110,11 @@ export const actions = {
     commit("setSelectedNodeList", param);
   },
 
-  updateNodeInfo({ commit }, param) {
-    console.log(param);
+  async updateNodeInfo({ commit }, param) {
+    await this.$axios.post("/api/meta/updateCategory", param);
   },
 
-  addNewChild({ commit }, param) {
-    console.log(param);
+  async addChildCategory({ commit }, param) {
+    await this.$axios.post("/api/meta/addChildCategory", param);
   }
 };
