@@ -54,6 +54,10 @@ export const state = () => ({
       VISIBLE_PAGES: "visiblePages",
       PAGE: "page"
     },
+    SERIAL : {
+      WEB : "web",
+      DB : "db"
+    },
     FILTER: {
       TYPE: {
         CHECKBOX: "checkbox",
