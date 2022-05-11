@@ -127,11 +127,22 @@ export default {
   },
 
   proxy: {
+    // api-router 사용
     "/api/": {
-      target: "http://192.168.101.43:19000/",
-      changeOrigin: true // cross origin 허용
+      target: "http://192.168.101.43:18000/route/",
+      pathRewrite: {
+        "/api/meta/": "/",
+        "/api/user/": "/"
+      }
+      // changeOrigin: true // cross origin 허용
     },
-    // for test,
+    // backend 바로 붙을때 사용
+    // "/api/": {
+    //   target: "http://192.168.101.43:19000/",
+    //   pathRewrite: { "/api": "/route/" },
+    //   changeOrigin: true // cross origin 허용
+    // },
+    // local 테스트
     "/local/": {
       target: "http://localhost:8888/",
       pathRewrite: { "/local": "/dataPortal/api" },
