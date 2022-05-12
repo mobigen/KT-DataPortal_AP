@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="basicTagList">
-    <template v-for="(data) in tagData">
+    <template v-for="data in tagData">
       <div :class="['tag-item', { cursorPointer }]" @click="tagClick(data)">
         <span v-if="previousText" class="prev-text">{{ previousText }}</span>
         <span>{{ data["itemName"] }}</span>
@@ -38,6 +38,10 @@ export default {
       type: Array,
       require: true
     },
+    tagType: {
+      type: String,
+      require: true
+    },
     previousText: {
       type: String,
       require: false
@@ -68,7 +72,11 @@ export default {
       const index = this.tagData.findIndex((el) => el.itemId === itemId);
       this.tagData.splice(index, 1);
 
-      this.$emit("tagCancel", this.tagData, this.tagKey);
+      this.$emit("tagCancel", {
+        key: this.tagKey,
+        dataList: this.tagData,
+        type: this.tagType
+      });
     },
     tagClick(tagObj) {
       this.$emit("tagClick", tagObj);

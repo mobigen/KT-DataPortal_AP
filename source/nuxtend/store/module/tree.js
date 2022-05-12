@@ -59,7 +59,9 @@ export const mutations = {
 };
 
 export const actions = {
-  getCategoryObject({ commit }, param) {
+  getCategoryObject({ commit, rootGetters }, param) {
+    const CONSTANTS = rootGetters["defaults/constants/CONSTANTS"];
+
     this.$axios.get(param.api).then((d) => {
       // ArrayList 형태의 데이터를, children 형태의 데이터로 변경처리한다.
       let jsonHelper = {};
@@ -72,29 +74,32 @@ export const actions = {
       let objectByKey = {};
 
       reverseD.forEach((el) => {
-        objectByKey[el[param.nodeIdText]] = el;
+        objectByKey[el[param[CONSTANTS.TREE.TREE_KEY.NODE_ID]]] = el;
 
         if (
-          Object.prototype.hasOwnProperty.call(jsonHelper, el[param.nodeIdText])
+          Object.prototype.hasOwnProperty.call(
+            jsonHelper,
+            el[param[CONSTANTS.TREE.TREE_KEY.NODE_ID]]
+          )
         ) {
-          el.children = jsonHelper[el[param.nodeIdText]];
-          delete jsonHelper[el[param.nodeIdText]];
+          el.children = jsonHelper[el[param[CONSTANTS.TREE.TREE_KEY.NODE_ID]]];
+          delete jsonHelper[el[param[CONSTANTS.TREE.TREE_KEY.NODE_ID]]];
         }
 
         if (
           !Object.prototype.hasOwnProperty.call(
             jsonHelper,
-            el[param.parentIdText]
+            el[param[CONSTANTS.TREE.TREE_KEY.PARENT_ID]]
           )
         ) {
-          jsonHelper[el[param.parentIdText]] = [];
+          jsonHelper[el[param[CONSTANTS.TREE.TREE_KEY.PARENT_ID]]] = [];
         }
-        jsonHelper[el[param.parentIdText]].push(el);
+        jsonHelper[el[param[CONSTANTS.TREE.TREE_KEY.PARENT_ID]]].push(el);
       });
 
       // root는 무조건 1개만 나오는 데이터로 가정.
       // db에서 조회한 데이터의 첫번째 row가 root node 로, 이 id를 기준으로 데이터가 정제되어 있다.
-      let newD = jsonHelper[d[0][param.nodeIdText]][0];
+      let newD = jsonHelper[d[0][param[CONSTANTS.TREE.TREE_KEY.NODE_ID]]][0];
 
       commit("setCategoryObject", {
         componentKey: param.componentKey,

@@ -163,8 +163,7 @@ export default {
           label: "트리뷰",
           columnCnt: 1,
           componentType: "tree",
-          restApi: "",
-          forLabel: true // tree는 다른 컴포넌트를 사용하기 때문에, 예외처리를 위하여 추가한다.
+          // restApi: ""
         }
       },
       searchKeyword: "",

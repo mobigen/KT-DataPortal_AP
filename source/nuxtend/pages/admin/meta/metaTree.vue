@@ -7,7 +7,11 @@
       :tree-rest-api="treeRestApi"
       :use-single-checkbox="true"
       :checkbox-label="checkboxLabel"
-      :tree-key="treeKey"
+      :tree-key="{
+        [CONSTANTS.TREE.TREE_KEY.NODE_NAME]: 'node_name',
+        [CONSTANTS.TREE.TREE_KEY.NODE_ID]: 'node_id',
+        [CONSTANTS.TREE.TREE_KEY.PARENT_ID]: 'parent_id'
+      }"
       :tree-mode="CONSTANTS.TREE.TREE_MODE.VIEW"
       :tree-select-type="CONSTANTS.TREE.TREE_TYPE.LEAF"
     >
@@ -26,12 +30,7 @@ export default {
     return {
       componentKey: "metaTreeKey",
       treeRestApi: "/api/meta/getCategoryList",
-      checkboxLabel: "상위자동선택",
-      treeKey: {
-        nodeName: "node_name", // node title
-        nodeIdText: "node_id", // node key
-        parentIdText: "parent_id" // parent key
-      }
+      checkboxLabel: "상위자동선택"
     };
   },
   props: {},

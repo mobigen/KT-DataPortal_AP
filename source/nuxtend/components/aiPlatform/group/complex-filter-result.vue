@@ -15,6 +15,7 @@
       <basic-tag-list
         :tagKey="key"
         :tag-list="getTagList(obj.componentType, key)"
+        :tag-type="obj.componentType"
         :previousText="previousText"
         :useCancelButton="useCancelButton"
         :cursorPointer="cursorPointer"
@@ -63,18 +64,32 @@ export default {
       return this.$store.getters["module/tree/selectedNodeList"];
     }
   },
-  components: {BasicTagList, BasicButton, BasicLabel },
+  components: { BasicTagList, BasicButton, BasicLabel },
   watch: {},
   methods: {
     ...mapActions("app/search/search", [
       "changeSearchFilterList",
       "resetSearchFilterList"
     ]),
+    ...mapActions("module/tree", ["setSelectedNodeList"]),
     filterClick(tagObj) {
       // TODO : when filter clicked, use this method.
     },
-    filterTagCancel(tagList, tagKey) {
-      this.changeSearchFilterList({ key: tagKey, changeList: tagList });
+    filterTagCancel({ key, dataList, type }) {
+      // checkbox와 tree의 vuex가 다르기 때문에 여기서 처리를 따로 해준다.
+      if (type === this.CONSTANTS.FILTER.TYPE.CHECKBOX) {
+        this.changeSearchFilterList({ key: key, changeList: dataList });
+      } else {
+        // checkBox
+        const data = dataList[0];
+
+        // treee type은 tree vuex에서 처리해줘야함.
+        this.setSelectedNodeList({
+          componentKey: this.treeObj.componentKey,
+          key: data["itemId"],
+          bool: false
+        });
+      }
     },
     selectFilterReset() {
       this.resetSearchFilterList();
