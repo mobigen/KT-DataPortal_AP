@@ -1,6 +1,13 @@
 <template>
-  <div>
-    <h3>샘플 Grid + pagination</h3>
+  <div class="sample">
+    <!--    <h3>샘플 Grid + pagination</h3>-->
+
+    <!--    <div class="NOTY">-->
+    <!--      <p>sampleGrid.vue</p>-->
+    <!--      <p>basic-table.vue : list</p>-->
+    <!--      <p>basic-pagination.vue : pagination</p>-->
+    <!--      <p>sample.js : vuex</p>-->
+    <!--    </div>-->
 
     <basic-table
       componentId=""
@@ -104,5 +111,8 @@ div.noty {
 }
 .hidden {
   display: none;
+}
+.sample {
+  margin : 10px;
 }
 </style>
