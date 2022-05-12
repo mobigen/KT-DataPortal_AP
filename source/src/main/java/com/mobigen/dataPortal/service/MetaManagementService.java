@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -22,8 +23,8 @@ public class MetaManagementService {
     }
 
     @SQLHeader(tableName = "v_biz_meta_name")
-    public Object getMetaNameList() {
-        return mapper.getMetaNameList();
+    public Object getMetaNameList(Map<String, Object> paging) {
+        return mapper.getMetaNameList(paging);
     }
 
     public Object getBizMetaForm() {

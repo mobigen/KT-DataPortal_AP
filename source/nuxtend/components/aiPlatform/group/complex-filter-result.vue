@@ -28,7 +28,7 @@
 <script type="text/javascript">
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 import BasicLabel from "@/components/aiPlatform/basic/basic-label.vue";
-import BasicTagList from "@/components/aiPlatform/basic/basic-tag-list.vue";
+import BasicTagList from "@/components/aiPlatform/basic/basic-tag-list";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -63,7 +63,7 @@ export default {
       return this.$store.getters["module/tree/selectedNodeList"];
     }
   },
-  components: { BasicButton, BasicLabel, BasicTagList },
+  components: { BasicTagList, BasicButton, BasicLabel },
   watch: {},
   methods: {
     ...mapActions("app/search/search", [

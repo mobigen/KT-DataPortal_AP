@@ -19,19 +19,27 @@
         where name_id = #{nameId};
     </select>
 
-    <select id="getMetaNameList" resultType="java.util.Map">
-        SELECT kor_name,
-               eng_name,
-               show_order,
-               name_id,
-               (case
-                    when type = 0 then 'text'
-                    when type = 1 then 'int'
-                    when type = 2 then 'binary'
-                   end
-                   ) as type
-        FROM tb_biz_meta_name
-        order by name_id;
+    <select id="getMetaNameList" resultType="java.util.Map" parameterType="Object">
+        select *
+        from metasch.tb_biz_meta_name as p
+                 join (SELECT kor_name,
+                              eng_name,
+                              show_order,
+                              name_id,
+                              (case
+                                   when type = 0 then 'text'
+                                   when type = 1 then 'int'
+                                   when type = 2 then 'binary'
+                                  end
+                                  ) as     type,
+                              ROW_NUMBER() OVER (ORDER BY name_id DESC) as rowNo
+                       FROM tb_biz_meta_name
+                       order by name_id
+                           limit ${perPage}
+                       offset (${perPage} * ${curPage})) as t
+                      on p.name_id = t.name_id
+        ;
+
     </select>
 
     <!-- metaMap 등록 유무 포함한 metaName 목록 조회 -->

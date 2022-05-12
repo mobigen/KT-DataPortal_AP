@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="selectFilterList">
-    <div v-for="(value, key, index) in filterData">
+    <div v-for="(value, key) in filterData">
       <basic-label forProperty="">{{ value["label"] }}</basic-label>
       <basic-tag-list
         :tagKey="key"
@@ -26,7 +26,7 @@
 
 <script type="text/javascript">
 import BasicLabel from "@/components/aiPlatform/basic/basic-label.vue";
-import BasicTagList from "@/components/aiPlatform/basic/basic-tag-list.vue";
+import BasicTagList from "@/components/aiPlatform/basic/basic-tag-list";
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 export default {
   name: "select-filter-list",
@@ -83,7 +83,7 @@ export default {
     grid-template-columns: 100px 1fr;
     padding: 5px;
     .tag-item {
-      border-radius: 0px;
+      border-radius: 0;
     }
   }
   .filter-reset-button {

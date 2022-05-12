@@ -33,7 +33,7 @@ export const mutations = {
     if (Object.prototype.hasOwnProperty.call(params.data, "totalCount")) {
       // totalCount가 변경되면, totalPageNo를 계산한다.
       params.data.totalPage = Math.ceil(
-        statePageObj.totalCount / statePageObj.itemsPerPage
+        params.data.totalCount / statePageObj.itemsPerPage
       );
     }
     Object.assign(state.pagingObj[params.key], params.data);

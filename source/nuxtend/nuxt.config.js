@@ -1,5 +1,11 @@
 import { resolve } from "path";
 
+function _interopDefaultLegacy(e) {
+  return e && typeof e === "object" && "default" in e ? e : { default: e };
+}
+const consola__default = /*#__PURE__*/ _interopDefaultLegacy(consola);
+const logger = consola__default["default"];
+
 export default {
   ssr: true,
 
@@ -81,11 +87,7 @@ export default {
   },
 
   axios: {
-    baseURL:
-      // After project generated, proxy doesn't work.
-      process.env.ENV_TYPE === "development"
-        ? process.env.VUE_APP_AXIOS_BACKEND_URL + "/"
-        : process.env.VUE_APP_AXIOS_BACKEND_URL + "/dataPortal",
+    baseURL: process.env.VUE_APP_AXIOS_BACKEND_URL + "/",
     proxy: process.env.ENV_TYPE === "development"
   },
 
@@ -127,11 +129,22 @@ export default {
   },
 
   proxy: {
+    // api-router 사용
     "/api/": {
-      target: "http://192.168.101.43:19000/",
-      changeOrigin: true // cross origin 허용
+      target: "http://192.168.101.43:18000/route/",
+      pathRewrite: {
+        "/api/meta/": "/",
+        "/api/user/": "/"
+      }
+      // changeOrigin: true // cross origin 허용
     },
-    // for test,
+    // backend 바로 붙을때 사용
+    // "/api/": {
+    //   target: "http://192.168.101.43:19000/",
+    //   pathRewrite: { "/api": "/route/" },
+    //   changeOrigin: true // cross origin 허용
+    // },
+    // local 테스트
     "/local/": {
       target: "http://localhost:8888/",
       pathRewrite: { "/local": "/dataPortal/api" },
@@ -141,5 +154,22 @@ export default {
   server: {
     port: process.env.VUE_APP_AXIOS_BASE_PORT,
     listen: 80
+  },
+
+  router: {
+    extendRoutes(routes) {
+      logger.info(
+        "## NuxtLink 처리: 정적 리소스에 대한 html 파일 대응을 위해 아래와 같이 alias 경로를 변경 합니다."
+      );
+      routes.forEach((route) => {
+        const alias =
+          route.path.length > 1 ? `${route.path}/index.html` : "/index.html";
+        logger.info(route.alias, "==> " + alias);
+        for (var key in route) {
+          logger.info("----" + key + " [" + route[key] + "]");
+        }
+        route.alias = alias;
+      });
+    }
   }
 };
