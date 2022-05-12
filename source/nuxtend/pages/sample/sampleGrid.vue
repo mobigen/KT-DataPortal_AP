@@ -43,7 +43,6 @@
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
 import BasicTable from "@/components/aiPlatform/basic/basic-table";
-import BasicButton from "@/components/aiPlatform/basic/basic-button";
 import BasicPagination from "@/components/aiPlatform/basic/basic-pagination";
 
 export default {
@@ -74,7 +73,7 @@ export default {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
     ...mapGetters("sample/sample", ["metaNameList"])
   },
-  components: { BasicTable, BasicButton, BasicPagination },
+  components: { BasicTable, BasicPagination },
   watch: {},
   methods: {
     ...mapActions("sample/sample", ["getMetaNameList"]),
@@ -113,6 +112,6 @@ div.noty {
   display: none;
 }
 .sample {
-  margin : 10px;
+  margin: 10px;
 }
 </style>
