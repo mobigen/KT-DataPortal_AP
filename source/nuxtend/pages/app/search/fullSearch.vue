@@ -130,8 +130,7 @@
         <template v-slot:body-top>
           <div class="body-top">
             <div>
-              <!-- v-if="testData.category !== null"
-                :tagName="카테고리" -->
+              <!-- data 가져오는 다른 방법 알아보기 -->
               <basic-single-tag
                 :tagName="nameTagObject.category"
                 previousText=""
