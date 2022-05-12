@@ -16,8 +16,8 @@
       rowKey="name_id"
       :serialNumUse="false"
       serialNumText="No."
-      :tableButtonUse="true"
-      :tableButtonText="this.buttonList"
+      :tableButtonUse="false"
+      :tableButtonText="{}"
       @buttonAction="tableButtonClick"
       @columnAction="rowClick"
       :keyActionText="{
@@ -52,20 +52,20 @@ export default {
   data() {
     return {
       paginationKey: "samplePagination",
-      currentPage: 0,
       buttonList: {
-        edit: {
-          buttonType: "icon",
-          buttonName: "수정",
-          buttonCss: "icon-button",
-          iconData: "@icon/minus.svg"
-        },
-        remove: {
-          buttonType: "icon",
-          buttonName: "삭제",
-          buttonCss: "icon-button",
-          iconData: "@icon/minus.svg"
-        }
+        // sample 용이며, 여기서는 사용하지 않음.
+        // edit: {
+        //   buttonType: "icon",
+        //   buttonName: "수정",
+        //   buttonCss: "icon-button",
+        //   iconData: "@icon/minus.svg"
+        // },
+        // remove: {
+        //   buttonType: "icon",
+        //   buttonName: "삭제",
+        //   buttonCss: "icon-button",
+        //   iconData: "@icon/minus.svg"
+        // }
       }
     };
   },
@@ -87,11 +87,7 @@ export default {
     /**
      * // grid default methods
      */
-    getGridData(param) {
-      if (param !== undefined && param.page) {
-        this.currentPage = param.page;
-      }
-
+    getGridData() {
       this.getMetaNameList({
         paginationKey: this.paginationKey
       });

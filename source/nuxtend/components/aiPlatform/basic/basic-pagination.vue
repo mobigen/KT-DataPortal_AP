@@ -160,7 +160,7 @@ export default {
        * paging을 눌렀을때 grid 목록도 리로드 할수 있게
        * 부모 component로 Noty를 준다.
        */
-      this.$emit("pagingEvent", { page: page });
+      this.$emit("pagingEvent");
     },
     getPageNo(data) {
       return this.paging.pageSet * this.paging.visiblePages + data;
