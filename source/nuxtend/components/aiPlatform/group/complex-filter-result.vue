@@ -12,7 +12,7 @@
 
     <div v-for="(obj, key) in filterObj">
       <basic-label forProperty="">{{ obj.label }}</basic-label>
-      <search-tag
+      <basic-tag-list
         :tagKey="key"
         :tag-list="getTagList(obj.componentType, key)"
         :previousText="previousText"
@@ -28,7 +28,7 @@
 <script type="text/javascript">
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 import BasicLabel from "@/components/aiPlatform/basic/basic-label.vue";
-import SearchTag from "@/components/aiPlatform/basic/search-tag.vue";
+import BasicTagList from "@/components/aiPlatform/basic/basic-tag-list.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -63,7 +63,7 @@ export default {
       return this.$store.getters["module/tree/selectedNodeList"];
     }
   },
-  components: { BasicButton, BasicLabel, SearchTag },
+  components: { BasicButton, BasicLabel, BasicTagList },
   watch: {},
   methods: {
     ...mapActions("app/search/search", [

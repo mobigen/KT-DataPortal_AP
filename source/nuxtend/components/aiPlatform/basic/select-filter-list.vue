@@ -2,7 +2,7 @@
   <div id="selectFilterList">
     <div v-for="(value, key, index) in filterData">
       <basic-label forProperty="">{{ value["label"] }}</basic-label>
-      <search-tag
+      <basic-tag-list
         :tagKey="key"
         :tagList="value['dataList']"
         :previousText="previousText"
@@ -10,7 +10,7 @@
         :cursorPointer="cursorPointer"
         @tagCancel="filterTagCancel"
         @tagClick="filterClick"
-      ></search-tag>
+      ></basic-tag-list>
     </div>
     <basic-button
       class="filter-reset-button"
@@ -26,7 +26,7 @@
 
 <script type="text/javascript">
 import BasicLabel from "@/components/aiPlatform/basic/basic-label.vue";
-import SearchTag from "@/components/aiPlatform/basic/search-tag.vue";
+import BasicTagList from "@/components/aiPlatform/basic/basic-tag-list.vue";
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 export default {
   name: "select-filter-list",
@@ -55,7 +55,7 @@ export default {
     return {};
   },
   computed: {},
-  components: { BasicLabel, SearchTag, BasicButton },
+  components: { BasicLabel, BasicTagList, BasicButton },
   watch: {},
   methods: {
     filterTagCancel(tagList, tagKey) {
