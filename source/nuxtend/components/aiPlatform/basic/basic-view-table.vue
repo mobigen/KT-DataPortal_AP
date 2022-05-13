@@ -1,12 +1,12 @@
 <template lang="html">
   <div id="basicViewTable">
     <table :style="cssVariable">
-      <template v-for="(data, i) in headerList">
+      <tbody v-for="(data, i) in headerList">
         <tr>
           <th>{{ data["column_name"] }}</th>
           <td>{{ dataList[i][data["column_name"]] }}</td>
         </tr>
-      </template>
+      </tbody>
     </table>
   </div>
 </template>
@@ -53,18 +53,20 @@ export default {
     width: 100%;
     display: grid;
     grid-template-columns: var(--grid-template-columns);
-    tr {
+    tbody {
       border: solid rgb(220, 220, 220) 1px;
       margin-top: -1px;
       margin-left: -1px;
-      th {
-        width: 220px;
-        padding: 10px;
-        background-color: rgba(211, 211, 211, 0.305);
-        text-align: left;
-      }
-      td {
-        padding: 10px;
+      tr {
+        th {
+          width: 220px;
+          padding: 10px;
+          background-color: rgba(211, 211, 211, 0.305);
+          text-align: left;
+        }
+        td {
+          padding: 10px;
+        }
       }
     }
   }

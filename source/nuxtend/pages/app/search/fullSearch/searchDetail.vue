@@ -40,6 +40,15 @@
         subtitle="관리자가 등록한 데이터 관련 본문 정보입니다."
       ></basic-title>
       <h3>textarea component</h3>
+      <basic-textarea
+        inputData="Editor작성 내용 노출"
+        placeholder="내용을 입력해주세요"
+        :disabled="true"
+        :readonly="false"
+        maxlength=""
+        @input="changeData"
+      >
+      </basic-textarea>
     </div>
 
     <div class="component">
@@ -58,6 +67,7 @@
 <script type="text/javascript">
 import BasicViewTable from "@/components/aiPlatform/basic/basic-view-table.vue";
 import BasicTitle from "@/components/aiPlatform/basic/basic-title.vue";
+import BasicTextarea from "@/components/aiPlatform/basic/basic-textarea.vue";
 
 export default {
   name: "app-search-full-detail",
@@ -88,9 +98,13 @@ export default {
     };
   },
   computed: {},
-  components: { BasicViewTable, BasicTitle },
+  components: { BasicViewTable, BasicTitle, BasicTextarea },
   watch: {},
-  methods: {},
+  methods: {
+    changeData(input) {
+      console.log(input);
+    }
+  },
   created() {}
 };
 </script>
