@@ -103,6 +103,73 @@
     </div>
 
     <div class="component">
+      <h3>name tag component - wide</h3>
+      <basic-name-tag
+        :nameTagObject="nameTagObject"
+        @nameTagClick="nameTagClick"
+        @dataOfInterest="dataOfInterest"
+        @dataSharing="dataSharing"
+        width="wide"
+      >
+        <!-- 사용안하는 slot 빈값으로 바꾸는 다른 방법 알아보기 -->
+        <template v-slot:header><div></div></template>
+        <template v-slot:left-side><div></div></template>
+        <template v-slot:right-side><div></div></template>
+      </basic-name-tag>
+
+      <h3>name tag component - narrow</h3>
+      <basic-name-tag
+        :nameTagObject="nameTagObject"
+        @nameTagClick="nameTagClick"
+        @dataOfInterest="dataOfInterest"
+        @dataSharing="dataSharing"
+        width="narrow"
+      >
+        <template v-slot:left-side><div></div></template>
+        <template v-slot:right-side><div></div></template>
+        <template v-slot:body-top>
+          <div class="body-top">
+            <div>
+              <!-- data 가져오는 다른 방법 알아보기 -->
+              <basic-single-tag
+                :tagName="nameTagObject.category"
+                previousText=""
+              ></basic-single-tag>
+              <basic-single-tag
+                :tagName="nameTagObject.dataLocation"
+                previousText=""
+              ></basic-single-tag>
+            </div>
+
+            <div>
+              <basic-icon>CSV</basic-icon>
+              <basic-button
+                componentId=""
+                buttonCss="icon-button"
+                :underline="false"
+                :hoverColor="false"
+                @click="dataSharing(nameTagObject.id)"
+              >
+                <fa icon="share-nodes" />
+              </basic-button>
+              <basic-button
+                componentId=""
+                buttonCss="icon-button"
+                :underline="false"
+                :hoverColor="false"
+                @click="dataOfInterest(nameTagObject.id)"
+                title="관심데이터 추가"
+              >
+                <fa icon="bookmark" />
+              </basic-button>
+            </div>
+          </div>
+        </template>
+        <template v-slot:body-bottom><div></div></template>
+      </basic-name-tag>
+    </div>
+
+    <div class="component">
       <h3>paging component</h3>
       <basic-pagination
         paging-key="fullSearchPagination"
@@ -125,6 +192,10 @@ import BasicPagination from "@/components/aiPlatform/basic/basic-pagination";
 import BasicSortOptions from "@/components/aiPlatform/basic/basic-sort-options.vue";
 import ComplexFilter from "@/components/aiPlatform/group/complex-filter.vue";
 import NameTagList from "@/components/aiPlatform/basic/name-tag-list.vue";
+import BasicNameTag from "@/components/aiPlatform/basic/basic-name-tag.vue";
+import BasicSingleTag from "@/components/aiPlatform/basic/basic-single-tag.vue";
+import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
+import BasicIcon from "@/components/aiPlatform/basic/basic-icon.vue";
 
 export default {
   name: "app-search-full",
@@ -189,7 +260,19 @@ export default {
         { sortName: "최신순", orderBy: "latest" },
         { sortName: "다운로드순", orderBy: "download" },
         { sortName: "조회순", orderBy: "view" }
-      ]
+      ],
+      nameTagObject: {
+        id: 1,
+        category: "자동차부품",
+        dataLocation: "내부",
+        dataSource: "도로교통공단",
+        fileType: ["CSV", "XML"],
+        title: "도로교통공단_결빙사고 다발지역",
+        body: "노면상태가 '서리/결빙'인 교통사고에 대한 사고다발지역 정보",
+        date: "2022-05-09",
+        download: 180,
+        hit: 200
+      }
     };
   },
   computed: {
@@ -211,7 +294,11 @@ export default {
     BasicPagination,
     ComplexFilter,
     BasicSortOptions,
-    NameTagList
+    NameTagList,
+    BasicNameTag,
+    BasicSingleTag,
+    BasicButton,
+    BasicIcon
   },
   watch: {},
   methods: {
@@ -270,6 +357,9 @@ export default {
       } else {
         window.open("/app/search/fullSearch", "_blank");
       }
+    },
+    nameTagClick(id) {
+      alert("게시물ID: " + id);
     }
   },
   created() {

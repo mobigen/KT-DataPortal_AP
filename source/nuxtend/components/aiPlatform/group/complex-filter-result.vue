@@ -63,7 +63,7 @@ export default {
       return this.$store.getters["module/tree/selectedNodeList"];
     }
   },
-  components: {BasicTagList, BasicButton, BasicLabel },
+  components: { BasicTagList, BasicButton, BasicLabel },
   watch: {},
   methods: {
     ...mapActions("app/search/search", [

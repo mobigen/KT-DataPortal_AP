@@ -133,8 +133,8 @@ export default {
     "/api/": {
       target: "http://192.168.101.43:18000/route/",
       pathRewrite: {
-        "/api/meta/": "/",
-        "/api/user/": "/"
+        "/api/meta/": "/meta/",
+        "/api/user/": "/meta/"
       }
       // changeOrigin: true // cross origin 허용
     },
