@@ -55,7 +55,7 @@ export default {
     return {};
   },
   computed: {},
-  components: {BasicLabel, BasicTagList, BasicButton },
+  components: { BasicLabel, BasicTagList, BasicButton },
   watch: {},
   methods: {
     filterTagCancel(tagList, tagKey) {
