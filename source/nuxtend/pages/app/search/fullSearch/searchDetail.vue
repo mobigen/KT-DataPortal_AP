@@ -7,13 +7,26 @@
     </div>
 
     <div class="component">
-      <h3>title component</h3>
       <h3>view table component - 2</h3>
+      <basic-view-table
+        :headerList="headerList"
+        :dataList="dataList"
+        viewTableColumnCount="2"
+      ></basic-view-table>
     </div>
 
     <div class="component">
-      <h3>title component</h3>
       <h3>view table component 2 + 1</h3>
+      <basic-view-table
+        :headerList="headerList"
+        :dataList="dataList"
+        viewTableColumnCount="2"
+      ></basic-view-table>
+      <basic-view-table
+        :headerList="headerList"
+        :dataList="dataList"
+        viewTableColumnCount="1"
+      ></basic-view-table>
     </div>
 
     <div class="component">
@@ -31,15 +44,38 @@
 </template>
 
 <script type="text/javascript">
+import BasicViewTable from "@/components/aiPlatform/basic/basic-view-table.vue";
+
 export default {
   name: "app-search-full-detail",
   extends: {},
   props: {},
   data() {
-    return {};
+    return {
+      headerList: [
+        {
+          column_name: "provider"
+        },
+        {
+          column_name: "department"
+        },
+        {
+          column_name: "manager"
+        },
+        {
+          column_name: "deptPhoneNo"
+        }
+      ],
+      dataList: [
+        { provider: "제공기관" },
+        { department: "관련부서" },
+        { manager: "담당자" },
+        { deptPhoneNo: "관련부서 전화번호" }
+      ]
+    };
   },
   computed: {},
-  components: {},
+  components: { BasicViewTable },
   watch: {},
   methods: {},
   created() {}
