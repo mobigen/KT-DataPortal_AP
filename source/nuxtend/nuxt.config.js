@@ -53,8 +53,17 @@ export default {
     "@nuxtjs/style-resources",
     "@nuxtjs/svg-sprite",
     "@nuxtjs/i18n",
-    "@nuxtjs/fontawesome"
+    "@nuxtjs/fontawesome",
+    // build, generate 속도 향샹
+    "nuxt-build-optimisations"
   ],
+
+  buildOptimisations: {
+    profile: "risky" //  속도 가장 빠름, 에러에 대해서 pass 같음.
+    // profile: 'experimental' // default
+    // profile: 'safe'
+    // profile: false
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["cookie-universal-nuxt"],
@@ -71,7 +80,20 @@ export default {
 
     extend(config) {
       config.resolve.alias["vue"] = "vue/dist/vue.common";
-    }
+    },
+
+    // build, generate 속도 향샹
+    // thread-loader 를 사용한다.
+    // thread-loader 는 워커풀을 가능하게 한다.
+    // 일정한 thread 개수를 미리 만들어두어 처리 속도를 빠르게 한다.
+    parallel: true,
+    cache: false,
+    // 캐시의 성능을 더 높이기 위해 hardSourceWebpackPlugin 을 사용한다.
+    // ERROR  [hardsource:bb467e33] Could not freeze ./.nuxt/router.js:
+    // Cannot read property 'hash' of undefined
+    // 만약 위와 같은 오류가 뜬다면 node_modules/.cache/hard-source 폴더를
+    // 삭제했다가 다시 빌드하면 된다.
+    hardSource: true
   },
 
   // alias
@@ -87,8 +109,9 @@ export default {
   },
 
   axios: {
-    baseURL: process.env.VUE_APP_AXIOS_BACKEND_URL + "/",
-    proxy: process.env.ENV_TYPE === "development"
+    baseURL: process.env.API_BASE_URL + "/",
+    // proxy: process.env.ENV_TYPE === "local"
+    proxy: true
   },
 
   i18n: {
@@ -131,7 +154,7 @@ export default {
   proxy: {
     // api-router 사용
     "/api/": {
-      target: "http://192.168.101.43:18000/route/",
+      target: process.env.API_REMOTE_URL + "/route/",
       pathRewrite: {
         "/api/meta/": "/meta/",
         "/api/user/": "/meta/"
@@ -146,13 +169,13 @@ export default {
     // },
     // local 테스트
     "/local/": {
-      target: "http://localhost:8888/",
+      target: process.env.API_BASE_URL + "/",
       pathRewrite: { "/local": "/dataPortal/api" },
       changeOrigin: true
     }
   },
   server: {
-    port: process.env.VUE_APP_AXIOS_BASE_PORT,
+    port: process.env.VUE_APP_BASE_PORT,
     listen: 80
   },
 
