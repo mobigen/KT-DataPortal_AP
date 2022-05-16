@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
   <div id="basicNameTag">
     <component
       :is="width === 'wide' ? 'atoms-wide-name-tag' : 'atoms-narrow-name-tag'"
@@ -107,7 +107,7 @@
       </template>
 
       <template v-slot:right-side>
-        <slot name="left-side"></slot>
+        <slot name="right-side"> </slot>
       </template>
     </component>
   </div>

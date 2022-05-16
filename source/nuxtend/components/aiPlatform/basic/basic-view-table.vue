@@ -4,7 +4,7 @@
       <tbody v-for="(data, i) in headerList">
         <tr>
           <th>{{ data["column_name"] }}</th>
-          <td>{{ dataList[i][data["column_name"]] }}</td>
+          <td>{{ dataObj[data["column_name"]] }}</td>
         </tr>
       </tbody>
     </table>
@@ -23,8 +23,8 @@ export default {
       type: Array,
       require: true
     },
-    dataList: {
-      type: Array,
+    dataObj: {
+      type: Object,
       require: false
     },
     viewTableColumnCount: {

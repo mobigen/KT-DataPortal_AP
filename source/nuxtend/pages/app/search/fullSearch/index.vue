@@ -351,7 +351,7 @@ export default {
       // dataLocationKey, path 정해지면 변경
       if (dataList.dataLocation === "내부") {
         this.$router.push({
-          path: "/app/search/detail",
+          path: "/app/search/fullSearch/searchDetail",
           query: { postId: id }
         });
       } else {
