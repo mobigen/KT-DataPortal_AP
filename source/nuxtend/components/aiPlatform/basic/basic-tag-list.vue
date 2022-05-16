@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="basicTagList">
-    <template v-for="(data) in tagData">
+    <template v-for="data in tagList">
       <div :class="['tag-item', { cursorPointer }]" @click="tagClick(data)">
         <span v-if="previousText" class="prev-text">{{ previousText }}</span>
         <span>{{ data["itemName"] }}</span>
@@ -38,6 +38,10 @@ export default {
       type: Array,
       require: true
     },
+    tagType: {
+      type: String,
+      require: true
+    },
     previousText: {
       type: String,
       require: false
@@ -53,22 +57,22 @@ export default {
       default: true
     }
   },
-  computed: {
-    tagData: {
-      get() {
-        return this.tagList;
-      }
-    }
-  },
+  computed: {},
   components: { BasicButton },
   watch: {},
   methods: {
     cancel(componentId) {
-      const itemId = Number(componentId.split("_").splice(-1));
-      const index = this.tagData.findIndex((el) => el.itemId === itemId);
-      this.tagData.splice(index, 1);
+      let itemId = componentId.split("_").pop();
+      // TODO: 추후에, itemId가 UUID로 변경된 이후에 Number로 처리할 필요가 없어지면 이 코드를 지워준다.
+      if (!isNaN(itemId)) {
+        itemId = Number(itemId);
+      }
 
-      this.$emit("tagCancel", this.tagData, this.tagKey);
+      this.$emit("tagCancel", {
+        key: this.tagKey,
+        itemId: itemId,
+        type: this.tagType
+      });
     },
     tagClick(tagObj) {
       this.$emit("tagClick", tagObj);

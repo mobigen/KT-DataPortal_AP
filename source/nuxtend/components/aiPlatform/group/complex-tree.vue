@@ -1,14 +1,21 @@
 <template lang="html">
   <div>
     <div>
-      <div>tree component mode : {{ treeMode }}</div>
-
       <basic-single-checkbox
         v-show="useSingleCheckbox && treeMode === CONSTANTS.TREE.TREE_MODE.VIEW"
         :checkbox-label="checkboxLabel"
         label-name="selectNodeAll"
         @changeData="checkboxChange"
       ></basic-single-checkbox>
+
+      <basic-button
+        v-if="useTreeViewAll"
+        @click="toggleTree"
+        buttonCss="text-button"
+      >
+        <fa :icon="['fas', treeViewAll ? 'minus' : 'plus']" />
+        {{ treeViewAll ? "닫기" : "모두 열기" }}
+      </basic-button>
     </div>
 
     <basic-tree
@@ -16,26 +23,25 @@
       :tree-select-type="treeSelectType"
       :tree-data="categoryObject"
       :tree-mode="treeMode"
+      :tree-key="treeKey"
+      :show-root-node="false"
+      :node-open-type="CONSTANTS.TREE.OPEN_TYPE.FIRST"
       :checked="checked"
-      :nodeTitle="treeKey.nodeName"
-      :nodeIdText="treeKey.nodeIdText"
-      :parentIdText="treeKey.parentIdText"
       @selectionChange="selectionChange"
       @setEditForm="editNode"
+      :use-tree-view-all="useTreeViewAll"
     ></basic-tree>
 
     <basic-tree-tag
-      v-show="treeMode === CONSTANTS.TREE.TREE_MODE.VIEW"
+      v-show="useTreeTag && treeMode === CONSTANTS.TREE.TREE_MODE.VIEW"
       :selectedNodeList="selectedNodeList"
-      :nodeTitle="treeKey.nodeName"
-      :nodeIdText="treeKey.nodeIdText"
-    >
-    </basic-tree-tag>
+      :tree-key="treeKey"
+    />
 
     <div
       v-show="
         treeMode === CONSTANTS.TREE.TREE_MODE.EDITOR &&
-        selectedNode[treeKey.nodeName] !== undefined
+        selectedNode[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NAME]] !== undefined
       "
     >
       <basic-label> {{ notyTitle }}</basic-label>
@@ -74,6 +80,16 @@ export default {
       require: true,
       default: "treeComponentKey"
     },
+    useTreeViewAll: {
+      type: Boolean,
+      require: false,
+      default: false
+    },
+    useTreeTag: {
+      type: Boolean,
+      require: false,
+      default: false
+    },
     treeRestApi: {
       type: String,
       require: true
@@ -110,7 +126,8 @@ export default {
       headerList: [],
       dataObject: {},
       selectedNode: {},
-      nodeName: null
+      nodeName: null,
+      treeViewAll: false
     };
   },
   computed: {
@@ -158,13 +175,15 @@ export default {
     selectionChange({ bool, nodeData }) {
       this.setSelectedNodeList({
         componentKey: this.componentKey,
-        key: nodeData[this.treeKey.nodeIdText],
+        key: nodeData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]],
         node: nodeData,
         bool: bool
       });
     },
     setFormDefaultsData() {
-      this.headerList.push({ column_name: this.treeKey.nodeName });
+      this.headerList.push({
+        column_name: this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NAME]
+      });
     },
     editNode({ clickMode, nodeData }) {
       this.clickMode = clickMode;
@@ -175,23 +194,32 @@ export default {
 
       if (this.clickMode === this.CONSTANTS.TREE.CLICK_MODE.EDIT) {
         // node edit
-        // params[this.treeKey.parentIdText] = this.selectedNode[this.treeKey.parentIdText];
-        params[this.treeKey.nodeIdText] = this.selectedNode[this.treeKey.nodeIdText];
-        params[this.treeKey.nodeName] = this.nodeName;
+        params[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]] =
+          this.selectedNode[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]];
+        params[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NAME]] =
+          this.nodeName;
 
         this.updateNodeInfo(params);
       } else {
         // add child
-        params[this.treeKey.parentIdText] = this.selectedNode[this.treeKey.nodeIdText];
-        // params[this.treeKey.nodeIdText] = this.selectedNode.nodeIdText;
-        params[this.treeKey.nodeName] = this.nodeName;
+        params[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.PARENT_ID]] =
+          this.selectedNode[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]];
+        params[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NAME]] =
+          this.nodeName;
 
         this.addChildCategory(params);
       }
     },
     updateFormData(formData) {
       // 만약 노드 수정/하위노드 추가 form에서 복수개의 parmeter를 전달받아야 한다면, Object 형태로 구현해야 함.
-      this.nodeName = formData[this.treeKey.nodeName];
+      this.nodeName =
+        formData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NAME]];
+    },
+    toggleTree() {
+      this.treeViewAll = !this.treeViewAll;
+
+      // basic-tree.vue
+      this.$nuxt.$emit("treeCompRecursionFn", this.treeViewAll);
     }
   },
   created() {

@@ -35,14 +35,26 @@ export const mutations = {
     state.searchFilterList = data;
 
     // selectSearchFilterList setting
-    const setData = JSON.parse(JSON.stringify(data));
-    for (const key in setData) {
-      setData[key] = [];
-    }
-    state.selectSearchFilterList = setData;
+    // const setData = JSON.parse(JSON.stringify(data));
+    // for (const key in setData) {
+    //   setData[key] = [];
+    // }
+    // state.selectSearchFilterList = setData;
   },
-  setSearchFilterListByKey(state, {key, changeList}) {
+  // list를 덮어씌움
+  setSearchFilterListByKey(state, { key, changeList }) {
     state.selectSearchFilterList[key] = changeList;
+  },
+  // 값 1개를 덮어씌움 or 삭제함.
+  setSearchFilterSingleByKey(state, { key, itemId }) {
+    state.selectSearchFilterList[key] = state.selectSearchFilterList[
+      key
+    ].filter((e) => {
+      return e.itemId !== itemId;
+    });
+    state.selectSearchFilterList[key] = JSON.parse(
+      JSON.stringify(state.selectSearchFilterList[key])
+    );
   },
   resetSearchFilterList(state) {
     const data = state.selectSearchFilterList;
@@ -126,6 +138,9 @@ export const actions = {
   resetSearchFilterList({ commit }) {
     // state에게 들어올 값의 타입 미리 알려주기위해 {} 입력
     commit("resetSearchFilterList", {});
+  },
+  changeSearchFilterSingle({ commit }, params) {
+    commit("setSearchFilterSingleByKey", params);
   },
   getSearchResultList({ commit }) {
     const searchResultList = [

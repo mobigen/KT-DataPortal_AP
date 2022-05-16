@@ -23,9 +23,10 @@
             :tree-rest-api="treeObj.treeRestApi"
             :use-single-checkbox="true"
             :checkbox-label="treeObj.checkboxLabel"
+            :use-tree-view-all="true"
             :tree-key="treeObj.treeKey"
             :tree-mode="CONSTANTS.TREE.TREE_MODE.VIEW"
-            :tree-select-type="CONSTANTS.TREE.TREE_TYPE.LEAF"
+            :tree-select-type="CONSTANTS.TREE.TREE_TYPE.ALL"
           />
         </div>
       </template>

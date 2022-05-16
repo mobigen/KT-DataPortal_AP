@@ -46,6 +46,16 @@ export const state = () => ({
       CLICK_MODE: {
         EDIT: "edit",
         ADD_CHILD: "addChild"
+      },
+      TREE_KEY: {
+        NODE_NAME: "node_name",
+        NODE_ID: "node_id",
+        PARENT_ID: "parent_id"
+      },
+      OPEN_TYPE: {
+        FIRST: "first",
+        ALL: "all",
+        NONE: "none"
       }
     },
     PAGING: {
@@ -54,9 +64,9 @@ export const state = () => ({
       VISIBLE_PAGES: "visiblePages",
       PAGE: "page"
     },
-    SERIAL : {
-      WEB : "web",
-      DB : "db"
+    SERIAL: {
+      WEB: "web",
+      DB: "db"
     },
     FILTER: {
       TYPE: {
