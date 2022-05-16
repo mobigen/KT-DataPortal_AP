@@ -55,6 +55,9 @@ export const mutations = {
   },
   setCategoryObjectByKey(state, { componentKey, data }) {
     state.categoryObjectByKey[componentKey] = data;
+  },
+  resetSelectedNodeList(state, { componentKey }) {
+    state.selectedNodeList[componentKey] = {};
   }
 };
 
@@ -113,6 +116,9 @@ export const actions = {
   },
   setSelectedNodeList({ commit }, param) {
     commit("setSelectedNodeList", param);
+  },
+  resetSelectedNodeList({ commit }, param) {
+    commit("resetSelectedNodeList", param);
   },
 
   async updateNodeInfo({ commit }, param) {

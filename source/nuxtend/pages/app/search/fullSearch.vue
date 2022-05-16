@@ -162,7 +162,7 @@ export default {
         treeView: {
           label: "트리뷰",
           columnCnt: 1,
-          componentType: "tree",
+          componentType: "tree"
           // restApi: ""
         }
       },
@@ -181,9 +181,9 @@ export default {
         treeRestApi: "/api/meta/getCategoryList",
         checkboxLabel: "상위자동선택",
         treeKey: {
-          nodeName: "node_name", // node title
-          nodeIdText: "node_id", // node key
-          parentIdText: "parent_id" // parent key
+          node_name: "node_name", // node title
+          node_id: "node_id", // node key
+          parent_id: "parent_id" // parent key
         }
       },
       sortList: [
@@ -200,7 +200,7 @@ export default {
       "searchTagList",
       "tabMenuList",
       "searchResultList"
-    ]),
+    ])
   },
   components: {
     BasicSearchBar,
