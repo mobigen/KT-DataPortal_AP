@@ -230,9 +230,8 @@ export default {
         treeView: {
           label: "트리뷰",
           columnCnt: 1,
-          componentType: "tree",
-          restApi: "",
-          forLabel: true // tree는 다른 컴포넌트를 사용하기 때문에, 예외처리를 위하여 추가한다.
+          componentType: "tree"
+          // restApi: ""
         }
       },
       searchKeyword: "",
@@ -250,9 +249,9 @@ export default {
         treeRestApi: "/api/meta/getCategoryList",
         checkboxLabel: "상위자동선택",
         treeKey: {
-          nodeName: "node_name", // node title
-          nodeIdText: "node_id", // node key
-          parentIdText: "parent_id" // parent key
+          node_name: "node_name", // node title
+          node_id: "node_id", // node key
+          parent_id: "parent_id" // parent key
         }
       },
       sortList: [

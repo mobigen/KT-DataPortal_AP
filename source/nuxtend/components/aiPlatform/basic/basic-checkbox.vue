@@ -16,7 +16,7 @@
       </template>
     </div>
     <div class="checkbox-body" :style="cssVariable">
-      <template v-for="(data) in checkboxData">
+      <template v-for="data in checkboxData">
         <basic-single-checkbox
           :checkboxLabel="data['itemName']"
           :labelName="'ckb_' + data['itemId']"
@@ -51,7 +51,9 @@ export default {
     selectCheckboxList: {
       type: Array,
       require: true,
-      default: []
+      default: () => {
+        return [];
+      }
     },
     checkboxColumnCount: {
       type: Number,

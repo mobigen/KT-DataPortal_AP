@@ -32,7 +32,8 @@ export default {
     }
   },
   created() {
-    this.isDevMode = process.env.NODE_ENV === "development";
+    // local, 개발 버전에서만 표시한다.
+    this.isDevMode = process.env.ENV_TYPE !== "prod";
   }
 };
 </script>
@@ -44,7 +45,7 @@ export default {
   top: 0;
   left: 0;
   background: white;
-  z-index: 1
+  z-index: 1;
 }
 pre {
   font-size: 11px;

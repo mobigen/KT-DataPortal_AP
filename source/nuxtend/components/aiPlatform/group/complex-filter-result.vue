@@ -15,6 +15,7 @@
       <basic-tag-list
         :tagKey="key"
         :tag-list="getTagList(obj.componentType, key)"
+        :tag-type="obj.componentType"
         :previousText="previousText"
         :useCancelButton="useCancelButton"
         :cursorPointer="cursorPointer"
@@ -53,31 +54,43 @@ export default {
   },
   computed: {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
-    ...mapGetters("module/tree", ["categoryObjectForTag"]),
-    selectFilterData() {
-      const data =
-        this.$store.getters["app/search/search/selectSearchFilterList"];
-      return JSON.parse(JSON.stringify(data));
-    },
-    selectedNodeList() {
-      return this.$store.getters["module/tree/selectedNodeList"];
-    }
+    ...mapGetters("module/tree", ["categoryObjectForTag", "selectedNodeList"]),
+    ...mapGetters("app/search/search", {
+      selectFilterData: "selectSearchFilterList"
+    })
   },
   components: { BasicTagList, BasicButton, BasicLabel },
   watch: {},
   methods: {
     ...mapActions("app/search/search", [
       "changeSearchFilterList",
-      "resetSearchFilterList"
+      "resetSearchFilterList",
+      "changeSearchFilterSingle"
+    ]),
+    ...mapActions("module/tree", [
+      "setSelectedNodeList",
+      "resetSelectedNodeList"
     ]),
     filterClick(tagObj) {
       // TODO : when filter clicked, use this method.
     },
-    filterTagCancel(tagList, tagKey) {
-      this.changeSearchFilterList({ key: tagKey, changeList: tagList });
+    filterTagCancel({ key, itemId, type }) {
+      // checkbox와 tree의 vuex가 다르기 때문에 여기서 처리를 따로 해준다.
+      if (type === this.CONSTANTS.FILTER.TYPE.CHECKBOX) {
+        this.changeSearchFilterSingle({ key: key, itemId: itemId });
+      } else {
+        this.setSelectedNodeList({
+          componentKey: this.treeObj.componentKey,
+          key: itemId,
+          bool: false
+        });
+      }
     },
     selectFilterReset() {
+      // checkbox reset
       this.resetSearchFilterList();
+      // tree reset
+      this.resetSelectedNodeList(this.treeObj.componentKey);
     },
     getTagList(componentType, key) {
       if (componentType === this.CONSTANTS.FILTER.TYPE.CHECKBOX) {
@@ -100,7 +113,7 @@ export default {
          */
         return this.categoryObjectForTag(
           this.treeObj.componentKey,
-          this.treeObj.treeKey.nodeName
+          this.treeObj.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NAME]
         );
       }
     }
