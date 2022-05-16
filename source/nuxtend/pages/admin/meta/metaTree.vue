@@ -7,6 +7,7 @@
       :tree-rest-api="treeRestApi"
       :use-single-checkbox="true"
       :checkbox-label="checkboxLabel"
+      :use-tree-view-all="true"
       :tree-key="{
         [CONSTANTS.TREE.TREE_KEY.NODE_NAME]: 'node_name',
         [CONSTANTS.TREE.TREE_KEY.NODE_ID]: 'node_id',
@@ -14,6 +15,7 @@
       }"
       :tree-mode="CONSTANTS.TREE.TREE_MODE.VIEW"
       :tree-select-type="CONSTANTS.TREE.TREE_TYPE.LEAF"
+      :use-tree-tag="true"
     >
     </complex-tree>
   </div>

@@ -54,6 +54,8 @@
         :first-node-id="fNodeId"
         :show-root-node="showRootNode"
         :node-open-type="nodeOpenType"
+        :use-tree-view-all="useTreeViewAll"
+        :pDepth="depth"
       />
     </ul>
   </div>
@@ -130,16 +132,32 @@ export default {
       type: String,
       require: false,
       default: null
+    },
+    useTreeViewAll: {
+      type: Boolean,
+      require: false,
+      default: false
+    },
+    pDepth: {
+      type: Number,
+      require: false,
+      default: 0
     }
   },
   data() {
     return {
       open: true,
       fNodeId: null,
-      pId: []
+      pId: [],
+      depth: 0
     };
   },
   created() {
+    this.depth = this.pDepth + 1;
+    // 모든 component의 열기/닫기를 처리하기 위해서, eventBus를 지정한다.
+    // 단 'useTreeViewAll'를 사용할때만, (true) 일 때만 eventBus를 정의하면 된다.
+    this.setEventBus();
+
     this.setParentIds();
     this.setFirstNodeId();
     this.getOpenTypeByNode();
@@ -179,6 +197,19 @@ export default {
   watch: {},
   methods: {
     ...mapActions("module/tree", ["getCategoryObject"]),
+    setEventBus() {
+      if (this.useTreeViewAll && this.depth === 2) {
+        /**
+         * depth : root (1), root-child (2) ...         *
+         * ROOT의 자식 노드만 모두열기/닫기의 기능이 동작된다.
+         *
+         */
+        const me = this;
+        this.$nuxt.$on("treeCompRecursionFn", (bool) => {
+          me.open = bool;
+        });
+      }
+    },
     setFirstNodeId() {
       /**
        * 노드 오픈 타입을 'first'로 지정했을때, 어떤 노드가 'first'인지 알기 위해서 동작하는 함수.       *

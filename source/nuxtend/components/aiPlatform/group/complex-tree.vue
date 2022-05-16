@@ -1,14 +1,21 @@
 <template lang="html">
   <div>
     <div>
-<!--      <div>tree component mode : {{ treeMode }}</div>-->
-
       <basic-single-checkbox
         v-show="useSingleCheckbox && treeMode === CONSTANTS.TREE.TREE_MODE.VIEW"
         :checkbox-label="checkboxLabel"
         label-name="selectNodeAll"
         @changeData="checkboxChange"
       ></basic-single-checkbox>
+
+      <basic-button
+        v-if="useTreeViewAll"
+        @click="toggleTree"
+        buttonCss="text-button"
+      >
+        <fa :icon="['fas', treeViewAll ? 'minus' : 'plus']" />
+        {{ treeViewAll ? "닫기" : "모두 열기" }}
+      </basic-button>
     </div>
 
     <basic-tree
@@ -18,14 +25,15 @@
       :tree-mode="treeMode"
       :tree-key="treeKey"
       :show-root-node="false"
-      :node-open-type="CONSTANTS.TREE.OPEN_TYPE.ALL"
+      :node-open-type="CONSTANTS.TREE.OPEN_TYPE.FIRST"
       :checked="checked"
       @selectionChange="selectionChange"
       @setEditForm="editNode"
+      :use-tree-view-all="useTreeViewAll"
     ></basic-tree>
 
     <basic-tree-tag
-      v-show="treeMode === CONSTANTS.TREE.TREE_MODE.VIEW"
+      v-show="useTreeTag && treeMode === CONSTANTS.TREE.TREE_MODE.VIEW"
       :selectedNodeList="selectedNodeList"
       :tree-key="treeKey"
     />
@@ -72,6 +80,16 @@ export default {
       require: true,
       default: "treeComponentKey"
     },
+    useTreeViewAll: {
+      type: Boolean,
+      require: false,
+      default: false
+    },
+    useTreeTag: {
+      type: Boolean,
+      require: false,
+      default: false
+    },
     treeRestApi: {
       type: String,
       require: true
@@ -108,7 +126,8 @@ export default {
       headerList: [],
       dataObject: {},
       selectedNode: {},
-      nodeName: null
+      nodeName: null,
+      treeViewAll: false
     };
   },
   computed: {
@@ -195,6 +214,12 @@ export default {
       // 만약 노드 수정/하위노드 추가 form에서 복수개의 parmeter를 전달받아야 한다면, Object 형태로 구현해야 함.
       this.nodeName =
         formData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NAME]];
+    },
+    toggleTree() {
+      this.treeViewAll = !this.treeViewAll;
+
+      // basic-tree.vue
+      this.$nuxt.$emit("treeCompRecursionFn", this.treeViewAll);
     }
   },
   created() {
