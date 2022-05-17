@@ -98,7 +98,7 @@
         :nameTagList="searchResultList"
         @dataOfInterest="dataOfInterest"
         @dataSharing="dataSharing"
-        @listClick="listClick"
+        @nameTagClick="nameTagClick"
       ></name-tag-list>
     </div>
 
@@ -340,7 +340,7 @@ export default {
     dataSharing(id) {
       alert("데이터 공유하기/ 게시물ID: " + id);
     },
-    listClick(id) {
+    nameTagClick(id) {
       const dataList = this.searchResultList.find((el) => {
         if (el.id === id) {
           return true;
@@ -356,9 +356,6 @@ export default {
       } else {
         window.open("/app/search/fullSearch", "_blank");
       }
-    },
-    nameTagClick(id) {
-      alert("게시물ID: " + id);
     }
   },
   created() {
