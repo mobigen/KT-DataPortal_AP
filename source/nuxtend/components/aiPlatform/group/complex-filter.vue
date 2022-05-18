@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
-    ...mapGetters("app/search/search", [
+    ...mapGetters("meta/search/search", [
       "searchFilterList",
       "selectSearchFilterList"
     ])
@@ -66,7 +66,7 @@ export default {
   components: { BasicCheckbox, ComplexTree },
   watch: {},
   methods: {
-    ...mapActions("app/search/search", ["changeSearchFilterList"]),
+    ...mapActions("meta/search/search", ["changeSearchFilterList"]),
     changeCheckboxList(checkboxKey, checkboxList) {
       this.changeSearchFilterList({
         key: checkboxKey,
