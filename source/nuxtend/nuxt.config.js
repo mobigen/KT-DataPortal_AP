@@ -111,10 +111,11 @@ export default {
   },
 
   axios: {
+    baseURL: process.env.API_GW_URL,
     // baseURL: process.env.API_REMOTE_URL,
     // proxy: false,
-    baseURL: process.env.SERVER_HOST + ":" + process.env.SERVER_PORT,
-    proxy: true
+    // baseURL: process.env.SERVER_HOST + ":" + process.env.SERVER_PORT,
+    proxy: false
   },
 
   i18n: {
@@ -171,10 +172,6 @@ export default {
     "/api/user/": {
       target: process.env.API_USER_URL
       // api-router 사용
-    },
-    "/api/meta/": {
-      target: process.env.API_REMOTE_URL,
-      pathRewrite: { "/api": "/route" }
     }
   },
 
