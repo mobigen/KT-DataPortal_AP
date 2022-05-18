@@ -33,7 +33,7 @@ export default {
   },
   created() {
     // local, 개발 버전에서만 표시한다.
-    this.isDevMode = process.env.ENV_TYPE !== "prod";
+    this.isDevMode = process.env.NODE_ENV !== "prod";
   }
 };
 </script>

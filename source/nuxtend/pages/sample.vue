@@ -6,6 +6,9 @@
 
 <script>
 export default {
-  name: "index-sample"
+  name: "index-sample",
+  created() {
+    console.log(process.env.NODE_ENV);
+  }
 };
 </script>
