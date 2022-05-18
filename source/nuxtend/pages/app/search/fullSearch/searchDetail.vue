@@ -51,14 +51,20 @@
       <basic-title title="데이터 정보" subtitle=""></basic-title>
       <h3>view table component 2 + 1</h3>
       <basic-view-table
-        :headerList="twoRowTableHeader"
+        :headerList="twoColumnTableHeader"
         :dataObj="searchDetailObject.dataInfo.body"
         viewTableColumnCount="2"
       ></basic-view-table>
       <basic-view-table
-        :headerList="singleRowTableHeader"
+        :headerList="singleColumnTableHeader"
         :dataObj="searchDetailObject.dataInfo.body"
         viewTableColumnCount="1"
+        :useTagList="true"
+        tagPreviousText="#"
+        :tagCursorPointer="false"
+        @tagClick=""
+        :useSeparator="false"
+        separator=","
       ></basic-view-table>
     </div>
 
@@ -107,8 +113,8 @@ export default {
   props: {},
   data() {
     return {
-      singleRowTableHeader: [],
-      twoRowTableHeader: []
+      singleColumnTableHeader: [],
+      twoColumnTableHeader: []
     };
   },
   computed: {
@@ -131,18 +137,22 @@ export default {
       const dataInfoHeader = JSON.parse(
         JSON.stringify(this.searchDetailObject.dataInfo.header)
       );
-      const singleRowTableHeader = [];
-      const singleRowTableColumnName = ["provideUrl", "description", "keyword"];
+      const singleColumnTableHeader = [];
+      const singleColumnTableColumnName = [
+        "provideUrl",
+        "description",
+        "keyword"
+      ];
 
-      singleRowTableColumnName.forEach((el) => {
+      singleColumnTableColumnName.forEach((el) => {
         const index = dataInfoHeader.findIndex(
           (item) => item.column_name === el
         );
-        singleRowTableHeader.push(dataInfoHeader.splice(index, 1).shift());
+        singleColumnTableHeader.push(dataInfoHeader.splice(index, 1).shift());
       });
 
-      this.singleRowTableHeader = singleRowTableHeader;
-      this.twoRowTableHeader = dataInfoHeader;
+      this.singleColumnTableHeader = singleColumnTableHeader;
+      this.twoColumnTableHeader = dataInfoHeader;
     }
   },
   created() {
