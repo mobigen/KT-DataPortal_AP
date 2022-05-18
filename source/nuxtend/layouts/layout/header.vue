@@ -16,10 +16,10 @@ export default {
   data() {
     return {
       menuList: [
-        { menuName: "SuperAdmin-MetaName", url: "/superAdmin/meta/metaList" },
-        { menuName: "SuperAdmin-MetaMap", url: "/superAdmin/meta/metaMapList" },
-        { menuName: "Admin-MetaName", url: "/admin/meta/metaList" },
-        { menuName: "Admin-MetaTree", url: "/admin/meta/metaTree" }
+        { menuName: "SuperAdmin-MetaName", url: "/superAdmin/meta/metaName/list" },
+        { menuName: "SuperAdmin-MetaMap", url: "/superAdmin/meta/map/list" },
+        { menuName: "Admin-MetaName", url: "/mgnt/ui/meta/List" },
+        { menuName: "Admin-MetaTree", url: "/mgnt/ui/meta/tree" }
       ]
     };
   },

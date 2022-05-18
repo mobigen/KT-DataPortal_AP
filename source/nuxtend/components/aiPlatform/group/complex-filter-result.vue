@@ -55,14 +55,14 @@ export default {
   computed: {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
     ...mapGetters("module/tree", ["categoryObjectForTag", "selectedNodeList"]),
-    ...mapGetters("app/search/search", {
+    ...mapGetters("meta/search/search", {
       selectFilterData: "selectSearchFilterList"
     })
   },
   components: { BasicTagList, BasicButton, BasicLabel },
   watch: {},
   methods: {
-    ...mapActions("app/search/search", [
+    ...mapActions("meta/search/search", [
       "changeSearchFilterList",
       "resetSearchFilterList",
       "changeSearchFilterSingle"

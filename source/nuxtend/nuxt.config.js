@@ -111,8 +111,10 @@ export default {
   },
 
   axios: {
-    baseURL: process.env.API_REMOTE_URL,
-    proxy: false
+    // baseURL: process.env.API_REMOTE_URL,
+    // proxy: false,
+    baseURL: process.env.SERVER_HOST + ":" + process.env.SERVER_PORT,
+    proxy: true
   },
 
   i18n: {
@@ -147,10 +149,12 @@ export default {
 
   publicRuntimeConfig: {
     API_USERS_PREFIX: process.env.API_USERS_PREFIX,
+    API_META_PREFIX: process.env.API_META_PREFIX,
     USER_ACCESS_TOKEN_NAME: process.env.USER_ACCESS_TOKEN_NAME,
     USER_INDEX_PAGE: process.env.USER_INDEX_PAGE,
     USER_LOGIN_PAGE: process.env.USER_LOGIN_PAGE,
     API_ADMIN_USERS_PREFIX: process.env.API_ADMIN_USERS_PREFIX,
+    API_ADMIN_META_PREFIX: process.env.API_ADMIN_META_PREFIX,
     ADMIN_ACCESS_TOKEN_NAME: process.env.ADMIN_ACCESS_TOKEN_NAME,
     ADMIN_INDEX_PAGE: process.env.ADMIN_INDEX_PAGE,
     ADMIN_LOGIN_PAGE: process.env.ADMIN_LOGIN_PAGE
@@ -165,13 +169,12 @@ export default {
 
   proxy: {
     "/api/user/": {
-      target: process.env.API_USER_URL,
+      target: process.env.API_USER_URL
       // api-router 사용
-      "/remote/": {
-        target: process.env.API_REMOTE_URL,
-        pathRewrite: { "/remote": "" }
-        // , changeOrigin: true
-      }
+    },
+    "/api/meta/": {
+      target: process.env.API_REMOTE_URL,
+      pathRewrite: { "/api": "/route" }
     }
   },
 
