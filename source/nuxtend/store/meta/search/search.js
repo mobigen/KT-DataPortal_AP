@@ -310,11 +310,15 @@ export const actions = {
           provideUrl:
             "http://openapi/grid/selectOpenApiSvcDtlView.do?apiSvcCd=CM",
           description: "지역별 결빙사고다발지역에 대한 주요 정보를 제공합니다.",
-          keyword: "결빙, 사고, 다발지역, 교통"
+          keyword: "결빙,키워드,다발지역,교통"
         }
       },
       mainTextInfo: "Editor작성 내용 노출"
     };
+
+    // string convert list
+    searchDetailObject.dataInfo.body.keyword =
+      searchDetailObject.dataInfo.body.keyword.split(",");
 
     commit("setSearchDetailObject", searchDetailObject);
   }

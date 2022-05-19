@@ -342,9 +342,7 @@ export default {
     },
     nameTagClick(id) {
       const dataList = this.searchResultList.find((el) => {
-        if (el.id === id) {
-          return true;
-        }
+        return el.id === id;
       });
 
       // dataLocationKey, path 정해지면 변경

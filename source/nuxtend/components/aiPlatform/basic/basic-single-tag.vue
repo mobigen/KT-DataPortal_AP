@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="tag-item">
+  <div :class="['tag-item', { cursorPointer }]" @click="tagClick">
     <span v-if="previousText" class="prev-text">{{ previousText }}</span>
     <span>{{ tagName }}</span>
   </div>
@@ -17,6 +17,10 @@ export default {
     previousText: {
       type: String,
       require: false
+    },
+    cursorPointer: {
+      type: Boolean,
+      require: false
     }
   },
   data() {
@@ -25,7 +29,11 @@ export default {
   computed: {},
   components: {},
   watch: {},
-  methods: {},
+  methods: {
+    tagClick() {
+      this.$emit("tagClick", { tagName: this.tagName });
+    }
+  },
   created() {}
 };
 </script>
@@ -44,5 +52,8 @@ export default {
   span {
     padding: 4px 10px;
   }
+}
+.cursorPointer {
+  cursor: pointer;
 }
 </style>

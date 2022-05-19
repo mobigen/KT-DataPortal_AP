@@ -40,7 +40,8 @@ export default {
     },
     tagType: {
       type: String,
-      require: true
+      require: false,
+      default: "checkbox"
     },
     previousText: {
       type: String,

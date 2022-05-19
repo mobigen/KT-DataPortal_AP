@@ -4,7 +4,28 @@
       <tbody v-for="(data, i) in headerList">
         <tr>
           <th>{{ data["column_name"] }}</th>
-          <td>{{ dataObj[data["column_name"]] }}</td>
+          <td v-if="Array.isArray(dataObj[data['column_name']])">
+            <template v-for="(ldata, li) in dataObj[data['column_name']]">
+              <basic-single-tag
+                v-if="useTagList"
+                :tagName="ldata"
+                :previousText="tagPreviousText"
+                :cursorPointer="tagCursorPointer"
+                @tagClick="tagClick"
+              ></basic-single-tag>
+
+              <span v-else-if="useSeparator">
+                {{ ldata }}
+                <template v-if="dataObj[data['column_name']].length !== li + 1">
+                  {{ separator }}
+                </template>
+              </span>
+            </template>
+          </td>
+
+          <td v-else>
+            {{ dataObj[data["column_name"]] }}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -12,6 +33,8 @@
 </template>
 
 <script type="text/javascript">
+import BasicSingleTag from "@/components/aiPlatform/basic/basic-single-tag.vue";
+
 export default {
   name: "basic-view-table",
   extends: {},
@@ -31,6 +54,28 @@ export default {
       type: String,
       require: false,
       default: 1
+    },
+    useTagList: {
+      type: Boolean,
+      require: false
+    },
+    tagPreviousText: {
+      type: String,
+      require: false
+    },
+    tagCursorPointer: {
+      type: Boolean,
+      require: false
+    },
+    useSeparator: {
+      type: Boolean,
+      require: false,
+      default: true
+    },
+    separator: {
+      type: String,
+      require: false,
+      default: ","
     }
   },
   computed: {
@@ -40,9 +85,13 @@ export default {
       };
     }
   },
-  components: {},
+  components: { BasicSingleTag },
   watch: {},
-  methods: {},
+  methods: {
+    tagClick({ tagName }) {
+      this.$emit("tagClick", { tagName });
+    }
+  },
   created() {}
 };
 </script>
@@ -65,6 +114,7 @@ export default {
           text-align: left;
         }
         td {
+          display: flex;
           padding: 10px;
         }
       }
