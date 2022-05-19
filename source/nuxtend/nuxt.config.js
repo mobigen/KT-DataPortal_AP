@@ -16,8 +16,8 @@ export default {
   generate: {
     cache: false,
     crawler: true,
-    routes: ["/"]
-    // dir: "../../src/main/resources/static"
+    routes: ["/"],
+    dir: "../src/main/resources/static"
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -42,7 +42,9 @@ export default {
     "@/plugins/defaults.js",
     "@/plugins/axios.js",
     "@/plugins/route.js",
-    "@/plugins/persisted-state.client.js"
+    "@/plugins/persisted-state.client.js",
+    "@/plugins/lodash.js",
+    "@/plugins/users/common.js"
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -109,9 +111,11 @@ export default {
   },
 
   axios: {
-    baseURL: process.env.API_BASE_URL + "/",
-    // proxy: process.env.ENV_TYPE === "local"
-    proxy: true
+    baseURL: process.env.API_GW_URL,
+    // baseURL: process.env.API_REMOTE_URL,
+    // proxy: false,
+    // baseURL: process.env.SERVER_HOST + ":" + process.env.SERVER_PORT,
+    proxy: false
   },
 
   i18n: {
@@ -144,6 +148,19 @@ export default {
     }
   },
 
+  publicRuntimeConfig: {
+    API_USERS_PREFIX: process.env.API_USERS_PREFIX,
+    API_META_PREFIX: process.env.API_META_PREFIX,
+    USER_ACCESS_TOKEN_NAME: process.env.USER_ACCESS_TOKEN_NAME,
+    USER_INDEX_PAGE: process.env.USER_INDEX_PAGE,
+    USER_LOGIN_PAGE: process.env.USER_LOGIN_PAGE,
+    API_ADMIN_USERS_PREFIX: process.env.API_ADMIN_USERS_PREFIX,
+    API_ADMIN_META_PREFIX: process.env.API_ADMIN_META_PREFIX,
+    ADMIN_ACCESS_TOKEN_NAME: process.env.ADMIN_ACCESS_TOKEN_NAME,
+    ADMIN_INDEX_PAGE: process.env.ADMIN_INDEX_PAGE,
+    ADMIN_LOGIN_PAGE: process.env.ADMIN_LOGIN_PAGE
+  },
+
   storybook: {
     addons: ["@storybook/addon-actions", "@storybook/addon-controls"],
     modules: {
@@ -152,34 +169,22 @@ export default {
   },
 
   proxy: {
-    // api-router 사용
-    "/api/": {
-      target: process.env.API_REMOTE_URL + "/route/",
-      pathRewrite: {
-        "/api/meta/": "/meta/",
-        "/api/user/": "/meta/"
-      }
-      // changeOrigin: true // cross origin 허용
-    },
-    // backend 바로 붙을때 사용
-    // "/api/": {
-    //   target: "http://192.168.101.43:19000/",
-    //   pathRewrite: { "/api": "/route/" },
-    //   changeOrigin: true // cross origin 허용
-    // },
-    // local 테스트
-    "/local/": {
-      target: process.env.API_BASE_URL + "/",
-      pathRewrite: { "/local": "/dataPortal/api" },
-      changeOrigin: true
+    "/api/user/": {
+      target: process.env.API_USER_URL
+      // api-router 사용
     }
   },
+
   server: {
-    port: process.env.VUE_APP_BASE_PORT,
-    listen: 80
+    host: process.env.SERVER_HOST,
+    port: process.env.SERVER_PORT,
+    listen: 82
   },
 
+  // 라우터 타면 여길로 들어옴.
+  // 미들웨어에 인증, 권한 추가
   router: {
+    middleware: ["auth"],
     extendRoutes(routes) {
       logger.info(
         "## NuxtLink 처리: 정적 리소스에 대한 html 파일 대응을 위해 아래와 같이 alias 경로를 변경 합니다."

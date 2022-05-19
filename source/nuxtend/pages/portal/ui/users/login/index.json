@@ -1,0 +1,12 @@
+{
+  "ko": {
+    "index": {
+      "hello-world": "안녕!!! 세상천지"
+    }
+  },
+  "en": {
+    "index": {
+      "hello-world": "Hello!!! World"
+    }
+  }
+}
