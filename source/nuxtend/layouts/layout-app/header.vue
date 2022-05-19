@@ -54,41 +54,53 @@ export default {
 
         {
           menuName: "데이터검색",
-          url: "/app/search",
+          url: "/portal/ui/meta/search",
           children: [
-            { menuName: "데이터통합검색", url: "/app/search/fullSearch" },
-            { menuName: "데이터맵검색", url: "/app/search/mapSearch" },
-            { menuName: "연관관계검색", url: "/app/search/relationSearch" }
+            {
+              menuName: "데이터통합검색",
+              url: "/portal/ui/meta/search/fullSearch"
+            },
+            {
+              menuName: "데이터맵검색",
+              url: "/portal/ui/meta/search/mapSearch"
+            },
+            {
+              menuName: "연관관계검색",
+              url: "/portal/ui/meta/search/relationSearch"
+            }
           ]
         },
         {
           menuName: "데이터등록",
-          url: "/app/register",
+          url: "/portal/ui/meta/register",
           children: [
             {
               menuName: "데이터(개별)등록",
-              url: "/app/register/registerSingle"
+              url: "/portal/ui/meta/register/registerSingle"
             },
-            { menuName: "데이터일괄등록요청", url: "/app/register/registerAll" }
+            {
+              menuName: "데이터일괄등록요청",
+              url: "/portal/ui/meta/register/registerAll"
+            }
           ]
         },
         {
           menuName: "마이페이지",
-          url: "/app/my",
+          url: "/portal/ui/meta/my",
           children: [
-            { menuName: "마이디스크", url: "/app/my/mydisk" },
-            { menuName: "개인정보관리", url: "/app/my/info" }
+            { menuName: "마이디스크", url: "/portal/ui/meta/my/mydisk" },
+            { menuName: "개인정보관리", url: "/portal/ui/meta/my/info" }
           ]
         }
       ],
       /* 임시로 url, icon 설정 */
       userMenuList: [
-        { menuName: "로그인", url: "/app/search" },
+        { menuName: "로그인", url: "/portal/ui/users/login" },
         { menuName: "회원가입", url: "/app/search/fullSearch" },
         { menuName: "마이디스크", url: "/app/search/mapSearch" }
       ],
-      textPreviousIcon: [, , "book-bookmark"],
-      textNextIcon: ["key", ,]
+      textPreviousIcon: [null, null, "book-bookmark"],
+      textNextIcon: ["key", null, null]
     };
   },
   props: {},

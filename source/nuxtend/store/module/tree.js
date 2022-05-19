@@ -122,10 +122,16 @@ export const actions = {
   },
 
   async updateNodeInfo({ commit }, param) {
-    await this.$axios.post("/api/meta/updateCategory", param);
+    await this.$axios.post(
+      this.$config.API_ADMIN_META_PREFIX + "/updateCategory",
+      param
+    );
   },
 
   async addChildCategory({ commit }, param) {
-    await this.$axios.post("/api/meta/addChildCategory", param);
+    await this.$axios.post(
+      this.$config.API_ADMIN_META_PREFIX + "/addChildCategory",
+      param
+    );
   }
 };
