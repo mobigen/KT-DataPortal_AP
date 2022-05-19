@@ -47,7 +47,6 @@ export const actions = {
     commit("setNewPaging", params);
   },
   setPage({ commit }, { key, page }) {
-    console.log("setPage");
     commit("setPageObject", {
       key: key,
       data: {
@@ -57,7 +56,6 @@ export const actions = {
   },
 
   setTotalCount({ commit }, { key, totalCount }) {
-    console.log(key);
     commit("setPageObject", {
       key: key,
       data: {

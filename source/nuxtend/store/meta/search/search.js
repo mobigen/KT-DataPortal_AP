@@ -47,12 +47,11 @@ export const mutations = {
   },
   // list를 덮어씌움
   setSearchFilterListByKey(state, { key, changeList }) {
-    if (
-      !Object.prototype.hasOwnProperty.call(state.selectSearchFilterList, key)
-    ) {
-      state.selectSearchFilterList[key] = {};
-    }
     state.selectSearchFilterList[key] = changeList;
+
+    state.selectSearchFilterList = JSON.parse(
+      JSON.stringify(state.selectSearchFilterList)
+    );
   },
   // 값 1개를 덮어씌움 or 삭제함.
   setSearchFilterSingleByKey(state, { key, itemId }) {

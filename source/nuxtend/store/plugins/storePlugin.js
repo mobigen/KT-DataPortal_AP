@@ -1,13 +1,4 @@
 export function storePlugin(store) {
-  // called when the store is initialized
-
-  // called (before or after) every action.
-  // The action comes in the format of `{type, payload}`
-  // store.subscribeAction({
-  //   // before: (action, state) => {},
-  //   // after: (action, state) => {}
-  // });
-
   // called after every mutation.
   // The mutation comes in the format of `{ type, payload }`.
   store.subscribe((mutation, state) => {
