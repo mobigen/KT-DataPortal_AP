@@ -67,17 +67,6 @@ export default {
 .hoverColor:hover {
   color: red;
 }
-.link-button {
-  padding: 0;
-  border: none;
-  background: none;
-}
-.underline {
-  text-decoration: underline;
-}
-.hoverColor:hover {
-  color: red;
-}
 button:hover {
   cursor: pointer;
 }

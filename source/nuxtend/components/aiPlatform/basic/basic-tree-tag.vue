@@ -1,9 +1,13 @@
 <template lang="html">
   <div>
     <template v-for="(obj, key, i) in selectedNodeList">
-      <div class="basic-tree-tag" :key="'tag_' + i" :id="obj[nodeIdText]">
+      <div
+        class="basic-tree-tag"
+        :key="'tag_' + i"
+        :id="obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
+      >
         <span>
-          {{ obj[nodeTitle] }}
+          {{ obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NAME]] }}
         </span>
       </div>
     </template>
@@ -11,6 +15,8 @@
 </template>
 
 <script type="text/javascript">
+import { mapGetters } from "vuex";
+
 export default {
   name: "item",
   extends: {},
@@ -19,22 +25,21 @@ export default {
       type: Object,
       require: true
     },
-    nodeTitle: {
-      type: String,
-      require: true
-    },
-    nodeIdText: {
-      type: String,
+    treeKey: {
+      type: Object,
       require: true
     }
   },
   data() {
     return {};
   },
+  computed: {
+    ...mapGetters("defaults/constants", ["CONSTANTS"])
+  },
   components: {},
   watch: {},
-  created() {},
-  methods: {}
+  methods: {},
+  created() {}
 };
 </script>
 

@@ -1,17 +1,29 @@
 <template lang="html">
-  <div>
+  <div id="basicMenu">
     <ul>
-      <li v-for="(data, i) in menuList" :key="'menu_' + i">
-        <router-link :to="menuList[i]['url']">{{
-          menuList[i]["menuName"]
-        }}</router-link>
-        <span v-if="separatorUse(menuList.length, i)">{{ separator }}</span>
-      </li>
+      <template v-for="(data, i) in menuList">
+        <li :key="'menu_' + i">
+          <router-link :to="data['url']">
+            <basic-icon-label
+              forProperty=""
+              :textPreviousIcon="textPreviousIcon[i]"
+              :textNextIcon="textNextIcon[i]"
+            >
+              {{ data["menuName"] }}
+            </basic-icon-label>
+          </router-link>
+        </li>
+        <span v-if="useSeparator && menuList.length !== i + 1">{{
+          separator
+        }}</span>
+      </template>
     </ul>
   </div>
 </template>
 
 <script type="text/javascript">
+import BasicIconLabel from "@/components/aiPlatform/basic/basic-icon-label.vue";
+
 export default {
   name: "basic-menu",
   extends: {},
@@ -20,8 +32,21 @@ export default {
       type: Array,
       require: true
     },
+    useSeparator: {
+      type: Boolean,
+      require: false,
+      default: false
+    },
     separator: {
       type: String,
+      require: false
+    },
+    textPreviousIcon: {
+      type: Array,
+      require: false
+    },
+    textNextIcon: {
+      type: Array,
       require: false
     }
   },
@@ -29,32 +54,33 @@ export default {
     return {};
   },
   computed: {},
-  components: {},
+  components: { BasicIconLabel },
   watch: {},
-  methods: {
-    separatorUse(menuListLength, index) {
-      let notEmpSeparator = false;
-      notEmpSeparator = this.separator !== undefined && this.separator !== "";
-
-      return notEmpSeparator && menuListLength !== index + 1;
-    }
-  }
+  methods: {}
 };
 </script>
 
-<style scoped lang="scss">
-ul {
-  list-style: none;
-  display: flex;
-  li {
-    a {
-      text-decoration: none;
-      padding: 0px 10px;
-      color: black;
-    }
-    a:hover {
-      text-decoration: underline;
-      color: red;
+<style lang="scss">
+#basicMenu {
+  ul {
+    list-style: none;
+    display: flex;
+    li {
+      a {
+        display: flex;
+        text-decoration: none;
+        padding: 0 10px;
+        color: black;
+        #basicIconLabel {
+          label {
+            cursor: pointer;
+          }
+        }
+      }
+      a:hover {
+        text-decoration: underline;
+        color: red;
+      }
     }
   }
 }

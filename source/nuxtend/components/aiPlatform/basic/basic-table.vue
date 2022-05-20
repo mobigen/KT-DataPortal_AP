@@ -3,11 +3,11 @@
     <table>
       <thead>
         <tr>
-          <th v-if="serialNumUse">{{ serialNumText }}</th>
+          <th v-if="useSerialNum">{{ serialNumText }}</th>
           <th v-for="(h, hi) in headerList" :key="'header_' + hi">
             {{ h["column_name"] }}
           </th>
-          <template v-if="tableButtonUse">
+          <template v-if="useTableButton">
             <th
               v-for="(value, key, index) in tableButtonText"
               :key="'header_button_' + key"
@@ -24,7 +24,7 @@
           :key="'table_body_' + i"
           @click="rowClick(data[rowKey])"
         >
-          <td v-if="serialNumUse">{{ i + 1 }}</td>
+          <td v-if="useSerialNum">{{ i + 1 }}</td>
 
           <td v-for="(h, hi) in headerList" :key="'header_' + hi">
             <template
@@ -46,7 +46,7 @@
             <template v-else>{{ data[h["column_name"]] }}</template>
           </td>
           <template v-for="(value, key, index) in tableButtonText">
-            <td @click.stop v-if="tableButtonUse" :key="'header_button_' + key">
+            <td @click.stop v-if="useTableButton" :key="'header_button_' + key">
               <basic-button
                 @click="buttonClick(data[rowKey], key)"
                 :buttonCss="tableButtonText[key]['buttonCss']"
@@ -97,7 +97,7 @@ export default {
       type: Array,
       require: true
     },
-    serialNumUse: {
+    useSerialNum: {
       type: Boolean,
       require: false,
       default: false
@@ -107,7 +107,7 @@ export default {
       require: false,
       default: ""
     },
-    tableButtonUse: {
+    useTableButton: {
       type: Boolean,
       require: false,
       default: false

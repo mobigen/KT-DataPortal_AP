@@ -1,13 +1,25 @@
 <template lang="html">
   <div class="tree_cont">
-    <div>
-      <span v-if="isOpen" @click="toggle">[{{ open ? "-" : "+" }}]</span>
+    <div
+      :style="{
+        color: isRootNode() && !showRootNode ? 'red' : 'black',
+        display: isRootNode() && !showRootNode ? 'none' : 'inherit'
+      }"
+    >
+      <span v-show="isOpen" @click="toggle">
+        <template v-if="open">
+          <fa :icon="['fas', 'minus']" />
+        </template>
+        <template v-else>
+          <fa :icon="['fas', 'plus']" />
+        </template>
+      </span>
 
       <template v-if="treeMode === CONSTANTS.TREE.TREE_MODE.EDITOR">
         <span
           :class="[spanSelected ? 'span-selected' : '']"
           @click="spanEdit(treeData)"
-          >{{ treeData[nodeTitle] }}</span
+          >{{ treeData[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NAME]] }}</span
         >
         <basic-button
           style="display: inline"
@@ -22,37 +34,45 @@
         <span
           :class="[spanSelected ? 'span-selected' : '']"
           @click="spanClick(treeData, $event)"
-          >{{ treeData[nodeTitle] }}</span
+          >{{ treeData[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NAME]] }}</span
         >
       </template>
     </div>
     <ul v-if="isOpen" v-show="open">
       <item
         v-for="(data, index) in treeData.children"
+        :component-key="componentKey"
         :tree-select-type="treeSelectType"
         :checked="checked"
         :treeData="data"
         :key="index"
-        :nodeTitle="nodeTitle"
-        :nodeIdText="nodeIdText"
-        :parentIdText="parentIdText"
+        :tree-key="treeKey"
         :tree-mode="treeMode"
         @selectionChange="selectionChange"
         :parentsIds="pId"
         @setEditForm="setEditForm"
-      ></item>
+        :first-node-id="fNodeId"
+        :show-root-node="showRootNode"
+        :node-open-type="nodeOpenType"
+        :use-tree-view-all="useTreeViewAll"
+        :pDepth="depth"
+      />
     </ul>
   </div>
 </template>
 
 <script type="text/javascript">
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "item",
   extends: {},
   props: {
+    componentKey: {
+      type: String,
+      require: true
+    },
     /**
      * Tree Type.
      * ALL : You can select Every Node.
@@ -62,75 +82,185 @@ export default {
     treeSelectType: {
       type: String,
       require: false,
-      defaults: "ALL" // ALL, LEAF
+      default: "ALL" // ALL, LEAF
     },
     checked: {
       type: Boolean,
       require: false,
-      defaults: false
+      default: false
     },
     treeData: {
       type: Object,
       require: true,
-      defaults: {}
+      default: () => {
+        return {};
+      }
     },
-    nodeTitle: {
-      type: String,
-      require: true,
-      defaults: ""
-    },
-    nodeIdText: {
-      type: String,
-      require: true,
-      defaults: ""
-    },
-    parentIdText: {
-      type: String,
-      require: true,
-      defaults: ""
+    treeKey: {
+      type: Object,
+      require: true
     },
     treeMode: {
       type: String,
       require: true,
-      defaults: "VIEW"
+      default: "VIEW"
     },
     // 내부 재귀 루틴에서만 쓰임.
     parentsIds: {
       type: Array,
       require: false,
-      defaults: []
+      default: () => {
+        return [];
+      }
+    },
+    showRootNode: {
+      type: Boolean,
+      require: false,
+      default: true
+    },
+    nodeOpenType: {
+      type: String,
+      require: false,
+      /**
+       * first : open only first node
+       * all : open all node
+       * none : not open
+       */
+      default: "first"
+    },
+    firstNodeId: {
+      type: String,
+      require: false,
+      default: null
+    },
+    useTreeViewAll: {
+      type: Boolean,
+      require: false,
+      default: false
+    },
+    pDepth: {
+      type: Number,
+      require: false,
+      default: 0
     }
   },
   data() {
     return {
-      open: false,
-      // spanSelected: false,
-      pId: []
+      open: true,
+      fNodeId: null,
+      pId: [],
+      depth: 0
     };
+  },
+  created() {
+    this.depth = this.pDepth + 1;
+    // 모든 component의 열기/닫기를 처리하기 위해서, eventBus를 지정한다.
+    // 단 'useTreeViewAll'를 사용할때만, (true) 일 때만 eventBus를 정의하면 된다.
+    this.setEventBus();
+
+    this.setParentIds();
+    this.setFirstNodeId();
+    this.getOpenTypeByNode();
   },
   computed: {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
-    ...mapGetters("module/tree", ["categoryObjectByKey"]),
+
+    categoryObjectByKey() {
+      return this.$store.getters["module/tree/categoryObjectByKey"][
+        this.componentKey
+      ];
+    },
     isOpen() {
       return this.treeData.children && this.treeData.children.length;
     },
     spanSelected() {
-      const selectedNodeList =
+      let selectedNodeList =
         this.$store.getters["module/tree/selectedNodeList"];
-      return Object.prototype.hasOwnProperty.call(
-        selectedNodeList,
-        this.treeData[this.nodeIdText]
-      );
+
+      if (
+        !Object.prototype.hasOwnProperty.call(
+          selectedNodeList,
+          this.componentKey
+        )
+      ) {
+        // component key가 아예 없다면 false를 리턴한다.
+        return false;
+      } else {
+        return Object.prototype.hasOwnProperty.call(
+          selectedNodeList[this.componentKey],
+          this.treeData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]]
+        );
+      }
     }
   },
   components: { BasicButton },
   watch: {},
-  created() {
-    this.setParentIds();
-  },
   methods: {
+    ...mapActions("module/tree", ["getCategoryObject"]),
+    setEventBus() {
+      if (this.useTreeViewAll && this.depth === 2) {
+        /**
+         * depth : root (1), root-child (2) ...         *
+         * ROOT의 자식 노드만 모두열기/닫기의 기능이 동작된다.
+         *
+         */
+        const me = this;
+        this.$nuxt.$on("treeCompRecursionFn", (bool) => {
+          me.open = bool;
+        });
+      }
+    },
+    setFirstNodeId() {
+      /**
+       * 노드 오픈 타입을 'first'로 지정했을때, 어떤 노드가 'first'인지 알기 위해서 동작하는 함수.       *
+       * 가장 처음 ROOT 노드 일때 이 함수를 실행해서 'first'노드를 저장해둔다.
+       *
+       * 만약, 노드 오픈 탸입이 'first'가 아닌 경우 실행할 필요가 없다.
+       * 또, basic-tree는 component를 재귀적으로 실행하는데
+       * 재귀적으로 실행할때는 이 함수가 동작할 필요가 없다. (오직 ROOT 일때만 동작함)       *
+       */
+
+      // ROOT가 아닐 경우 실행할 필요가 없음.
+      // 노드 오픈 타입이 first가 아닐경우 실행할 필요가 없음.
+      if (
+        !this.isRootNode() ||
+        this.nodeOpenType !== this.CONSTANTS.TREE.OPEN_TYPE.FIRST
+      ) {
+        return;
+      }
+
+      if (
+        this.treeData["children"] !== undefined &&
+        this.treeData["children"].length > 0
+      ) {
+        this.fNodeId =
+          this.treeData["children"][0][
+            this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]
+          ];
+      }
+    },
+    getOpenTypeByNode() {
+      // 맨 처음 노드를 그릴때만 실행함.
+      if (this.nodeOpenType === this.CONSTANTS.TREE.OPEN_TYPE.ALL) {
+        this.open = true;
+      } else if (this.nodeOpenType === this.CONSTANTS.TREE.OPEN_TYPE.FIRST) {
+        // 첫번째 노드만 오픈할 경우
+
+        // ROOT 노드는 오픈한다.
+        // 일단 open 시켜두고, class 제어를 통해서 화면에서 표시/미표시 한다.
+        if (this.isRootNode()) {
+          this.open = true;
+        } else {
+          // ROOT가 아니면,
+          this.open =
+            this.firstNodeId ===
+            this.treeData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]];
+        }
+      }
+    },
     setParentIds() {
-      const parentId = this.treeData[this.parentIdText];
+      const parentId =
+        this.treeData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.PARENT_ID]];
       if (parentId === undefined || this.parentsIds === undefined) {
         return;
       }
@@ -160,7 +290,9 @@ export default {
       if (this.checked) {
         const me = this;
         // 자기 자신 노드를 포함한다.
-        this.pId.push(treeNode[this.nodeIdText]);
+        this.pId.push(
+          treeNode[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]]
+        );
         this.pId.forEach((parentId) => {
           this.selectionChange({
             bool: nodeSelected,
@@ -195,6 +327,12 @@ export default {
     },
     setEditForm(param) {
       this.$emit("setEditForm", param);
+    },
+    isRootNode() {
+      return (
+        this.treeData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]] ===
+        this.treeData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.PARENT_ID]]
+      );
     }
   }
 };
@@ -203,6 +341,7 @@ export default {
 <style scoped>
 ul {
   padding-left: 0.5rem;
+  display: inline-grid;
 }
 
 .tree_cont {

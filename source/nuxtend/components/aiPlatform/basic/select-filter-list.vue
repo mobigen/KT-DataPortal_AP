@@ -1,46 +1,46 @@
 <template lang="html">
   <div id="selectFilterList">
-    <div v-for="(data, i) in filterData">
-      <basic-label forProperty="">{{ data["label"] }}</basic-label>
-      <search-tag
-        :tagList="data['selectFilterList']"
+    <div v-for="(value, key) in filterData">
+      <basic-label forProperty="">{{ value["label"] }}</basic-label>
+      <basic-tag-list
+        :tagKey="key"
+        :tagList="value['dataList']"
         :previousText="previousText"
-        :cancelButtonUse="cancelButtonUse"
+        :useCancelButton="useCancelButton"
         :cursorPointer="cursorPointer"
+        @tagCancel="filterTagCancel"
         @tagClick="filterClick"
-      ></search-tag>
+      ></basic-tag-list>
     </div>
-    <template>
-      <basic-button
-        class="filter-reset-button"
-        componentId=""
-        buttonCss="text-button"
-        :underline="false"
-        :hoverColor="false"
-        @click="selectFilterReset"
-        >선택 필터 초기화</basic-button
-      >
-    </template>
+    <basic-button
+      class="filter-reset-button"
+      componentId=""
+      buttonCss="text-button"
+      :underline="false"
+      :hoverColor="false"
+      @click="selectFilterReset"
+      >선택 필터 초기화</basic-button
+    >
   </div>
 </template>
 
 <script type="text/javascript">
 import BasicLabel from "@/components/aiPlatform/basic/basic-label.vue";
-import SearchTag from "@/components/aiPlatform/basic/search-tag.vue";
+import BasicTagList from "@/components/aiPlatform/basic/basic-tag-list";
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 export default {
   name: "select-filter-list",
   extends: {},
   props: {
     filterData: {
-      type: Array,
+      type: Object,
       require: true
     },
     previousText: {
       type: String,
       require: false
     },
-    cancelButtonUse: {
+    useCancelButton: {
       type: Boolean,
       require: false,
       default: false
@@ -55,9 +55,12 @@ export default {
     return {};
   },
   computed: {},
-  components: { BasicLabel, SearchTag, BasicButton },
+  components: { BasicLabel, BasicTagList, BasicButton },
   watch: {},
   methods: {
+    filterTagCancel(tagList, tagKey) {
+      this.$emit("filterTagCancel", tagKey, tagList);
+    },
     filterClick(tagObj) {
       this.$emit("filterClick", tagObj);
     },
@@ -80,7 +83,7 @@ export default {
     grid-template-columns: 100px 1fr;
     padding: 5px;
     .tag-item {
-      border-radius: 0px;
+      border-radius: 0;
     }
   }
   .filter-reset-button {

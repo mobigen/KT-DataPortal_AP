@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <router-link :to="url" :is="routerLinkUse">
+    <router-link :to="url" :is="useRouterLink ? 'router-link' : 'div'">
       <img :width="width" :height="height" :src="src" :alt="alt" />
       <span class="text-title" v-if="textTitle">{{ textTitle }}</span>
     </router-link>
@@ -9,7 +9,7 @@
 
 <script type="text/javascript">
 export default {
-  name: "biasic-logo",
+  name: "basic-logo",
   extends: {},
   props: {
     url: {
@@ -35,16 +35,16 @@ export default {
     textTitle: {
       type: String,
       require: false
+    },
+    useRouterLink: {
+      type: Boolean,
+      require: true
     }
   },
   data() {
     return {};
   },
-  computed: {
-    routerLinkUse() {
-      return this.url === undefined || this.url === "" ? "div" : "router-link";
-    }
-  },
+  computed: {},
   components: {},
   watch: {},
   methods: {}

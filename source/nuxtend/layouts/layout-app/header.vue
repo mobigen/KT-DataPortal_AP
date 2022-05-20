@@ -20,6 +20,14 @@
           >버튼 클릭시, alert 형태로 event 처리까지만 구현 (detail한 동작구현
           x)</span
         >
+        <basic-menu
+          :menuList="userMenuList"
+          :useSeparator="false"
+          separator=""
+          :textPreviousIcon="textPreviousIcon"
+          :textNextIcon="textNextIcon"
+        >
+        </basic-menu>
       </div>
 
       <!-- menuComponent-->
@@ -30,6 +38,7 @@
 
 <script>
 import BasicNav from "@/components/aiPlatform/basic/basic-nav.vue";
+import BasicMenu from "@/components/aiPlatform/basic/basic-menu.vue";
 export default {
   name: "layout-header",
   extends: {},
@@ -43,21 +52,59 @@ export default {
          * Component 구현할때 고민해봐야함.  (추후에 추가될 경우, Component를 분리할것인지, option값을 줘서 분기를 탈것인지 등등)
          */
 
-        { menuName: "데이터검색", url: "/app/search" },
-        { menuName: "데이터통합검색", url: "/app/search/fullSearch" },
-        { menuName: "데이터맵검색", url: "/app/search/mapSearch" },
-        { menuName: "연관관계검색", url: "/app/search/relationSearch" },
-        { menuName: "데이터등록", url: "/app/register" },
-        { menuName: "데이터(개별)등록", url: "/app/register/registerSingle" },
-        { menuName: "데이터일괄등록요청", url: "/app/register/registerAll" },
-        { menuName: "마이페이지", url: "/app/my" },
-        { menuName: "마이디스크", url: "/app/my/mydisk" },
-        { menuName: "개인정보관리", url: "/app/my/info" }
-      ]
+        {
+          menuName: "데이터검색",
+          url: "/portal/ui/meta/search",
+          children: [
+            {
+              menuName: "데이터통합검색",
+              url: "/portal/ui/meta/search/fullSearch"
+            },
+            {
+              menuName: "데이터맵검색",
+              url: "/portal/ui/meta/search/mapSearch"
+            },
+            {
+              menuName: "연관관계검색",
+              url: "/portal/ui/meta/search/relationSearch"
+            }
+          ]
+        },
+        {
+          menuName: "데이터등록",
+          url: "/portal/ui/meta/register",
+          children: [
+            {
+              menuName: "데이터(개별)등록",
+              url: "/portal/ui/meta/register/registerSingle"
+            },
+            {
+              menuName: "데이터일괄등록요청",
+              url: "/portal/ui/meta/register/registerAll"
+            }
+          ]
+        },
+        {
+          menuName: "마이페이지",
+          url: "/portal/ui/meta/my",
+          children: [
+            { menuName: "마이디스크", url: "/portal/ui/meta/my/mydisk" },
+            { menuName: "개인정보관리", url: "/portal/ui/meta/my/info" }
+          ]
+        }
+      ],
+      /* 임시로 url, icon 설정 */
+      userMenuList: [
+        { menuName: "로그인", url: "/portal/ui/users/login" },
+        { menuName: "회원가입", url: "/app/search/fullSearch" },
+        { menuName: "마이디스크", url: "/app/search/mapSearch" }
+      ],
+      textPreviousIcon: [null, null, "book-bookmark"],
+      textNextIcon: ["key", null, null]
     };
   },
   props: {},
-  components: { BasicNav },
+  components: { BasicNav, BasicMenu },
   computed: {},
   watch: {},
   methods: {},

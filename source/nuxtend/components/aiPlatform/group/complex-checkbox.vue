@@ -1,12 +1,12 @@
 <template lang="html">
   <div>
-    <template v-for="(data, i) in complexCheckboxList">
+    <template v-for="(value, key, index) in complexCheckboxList">
       <basic-checkbox
-        :componentId="data['label'] + '_' + i"
-        :checkboxTitle="data['label']"
-        :checkboxData="data[checkboxKey.listName]"
-        :selectCheckboxList="data[checkboxKey.selectListName]"
-        :checkboxColumnCount="columnCount(i)"
+        :checkboxKey="key"
+        :checkboxTitle="value['label']"
+        :checkboxData="value['dataList']"
+        :selectCheckboxList="selectCheckboxList[key]['dataList']"
+        :checkboxColumnCount="columnCount(index)"
         @changeCheckboxList="changeCheckboxList"
       ></basic-checkbox>
     </template>
@@ -19,13 +19,13 @@ export default {
   name: "complex-checkbox",
   extends: {},
   props: {
-    checkboxKey: {
+    checkboxColumnCount: { type: Array, require: false },
+    complexCheckboxList: {
       type: Object,
       require: true
     },
-    checkboxColumnCount: { type: Array, require: false },
-    complexCheckboxList: {
-      type: Array,
+    selectCheckboxList: {
+      type: Object,
       require: true
     }
   },
@@ -36,9 +36,8 @@ export default {
   components: { BasicCheckbox },
   watch: {},
   methods: {
-    changeCheckboxList(componentId, checkboxList) {
-      const index = componentId.split("_").pop();
-      this.$emit("changeCheckboxList", index, checkboxList);
+    changeCheckboxList(checkboxKey, checkboxList) {
+      this.$emit("changeCheckboxList", checkboxKey, checkboxList);
     },
     columnCount(index) {
       return this.checkboxColumnCount ? this.checkboxColumnCount[index] : 1;

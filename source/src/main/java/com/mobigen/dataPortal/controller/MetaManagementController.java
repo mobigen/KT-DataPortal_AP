@@ -1,23 +1,16 @@
 package com.mobigen.dataPortal.controller;
 
+import com.mobigen.dataPortal.service.MetaManagementService;
+import com.mobigen.dataPortal.utils.SQLHeader.SQLResult;
+import com.mobigen.framework.result.annotation.ResponseJsonResult;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.mobigen.dataPortal.service.MetaManagementService;
-import com.mobigen.framework.result.annotation.ResponseJsonResult;
-
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequestMapping("/api/meta")
@@ -47,8 +40,16 @@ public class MetaManagementController {
      */
     @ResponseJsonResult
     @GetMapping("/metaNameList")
-    public Object getMetaNameList() throws Exception {
-        return service.getMetaNameList();
+    public Object getMetaNameList(@RequestParam String perPage, @RequestParam String curPage) throws Exception {
+        Map<String, Object> paging = new HashMap<>();
+        paging.put("perPage", perPage);
+        paging.put("curPage", curPage);
+
+//        ArrayList<Object> nameList = (ArrayList<Object>) service.getMetaNameList(paging);
+//        Map<String, Object> result = new HashMap<>();
+//        result.put(nameList);
+
+        return service.getMetaNameList(paging);
     }
 
     /**
