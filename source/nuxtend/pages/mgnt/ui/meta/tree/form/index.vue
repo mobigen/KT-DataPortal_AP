@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       componentKey: "metaFormKey",
-      treeRestApi: "/api/meta/getCategoryList",
+      treeRestApi: "/getCategoryList",
       checkboxLabel: "상위자동선택",
       treeKey: {
         nodeName: "node_name", // node title

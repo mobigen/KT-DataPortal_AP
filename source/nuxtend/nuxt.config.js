@@ -1,5 +1,4 @@
 import { resolve } from "path";
-
 function _interopDefaultLegacy(e) {
   return e && typeof e === "object" && "default" in e ? e : { default: e };
 }
@@ -63,9 +62,8 @@ export default {
     // build, generate 속도 향샹
     "nuxt-build-optimisations"
   ],
-
   buildOptimisations: {
-    profile: "risky" //  속도 가장 빠름, 에러에 대해서 pass 같음.
+    profile: "risky"
     // profile: 'experimental' // default
     // profile: 'safe'
     // profile: false
@@ -113,31 +111,45 @@ export default {
   axios: {
     // baseURL: process.env.API_GW_URL,
     baseURL: process.env.API_GW_URL,
-    // credentials: true,
+    credentials: true,
     // proxy: process.env.ENV_TYPE === "local",
     proxy: true
     // debug : true
   },
-  proxy: {
-    // "/api/meta/": {
-    //   target: process.env.API_USER_URL
-    // }
-    // "/api/user/": {
-    //   target: process.env.API_USER_URL
-    //   // pathRewrite: { "/api": "/dataPortal/api" },
-    //   // pathRewrite: { "^/api/": "" },
-    //   // changeOrigin: true // cross origin 허용
-    //   // prependPath: false
-    // },
-    "/api/meta/": {
-      target: process.env.API_REMOTE_URL,
-      pathRewrite: { "/api": "/route" }
-    },
-    "/api/apiRouter": {
-      target: process.env.API_REMOTE_URL,
-      pathRewrite: { "/api/apiRouter": "/api" }
-    }
-  },
+  proxy: [
+    [
+      "/oauth2/authorization/",
+      {
+        target: process.env.API_USER_URL,
+        changeOrigin: true,
+        secure: false
+      }
+    ],
+    [
+      "/login/oauth2",
+      {
+        target: process.env.API_USER_URL,
+        changeOrigin: true,
+        secure: false
+      }
+    ],
+    [
+      "/portal/api/V1/users",
+      {
+        target: process.env.API_USER_URL,
+        pathRewrite: { "^/api/": "" },
+        changeOrigin: true,
+        secure: false
+      }
+    ],
+    [
+      "/portal/api/V1/meta/",
+      {
+        target: process.env.API_META_URL,
+        pathRewrite: { "/portal/api/V1/meta/": "/route/meta/" }
+      }
+    ]
+  ],
 
   i18n: {
     locales: [
@@ -199,11 +211,9 @@ export default {
     USER_INDEX_PAGE: process.env.USER_INDEX_PAGE,
     USER_LOGIN_PAGE: process.env.USER_LOGIN_PAGE,
     API_ADMIN_USERS_PREFIX: process.env.API_ADMIN_USERS_PREFIX,
-    API_ADMIN_META_PREFIX: process.env.API_ADMIN_META_PREFIX,
     ADMIN_ACCESS_TOKEN_NAME: process.env.ADMIN_ACCESS_TOKEN_NAME,
     ADMIN_INDEX_PAGE: process.env.ADMIN_INDEX_PAGE,
-    ADMIN_LOGIN_PAGE: process.env.ADMIN_LOGIN_PAGE,
-    API_ROUTER_PREFIX: process.env.API_ROUTER_PREFIX
+    ADMIN_LOGIN_PAGE: process.env.ADMIN_LOGIN_PAGE
   },
 
   storybook: {

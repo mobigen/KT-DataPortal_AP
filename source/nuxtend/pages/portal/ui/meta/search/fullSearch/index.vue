@@ -247,7 +247,7 @@ export default {
       },
       treeObj: {
         componentKey: "metaTreeKey",
-        treeRestApi: "/api/meta/getCategoryList",
+        treeRestApi: "/getCategoryList",
         checkboxLabel: "상위자동선택",
         treeKey: {
           node_name: "node_name", // node title
