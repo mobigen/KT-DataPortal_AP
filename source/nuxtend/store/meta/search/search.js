@@ -4,7 +4,8 @@ export const state = () => ({
   searchFilterList: [],
   selectSearchFilterList: {},
   searchResultList: [],
-  searchDetailObject: {}
+  searchDetailObject: {},
+  fileData: []
 });
 
 export const getters = {
@@ -25,6 +26,9 @@ export const getters = {
   },
   searchDetailObject(state) {
     return state.searchDetailObject;
+  },
+  fileData(state) {
+    return state.fileData;
   }
 };
 
@@ -76,6 +80,9 @@ export const mutations = {
   },
   setSearchDetailObject(state, data) {
     state.searchDetailObject = data;
+  },
+  setFileData(state, data) {
+    state.fileData = data;
   }
 };
 
@@ -321,5 +328,180 @@ export const actions = {
       searchDetailObject.dataInfo.body.keyword.split(",");
 
     commit("setSearchDetailObject", searchDetailObject);
+  },
+  getFileData({ commit }, postId) {
+    console.log(postId);
+    const fileData = [
+      {
+        id: 1,
+        title: "시도별 시간대별 교통량 분석 통계정보01",
+        detail: {
+          header: [
+            { column_name: "item_name" },
+            { column_name: "explanation" },
+            { column_name: "data_type" },
+            { column_name: "data_length" },
+            { column_name: "decimal_point" },
+            { column_name: "pk" },
+            { column_name: "pk_position" },
+            { column_name: "null_check" },
+            { column_name: "code_check" },
+            { column_name: "default" }
+          ],
+          body: [
+            {
+              item_name: "교통정보코드",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            },
+            {
+              item_name: "사업지구코드",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            },
+            {
+              item_name: "자료형식",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            }
+          ]
+        }
+      },
+      {
+        id: 2,
+        title: "시도별 시간대별 교통량 분석 통계정보02",
+        detail: {
+          header: [
+            { column_name: "item_name" },
+            { column_name: "explanation" },
+            { column_name: "data_type" },
+            { column_name: "data_length" },
+            { column_name: "decimal_point" },
+            { column_name: "pk" },
+            { column_name: "pk_position" },
+            { column_name: "null_check" },
+            { column_name: "code_check" },
+            { column_name: "default" }
+          ],
+          body: [
+            {
+              item_name: "교통정보코드",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            },
+            {
+              item_name: "사업지구코드",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            },
+            {
+              item_name: "자료형식",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            }
+          ]
+        }
+      },
+      {
+        id: 3,
+        title: "시도별 시간대별 교통량 분석 통계정보03",
+        detail: {
+          header: [
+            { column_name: "item_name" },
+            { column_name: "explanation" },
+            { column_name: "data_type" },
+            { column_name: "data_length" },
+            { column_name: "decimal_point" },
+            { column_name: "pk" },
+            { column_name: "pk_position" },
+            { column_name: "null_check" },
+            { column_name: "code_check" },
+            { column_name: "default" }
+          ],
+          body: [
+            {
+              item_name: "교통정보코드",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            },
+            {
+              item_name: "사업지구코드",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            },
+            {
+              item_name: "자료형식",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            }
+          ]
+        }
+      }
+    ];
+
+    commit("setFileData", fileData);
   }
 };

@@ -89,12 +89,30 @@
     <div class="component">
       <h3>title component</h3>
       <basic-title
-        title="미리보기"
-        subtitle="데이터 미리보기를 제공합니다."
+        title="파일데이터"
+        subtitle="파일 데이터 미리보기 및 분석서비스를 제공합니다."
       ></basic-title>
-      <h3>tab menu component</h3>
-      <h3>button component</h3>
-      <h3>basic-table</h3>
+      <h3>accordion component</h3>
+      <basic-accordion-table
+        componentId=""
+        rowKey="id"
+        :headerList="[]"
+        :dataList="fileData"
+        :useButtonEvent="true"
+        :multipleActive="false"
+      >
+        <template v-slot:titleItem="{ rowKey }">
+          <basic-button @click="download(rowKey)">
+            <fa icon="download"></fa>
+          </basic-button>
+        </template>
+        <template v-slot:detail="{ detail }">
+          <basic-table
+            :headerList="detail.header"
+            :dataList="detail.body"
+          ></basic-table>
+        </template>
+      </basic-accordion-table>
     </div>
   </div>
 </template>
@@ -106,6 +124,9 @@ import BasicTitle from "@component/aiPlatform/basic/basic-title.vue";
 import BasicTextarea from "@component/aiPlatform/basic/basic-textarea.vue";
 import BasicNameTag from "@component/aiPlatform/basic/basic-name-tag.vue";
 import BasicSingleTag from "@component/aiPlatform/basic/basic-single-tag.vue";
+import BasicAccordionTable from "@component/aiPlatform/basic/basic-accordion-table.vue";
+import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
+import BasicTable from "@/components/aiPlatform/basic/basic-table.vue";
 
 export default {
   name: "app-search-full-detail",
@@ -118,18 +139,24 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("meta/search/search", ["searchDetailObject"])
+    ...mapGetters("meta/search/search", ["searchDetailObject", "fileData"])
   },
   components: {
     BasicViewTable,
     BasicTitle,
     BasicTextarea,
     BasicNameTag,
-    BasicSingleTag
+    BasicSingleTag,
+    BasicAccordionTable,
+    BasicButton,
+    BasicTable
   },
   watch: {},
   methods: {
-    ...mapActions("meta/search/search", ["getSearchDetailObject"]),
+    ...mapActions("meta/search/search", [
+      "getSearchDetailObject",
+      "getFileData"
+    ]),
     changeData(input) {
       console.log(input);
     },
@@ -153,11 +180,15 @@ export default {
 
       this.singleColumnTableHeader = singleColumnTableHeader;
       this.twoColumnTableHeader = dataInfoHeader;
+    },
+    download(rowKey) {
+      alert(rowKey + " 다운로드");
     }
   },
   created() {
     this.getSearchDetailObject(this.$route.query.postId);
     this.getDataInfoHeader();
+    this.getFileData(this.$route.query.postId);
   }
 };
 </script>
