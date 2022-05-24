@@ -6,10 +6,12 @@
         :key="'nav_' + i"
         :style="cssVariable"
         :class="{ isActive: currentTab === i }"
-        @click="changeCurrentTab(i, data['data'])"
+        @click="changeCurrentTab(i, data['menuId'])"
       >
         <span>{{ data["menuName"] }}</span>
-        <span>({{ data["numberOfPosts"] }})</span>
+        <span v-if="data['numberOfPosts'] !== null">
+          <slot name="numberOfposts">({{ data["numberOfPosts"] }})</slot>
+        </span>
       </li>
     </ul>
   </div>
@@ -40,9 +42,9 @@ export default {
   components: {},
   watch: {},
   methods: {
-    changeCurrentTab(index, data) {
+    changeCurrentTab(index, menuId) {
       this.currentTab = index;
-      this.$emit("currentTabData", data);
+      this.$emit("tabMenuClick", menuId);
     }
   },
   created() {}

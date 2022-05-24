@@ -1,6 +1,5 @@
 export const state = () => ({
   searchTagList: {},
-  tabMenuList: [],
   searchFilterList: [],
   selectSearchFilterList: {},
   searchResultList: [],
@@ -11,9 +10,6 @@ export const state = () => ({
 export const getters = {
   searchTagList(state) {
     return state.searchTagList;
-  },
-  tabMenuList(state) {
-    return state.tabMenuList;
   },
   searchFilterList(state) {
     return state.searchFilterList;
@@ -35,9 +31,6 @@ export const getters = {
 export const mutations = {
   setSearchTagList(state, data) {
     state.searchTagList = data;
-  },
-  setTabMenuList(state, data) {
-    state.tabMenuList = data;
   },
   setSearchFilterList(state, data) {
     state.searchFilterList = data;
@@ -97,16 +90,6 @@ export const actions = {
     ];
 
     commit("setSearchTagList", result);
-  },
-  getTabMenuList({ commit }) {
-    const result = [
-      { menuName: "전체", data: {}, numberOfPosts: 126 },
-      { menuName: "내부데이터", data: {}, numberOfPosts: 777 },
-      { menuName: "CKAN", data: {}, numberOfPosts: 99 },
-      { menuName: "분원데이터", data: {}, numberOfPosts: 456 }
-    ];
-
-    commit("setTabMenuList", result);
   },
   async getSearchFilterList({ commit }, filterObj) {
     // when connect API server, use this code.

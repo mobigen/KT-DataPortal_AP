@@ -69,51 +69,69 @@
     </div>
 
     <div class="component">
-      <h3>title component</h3>
-      <basic-title
-        title="본문정보"
-        subtitle="관리자가 등록한 데이터 관련 본문 정보입니다."
-      ></basic-title>
-      <h3>textarea component</h3>
-      <basic-textarea
-        :inputData="searchDetailObject.mainTextInfo"
-        placeholder="내용을 입력해주세요"
-        :disabled="true"
-        :readonly="false"
-        maxlength=""
-        @input="changeData"
-      >
-      </basic-textarea>
+      <basic-tab-menu :menuList="tabMenuList" @tabMenuClick="tabMenuClick">
+      </basic-tab-menu>
     </div>
 
-    <div class="component">
-      <h3>title component</h3>
-      <basic-title
-        title="파일데이터"
-        subtitle="파일 데이터 미리보기 및 분석서비스를 제공합니다."
-      ></basic-title>
-      <h3>accordion component</h3>
-      <basic-accordion-table
-        componentId=""
-        rowKey="id"
-        :headerList="[]"
-        :dataList="fileData"
-        :useButtonEvent="true"
-        :multipleActive="false"
-      >
-        <template v-slot:titleItem="{ rowKey }">
-          <basic-button @click="download(rowKey)">
-            <fa icon="download"></fa>
-          </basic-button>
-        </template>
-        <template v-slot:detail="{ detail }">
-          <basic-table
-            :headerList="detail.header"
-            :dataList="detail.body"
-          ></basic-table>
-        </template>
-      </basic-accordion-table>
-    </div>
+    <template v-if="currentTabMenuId === 1">
+      <div class="component">
+        <basic-title title="샘플데이터 미리보기" subtitle=""></basic-title>
+        <basic-table
+          :headerList="getSampleData().detail.header"
+          :dataList="getSampleData().detail.body"
+        >
+        </basic-table>
+      </div>
+
+      <div class="component">
+        <h3>title component</h3>
+        <basic-title
+          title="파일데이터"
+          subtitle="파일 데이터 미리보기 및 분석서비스를 제공합니다."
+        ></basic-title>
+        <h3>accordion component</h3>
+        <basic-accordion-table
+          componentId=""
+          rowKey="id"
+          :headerList="[]"
+          :dataList="fileData"
+          :useButtonEvent="true"
+          :multipleActive="false"
+        >
+          <template v-slot:titleItem="{ rowKey }">
+            <basic-button @click="download(rowKey)">
+              <fa icon="download"></fa>
+            </basic-button>
+          </template>
+          <template v-slot:detail="{ detail }">
+            <basic-table
+              :headerList="detail.header"
+              :dataList="detail.body"
+            ></basic-table>
+          </template>
+        </basic-accordion-table>
+      </div>
+    </template>
+
+    <template v-else-if="currentTabMenuId === 2">
+      <div class="component">
+        <h3>title component</h3>
+        <basic-title
+          title="본문정보"
+          subtitle="관리자가 등록한 데이터 관련 본문 정보입니다."
+        ></basic-title>
+        <h3>textarea component</h3>
+        <basic-textarea
+          :inputData="searchDetailObject.mainTextInfo"
+          placeholder="내용을 입력해주세요"
+          :disabled="true"
+          :readonly="false"
+          maxlength=""
+          @input="changeData"
+        >
+        </basic-textarea>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -127,6 +145,7 @@ import BasicSingleTag from "@component/aiPlatform/basic/basic-single-tag.vue";
 import BasicAccordionTable from "@component/aiPlatform/basic/basic-accordion-table.vue";
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 import BasicTable from "@/components/aiPlatform/basic/basic-table.vue";
+import BasicTabMenu from "@/components/aiPlatform/basic/basic-tab-menu.vue";
 
 export default {
   name: "app-search-full-detail",
@@ -134,6 +153,11 @@ export default {
   props: {},
   data() {
     return {
+      tabMenuList: [
+        { menuId: 1, menuName: "데이터 목록/샘플", numberOfPosts: null },
+        { menuId: 2, menuName: "데이터 본문 정보", numberOfPosts: null }
+      ],
+      currentTabMenuId: 1,
       singleColumnTableHeader: [],
       twoColumnTableHeader: []
     };
@@ -149,7 +173,8 @@ export default {
     BasicSingleTag,
     BasicAccordionTable,
     BasicButton,
-    BasicTable
+    BasicTable,
+    BasicTabMenu
   },
   watch: {},
   methods: {
@@ -183,6 +208,12 @@ export default {
     },
     download(rowKey) {
       alert(rowKey + " 다운로드");
+    },
+    tabMenuClick(menuId) {
+      this.currentTabMenuId = menuId;
+    },
+    getSampleData() {
+      return this.fileData.find((element) => element !== undefined);
     }
   },
   created() {
