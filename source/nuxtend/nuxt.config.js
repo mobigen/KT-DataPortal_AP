@@ -148,6 +148,13 @@ export default {
         target: process.env.API_META_URL,
         pathRewrite: { "/portal/api/V1/meta/": "/route/meta/" }
       }
+    ],
+    [
+      "/api/apiRouter",
+      {
+        target: process.env.API_META_URL,
+        pathRewrite: { "/api/apiRouter/": "/api/" }
+      }
     ]
   ],
 
@@ -207,6 +214,7 @@ export default {
   publicRuntimeConfig: {
     API_USERS_PREFIX: process.env.API_USERS_PREFIX,
     API_META_PREFIX: process.env.API_META_PREFIX,
+    API_ROUTER_PREFIX: process.env.API_ROUTER_PREFIX,
     USER_ACCESS_TOKEN_NAME: process.env.USER_ACCESS_TOKEN_NAME,
     USER_INDEX_PAGE: process.env.USER_INDEX_PAGE,
     USER_LOGIN_PAGE: process.env.USER_LOGIN_PAGE,
