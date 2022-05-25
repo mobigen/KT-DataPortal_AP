@@ -1,18 +1,17 @@
 export const state = () => ({
   searchTagList: {},
-  tabMenuList: [],
   searchFilterList: [],
   selectSearchFilterList: {},
   searchResultList: [],
-  searchDetailObject: {}
+  searchDetailObject: {},
+  fileData: [],
+  recommendData: [],
+  dataUseCases: {}
 });
 
 export const getters = {
   searchTagList(state) {
     return state.searchTagList;
-  },
-  tabMenuList(state) {
-    return state.tabMenuList;
   },
   searchFilterList(state) {
     return state.searchFilterList;
@@ -25,15 +24,21 @@ export const getters = {
   },
   searchDetailObject(state) {
     return state.searchDetailObject;
+  },
+  fileData(state) {
+    return state.fileData;
+  },
+  recommendData(state) {
+    return state.recommendData;
+  },
+  dataUseCases(state) {
+    return state.dataUseCases;
   }
 };
 
 export const mutations = {
   setSearchTagList(state, data) {
     state.searchTagList = data;
-  },
-  setTabMenuList(state, data) {
-    state.tabMenuList = data;
   },
   setSearchFilterList(state, data) {
     state.searchFilterList = data;
@@ -76,6 +81,15 @@ export const mutations = {
   },
   setSearchDetailObject(state, data) {
     state.searchDetailObject = data;
+  },
+  setFileData(state, data) {
+    state.fileData = data;
+  },
+  setRecommendData(state, data) {
+    state.recommendData = data;
+  },
+  setDataUseCases(state, data) {
+    state.dataUseCases = data;
   }
 };
 
@@ -90,16 +104,6 @@ export const actions = {
     ];
 
     commit("setSearchTagList", result);
-  },
-  getTabMenuList({ commit }) {
-    const result = [
-      { menuName: "전체", data: {}, numberOfPosts: 126 },
-      { menuName: "내부데이터", data: {}, numberOfPosts: 777 },
-      { menuName: "CKAN", data: {}, numberOfPosts: 99 },
-      { menuName: "분원데이터", data: {}, numberOfPosts: 456 }
-    ];
-
-    commit("setTabMenuList", result);
   },
   async getSearchFilterList({ commit }, filterObj) {
     // when connect API server, use this code.
@@ -221,6 +225,7 @@ export const actions = {
         title: "도로교통공단_결빙사고 다발지역",
         body: "노면상태가 '서리/결빙'인 교통사고에 대한 사고다발지역 정보",
         date: "2022-05-09",
+        updateDate: "YYYY-MM-DD",
         download: 180,
         hit: 200
       },
@@ -321,5 +326,212 @@ export const actions = {
       searchDetailObject.dataInfo.body.keyword.split(",");
 
     commit("setSearchDetailObject", searchDetailObject);
+  },
+  getFileData({ commit }, postId) {
+    console.log(postId);
+    const fileData = [
+      {
+        id: 1,
+        title: "시도별 시간대별 교통량 분석 통계정보01",
+        detail: {
+          header: [
+            { column_name: "item_name" },
+            { column_name: "explanation" },
+            { column_name: "data_type" },
+            { column_name: "data_length" },
+            { column_name: "decimal_point" },
+            { column_name: "pk" },
+            { column_name: "pk_position" },
+            { column_name: "null_check" },
+            { column_name: "code_check" },
+            { column_name: "default" }
+          ],
+          body: [
+            {
+              item_name: "교통정보코드",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            },
+            {
+              item_name: "사업지구코드",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            },
+            {
+              item_name: "자료형식",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            }
+          ]
+        }
+      },
+      {
+        id: 2,
+        title: "시도별 시간대별 교통량 분석 통계정보02",
+        detail: {
+          header: [
+            { column_name: "item_name" },
+            { column_name: "explanation" },
+            { column_name: "data_type" },
+            { column_name: "data_length" },
+            { column_name: "decimal_point" },
+            { column_name: "pk" },
+            { column_name: "pk_position" },
+            { column_name: "null_check" },
+            { column_name: "code_check" },
+            { column_name: "default" }
+          ],
+          body: [
+            {
+              item_name: "교통정보코드",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            },
+            {
+              item_name: "사업지구코드",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            },
+            {
+              item_name: "자료형식",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            }
+          ]
+        }
+      },
+      {
+        id: 3,
+        title: "시도별 시간대별 교통량 분석 통계정보03",
+        detail: {
+          header: [
+            { column_name: "item_name" },
+            { column_name: "explanation" },
+            { column_name: "data_type" },
+            { column_name: "data_length" },
+            { column_name: "decimal_point" },
+            { column_name: "pk" },
+            { column_name: "pk_position" },
+            { column_name: "null_check" },
+            { column_name: "code_check" },
+            { column_name: "default" }
+          ],
+          body: [
+            {
+              item_name: "교통정보코드",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            },
+            {
+              item_name: "사업지구코드",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            },
+            {
+              item_name: "자료형식",
+              explanation: "사업지구코드",
+              data_type: "VARCHAR2",
+              data_length: "6",
+              decimal_point: "5",
+              pk: "Y",
+              pk_position: 1,
+              null_check: "Y",
+              code_check: "Y",
+              default: "SYSDATE"
+            }
+          ]
+        }
+      }
+    ];
+
+    commit("setFileData", fileData);
+  },
+  getRecommendData({ commit }, postId) {
+    const recommendData = [{}, {}, {}, {}, {}];
+
+    commit("setRecommendData", recommendData);
+  },
+  getDataUseCases({ commit }, postId) {
+    const dataUseCases = {
+      header: [
+        { column_name: "title" },
+        { column_name: "body" },
+        { column_name: "date" }
+      ],
+      body: [
+        {
+          id: 1,
+          tagList: ["모바일"],
+          title: "기상청 중기예보 조회서비스",
+          body: "중기전망, 중기육상예보, 중기기온, 중기상예보 정보를 조회하는 서비스",
+          date: "2022-04-01"
+        },
+        {
+          id: 2,
+          tagList: ["웹"],
+          title: "케이웨더",
+          body: "날씨 정보를 제공하는 서비스",
+          date: "2022-04-01"
+        }
+      ]
+    };
+
+    commit("setDataUseCases", dataUseCases);
   }
 };

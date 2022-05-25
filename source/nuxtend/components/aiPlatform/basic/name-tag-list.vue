@@ -1,16 +1,34 @@
 <template lang="html">
-  <div id="nameTagList">
+  <div id="nameTagList" :class="[width]" :style="cssVariable">
     <div class="list-wrap" v-for="data in nameTagList">
       <basic-name-tag
         :nameTagObject="data"
+        :width="width"
         @nameTagClick="nameTagClick(data.id)"
         @dataOfInterest="dataOfInterest(data.id)"
         @dataSharing="dataSharing(data.id)"
-        width="wide"
       >
-        <template #header><div></div></template>
-        <template #left-side><div></div></template>
-        <template #right-side><div></div></template>
+        <template #header>
+          <slot name="header"><div></div></slot>
+        </template>
+        <template #body-top>
+          <slot name="body-top"></slot>
+        </template>
+        <template #body-middle>
+          <slot name="body-middle"></slot>
+        </template>
+        <template #body-bottom>
+          <slot name="body-bottom"></slot>
+        </template>
+        <template #footer>
+          <slot name="body-top"></slot>
+        </template>
+        <template #left-side>
+          <slot name="left-side"><div></div></slot>
+        </template>
+        <template #right-side>
+          <slot name="right-side"><div></div></slot>
+        </template>
       </basic-name-tag>
     </div>
   </div>
@@ -21,17 +39,34 @@ import BasicNameTag from "@/components/aiPlatform/basic/basic-name-tag.vue";
 
 export default {
   name: "name-tag-list",
+  template: "",
   extends: {},
   props: {
     nameTagList: {
       type: Array,
       require: true
+    },
+    width: {
+      type: String,
+      require: false,
+      default: "wide"
+    },
+    nameTagColumnCount: {
+      type: Number,
+      require: false,
+      default: 4
     }
   },
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    cssVariable() {
+      return {
+        "--grid-template-columns": `repeat(${this.nameTagColumnCount}, 1fr)`
+      };
+    }
+  },
   components: {
     BasicNameTag
   },
@@ -52,6 +87,14 @@ export default {
 </script>
 
 <style lang="scss">
-#nameTagList {
+#nameTagList.wide {
+}
+#nameTagList.narrow {
+  display: grid;
+  grid-template-columns: var(--grid-template-columns);
+  #atomsNarrowNameTag {
+    width: 170px;
+    height: 200px;
+  }
 }
 </style>

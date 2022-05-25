@@ -50,7 +50,7 @@
       <h3>tab component</h3>
       <basic-tab-menu
         :menuList="tabMenuList"
-        @currentTabData="currentTabData"
+        @tabMenuClick="tabMenuClick"
       ></basic-tab-menu>
     </div>
 
@@ -96,6 +96,7 @@
       <h3>검색결과 panel component</h3>
       <name-tag-list
         :nameTagList="searchResultList"
+        :width="wide"
         @dataOfInterest="dataOfInterest"
         @dataSharing="dataSharing"
         @nameTagClick="nameTagClick"
@@ -271,16 +272,18 @@ export default {
         date: "2022-05-09",
         download: 180,
         hit: 200
-      }
+      },
+      tabMenuList: [
+        { menuId: 1, menuName: "전체", numberOfPosts: 126 },
+        { menuId: 2, menuName: "내부데이터", numberOfPosts: 777 },
+        { menuId: 3, menuName: "CKAN", numberOfPosts: 99 },
+        { menuId: 4, menuName: "분원데이터", numberOfPosts: 456 }
+      ]
     };
   },
   computed: {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
-    ...mapGetters("meta/search/search", [
-      "searchTagList",
-      "tabMenuList",
-      "searchResultList"
-    ])
+    ...mapGetters("meta/search/search", ["searchTagList", "searchResultList"])
   },
   components: {
     BasicSearchBar,
@@ -303,7 +306,6 @@ export default {
   methods: {
     ...mapActions("meta/search/search", [
       "getSearchTagList",
-      "getTabMenuList",
       "getSearchFilterList",
       "getSearchResultList"
     ]),
@@ -325,8 +327,8 @@ export default {
 
       this.searchResultSuccess = true;
     },
-    currentTabData(data) {
-      console.log(data);
+    tabMenuClick(menuId) {
+      console.log(menuId);
     },
     radioSelectSearch(radioValue, searchKeyword) {
       alert("radioValue: " + radioValue + ", searchKeyword: " + searchKeyword);
@@ -348,7 +350,7 @@ export default {
       // dataLocationKey, path 정해지면 변경
       if (dataList.dataLocation === "내부") {
         this.$router.push({
-          path: "/app/search/fullSearch/searchDetail",
+          path: "/portal/ui/meta/search/fullSearch/detail",
           query: { postId: id }
         });
       } else {
@@ -358,7 +360,6 @@ export default {
   },
   created() {
     this.getSearchTagList();
-    this.getTabMenuList();
     this.getSearchFilterList(this.filterObj);
     this.getSearchResultList();
   }

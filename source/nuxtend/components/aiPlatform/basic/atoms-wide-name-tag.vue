@@ -35,7 +35,6 @@ export default {
 <style lang="scss">
 #atomsWideNameTag {
   display: flex;
-  width: 50%;
   padding: 10px;
   border: solid 1px lightgray;
   .left-side-wrap {
@@ -43,8 +42,8 @@ export default {
     .left-side {
       height: 100%;
       .img {
-        width: 150px;
-        height: 100%;
+        width: 130px;
+        height: 80%;
         border: 3px solid lightgray;
         border-radius: 50%;
       }
