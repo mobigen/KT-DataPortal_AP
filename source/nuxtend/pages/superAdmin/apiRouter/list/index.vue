@@ -15,7 +15,7 @@
       componentId=""
       :headerList="apiList.header"
       :dataList="apiList.body"
-      rowKey="api_name"
+      rowKey="API_NM"
       :useSerialNum="true"
       serialNumText="No."
       :useTableButton="true"

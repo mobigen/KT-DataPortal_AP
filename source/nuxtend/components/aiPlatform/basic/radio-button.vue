@@ -34,7 +34,7 @@ export default {
       require: true
     },
     defaultValue: {
-      type: Number,
+      type: String,
       require: true
     },
     labelName: {
@@ -64,7 +64,7 @@ export default {
   display: flex;
   #radio-button {
     display: flex;
-    width: 100px;
+    width: 300px;
     input {
       z-index: 1;
       margin: 0px -10px 0px 0px;
