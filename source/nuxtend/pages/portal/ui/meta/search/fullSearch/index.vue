@@ -96,6 +96,7 @@
       <h3>검색결과 panel component</h3>
       <name-tag-list
         :nameTagList="searchResultList"
+        :width="wide"
         @dataOfInterest="dataOfInterest"
         @dataSharing="dataSharing"
         @nameTagClick="nameTagClick"

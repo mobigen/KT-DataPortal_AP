@@ -46,7 +46,12 @@
           </tr>
           <tr class="fold">
             <td :colspan="Object.keys(data).length">
-              <slot name="detail" :detail="data.detail">{{ data.detail }}</slot>
+              <slot
+                name="detail"
+                :detail="data.detail"
+                :rowKey="data[rowKey]"
+                >{{ data.detail }}</slot
+              >
             </td>
           </tr>
         </tbody>

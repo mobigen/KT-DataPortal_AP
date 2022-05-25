@@ -4,7 +4,9 @@ export const state = () => ({
   selectSearchFilterList: {},
   searchResultList: [],
   searchDetailObject: {},
-  fileData: []
+  fileData: [],
+  recommendData: [],
+  dataUseCases: {}
 });
 
 export const getters = {
@@ -25,6 +27,12 @@ export const getters = {
   },
   fileData(state) {
     return state.fileData;
+  },
+  recommendData(state) {
+    return state.recommendData;
+  },
+  dataUseCases(state) {
+    return state.dataUseCases;
   }
 };
 
@@ -76,6 +84,12 @@ export const mutations = {
   },
   setFileData(state, data) {
     state.fileData = data;
+  },
+  setRecommendData(state, data) {
+    state.recommendData = data;
+  },
+  setDataUseCases(state, data) {
+    state.dataUseCases = data;
   }
 };
 
@@ -211,6 +225,7 @@ export const actions = {
         title: "도로교통공단_결빙사고 다발지역",
         body: "노면상태가 '서리/결빙'인 교통사고에 대한 사고다발지역 정보",
         date: "2022-05-09",
+        updateDate: "YYYY-MM-DD",
         download: 180,
         hit: 200
       },
@@ -486,5 +501,37 @@ export const actions = {
     ];
 
     commit("setFileData", fileData);
+  },
+  getRecommendData({ commit }, postId) {
+    const recommendData = [{}, {}, {}, {}, {}];
+
+    commit("setRecommendData", recommendData);
+  },
+  getDataUseCases({ commit }, postId) {
+    const dataUseCases = {
+      header: [
+        { column_name: "title" },
+        { column_name: "body" },
+        { column_name: "date" }
+      ],
+      body: [
+        {
+          id: 1,
+          tagList: ["모바일"],
+          title: "기상청 중기예보 조회서비스",
+          body: "중기전망, 중기육상예보, 중기기온, 중기상예보 정보를 조회하는 서비스",
+          date: "2022-04-01"
+        },
+        {
+          id: 2,
+          tagList: ["웹"],
+          title: "케이웨더",
+          body: "날씨 정보를 제공하는 서비스",
+          date: "2022-04-01"
+        }
+      ]
+    };
+
+    commit("setDataUseCases", dataUseCases);
   }
 };

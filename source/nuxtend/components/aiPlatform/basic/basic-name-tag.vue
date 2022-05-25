@@ -84,6 +84,10 @@
       <template v-slot:footer>
         <slot name="footer">
           <div class="footer">
+            <div v-if="nameTagObject.updateDate">
+              <basic-label>수정일</basic-label>
+              <basic-label>{{ nameTagObject.updateDate }}</basic-label>
+            </div>
             <div>
               <basic-label>등록일</basic-label>
               <basic-label>{{ nameTagObject.date }}</basic-label>
@@ -102,7 +106,10 @@
 
       <template v-slot:left-side>
         <slot name="left-side">
-          <div class="left-side"><div class="img"></div></div>
+          <div class="left-side">
+            <div>{{ nameTagObject.dataSource }}</div>
+            <div class="img"></div>
+          </div>
         </slot>
       </template>
 

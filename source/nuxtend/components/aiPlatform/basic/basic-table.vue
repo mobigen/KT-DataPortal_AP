@@ -1,7 +1,7 @@
 <template lang="html">
-  <div id="simple-table">
+  <div id="simpleTable">
     <table>
-      <thead>
+      <thead v-if="useHeader">
         <tr>
           <th v-if="useSerialNum">{{ serialNumText }}</th>
           <th v-for="(h, hi) in headerList" :key="'header_' + hi">
@@ -25,6 +25,17 @@
           @click="rowClick(data[rowKey])"
         >
           <td v-if="useSerialNum">{{ i + 1 }}</td>
+
+          <td v-if="useTagList">
+            <template v-for="data in data['tagList']">
+              <basic-single-tag
+                :tagName="data"
+                previousText=""
+                :cursorPointer="false"
+                @tagClick=""
+              ></basic-single-tag>
+            </template>
+          </td>
 
           <td v-for="(h, hi) in headerList" :key="'header_' + hi">
             <template
@@ -52,9 +63,7 @@
                 :buttonCss="tableButtonText[key]['buttonCss']"
               >
                 <template v-if="tableButtonText[key]['buttonType'] === 'icon'">
-                  {{ data[rowKey] }}
-                  <!-- <icon data="@icon/minus.svg" aria-hidden="true"></icon>-->
-                  <!-- svg icon not working with nuxt-->
+                  <fa :icon="tableButtonText[key]['iconData']"></fa>
                 </template>
 
                 <template
@@ -85,6 +94,7 @@
 
 <script type="text/javascript">
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
+import BasicSingleTag from "@/components/aiPlatform/basic/basic-single-tag.vue";
 export default {
   name: "basic-table",
   extends: {},
@@ -127,10 +137,19 @@ export default {
     keyActionText: {
       type: Object,
       require: false
+    },
+    useHeader: {
+      type: Boolean,
+      require: false,
+      default: true
+    },
+    useTagList: {
+      type: Boolean,
+      require: false
     }
   },
   computed: {},
-  components: { BasicButton },
+  components: { BasicButton, BasicSingleTag },
   watch: {},
   methods: {
     buttonClick(rowKey, btnAction) {
@@ -147,27 +166,35 @@ export default {
 };
 </script>
 
-<style lang="scss">
-#simple-table {
+<style lang="scss" scoped>
+#simpleTable {
   height: 200px;
   overflow: auto;
   border-bottom: solid 1px gray;
   table {
     width: 100%;
     text-align: center;
-    th {
-      background-color: lightgray;
-      border-top: solid 1px rgb(192, 190, 190);
-      border-bottom: solid 1px rgb(192, 190, 190);
-      position: sticky;
-      top: 0px;
+    thead {
+      th {
+        background-color: lightgray;
+        border-bottom: solid 1px rgb(192, 190, 190);
+        position: sticky;
+        top: 0px;
+      }
     }
-    tr,
-    td {
-      border-bottom: 1px solid lightgray !important;
-    }
-    tr:hover {
-      background-color: rgba(250, 240, 240, 0.952);
+    tbody {
+      tr,
+      td {
+        border-bottom: 1px solid lightgray !important;
+      }
+      tr:nth-child(1) {
+        td {
+          border-top: solid 1px rgb(192, 190, 190);
+        }
+      }
+      tr:hover {
+        background-color: rgba(250, 240, 240, 0.952);
+      }
     }
   }
 }

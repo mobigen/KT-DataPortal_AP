@@ -104,5 +104,11 @@ export default {
       }
     }
   }
+  .img {
+    width: 100%;
+    height: 70%;
+    border: 3px solid lightgray;
+    border-radius: 5px;
+  }
 }
 </style>
