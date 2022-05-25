@@ -173,8 +173,14 @@
     <div class="component">
       <h3>paging component</h3>
       <basic-pagination
+        :show-test-table="true"
         paging-key="fullSearchPagination"
-        :paging-object="pagingObj"
+        :paging-object="{
+          [CONSTANTS.PAGING.ITEMS_PER_PAGE]: 5,
+          [CONSTANTS.PAGING.VISIBLE_PAGES]: 3,
+          [CONSTANTS.PAGING.PAGE]: 1,
+          'totalPage': 1
+        }"
       />
     </div>
   </div>
@@ -242,9 +248,6 @@ export default {
         { value: 0, label: "포함" },
         { value: 1, label: "제외" }
       ],
-      pagingObj: {
-        visiblePages: 5
-      },
       treeObj: {
         componentKey: "metaTreeKey",
         treeRestApi: "/getCategoryList",
