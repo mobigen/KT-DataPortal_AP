@@ -1,5 +1,4 @@
 import { resolve } from "path";
-
 function _interopDefaultLegacy(e) {
   return e && typeof e === "object" && "default" in e ? e : { default: e };
 }
@@ -17,7 +16,8 @@ export default {
     cache: false,
     crawler: true,
     routes: ["/"],
-    dir: "../src/main/resources/static"
+    // dir: "../../src/main/resources/static"
+    dir: "../../../web/htdocs"
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -45,7 +45,10 @@ export default {
     "@/plugins/persisted-state.client.js",
     "@/plugins/lodash.js",
     "@/plugins/users/common.js"
+    // "@/plugins/vue-js-modal.js"
   ],
+
+  components: ["~/components/functional"],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -59,9 +62,8 @@ export default {
     // build, generate 속도 향샹
     "nuxt-build-optimisations"
   ],
-
   buildOptimisations: {
-    profile: "risky" //  속도 가장 빠름, 에러에 대해서 pass 같음.
+    profile: "risky"
     // profile: 'experimental' // default
     // profile: 'safe'
     // profile: false
@@ -72,6 +74,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    // build, generate 속도 향샹
+    parallel: true,
+    cache: false,
+    hardSource: true,
     postcss: {
       preset: {
         features: {
@@ -79,28 +85,20 @@ export default {
         }
       }
     },
-
+    // plugins: [
+    //   new webpack.ProvidePlugin({
+    //     _: "lodash", // lodash 추가
+    //   }),
+    // ],
     extend(config) {
       config.resolve.alias["vue"] = "vue/dist/vue.common";
-    },
-
-    // build, generate 속도 향샹
-    // thread-loader 를 사용한다.
-    // thread-loader 는 워커풀을 가능하게 한다.
-    // 일정한 thread 개수를 미리 만들어두어 처리 속도를 빠르게 한다.
-    parallel: true,
-    cache: false,
-    // 캐시의 성능을 더 높이기 위해 hardSourceWebpackPlugin 을 사용한다.
-    // ERROR  [hardsource:bb467e33] Could not freeze ./.nuxt/router.js:
-    // Cannot read property 'hash' of undefined
-    // 만약 위와 같은 오류가 뜬다면 node_modules/.cache/hard-source 폴더를
-    // 삭제했다가 다시 빌드하면 된다.
-    hardSource: true
+    }
   },
 
   // alias
   alias: {
     "@component": resolve(__dirname, "./components"),
+    "@functional": resolve(__dirname, "./components/functional"),
     "@molecules": resolve(__dirname, "./components/molecules"),
     "@organisms": resolve(__dirname, "./components/organisms")
   },
@@ -111,12 +109,54 @@ export default {
   },
 
   axios: {
+    // baseURL: process.env.API_GW_URL,
     baseURL: process.env.API_GW_URL,
-    // baseURL: process.env.API_REMOTE_URL,
-    // proxy: false,
-    // baseURL: process.env.SERVER_HOST + ":" + process.env.SERVER_PORT,
-    proxy: false
+    credentials: true,
+    // proxy: process.env.ENV_TYPE === "local",
+    proxy: true
+    // debug : true
   },
+  proxy: [
+    [
+      "/oauth2/authorization/",
+      {
+        target: process.env.API_USER_URL,
+        changeOrigin: true,
+        secure: false
+      }
+    ],
+    [
+      "/login/oauth2",
+      {
+        target: process.env.API_USER_URL,
+        changeOrigin: true,
+        secure: false
+      }
+    ],
+    [
+      "/portal/api/V1/users",
+      {
+        target: process.env.API_USER_URL,
+        pathRewrite: { "^/api/": "" },
+        changeOrigin: true,
+        secure: false
+      }
+    ],
+    [
+      "/portal/api/V1/meta/",
+      {
+        target: process.env.API_META_URL,
+        pathRewrite: { "/portal/api/V1/meta/": "/route/meta/" }
+      }
+    ],
+    [
+      "/api/apiRouter",
+      {
+        target: process.env.API_META_URL,
+        pathRewrite: { "/api/apiRouter/": "/api/" }
+      }
+    ]
+  ],
 
   i18n: {
     locales: [
@@ -127,13 +167,36 @@ export default {
     vueI18n: {
       fallbackLocale: "ko"
     },
-    lazy: true,
-    langDir: "./locales",
+    langDir: "locales/",
     vueI18nLoader: true
   },
 
   loading: {
     color: "blue"
+  },
+
+  // 미들웨어
+  router: {
+    extendRoutes(routes, resolves) {
+      logger.info(
+        "## NuxtLink 처리: 정적 리소스에 대한 html 파일 대응을 위해 아래와 같이 alias 경로를 변경 합니다."
+      );
+      routes.forEach((route) => {
+        const alias =
+          route.path.length > 1 ? `${route.path}/index.html` : "/index.html";
+        route.alias = alias;
+        logger.info(route.path + "---------------");
+        for (var key in route) {
+          logger.info("----" + key + " [" + route[key] + "]");
+        }
+      });
+    },
+    // 인증, 권한 추가
+    middleware: ["auth"]
+    // groupMiddleware: {
+    //   '/user' : ['userAuthentication'],
+    //   '/admin' : ['adminAuthentication']
+    // }
   },
 
   styleResources: {
@@ -151,11 +214,11 @@ export default {
   publicRuntimeConfig: {
     API_USERS_PREFIX: process.env.API_USERS_PREFIX,
     API_META_PREFIX: process.env.API_META_PREFIX,
+    API_ROUTER_PREFIX: process.env.API_ROUTER_PREFIX,
     USER_ACCESS_TOKEN_NAME: process.env.USER_ACCESS_TOKEN_NAME,
     USER_INDEX_PAGE: process.env.USER_INDEX_PAGE,
     USER_LOGIN_PAGE: process.env.USER_LOGIN_PAGE,
     API_ADMIN_USERS_PREFIX: process.env.API_ADMIN_USERS_PREFIX,
-    API_ADMIN_META_PREFIX: process.env.API_ADMIN_META_PREFIX,
     ADMIN_ACCESS_TOKEN_NAME: process.env.ADMIN_ACCESS_TOKEN_NAME,
     ADMIN_INDEX_PAGE: process.env.ADMIN_INDEX_PAGE,
     ADMIN_LOGIN_PAGE: process.env.ADMIN_LOGIN_PAGE
@@ -168,36 +231,9 @@ export default {
     }
   },
 
-  proxy: {
-    "/api/user/": {
-      target: process.env.API_USER_URL
-      // api-router 사용
-    }
-  },
-
   server: {
     host: process.env.SERVER_HOST,
     port: process.env.SERVER_PORT,
     listen: 82
-  },
-
-  // 라우터 타면 여길로 들어옴.
-  // 미들웨어에 인증, 권한 추가
-  router: {
-    middleware: ["auth"],
-    extendRoutes(routes) {
-      logger.info(
-        "## NuxtLink 처리: 정적 리소스에 대한 html 파일 대응을 위해 아래와 같이 alias 경로를 변경 합니다."
-      );
-      routes.forEach((route) => {
-        const alias =
-          route.path.length > 1 ? `${route.path}/index.html` : "/index.html";
-        logger.info(route.alias, "==> " + alias);
-        for (var key in route) {
-          logger.info("----" + key + " [" + route[key] + "]");
-        }
-        route.alias = alias;
-      });
-    }
   }
 };

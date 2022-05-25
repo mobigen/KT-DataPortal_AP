@@ -15,12 +15,12 @@ export const includeAuthUrl = (url) => {
   else return false
 }
 
-export default async function ({ $getUser, route, error, redirect }) {
+export default async function ({ $getAuthUser, route, error, redirect }) {
   console.log('관리자 인증 route middleware 체크');
   const path = route.path;
   const query = route.query;
   const incAuth = includeAuthUrl(path)
-  const user = await $getUser();
+  const user = await $getAuthUser();
   console.log('path : ', path)
   console.log('query : ', query)
   console.log('JSON.stringify(query) : ', JSON.stringify(query))

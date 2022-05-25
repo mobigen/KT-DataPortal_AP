@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       componentKey: "metaTreeKey",
-      treeRestApi: "/api/meta/getCategoryList",
+      treeRestApi: "/getCategoryList",
       checkboxLabel: "상위자동선택"
     };
   },
