@@ -59,16 +59,19 @@ export default {
   computed: {
     useMetaNameList: {
       get() {
-        const data = this.$store.getters["meta/bizMeta/useMetaNameList"];
+        const data = this.$store.getters["meta/bizMeta/useMetaNameList"].body;
 
-        // selectButtonList setting
-        let selectButtonList = [];
-        data.forEach((d) => {
-          if (d["use_meta"]) {
-            selectButtonList.push(d["NM_ID"]);
-          }
-        });
-        this.buttonList.textChange.selectButtonList = selectButtonList;
+        // TODO : useMetaNameList를 호출해서 vuex를 셋팅하기전에, computed가 먼저 실행되면 data가 undefined가 되어 forEach를 실행할때 에러가 발생함. 일단은 주석처리 하였으며 추후에 방안 고민.
+        if (data !== undefined) {
+          // selectButtonList setting
+          let selectButtonList = [];
+          data.forEach((d) => {
+            if (d["use_meta"]) {
+              selectButtonList.push(d["NM_ID"]);
+            }
+          });
+          this.buttonList.textChange.selectButtonList = selectButtonList;
+        }
 
         return data;
       }
