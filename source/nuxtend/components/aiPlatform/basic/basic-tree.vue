@@ -19,7 +19,7 @@
         <span
           :class="[spanSelected ? 'span-selected' : '']"
           @click="spanEdit(treeData)"
-          >{{ treeData[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NAME]] }}</span
+          >{{ treeData[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NM]] }}</span
         >
         <basic-button
           style="display: inline"
@@ -34,7 +34,7 @@
         <span
           :class="[spanSelected ? 'span-selected' : '']"
           @click="spanClick(treeData, $event)"
-          >{{ treeData[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NAME]] }}</span
+          >{{ treeData[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NM]] }}</span
         >
       </template>
     </div>
@@ -260,7 +260,7 @@ export default {
     },
     setParentIds() {
       const parentId =
-        this.treeData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.PARENT_ID]];
+        this.treeData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.PRNTS_ID]];
       if (parentId === undefined || this.parentsIds === undefined) {
         return;
       }
@@ -331,7 +331,7 @@ export default {
     isRootNode() {
       return (
         this.treeData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]] ===
-        this.treeData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.PARENT_ID]]
+        this.treeData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.PRNTS_ID]]
       );
     }
   }

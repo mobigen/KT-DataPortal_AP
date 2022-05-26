@@ -7,18 +7,18 @@
             {{ row[CONSTANTS.DEFAULT_NAME_COLUMN] }}
           </th>
           <td>
-            <template v-if="row.value_type === 0">
+            <template v-if="row.VAL_TYPE === 0">
               <text-input
                 :placeholder="placeholder"
-                :labelName="row.item_id"
+                :labelName="row.ITEM_ID"
                 :inputData="rowValues[row[CONSTANTS.DEFAULT_NAME_COLUMN]]"
                 @input="changeData"
               ></text-input>
             </template>
-            <template v-else-if="row.value_type === 1">
+            <template v-else-if="row.VAL_TYPE === 1">
               <number-input
                 :placeholder="placeholder"
-                :labelName="row.item_id"
+                :labelName="row.ITEM_ID"
                 :inputData="rowValues[row[CONSTANTS.DEFAULT_NAME_COLUMN]]"
                 @input="changeData"
               ></number-input>

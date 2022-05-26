@@ -5,27 +5,18 @@
     <div>
       <h3>simple-table</h3>
 
-      <basic-button
-        componentId=""
-        buttonCss="text-button"
-        :underline="false"
-        :hoverColor="false"
-        @click="reloadViewTable"
-        >viewTableReload</basic-button
-      >
-
       <basic-table
         componentId=""
         :headerList="headerList"
         :dataList="metaMapList.body"
-        rowKey="item_id"
+        rowKey="ITEM_ID"
         :useSerialNum="false"
         serialNumText=""
         :useTableButton="false"
         :tableButtonText="{}"
         @buttonAction=""
         @columnAction=""
-        :keyActionText="{ eng_name: 'keyActionTest01' }"
+        :keyActionText="{ ENG_NM: 'keyActionTest01' }"
         @keyAction="keyClick"
       />
 
@@ -53,7 +44,7 @@ export default {
   data() {
     return {
       // 임시
-      headerList: [{ column_name: "kor_name" }, { column_name: "eng_name" }]
+      headerList: [{ column_name: "KOR_NM" }, { column_name: "ENG_NM" }]
     };
   },
   props: {},
@@ -65,16 +56,10 @@ export default {
   methods: {
     ...mapActions("meta/bizMeta", ["getMetaMapList", "viewReload"]),
     editTable() {
-      this.$router.push({ path: "/superAdmin/meta/metaMapModify" });
+      this.$router.push({ path: "/superAdmin/meta/map/modify" });
     },
     keyClick(rowKey, keyAction) {
       alert("rowKey: " + rowKey + ",keyAction: " + keyAction);
-    },
-    async reloadViewTable() {
-      const returnVal = await this.viewReload();
-      alert(
-        returnVal ? "변경된 metaname 정보로 viewTable이 재설정 됨." : "Error"
-      );
     }
   },
   created() {

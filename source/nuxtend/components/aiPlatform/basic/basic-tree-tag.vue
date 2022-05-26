@@ -7,7 +7,7 @@
         :id="obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
       >
         <span>
-          {{ obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NAME]] }}
+          {{ obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NM]] }}
         </span>
       </div>
     </template>

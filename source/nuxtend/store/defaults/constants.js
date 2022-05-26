@@ -1,7 +1,7 @@
 export const state = () => ({
   constants: Object.freeze({
     TITLE: "KT_DATA_PORTAL",
-    DEFAULT_NAME_COLUMN: "kor_name",
+    DEFAULT_NAME_COLUMN: "KOR_NM",
     META_TYPE: {
       0: "text",
       1: "integer",
@@ -18,7 +18,7 @@ export const state = () => ({
             buttonType: "icon",
             buttonName: "수정",
             buttonCss: "icon-button",
-            iconData: "@icon/minus.svg"
+            iconData: "pen"
           }
         },
         DELETE_BTN: {
@@ -26,7 +26,7 @@ export const state = () => ({
             buttonType: "icon",
             buttonName: "삭제",
             buttonCss: "icon-button",
-            iconData: "@icon/minus.svg"
+            iconData: "minus"
           }
         }
       }
@@ -48,9 +48,9 @@ export const state = () => ({
         ADD_CHILD: "addChild"
       },
       TREE_KEY: {
-        NODE_NAME: "node_name",
-        NODE_ID: "node_id",
-        PARENT_ID: "parent_id"
+        NODE_NM: "NODE_NM",
+        NODE_ID: "NODE_ID",
+        PRNTS_ID: "PRNTS_ID"
       },
       OPEN_TYPE: {
         FIRST: "first",

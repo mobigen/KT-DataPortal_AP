@@ -13,7 +13,7 @@
       componentId=""
       :headerList="metaNameList.header"
       :dataList="metaNameList.body"
-      rowKey="name_id"
+      rowKey="NM_ID"
       :serialNumUse="false"
       serialNumText="No."
       :tableButtonUse="false"
@@ -21,8 +21,8 @@
       @buttonAction="tableButtonClick"
       @columnAction="rowClick"
       :keyActionText="{
-        eng_name: 'testAction01',
-        show_order: 'testAction02'
+        ENG_NM: 'testAction01',
+        SHOW_ODRG: 'testAction02'
       }"
       @keyAction="testAction"
     />

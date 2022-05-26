@@ -20,7 +20,7 @@
         componentId=""
         :headerList="metaNameList.header"
         :dataList="metaNameList.body"
-        rowKey="name_id"
+        rowKey="NM_ID"
         :useSerialNum="true"
         serialNumText="No."
         :useTableButton="true"
@@ -28,8 +28,8 @@
         @buttonAction="tableButtonClick"
         @columnAction="rowClick"
         :keyActionText="{
-          eng_name: 'testAction01',
-          show_order: 'testAction02'
+          ENG_NM: 'testAction01',
+          SHOW_ODRG: 'testAction02'
         }"
         @keyAction="testAction"
       />
@@ -65,13 +65,13 @@ export default {
           buttonType: "icon",
           buttonName: "수정",
           buttonCss: "icon-button",
-          iconData: "@icon/minus.svg"
+          iconData: "pen"
         },
         remove: {
           buttonType: "icon",
           buttonName: "삭제",
           buttonCss: "icon-button",
-          iconData: "@icon/minus.svg"
+          iconData: "minus"
         }
         /*
         sample : buttonType : text
@@ -98,11 +98,11 @@ export default {
       this.removeMetaName(rowKey);
     },
     addForm() {
-      this.$router.push({ path: "/superAdmin/meta/metaForm" });
+      this.$router.push({ path: "/superAdmin/meta/metaName/form" });
     },
     editForm(rowKey) {
       this.$router.push({
-        path: "/superAdmin/meta/metaForm",
+        path: "/superAdmin/meta/metaName/form",
         query: { metaNameId: rowKey }
       });
     },
@@ -117,7 +117,7 @@ export default {
     },
     rowClick(rowKey) {
       this.$router.push({
-        path: "/superAdmin/meta/metaView",
+        path: "/superAdmin/meta/metaName/view",
         query: { metaNameId: rowKey }
       });
     },
