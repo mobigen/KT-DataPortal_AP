@@ -15,7 +15,7 @@
       componentId=""
       :headerList="apiList.header"
       :dataList="apiList.body"
-      rowKey="api_name"
+      rowKey="API_NM"
       :useSerialNum="true"
       serialNumText="No."
       :useTableButton="true"
@@ -40,12 +40,12 @@ export default {
     return {
       apiList: {},
       buttonList: {
-        edit: {
-          buttonType: "icon",
-          buttonName: "수정",
-          buttonCss: "icon-button",
-          iconData: "pen-to-square"
-        },
+        // edit: {
+        //   buttonType: "icon",
+        //   buttonName: "수정",
+        //   buttonCss: "icon-button",
+        //   iconData: "pen-to-square"
+        // },
         remove: {
           buttonType: "icon",
           buttonName: "삭제",
