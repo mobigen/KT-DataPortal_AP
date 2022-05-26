@@ -168,7 +168,7 @@ export default {
 
 <style lang="scss" scoped>
 #simpleTable {
-  height: 200px;
+  //height: 200px;
   overflow: auto;
   border-bottom: solid 1px gray;
   table {

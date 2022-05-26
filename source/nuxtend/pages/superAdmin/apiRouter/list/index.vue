@@ -40,12 +40,12 @@ export default {
     return {
       apiList: {},
       buttonList: {
-        edit: {
-          buttonType: "icon",
-          buttonName: "수정",
-          buttonCss: "icon-button",
-          iconData: "pen-to-square"
-        },
+        // edit: {
+        //   buttonType: "icon",
+        //   buttonName: "수정",
+        //   buttonCss: "icon-button",
+        //   iconData: "pen-to-square"
+        // },
         remove: {
           buttonType: "icon",
           buttonName: "삭제",

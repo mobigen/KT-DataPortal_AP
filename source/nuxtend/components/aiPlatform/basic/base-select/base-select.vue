@@ -34,6 +34,7 @@
                 class="select-container__button"
                 type="button"
                 role="option"
+                @click="changeData(obj.NM)"
               >
                 <span class="select-container__text">{{ obj.NM }}</span>
               </button>
@@ -54,6 +55,10 @@ export default {
     };
   },
   props: {
+    labelName: {
+      type: String,
+      require: true
+    },
     selectList: {
       type: Array,
       require: true,
@@ -63,7 +68,11 @@ export default {
     }
   },
   computed: {},
-  methods: {}
+  methods: {
+    changeData(input) {
+      this.$emit("changeData", this.labelName, input);
+    }
+  }
 };
 </script>
 
