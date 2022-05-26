@@ -95,12 +95,12 @@ export const actions = {
           if (
             !Object.prototype.hasOwnProperty.call(
               jsonHelper,
-              el[param[CONSTANTS.TREE.TREE_KEY.PARENT_ID]]
+              el[param[CONSTANTS.TREE.TREE_KEY.PRNTS_ID]]
             )
           ) {
-            jsonHelper[el[param[CONSTANTS.TREE.TREE_KEY.PARENT_ID]]] = [];
+            jsonHelper[el[param[CONSTANTS.TREE.TREE_KEY.PRNTS_ID]]] = [];
           }
-          jsonHelper[el[param[CONSTANTS.TREE.TREE_KEY.PARENT_ID]]].push(el);
+          jsonHelper[el[param[CONSTANTS.TREE.TREE_KEY.PRNTS_ID]]].push(el);
         });
 
         // root는 무조건 1개만 나오는 데이터로 가정.

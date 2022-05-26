@@ -17,7 +17,7 @@
         componentId=""
         :headerList="bizMetaList.header"
         :dataList="bizMetaList.body"
-        rowKey="biz_dataset_id"
+        rowKey="BIZ_DATASET_ID"
         :useSerialNum="false"
         serialNumText=""
         :useTableButton="true"
@@ -55,16 +55,17 @@ export default {
     ...mapActions("meta/bizMeta", ["getBizMetaList", "removeBizMeta"]),
     viewMetaInfo(rowKey) {
       this.$router.push({
-        path: "/admin/meta/metaView",
+        path: "/mgnt/ui/meta/view",
         query: { metaNameId: rowKey }
       });
     },
     addMeta() {
-      this.$router.push({ path: "/admin/meta/metaForm" });
+      this.$router.push({ path: "/mgnt/ui/meta/form" });
     },
     editMeta(rowKey) {
+      return;
       this.$router.push({
-        path: "/admin/meta/metaForm",
+        path: "/mgnt/ui/meta/form",
         query: { metaNameId: rowKey }
       });
     },

@@ -9,9 +9,9 @@
       :checkbox-label="checkboxLabel"
       :use-tree-view-all="true"
       :tree-key="{
-        [CONSTANTS.TREE.TREE_KEY.NODE_NAME]: 'node_name',
-        [CONSTANTS.TREE.TREE_KEY.NODE_ID]: 'node_id',
-        [CONSTANTS.TREE.TREE_KEY.PARENT_ID]: 'parent_id'
+        [CONSTANTS.TREE.TREE_KEY.NODE_NM]: 'NODE_NM',
+        [CONSTANTS.TREE.TREE_KEY.NODE_ID]: 'NODE_ID',
+        [CONSTANTS.TREE.TREE_KEY.PRNTS_ID]: 'PRNTS_ID'
       }"
       :tree-mode="CONSTANTS.TREE.TREE_MODE.VIEW"
       :tree-select-type="CONSTANTS.TREE.TREE_TYPE.LEAF"

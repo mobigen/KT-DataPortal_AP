@@ -4,11 +4,17 @@
     <h1>META Detail</h1>
     <div>
       <h3>simple-viewTable</h3>
-
-      <basic-viewTable
-        :useTableHead="false"
-        :viewDetail="metaNameDetail"
-      ></basic-viewTable>
+      <basic-view-table
+        :headerList="metaNameDetail.header"
+        :dataObj="metaNameDetail.body"
+        viewTableColumnCount="1"
+        :useTagList="false"
+        tagPreviousText=""
+        @tagClick=""
+        :tagCursorPointer="false"
+        :useSeparator="false"
+        separator=""
+      ></basic-view-table>
 
       <div class="add-button">
         <basic-button
@@ -27,7 +33,7 @@
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
-import BasicViewTable from "@component/aiPlatform/basic/basic-viewTable.vue";
+import BasicViewTable from "@component/aiPlatform/basic/basic-view-table.vue";
 
 export default {
   name: "super-admin-metaView",
@@ -47,7 +53,7 @@ export default {
   methods: {
     ...mapActions("meta/bizMeta", ["getMetaNameDetail"]),
     buttonOk() {
-      this.$router.push({ path: "/superAdmin/meta/metaList" });
+      this.$router.push({ path: "/superAdmin/meta/metaName/list" });
     }
   },
   created() {

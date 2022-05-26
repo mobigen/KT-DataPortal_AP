@@ -28,9 +28,9 @@ export default {
       treeRestApi: "/getCategoryList",
       checkboxLabel: "상위자동선택",
       treeKey: {
-        nodeName: "node_name", // node title
-        nodeIdText: "node_id", // node key
-        parentIdText: "parent_id" // parent key
+        nodeName: "NODE_NM", // node title
+        nodeIdText: "NODE_ID", // node key
+        parentIdText: "PRNTS_ID" // parent key
       }
     };
   },

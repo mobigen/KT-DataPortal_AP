@@ -179,7 +179,7 @@
           [CONSTANTS.PAGING.ITEMS_PER_PAGE]: 5,
           [CONSTANTS.PAGING.VISIBLE_PAGES]: 3,
           [CONSTANTS.PAGING.PAGE]: 1,
-          'totalPage': 1
+          totalPage: 1
         }"
       />
     </div>
@@ -253,9 +253,9 @@ export default {
         treeRestApi: "/getCategoryList",
         checkboxLabel: "상위자동선택",
         treeKey: {
-          node_name: "node_name", // node title
-          node_id: "node_id", // node key
-          parent_id: "parent_id" // parent key
+          NODE_NM: "NODE_NM", // node title
+          NODE_ID: "NODE_ID", // node key
+          PRNTS_ID: "PRNTS_ID" // parent key
         }
       },
       sortList: [

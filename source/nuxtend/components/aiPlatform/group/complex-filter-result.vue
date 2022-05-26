@@ -113,7 +113,7 @@ export default {
          */
         return this.categoryObjectForTag(
           this.treeObj.componentKey,
-          this.treeObj.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NAME]
+          this.treeObj.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NM]
         );
       }
     }

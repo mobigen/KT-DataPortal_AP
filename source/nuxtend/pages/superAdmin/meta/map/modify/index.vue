@@ -8,7 +8,7 @@
         componentId=""
         :headerList="headerList"
         :dataList="useMetaNameList"
-        rowKey="name_id"
+        rowKey="NM_ID"
         :useSerialNum="false"
         serialNumText=""
         :useTableButton="true"
@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       // TODO : 임시
-      headerList: [{ column_name: "kor_name" }, { column_name: "eng_name" }],
+      headerList: [{ column_name: "KOR_NM" }, { column_name: "ENG_NM" }],
       buttonList: {
         textChange: {
           buttonType: "text",
@@ -59,13 +59,13 @@ export default {
   computed: {
     useMetaNameList: {
       get() {
-        const data = this.$store.getters["bizMeta/useMetaNameList"];
+        const data = this.$store.getters["meta/bizMeta/useMetaNameList"];
 
         // selectButtonList setting
         let selectButtonList = [];
         data.forEach((d) => {
           if (d["use_meta"]) {
-            selectButtonList.push(d["name_id"]);
+            selectButtonList.push(d["NM_ID"]);
           }
         });
         this.buttonList.textChange.selectButtonList = selectButtonList;
@@ -81,7 +81,7 @@ export default {
       await this.addMetaMap(
         this.buttonList["textChange"]["selectButtonList"]
       ).then(() => {
-        this.$router.push({ path: "/superAdmin/meta/metaMapList" });
+        this.$router.push({ path: "/superAdmin/meta/map/list" });
       });
     },
     tableButtonClick(rowKey, btnAction) {

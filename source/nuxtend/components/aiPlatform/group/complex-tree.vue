@@ -41,7 +41,7 @@
     <div
       v-show="
         treeMode === CONSTANTS.TREE.TREE_MODE.EDITOR &&
-        selectedNode[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NAME]] !== undefined
+        selectedNode[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NM]] !== undefined
       "
     >
       <basic-label> {{ notyTitle }}</basic-label>
@@ -182,7 +182,7 @@ export default {
     },
     setFormDefaultsData() {
       this.headerList.push({
-        column_name: this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NAME]
+        column_name: this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NM]
       });
     },
     editNode({ clickMode, nodeData }) {
@@ -196,15 +196,15 @@ export default {
         // node edit
         params[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]] =
           this.selectedNode[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]];
-        params[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NAME]] =
+        params[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NM]] =
           this.nodeName;
 
         this.updateNodeInfo(params);
       } else {
         // add child
-        params[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.PARENT_ID]] =
+        params[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.PRNTS_ID]] =
           this.selectedNode[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]];
-        params[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NAME]] =
+        params[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NM]] =
           this.nodeName;
 
         this.addChildCategory(params);
@@ -213,7 +213,7 @@ export default {
     updateFormData(formData) {
       // 만약 노드 수정/하위노드 추가 form에서 복수개의 parmeter를 전달받아야 한다면, Object 형태로 구현해야 함.
       this.nodeName =
-        formData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NAME]];
+        formData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_NM]];
     },
     toggleTree() {
       this.treeViewAll = !this.treeViewAll;

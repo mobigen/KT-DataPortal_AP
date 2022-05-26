@@ -1,8 +1,7 @@
 export const state = () => ({
   metaNameList: [],
   useMetaNameList: [],
-  metaName: {},
-  bizMetaList: [],
+  bizMetaList: {},
   metaNameDetail: {},
   bizMetaDetail: {},
   metaMapList: [],
@@ -15,9 +14,6 @@ export const getters = {
   },
   useMetaNameList(state) {
     return state.useMetaNameList;
-  },
-  metaName(state) {
-    return state.metaName;
   },
   bizMetaList(state) {
     return state.bizMetaList;
@@ -41,9 +37,6 @@ export const mutations = {
   },
   setUseMetaNameList(state, data) {
     state.useMetaNameList = data;
-  },
-  setMetaName(state, data) {
-    state.metaName = data;
   },
   setBizMetaList(state, data) {
     state.bizMetaList = data;
@@ -77,7 +70,7 @@ export const actions = {
           "module/pagination/setTotalCount",
           {
             key: params.paginationKey,
-            totalCount: 8
+            totalCount: d.totalcount
           },
           { root: true }
         );
@@ -88,21 +81,6 @@ export const actions = {
       .get(this.$config.API_META_PREFIX + "/useMetaNameList")
       .then((d) => {
         commit("setUseMetaNameList", d);
-      });
-  },
-  getMetaName({ commit }, rowKey) {
-    if (rowKey === undefined) {
-      const empObj = {};
-      commit("setMetaName", empObj);
-      return;
-    }
-
-    this.$axios
-      .get(this.$config.API_META_PREFIX + "/getMetaName", {
-        params: { nameId: rowKey }
-      })
-      .then((d) => {
-        commit("setMetaName", d);
       });
   },
   async addMetaName({}, obj) {
@@ -139,39 +117,55 @@ export const actions = {
     this.$axios
       .get(this.$config.API_META_PREFIX + "/getBizMetaList")
       .then((d) => {
-        d.useRebuildBody = true;
+        /*
+         d.useRebuildBody = true;
 
         // header rebuild
         let newHeader = [];
         d.header.forEach((_h) => {
-          newHeader.push({ column_name: _h.eng_name });
+          newHeader.push({ column_name: _h.ENG_NM });
         });
         d.header = newHeader;
+        */
 
         commit("setBizMetaList", d);
       });
   },
   getMetaNameDetail({ commit }, rowId) {
-    this.$axios
-      .get(this.$config.API_META_PREFIX + "/getMetaNameDetail?nameId=" + rowId)
-      .then((d) => {
-        commit("setMetaNameDetail", d);
-      });
+    if (rowId === undefined) {
+      this.$axios
+        .get(this.$config.API_META_PREFIX + "/getMetaNameDetail")
+        .then((d) => {
+          commit("setMetaNameDetail", d);
+        });
+    } else {
+      this.$axios
+        .get(
+          this.$config.API_META_PREFIX + "/getMetaNameDetail?nameId=" + rowId
+        )
+        .then((d) => {
+          commit("setMetaNameDetail", d);
+        });
+    }
   },
   async getBizMetaDetail({ commit }, rowId) {
     if (rowId === undefined) {
-      const empObj = {};
-      commit("setBizMetaDetail", empObj);
-      return;
+      await this.$axios
+        .get(this.$config.API_META_PREFIX + "/getBizMetaDetail")
+        .then((d) => {
+          d.useRebuildBody = true;
+          commit("setBizMetaDetail", d);
+        });
+    } else {
+      await this.$axios
+        .get(
+          this.$config.API_META_PREFIX + "/getBizMetaDetail?datasetId=" + rowId
+        )
+        .then((d) => {
+          d.useRebuildBody = true;
+          commit("setBizMetaDetail", d);
+        });
     }
-    await this.$axios
-      .get(
-        this.$config.API_META_PREFIX + "/getBizMetaDetail?datasetId=" + rowId
-      )
-      .then((d) => {
-        d.useRebuildBody = true;
-        commit("setBizMetaDetail", d);
-      });
   },
   async getBizMetaForm({ commit }) {
     await this.$axios
@@ -230,16 +224,5 @@ export const actions = {
       this.$config.API_META_PREFIX + "/insertMetaMap",
       dataList
     );
-  },
-
-  async viewReload({}) {
-    let response = null;
-    await this.$axios
-      .get(this.$config.API_META_PREFIX + "/setViewTable")
-      .then((d) => {
-        response = d;
-      });
-
-    return response.result === "success";
   }
 };

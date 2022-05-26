@@ -3,9 +3,9 @@
     <div>
       <h3>form</h3>
       <meta-form
-        rowKey="name_id"
-        :labelList="metaNameList.header"
-        :dataObject="metaName"
+        rowKey="NM_ID"
+        :labelList="metaNameDetail.header"
+        :dataObject="metaNameDetail.body"
         :formInputType="formInputType"
         @changeData="setChangeData"
         placeholder="내용을 입력해주세요"
@@ -47,24 +47,23 @@ export default {
       rowKey: null,
       changeData: {},
       formInputType: {
-        kor_name: "text",
-        eng_name: "text",
-        show_order: "number",
-        name_id: "text",
-        type: "radio"
+        KOR_NM: "text",
+        ENG_NM: "text",
+        SHOW_ODRG: "number",
+        NM_ID: "text",
+        TYPE: "radio"
       }
     };
   },
   props: {},
   computed: {
-    ...mapGetters("meta/bizMeta", ["metaNameList", "metaName"])
+    ...mapGetters("meta/bizMeta", ["metaNameDetail"])
   },
   components: { MetaForm, BasicButton },
   watch: {},
   methods: {
     ...mapActions("meta/bizMeta", [
-      "getMetaNameList",
-      "getMetaName",
+      "getMetaNameDetail",
       "addMetaName",
       "editMetaName"
     ]),
@@ -75,21 +74,19 @@ export default {
         await this.addMetaName(this.changeData);
       }
 
-      this.$router.push({ path: "/superAdmin/meta/metaList" });
+      this.$router.push({ path: "/superAdmin/meta/metaName/list" });
     },
     setChangeData(data) {
       this.changeData = data;
     },
     cancel() {
-      this.$router.push({ path: "/superAdmin/meta/metaList" });
+      this.$router.push({ path: "/superAdmin/meta/metaName/list" });
     }
   },
   created() {
     this.rowKey = this.$route.query.metaNameId;
 
-    this.getMetaNameList();
-
-    this.getMetaName(this.rowKey);
+    this.getMetaNameDetail(this.rowKey);
   }
 };
 </script>
