@@ -24,24 +24,6 @@
           >
         </li>
       </ul>
-      <ul>
-        <li>
-          <router-link
-            :to="{ path: '/mgnt/ui/users/login' }"
-            v-if="!getAdminUserInfo.authenticated"
-            >관리자 로그인</router-link
-          >
-          <a @click="adminLogout" v-else>관리자 로그아웃</a>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <router-link :to="{ path: '/mgnt/ui/users/member' }"
-            >관리자 회원정보1</router-link
-          >&nbsp;&nbsp;&nbsp;&nbsp;
-          <router-link
-            :to="{ path: '/mgnt/ui/users/member?id=admin&id2=admin2' }"
-            >관리자 회원정보2</router-link
-          >
-        </li>
-      </ul>
     </header>
   </div>
 </template>
@@ -70,8 +52,7 @@ export default {
   props: {},
   components: { BasicNav },
   computed: {
-    ...mapGetters("users/user", ["getUserInfo"]),
-    ...mapGetters("users/adminUser", ["getAdminUserInfo"])
+    ...mapGetters("users/user", ["getUserInfo"])
   },
   mounted() {
     // console.log('header mounted getUserInfo.authenticated : ', this.getUserInfo.authenticated)
@@ -81,7 +62,6 @@ export default {
   watch: {},
   methods: {
     ...mapActions("users/user", ["clearUserInfo"]),
-    ...mapActions("users/adminUser", ["clearAdminUserInfo"]),
     async logout() {
       const userAccessToken = await this.$axios.post(
         `${this.$config.API_USERS_PREFIX}/auth/logout`
@@ -92,20 +72,6 @@ export default {
 
       await this.$router.push({
         path: `${this.$config.USER_LOGIN_PAGE}`,
-        query: {
-          prevFullUrl: `${encodeURIComponent(this.$route.fullPath)}`
-        }
-      });
-    },
-    async adminLogout() {
-      const adminAccessToken = await this.$axios.post(
-        `${this.$config.API_ADMIN_USERS_PREFIX}/auth/logout`
-      );
-      await this.$cookies.remove(this.$config.ADMIN_ACCESS_TOKEN_NAME);
-      await this.clearAdminUserInfo();
-
-      await this.$router.push({
-        path: `${this.$config.ADMIN_LOGIN_PAGE}`,
         query: {
           prevFullUrl: `${encodeURIComponent(this.$route.fullPath)}`
         }

@@ -1,12 +1,12 @@
 {
   "ko": {
     "index": {
-      "hello-world": "안녕!!! 세상천지"
+      "title": "로그인"
     }
   },
   "en": {
     "index": {
-      "hello-world": "Hello!!! World"
+      "title": "LOGIN"
     }
   }
 }

@@ -71,6 +71,7 @@ export default {
     changeData(label, input) {
       // Object나 Array의 변동사항을 감지하기 위해 this.$set 사용
       this.$set(this.changeDataObject, label, input);
+
       this.$emit("changeData", this.changeDataObject);
     }
   },

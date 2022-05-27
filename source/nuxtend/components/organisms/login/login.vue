@@ -59,10 +59,17 @@ export default {
        */
       this.$emit("login", { username: this.username, password: this.password });
     },
-
     onLocale(param) {
-      console.log("LOCALE:", param);
       this.$i18n.setLocale(param);
+    },
+    onSocialLogin(socialType) {
+      /**
+       * 소셜 로그인에 필요한 타입를 반환
+       *
+       * @event social login
+       * @property {string} socialType - 소셜 로그인 타입
+       */
+      this.$emit("socialLogin", { socialType: socialType });
     }
   }
 };

@@ -16,8 +16,8 @@ export default {
     cache: false,
     crawler: true,
     routes: ["/"],
-    // dir: "../../src/main/resources/static"
     dir: "../../../web/htdocs"
+    // dir: process.env.ENV_TYPE === "local" ? "../../../web/htdocs" : "../../../web2/htdocs"
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -44,8 +44,8 @@ export default {
     "@/plugins/route.js",
     "@/plugins/persisted-state.client.js",
     "@/plugins/lodash.js",
-    "@/plugins/users/common.js"
-    // "@/plugins/vue-js-modal.js"
+    "@/plugins/users/common.js",
+    "@/plugins/vue-js-modal.js"
   ],
 
   components: ["~/components/functional"],
@@ -85,11 +85,6 @@ export default {
         }
       }
     },
-    // plugins: [
-    //   new webpack.ProvidePlugin({
-    //     _: "lodash", // lodash 추가
-    //   }),
-    // ],
     extend(config) {
       config.resolve.alias["vue"] = "vue/dist/vue.common";
     }
@@ -109,11 +104,11 @@ export default {
   },
 
   axios: {
-    // baseURL: process.env.API_GW_URL,
     baseURL: process.env.API_GW_URL,
     credentials: true,
-    // proxy: process.env.ENV_TYPE === "local",
-    proxy: true
+    proxy:
+      process.env.ENV_TYPE === "local" || process.env.ENV_TYPE === "dev.apache",
+    progress: false
     // debug : true
   },
   proxy: [
@@ -134,7 +129,25 @@ export default {
       }
     ],
     [
-      "/portal/api/V1/users",
+      "/portal/api/analysis",
+      {
+        target: process.env.API_ANALYSIS_URL,
+        pathRewrite: { "^/api/": "" },
+        changeOrigin: true,
+        secure: false
+      }
+    ],
+    [
+      "/portal/api/board",
+      {
+        target: process.env.API_BOARD_URL,
+        pathRewrite: { "^/api/": "" },
+        changeOrigin: true,
+        secure: false
+      }
+    ],
+    [
+      "/portal/api/users",
       {
         target: process.env.API_USER_URL,
         pathRewrite: { "^/api/": "" },
@@ -143,17 +156,17 @@ export default {
       }
     ],
     [
-      "/portal/api/V1/meta/",
+      "/portal/api/meta",
       {
         target: process.env.API_META_URL,
-        pathRewrite: { "/portal/api/V1/meta/": "/route/meta/" }
+        pathRewrite: { "/portal/api/meta/": "/route/meta/" }
       }
     ],
     [
-      "/api/apiRouter",
+      "/mgnt/api/apiRouter",
       {
         target: process.env.API_META_URL,
-        pathRewrite: { "/api/apiRouter/": "/api/" }
+        pathRewrite: { "/mgnt/api/apiRouter/": "/api/" }
       }
     ]
   ],
@@ -171,9 +184,8 @@ export default {
     vueI18nLoader: true
   },
 
-  loading: {
-    color: "blue"
-  },
+  // custom loading bar
+  loading: "~/components/functional/loader/loader.vue",
 
   // 미들웨어
   router: {
@@ -193,10 +205,6 @@ export default {
     },
     // 인증, 권한 추가
     middleware: ["auth"]
-    // groupMiddleware: {
-    //   '/user' : ['userAuthentication'],
-    //   '/admin' : ['adminAuthentication']
-    // }
   },
 
   styleResources: {
@@ -212,14 +220,17 @@ export default {
   },
 
   publicRuntimeConfig: {
+    API_ANALYSIS_PREFIX: process.env.API_ANALYSIS_PREFIX,
+    API_BOARD_PREFIX: process.env.API_BOARD_PREFIX,
     API_USERS_PREFIX: process.env.API_USERS_PREFIX,
     API_META_PREFIX: process.env.API_META_PREFIX,
     API_ROUTER_PREFIX: process.env.API_ROUTER_PREFIX,
     USER_ACCESS_TOKEN_NAME: process.env.USER_ACCESS_TOKEN_NAME,
+    ROUTE_USERS_PREFIX: process.env.ROUTE_USERS_PREFIX,
     USER_INDEX_PAGE: process.env.USER_INDEX_PAGE,
     USER_LOGIN_PAGE: process.env.USER_LOGIN_PAGE,
     API_ADMIN_USERS_PREFIX: process.env.API_ADMIN_USERS_PREFIX,
-    ADMIN_ACCESS_TOKEN_NAME: process.env.ADMIN_ACCESS_TOKEN_NAME,
+    API_ADMIN_META_PREFIX: process.env.API_ADMIN_META_PREFIX,
     ADMIN_INDEX_PAGE: process.env.ADMIN_INDEX_PAGE,
     ADMIN_LOGIN_PAGE: process.env.ADMIN_LOGIN_PAGE
   },
