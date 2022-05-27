@@ -34,7 +34,7 @@ export default {
       require: true
     },
     defaultValue: {
-      type: String,
+      type: [Number, String],
       require: true
     },
     labelName: {
