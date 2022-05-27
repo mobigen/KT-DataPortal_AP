@@ -56,17 +56,16 @@ export default {
     viewMetaInfo(rowKey) {
       this.$router.push({
         path: "/mgnt/ui/meta/view",
-        query: { metaNameId: rowKey }
+        query: { datasetId: rowKey }
       });
     },
     addMeta() {
       this.$router.push({ path: "/mgnt/ui/meta/form" });
     },
     editMeta(rowKey) {
-      return;
       this.$router.push({
         path: "/mgnt/ui/meta/form",
-        query: { metaNameId: rowKey }
+        query: { datasetId: rowKey }
       });
     },
     removeMeta(rowKey) {

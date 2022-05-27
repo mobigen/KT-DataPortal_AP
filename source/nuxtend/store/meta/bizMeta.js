@@ -153,7 +153,7 @@ export const actions = {
       await this.$axios
         .get(this.$config.API_META_PREFIX + "/getBizMetaDetail")
         .then((d) => {
-          d.useRebuildBody = true;
+          // d.useRebuildBody = true;
           commit("setBizMetaDetail", d);
         });
     } else {
@@ -162,7 +162,7 @@ export const actions = {
           this.$config.API_META_PREFIX + "/getBizMetaDetail?datasetId=" + rowId
         )
         .then((d) => {
-          d.useRebuildBody = true;
+          // d.useRebuildBody = true;
           commit("setBizMetaDetail", d);
         });
     }
