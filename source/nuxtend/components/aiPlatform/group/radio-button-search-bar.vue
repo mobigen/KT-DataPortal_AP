@@ -26,7 +26,7 @@ export default {
       require: true
     },
     defaultValue: {
-      type: Number,
+      type: String,
       require: false
     }
   },

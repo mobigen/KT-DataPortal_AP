@@ -60,7 +60,7 @@
       <radio-button-search-bar
         :radioButtonList="RadioList"
         labelName="radioSelectSearch"
-        :defaultValue="0"
+        defaultValue="0"
         @searchClick="radioSelectSearch"
       ></radio-button-search-bar>
     </div>
@@ -96,7 +96,7 @@
       <h3>검색결과 panel component</h3>
       <name-tag-list
         :nameTagList="searchResultList"
-        :width="wide"
+        width="wide"
         @dataOfInterest="dataOfInterest"
         @dataSharing="dataSharing"
         @nameTagClick="nameTagClick"
