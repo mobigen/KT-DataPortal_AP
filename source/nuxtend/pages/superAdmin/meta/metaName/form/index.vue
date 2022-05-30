@@ -71,6 +71,14 @@ export default {
       if (this.rowKey) {
         await this.editMetaName(this.changeData);
       } else {
+        if (this.changeData.KOR_NM === "") {
+          alert("KOR_NM 값을 입력해주세요");
+          return;
+        } else if (this.changeData.ENG_NM === "") {
+          alert("ENG_NM 값을 입력해주세요.");
+          return;
+        }
+
         await this.addMetaName(this.changeData);
       }
 
@@ -87,6 +95,7 @@ export default {
     this.rowKey = this.$route.query.metaNameId;
 
     this.getMetaNameDetail(this.rowKey);
+    this.changeData = this.metaNameDetail.body;
   }
 };
 </script>
