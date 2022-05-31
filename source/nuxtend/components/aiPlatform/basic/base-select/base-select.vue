@@ -94,8 +94,6 @@ export default {
   watch: {
     selectList() {
       const tempList = JSON.parse(JSON.stringify(this.selectList));
-      console.log('here')
-
 
       if (this.useAllOption) {
         tempList.unshift({

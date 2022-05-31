@@ -89,7 +89,8 @@ export const state = () => ({
       },
       METH: {
         GET: "GET",
-        POST: "POST"
+        POST: "POST",
+        PUT: "PUT"
       },
       MODE: {
         REMOTE_CALL: "REMOTE CALL",

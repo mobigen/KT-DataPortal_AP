@@ -8,7 +8,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(header, i) in viewDetail.header" :key="'body_tr_' + i">
+        <tr
+          v-for="(header, i) in viewDetail.header"
+          :key="'body_tr_' + i"
+          v-show="!hideColumns.includes(header.column_name)"
+        >
           <th>{{ header.column_name }}</th>
           <td>{{ viewDetail.body[0][header.column_name] }}</td>
         </tr>
@@ -30,6 +34,10 @@ export default {
     viewDetail: {
       type: Object,
       require: true
+    },
+    hideColumns: {
+      type: Array,
+      require: false
     }
   },
   computed: {},
