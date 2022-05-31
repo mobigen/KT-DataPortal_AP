@@ -57,7 +57,7 @@ export default {
     }
   },
   created() {
-    this.getBizMetaDetail(this.$route.query.metaNameId);
+    this.getBizMetaDetail(this.$route.query.datasetId);
   }
 };
 </script>

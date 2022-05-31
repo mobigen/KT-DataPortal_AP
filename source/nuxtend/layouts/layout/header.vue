@@ -3,6 +3,8 @@
     <json-viwer />
     <header>
       <h1>Header</h1>
+
+      <router-link :to="{ path: '/superAdmin/apiRouter/list' }"> API ROUTER </router-link>
       <basic-nav :menuList="menuList" />
       <ul>
         <li>
