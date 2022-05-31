@@ -18,7 +18,7 @@ export const actions = {
       rootGetters["module/pagination/paging"][params.paginationKey];
     const paramAPI = `?perPage=${paging.itemsPerPage}&curPage=${paging.page}`;
 
-    this.$axios.get("/api/meta/metaNameList" + paramAPI).then((response) => {
+    this.$axios.get(this.$config.API_META_PREFIX + "/metaNameList" + paramAPI).then((response) => {
       // backend-api에서 rowno를 조회하는데, 이 api에서는 response.header에 rowno가 들어있기 않기 때문에
       // javascript단에서 수동으로 값을 넣어준다.
       response.header.unshift({ column_name: "rowno" });

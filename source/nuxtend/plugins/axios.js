@@ -1,3 +1,4 @@
+import { errorAlert } from "@functional/alert/alert-default";
 const UrlPattern = require("url-pattern");
 
 const isUserApiUrl = (path) => {
@@ -23,36 +24,48 @@ const isAdminApiUrl = (path) => {
 };
 
 export default function ({ $axios, $config, $cookies, store, redirect }) {
-  $axios.onRequest((config) => {
-    const userAccessToken = $cookies.get($config.USER_ACCESS_TOKEN_NAME);
-    const adminAccessToken = $cookies.get($config.ADMIN_ACCESS_TOKEN_NAME);
-    // console.log("Making request to " + config.url);
-    // console.log("$cookies userAccessToken : ",  userAccessToken);
-    // console.log("$cookies adminAccessToken : ",  adminAccessToken);
-    // console.log("isAdminUrl(config.url) : ",  isAdminUrl(config.url));
-    // console.log("$config userAccessToken : ",  $config.USER_ACCESS_TOKEN_NAME);
-    // console.log("isUserApiUrl(config.url) ",  isUserApiUrl(config.url));
-    if (isUserApiUrl(config.url)) {
-      config.headers.common[
-        $config.USER_ACCESS_TOKEN_NAME
-      ] = `${userAccessToken}`;
-    } else if (isAdminApiUrl(config.url)) {
-      config.headers.common[
-        $config.ADMIN_ACCESS_TOKEN_NAME
-      ] = `${adminAccessToken}`;
+  function showLoader() {
+    if (typeof $nuxt !== "undefined") {
+      $nuxt.$loading.start();
     }
+  }
+
+  function hideLoader() {
+    if (typeof $nuxt !== "undefined") {
+      $nuxt.$loading.finish();
+    }
+  }
+
+  $axios.onRequest((config) => {
+    showLoader();
   });
 
-  $axios.onResponse((response) => {
+  $axios.onResponse(async (response) => {
+    hideLoader();
     let data = response.data;
+
+    /**
+     * TODO : API Router에서 조회하는 경우 response가 달라서 임시로 따로 처리하였습니다.
+     * - AP skysora.
+     */
+    if (response.config.url.includes("/apiRouter/")) {
+      return response;
+    }
+
     if (data.hasOwnProperty("result") && data.result === 0) {
       let errorMessage = data.errorMessage;
       if (errorMessage === null || errorMessage === "") {
         errorMessage = "여기에 시스템 에러 메세지를 넣어야 함";
       }
-      alert(errorMessage);
+      await errorAlert(errorMessage);
       return Promise.resolve(false);
     }
     return data.data;
+  });
+
+  $axios.onError((error) => {
+    hideLoader();
+    errorAlert(error.message);
+    return Promise.resolve(false);
   });
 }

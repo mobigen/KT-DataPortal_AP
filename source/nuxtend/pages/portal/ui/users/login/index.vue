@@ -1,7 +1,13 @@
 <template lang="html">
   <div>
-    <h1>{{ $t("index.hello-world") }}</h1>
-    <Login @login="onLogin" />
+    <h1>{{ $t("index.title") }}</h1>
+    <Login
+      @login="onLogin"
+      @idSearch="onIdSearch"
+      @pwdSearch="onPwdSearch"
+      @join="onJoin"
+      @socialLogin="onSocialLogin"
+    />
     <p><button @click="userInfo()">사용자정보</button></p>
     <p>store 사용자 정보 : {{ getUserInfo }}</p>
   </div>
@@ -18,56 +24,29 @@ export default {
   name: "index",
   data() {
     return {
-      prevFullUrl: null,
-      prevPath: null,
-      prevQuery: null
+      prevFullUrl: null
     };
   },
   components: {
     Login
   },
+  beforeMount() {},
+  mounted() {},
   computed: {
+    ...mapGetters("users/user", ["getterPrevFullUrl"]),
     ...mapGetters("users/user", ["getUserInfo"])
-  },
-  mounted() {
-    console.log('$isUserRouteUrl', this.$isUserRouteUrl('/user/users'))
-
-    const url = this.$route.path;
-    const includeUrls = ["/user/users/login"]
-    const idx = _.findIndex(includeUrls, function (item) {
-      return item === url
-    })
-    // console.log('idx : ', idx)
-
-    const prevFullUrl = this.$route.query.prevFullUrl;
-    this.prevFullUrl = prevFullUrl;
-
-    const prevPath = this.$route.query.prevPath;
-    const prevQueryStr = this.$route.query.prevQuery;
-    // console.log("prevPath : ", prevPath);
-    // console.log("prevQueryStr : ", prevQueryStr);
-    let prevQuery = null;
-    if (prevQueryStr && prevQueryStr !== "") {
-      prevQuery = JSON.parse(prevQueryStr);
-    }
-    this.prevPath = prevPath;
-    this.prevQuery = prevQuery;
-
-    // console.log("prevQuery : ", prevQuery);
-
-    const prevUrl = this.getPrevUrl();
-    // console.log("prevUrl : ", prevUrl);
   },
   methods: {
     ...mapActions("users/user", ["getAuthenticatedUser"]),
+    ...mapActions("users/user", ["setPrevFullUrl"]),
     async onLogin(param) {
       let publicKey = await this.getPublicKey();
-      let password = param.password;
+      if (!publicKey) return;
 
+      let password = param.password;
       if (publicKey && publicKey !== "") {
         password = this.encrypt(publicKey, param.password);
       }
-
       let userAccessToken = await this.auth(param.username, password);
 
       if (userAccessToken && userAccessToken !== "") {
@@ -76,12 +55,51 @@ export default {
           this.$config.USER_ACCESS_TOKEN_NAME,
           userAccessToken
         );
+
+        // 아이디 저장
+        const idSaveChk = param.idSaveChk;
+        if (idSaveChk) {
+          const expireTime = 60 * 1; // 60초
+          await this.$cookies.set("userSaveId", param.username, expireTime);
+        } else {
+          await this.$cookies.set("userSaveId", "", -1);
+          await this.$cookies.remove("userSaveId");
+        }
+
         // 사용자 정보 store 저장
         await this.getAuthenticatedUser();
         // 로그인 성공 후 페이지 이동
         const prevFullUrl = this.getPrevFullUrl();
         await this.$router.push({ path: `${prevFullUrl}` });
       }
+    },
+    onIdSearch() {
+      this.$router.push({
+        path: `${this.$config.ROUTE_USERS_PREFIX}/member/search/id`
+      });
+    },
+    onPwdSearch() {
+      this.$router.push({
+        path: `${this.$config.ROUTE_USERS_PREFIX}/member/search/pwd`
+      });
+    },
+    onJoin() {
+      this.$router.push({
+        path: `${this.$config.ROUTE_USERS_PREFIX}/member/register`
+      });
+    },
+    async onSocialLogin(param) {
+      const socialType = param.socialType;
+      const prevFullUrl = this.getPrevFullUrl();
+
+      await this.setPrevFullUrl(prevFullUrl);
+
+      // location.href =
+      //   `/oauth2/authorization/` +
+      //   socialType +
+      //   "?prevFullUrl=" +
+      //   encodeURIComponent(prevFullUrl);
+      location.href = `/oauth2/authorization/` + socialType;
     },
     getPublicKey() {
       return this.$axios.get(`${this.$config.API_USERS_PREFIX}/auth/key`);
@@ -99,10 +117,13 @@ export default {
       return encrypt.encrypt(source);
     },
     async userInfo() {
-      const user = await this.$getUser();
+      const user = await this.$getAuthUser();
     },
     getPrevFullUrl() {
       let sUrl = "";
+
+      const prevFullUrl = this.$route.query.prevFullUrl;
+      this.prevFullUrl = prevFullUrl;
 
       if (this.prevFullUrl && this.prevFullUrl !== "") {
         sUrl += decodeURIComponent(this.prevFullUrl);

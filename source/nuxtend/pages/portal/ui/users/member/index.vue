@@ -11,18 +11,18 @@ export default {
   name: "index",
   data() {
     return {
-      user : {}
-    }
+      user: {}
+    };
   },
   async mounted() {
     await this.userInfo();
   },
   methods: {
     async userInfo() {
+      // const user = await this.$getAuthUser();
       const user = await this.$getUser();
       this.user = user;
-
-    },
+    }
   }
-}
+};
 </script>

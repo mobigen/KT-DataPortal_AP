@@ -26,9 +26,18 @@
       /><br />
       <Locale @changeLocale="onLocale" />
       <br />
+      <input type="checkbox" id="idSaveChk" v-model="idSaveChk" />
+      <label for="idSaveChk"><span>아이디저장</span></label>
+      <br />
       <button type="submit" class="button button--primary button--lg w-12_12">
         {{ $t("login.submit-button") }}
       </button>
+      <br />
+      <div>
+        <span><a href="" @click.prevent="onIdSearch()">아이디찾기</a></span>
+        <span><a href="" @click.prevent="onPwdSearch()">비밀번호찾기</a></span>
+        <span><a href="" @click.prevent="onJoin()">회원가입</a></span>
+      </div>
     </form>
   </div>
 </template>
@@ -45,8 +54,19 @@ export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
+      idSaveChk: false
     };
+  },
+  mounted() {
+    const userSaveId = this.$cookies.get("userSaveId");
+    if (userSaveId) {
+      this.idSaveChk = true;
+      this.username = userSaveId;
+    } else {
+      this.idSaveChk = false;
+      this.username = "";
+    }
   },
   methods: {
     async onLogin() {
@@ -57,12 +77,32 @@ export default {
        * @property {string} username - 사용자계정
        * @property {string} password - 비밀번호
        */
-      this.$emit("login", { username: this.username, password: this.password });
+      this.$emit("login", {
+        username: this.username,
+        password: this.password,
+        idSaveChk: this.idSaveChk
+      });
     },
-
     onLocale(param) {
-      console.log("LOCALE:", param);
       this.$i18n.setLocale(param);
+    },
+    onIdSearch() {
+      this.$emit("idSearch");
+    },
+    onPwdSearch() {
+      this.$emit("pwdSearch");
+    },
+    onJoin() {
+      this.$emit("join");
+    },
+    onSocialLogin(socialType) {
+      /**
+       * 소셜 로그인에 필요한 타입를 반환
+       *
+       * @event social login
+       * @property {string} socialType - 소셜 로그인 타입
+       */
+      this.$emit("socialLogin", { socialType: socialType });
     }
   }
 };

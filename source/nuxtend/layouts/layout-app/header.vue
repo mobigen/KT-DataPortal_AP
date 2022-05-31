@@ -3,23 +3,13 @@
     <json-viwer />
     <header>
       <div>
-        <h1>Header - 모든 페이지의 제목은 구현 완료시 삭제.</h1>
-        <span
-          >** 위치잡는 css 구현할 필요 없음. 각각의 component별로 구현되면 되고,
-          기능우선.</span
-        >
+        <h1>Header</h1>
+        <router-link :to="{ path: '/superAdmin/apiRouter/list' }"> API ROUTER </router-link>
       </div>
 
       <div>LOGO, title Component</div>
 
       <div>
-        <span
-          >로그인,회원가입, 마이디스크 Component (화면설계기준 좌측 상단)</span
-        >
-        <span
-          >버튼 클릭시, alert 형태로 event 처리까지만 구현 (detail한 동작구현
-          x)</span
-        >
         <basic-menu
           :menuList="userMenuList"
           :useSeparator="false"
@@ -39,6 +29,7 @@
 <script>
 import BasicNav from "@/components/aiPlatform/basic/basic-nav.vue";
 import BasicMenu from "@/components/aiPlatform/basic/basic-menu.vue";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "layout-header",
   extends: {},
@@ -91,12 +82,50 @@ export default {
             { menuName: "마이디스크", url: "/portal/ui/meta/my/mydisk" },
             { menuName: "개인정보관리", url: "/portal/ui/meta/my/info" }
           ]
+        },
+        {
+          menuName: "커뮤니티",
+          url: "/portal/ui/board/community",
+          children: [
+            { menuName: "경진대회", url: "/portal/ui/board/community/contest" },
+            {
+              menuName: "데이터 교육",
+              url: "/portal/ui/board/community/data-education"
+            },
+            {
+              menuName: "기업지원",
+              url: "/portal/ui/board/community/corporate-support"
+            }
+          ]
+        },
+        {
+          menuName: "이용안내",
+          url: "/portal/ui/board/information",
+          children: [
+            {
+              menuName: "공지사항",
+              url: "/portal/ui/board/information/notification"
+            },
+            { menuName: "FAQ", url: "/portal/ui/board/information/faq" },
+            { menuName: "문의하기", url: "/portal/ui/board/information/qna" },
+            {
+              menuName: "ckeditor",
+              url: "/portal/ui/board/information/ckeditor"
+            },
+            {
+              menuName: "데이터맵검색",
+              url: "/portal/ui/board/information/map-search"
+            }
+          ]
         }
       ],
       /* 임시로 url, icon 설정 */
       userMenuList: [
-        { menuName: "로그인", url: "/portal/ui/users/login" },
-        { menuName: "회원가입", url: "/app/search/fullSearch" },
+        { menuName: "로그인", url: `${this.$config.ROUTE_USERS_PREFIX}/login` },
+        {
+          menuName: "회원가입",
+          url: `${this.$config.ROUTE_USERS_PREFIX}/member/register`
+        },
         { menuName: "마이디스크", url: "/app/search/mapSearch" }
       ],
       textPreviousIcon: [null, null, "book-bookmark"],
@@ -105,10 +134,37 @@ export default {
   },
   props: {},
   components: { BasicNav, BasicMenu },
-  computed: {},
+  computed: {
+    ...mapGetters("users/user", ["getUserInfo"])
+  },
   watch: {},
   methods: {},
-  created() {}
+  beforeCreate() {},
+  created() {},
+  async fetch() {},
+  beforeMount() {
+    console.log("this.getUserInfo : ", this.getUserInfo);
+    if (this.getUserInfo && this.getUserInfo.authenticated) {
+      // 로그인 후
+      this.userMenuList = [
+        {
+          menuName: "로그아웃",
+          url: ``
+        },
+        { menuName: "마이디스크", url: "/app/search/mapSearch" }
+      ];
+    } else {
+      // 로그인 전
+      this.userMenuList = [
+        { menuName: "로그인", url: `${this.$config.ROUTE_USERS_PREFIX}/login` },
+        {
+          menuName: "회원가입",
+          url: `${this.$config.ROUTE_USERS_PREFIX}/member/register`
+        },
+        { menuName: "마이디스크", url: "/app/search/mapSearch" }
+      ];
+    }
+  }
 };
 </script>
 
