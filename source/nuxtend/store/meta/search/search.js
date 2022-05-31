@@ -6,7 +6,8 @@ export const state = () => ({
   searchDetailObject: {},
   fileData: [],
   recommendData: [],
-  dataUseCases: {}
+  dataUseCases: {},
+  requireObj: {}
 });
 
 export const getters = {
@@ -33,6 +34,9 @@ export const getters = {
   },
   dataUseCases(state) {
     return state.dataUseCases;
+  },
+  requireObj(state) {
+    return state.requireObj;
   }
 };
 
@@ -90,6 +94,9 @@ export const mutations = {
   },
   setDataUseCases(state, data) {
     state.dataUseCases = data;
+  },
+  setRequireObj(state, data) {
+    state.requireObj = data;
   }
 };
 
@@ -533,5 +540,36 @@ export const actions = {
     };
 
     commit("setDataUseCases", dataUseCases);
+  },
+  getRequireObj({ commit }, { searchCriteria, searchKeyword }) {
+    console.log(searchCriteria);
+    console.log(searchKeyword);
+
+    const requireObj = {
+      header: [
+        { column_name: "empNum" },
+        { column_name: "title" },
+        { column_name: "body" }
+      ],
+      body: [
+        { id: 1, empNum: "20220101", title: "제목01", body: "내용01" },
+        { id: 2, empNum: "20220102", title: "제목02", body: "내용02" },
+        { id: 3, empNum: "20220103", title: "제목03", body: "내용03" },
+        { id: 4, empNum: "20220104", title: "제목04", body: "내용04" },
+        { id: 5, empNum: "20220105", title: "제목05", body: "내용05" },
+        { id: 6, empNum: "20220101", title: "제목06", body: "내용06" },
+        { id: 7, empNum: "20220102", title: "제목07", body: "내용07" },
+        { id: 8, empNum: "20220103", title: "제목08", body: "내용08" },
+        { id: 9, empNum: "20220104", title: "제목09", body: "내용09" },
+        { id: 10, empNum: "20220101", title: "제목10", body: "내용10" },
+        { id: 11, empNum: "20220102", title: "제목11", body: "내용11" },
+        { id: 12, empNum: "20220103", title: "제목12", body: "내용12" },
+        { id: 13, empNum: "20220101", title: "제목13", body: "내용13" },
+        { id: 14, empNum: "20220102", title: "제목14", body: "내용14" },
+        { id: 15, empNum: "20220101", title: "제목15", body: "내용15" }
+      ]
+    };
+
+    commit("setRequireObj", requireObj);
   }
 };
