@@ -139,8 +139,7 @@ export default {
           me.selectList = arr;
         });
     },
-    changeData(label, input) {
-      console.log(input);
+    changeData({ input }) {
       this.selectKey = input;
 
       this.getApiList();

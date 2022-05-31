@@ -189,7 +189,8 @@ export default {
       modeRadioOptions: [],
       methRadioOptions: [
         { value: "GET", label: "GET" },
-        { value: "POST", label: "POST" }
+        { value: "POST", label: "POST" },
+        { value: "PUT", label: "PUT" }
       ],
       buttonList: {
         remove: {
@@ -299,15 +300,18 @@ export default {
         params[this.CONSTANTS.API_ROUTER.PARAM.CTGRY]
       );
     },
-    changeData(label, input) {
+    changeData({ label, input }) {
+      console.log(label)
       if (label === this.CONSTANTS.API_ROUTER.PARAM.MODE) {
+
+      console.log(input)
         this.openParam = input === this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL;
       }
       this.apiObj[label] = input;
 
       this.apiObj = JSON.parse(JSON.stringify(this.apiObj));
     },
-    changeDataParam(label, input) {
+    changeDataParam({ label, input }) {
       this.apiParamObj[label] = input;
 
       this.apiParamObj = JSON.parse(JSON.stringify(this.apiParamObj));
