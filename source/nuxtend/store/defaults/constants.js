@@ -73,6 +73,28 @@ export const state = () => ({
         CHECKBOX: "checkbox",
         TREE: "tree"
       }
+    },
+    API_ROUTER: {
+      PARAM: {
+        API_NM: "API_NM",
+        CMD: "CMD",
+        URL: "URL",
+        MODE: "MODE",
+        METH: "METH",
+        CTGRY: "CTGRY",
+        PARAMS: "PARAMS",
+        NM: "NM",
+        DATA_TYPE: "DATA_TYPE",
+        DEFLT_VAL: "DEFLT_VAL"
+      },
+      METH: {
+        GET: "GET",
+        POST: "POST"
+      },
+      MODE: {
+        REMOTE_CALL: "REMOTE CALL",
+        MESSAGE_PASSING: "MESSAGE PASSING"
+      }
     }
   })
 });

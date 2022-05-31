@@ -2,35 +2,54 @@
   <div>
     <h3>api-router list</h3>
 
-    <basic-button
-      componentId="metaFormAddBtn"
-      buttonCss="text-button"
-      :underline="false"
-      :hoverColor="false"
-      @click="addApiRoute"
-      >등록</basic-button
-    >
+    <div class="component flex">
+      <basic-label forProperty="">CTGRY</basic-label>
+      <base-select
+        labelName="CTGRY"
+        :select-list="selectList"
+        :selected-key="selectKey"
+        :use-all-option="true"
+        placeholder-text="선택해주세요."
+        @changeData="changeData"
+      />
+    </div>
 
-    <basic-table
-      componentId=""
-      :headerList="apiList.header"
-      :dataList="apiList.body"
-      rowKey="API_NM"
-      :useSerialNum="true"
-      serialNumText="No."
-      :useTableButton="true"
-      :tableButtonText="this.buttonList"
-      @buttonAction="tableButtonClick"
-      @columnAction=""
-      :keyActionText="{ api_name: 'viewRouterInfo' }"
-      @keyAction="viewRouterInfo"
-    />
+    <div class="component">
+      <basic-button
+        componentId="metaFormAddBtn"
+        buttonCss="text-button"
+        :underline="false"
+        :hoverColor="false"
+        @click="addApiRoute"
+        >등록</basic-button
+      >
+    </div>
+
+    <div class="component">
+      <basic-table
+        componentId=""
+        :headerList="apiList.header"
+        :dataList="apiList.body"
+        rowKey="API_NM"
+        :useSerialNum="true"
+        serialNumText="No."
+        :useTableButton="true"
+        :tableButtonText="this.buttonList"
+        @buttonAction="tableButtonClick"
+        @columnAction=""
+        :keyActionText="{ API_NM: 'viewRouterInfo' }"
+        @keyAction="viewRouterInfo"
+      />
+    </div>
   </div>
 </template>
 
 <script type="text/javascript">
+import BasicLabel from "@/components/aiPlatform/basic/basic-label.vue";
 import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
+import BaseSelect from "@/components/aiPlatform/basic/base-select/base-select.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "apiRouter-list",
@@ -52,11 +71,15 @@ export default {
           buttonCss: "icon-button",
           iconData: "ban"
         }
-      }
+      },
+      selectList: [],
+      selectKey: null
     };
   },
-  computed: {},
-  components: { BasicButton, BasicTable },
+  computed: {
+    ...mapGetters("defaults/constants", ["CONSTANTS"])
+  },
+  components: { BasicButton, BasicTable, BasicLabel, BaseSelect },
   watch: {},
   methods: {
     addApiRoute() {
@@ -75,12 +98,11 @@ export default {
       }
     },
     removeBizMeta(rowKey) {
+      const me = this;
       this.$axios
-        .post(this.$config.API_ROUTER_PREFIX + "/delApi", {
-          params: { api_name: rowKey }
-        })
+        .post(this.$config.API_ROUTER_PREFIX + "/delApi?API_NM=" + rowKey)
         .then((d) => {
-          console.log(d);
+          me.getApiList();
         });
     },
     viewRouterInfo(rowKey) {
@@ -89,19 +111,59 @@ export default {
         path: "/superAdmin/apiRouter/view",
         query: { apiName: rowKey }
       });
+    },
+    getApiList() {
+      let url = "/getApiList";
+      if (this.selectKey && this.selectKey !== "all") {
+        url = "/getCategoryApiList?CTGRY=" + this.selectKey;
+      }
+
+      const me = this;
+      this.$axios.get(this.$config.API_ROUTER_PREFIX + url).then((d) => {
+        me.apiList = d.data["api_info"];
+      });
+    },
+
+    async getCategoryObj() {
+      const me = this;
+      await this.$axios
+        .get(this.$config.API_ROUTER_PREFIX + "/getServerInfoList")
+        .then((d) => {
+          let arr = [];
+          d.data["api_server_info"].forEach((el) => {
+            arr.push({
+              key: el.NM,
+              text: el.NM
+            });
+          });
+          me.selectList = arr;
+        });
+    },
+    changeData(label, input) {
+      console.log(input);
+      this.selectKey = input;
+
+      this.getApiList();
     }
   },
   created() {
-    const me = this;
-    this.$axios
-      .get(this.$config.API_ROUTER_PREFIX + "/getApiList")
-      .then((d) => {
-        me.apiList = d.data["api_info"];
-      });
+    this.getCategoryObj();
+
+    this.getApiList();
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.component {
+  margin: 5px 10px;
+  padding: 10px;
+}
+.component.flex {
+  display: flex;
+}
+.component .select {
+  width: 300px;
+}
 // @import ""
 </style>

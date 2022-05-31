@@ -14,16 +14,19 @@
     </div>
 
     <div class="api-router-row">
-      <basic-label forProperty="">CATGY</basic-label>
+      <basic-label forProperty="">CTGRY</basic-label>
       <base-select
-        labelName="CATGY"
+        labelName="CTGRY"
         :select-list="categoryList"
+        :selected-key="apiObj['CTGRY']"
+        placeholder-text="선택해주세요"
         @changeData="changeData"
       />
     </div>
 
     <div class="api-router-row">
       <basic-label forProperty="">MODE</basic-label>
+
       <radio-button
         :radioButtonList="modeRadioOptions"
         labelName="MODE"
@@ -90,7 +93,7 @@
           :tableButtonText="this.buttonList"
           @buttonAction="tableButtonClick"
           @columnAction=""
-          :keyActionText="{ api_name: 'viewRouterInfo' }"
+          :keyActionText="{}"
           @keyAction=""
         />
 
@@ -117,10 +120,11 @@
             </div>
             <div class="api-router-row">
               <basic-label forProperty="">DATA_TYPE</basic-label>
-              <basic-input
-                formInputType="text"
+              <base-select
                 labelName="DATA_TYPE"
-                :inputData="apiParamObj['DATA_TYPE']"
+                :select-list="dataTypeList"
+                :selected-key="apiParamObj['DATA_TYPE']"
+                placeholder-text="선택해주세요"
                 @changeData="changeDataParam"
               />
             </div>
@@ -129,7 +133,7 @@
               <basic-input
                 formInputType="text"
                 labelName="DEFLT_VAL"
-                :inputData="apiParamObj['DEVLT_VAL']"
+                :inputData="apiParamObj['DEFLT_VAL']"
                 @changeData="changeDataParam"
               />
             </div>
@@ -165,6 +169,7 @@ import BasicInput from "@/components/aiPlatform/basic/basic-input.vue";
 import BaseSelect from "@/components/aiPlatform/basic/base-select/base-select.vue";
 import RadioButton from "@/components/aiPlatform/basic/radio-button.vue";
 import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "apiRouter-form",
@@ -174,29 +179,14 @@ export default {
     return {
       apiName: null,
       openParam: false,
-      apiObj: {
-        // API_NM: null,
-        // CATGY: null,
-        // URL: null,
-        // METH: null,
-        // CMD: null,
-        // MODE: null
-      },
-      apiParamObj: {
-        // API_NM: null,
-        // NM: null,
-        // DATA_TYPE: null,
-        // DEFLT_VAL: null
-      },
+      apiObj: {},
+      apiParamObj: {},
       apiParams: {
         header: [],
         body: []
       },
       categoryList: [],
-      modeRadioOptions: [
-        { value: "MESSAGE PASSING", label: "MESSAGE PASSING" },
-        { value: "REMOTE CALL", label: "REMOTE CALL" }
-      ],
+      modeRadioOptions: [],
       methRadioOptions: [
         { value: "GET", label: "GET" },
         { value: "POST", label: "POST" }
@@ -209,10 +199,22 @@ export default {
           iconData: "ban"
         }
       },
-      showAddParam: false
+      showAddParam: false,
+      dataTypeList: [
+        {
+          key: "STRING",
+          text: "String"
+        },
+        {
+          key: "NUMBER",
+          text: "Number"
+        }
+      ]
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters("defaults/constants", ["CONSTANTS"])
+  },
   components: {
     BasicButton,
     BasicLabel,
@@ -232,7 +234,14 @@ export default {
           const _d = d.data;
 
           _d["api_info"]["header"].forEach((e) => {
-            me.apiObj[e.column_name] = null;
+            let defaultVal = null;
+            // default value setting
+            if (e.column_name === me.CONSTANTS.API_ROUTER.PARAM.MODE) {
+              defaultVal = me.CONSTANTS.API_ROUTER.MODE.MESSAGE_PASSING;
+            } else if (e.column_name === me.CONSTANTS.API_ROUTER.PARAM.METH) {
+              defaultVal = me.CONSTANTS.API_ROUTER.METH.GET;
+            }
+            me.apiObj[e.column_name] = defaultVal;
           });
 
           me.apiParams.header = _d["api_params"]["header"];
@@ -242,35 +251,82 @@ export default {
         });
     },
     async addObject() {
+      // 수정
       if (this.apiName) {
-        // 수정
-        alert("edit not available");
+        alert("not available");
+        console.log("not available");
+        return;
+      }
+      // 등록
+      let params = JSON.parse(JSON.stringify(this.apiObj));
+
+      if (this.apiObj.MODE === this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL) {
+        params[this.CONSTANTS.API_ROUTER.PARAM.PARAMS] = [];
+        params[this.CONSTANTS.API_ROUTER.PARAM.CMD] = "";
+      } else {
+        params[this.CONSTANTS.API_ROUTER.PARAM.URL] = "";
+        params[this.CONSTANTS.API_ROUTER.PARAM.METH] = "";
+
+        params[this.CONSTANTS.API_ROUTER.PARAM.PARAMS] = this.apiParams.body;
+      }
+
+      if (!this.checkValidation(params)) {
+        alert("not valid");
+        console.log("not valid");
         return;
       }
 
-      const params = JSON.parse(JSON.stringify(this.apiObj));
-      params.params.params = this.apiParams.body;
-
-      console.log(params);
-      // this.$axios
-      //   .post(this.$config.API_ROUTER_PREFIX + "/setApi", this.apiObj)
-      //   .then();
+      const me = this;
+      this.$axios
+        .post(this.$config.API_ROUTER_PREFIX + "/setApi", params)
+        .then((d) => {
+          if (d.status === 200) {
+            alert("add success");
+            console.log("add success");
+            // success
+            me.apiObj = JSON.parse(JSON.stringify({}));
+            me.apiParamObj = JSON.parse(JSON.stringify({}));
+          } else {
+            alert("add fail");
+            console.log("add fail");
+          }
+        });
+    },
+    checkValidation(params) {
+      // API_NM과 CTGRY는 null이 될수 없음.
+      return (
+        params[this.CONSTANTS.API_ROUTER.PARAM.API_NM] &&
+        params[this.CONSTANTS.API_ROUTER.PARAM.CTGRY]
+      );
     },
     changeData(label, input) {
-      if (label === "MODE") {
-        this.openParam = input === "REMOTE CALL";
+      if (label === this.CONSTANTS.API_ROUTER.PARAM.MODE) {
+        this.openParam = input === this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL;
       }
       this.apiObj[label] = input;
+
+      this.apiObj = JSON.parse(JSON.stringify(this.apiObj));
     },
     changeDataParam(label, input) {
       this.apiParamObj[label] = input;
+
+      this.apiParamObj = JSON.parse(JSON.stringify(this.apiParamObj));
     },
-    getCategoryList() {
+    async getCategoryObj() {
       const me = this;
-      this.$axios
+      await this.$axios
         .get(this.$config.API_ROUTER_PREFIX + "/getServerInfoList")
         .then((d) => {
-          me.categoryList = d.data["api_server_info"];
+          let arr = [];
+          d.data["api_server_info"].forEach((el) => {
+            arr.push({
+              key: el.NM,
+              text: el.NM
+            });
+          });
+          me.categoryList = arr;
+
+          me.apiObj.CTGRY = arr[0].key;
         });
     },
     getApi() {
@@ -294,26 +350,77 @@ export default {
         : this.methRadioOptions[0].value;
     },
     tableButtonClick(rowKey) {
-      // 삭제만 처리함.
-      // this.removeBizMeta(rowKey);
-      console.log(rowKey);
+      // param remove
+      const idx = this.apiParams.body.findIndex((el) => {
+        return el.API_NM === rowKey;
+      });
+
+      this.apiParams.body.splice(idx, 1);
     },
     addParam() {
       this.showAddParam = true;
     },
+    isDuplicated(obj, keyText, val) {
+      const idx = obj.body.findIndex((el) => {
+        return el[keyText] === val;
+      });
+      return idx > -1;
+    },
     addParamObj() {
+      if (!this.isParamValid()) {
+        alert("not valid");
+        console.log("not valid");
+        return;
+      }
+
+      const apiNm = this.apiParamObj[this.CONSTANTS.API_ROUTER.PARAM.API_NM];
+      if (
+        this.isDuplicated(
+          this.apiParams,
+          this.CONSTANTS.API_ROUTER.PARAM.API_NM,
+          apiNm
+        )
+      ) {
+        alert("is duplicated");
+        console.log("is duplicated");
+        return;
+      }
+
       this.apiParams.body.push(this.apiParamObj);
+
+      // clean filed.
+      this.apiParamObj = JSON.parse(JSON.stringify({}));
+    },
+    isParamValid() {
+      // API_NM, NM, DATA_TYPE은 null일수 없음.
+      return (
+        this.apiParamObj[this.CONSTANTS.API_ROUTER.PARAM.API_NM] &&
+        this.apiParamObj[this.CONSTANTS.API_ROUTER.PARAM.NM] &&
+        this.apiParamObj[this.CONSTANTS.API_ROUTER.PARAM.DATA_TYPE]
+      );
+    },
+    setModeRadioOption() {
+      this.modeRadioOptions.push({
+        value: this.CONSTANTS.API_ROUTER.MODE.MESSAGE_PASSING,
+        label: this.CONSTANTS.API_ROUTER.MODE.MESSAGE_PASSING
+      });
+      this.modeRadioOptions.push({
+        value: this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL,
+        label: this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL
+      });
     }
   },
   created() {
     this.setApiDefaultColumns();
+    this.setModeRadioOption();
 
     this.apiName = this.$route.query.apiName;
     if (this.apiName) {
       // 수정이면
       this.getApi();
     }
-    this.getCategoryList();
+
+    this.getCategoryObj();
   }
 };
 </script>

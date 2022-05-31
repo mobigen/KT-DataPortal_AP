@@ -5,6 +5,7 @@
     <div>
       <basic-viewTable :useTableHead="false" :viewDetail="apiInfoDetail" />
 
+      {{ apiParamsDetail }}
       <div>PARAMS</div>
       <basic-table
         componentId=""
@@ -66,7 +67,7 @@ export default {
     this.$axios
       .get(
         this.$config.API_ROUTER_PREFIX +
-          "/getApi?api_name=" +
+          "/getApi?API_NM=" +
           this.$route.query.apiName
       )
       .then((d) => {
