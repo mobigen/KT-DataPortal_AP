@@ -13,6 +13,8 @@
                 :labelName="row.ITEM_ID"
                 :inputData="rowValues[row[CONSTANTS.DEFAULT_NAME_COLUMN]]"
                 @input="changeData"
+                :disabled="false"
+                :readonly="false"
               ></text-input>
             </template>
             <template v-else-if="row.VAL_TYPE === 1">
@@ -21,6 +23,8 @@
                 :labelName="row.ITEM_ID"
                 :inputData="rowValues[row[CONSTANTS.DEFAULT_NAME_COLUMN]]"
                 @input="changeData"
+                :disabled="false"
+                :readonly="false"
               ></number-input>
             </template>
           </td>
@@ -71,7 +75,7 @@ export default {
   components: { TextInput, NumberInput },
   watch: {},
   methods: {
-    changeData(label, input) {
+    changeData({ label, input }) {
       this.$set(this.changeDataObject, label, input);
 
       this.$emit("changeData", this.changeDataObject);

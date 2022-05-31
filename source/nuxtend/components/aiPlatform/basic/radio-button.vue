@@ -48,7 +48,7 @@ export default {
         return this.defaultValue;
       },
       set(newValue) {
-        this.$emit("changeValue", this.labelName, newValue);
+        this.$emit("changeValue", { label: this.labelName, input: newValue });
       }
     }
   },

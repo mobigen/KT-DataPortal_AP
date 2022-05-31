@@ -1,8 +1,7 @@
 <template lang="html">
-  <div>
+  <div id="BasicTextarea">
     <textarea
-      @input="typing"
-      :value="input"
+      v-model="input"
       :placeholder="placeholder"
       :disabled="disabled"
       :readonly="readonly"
@@ -18,6 +17,10 @@ export default {
   extends: {},
   props: {
     inputData: {
+      type: String,
+      require: false
+    },
+    labelName: {
       type: String,
       require: false
     },
@@ -50,17 +53,13 @@ export default {
         return this.inputData;
       },
       set(newValue) {
-        this.$emit("input", newValue);
+        this.$emit("input", { label: this.labelName, input: newValue });
       }
     }
   },
   components: {},
   watch: {},
-  methods: {
-    typing(e) {
-      this.input = e.target.value;
-    }
-  },
+  methods: {},
   created() {}
 };
 </script>

@@ -6,6 +6,8 @@
       :labelName="labelName"
       :inputData="inputData"
       @input="changeData"
+      :disabled="false"
+      :readonly="false"
     ></text-input>
 
     <number-input
@@ -14,6 +16,8 @@
       :labelName="labelName"
       :inputData="inputData"
       @input="changeData"
+      :disabled="false"
+      :readonly="false"
     ></number-input>
 
     <radio-button
@@ -61,7 +65,7 @@ export default {
   components: { TextInput, NumberInput, RadioButton },
   watch: {},
   methods: {
-    changeData(label, input) {
+    changeData({ label, input }) {
       this.$emit("changeData", label, input);
     }
   },

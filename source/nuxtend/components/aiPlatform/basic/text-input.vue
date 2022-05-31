@@ -3,10 +3,12 @@
     <input
       type="text"
       class="text-input text-input--sm"
-      :placeholder="placeholder"
       @input="typing"
       :value="input"
       @keyup.enter="enterEvent"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :readonly="readonly"
     />
   </div>
 </template>
@@ -30,6 +32,14 @@ export default {
     placeholder: {
       type: String,
       require: false
+    },
+    disabled: {
+      type: Boolean,
+      require: false
+    },
+    readonly: {
+      type: Boolean,
+      require: false
     }
   },
   computed: {
@@ -38,7 +48,7 @@ export default {
         return this.inputData;
       },
       set(newValue) {
-        this.$emit("input", this.labelName, newValue);
+        this.$emit("input", { label: this.labelName, input: newValue });
       }
     }
   },

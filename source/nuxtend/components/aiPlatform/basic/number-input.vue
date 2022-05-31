@@ -3,8 +3,10 @@
     <input
       type="number"
       class="text-input text-input--sm"
-      :placeholder="placeholder"
       v-model="input"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :readonly="readonly"
     />
   </div>
 </template>
@@ -28,6 +30,14 @@ export default {
     placeholder: {
       type: String,
       require: false
+    },
+    disabled: {
+      type: Boolean,
+      require: false
+    },
+    readonly: {
+      type: Boolean,
+      require: false
     }
   },
   computed: {
@@ -40,7 +50,7 @@ export default {
           newValue = null;
         }
 
-        this.$emit("input", this.labelName, Number(newValue));
+        this.$emit("input", { label: this.labelName, input: Number(newValue) });
       }
     }
   },
