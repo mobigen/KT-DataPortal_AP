@@ -2,9 +2,7 @@
   <div>
     <json-viwer />
     <header>
-      <h1>Header</h1>
-
-      <router-link :to="{ path: '/superAdmin/apiRouter/list' }"> API ROUTER </router-link>
+      <h1>Header(관리자)</h1>
       <basic-nav :menuList="menuList" />
       <ul>
         <li>
@@ -22,9 +20,6 @@
             :to="{ path: '/portal/ui/users/member?id=test&id2=test2' }"
             >회원정보2</router-link
           >
-          <router-link
-            :to="{ path: '/portal/ui/board/community' }"
-          >커뮤니티</router-link>
         </li>
       </ul>
     </header>

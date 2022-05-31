@@ -2,47 +2,57 @@
 <template>
   <div>
     <h1>경진대회</h1>
+    <hr />
+    <p>목록</p>
+    <basic-table
+      :headerList="tableHeaderList"
+      :dataList="tableDataList"
+      rowKey="list_key"
+      :serialNumUse="false"
+      :tableButtonUse="false"
+    >
 
-    <div style="display: flex;">
-      <basic-tab-menu
-        @currentTabData="currentTabData"
-        :menuList="menuList">
-      </basic-tab-menu>
-      <basic-search-bar
-        @search="search"
-      ></basic-search-bar>
-
-
-    </div>
-
+    </basic-table>
   </div>
 </template>
 
 <script>
-import BasicTabMenu from "@component/aiPlatform/basic/basic-tab-menu";
-import BasicSearchBar from "@component/aiPlatform/basic/basic-search-bar";
-import BasicViewTable from "@component/aiPlatform/basic/basic-viewTable";
-import NameTagList from "@component/aiPlatform/basic/name-tag-list";
+import BasicTable from "@component/aiPlatform/basic/basic-table";
 export default {
   name: "contest",
-  components: {NameTagList, BasicViewTable, BasicSearchBar, BasicTabMenu},
+  components: {BasicTable},
   data() {
     return {
-      tabDataIndex:"제목+내용",
-      menuList: [
-        { menuName: "제목+내용",data:"제목+내용" },
-        { menuName: "제목",data:"제목" },
-        { menuName: "내용",data:"내용"},
+      list: [],
+      tableHeaderList: [
+        {column_name : 'conteId'},
+        {column_name : 'conteTitle'},
+        {column_name : 'host'},
+        {column_name : 'apyStDate'},
+        {column_name : 'apyFnsDate'}
       ],
+      tableDataList: []
     }
   },
+  mounted() {
+    this.getList()
+  },
   methods: {
-    currentTabData(data){
-      this.tabDataIndex = data
-    },
-    search(data) {
-      alert(`탭 옵션 =${this.tabDataIndex}
-      검색어 = ${data}`);
+    getList() {
+      this.$axios.get(`${this.$config.API_BOARD_PREFIX}/contest/list`)
+        .then((res) => {
+          // console.log('return log')
+          // console.log(res)
+          this.tableDataList = res
+          console.log('===========API 데이터==========')
+          console.log('===테이블 헤더 목록======')
+          console.log(this.tableHeaderList)
+          console.log('==== 데이터 ====')
+          console.log(this.tableDataList)
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
     }
   },
 }

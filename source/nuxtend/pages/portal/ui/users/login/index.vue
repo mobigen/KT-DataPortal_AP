@@ -1,7 +1,13 @@
 <template lang="html">
   <div>
     <h1>{{ $t("index.title") }}</h1>
-    <Login @login="onLogin" @socialLogin="onSocialLogin" />
+    <Login
+      @login="onLogin"
+      @idSearch="onIdSearch"
+      @pwdSearch="onPwdSearch"
+      @join="onJoin"
+      @socialLogin="onSocialLogin"
+    />
     <p><button @click="userInfo()">사용자정보</button></p>
     <p>store 사용자 정보 : {{ getUserInfo }}</p>
   </div>
@@ -41,7 +47,6 @@ export default {
       if (publicKey && publicKey !== "") {
         password = this.encrypt(publicKey, param.password);
       }
-
       let userAccessToken = await this.auth(param.username, password);
 
       if (userAccessToken && userAccessToken !== "") {
@@ -50,12 +55,38 @@ export default {
           this.$config.USER_ACCESS_TOKEN_NAME,
           userAccessToken
         );
+
+        // 아이디 저장
+        const idSaveChk = param.idSaveChk;
+        if (idSaveChk) {
+          const expireTime = 60 * 1; // 60초
+          await this.$cookies.set("userSaveId", param.username, expireTime);
+        } else {
+          await this.$cookies.set("userSaveId", "", -1);
+          await this.$cookies.remove("userSaveId");
+        }
+
         // 사용자 정보 store 저장
         await this.getAuthenticatedUser();
         // 로그인 성공 후 페이지 이동
         const prevFullUrl = this.getPrevFullUrl();
         await this.$router.push({ path: `${prevFullUrl}` });
       }
+    },
+    onIdSearch() {
+      this.$router.push({
+        path: `${this.$config.ROUTE_USERS_PREFIX}/member/search/id`
+      });
+    },
+    onPwdSearch() {
+      this.$router.push({
+        path: `${this.$config.ROUTE_USERS_PREFIX}/member/search/pwd`
+      });
+    },
+    onJoin() {
+      this.$router.push({
+        path: `${this.$config.ROUTE_USERS_PREFIX}/member/register`
+      });
     },
     async onSocialLogin(param) {
       const socialType = param.socialType;

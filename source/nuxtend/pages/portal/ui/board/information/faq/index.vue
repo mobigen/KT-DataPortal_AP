@@ -1,12 +1,13 @@
+
 <template>
   <div>
-    <h1>이용안내</h1>
+    <h1>FAQ</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: "information"
+  name: "faq"
 }
 </script>
 

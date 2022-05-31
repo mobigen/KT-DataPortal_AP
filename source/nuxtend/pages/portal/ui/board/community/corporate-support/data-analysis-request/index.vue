@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h1>이용안내</h1>
+    <h1>데이터 분석 요청</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: "information"
+  name: "dataAnalysisRequest"
 }
 </script>
 

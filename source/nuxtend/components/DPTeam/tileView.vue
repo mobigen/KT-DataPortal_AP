@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import data from '~/pages/portal/ui/board/information/data.json'
+import data from '@/pages/portal/ui/board/information/data.json'
 const d3 = require('d3')
 export default {
   name: "tileView",
