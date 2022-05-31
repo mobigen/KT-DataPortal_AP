@@ -84,10 +84,6 @@ export const actions = {
       });
   },
   async addMetaName({}, obj) {
-    if (Object.keys(obj).length === 0) {
-      console.log("저장할 Data 없음");
-      return;
-    }
     await this.$axios.post(
       this.$config.API_META_PREFIX + "/insertMetaName",
       obj
@@ -104,7 +100,7 @@ export const actions = {
   },
   async editMetaName({}, obj) {
     if (Object.keys(obj).length === 0) {
-      console.log("변경된 Data 없음");
+      alert("변경된 Data 없음");
       return;
     }
 
@@ -136,6 +132,13 @@ export const actions = {
       this.$axios
         .get(this.$config.API_META_PREFIX + "/getMetaNameDetail")
         .then((d) => {
+          d.body = {
+            KOR_NM: "",
+            ENG_NM: "",
+            SHOW_ODRG: 0,
+            NM_ID: "",
+            TYPE: 0
+          };
           commit("setMetaNameDetail", d);
         });
     } else {
@@ -153,7 +156,7 @@ export const actions = {
       await this.$axios
         .get(this.$config.API_META_PREFIX + "/getBizMetaDetail")
         .then((d) => {
-          d.useRebuildBody = true;
+          // d.useRebuildBody = true;
           commit("setBizMetaDetail", d);
         });
     } else {
@@ -162,7 +165,7 @@ export const actions = {
           this.$config.API_META_PREFIX + "/getBizMetaDetail?datasetId=" + rowId
         )
         .then((d) => {
-          d.useRebuildBody = true;
+          // d.useRebuildBody = true;
           commit("setBizMetaDetail", d);
         });
     }
@@ -215,8 +218,8 @@ export const actions = {
     list.sort();
     list.forEach((data, i) => {
       let obj = {};
-      obj.itemId = i + 1;
-      obj.nameId = data;
+      obj.ITEM_ID = String(i + 1);
+      obj.NM_ID = data;
       dataList.push(obj);
     });
 

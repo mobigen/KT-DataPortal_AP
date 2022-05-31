@@ -2,12 +2,14 @@
   <div>
     <div>meta-form</div>
     <div>
+      <!--
       <basic-table-form
-        :viewDetail="bizMetaForm"
+        :viewDetail="bizMetaDetail"
         :rowValues="bizMetaDetail"
         placeholder="내용을 입력해주세요"
         @changeData="setChangeData"
       ></basic-table-form>
+        -->
 
       <basic-button
         componentId=""
@@ -69,7 +71,7 @@ export default {
       "editBizMeta"
     ]),
     cancel() {
-      this.$router.push({ path: "/admin/meta/metaList" });
+      this.$router.push({ path: "/mgnt/ui/meta/list" });
     },
     async addObject() {
       const dataList = this.setDataList();
@@ -80,7 +82,7 @@ export default {
         await this.addBizMeta(dataList);
       }
 
-      this.$router.push({ path: "/admin/meta/metaList" });
+      this.$router.push({ path: "/mgnt/ui/meta/list" });
     },
     setDataList() {
       let dataList = [];
@@ -101,7 +103,7 @@ export default {
     }
   },
   created() {
-    this.rowKey = this.$route.query.metaNameId;
+    this.rowKey = this.$route.query.datasetId;
 
     this.getBizMetaForm();
 
