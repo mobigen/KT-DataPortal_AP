@@ -257,6 +257,7 @@
         <h3>textarea component</h3>
         <basic-textarea
           :inputData="searchDetailObject.mainTextInfo"
+          labelName="mainTextInfo"
           placeholder="내용을 입력해주세요"
           :disabled="true"
           :readonly="false"
@@ -271,7 +272,7 @@
         <name-tag-list
           :nameTagList="recommendData"
           width="narrow"
-          nameTagColumnCount="5"
+          :nameTagColumnCount="5"
         >
           <template v-slot:header><div></div></template>
           <template v-slot:body-top><div></div></template>
@@ -385,7 +386,7 @@ export default {
       "getRecommendData",
       "getDataUseCases"
     ]),
-    changeData(input) {
+    changeData({ input }) {
       console.log(input);
     },
     getDataInfoHeader() {
@@ -443,7 +444,10 @@ export default {
       alert("id : " + id);
     },
     request() {
-      alert("요청하기/ 게시물ID: " + this.$route.query.postId);
+      this.$router.push({
+        path: "/portal/ui/meta/search/fullSearch/requestForm",
+        query: { postId: this.$route.query.postId }
+      });
     }
   },
   created() {

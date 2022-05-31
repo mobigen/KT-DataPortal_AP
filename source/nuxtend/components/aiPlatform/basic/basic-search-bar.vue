@@ -6,6 +6,8 @@
       placeholder="검색어를 입력해주세요"
       @input="setInputData"
       @enterEvent="search"
+      :disabled="false"
+      :readonly="false"
     />
 
     <basic-button
@@ -50,7 +52,7 @@ export default {
     search() {
       this.$emit("search", this.inputData);
     },
-    setInputData(labelName, input) {
+    setInputData({ input }) {
       this.inputData = input;
     }
   },

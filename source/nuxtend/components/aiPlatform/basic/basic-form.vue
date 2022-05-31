@@ -11,6 +11,8 @@
         :labelName="data['column_name']"
         :inputData="changeDataObject[data['column_name']]"
         @input="changeData"
+        :disabled="false"
+        :readonly="false"
       ></text-input>
     </div>
   </div>
@@ -51,7 +53,7 @@ export default {
     }
   },
   methods: {
-    changeData(label, input) {
+    changeData({ label, input }) {
       this.$set(this.changeDataObject, label, input);
       this.$emit("changeData", this.changeDataObject);
     }
