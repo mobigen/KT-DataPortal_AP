@@ -3,23 +3,13 @@
     <json-viwer />
     <header>
       <div>
-        <h1>Header - 모든 페이지의 제목은 구현 완료시 삭제.</h1>
-        <span
-          >** 위치잡는 css 구현할 필요 없음. 각각의 component별로 구현되면 되고,
-          기능우선.</span
-        >
+        <h1>Header</h1>
+        <router-link :to="{ path: '/superAdmin/apiRouter/list' }"> API ROUTER </router-link>
       </div>
 
       <div>LOGO, title Component</div>
 
       <div>
-        <span
-          >로그인,회원가입, 마이디스크 Component (화면설계기준 좌측 상단)</span
-        >
-        <span
-          >버튼 클릭시, alert 형태로 event 처리까지만 구현 (detail한 동작구현
-          x)</span
-        >
         <basic-menu
           :menuList="userMenuList"
           :useSeparator="false"
