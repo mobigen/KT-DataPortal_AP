@@ -301,10 +301,7 @@ export default {
       );
     },
     changeData({ label, input }) {
-      console.log(label)
       if (label === this.CONSTANTS.API_ROUTER.PARAM.MODE) {
-
-      console.log(input)
         this.openParam = input === this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL;
       }
       this.apiObj[label] = input;
