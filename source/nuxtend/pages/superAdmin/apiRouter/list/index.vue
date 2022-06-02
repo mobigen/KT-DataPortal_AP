@@ -113,6 +113,7 @@ export default {
       });
     },
     getApiList() {
+      // select box 값에 따라서 호출되는 API가 다르기 때문에 여기서 분리한다.
       let url = "/getApiList";
       if (this.selectKey && this.selectKey !== "all") {
         url = "/getCategoryApiList?CTGRY=" + this.selectKey;

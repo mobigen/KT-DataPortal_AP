@@ -116,13 +116,8 @@ export default {
   methods: {
     changeData(input) {
       // select text에 셋팅하준다.
-      // this.selectedVal = input;
-
-      this.$emit("changeData", this.labelName, input);
+      this.$emit("changeData", { label: this.labelName, input: input });
     }
-  },
-  beforeCreate() {
-    console.log(this);
   },
   created() {}
 };
