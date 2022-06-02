@@ -9,7 +9,7 @@
         :select-list="selectList"
         :selected-key="selectKey"
         :use-all-option="true"
-        placeholder-text="선택해주세요."
+        placeholder-text="전체"
         @changeData="changeData"
       />
     </div>
@@ -50,6 +50,8 @@ import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 import BaseSelect from "@/components/aiPlatform/basic/base-select/base-select.vue";
 import { mapGetters } from "vuex";
+
+import { confirmAlert } from "@/components/aiPlatform/basic/alert/alert-default";
 
 export default {
   name: "apiRouter-list",
@@ -99,11 +101,15 @@ export default {
     },
     removeBizMeta(rowKey) {
       const me = this;
-      this.$axios
-        .post(this.$config.API_ROUTER_PREFIX + "/delApi?API_NM=" + rowKey)
-        .then((d) => {
-          me.getApiList();
-        });
+      confirmAlert("삭제하시겠습니까?", {
+        confirm: () => {
+          me.$axios
+            .post(me.$config.API_ROUTER_PREFIX + "/delApi?API_NM=" + rowKey)
+            .then(() => {
+              me.getApiList();
+            });
+        }
+      });
     },
     viewRouterInfo(rowKey) {
       // 설정한 key action이 한개 이므로, 분기처리 하지 않는다.
