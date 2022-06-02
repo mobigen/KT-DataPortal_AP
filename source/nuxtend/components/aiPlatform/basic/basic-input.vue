@@ -66,7 +66,7 @@ export default {
   watch: {},
   methods: {
     changeData({ label, input }) {
-      this.$emit("changeData", label, input);
+      this.$emit("changeData", { label: label, input: input });
     }
   },
   created() {}
