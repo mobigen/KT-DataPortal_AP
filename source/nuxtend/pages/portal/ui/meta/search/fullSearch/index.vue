@@ -5,12 +5,15 @@
       <group-breadcrumb></group-breadcrumb>
       <div class="subject">
         <h3 class="subject__title">데이터 통합검색</h3>
-        <p class="subject__desc">데이터를 트리구조로 검색할 수 있는 트리뷰를 제공합니다.</p>
+        <p class="subject__desc">
+          데이터를 트리구조로 검색할 수 있는 트리뷰를 제공합니다.
+        </p>
       </div>
     </div>
     <div class="content-top">
       <div class="contents-top__search">
         <search-input-field></search-input-field>
+
         <div class="contents-top__recommend">
           <h4>추천검색어</h4>
           <div class="tags">
@@ -23,10 +26,24 @@
         </div>
       </div>
       <div class="contents-search-result">
-        <strong>'결빙사고'</strong>에 대한 검색결과 총 <strong>150</strong> 건이 검색되었습니다.
+        <strong>'결빙사고'</strong>에 대한 검색결과 총 <strong>150</strong> 건이
+        검색되었습니다.
       </div>
       <div class="contents-top__detail">
-        <base-button class="detail-button-default" :class="isDetailOpen ? 'detail-button-open' : ''" @click="toggleDetail" title="상세검색">상세검색</base-button>
+        <base-button
+          class="detail-button-default"
+          :class="isDetailOpen ? 'detail-button-open' : ''"
+          @click="toggleDetail"
+          title="상세검색"
+          >상세검색</base-button
+        >
+
+        <!-- TODO : 태그 선택 창 하다가 멈춤 - 유경책임이 진행하고 있는 basic-tag-list랑 겹침 -->
+        <!--        <organisms-filter-result-->
+        <!--          :filter-obj="filterObj"-->
+        <!--          :tree-obj="treeObj"-->
+        <!--          :is-detail-open="isDetailOpen"-->
+        <!--        />-->
         <ul :class="isDetailOpen ? 'detail_open' : ''">
           <li>
             <h4>카테고리</h4>
@@ -34,25 +51,41 @@
               <a href="#none">
                 미래자동차 핵심기술
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
               <a href="#none">
                 자동차제조
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
               <a href="#none">
                 화물운송
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
               <a href="#none">
                 자율주행자동차
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
             </div>
@@ -63,19 +96,31 @@
               <a href="#none">
                 국토교통부
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
               <a href="#none">
                 도로교통공단
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
               <a href="#none">
                 행정안전부
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
             </div>
@@ -86,13 +131,21 @@
               <a href="#none">
                 데이터셋(파일)
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
               <a href="#none">
                 링크
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
             </div>
@@ -103,37 +156,59 @@
               <a href="#none">
                 EV
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
               <a href="#none">
                 견적
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
               <a href="#none">
                 부품
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
               <a href="#none">
                 정비
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
               <a href="#none">
                 데이터
                 <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
+                  <svg-icon
+                    class="svg-icon"
+                    name="close"
+                    aria-hidden="true"
+                  ></svg-icon>
                 </base-button>
               </a>
             </div>
           </li>
           <li>
-            <base-button class="detail__reset-button">검색조건 초기화</base-button>
+            <base-button class="detail__reset-button"
+              >검색조건 초기화</base-button
+            >
           </li>
         </ul>
       </div>
@@ -142,65 +217,122 @@
       <!--사이드메뉴-->
       <aside>
         <h3 class="hidden">검색필터 상세선택</h3>
-<!--        높이 임시로 넣었습니다.-->
+        <!--        높이 임시로 넣었습니다.-->
         <div class="aside__category" style="height: 1160px">
-          <div class="aside__category-default" :class="isCategoryExpand ? 'aside__category-expand' : ''">
+          <div
+            class="aside__category-default"
+            :class="isCategoryExpand ? 'aside__category-expand' : ''"
+          >
             <h4 class="aside__title">카테고리</h4>
-            <base-button class="aside__button-expand" :class="isCategoryExpand ? 'aside__button-default' : ''" @click="toggleCategoryExpand"></base-button>
+            <base-button
+              class="aside__button-expand"
+              :class="isCategoryExpand ? 'aside__button-default' : ''"
+              @click="toggleCategoryExpand"
+            ></base-button>
+
+            <!-- 카테고리 트리 component -->
             <group-search-filter></group-search-filter>
+
           </div>
         </div>
-        <div class="aside__provider" :class="isProviderExpand ? 'aside__provider-expand' : ''">
+        <div
+          class="aside__provider"
+          :class="isProviderExpand ? 'aside__provider-expand' : ''"
+        >
           <h4 class="aside__title">제공기관</h4>
-          <base-button class="aside__button-down" :class="isProviderExpand ? 'aside__button-up' : ''" @click="toggleProviderExpand"></base-button>
+          <base-button
+            class="aside__button-down"
+            :class="isProviderExpand ? 'aside__button-up' : ''"
+            @click="toggleProviderExpand"
+          ></base-button>
           <ul>
             <li>
-              <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category01">
+              <base-checkbox
+                class="checkbox--aside"
+                name="searchFilter"
+                checkbox-id="check-category01"
+              >
                 <template v-slot:label>국토교통부</template>
               </base-checkbox>
             </li>
             <li>
-              <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category02">
+              <base-checkbox
+                class="checkbox--aside"
+                name="searchFilter"
+                checkbox-id="check-category02"
+              >
                 <template v-slot:label>도로교통공단</template>
               </base-checkbox>
             </li>
             <li>
-              <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category03">
+              <base-checkbox
+                class="checkbox--aside"
+                name="searchFilter"
+                checkbox-id="check-category03"
+              >
                 <template v-slot:label>행정안전부</template>
               </base-checkbox>
             </li>
             <li>
-              <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category04">
+              <base-checkbox
+                class="checkbox--aside"
+                name="searchFilter"
+                checkbox-id="check-category04"
+              >
                 <template v-slot:label>농림축산부</template>
               </base-checkbox>
             </li>
             <li>
-              <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category05">
+              <base-checkbox
+                class="checkbox--aside"
+                name="searchFilter"
+                checkbox-id="check-category05"
+              >
                 <template v-slot:label>보건복지부</template>
               </base-checkbox>
             </li>
             <li>
-              <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category01">
+              <base-checkbox
+                class="checkbox--aside"
+                name="searchFilter"
+                checkbox-id="check-category01"
+              >
                 <template v-slot:label>법무부</template>
               </base-checkbox>
             </li>
             <li>
-              <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category01">
+              <base-checkbox
+                class="checkbox--aside"
+                name="searchFilter"
+                checkbox-id="check-category01"
+              >
                 <template v-slot:label>지방자치센터</template>
               </base-checkbox>
             </li>
             <li>
-              <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category01">
+              <base-checkbox
+                class="checkbox--aside"
+                name="searchFilter"
+                checkbox-id="check-category01"
+              >
                 <template v-slot:label>전국화물협동조합</template>
               </base-checkbox>
             </li>
             <li>
-              <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category01">
+              <base-checkbox
+                class="checkbox--aside"
+                name="searchFilter"
+                checkbox-id="check-category01"
+              >
                 <template v-slot:label>국토교통부</template>
               </base-checkbox>
             </li>
             <li>
-              <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category01">
+              <base-checkbox
+                class="checkbox--aside"
+                name="searchFilter"
+                checkbox-id="check-category01"
+              >
                 <template v-slot:label>도로교통공단</template>
               </base-checkbox>
             </li>
@@ -211,12 +343,20 @@
           <div class="aside__type-default">
             <ul>
               <li>
-                <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category01">
+                <base-checkbox
+                  class="checkbox--aside"
+                  name="searchFilter"
+                  checkbox-id="check-category01"
+                >
                   <template v-slot:label>데이터셋(파일)</template>
                 </base-checkbox>
               </li>
               <li>
-                <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category01">
+                <base-checkbox
+                  class="checkbox--aside"
+                  name="searchFilter"
+                  checkbox-id="check-category01"
+                >
                   <template v-slot:label>링크</template>
                 </base-checkbox>
               </li>
@@ -228,27 +368,47 @@
           <div class="aside__keyword-default">
             <ul>
               <li>
-                <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category01">
+                <base-checkbox
+                  class="checkbox--aside"
+                  name="searchFilter"
+                  checkbox-id="check-category01"
+                >
                   <template v-slot:label>EV</template>
                 </base-checkbox>
               </li>
               <li>
-                <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category01">
+                <base-checkbox
+                  class="checkbox--aside"
+                  name="searchFilter"
+                  checkbox-id="check-category01"
+                >
                   <template v-slot:label>견적</template>
                 </base-checkbox>
               </li>
               <li>
-                <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category01">
+                <base-checkbox
+                  class="checkbox--aside"
+                  name="searchFilter"
+                  checkbox-id="check-category01"
+                >
                   <template v-slot:label>부품</template>
                 </base-checkbox>
               </li>
               <li>
-                <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category01">
+                <base-checkbox
+                  class="checkbox--aside"
+                  name="searchFilter"
+                  checkbox-id="check-category01"
+                >
                   <template v-slot:label>정비</template>
                 </base-checkbox>
               </li>
               <li>
-                <base-checkbox class="checkbox--aside" name="searchFilter" checkbox-id="check-category01">
+                <base-checkbox
+                  class="checkbox--aside"
+                  name="searchFilter"
+                  checkbox-id="check-category01"
+                >
                   <template v-slot:label>데이터</template>
                 </base-checkbox>
               </li>
@@ -267,26 +427,51 @@
             <div class="list-head__options">
               <div class="list-head__options-sort">
                 <div class="radios">
-                  <base-radio name="radio-check" radioId="radio-sort1" class="radio--check" checked>
-                    <template v-slot:label><span class="radio-check-first">정확도순</span></template>
+                  <base-radio
+                    name="radio-check"
+                    radioId="radio-sort1"
+                    class="radio--check"
+                    checked
+                  >
+                    <template v-slot:label
+                      ><span class="radio-check-first">정확도순</span></template
+                    >
                   </base-radio>
-                  <base-radio name="radio-check" radioId="radio-sort2" class="radio--check">
+                  <base-radio
+                    name="radio-check"
+                    radioId="radio-sort2"
+                    class="radio--check"
+                  >
                     <template v-slot:label><span>수정일순</span></template>
                   </base-radio>
-                  <base-radio name="radio-check" radioId="radio-sort3" class="radio--check">
+                  <base-radio
+                    name="radio-check"
+                    radioId="radio-sort3"
+                    class="radio--check"
+                  >
                     <template v-slot:label><span>조회순</span></template>
                   </base-radio>
                 </div>
               </div>
               <div class="list-head__options-view">
                 <div class="radios radios--toggle">
-                  <base-radio name="radio-test-icon" radioId="radio1" class="radio--icon" checked>
+                  <base-radio
+                    name="radio-test-icon"
+                    radioId="radio1"
+                    class="radio--icon"
+                    checked
+                  >
                     <template v-slot:label>
                       <svg-icon name="list_katech" class="svg-icon" />
                       <span class="hidden">목록형</span>
                     </template>
                   </base-radio>
-                  <base-radio name="radio-test-icon" radioId="radio2" class="radio--icon" @change="toggleListCard">
+                  <base-radio
+                    name="radio-test-icon"
+                    radioId="radio2"
+                    class="radio--icon"
+                    @change="toggleListCard"
+                  >
                     <template v-slot:label>
                       <svg-icon name="list_card_katech" class="svg-icon" />
                       <span class="hidden">카드형</span>
@@ -320,6 +505,7 @@ import GroupBreadcrumb from "@component/project/katech/molecules/group-breadcrum
 import GroupSearchFilter from "@component/project/katech/molecules/group-search-filter/group-search-filter";
 import SearchList from "@component/project/katech/organisms/search-list/search-list.vue";
 import SearchInputField from "@component/project/katech/organisms/search-input-field/search-input-field.vue";
+import OrganismsFilterResult from "@component/aiPlatform/organisms/organisms-filter-result";
 import { mapGetters } from "vuex";
 
 export default {
@@ -342,27 +528,56 @@ export default {
     GroupSearchFilter,
     GroupTab,
     SearchList,
-    SearchInputField
+    SearchInputField,
+    OrganismsFilterResult
   },
   data() {
     return {
-      isDetailOpen: false,
+      isDetailOpen: true,
       isCategoryExpand: false,
       isProviderExpand: false,
-      isListCard: false
-    }
+      isListCard: false,
+      filterObj: {
+        category: {
+          label: "카테고리",
+          componentType: "checkbox"
+        },
+        provider: {
+          label: "제공기관",
+          componentType: "checkbox"
+        },
+        dataType: {
+          label: "데이터 타입",
+          componentType: "checkbox"
+        },
+        treeView: {
+          label: "트리뷰",
+          componentType: "tree"
+        }
+      },
+      treeObj: {
+        componentKey: "metaTreeKey",
+        treeRestApi: "/getCategoryList",
+        checkboxLabel: "상위자동선택",
+        treeKey: {
+          NODE_NM: "NODE_NM", // node title
+          NODE_ID: "NODE_ID", // node key
+          PRNTS_ID: "PRNTS_ID" // parent key
+        }
+      }
+    };
   },
   methods: {
-    toggleDetail: function() {
+    toggleDetail: function () {
       this.isDetailOpen = !this.isDetailOpen;
     },
-    toggleCategoryExpand: function() {
+    toggleCategoryExpand: function () {
       this.isCategoryExpand = !this.isCategoryExpand;
     },
-    toggleProviderExpand: function() {
+    toggleProviderExpand: function () {
       this.isProviderExpand = !this.isProviderExpand;
     },
-    toggleListCard: function() {
+    toggleListCard: function () {
       this.isListCard = !this.isListCard;
     }
   }
