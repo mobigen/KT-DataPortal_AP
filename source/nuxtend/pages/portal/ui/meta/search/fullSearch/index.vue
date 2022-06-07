@@ -324,7 +324,6 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "Index",
-  layout: "katech/katech",
   async asyncData({ store }) {
     await store.dispatch("meta/keyword-search/getContents");
   },
