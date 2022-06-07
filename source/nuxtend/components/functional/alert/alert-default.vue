@@ -1,18 +1,23 @@
 <template lang="html">
-  <div class="alert" :class="alertIconTheme" :style="{ width: width + 'px', height }">
+  <div class="alert alert--default" :class="alertIconTheme" :style="{ width: width + 'px', height }">
     <div class="alert__body">
       <svg-icon name="info-fill" class="alert__icon svg-icon" />
       <div class="alert__contents">
-        <p lass="alert__title">{{ title }}</p>
+        <p class="alert__title">{{ title }}</p>
         <p class="alert__text" v-html="content" />
       </div>
     </div>
     <div class="alert__foot">
       <div class="alert__foot-main-buttons">
-        <button class="button button--sm" :class="alertCancelButtonTheme" v-if="type === 'confirm'" @click.stop="onCancel">
+        <button
+          class="button button--link button--lg"
+          :class="alertCancelButtonTheme"
+          v-if="type === 'confirm'"
+          @click.stop="onCancel"
+        >
           {{ cancelButtonText }}
         </button>
-        <button class="button button--sm" :class="alertConfirmButtonTheme" @click.stop="onClose">
+        <button class="button button--primary button--lg" :class="alertConfirmButtonTheme" @click.stop="onClose">
           {{ confirmButtonText }}
         </button>
       </div>
@@ -28,7 +33,7 @@ export default {
   props: {
     width: {
       type: String,
-      default: "450"
+      default: "100%"
     },
     height: {
       type: String,

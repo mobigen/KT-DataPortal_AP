@@ -1,0 +1,65 @@
+/* breadcrumb */
+.breadcrumbs__wrap {
+  display: flex;
+  width: 100%;
+}
+
+.breadcrumbs__list {
+  flex-grow: 1;
+  display: flex;
+  width: 100%;
+}
+
+.breadcrumbs__item {
+  position: relative;
+  height: rem(60px);
+  line-height: rem(60px); 
+  @include font-size("14");
+  color: $text-03; 
+  padding:0 0 0 rem(20px); 
+}
+
+.breadcrumbs__item:hover {
+  color: $secondary
+}
+
+.breadcrumbs__item:before {
+  content: "";
+  width: rem(4px);
+  height: rem(4px);
+  border-top: 1px solid $ui-04;
+  border-right: 1px solid $ui-04;
+  display: inline-block;
+  -webkit-transform: rotate(45deg) translateY(-50%);
+  transform: rotate(45deg) translateY(-50%);
+  position: absolute;
+  top: 50%;
+  left: rem(5px);
+  border-radius: 2px;
+}
+
+.breadcrumbs__item--home {
+  padding-left: $spacing-lg;
+}
+
+.breadcrumbs__item--home:before {
+  //background: url("../../../../assets/style-core/images/icon/home.svg") no-repeat center center;
+  position: absolute;
+  left: 0;
+  transform: rotate(0deg) translateY(-50%);
+  background: url(#{$img-path}/common/icon.png) no-repeat -10px -78px;
+  border: none;
+  width: rem(16px);
+  height: rem(16px);
+}
+
+ @include template-respond-to('breakpoint-lg') {
+   .breadcrumbs {
+     display: none;
+   }
+ }
+
+ .breadcrumb__link {
+  flex-shrink: 0;
+  display: none;
+}

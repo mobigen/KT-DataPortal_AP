@@ -2,8 +2,14 @@ import Alert from "./alert-default.vue";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  title: "Functional/Alert-Default",
+  title: 'Functional/[PCFI] 얼럿 모달',
   component: Alert,
+  decorators: [
+    () => ({
+      template:
+        '<div style="margin: 1em;"><h2 style="margin-bottom: 20px; font-size: 20px; color: #212121;">(예시) 얼럿 모달 </h2><div style="display: flex; flex-direction: row; "><story /></div></div>',
+    }),
+  ],
   args: {
     title: "제목 입니다",
     content: "<b>강조표시</b>원투쓰리포파이브씩수",
@@ -69,7 +75,7 @@ export default {
   }
 };
 
-export const Normal = (args, { argTypes }) => {
+export const Default = (args, { argTypes }) => {
   return {
     components: { Alert },
     template: `
