@@ -1,0 +1,58 @@
+.badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+
+  .badge, .badge__label {
+    @include text-overflow();
+  }
+
+  .badge + .badge {
+    margin-left: $spacing-2xs;
+  }
+}
+
+.badge--icon{
+  width: rem(24px);
+}
+
+.badge--red {
+  @include fontawesome-icon-color(#da1e28);
+}
+
+.badge--red-deep {
+  @include fontawesome-icon-color($text-04);
+}
+
+.badge--cyan {
+  @include fontawesome-icon-color(#0089c9);
+}
+
+.badge--cyan-deep {
+  @include fontawesome-icon-color($text-04);
+}
+
+.badge--green {
+  @include fontawesome-icon-color(#198038);
+}
+
+.badge--green-deep {
+  @include fontawesome-icon-color($text-04);
+}
+
+.badge--teal {
+  @include fontawesome-icon-color(#007d79);
+}
+
+.badge--teal-deep {
+  @include fontawesome-icon-color($text-04);
+}
+
+.badge--purple {
+  @include fontawesome-icon-color(#6929c4);
+}
+
+.badge--purple-deep {
+  @include fontawesome-icon-color($text-04);
+}

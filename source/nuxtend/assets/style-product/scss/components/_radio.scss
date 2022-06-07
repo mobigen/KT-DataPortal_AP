@@ -1,0 +1,185 @@
+// -------------------------
+// radio--icon only
+// -------------------------
+.radio.radio--icon .radio__label {
+  width: rem(36px);
+  height: rem(36px);
+  padding: 0;
+  justify-content: center;
+}
+
+.radio.radio--icon .radio__label:before,
+.radio.radio--icon .radio__label:after {
+  display: none;
+}
+
+.radio.radio--icon [class*="svg-"] {
+  width: rem(32px);
+  height: rem(32px);
+  margin: 0;
+  fill: $text-03;
+}
+
+.radio.radio--icon .radio__input:checked+.radio__label{
+  border: 1px solid $secondary;
+}
+
+.radio.radio--icon .radio__input:checked+.radio__label [class*="svg-"]{
+  fill: $secondary;
+}
+
+// --------------------------------------------------
+// radio--right: input 과 label 위치가 바뀐 유형
+// --------------------------------------------------
+.radio.radio--right .radio__label:before {
+  left: unset;
+  right: 0;
+}
+
+.radio.radio--right .radio__label {
+  padding-left: 0;
+  padding-right: 24px;
+}
+
+.radio.radio--right .radio__label:after {
+  left: unset;
+  right: 7px;
+}
+
+// --------------------------------------------------
+// radios--toggle: radio를 감싸는 상위 radios의 신규 테마
+// --------------------------------------------------
+.radios--toggle .radio {
+  margin: 0 0 0 -1px;
+}
+
+.radios--toggle .radio:first-child {
+  margin-left: 0
+}
+
+.radios--toggle .radio:not(:last-of-type) {
+  margin-right: 0;
+}
+
+.radios--toggle .radio .radio__label {
+  position: relative;
+  width: rem(36px);
+  height: rem(36px);
+  padding: 0 15px;
+  border: 1px solid $ui-04;
+  transition: all 0.3s ease;
+}
+
+.radios--toggle .radio .radio__label:before {
+  content: "";
+  border: none;
+  width: 0;
+  margin: 0;
+}
+
+.radios--toggle .radio .radio__label:after {
+  content: none;
+}
+
+.radios--toggle .radio__input:focus-visible:not(:disabled)+.radio__label:before {
+  outline: unset;
+}
+
+.radios--toggle .radio__input:focus-visible:not(:disabled)+.radio__label {
+  outline: 1px dashed $text-02;
+}
+
+.radios--toggle .radio .radio__input:checked+.radio__label {
+  border-color: $secondary;
+  background-color: $ui-02;
+  z-index: 1;
+}
+
+.radios--toggle .radio .radio__input:checked+.radio__label:before,
+.radios--toggle .radio .radio__input:checked+.radio__label:after {
+  content: "";
+  background: none;
+}
+
+.radios--toggle .radio .radio__input:checked+.radio__label {
+  color: $ui-02;
+}
+
+.radios--toggle .radio:first-child:not(:last-child) .radio__label {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.radios--toggle .radio:last-child:not(:first-child) .radio__label {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+// --------------------------------------------------
+// radio--toggle
+// --------------------------------------------------
+
+.radio--toggle .checkbox__label {
+  position: relative;
+  height: rem(32px);
+  padding: 0 15px;
+  border: 1px solid $ui-04;
+  transition: all 0.3s ease;
+}
+
+.radio--toggle .checkbox__label:before {
+  content: "";
+  border: none;
+  width: 0;
+  margin: 0;
+}
+
+.radio--toggle .checkbox__label:after {
+  content: none;
+}
+
+.radio--toggle .checkbox__input:focus-visible:not(:disabled)+.checkbox__label:before {
+  outline: unset;
+}
+
+.radio--toggle .checkbox__input:focus-visible:not(:disabled)+.checkbox__label {
+  outline: 1px dashed $text-02;
+}
+
+.radio--toggle .checkbox__input:checked+.checkbox__label {
+  border-color: $primary;
+  background-color: $primary;
+  z-index: 1;
+}
+
+.radio--toggle .checkbox__input:checked+.checkbox__label:before,
+.radio--toggle .checkbox__input:checked+.checkbox__label:after {
+  content: "";
+  background: none;
+  border: none;
+}
+
+.radio--toggle .checkbox__input:checked+.checkbox__label {
+  color: $ui-02;
+}
+
+// --------------------------------------------------
+// checkbox--toggle 크기별 스타일
+// --------------------------------------------------
+
+.radio--toggle.checkbox--lg {
+  .checkbox__label {
+    @include font-size("16");
+    height: rem(40px);
+  }
+
+}
+
+.radio--toggle.checkbox--sm {
+  .checkbox__label {
+    @include font-weight("light");
+    @include font-size("12");
+    height: rem(24px);
+    padding: 0 $spacing-sm;
+  }
+}

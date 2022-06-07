@@ -1,6 +1,6 @@
-@import "./components/components";
-@import "./utils/utils";
-@import "./layout/layout";
-@import "./config/config";
-
-
+@import "./themes/theme.scss";
+@import "./utils/utils.scss";
+@import "./config/config.scss";
+@import "./components/components.scss";
+@import "./layout/layout.scss";
+@import "./config/helper-classes.scss";
