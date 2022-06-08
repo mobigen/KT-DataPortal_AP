@@ -193,7 +193,7 @@ import RecommendSearchTag from "@component/aiPlatform/basic/recommend-search-tag
 import SearchResultBox from "@component/aiPlatform/basic/search-result-box.vue";
 import BasicTabMenu from "@component/aiPlatform/basic/basic-tab-menu.vue";
 import ComplexFilterResult from "@component/aiPlatform/group/complex-filter-result.vue";
-import RadioButtonSearchBar from "../../../../../../../../../../katech_dp/source/Katech/frontend/components/aiPlatform/group/radio-button-search-bar.vue";
+import RadioButtonSearchBar from "@component/aiPlatform/group/radio-button-search-bar";
 import ComplexCheckbox from "@component/aiPlatform/group/complex-checkbox.vue";
 import BasicPagination from "@component/aiPlatform/basic/basic-pagination";
 import BasicSortOptions from "@component/aiPlatform/basic/basic-sort-options.vue";

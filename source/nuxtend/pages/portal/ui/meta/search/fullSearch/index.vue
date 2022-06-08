@@ -12,23 +12,30 @@
     </div>
     <div class="content-top">
       <div class="contents-top__search">
-        <search-input-field></search-input-field>
-
+        <search-input-field
+          @search="searchBtnClick"
+          :searchKeyword="searchKeyword"
+        ></search-input-field>
         <div class="contents-top__recommend">
           <h4>추천검색어</h4>
-          <div class="tags">
-            <base-tag class="tag">#결빙사고</base-tag>
-            <base-tag class="tag">#사고다발지역</base-tag>
-            <base-tag class="tag">#교통체증</base-tag>
-            <base-tag class="tag">#대중교통</base-tag>
-            <base-tag class="tag">#자전거</base-tag>
-          </div>
+          <basic-tag-list
+            :tagList="tagList"
+            previousText="#"
+            :useCancelButton="false"
+            @tagClick="tagClick"
+          ></basic-tag-list>
         </div>
       </div>
-      <div class="contents-search-result">
-        <strong>'결빙사고'</strong>에 대한 검색결과 총 <strong>150</strong> 건이
-        검색되었습니다.
-      </div>
+      <search-result-box
+        class="contents-search-result"
+        :showSearchResultBox="showSearchResultBox"
+        :searchResultSuccess="searchResultSuccess"
+      >
+        <template v-slot:resultSuccessTrueText>
+          <strong>'{{ searchKeyword }}'</strong>에 대한 검색결과 총
+          <strong>{{ numOfSearchResult }}</strong> 건이 검색되었습니다.
+        </template>
+      </search-result-box>
       <div class="contents-top__detail">
         <base-button
           class="detail-button-default"
@@ -499,7 +506,6 @@
 
 <script type="text/javascript">
 import BaseRadio from "@component/project/katech/atoms/base-radio/base-radio";
-import BaseTag from "@component/project/katech/atoms/base-tag/base-tag";
 import BaseButton from "@component/project/katech/atoms/base-button/base-button";
 import BaseCheckbox from "@component/project/katech/atoms/base-checkbox/base-checkbox";
 import GroupTab from "@component/project/katech/molecules/group-tab/group-tab";
@@ -507,8 +513,10 @@ import GroupPagination from "@component/project/katech/molecules/group-paginatio
 import GroupBreadcrumb from "@component/project/katech/molecules/group-breadcrumb/group-breadcrumb";
 import GroupSearchFilter from "@component/aiPlatform/katech/molecules/group-search-filter/group-search-filter";
 import SearchList from "@component/project/katech/organisms/search-list/search-list.vue";
-import SearchInputField from "@component/project/katech/organisms/search-input-field/search-input-field.vue";
+import SearchInputField from "@component/aiPlatform/katech/organisms/search-input-field/search-input-field.vue";
 import OrganismsFilterResult from "@component/aiPlatform/katech/organisms/filter-result";
+import SearchResultBox from "@component/aiPlatform/katech/atoms/search-result-box";
+import BasicTagList from "@component/aiPlatform/katech/atoms/basic-tag-list";
 import { mapGetters } from "vuex";
 
 export default {
@@ -524,7 +532,6 @@ export default {
   components: {
     BaseRadio,
     BaseButton,
-    BaseTag,
     BaseCheckbox,
     GroupPagination,
     GroupBreadcrumb,
@@ -532,7 +539,9 @@ export default {
     GroupTab,
     SearchList,
     SearchInputField,
-    OrganismsFilterResult
+    OrganismsFilterResult,
+    SearchResultBox,
+    BasicTagList
   },
   data() {
     return {
@@ -567,7 +576,18 @@ export default {
           NODE_ID: "NODE_ID", // node key
           PRNTS_ID: "PRNTS_ID" // parent key
         }
-      }
+      },
+      searchKeyword: "",
+      numOfSearchResult: null,
+      showSearchResultBox: false,
+      searchResultSuccess: false,
+      tagList: [
+        { itemId: 1, itemName: "결빙사고" },
+        { itemId: 2, itemName: "사고다발지역" },
+        { itemId: 3, itemName: "교통체증" },
+        { itemId: 4, itemName: "대중교통" },
+        { itemId: 5, itemName: "자전거" }
+      ]
     };
   },
   methods: {
@@ -582,6 +602,26 @@ export default {
     },
     toggleListCard: function () {
       this.isListCard = !this.isListCard;
+    },
+    searchBtnClick(inputData) {
+      this.searchKeyword = inputData.trim();
+      this.search();
+    },
+    search() {
+      this.numOfSearchResult = 135;
+
+      if (this.searchKeyword.trim() === "") {
+        this.showSearchResultBox = false;
+        this.searchResultSuccess = false;
+        return;
+      }
+
+      this.showSearchResultBox = true;
+      this.searchResultSuccess = true;
+    },
+    tagClick(tagObj) {
+      this.searchKeyword = tagObj.itemName;
+      this.search();
     }
   }
 };
