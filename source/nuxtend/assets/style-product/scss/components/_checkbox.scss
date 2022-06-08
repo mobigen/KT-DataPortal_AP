@@ -1,0 +1,192 @@
+// -------------------------
+// checkbox--icon only
+// -------------------------
+.checkbox.checkbox--icon .checkbox__label {
+  width: rem(40px);
+  height: rem(40px);
+  padding: 0;
+  justify-content: center;
+}
+
+.checkbox.checkbox--icon .checkbox__label:before,
+.checkbox.checkbox--icon .checkbox__label:after {
+  display: none;
+}
+
+.checkbox.checkbox--icon [class*="svg-"] {
+  width: rem(20px);
+  height: rem(20px);
+  margin: 0;
+}
+
+.checkbox.checkbox--icon .checkbox__input:checked+.checkbox__label{
+  background-color: $primary;
+}
+
+.checkbox.checkbox--icon .checkbox__input:checked+.checkbox__label [class*="svg-"]{
+  fill: $ui-02;
+}
+
+// --------------------------------------------------
+// checkbox--right: input 과 label 위치가 바뀐 유형
+// --------------------------------------------------
+.checkbox.checkbox--right .checkbox__label:before {
+  left: unset;
+  right: 0;
+}
+
+.checkbox.checkbox--right .checkbox__label {
+  padding-left: 0;
+  padding-right: 24px;
+}
+
+.checkbox.checkbox--right .checkbox__label:after {
+  left: unset;
+  right: 5px;
+}
+
+// --------------------------------------------------
+// checkboxes--toggle: checkbox를 감싸는 상위 checkboxes의 신규 테마
+// --------------------------------------------------
+.checkboxes {
+  display: flex;
+}
+
+.checkboxes .checkbox:not(:last-of-type) {
+  margin-right: $spacing-xs;
+}
+
+.checkboxes--toggle .checkbox {
+  margin: 0 0 0 -1px;
+}
+
+.checkboxes--toggle .checkbox:first-child {
+  margin-left: 0
+}
+
+.checkboxes--toggle .checkbox:not(:last-of-type) {
+  margin-right: 0;
+}
+
+.checkboxes--toggle .checkbox .checkbox__label {
+  position: relative;
+  height: rem(32px);
+  padding: 0 15px;
+  border: 1px solid $ui-04;
+  transition: all 0.3s ease;
+}
+
+.checkboxes--toggle .checkbox .checkbox__label:before {
+  content: "";
+  border: none;
+  width: 0;
+  margin: 0;
+}
+
+.checkboxes--toggle .checkbox .checkbox__label:after {
+  content: none;
+}
+
+.checkboxes--toggle .checkbox__input:focus-visible:not(:disabled)+.checkbox__label:before {
+  outline: unset;
+}
+
+.checkboxes--toggle .checkbox__input:focus-visible:not(:disabled)+.checkbox__label {
+  outline: 1px dashed $text-02;
+}
+
+.checkboxes--toggle .checkbox .checkbox__input:checked+.checkbox__label {
+  border-color: $primary;
+  background-color: $primary;
+  z-index: 1;
+}
+
+.checkboxes--toggle .checkbox .checkbox__input:checked+.checkbox__label:before,
+.checkboxes--toggle .checkbox .checkbox__input:checked+.checkbox__label:after {
+  content: "";
+  background: none;
+  border: none;
+}
+
+.checkboxes--toggle .checkbox .checkbox__input:checked+.checkbox__label {
+  color: $ui-02;
+}
+
+.checkboxes--toggle .checkbox:first-child:not(:last-child) .checkbox__label {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.checkboxes--toggle .checkbox:last-child:not(:first-child) .checkbox__label {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+// --------------------------------------------------
+// checkbox--toggle
+// --------------------------------------------------
+
+.checkbox--toggle .checkbox__label {
+  position: relative;
+  height: rem(32px);
+  padding: 0 15px;
+  border: 1px solid $ui-04;
+  transition: all 0.3s ease;
+}
+
+.checkbox--toggle .checkbox__label:before {
+  content: "";
+  border: none;
+  width: 0;
+  margin: 0;
+}
+
+.checkbox--toggle .checkbox__label:after {
+  content: none;
+}
+
+.checkbox--toggle .checkbox__input:focus-visible:not(:disabled)+.checkbox__label:before {
+  outline: unset;
+}
+
+.checkbox--toggle .checkbox__input:focus-visible:not(:disabled)+.checkbox__label {
+  outline: 1px dashed $text-02;
+}
+
+.checkbox--toggle .checkbox__input:checked+.checkbox__label {
+  border-color: $primary;
+  background-color: $primary;
+  z-index: 1;
+}
+
+.checkbox--toggle .checkbox__input:checked+.checkbox__label:before,
+.checkbox--toggle .checkbox__input:checked+.checkbox__label:after {
+  content: "";
+  background: none;
+  border: none;
+}
+
+.checkbox--toggle .checkbox__input:checked+.checkbox__label {
+  color: $ui-02;
+}
+
+// --------------------------------------------------
+// checkbox--toggle 크기별 스타일
+// --------------------------------------------------
+
+.checkbox--toggle.checkbox--lg {
+  .checkbox__label {
+    @include font-size("16");
+    height: rem(40px);
+  }
+
+}
+
+.checkbox--toggle.checkbox--sm {
+  .checkbox__label {
+    @include font-weight("light");
+    @include font-size("12");
+    height: rem(24px);
+    padding: 0 $spacing-sm;
+  }
+}

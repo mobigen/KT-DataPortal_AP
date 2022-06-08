@@ -16,7 +16,7 @@
 <i18n src="./index.json"></i18n>
 
 <script type="text/javascript">
-import Login from "@organisms/login/login.vue";
+import Login from "@component/project/sample/login/login.vue";
 import RSA from "rsajs";
 import { mapGetters, mapActions } from "vuex";
 

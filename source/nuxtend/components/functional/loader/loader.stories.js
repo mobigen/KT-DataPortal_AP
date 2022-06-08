@@ -1,7 +1,7 @@
 import Loader from "./loader.vue";
 
 export default {
-  title: "Functional/Loader",
+  title: 'Functional/[PCFI] 로더',
   components: Loader,
   decorators: [
     () => ({

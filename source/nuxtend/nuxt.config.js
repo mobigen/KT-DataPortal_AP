@@ -95,7 +95,8 @@ export default {
     "@component": resolve(__dirname, "./components"),
     "@functional": resolve(__dirname, "./components/functional"),
     "@molecules": resolve(__dirname, "./components/molecules"),
-    "@organisms": resolve(__dirname, "./components/organisms")
+    "@organisms": resolve(__dirname, "./components/organisms"),
+    "@project": resolve(__dirname, "./components/project")
   },
 
   // options

@@ -1,0 +1,46 @@
+{
+  "ko": {
+    "footer": {
+      "company-copyright": "Copyright(c) 2022 KATECH(Korea Automotive Technology Institute) All right reserved.",
+      "company-title": "A New Experience in Big Data Analytics",
+      "company-sub-title": "IRIS Big Data Platform",
+      "company-mail": "opendata@qwertyuio.or.kr",
+      "company-address": "31214  충청남도 천안시 동남구 풍세면 풍세로 303 한국자동차연구원  TEL : 041-559-3114  /  FAX : 041-559-3068",
+      "company-tel": "02-538-9360",
+      "company-fax": "02-538-9369",
+      "move": "이동",
+      "relative-site": "관련사이트",
+      "error-relative-site": "이동하실 사이트를 선택해 주세요.",
+      "nav": {
+        "home": "포털소개",
+        "terms": "이용약관",
+        "privacy-policy": "개인정보처리방침",
+        "copyright-policy": "저작권정책",
+        "personal-center": " 개인정보침해센터",
+        "data-report": "데이터오류신고"
+      }
+    }
+  },
+  "en": {
+    "footer": {
+      "company-copyright": "Copyright(c) 2022 KATECH(Korea Automotive Technology Institute) All right reserved.",
+      "company-title": "A New Experience in Big Data Analytics",
+      "company-sub-title": "IRIS Big Data Platform",
+      "company-mail": "opendata@qwertyuio.or.kr",
+      "company-address": "128, Songpa-daero 37-gil, Songpa-gu, Seoul, Republic of Korea",
+      "company-tel": "02-538-9360",
+      "company-fax": "02-538-9369",
+      "move": "Move",
+      "relative-site": "Relative site",
+      "error-relative-site": "Please select the site you want to go to.",
+      "nav": {
+        "home": "Public data portal",
+        "terms": "Terms of service",
+        "privacy-policy": "Privacy policy",
+        "copyright-policy": "Copyright policy",
+        "personal-center": " Personal information infringement center",
+        "data-report": "Report data error"
+      }
+    }
+  }
+}

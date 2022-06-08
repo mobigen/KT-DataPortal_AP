@@ -1,0 +1,17 @@
+// @include multi-text-overflow(line-height 값, 줄 수)
+@mixin multi-text-overflow($line-height, $lines) {
+  display:block;
+  display:-webkit-box;
+  overflow:hidden;
+  max-height: $line-height * $lines;
+  line-height :rem($line-height);
+  -webkit-line-clamp:$lines;
+  -webkit-box-orient:vertical;
+  word-wrap:break-word;
+}
+
+@mixin fontawesome-icon-color($icon-color) {
+  .svg-icon {
+    color: $icon-color;
+  }
+}

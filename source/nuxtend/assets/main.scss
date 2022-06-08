@@ -1,5 +1,8 @@
-$img-path: '@/assets/style-core/images' !default;
-$font-path: '@/assets/style-core/fonts' !default;
+// $img-path: '~@/assets/style-core/images' !default;
+// $font-path: '~@/assets/style-core/fonts' !default;
 
-@import "./style-core/scss/core-index.scss";
+$img-path: '~@/assets/style-product/images' !default;
+$font-path: '~@/assets/style-product/fonts' !default;
+
+@import "./style-product/scss-core/core-index.scss";
 @import "./style-product/scss/product-index.scss";

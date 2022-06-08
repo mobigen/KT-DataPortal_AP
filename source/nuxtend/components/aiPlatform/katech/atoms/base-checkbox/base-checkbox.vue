@@ -1,0 +1,56 @@
+<template>
+  <!--  최소 단위인 checkbox Component - 기능 별로 쪼개는 작업 필요-->
+  <div class="checkbox">
+    <input
+      type="checkbox"
+      class="checkbox__input"
+      :id="checkboxId"
+      :name="name"
+      :checked="checked"
+      :disabled="disabled"
+      v-model="checkedData"
+    />
+    <label class="checkbox__label" :for="checkboxId">
+      <slot name="label" class="checkbox__label">Default Label</slot>
+    </label>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "BaseCheckbox",
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    checkboxId: {
+      type: String,
+      default: null
+    },
+    name: {
+      type: String,
+      default: null
+    },
+    checked: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    checkedData: {
+      get() {
+        return this.checked;
+      },
+      set(newValue) {
+        this.$emit("changeData", newValue, this.name);
+      }
+    }
+  },
+  methods: {}
+};
+</script>
+
+<style lang="scss">
+@import "base-checkbox";
+</style>

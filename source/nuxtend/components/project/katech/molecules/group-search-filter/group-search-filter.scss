@@ -1,0 +1,98 @@
+.search-filter {
+  border: none;
+  position: relative;
+
+  .search-filter__button-reset {
+    display: block;
+    margin: rem(12px) 0 0 rem(10px);
+    width: 220px;
+    height: rem(30px);
+    border: 1px solid $ui-04;
+    border-radius: rem(5px);
+    @include font-size("13");
+    @include font-weight("regular");
+    text-align: center;
+    line-height: rem(25px);
+    color: $text-02;
+    padding-left: rem(24px);
+    cursor: pointer;
+    background: $ui-02 url(#{$img-path}/common/icon.png) no-repeat rem(36px) rem(-218px);
+
+    &:hover {
+      background: url(#{$img-path}/common/icon.png) no-repeat rem(36px) rem(-218px);
+      border: 1px solid $secondary;
+    }
+  }
+}
+
+.search-filter__icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: rem(22px);
+  height: rem(22px);
+  margin-right: $spacing-3xs;
+  border-radius: 50%;
+  background-color: $ui-04;
+}
+
+.search-filter__head {
+  position: absolute;
+  top: rem(-40px);
+  right: rem(10px);
+  height: $button-height-md;
+}
+
+.search-filter__head .checkbox__label {
+  @include font-size("14");
+  @include font-weight("regular");
+  color: $text-03;
+}
+
+.search-filter__body {
+  padding-right: rem(20px);
+  position: relative;
+}
+
+
+.search-filter__list{
+  margin-left: $spacing-xs;
+}
+
+.search-filter__item-group{
+  display: flex;
+  align-items: center;
+}
+
+.search-filter__body .checkbox {
+  flex: 1;
+}
+
+.search-filter__count {
+  margin-left: auto;
+}
+
+
+.search-filter__next{
+  margin: $spacing-2xs 0 $spacing-xs $spacing-2xs;
+  background: #F7F7FA;
+  border-radius: rem(5px);
+  padding-left: rem(10px);
+
+  .search-filter__item:first-child {
+    padding-top: $spacing-sm;
+  }
+
+  .search-filter__item:last-child {
+    padding-bottom: $spacing-sm;
+  }
+}
+
+.search-filter__last{
+  margin-left: $spacing-lg;
+  background: transparent;
+  
+  li:last-child {
+    padding-bottom: $spacing-2xs;
+  }
+}

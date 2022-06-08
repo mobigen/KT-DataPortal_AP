@@ -11,7 +11,9 @@
         <tr
           v-for="(header, i) in viewDetail.header"
           :key="'body_tr_' + i"
-          v-show="!hideColumns.includes(header.column_name)"
+          v-show="
+            hideColumns.length > 0 && !hideColumns.includes(header.column_name)
+          "
         >
           <th>{{ header.column_name }}</th>
           <td>{{ viewDetail.body[0][header.column_name] }}</td>
@@ -37,7 +39,10 @@ export default {
     },
     hideColumns: {
       type: Array,
-      require: false
+      require: false,
+      default: () => {
+        return [];
+      }
     }
   },
   computed: {},
