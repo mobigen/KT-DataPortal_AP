@@ -1,38 +1,33 @@
 <template lang="html">
-  <div :class="pDepth === 0 ? 'search-filter__next' : 'depth-3'">
-    <ul class="search-filter__list">
-      <li class="search-filter__item">
-        <div
-          class="checkbox checkbox--aside"
-          :style="{
-            display: isRootNode() && !showRootNode ? 'none' : 'inherit'
-          }"
+  <div :class="pDepth === 0 ? 'search-filter__next' : 'search-filter__last'">
+    <ul :class="pDepth === 0 ? 'search-filter__list' : ''">
+      <li
+        :class="pDepth === 0 ? 'search-filter__item' : ''"
+        v-for="(treeChildren, i) in treeData.children"
+        :key="'li_' + i"
+      >
+        <base-checkbox
+          class="checkbox--aside"
+          :style="{}"
+          :name="treeChildren[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
+          :checkbox-id="treeChildren[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
+          @changeData="checkboxClick"
         >
-          <input
-            type="checkbox"
-            :id="treeData[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
-            name="NextSearchFilter"
-            class="checkbox__input"
-            @change="spanClick(treeData, $event)"
-          />
-          <label
-            :for="treeData[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
-            class="checkbox__label"
-          >
-            <span @click="toggle"
-              >{{ treeData[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NM]] }}
-            </span></label
-          >
-        </div>
-        <ul v-if="isOpen" v-show="open">
+          <template v-slot:label>{{
+            treeChildren[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NM]]
+          }}</template>
+        </base-checkbox>
+        <template
+          v-if="Object.prototype.hasOwnProperty.call(treeChildren, 'children')"
+        >
           <item
-            v-for="(data, index) in treeData.children"
-            :treeData="data"
-            :key="index"
+            :component-key="componentKey"
+            :treeData="treeChildren"
             :tree-key="treeKey"
             :pDepth="depth"
+            @selectionChange="selectionChange"
           ></item>
-        </ul>
+        </template>
       </li>
     </ul>
   </div>
@@ -41,6 +36,7 @@
 <script type="text/javascript">
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 import { mapActions, mapGetters } from "vuex";
+import BaseCheckbox from "@component/aiPlatform/katech/atoms/base-checkbox/base-checkbox";
 
 export default {
   name: "item",
@@ -165,12 +161,37 @@ export default {
       }
     }
   },
-  components: { BasicButton },
+  components: { BasicButton, BaseCheckbox },
   watch: {},
   methods: {
     ...mapActions("module/tree", ["getCategoryObject"]),
     setEventBus() {
-      // // 모두열기 / 모두 닫기
+      // 전체 선택
+      const me = this;
+      this.$nuxt.$on("treeCompSelectionChange", (bool, parentId) => {
+        if (parentId === undefined) {
+          // parentId가 없으면 전체 노드를 '선택'/ '비선택'을 셋팅한다.
+          me.selectionChange({
+            bool: bool,
+            nodeData: me.treeData
+          });
+        } else {
+          // parentId가 있으면 해당되는 노드만 '선택' / '비선택'을 셋팅한다.
+          if (
+            me.treeData[me.treeKey[me.CONSTANTS.TREE.TREE_KEY.NODE_ID]] ===
+            parentId
+          ) {
+            me.treeData.children.forEach((c) => {
+              me.selectionChange({
+                bool: bool,
+                nodeData: c
+              });
+            });
+          }
+        }
+      });
+
+      // // 모두열기 / 모두 닫기 - 기능 사용하지 않아 주석처리.
       // if (this.useTreeViewAll && this.depth === 2) {
       //   /**
       //    * depth : root (1), root-child (2) ...         *
@@ -182,15 +203,6 @@ export default {
       //     me.open = bool;
       //   });
       // }
-
-      // 전체 선택
-      const me = this;
-      this.$nuxt.$on("treeCompSelectionChange", (bool) => {
-        me.selectionChange({
-          bool: bool,
-          nodeData: me.treeData
-        });
-      });
     },
     setFirstNodeId() {
       /**
@@ -251,41 +263,41 @@ export default {
     toggle() {
       this.open = !this.open;
     },
-    spanClick(treeNode) {
-      if (this.treeSelectType === this.CONSTANTS.TREE.TREE_TYPE.LEAF) {
-        // LEAF 일 경우, 가장 마지막 노드만 선택 가능함.
+    checkboxClick(bool, nodeId) {
+      // if (this.treeSelectType === this.CONSTANTS.TREE.TREE_TYPE.LEAF) {
+      //   // LEAF 일 경우, 가장 마지막 노드만 선택 가능함.
+      //
+      //   if (Object.prototype.hasOwnProperty.call(treeNode, "children")) {
+      //     // children을 가지고 있으면 하위노드가 아님. return한다.
+      //     return;
+      //   }
+      //   if (treeNode.children >= 1) {
+      //     // children을 가지고 있어도 그 갯수가 1개 이상이면 하위노드가 아님. return 한다.
+      //     return;
+      //   }
+      // }
 
-        if (Object.prototype.hasOwnProperty.call(treeNode, "children")) {
-          // children을 가지고 있으면 하위노드가 아님. return한다.
-          return;
-        }
-        if (treeNode.children >= 1) {
-          // children을 가지고 있어도 그 갯수가 1개 이상이면 하위노드가 아님. return 한다.
-          return;
-        }
-      }
-
-      const nodeSelected = !this.spanSelected;
+      // const nodeSelected = !this.spanSelected;
 
       // ALL인 경우, 모든 노드 선택 가능함.
       // 상위자동선택에 체크되어있는 경우, 자기보다 위의 노드를 모드 선택한다.
+      const me = this;
       if (this.checked) {
-        const me = this;
         // 자기 자신 노드를 포함한다.
         this.pId.push(
           treeNode[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]]
         );
         this.pId.forEach((parentId) => {
           this.selectionChange({
-            bool: nodeSelected,
+            bool: bool,
             nodeData: me.getNode(parentId)
           });
         });
       } else {
         // 상위 자동선택 미체크. 자신것만 체크한다.
         this.selectionChange({
-          bool: nodeSelected,
-          nodeData: treeNode
+          bool: bool,
+          nodeData: me.getNode(nodeId)
         });
       }
     },
@@ -305,18 +317,4 @@ export default {
 };
 </script>
 
-<style scoped>
-ul {
-  padding-left: 0.5rem;
-  display: inline-grid;
-}
-
-.tree_cont {
-  margin: 0.15rem 0.25rem;
-  background: white;
-  padding: 0.1rem 0.25rem;
-}
-span.span-selected {
-  background-color: red;
-}
-</style>
+<style></style>
