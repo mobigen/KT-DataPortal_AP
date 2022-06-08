@@ -5,46 +5,56 @@
         class="checkbox--aside"
         name="searchFilterAll"
         checkbox-id="searchFilterAll1"
-        @changeData="selectTree"
+        @changeData="allSelectClick"
       >
         <template v-slot:label>전체선택</template>
       </base-checkbox>
     </div>
 
-    <!-- Tree Component -->
+    <!--
+     Tree 영역
+     Tree Component가 재귀적으로 실행되도록 되어있어서, 코드를 분리함.
+     author : skysora@mobigen.com
+    -->
     <template>
       <div class="search-filter__body">
         <ul class="search-filter__list">
-          <li class="search-filter__item">
+          <li class="search-filter__item" v-for="(obj, i) in categoryObject" :key="'tree_li_' + i">
             <div class="search-filter__item-group">
               <base-checkbox
                 class="checkbox--aside"
-                name="searchFilter"
-                checkbox-id="category"
+                :name="obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
+                :checkbox-id="obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
+                @changeData="rootNodeClick"
               >
-                <template v-slot:label>카테고리</template>
+                <template v-slot:label>{{
+                  obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NM]]
+                }}</template>
               </base-checkbox>
             </div>
 
             <basic-tree
-              class="search-filter__body"
               :component-key="componentKey"
-              :tree-data="categoryObject"
+              :tree-data="obj"
               :tree-key="treeKey"
               @selectionChange="selectionChange"
             />
-            {{ selectedNodeList }}
           </li>
         </ul>
       </div>
+
+      <base-button class="search-filter__button-reset" @click="treeClear"
+        >검색조건 초기화</base-button
+      >
     </template>
   </div>
 </template>
 
 <script type="text/javascript">
-import BaseCheckbox from "@component/project/katech/atoms/base-checkbox/base-checkbox";
+import BaseCheckbox from "@component/aiPlatform/katech/atoms/base-checkbox/base-checkbox";
 import BasicTree from "@component/aiPlatform/katech/atoms/basic-tree.vue";
 import { mapActions, mapGetters } from "vuex";
+import BaseButton from "@component/project/katech/atoms/base-button/base-button";
 
 export default {
   name: "GroupSearchFilter",
@@ -64,14 +74,15 @@ export default {
   },
   components: {
     BaseCheckbox,
-    BasicTree
+    BasicTree,
+    BaseButton
   },
   computed: {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
     categoryObject() {
-      return this.$store.getters["module/tree/categoryObject"][
-        this.componentKey
-      ];
+      const _r =
+        this.$store.getters["module/tree/categoryObject"][this.componentKey];
+      return _r === undefined ? _r : _r.children;
     },
     selectedNodeList() {
       return this.$store.getters["module/tree/selectedNodeList"][
@@ -83,9 +94,17 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions("module/tree", ["getCategoryObject", "setSelectedNodeList"]),
-    selectTree(bool) {
+    ...mapActions("module/tree", [
+      "getCategoryObject",
+      "setSelectedNodeList",
+      "resetSelectedNodeList"
+    ]),
+    ...mapActions("meta/search/search", ["resetSearchFilterList"]),
+    allSelectClick(bool) {
       this.$nuxt.$emit("treeCompSelectionChange", bool);
+    },
+    rootNodeClick(bool, nodeId) {
+      this.$nuxt.$emit("treeCompSelectionChange", bool, nodeId);
     },
 
     selectionChange({ bool, nodeData }) {
@@ -95,6 +114,13 @@ export default {
         node: nodeData,
         bool: bool
       });
+    },
+    treeClear() {
+      console.log('treeClear')
+      // checkbox reset
+      this.resetSearchFilterList();
+      // tree reset
+      this.resetSelectedNodeList(this.componentKey);
     }
   },
   created() {
@@ -106,6 +132,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "group-search-filter";
+<style lang="scss">
+@import "./group-search-filter.scss";
 </style>

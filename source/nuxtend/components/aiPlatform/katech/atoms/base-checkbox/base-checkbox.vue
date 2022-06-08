@@ -8,6 +8,7 @@
       :name="name"
       :checked="checked"
       :disabled="disabled"
+      v-model="checkedData"
     />
     <label class="checkbox__label" :for="checkboxId">
       <slot name="label" class="checkbox__label">Default Label</slot>
