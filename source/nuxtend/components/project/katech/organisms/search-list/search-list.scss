@@ -19,12 +19,11 @@
 }
 
 .data-options {
+  flex-shrink: 0;
   display: flex;
-  align-items: center;
-  z-index: z('float');
-  position: absolute;
-  top: $spacing-md + $spacing-2xs;
-  right: $spacing-md + $spacing-2xs;
+  justify-content: flex-end;
+  position: relative;
+
   > * + * {
     margin-left: $spacing-2xs !important;
   }
@@ -73,10 +72,16 @@
 
 .data-box__top-content {
   display: flex;
+  position: relative;
+  height: rem(25px);
 
   > * + * {
     margin-left: $spacing-xs;
   }
+}
+
+.badge--provider-logo {
+  display: none;
 }
 
 .data-box__content {
@@ -198,41 +203,93 @@
 }
 
 // 카드형 UI
-.data-box-list.data-box-list--card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-left: rem(-20px);
-  width: calc(100% + 20px);
+.data-box-list--card.data-box-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: rem(-20px);
+    margin-right: rem(20px);
+    width: calc(100% + 20px);
+  
 
   .data-box {
-    flex-grow: 1;
-    width: 30%;
-    margin: 20px 20px 0 0;
+    width: 320px;
+    margin: rem(20px) 0 0 rem(20px);
     flex-direction: column;
     align-items: flex-start;
-    border: 1px solid $ui-03;
-    border-radius: rem(20px);
+    border: none;
+    border-radius: 0;
+    padding: 0;
   }
 
-  .data-box__top-content{
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+  .data-box__link {
+    padding: rem(30px);
+    width: unset;
+    border: 1px solid $ui-03;
+    border-radius: rem(20px);
 
-    .company-group {
-      margin: $spacing-2xs 0 0 0;
+    &:hover {
+      border-color: $secondary;
     }
   }
 
+  .data-box__top-content{
+    display: flex;
+    height: unset;
+    position: relative;
+  }
+
+  .badges {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .data-options {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .badge--provider-logo {
+    width: 100%;
+    height: $spacing-xl;
+    line-height: $spacing-lg;
+    display: block;
+    flex-shrink: 0;
+    margin-bottom: $spacing-sm;
+
+    span {
+      @include font-size("16");
+      @include font-weight("bold");
+      color: $primary;
+    }
+    
+    img {
+      width: auto;
+      max-height: 100%;
+    }
+  }
+
+  .badge--w-gray {
+    flex-grow: 0;
+  }
+
+  .badge--w-primary {
+    flex-grow: 0;
+  }
+  
+  .badge--provider {
+    display: none;
+  }
 
   .data-filetype {
     display: none;
   }
 
   .data-box__title {
-    @include multi-text-overflow(20px, 2);
+    @include multi-text-overflow(28px, 2);
     @include font-weight("medium");
     @include font-size("20");
     color: $text-01;
@@ -241,9 +298,9 @@
   }
 
   .data-box__description {
-    @include multi-text-overflow(16px, 2);
+    @include multi-text-overflow(20px, 2);
     @include font-size("14");
-    margin-top: $spacing-xs;
+    margin-top: $spacing-sm;
     color: $text-02;
   }
 
@@ -254,6 +311,7 @@
 
   .data-box__details {
     align-items: center;
+    margin: 0;
   }
 
   .data-box__details .tags {
@@ -263,14 +321,14 @@
   .data-box__details-group {
     flex-direction: column;
     align-items: flex-start;
-    margin-top: $spacing-2xs;
+    margin-top: rem(24px);
 
     dt{
       padding: 0;
     }
 
     dd{
-      padding-left: $spacing-2xs;
+      padding: 0 $spacing-sm 0 $spacing-2xs;
       margin: 0;
       &:after{
         content: none;
@@ -282,18 +340,9 @@
     }
   }
 
-  .data-options {
-    top: 20px;
-    right: 30px;
-
-    .badge{
-      display: none;
-    }
-  }
-
 }
 
-
+/* 반응형
 // breakpoints
 @include template-respond-to('breakpoint-xl') {
   .data-box-list.data-box-list--card {
@@ -348,4 +397,4 @@
     }
   }
 }
-
+*/

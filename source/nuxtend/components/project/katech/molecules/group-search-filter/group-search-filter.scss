@@ -75,7 +75,7 @@
 
 .search-filter__next{
   margin: $spacing-2xs 0 $spacing-xs $spacing-2xs;
-  background: $ui-01;
+  background: #F7F7FA;
   border-radius: rem(5px);
   padding-left: rem(10px);
 
@@ -88,15 +88,11 @@
   }
 }
 
-.search-filter__next2{
-  margin: $spacing-2xs 0 $spacing-xs $spacing-xl;
-  border-radius: rem(5px);
-
-  .search-filter__item:first-child {
-    padding-top: $spacing-xs;
-  }
-
-  .search-filter__item:last-child {
-    padding-bottom: $spacing-xs;
+.search-filter__last{
+  margin-left: $spacing-lg;
+  background: transparent;
+  
+  li:last-child {
+    padding-bottom: $spacing-2xs;
   }
 }

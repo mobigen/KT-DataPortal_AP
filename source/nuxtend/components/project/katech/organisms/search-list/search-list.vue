@@ -1,16 +1,21 @@
 <template lang="html">
   <!--  검색 리스트 - 리스트형 / 카드형 -->
-  <!--  카드형 - data-box-list--card-->
   <ul class="data-box-list">
-    <li class="data-box" v-for="(item, index) in list" :key="index">
+    <li class="data-box" v-for="(item, index) in contents" :key="index">
       <a href="#" class="data-box__link">
         <div class="data-box__information">
           <div class="data-box__top-content">
             <div class="badges">
+              <!-- 제공기관 로고 (카드형일때만 보임) -->
+              <div class="badge--provider-logo">
+                <img src="~@/assets/style-product/images/common/provider_logo01.png" alt="제공기관"><!-- 로고 있는경우 로고 이미지 출력 -->
+                <!-- <span>국토교통부</span><!--로고 없는 경우 제공기관명 텍스트 출력-->
+              </div>
+              <!-- // 제공기관 로고 -->
               <base-badge class="badge--w-gray">
                 <span class="badge__label">내부</span>
               </base-badge>
-              <base-badge class="badge--w-primary">
+              <base-badge class="badge--w-primary badge--provider">
                 <span class="badge__label">국토교통부</span>
               </base-badge>
               <base-badge class="badge--w-primary">
@@ -27,8 +32,7 @@
           <div class="data-box__content">
 
             <strong class="data-box__title">
-              <mark>결빙사고</mark>
-              다발지역 최대두줄 최대두줄 될수 있어요 두줄이 넘어가면 어떻게 되나요
+              {{ item.title }}<mark>결빙사고</mark> 다발지역 <!-- 검색어에 mark 태그 적용 -->
             </strong>
             <div class="data-filetype">
               <div class="badge--filetype-01"><span class="badge__label">CSV</span></div>
@@ -39,63 +43,7 @@
           </div>
           <div>
             <p class="data-box__description">
-              노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보노면 상태가 서리/
-              <mark>결빙</mark>
-              인 교통사고에 대한
-              <mark>사고</mark>
-              다발 지역 정보
+              {{ item.content }}
             </p>
           </div>
           <div class="data-box__bottom-content">
