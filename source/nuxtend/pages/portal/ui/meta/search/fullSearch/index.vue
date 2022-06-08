@@ -231,8 +231,11 @@
             ></base-button>
 
             <!-- 카테고리 트리 component -->
-            <group-search-filter></group-search-filter>
-
+            <group-search-filter
+              :component-key="treeObj.componentKey"
+              :tree-obj="treeObj"
+              :tree-key="treeObj.treeKey"
+            ></group-search-filter>
           </div>
         </div>
         <div
@@ -502,10 +505,10 @@ import BaseCheckbox from "@component/project/katech/atoms/base-checkbox/base-che
 import GroupTab from "@component/project/katech/molecules/group-tab/group-tab";
 import GroupPagination from "@component/project/katech/molecules/group-pagination/group-pagination";
 import GroupBreadcrumb from "@component/project/katech/molecules/group-breadcrumb/group-breadcrumb";
-import GroupSearchFilter from "@component/project/katech/molecules/group-search-filter/group-search-filter";
+import GroupSearchFilter from "@component/aiPlatform/katech/molecules/group-search-filter/group-search-filter";
 import SearchList from "@component/project/katech/organisms/search-list/search-list.vue";
 import SearchInputField from "@component/project/katech/organisms/search-input-field/search-input-field.vue";
-import OrganismsFilterResult from "@component/aiPlatform/organisms/organisms-filter-result";
+import OrganismsFilterResult from "@component/aiPlatform/katech/organisms/filter-result";
 import { mapGetters } from "vuex";
 
 export default {

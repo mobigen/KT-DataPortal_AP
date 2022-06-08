@@ -3,7 +3,7 @@
 }
 
 header {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -14,18 +14,19 @@ header {
 
 .header {
   z-index: z('header');
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   transition: all .3s;
+  background: $ui-02;
 }
 
 .header .header__inner {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  width: rem(1260px);
+  width: rem(1280px);
   height: rem(110px);
   margin: 0 auto;
 }
@@ -310,8 +311,9 @@ header.open-header .nav {
 }
 
 header.open-header .header {
-  //border-bottom: 1px solid $ui-04;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);;
   background: $ui-02;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
 }
 
 header.open-header .lnb {
@@ -319,33 +321,13 @@ header.open-header .lnb {
   height: auto;
   padding: 18px 0 33px;
 }
-
-header.open-header h1.logo {
-  width: rem(260px);
-  height: rem(70px);
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-header.open-header h1.logo a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: transparent; 
-  background: url(#{$img-path}/common/logo.png) no-repeat 0 center;
-  height: 100%;
-  @include font-size("16")
-
-}
-
 header.open-header+main .main-container {
   padding-top: 94px;
 }
 
-/* 화면 너비 0 ~ 1210px */
+/* 화면 너비 0 ~ 1210px 
 @media (max-width: 1210px) {
 
-  /* header */
   .header .header__inner {
     width: 100%;
     min-width: 100%;
@@ -357,11 +339,10 @@ header.open-header+main .main-container {
     padding: 0 1.2%;
   }
 }
-
-/* 화면 너비 0 ~ 1024px */
+*/
+/* 화면 너비 0 ~ 1024px 
 @media (max-width: 1024px) {
-  /* header */
-  header,
+   header,
   .header {
     height: 70px;
   }
@@ -392,7 +373,6 @@ header.open-header+main .main-container {
   
   }
 
-  /*header top-menu(util) */
   .top-menu {
     display: none;
   }
@@ -404,7 +384,6 @@ header.open-header+main .main-container {
     right: 16px;
   }
 
-  /* nav */
   .nav {
     display: none;
     position: fixed;
@@ -534,7 +513,7 @@ header.open-header+main .main-container {
     content: none;
   }
 
-  /* nav open */
+  
   .nav.nav--open {
     display: block;
     right: 0;
@@ -608,3 +587,4 @@ header.open-header+main .main-container {
     }
   }
 }
+*/

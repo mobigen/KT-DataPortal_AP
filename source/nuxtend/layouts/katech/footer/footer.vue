@@ -44,21 +44,15 @@
                 <svg-icon class="svg-icon select-selector__icon" name="chevron-down-medium" aria-hidden="true"></svg-icon>
               </button>
             </div>
-            <div class="select-container">
+            <div class="select-container footer-top__family-site-select">
               <ul class="select-container__list">
                 <li class="select-container__item" v-for="(item, index) in familyList" :key="index">
-                  <button class="select-container__button" type="button" @click="onSelectFamilySize(item)">
-                    <span class="select-container__text">{{ item.title }}</span>
+                  <button class="select-container__button" type="button">
+                    <a :href="(item.url)" target="_blank" title="새창열기" class="select-container__text">{{ item.title }}</a>
                   </button>
                 </li>
               </ul>
             </div>
-          </div>
-          &nbsp;
-          <div class="footer-top__button">
-            <button class="button button--tertiary" @click="onClickMoveRelativeSize">
-              <span>{{ $t("footer.move") }}</span>
-            </button>
           </div>
         </div>
       </div>
@@ -81,7 +75,7 @@
 
 <script type="text/javascript">
 import FamilySite from "./footer.familysite.json";
-import { errorAlert } from "@component/aiPlatform/basic/alert/alert-default";
+import { errorAlert } from "@functional/alert/alert-default";
 
 export default {
   name: "Footer",
