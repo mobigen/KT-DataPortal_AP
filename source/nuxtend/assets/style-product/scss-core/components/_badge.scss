@@ -1,6 +1,26 @@
 // -------------------------
 // Badge
 // -------------------------
+.badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  flex-grow: 1;
+
+  .badge, .badge__label {
+    @include text-overflow();
+  }
+
+  > * + * {
+    margin-right: $spacing-2xs;
+  }
+}
+
+.badge--icon{
+  width: rem(24px);
+}
+
 .badge {
   @include font-family("sans");
   @include font-weight("medium");

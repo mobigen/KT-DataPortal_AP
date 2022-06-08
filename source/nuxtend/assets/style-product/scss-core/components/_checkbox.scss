@@ -224,11 +224,11 @@
 // -------------------------
 .checkbox--aside {
   .checkbox__label {
-    @include font-size("14");
-    @include font-weight("medium");
+    @include font-size("13");
+    @include font-weight("regular");
     padding-left: rem(28px);
     min-height: rem(28px);
-    color: $text-02;
+    color: $icon-01;
   }
 
   .checkbox__label::before {
@@ -240,7 +240,7 @@
     top: rem(5px);
     width: rem(10px);
     height: rem(7px);
-    border-color: $text-05;
+    border-color: $icon-01;
     border-radius: rem(3px);
     transform: scale(1) rotate(-45deg);
   }
@@ -252,10 +252,17 @@
     border-color: $text-02;
   }
 
+  .checkbox__input:checked + .checkbox__label {
+    color: $text-01;
+    @include font-weight("medium");
+    
+  }
+  
   .checkbox__input:checked + .checkbox__label::after {
     transform: scale(1) rotate(-45deg);
     border-color: $secondary;
     color: $text-01;
+    
   }
 }
 
@@ -265,33 +272,24 @@
 // -------------------------
 .checkbox--favorite {
   .checkbox__label {
-    position: relative;
     font-size: 0;
     color: transparent;
+    top: rem(-2px);
   }
 
   .checkbox__label::before {
+    content: "";
     position: absolute;
-    top: 5px;
+    top: 0;
     right: 0;
     width: rem(25px);
     height: rem(25px);
     margin: 0;
-    background: $ui-02;
+    background: $ui-02 url(#{$img-path}/common/icon.png) no-repeat rem(-5px) rem(-147px);
     border: 1px solid $ui-04;
     border-radius: 50%;
-  }
-
-  .checkbox__label::after {
-    position: absolute;
-    left: rem(6px);
-    top: rem(17px);
-    width: rem(15px);
-    height: rem(15px);
-    transform: translateY(-45%);
-    background: url(#{$img-path}/common/icon.png) no-repeat rem(-10px) rem(-152px); 
-    border: none;
     transition: none;
+    transform: none;
   }
 
   .checkbox__input:hover + .checkbox__label::before {
@@ -309,14 +307,15 @@
   }
 
   .checkbox__input:checked + .checkbox__label::after {
+    content: "";
     position: absolute;
     left: rem(6px);
-    top: rem(17px);
-    width: rem(15px);
-    height: rem(15px);
-    transform: translateY(-45%);
-    background: url(#{$img-path}/common/icon.png) no-repeat rem(-33px) rem(-152px);
+    top: 0;
+    width: rem(18px);
+    height: rem(18px);
+    background: url(#{$img-path}/common/icon.png) no-repeat rem(-33px) rem(-146px);
     border: none;
     transition: none;
+    transform: none;
   }
 }

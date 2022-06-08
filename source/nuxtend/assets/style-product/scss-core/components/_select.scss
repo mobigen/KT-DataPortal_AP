@@ -5,19 +5,18 @@
 .select {
   position: relative;
   flex-shrink: 0;
-  min-width: rem(64px);
+  width: rem(180px);
 }
 
 .select--open {
   .select-selector__button,
   .select-selector__input {
     border-color: $secondary;
-    box-shadow: 0 0 rem(4px) rgba(77, 174, 255, 0.4);
-
+    
     &:hover:not(:disabled) {
       border-color: $secondary;
     }
-
+    
     &:focus-visible:not(:disabled) {
       border: 2px solid $default-focus;
       box-shadow: none;
@@ -26,6 +25,7 @@
 
   .select-selector__icon {
     transform: rotate(-180deg);
+    transition: all .1s;
   }
 
   .select-container {
@@ -202,21 +202,21 @@
   padding: $spacing-2xs $spacing-xl $spacing-2xs $spacing-sm;
   background-color: $ui-02;
   border: 1px solid $ui-04;
-  border-radius: $button-border-radius;
-
+  border-radius: rem(3px);
+  /*
   &:active {
     border-color: $secondary !important;
   }
 
-  &:hover {
-    border-color: $text-03;
-  }
-
   &:focus {
     border-color: $secondary;
-    box-shadow: 0 0 rem(4px) rgba(77, 174, 255, 0.4);
+    box-shadow: none;
   }
-
+  */
+  &:hover {
+    border-color: $secondary;
+  }
+  
   &:focus-visible:not(:disabled) {
     border: 2px solid $default-focus;
     box-shadow: none;
@@ -255,7 +255,7 @@
 
 .select-selector__title {
   @include text-overflow;
-  @include font-size("14");
+  @include font-size("12");
   @include font-weight("regular");
   color: $text-02;
 }
@@ -274,6 +274,7 @@
   right: $spacing-xs;
   transform: none;
   pointer-events: none;
+  transition: all .1s;
 }
 
 .select-selector__icon-button {
@@ -298,26 +299,33 @@
 // select panel(dropdown)
 .select-container {
   @include list;
-  @include layer("overlay");
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
   display: none;
   z-index: z("dropdown");
   position: absolute;
-  top: calc(100% + 2px);
-  // left: 0;
+  top: inherit;
+  left: 0;
   width: 100%;
-  max-height: rem(320px);
+  max-height: inherit;
   padding: $spacing-2xs 0;
   background-color: $ui-02;
-  border-radius: $field-border-radius;
+  border-radius: rem(3px);
   border: 1px solid $ui-04;
   overflow: auto;
 }
 
 .select-container__list {
   background-color: $ui-02;
+  display: flex;
+  flex-direction: column;
 }
 
 .select-container__button {
+  position: relative;
+  padding: $spacing-2xs $spacing-sm;
+  height: rem(30px);
+  @include font-size("12");
+
   &:focus-visible:not(:disabled) {
     background-color: $ui-01;
   }
@@ -326,7 +334,7 @@
 .select-container__subtext {
   @include font-size("12");
   color: $text-03;
-  margin-left: auto;
+  width: 100%;
 }
 
 .select-container--up {
