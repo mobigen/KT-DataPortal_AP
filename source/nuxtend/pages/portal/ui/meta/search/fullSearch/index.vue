@@ -22,7 +22,7 @@
             :tagList="tagList"
             previousText="#"
             :useCancelButton="false"
-            @tagClick="tagClick"
+            @tagClick="recommendTagClick"
           ></basic-tag-list>
         </div>
       </div>
@@ -497,7 +497,16 @@
           </div>
         </div>
         <div class="contents__pagination">
-          <group-pagination></group-pagination>
+          <group-pagination
+            :paging-key="paginationKey"
+            :paging-object="{
+              [CONSTANTS.PAGING.ITEMS_PER_PAGE]: 5,
+              [CONSTANTS.PAGING.VISIBLE_PAGES]: 3,
+              [CONSTANTS.PAGING.PAGE]: 1
+            }"
+            @pagingEvent="getGridData"
+            :show-test-table="false"
+          ></group-pagination>
         </div>
       </section>
     </div>
@@ -509,7 +518,7 @@ import BaseRadio from "@component/project/katech/atoms/base-radio/base-radio";
 import BaseButton from "@component/project/katech/atoms/base-button/base-button";
 import BaseCheckbox from "@component/project/katech/atoms/base-checkbox/base-checkbox";
 import GroupTab from "@component/project/katech/molecules/group-tab/group-tab";
-import GroupPagination from "@component/project/katech/molecules/group-pagination/group-pagination";
+import GroupPagination from "@component/aiPlatform/katech/molecules/group-pagination/group-pagination";
 import GroupBreadcrumb from "@component/project/katech/molecules/group-breadcrumb/group-breadcrumb";
 import GroupSearchFilter from "@component/aiPlatform/katech/molecules/group-search-filter/group-search-filter";
 import SearchList from "@component/project/katech/organisms/search-list/search-list.vue";
@@ -517,16 +526,14 @@ import SearchInputField from "@component/aiPlatform/katech/organisms/search-inpu
 import OrganismsFilterResult from "@component/aiPlatform/katech/organisms/filter-result";
 import SearchResultBox from "@component/aiPlatform/katech/atoms/search-result-box";
 import BasicTagList from "@component/aiPlatform/katech/atoms/basic-tag-list";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Index",
-  async asyncData({ store }) {
-    await store.dispatch("meta/keyword-search/getContents");
-  },
   computed: {
     ...mapGetters({
-      contents: "meta/keyword-search/contents"
+      contents: "meta/keyword-search/contents",
+      CONSTANTS: "defaults/constants/CONSTANTS"
     })
   },
   components: {
@@ -587,10 +594,12 @@ export default {
         { itemId: 3, itemName: "교통체증" },
         { itemId: 4, itemName: "대중교통" },
         { itemId: 5, itemName: "자전거" }
-      ]
+      ],
+      paginationKey: "fullSearchPagination"
     };
   },
   methods: {
+    ...mapActions("meta/keyword-search", ["getContents"]),
     toggleDetail: function () {
       this.isDetailOpen = !this.isDetailOpen;
     },
@@ -619,10 +628,18 @@ export default {
       this.showSearchResultBox = true;
       this.searchResultSuccess = true;
     },
-    tagClick(tagObj) {
+    recommendTagClick(tagObj) {
       this.searchKeyword = tagObj.itemName;
       this.search();
+    },
+    getGridData() {
+      this.getContents({
+        paginationKey: this.paginationKey
+      });
     }
+  },
+  mounted() {
+    this.getGridData();
   }
 };
 </script>
