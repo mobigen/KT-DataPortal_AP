@@ -1,11 +1,16 @@
 <template lang="html">
   <div id="api-router-wrapper">
-    <h3>api-router form</h3>
+    <p v-show="apiName">API_NM : 수정불가 (삭제 후 재등록)</p>
 
     <!-- apiRouter용 하드코딩-->
     <div class="api-router-row">
       <basic-label forProperty="">API_NM</basic-label>
+
+      <basic-label v-if="apiName" forProperty="">{{
+        apiObj["API_NM"]
+      }}</basic-label>
       <basic-input
+        v-else
         formInputType="text"
         labelName="API_NM"
         :inputData="apiObj['API_NM']"
@@ -170,6 +175,10 @@ import BaseSelect from "@/components/aiPlatform/basic/base-select/base-select.vu
 import RadioButton from "@/components/aiPlatform/basic/radio-button.vue";
 import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
 import { mapGetters } from "vuex";
+import {
+  successAlert,
+  errorAlert
+} from "@/components/aiPlatform/basic/alert/alert-default";
 
 export default {
   name: "apiRouter-form",
@@ -252,14 +261,17 @@ export default {
         });
     },
     async addObject() {
-      // 수정
-      if (this.apiName) {
-        alert("not available");
-        console.log("not available");
-        return;
-      }
-      // 등록
+      // 등록, 수정일때 api가 다름.
+      let apiUrl = this.apiName ? "/updateApi" : "/setApi";
+
       let params = JSON.parse(JSON.stringify(this.apiObj));
+
+      // 각 parameter는 null 일수 없음.
+      Object.keys(params).forEach((_p) => {
+        if (params[_p] === null) {
+          params[_p] = "";
+        }
+      });
 
       if (this.apiObj.MODE === this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL) {
         params[this.CONSTANTS.API_ROUTER.PARAM.PARAMS] = [];
@@ -272,24 +284,25 @@ export default {
       }
 
       if (!this.checkValidation(params)) {
-        alert("not valid");
-        console.log("not valid");
+        const msg = "param 값이 유효하지 않습니다.";
+        errorAlert(msg);
         return;
       }
 
       const me = this;
       this.$axios
-        .post(this.$config.API_ROUTER_PREFIX + "/setApi", params)
+        .post(this.$config.API_ROUTER_PREFIX + apiUrl, params)
         .then((d) => {
-          if (d.status === 200) {
-            alert("add success");
-            console.log("add success");
+          if (d.data.result > 0) {
             // success
             me.apiObj = JSON.parse(JSON.stringify({}));
             me.apiParamObj = JSON.parse(JSON.stringify({}));
+
+            successAlert("저장되었습니다.");
+            me.$router.push({ path: "/superAdmin/apiRouter/list" });
           } else {
-            alert("add fail");
-            console.log("add fail");
+            const msg = "저장에 실패하였습니다. msg:" + d.data.errorMessage;
+            errorAlert(msg);
           }
         });
     },
@@ -300,20 +313,23 @@ export default {
         params[this.CONSTANTS.API_ROUTER.PARAM.CTGRY]
       );
     },
+    setOpenParam() {
+      this.openParam =
+        this.apiObj[this.CONSTANTS.API_ROUTER.PARAM.MODE] ===
+        this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL;
+    },
     changeData({ label, input }) {
-      if (label === this.CONSTANTS.API_ROUTER.PARAM.MODE) {
-        this.openParam = input === this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL;
-      }
       this.apiObj[label] = input;
-
       this.apiObj = JSON.parse(JSON.stringify(this.apiObj));
+
+      this.setOpenParam();
     },
     changeDataParam({ label, input }) {
       this.apiParamObj[label] = input;
 
       this.apiParamObj = JSON.parse(JSON.stringify(this.apiParamObj));
     },
-    async getCategoryObj() {
+    async getServerList() {
       const me = this;
       await this.$axios
         .get(this.$config.API_ROUTER_PREFIX + "/getServerInfoList")
@@ -333,11 +349,10 @@ export default {
     getApi() {
       const me = this;
       this.$axios
-        .get(
-          this.$config.API_ROUTER_PREFIX + "/getApi?api_name=" + this.apiName
-        )
+        .get(this.$config.API_ROUTER_PREFIX + "/getApi?API_NM=" + this.apiName)
         .then((d) => {
-          me.apiObj = d.data["api_info"].body[0];
+          me.apiObj = JSON.parse(JSON.stringify(d.data["api_info"].body[0]));
+          me.setOpenParam();
         });
     },
     getModeDefaultValue() {
@@ -369,8 +384,8 @@ export default {
     },
     addParamObj() {
       if (!this.isParamValid()) {
-        alert("not valid");
-        console.log("not valid");
+        const msg = "param 값이 유효하지 않습니다.";
+        errorAlert(msg);
         return;
       }
 
@@ -382,8 +397,8 @@ export default {
           apiNm
         )
       ) {
-        alert("is duplicated");
-        console.log("is duplicated");
+        const msg = "API_NM이 중복됩니다.";
+        errorAlert(msg);
         return;
       }
 
@@ -411,17 +426,18 @@ export default {
       });
     }
   },
-  created() {
-    this.setApiDefaultColumns();
+  async created() {
     this.setModeRadioOption();
+    await this.getServerList();
 
     this.apiName = this.$route.query.apiName;
     if (this.apiName) {
       // 수정이면
       this.getApi();
+    } else {
+      // 등록이면 column 을 표시하기 위해 column 정보 api를 호출한다.
+      this.setApiDefaultColumns();
     }
-
-    this.getCategoryObj();
   }
 };
 </script>
@@ -435,6 +451,11 @@ export default {
   margin: 5px;
   padding: 10px;
   border: 1px solid lightgrey;
+}
+#api-router-wrapper p {
+  margin: 10px 0;
+  font-size: 13px;
+  color: red;
 }
 
 .api-router-row div:nth-child(1) {

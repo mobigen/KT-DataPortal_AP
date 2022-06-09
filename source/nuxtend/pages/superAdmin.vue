@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h3>superAdmin</h3>
+  <div class="superAdmin">
     <nuxt-child />
   </div>
 </template>
@@ -10,3 +9,9 @@ export default {
   name: "index-super"
 };
 </script>
+
+<style>
+.superAdmin {
+  margin: 10px 10px;
+}
+</style>
