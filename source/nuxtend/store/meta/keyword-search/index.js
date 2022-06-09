@@ -17,7 +17,23 @@ export const mutations = {
 import sampleContents from "./_contents.json";
 
 export const actions = {
-  getContents({ state, commit }) {
+  getContents({ commit, rootGetters, dispatch }, params) {
+    /*
+    const paging =
+      rootGetters["module/pagination/paging"][params.paginationKey];
+    // param with pageInfo (start, end...)
+    const paramAPI = `?perPage=${paging.itemsPerPage}&curPage=${paging.page}`;
+    */
+
     commit("setContents", sampleContents);
+
+    dispatch(
+      "module/pagination/setTotalCount",
+      {
+        key: params.paginationKey,
+        totalCount: sampleContents.length
+      },
+      { root: true }
+    );
   }
 };
