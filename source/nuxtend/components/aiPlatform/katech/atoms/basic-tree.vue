@@ -29,6 +29,7 @@
         :tree-data="treeChildren"
         :tree-key="treeKey"
         :pDepth="depth"
+        :parentsIds="pId"
         @selectionChange="selectionChange"
       >
       </item>
@@ -144,17 +145,14 @@ export default {
         } else {
           // parentId가 있으면 해당되는 노드만 '선택' / '비선택'을 셋팅한다.
           if (
-            me.treeData[me.treeKey[me.CONSTANTS.TREE.TREE_KEY.NODE_ID]] ===
-            parentId
+            me.treeData[me.treeKey[me.CONSTANTS.TREE.TREE_KEY.PRNTS_ID]] ===
+              parentId ||
+            me.parentsIds.includes(parentId)
           ) {
-            if (me.treeData.children !== undefined) {
-              me.treeData.children.forEach((c) => {
-                me.selectionChange({
-                  bool: bool,
-                  nodeData: c
-                });
-              });
-            }
+            me.selectionChange({
+              bool: bool,
+              nodeData: me.treeData
+            });
           }
         }
       });
@@ -175,29 +173,10 @@ export default {
       this.open = !this.open;
     },
     checkboxClick(bool, nodeId) {
-      // const nodeSelected = !this.spanSelected;
-
-      // ALL인 경우, 모든 노드 선택 가능함.
-      // 상위자동선택에 체크되어있는 경우, 자기보다 위의 노드를 모드 선택한다.
-      const me = this;
-      if (this.checked) {
-        // 자기 자신 노드를 포함한다.
-        this.pId.push(
-          treeNode[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]]
-        );
-        this.pId.forEach((parentId) => {
-          this.selectionChange({
-            bool: bool,
-            nodeData: me.getNode(parentId)
-          });
-        });
-      } else {
-        // 상위 자동선택 미체크. 자신것만 체크한다.
-        this.selectionChange({
-          bool: bool,
-          nodeData: me.getNode(nodeId)
-        });
-      }
+      this.selectionChange({
+        bool: bool,
+        nodeData: this.getNode(nodeId)
+      });
     },
     getNode(key) {
       return this.categoryObjectByKey[key];
