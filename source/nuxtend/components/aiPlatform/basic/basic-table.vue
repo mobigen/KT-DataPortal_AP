@@ -4,7 +4,11 @@
       <thead v-if="useHeader">
         <tr>
           <th v-if="useSerialNum">{{ serialNumText }}</th>
-          <th v-for="(h, hi) in headerList" :key="'header_' + hi">
+          <th
+            v-for="(h, hi) in headerList"
+            :key="'header_' + hi"
+            v-show="!hideColumns.includes(h['column_name'])"
+          >
             {{ h["column_name"] }}
           </th>
           <template v-if="useTableButton">
@@ -37,7 +41,11 @@
             </template>
           </td>
 
-          <td v-for="(h, hi) in headerList" :key="'header_' + hi">
+          <td
+            v-for="(h, hi) in headerList"
+            :key="'header_' + hi"
+            v-show="!hideColumns.includes(h['column_name'])"
+          >
             <template
               v-if="
                 keyActionText &&
@@ -146,6 +154,13 @@ export default {
     useTagList: {
       type: Boolean,
       require: false
+    },
+    hideColumns: {
+      type: Array,
+      require: false,
+      default: () => {
+        return [];
+      }
     }
   },
   computed: {},

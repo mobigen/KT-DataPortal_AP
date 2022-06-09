@@ -22,6 +22,7 @@
           @columnAction=""
           :keyActionText="{}"
           @keyAction=""
+          :hide-columns="paramHideColumns"
         />
       </div>
 
@@ -54,7 +55,8 @@ export default {
       apiName: null,
       apiInfoDetail: {},
       apiParamsDetail: {},
-      hideColumns: []
+      hideColumns: [],
+      paramHideColumns: ["API_NM"]
     };
   },
   computed: {
