@@ -8,7 +8,7 @@
     <div
       class="select-selector"
       aria-expanded="false"
-      aria-controls="select-01"
+      :aria-controls="selectId"
     >
       <button class="select-selector__button" type="button">
         <slot name="title">
@@ -23,7 +23,7 @@
         ></svg-icon>
       </button>
     </div>
-    <div class="select-container" id="select-01" aria-haspopup="true">
+    <div class="select-container" :id="selectId" aria-haspopup="true">
       <ul class="select-container__list">
         <slot name="list">
           <!-- 선택 된 객체에 select-container__item--selected 클래스 추가 -->
@@ -64,6 +64,11 @@ export default {
     };
   },
   props: {
+    selectId : {
+      type : String,
+      require : true,
+      default : "select-01"
+    },
     labelName: {
       type: String,
       require: true
@@ -94,6 +99,7 @@ export default {
   watch: {
     selectList() {
       const tempList = JSON.parse(JSON.stringify(this.selectList));
+      console.log(tempList)
 
       if (this.useAllOption) {
         tempList.unshift({
@@ -102,7 +108,6 @@ export default {
         });
       }
       this.newSelectList = tempList;
-      // console.log(this.newSelectList);
     },
     // changed selection
     selectedKey() {
@@ -119,10 +124,12 @@ export default {
       this.$emit("changeData", { label: this.labelName, input: input });
     }
   },
-  created() {}
+  created() {
+    console.log(this.selectId)
+  }
 };
 </script>
 
 <style lang="scss">
-@import "base-select.scss";
+@import "base-select";
 </style>

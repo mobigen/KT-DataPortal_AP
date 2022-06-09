@@ -21,6 +21,7 @@
     <div class="api-router-row">
       <basic-label forProperty="">CTGRY</basic-label>
       <base-select
+        select-id="select-01"
         labelName="CTGRY"
         :select-list="categoryList"
         :selected-key="apiObj['CTGRY']"
@@ -126,6 +127,7 @@
             <div class="api-router-row">
               <basic-label forProperty="">DATA_TYPE</basic-label>
               <base-select
+                select-id="select-02"
                 labelName="DATA_TYPE"
                 :select-list="dataTypeList"
                 :selected-key="apiParamObj['DATA_TYPE']"
@@ -171,14 +173,14 @@
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 import BasicLabel from "@/components/aiPlatform/basic/basic-label.vue";
 import BasicInput from "@/components/aiPlatform/basic/basic-input.vue";
-import BaseSelect from "@/components/aiPlatform/basic/base-select/base-select.vue";
+import BaseSelect from "@/components/aiPlatform/katech/atoms/base-select/base-select";
 import RadioButton from "@/components/aiPlatform/basic/radio-button.vue";
 import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
 import { mapGetters } from "vuex";
 import {
   successAlert,
   errorAlert
-} from "@/components/aiPlatform/basic/alert/alert-default";
+} from "@/components/aiPlatform/functional/alert/alert-default";
 
 export default {
   name: "apiRouter-form",
@@ -210,16 +212,7 @@ export default {
         }
       },
       showAddParam: false,
-      dataTypeList: [
-        {
-          key: "STRING",
-          text: "String"
-        },
-        {
-          key: "NUMBER",
-          text: "Number"
-        }
-      ]
+      dataTypeList: []
     };
   },
   computed: {
@@ -283,6 +276,9 @@ export default {
         params[this.CONSTANTS.API_ROUTER.PARAM.PARAMS] = this.apiParams.body;
       }
 
+      // NO parameter는 backend에서 처리되지 않기 때문에 삭제한다.
+      delete params.NO;
+
       if (!this.checkValidation(params)) {
         const msg = "param 값이 유효하지 않습니다.";
         errorAlert(msg);
@@ -299,7 +295,7 @@ export default {
             me.apiParamObj = JSON.parse(JSON.stringify({}));
 
             successAlert("저장되었습니다.");
-            me.$router.push({ path: "/superAdmin/apiRouter/list" });
+            // me.$router.push({ path: "/superAdmin/apiRouter/list" });
           } else {
             const msg = "저장에 실패하였습니다. msg:" + d.data.errorMessage;
             errorAlert(msg);
@@ -424,19 +420,31 @@ export default {
         value: this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL,
         label: this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL
       });
+    },
+    setParamSelect() {
+      this.dataTypeList = [
+        {
+          key: "STRING",
+          text: "String"
+        },
+        {
+          key: "NUMBER",
+          text: "Number"
+        }
+      ];
     }
   },
   async created() {
+    this.setApiDefaultColumns();
+
     this.setModeRadioOption();
     await this.getServerList();
+    this.setParamSelect();
 
     this.apiName = this.$route.query.apiName;
     if (this.apiName) {
       // 수정이면
       this.getApi();
-    } else {
-      // 등록이면 column 을 표시하기 위해 column 정보 api를 호출한다.
-      this.setApiDefaultColumns();
     }
   }
 };
