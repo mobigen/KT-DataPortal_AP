@@ -429,7 +429,11 @@
       <!-- // 사이드메뉴 -->
       <section>
         <!--탭 -->
-        <group-tab></group-tab>
+        <group-tab
+          :tabList="tabList"
+          :useTabNum="true"
+          @tabClick="tabClick"
+        ></group-tab>
         <!-- // 탭 -->
         <div class="contents__list">
           <div class="contents__list-head">
@@ -508,7 +512,7 @@
 import BaseRadio from "@component/project/katech/atoms/base-radio/base-radio";
 import BaseButton from "@component/project/katech/atoms/base-button/base-button";
 import BaseCheckbox from "@component/project/katech/atoms/base-checkbox/base-checkbox";
-import GroupTab from "@component/project/katech/molecules/group-tab/group-tab";
+import GroupTab from "@component/aiPlatform/katech/molecules/group-tab/group-tab";
 import GroupPagination from "@component/project/katech/molecules/group-pagination/group-pagination";
 import GroupBreadcrumb from "@component/project/katech/molecules/group-breadcrumb/group-breadcrumb";
 import GroupSearchFilter from "@component/aiPlatform/katech/molecules/group-search-filter/group-search-filter";
@@ -587,6 +591,12 @@ export default {
         { itemId: 3, itemName: "교통체증" },
         { itemId: 4, itemName: "대중교통" },
         { itemId: 5, itemName: "자전거" }
+      ],
+      tabList: [
+        { num: "999+", title: "전체" },
+        { num: "133", title: "내부데이터" },
+        { num: "0", title: "CKAN" },
+        { num: "71", title: "분원데이터" }
       ]
     };
   },
@@ -622,6 +632,9 @@ export default {
     tagClick(tagObj) {
       this.searchKeyword = tagObj.itemName;
       this.search();
+    },
+    tabClick({ tabObj }) {
+      console.log(tabObj);
     }
   }
 };
