@@ -27,6 +27,11 @@ export const actions = {
 
     commit("setContents", sampleContents);
 
+    // fullSearch/backup페이지에 페이지네이션 기능 추가 안해서 생기는 에러때문에 임시로 설정
+    if (params === undefined) {
+      return;
+    }
+
     dispatch(
       "module/pagination/setTotalCount",
       {
