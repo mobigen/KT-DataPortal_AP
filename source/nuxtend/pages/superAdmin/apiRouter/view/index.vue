@@ -1,7 +1,5 @@
 <template lang="html">
   <div>
-    <h3>api-router view</h3>
-
     <div>
       <basic-viewTable
         :useTableHead="false"
@@ -24,6 +22,7 @@
           @columnAction=""
           :keyActionText="{}"
           @keyAction=""
+          :hide-columns="paramHideColumns"
         />
       </div>
 
@@ -56,7 +55,8 @@ export default {
       apiName: null,
       apiInfoDetail: {},
       apiParamsDetail: {},
-      hideColumns: []
+      hideColumns: [],
+      paramHideColumns: ["API_NM"]
     };
   },
   computed: {
@@ -68,11 +68,11 @@ export default {
       const row = this.apiInfoDetail.body[0];
       const MODE = row[this.CONSTANTS.API_ROUTER.PARAM.MODE];
       if (MODE === this.CONSTANTS.API_ROUTER.MODE.MESSAGE_PASSING) {
-        this.hideColumns.push(this.CONSTANTS.API_ROUTER.PARAM.CMD);
-        this.hideColumns.push(this.CONSTANTS.API_ROUTER.PARAM.PARAMS);
-      } else {
         this.hideColumns.push(this.CONSTANTS.API_ROUTER.PARAM.URL);
         this.hideColumns.push(this.CONSTANTS.API_ROUTER.PARAM.METH);
+      } else {
+        this.hideColumns.push(this.CONSTANTS.API_ROUTER.PARAM.CMD);
+        this.hideColumns.push(this.CONSTANTS.API_ROUTER.PARAM.PARAMS);
       }
 
       this.hideColumns = JSON.parse(JSON.stringify(this.hideColumns));

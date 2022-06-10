@@ -1,6 +1,10 @@
 <template lang="html">
   <div class="tags">
-    <base-tag v-for="data in tagList" @tagClick="tagClick(data)">
+    <base-tag
+      v-for="(data, i) in tagList"
+      @tagClick="tagClick(data)"
+      :key="'base_tag_' + i"
+    >
       {{ previousText }}{{ data["itemName"] }}
       <template v-if="useCancelButton">
         <base-button title="삭제" @click="cancel(data['itemId'])">

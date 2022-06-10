@@ -22,7 +22,7 @@
             :tagList="tagList"
             previousText="#"
             :useCancelButton="false"
-            @tagClick="tagClick"
+            @tagClick="recommendTagClick"
           ></basic-tag-list>
         </div>
       </div>
@@ -440,58 +440,23 @@
             <h4>전체<span>164</span></h4>
             <div class="list-head__options">
               <div class="list-head__options-sort">
-                <div class="radios">
-                  <base-radio
-                    name="radio-check"
-                    radioId="radio-sort1"
-                    class="radio--check"
-                    checked
-                  >
-                    <template v-slot:label
-                      ><span class="radio-check-first">정확도순</span></template
-                    >
-                  </base-radio>
-                  <base-radio
-                    name="radio-check"
-                    radioId="radio-sort2"
-                    class="radio--check"
-                  >
-                    <template v-slot:label><span>수정일순</span></template>
-                  </base-radio>
-                  <base-radio
-                    name="radio-check"
-                    radioId="radio-sort3"
-                    class="radio--check"
-                  >
-                    <template v-slot:label><span>조회순</span></template>
-                  </base-radio>
-                </div>
+                <basic-option
+                  radioClass="radio--check"
+                  :optionList="sortOptionList"
+                  type="text"
+                  name="radio-sort"
+                  @checkOption="sortOptionChange"
+                ></basic-option>
               </div>
               <div class="list-head__options-view">
-                <div class="radios radios--toggle">
-                  <base-radio
-                    name="radio-test-icon"
-                    radioId="radio1"
-                    class="radio--icon"
-                    checked
-                  >
-                    <template v-slot:label>
-                      <svg-icon name="list_katech" class="svg-icon" />
-                      <span class="hidden">목록형</span>
-                    </template>
-                  </base-radio>
-                  <base-radio
-                    name="radio-test-icon"
-                    radioId="radio2"
-                    class="radio--icon"
-                    @change="toggleListCard"
-                  >
-                    <template v-slot:label>
-                      <svg-icon name="list_card_katech" class="svg-icon" />
-                      <span class="hidden">카드형</span>
-                    </template>
-                  </base-radio>
-                </div>
+                <basic-option
+                  class="radios--toggle"
+                  radioClass="radio--icon"
+                  :optionList="viewOptionList"
+                  type="icon"
+                  name="radio-view"
+                  @checkOption="viewOptionChange"
+                ></basic-option>
               </div>
             </div>
           </div>
@@ -501,7 +466,16 @@
           </div>
         </div>
         <div class="contents__pagination">
-          <group-pagination></group-pagination>
+          <group-pagination
+            :paging-key="paginationKey"
+            :paging-object="{
+              [CONSTANTS.PAGING.ITEMS_PER_PAGE]: 5,
+              [CONSTANTS.PAGING.VISIBLE_PAGES]: 3,
+              [CONSTANTS.PAGING.PAGE]: 1
+            }"
+            @pagingEvent="getGridData"
+            :show-test-table="false"
+          ></group-pagination>
         </div>
       </section>
     </div>
@@ -509,11 +483,10 @@
 </template>
 
 <script type="text/javascript">
-import BaseRadio from "@component/project/katech/atoms/base-radio/base-radio";
 import BaseButton from "@component/project/katech/atoms/base-button/base-button";
 import BaseCheckbox from "@component/project/katech/atoms/base-checkbox/base-checkbox";
 import GroupTab from "@component/aiPlatform/katech/molecules/group-tab/group-tab";
-import GroupPagination from "@component/project/katech/molecules/group-pagination/group-pagination";
+import GroupPagination from "@component/aiPlatform/katech/molecules/group-pagination/group-pagination";
 import GroupBreadcrumb from "@component/project/katech/molecules/group-breadcrumb/group-breadcrumb";
 import GroupSearchFilter from "@component/aiPlatform/katech/molecules/group-search-filter/group-search-filter";
 import SearchList from "@component/project/katech/organisms/search-list/search-list.vue";
@@ -521,20 +494,18 @@ import SearchInputField from "@component/aiPlatform/katech/organisms/search-inpu
 import OrganismsFilterResult from "@component/aiPlatform/katech/organisms/filter-result";
 import SearchResultBox from "@component/aiPlatform/katech/atoms/search-result-box";
 import BasicTagList from "@component/aiPlatform/katech/atoms/basic-tag-list";
-import { mapGetters } from "vuex";
+import BasicOption from "@component/aiPlatform/katech/atoms/basic-option";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Index",
-  async asyncData({ store }) {
-    await store.dispatch("meta/keyword-search/getContents");
-  },
   computed: {
     ...mapGetters({
-      contents: "meta/keyword-search/contents"
+      contents: "meta/keyword-search/contents",
+      CONSTANTS: "defaults/constants/CONSTANTS"
     })
   },
   components: {
-    BaseRadio,
     BaseButton,
     BaseCheckbox,
     GroupPagination,
@@ -545,7 +516,8 @@ export default {
     SearchInputField,
     OrganismsFilterResult,
     SearchResultBox,
-    BasicTagList
+    BasicTagList,
+    BasicOption
   },
   data() {
     return {
@@ -597,10 +569,21 @@ export default {
         { num: "133", title: "내부데이터" },
         { num: "0", title: "CKAN" },
         { num: "71", title: "분원데이터" }
+      ],
+      paginationKey: "fullSearchPagination",
+      sortOptionList: [
+        { label: "정확도순", option: "accuracy" },
+        { label: "수정일순", option: "updateDate" },
+        { label: "조회순", option: "view" }
+      ],
+      viewOptionList: [
+        { label: "목록형", option: "list", svgIconName: "list_katech" },
+        { label: "카드형", option: "card", svgIconName: "list_card_katech" }
       ]
     };
   },
   methods: {
+    ...mapActions("meta/keyword-search", ["getContents"]),
     toggleDetail: function () {
       this.isDetailOpen = !this.isDetailOpen;
     },
@@ -629,13 +612,27 @@ export default {
       this.showSearchResultBox = true;
       this.searchResultSuccess = true;
     },
-    tagClick(tagObj) {
+    recommendTagClick(tagObj) {
       this.searchKeyword = tagObj.itemName;
       this.search();
     },
     tabClick({ tabObj }) {
       console.log(tabObj);
+    },
+    getGridData() {
+      this.getContents({
+        paginationKey: this.paginationKey
+      });
+    },
+    sortOptionChange(option) {
+      console.log("sort option: " + option);
+    },
+    viewOptionChange(option) {
+      console.log("view option: " + option);
     }
+  },
+  mounted() {
+    this.getGridData();
   }
 };
 </script>

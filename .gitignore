@@ -137,6 +137,7 @@ nbdist/
 
 # frontend
 /source/nuxtend/assets/style-product/images/compiled-svg-icons/
+/source/nuxtend/package-lock.json
 
 # backend
 /source/src/main/resources/static/
@@ -145,4 +146,4 @@ nbdist/
 
 ### Only this project ###
 /source/nuxtend/assets/svg/
-/source/nuxtend/assets/style-core/
+/source/nuxtend/assets/style-core

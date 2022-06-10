@@ -1,7 +1,5 @@
 <template lang="html">
   <div>
-    <h3>api-router list</h3>
-
     <div class="component flex">
       <basic-label forProperty="">CTGRY</basic-label>
       <base-select
@@ -48,10 +46,10 @@
 import BasicLabel from "@/components/aiPlatform/basic/basic-label.vue";
 import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
-import BaseSelect from "@/components/aiPlatform/basic/base-select/base-select.vue";
+import BaseSelect from "@/components/aiPlatform/katech/atoms/base-select/base-select";
 import { mapGetters } from "vuex";
 
-import { confirmAlert } from "@/components/aiPlatform/basic/alert/alert-default";
+import { confirmAlert } from "@/components/aiPlatform/functional/alert/alert-default";
 
 export default {
   name: "apiRouter-list",
@@ -61,12 +59,12 @@ export default {
     return {
       apiList: {},
       buttonList: {
-        // edit: {
-        //   buttonType: "icon",
-        //   buttonName: "수정",
-        //   buttonCss: "icon-button",
-        //   iconData: "pen-to-square"
-        // },
+        edit: {
+          buttonType: "icon",
+          buttonName: "수정",
+          buttonCss: "icon-button",
+          iconData: "pen-to-square"
+        },
         remove: {
           buttonType: "icon",
           buttonName: "삭제",
