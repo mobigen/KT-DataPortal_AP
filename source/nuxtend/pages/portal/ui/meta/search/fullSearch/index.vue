@@ -483,13 +483,13 @@
 </template>
 
 <script type="text/javascript">
-import BaseButton from "@component/project/katech/atoms/base-button/base-button";
-import BaseCheckbox from "@component/project/katech/atoms/base-checkbox/base-checkbox";
+import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button";
+import BaseCheckbox from "@component/UITeam/project/katech/atoms/base-checkbox/base-checkbox";
 import GroupTab from "@component/aiPlatform/katech/molecules/group-tab/group-tab";
 import GroupPagination from "@component/aiPlatform/katech/molecules/group-pagination/group-pagination";
-import GroupBreadcrumb from "@component/project/katech/molecules/group-breadcrumb/group-breadcrumb";
+import GroupBreadcrumb from "@component/UITeam/project/katech/molecules/group-breadcrumb/group-breadcrumb";
 import GroupSearchFilter from "@component/aiPlatform/katech/molecules/group-search-filter/group-search-filter";
-import SearchList from "@component/project/katech/organisms/search-list/search-list.vue";
+import SearchList from "@component/UITeam/project/katech/organisms/search-list/search-list.vue";
 import SearchInputField from "@component/aiPlatform/katech/organisms/search-input-field/search-input-field.vue";
 import OrganismsFilterResult from "@component/aiPlatform/katech/organisms/filter-result";
 import SearchResultBox from "@component/aiPlatform/katech/atoms/search-result-box";

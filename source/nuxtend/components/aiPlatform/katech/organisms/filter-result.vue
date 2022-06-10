@@ -198,7 +198,7 @@
 // import BasicLabel from "@component/aiPlatform/basic/basic-label.vue";
 // import BasicTagList from "@component/aiPlatform/basic/basic-tag-list";
 import { mapActions, mapGetters } from "vuex";
-import BaseButton from "@project/katech/atoms/base-button/base-button";
+import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button";
 
 export default {
   name: "select-filter-list",

@@ -90,7 +90,7 @@
 </template>
 <script type="text/javascript">
 import { mapActions } from "vuex";
-import BaseButton from "@component/project/katech/atoms/base-button/base-button.vue";
+import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button.vue";
 import BasicViewTable from "@component/aiPlatform/basic/basic-view-table";
 
 export default {

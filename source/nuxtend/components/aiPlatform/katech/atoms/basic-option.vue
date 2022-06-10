@@ -2,6 +2,7 @@
   <div class="radios">
     <base-radio
       v-for="(data, i) in optionList"
+      :key="'basic_option_' + i"
       :class="radioClass"
       :name="name"
       :radioId="name + i"

@@ -186,7 +186,7 @@ export default {
   },
 
   // custom loading bar
-  loading: "~/components/functional/loader/loader.vue",
+  loading: "~/components/UITeam/functional/loader/loader.vue",
 
   // 미들웨어
   router: {

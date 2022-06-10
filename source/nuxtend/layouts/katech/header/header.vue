@@ -171,8 +171,8 @@
 <i18n src="./header.json"></i18n>
 
 <script>
-import BaseButton from "@component/project/katech/atoms/base-button/base-button";
-import BaseInput from "@component/project/katech/atoms/base-input/base-input";
+import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button";
+import BaseInput from "@component/UITeam/project/katech/atoms/base-input/base-input";
 // import Locale from "@project/sample/locale/locale.vue";
 import { mapGetters } from "vuex";
 
