@@ -54,79 +54,79 @@
 </template>
 
 <script>
-  export default {
-    name: "BaseSelect",
-    data() {
-      return {
-        isSelectOpen: false,
-        selectedVal: null,
-        newSelectList: []
-      };
+export default {
+  name: "BaseSelect",
+  data() {
+    return {
+      isSelectOpen: false,
+      selectedVal: null,
+      newSelectList: []
+    };
+  },
+  props: {
+    selectId: {
+      type: String,
+      require: true,
+      default: "select-01"
     },
-    props: {
-      selectId: {
-        type: String,
-        require: true,
-        default: "select-01"
-      },
-      labelName: {
-        type: String,
-        require: true
-      },
-      selectList: {
-        type: Array,
-        require: true,
-        default: () => {
-          return [];
-        }
-      },
-      placeholderText: {
-        type: String,
-        require: false,
-        default: "선택해주세요."
-      },
-      selectedKey: {
-        type: String,
-        require: false,
-        default: null
-      },
-      useAllOption: {
-        type: Boolean,
-        require: false,
-        default: false
+    labelName: {
+      type: String,
+      require: true
+    },
+    selectList: {
+      type: Array,
+      require: true,
+      default: () => {
+        return [];
       }
     },
-    watch: {
-      selectList() {
-        const tempList = JSON.parse(JSON.stringify(this.selectList));
+    placeholderText: {
+      type: String,
+      require: false,
+      default: "선택해주세요."
+    },
+    selectedKey: {
+      type: String,
+      require: false,
+      default: null
+    },
+    useAllOption: {
+      type: Boolean,
+      require: false,
+      default: false
+    }
+  },
+  watch: {
+    selectList() {
+      const tempList = JSON.parse(JSON.stringify(this.selectList));
 
-        if (this.useAllOption) {
-          tempList.unshift({
-            key: "all",
-            text: "전체"
-          });
-        }
-        this.newSelectList = tempList;
-      },
-      // changed selection
-      selectedKey() {
-        const obj = this.newSelectList.find((sl) => {
-          return sl.key === this.selectedKey;
+      if (this.useAllOption) {
+        tempList.unshift({
+          key: "all",
+          text: "전체"
         });
-        this.selectedVal = obj === undefined ? this.placeholderText : obj.text;
       }
+      this.newSelectList = tempList;
     },
-    computed: {},
-    methods: {
-      changeData(input) {
-        // select text에 셋팅하준다.
-        this.$emit("changeData", { label: this.labelName, input: input });
-      }
-    },
-    created() {}
-  };
+    // changed selection
+    selectedKey() {
+      const obj = this.newSelectList.find((sl) => {
+        return sl.key === this.selectedKey;
+      });
+      this.selectedVal = obj === undefined ? this.placeholderText : obj.text;
+    }
+  },
+  computed: {},
+  methods: {
+    changeData(input) {
+      // select text에 셋팅하준다.
+      this.$emit("changeData", { label: this.labelName, input: input });
+    }
+  },
+  created() {}
+};
 </script>
 
 <style lang="scss">
-  @import "base-select";
+@import "base-select";
 </style>
