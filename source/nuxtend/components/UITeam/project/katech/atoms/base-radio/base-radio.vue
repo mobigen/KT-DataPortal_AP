@@ -35,5 +35,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "base-radio";
+@import "base-radio.scss";
 </style>

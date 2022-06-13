@@ -103,5 +103,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "dialog";
+@import "dialog.scss";
 </style>

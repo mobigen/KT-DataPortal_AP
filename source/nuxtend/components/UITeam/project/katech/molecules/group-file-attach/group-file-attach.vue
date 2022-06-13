@@ -37,7 +37,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button.vue";
+import BaseButton from "@atoms/base-button/base-button.vue";
 
 export default {
   name: "GroupFileAttach",
@@ -48,5 +48,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "group-file-attach";
+@import "./group-file-attach";
 </style>

@@ -46,5 +46,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "group-checkbox";
+@import "./group-checkbox.scss";
 </style>

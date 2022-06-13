@@ -22,9 +22,9 @@
 </template>
 
 <script type="text/javascript">
-import GroupSearch from "@component/UITeam/project/katech/molecules/group-search/group-search";
-import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button";
-import BaseCheckbox from "@component/UITeam/project/katech/atoms/base-checkbox/base-checkbox";
+import GroupSearch from "@component/styled/molecules/group-search/group-search";
+import BaseButton from "@component/styled/atoms/base-button/base-button";
+import BaseCheckbox from "@component/styled/atoms/base-checkbox/base-checkbox";
 export default {
   name: "SearchInputSmall",
   extends: {},
@@ -44,5 +44,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "search-input-small";
+@import "./search-input-small.scss";
 </style>

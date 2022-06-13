@@ -71,5 +71,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "group-table";
+@import "./group-table";
 </style>

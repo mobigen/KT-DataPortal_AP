@@ -41,5 +41,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "group-input";
+@import "./group-input.scss";
 </style>

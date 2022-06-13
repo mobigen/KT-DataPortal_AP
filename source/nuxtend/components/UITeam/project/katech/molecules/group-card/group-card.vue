@@ -48,5 +48,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "group-card";
+@import "./group-card.scss";
 </style>

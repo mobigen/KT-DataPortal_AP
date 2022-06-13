@@ -72,5 +72,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "group-step";
+@import "./group-step.scss";
 </style>

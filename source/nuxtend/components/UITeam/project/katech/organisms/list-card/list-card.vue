@@ -13,7 +13,7 @@
 </template>
 
 <script type="text/javascript">
-import GroupCard from "@component/UITeam/project/katech/molecules/group-card/group-card.vue";
+import GroupCard from "@molecules/group-card/group-card.vue";
 export default {
   name: "ListCard",
   components: { GroupCard }
@@ -21,5 +21,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "list-card";
+@import "./list-card.scss";
 </style>

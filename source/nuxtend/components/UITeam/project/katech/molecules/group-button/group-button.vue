@@ -16,7 +16,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button.vue";
+import BaseButton from "@atoms/base-button/base-button.vue";
 
 export default {
   name: "GroupButton",
@@ -27,5 +27,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "group-button";
+@import "./group-button.scss";
 </style>

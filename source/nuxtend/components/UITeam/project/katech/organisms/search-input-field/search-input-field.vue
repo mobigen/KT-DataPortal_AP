@@ -21,9 +21,9 @@
 </template>
 
 <script type="text/javascript">
-import GroupSearch from "@component/UITeam/project/katech/molecules/group-search/group-search";
-import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button";
-import BaseCheckbox from "@component/UITeam/project/katech/atoms/base-checkbox/base-checkbox";
+import GroupSearch from "@component/project/katech/molecules/group-search/group-search";
+import BaseButton from "@component/project/katech/atoms/base-button/base-button";
+import BaseCheckbox from "@component/project/katech/atoms/base-checkbox/base-checkbox";
 export default {
   name: "SearchInputField",
   extends: {},
@@ -43,5 +43,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "search-input-field";
+@import "./search-input-field.scss";
 </style>

@@ -83,5 +83,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "group-search-small";
+@import "./group-search-small.scss";
 </style>

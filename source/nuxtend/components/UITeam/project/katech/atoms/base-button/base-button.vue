@@ -31,5 +31,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "base-button";
+@import "base-button.scss";
 </style>

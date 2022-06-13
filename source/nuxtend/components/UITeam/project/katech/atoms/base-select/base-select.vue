@@ -50,5 +50,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "base-select";
+@import "base-select.scss";
 </style>

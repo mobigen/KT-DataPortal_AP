@@ -42,5 +42,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "search-result-article";
+@import "./search-result-article";
 </style>

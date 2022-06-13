@@ -43,7 +43,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseCheckbox from "@component/UITeam/project/katech/atoms/base-checkbox/base-checkbox";
+import BaseCheckbox from "@component/project/katech/atoms/base-checkbox/base-checkbox";
 
 export default {
   name: "GroupSearchFilter",
@@ -57,7 +57,7 @@ export default {
       searchFilterList: [
         {
           checkboxId: '1',
-          title: "자동차 부품산업",
+          title: "자동차 부품 제조 산업",
           nextSearchFilterList: [
             {
               checkboxId: '1-1',
@@ -83,7 +83,7 @@ export default {
               lastSearchFilterList: [
                 {
                   checkboxId: '1-4-1',
-                  title: "xEV"
+                  title: "xEV 파워트레인"
                 },
                 {
                   checkboxId: '1-4-2',
@@ -95,37 +95,81 @@ export default {
         },
         {
           checkboxId: '2',
-          title: "자동차제조",
+          title: "자동차 제조 산업(부품제외)",
           nextSearchFilterList: [
             {
               checkboxId: '2-1',
-              title: "스마트팩토리"
+              title: "스마트팩토리 운영 데이터"
+            },
+            {
+              checkboxId: '2-2',
+              title: "조립공정 운영 데이터"
             }
           ]
         },
         {
           checkboxId: '3',
-          title: "자동차 정비 서비스",
+          title: "자동차 판매/정비 서비스",
           nextSearchFilterList: [
             {
               checkboxId: '3-1',
-              title: "보험사 데이터"
+              title: "자동차 판매"
+            },
+            {
+              checkboxId: '3-2',
+              title: "자동차 부품 판매"
+            },
+            {
+              checkboxId: '3-3',
+              title: "자동차 용품 판매"
+            },
+            {
+              checkboxId: '3-4',
+              title: "자동차 정비"
             }
           ]
         },
         {
           checkboxId: '4',
-          title: "화물운송 서비스",
+          title: "자동차 이용 산업",
           nextSearchFilterList: [
             {
               checkboxId: '4-1',
-              title: "SK렌터카"
+              title: "여객 운송"
+            },
+            {
+              checkboxId: '4-2',
+              title: "화물 운송"
+            },
+            {
+              checkboxId: '4-3',
+              title: "자동차 임대/리스",
+              lastSearchFilterList: [
+                {
+                  checkboxId: '4-3-1',
+                  title: "SK렌터카"
+                }
+              ]
+            },
+            {
+              checkboxId: '4-4',
+              title: "주차장"
             }
           ]
         },
         {
           checkboxId: '5',
-          title: "관제/사고 관련 서비스산업"
+          title: "관제/사고 관련 서비스 산업",
+          nextSearchFilterList: [
+            {
+              checkboxId: '5-1',
+              title: "도로 관제"
+            },
+            {
+              checkboxId: '5-2',
+              title: "사고 관제"
+            }
+          ]
         },
         {
           checkboxId: '6',
@@ -140,6 +184,30 @@ export default {
               title: "전기차"
             }
           ]
+        },
+        {
+          checkboxId: '7',
+          title: "기타",
+          nextSearchFilterList: [
+            {
+              checkboxId: '7-1',
+              title: "정유, 윤활유, 주유소, 충전소"
+            },
+            {
+              checkboxId: '7-2',
+              title: "보험, 금융",
+              lastSearchFilterList: [
+                {
+                  checkboxId: '7-2-1',
+                  title: "보험사 데이터"
+                }
+              ]
+            },
+            {
+              checkboxId: '7-3',
+              title: "운전교습"
+            }
+          ]
         }
       ]
     };
@@ -148,5 +216,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "group-search-filter";
+@import "./group-search-filter.scss";
 </style>

@@ -48,5 +48,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "group-detail-filter";
+@import "./group-detail-filter.scss";
 </style>

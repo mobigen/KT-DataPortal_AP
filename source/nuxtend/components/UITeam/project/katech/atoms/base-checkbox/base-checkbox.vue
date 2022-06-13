@@ -1,14 +1,7 @@
 <template>
   <!--  최소 단위인 checkbox Component - 기능 별로 쪼개는 작업 필요-->
   <div class="checkbox">
-    <input
-      type="checkbox"
-      class="checkbox__input"
-      :id="checkboxId"
-      :name="name"
-      :checked="checked"
-      :disabled="disabled"
-    />
+    <input type="checkbox" class="checkbox__input" :id="checkboxId" :name="name" :checked="checked" :disabled="disabled" />
     <label class="checkbox__label" :for="checkboxId">
       <slot name="label" class="checkbox__label">Default Label</slot>
     </label>
@@ -36,16 +29,7 @@ export default {
       default: false
     }
   },
-  computed: {
-    checkedData: {
-      get() {
-        return this.checked;
-      },
-      set(newValue) {
-        this.$emit("changeData", newValue, this.name);
-      }
-    }
-  },
+  computed: {},
   methods: {}
 };
 </script>
