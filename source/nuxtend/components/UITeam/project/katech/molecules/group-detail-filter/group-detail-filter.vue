@@ -33,7 +33,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseCheckbox from "@atoms/base-checkbox/base-checkbox.vue";
+import BaseCheckbox from "@/base-checkbox/base-checkbox.vue";
 import BaseButton from "@component/styled/atoms/base-button/base-button";
 
 export default {

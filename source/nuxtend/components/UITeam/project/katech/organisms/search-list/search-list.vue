@@ -27,10 +27,10 @@
                 <template v-slot:label>관심데이터 추가</template>
               </base-checkbox>
             </div>
-            
+
           </div>
           <div class="data-box__content">
-            
+
             <strong class="data-box__title">
               {{ item.title }}<mark>결빙사고</mark> 다발지역 <!-- 검색어에 mark 태그 적용 -->
             </strong>
@@ -39,7 +39,7 @@
               <div class="badge--filetype-02"><span class="badge__label">XML</span></div>
               <div class="badge--filetype-03"><span class="badge__label">JSON</span></div>
             </div>
-            
+
           </div>
           <div>
             <p class="data-box__description">
@@ -53,9 +53,9 @@
                 <base-tag class="tag">#사고다발지역</base-tag>
                 <base-tag class="tag">#교통체증</base-tag>
                 <base-tag class="tag">#대중교통</base-tag>
-                <base-tag class="tag">#자전거</base-tag>  
+                <base-tag class="tag">#자전거</base-tag>
               </div>
-                
+
               <div class="data-box__details-group">
                 <dl>
                   <dt><span>수정일</span></dt>
@@ -66,7 +66,7 @@
               </div>
             </div>
           </div>
-          
+
         </div>
       </a>
     </li>
@@ -74,10 +74,10 @@
 </template>
 
 <script type="text/javascript">
-import BaseBadge from "@atoms/base-badge/base-badge.vue";
-import BaseButton from "@atoms/base-button/base-button.vue";
-import BaseTag from "@atoms/base-tag/base-tag.vue";
-import BaseCheckbox from "@atoms/base-checkbox/base-checkbox.vue";
+import BaseBadge from "@component/UITeam/project/katech/atoms/base-badge/base-badge.vue";
+import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button.vue";
+import BaseTag from "@component/UITeam/project/katech/atoms/base-tag/base-tag.vue";
+import BaseCheckbox from "@component/UITeam/project/katech/atoms/base-checkbox/base-checkbox.vue";
 
 export default {
   name: "SearchList",
