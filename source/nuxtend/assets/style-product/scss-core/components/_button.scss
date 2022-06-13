@@ -285,6 +285,7 @@
 @mixin button--lg {
   @include button-size(15px, $button-height-lg, 24px);
   @include button-padding($spacing-md, $spacing-md);
+  border-radius: rem(5px);
 }
 
 @mixin button--sm {
@@ -423,4 +424,45 @@
 .button-group__button .select-selector__button {
   padding-left: $spacing-xs;
   padding-right: $spacing-lg;
+}
+
+.button-page__default {
+  height: rem(56px);
+  line-height: rem(56px);
+  padding:0 rem(40px);
+  background: $ui-02;
+  border-radius: rem(5px);
+  border : 1px solid $ui-04;
+  color: $text-01;
+  @include font-size("20");
+  @include font-weight("regular");
+
+  &:hover {
+    border-color: $secondary;
+  }
+
+  &:active {
+    border-color: $secondary;
+    color: $secondary;
+  }
+}
+
+.button-page__point {
+  height: rem(56px);
+  line-height: rem(56px);
+  padding:0 rem(40px);
+  background: $secondary;
+  border-radius: rem(5px);
+  border : none;
+  color: $ui-02;
+  @include font-size("20");
+  @include font-weight("regular");
+
+  &:hover {
+    background: $hover-secondary;
+  }
+
+  &:active {
+    background: $active-secondary;
+  }
 }

@@ -18,6 +18,41 @@ main {
   margin: 0 auto;
 }
 
+/* IE 스크롤바 */
+.scrollCustomize {
+  overflow:auto; 
+  scrollbar-arrow-color: #C2C2C2; 
+  scrollbar-base-color: #C2C2C2;
+  scrollbar-Face-Color: #C2C2C2;
+  scrollbar-track-color: #F2F2F2; 
+  scrollbar-DarkShadow-Color: #C2C2C2; 
+  scrollbar-Shadow-Color: #C2C2C2; 
+  scrollbar-Highlight-Color: #C2C2C2; 
+  scrollbar-3dLight-Color: #C2C2C2;
+}
+
+/* Chrome, Safari 스크롤 바 */
+.scrollCustomize::-webkit-scrollbar {
+  width:6px;
+}
+.scrollCustomize::-webkit-scrollbar-button:start:decrement {
+  display:block; 
+  height:4px; 
+}
+.scrollCustomize::-webkit-scrollbar-button:end:increment {
+  display:block; 
+  height:4px;
+}
+.scrollCustomize::-webkit-scrollbar-thumb {
+  border:none; 
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+.scrollCustomize::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+
 // -------------------------
 // 페이지 타이틀 영역 subject
 // -------------------------
@@ -30,24 +65,71 @@ main {
 .subject {
   position: relative;
   width: 100%;
+
+  .subject__title {
+    display: block; 
+    width: 100%; 
+    padding:rem(30px) 0 rem(20px) 0; 
+    @include font-size("32");
+    line-height: rem(32px);
+    color: $text-01; 
+  }
+  
+  .subject__desc {
+    display: block;
+    padding:0 0 rem(30px) 0; 
+    @include font-size("18");
+    line-height: rem(18px); 
+    color: $text-03; 
+  }
+
 }
 
-.subject__title {
-  display: block; 
-  width: 100%; 
-  padding:rem(30px) 0 rem(20px) 0; 
-  @include font-size("32");
-  line-height: rem(32px);
-  color: $primary; 
+.subject_sm {
+  display: flex;
+  align-items: center;
+
+  .subject__title {
+    padding:rem(30px) 0 rem(20px) 0; 
+    @include font-size("32");
+    @include font-weight("regular");
+    line-height: rem(32px);
+    color: $text-01;
+    flex-shrink: 0;     
+  }
+  
+  .subject__desc {
+    padding:rem(50px) 0 0 rem(30px);
+    height: rem(24px) ;
+    @include font-size("14");
+    line-height: rem(24px); 
+    color: $text-03;
+    flex-grow: 1;
+  }
+
+  .subject__right {
+    flex-shrink: 0; 
+  }
+
 }
 
-.subject__desc {
-  display: block;
-  padding:0 0 rem(30px) 0; 
-  @include font-size("18");
-  line-height: rem(18px); 
-  color: $text-03; 
+.blit_essential {
+  position: relative;
+  padding: 0 rem(10px);
+  font-size: 0;
+
+  &::before {
+    content: " ";
+    position: absolute;
+    top: rem(10px);
+    left: rem(10px);
+    width: rem(6px);
+    height: rem(6px);
+    border-radius: 50%;
+    background: $secondary;
+  }
 }
+
 
 .contents-top {
   width: 100%;
@@ -184,7 +266,7 @@ main {
   max-width: rem(1280px);
   margin: 0 auto;
   display: flex;
-  padding: $layout-xs 0 $layout-lg 0;
+  padding: 0 0 $layout-lg 0;
 
   aside {
     flex-shrink: 0;
@@ -260,6 +342,63 @@ main {
 .section-head h4 span {
   margin-left: $spacing-sm;
 }
+
+// 페이지 하단 버튼 그룹
+.page__button {
+  position: relative;
+  margin: rem(80px) 0 rem(40px) 0;
+  display: flex;
+
+  .button__left {
+    flex-shrink: 0;
+    width: rem(300px);
+    display: flex;
+  }
+  .button__center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+  .button__right {
+    flex-shrink: 0;
+    width: rem(300px);
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.button-declaration {
+  position: relative;
+  padding: 0 rem(30px);
+
+  .svg-icon {
+    width: rem(24px);
+    height: rem(24px);
+    fill: $text-02;
+    position: absolute;
+    top: rem(14px);
+    left: rem(28px);
+  }
+  p {
+    margin-left: $spacing-xl;  
+  }
+
+  &:active {
+    .svg-icon {
+      fill: $secondary;
+    }
+  }
+
+  small {
+    position: absolute;
+    right: 0;
+    top: rem(42px);
+    color: $text-03;
+    @include font-size("14");
+    @include font-weight("regular");
+  }
+}
+
 /*
 @include template-respond-to('breakpoint-lg') {
   .contents ,

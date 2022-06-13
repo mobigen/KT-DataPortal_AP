@@ -233,3 +233,38 @@
     @include font-weight("regular");
   }
 }
+
+// 데이터 활용사례 
+.badge--used {
+  width: rem(80px);
+  height: rem(30px);
+  border-radius: rem(15px);
+  position: relative;
+
+  .badge__icon {
+    width: rem(20px);
+    height: rem(20px);
+    position: absolute;
+    left: 12px;
+    top: 5px;
+  }
+  p {
+    margin-left: rem(30px);
+    line-height: rem(30px);
+    @include font-size("12");
+    text-align: center;
+    width: rem(40px);
+  }
+}
+
+.badge--mobile {
+  @include badge-theme(#F0FFF4, #2F855A, #2F855A);
+}
+
+.badge--web {
+  @include badge-theme(#EBF8FF, #2B6CB0, #2B6CB0);
+}
+
+.badge--etc {
+  @include badge-theme(#FAF5FF, #6B46C1, #6B46C1);
+}
