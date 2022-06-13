@@ -17,7 +17,7 @@
           </ul>
         </div>
       </base-button>
-      
+
       <base-checkbox class="checkbox--favorite" name="myFavoriteData" checkbox-id="breadcrumb__check-myfavoritedata">
         <template v-slot:label>관심데이터 추가</template>
       </base-checkbox>
@@ -26,8 +26,8 @@
   </div>
 </template>
 <script type="text/javascript">
-import BaseCheckbox from "@component/project/katech/atoms/base-checkbox/base-checkbox";
-import BaseButton from "@component/project/katech/atoms/base-button/base-button";
+import BaseCheckbox from "@component/UITeam/project/katech/atoms/base-checkbox/base-checkbox";
+import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button";
 import { mapGetters } from "vuex";
 
 export default {
@@ -53,7 +53,7 @@ export default {
   watch: {},
   data() {
     return {
-      isShareOpen: false      
+      isShareOpen: false
     }
   },
   methods: {

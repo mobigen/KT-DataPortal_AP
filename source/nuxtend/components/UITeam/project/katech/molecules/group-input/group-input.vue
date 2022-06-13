@@ -10,7 +10,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseInput from "@atoms/base-input/base-input.vue";
+import BaseInput from "@component/UITeam/project/katech/atoms/base-input/base-input.vue";
 
 export default {
   name: "GroupInput",
