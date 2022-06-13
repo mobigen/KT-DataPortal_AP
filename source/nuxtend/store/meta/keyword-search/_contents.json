@@ -7,7 +7,20 @@
     "writer": "개똥이",
     "created":"2022/10/10 11:11:11",
     "reactions": "좋아요:3&nbsp;&nbsp;&nbsp;훈훈해요:1&nbsp;&nbsp;&nbsp;슬퍼요:4&nbsp;&nbsp;&nbsp;화나요:14&nbsp;&nbsp;&nbsp;후속기사원해요:2",
-    "location": "서울"
+    "location": "서울",
+    "datatype": "내부",
+    "category": "자동차부품",
+    "provider": "국토교통부",
+    "filetype": ["CVS", "XML", "JSON"],
+    "keyword": [
+      { "itemId": 1, "itemName": "결빙사고" },
+      { "itemId": 2, "itemName": "사고다발지역" },
+      { "itemId": 3, "itemName": "교통체증" },
+      { "itemId": 4, "itemName": "대중교통" },
+      { "itemId": 5, "itemName": "자전거" }
+    ],
+    "updateDate": "2022-05-21",
+    "views" : "1,500"
   },
   {
     "id": 2,
@@ -17,7 +30,20 @@
     "writer": "개똥이",
     "created":"2022/10/10 11:11:11",
     "reactions": "좋아요:3&nbsp;&nbsp;&nbsp;훈훈해요:1&nbsp;&nbsp;&nbsp;슬퍼요:4&nbsp;&nbsp;&nbsp;화나요:14&nbsp;&nbsp;&nbsp;후속기사원해요:2",
-    "location": "서울"
+    "location": "서울",
+    "datatype": "내부",
+    "category": "자동차부품",
+    "provider": "국토교통부",
+    "filetype": ["CVS", "XML", "JSON"],
+    "keyword": [
+      { "itemId": 1, "itemName": "결빙사고" },
+      { "itemId": 2, "itemName": "사고다발지역" },
+      { "itemId": 3, "itemName": "교통체증" },
+      { "itemId": 4, "itemName": "대중교통" },
+      { "itemId": 5, "itemName": "자전거" }
+    ],
+    "updateDate": "2022-05-21",
+    "views" : "1,500"
   },
   {
     "id": 3,
@@ -27,7 +53,20 @@
     "writer": "개똥이",
     "created":"2022/10/10 11:11:11",
     "reactions": "좋아요:3&nbsp;&nbsp;&nbsp;훈훈해요:1&nbsp;&nbsp;&nbsp;슬퍼요:4&nbsp;&nbsp;&nbsp;화나요:14&nbsp;&nbsp;&nbsp;후속기사원해요:2",
-    "location": "서울"
+    "location": "서울",
+    "datatype": "내부",
+    "category": "자동차부품",
+    "provider": "국토교통부",
+    "filetype": ["CVS", "XML", "JSON"],
+    "keyword": [
+      { "itemId": 1, "itemName": "결빙사고" },
+      { "itemId": 2, "itemName": "사고다발지역" },
+      { "itemId": 3, "itemName": "교통체증" },
+      { "itemId": 4, "itemName": "대중교통" },
+      { "itemId": 5, "itemName": "자전거" }
+    ],
+    "updateDate": "2022-05-21",
+    "views" : "1,500"
   },
   {
     "id": 4,
@@ -37,7 +76,20 @@
     "writer": "개똥이",
     "created":"2022/10/10 11:11:11",
     "reactions": "좋아요:3&nbsp;&nbsp;&nbsp;훈훈해요:1&nbsp;&nbsp;&nbsp;슬퍼요:4&nbsp;&nbsp;&nbsp;화나요:14&nbsp;&nbsp;&nbsp;후속기사원해요:2",
-    "location": "서울"
+    "location": "서울",
+    "datatype": "내부",
+    "category": "자동차부품",
+    "provider": "국토교통부",
+    "filetype": ["CVS", "XML", "JSON"],
+    "keyword": [
+      { "itemId": 1, "itemName": "결빙사고" },
+      { "itemId": 2, "itemName": "사고다발지역" },
+      { "itemId": 3, "itemName": "교통체증" },
+      { "itemId": 4, "itemName": "대중교통" },
+      { "itemId": 5, "itemName": "자전거" }
+    ],
+    "updateDate": "2022-05-21",
+    "views" : "1,500"
   },
   {
     "id": 5,
@@ -47,7 +99,20 @@
     "writer": "개똥이",
     "created":"2022/10/10 11:11:11",
     "reactions": "좋아요:3&nbsp;&nbsp;&nbsp;훈훈해요:1&nbsp;&nbsp;&nbsp;슬퍼요:4&nbsp;&nbsp;&nbsp;화나요:14&nbsp;&nbsp;&nbsp;후속기사원해요:2",
-    "location": "서울"
+    "location": "서울",
+    "datatype": "내부",
+    "category": "자동차부품",
+    "provider": "국토교통부",
+    "filetype": ["CVS", "XML", "JSON"],
+    "keyword": [
+      { "itemId": 1, "itemName": "결빙사고" },
+      { "itemId": 2, "itemName": "사고다발지역" },
+      { "itemId": 3, "itemName": "교통체증" },
+      { "itemId": 4, "itemName": "대중교통" },
+      { "itemId": 5, "itemName": "자전거" }
+    ],
+    "updateDate": "2022-05-21",
+    "views" : "1,500"
   },
   {
     "id": 6,
@@ -57,6 +122,19 @@
     "writer": "개똥이",
     "created":"2022/10/10 11:11:11",
     "reactions": "좋아요:3&nbsp;&nbsp;&nbsp;훈훈해요:1&nbsp;&nbsp;&nbsp;슬퍼요:4&nbsp;&nbsp;&nbsp;화나요:14&nbsp;&nbsp;&nbsp;후속기사원해요:2",
-    "location": "서울"
+    "location": "서울",
+    "datatype": "내부",
+    "category": "자동차부품",
+    "provider": "국토교통부",
+    "filetype": ["CVS", "XML", "JSON"],
+    "keyword": [
+      { "itemId": 1, "itemName": "결빙사고" },
+      { "itemId": 2, "itemName": "사고다발지역" },
+      { "itemId": 3, "itemName": "교통체증" },
+      { "itemId": 4, "itemName": "대중교통" },
+      { "itemId": 5, "itemName": "자전거" }
+    ],
+    "updateDate": "2022-05-21",
+    "views" : "1,500"
   }
 ]
