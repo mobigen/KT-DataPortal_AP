@@ -150,7 +150,15 @@
           </div>
           <div>
             <!--   카드형인 경우, data-box-list--card 클래스 추가-->
-            <search-list :list="contents"></search-list>
+            <search-list
+              :class="isListCard ? 'data-box-list--card' : ''"
+              :list="contents"
+              :myFavoriteDataList="myFavoriteDataList"
+              :searchKeyword="searchKeyword"
+              @dataBoxClick="listDataBoxClick"
+              @keywordClick="listKeywordClick"
+              @myFavoriteDataClick="myFavoriteDataClick"
+            ></search-list>
           </div>
         </div>
         <div class="contents__pagination">
@@ -177,7 +185,7 @@ import GroupTab from "@component/aiPlatform/katech/molecules/group-tab/group-tab
 import GroupPagination from "@component/aiPlatform/katech/molecules/group-pagination/group-pagination";
 import GroupBreadcrumb from "@component/UITeam/project/katech/molecules/group-breadcrumb/group-breadcrumb";
 import GroupSearchFilter from "@component/aiPlatform/katech/molecules/group-search-filter/group-search-filter";
-import SearchList from "@component/UITeam/project/katech/organisms/search-list/search-list.vue";
+import SearchList from "@component/aiPlatform/katech/organisms/search-list/search-list.vue";
 import SearchInputField from "@component/aiPlatform/katech/organisms/search-input-field/search-input-field.vue";
 import SearchResultBox from "@component/aiPlatform/katech/atoms/search-result-box";
 import BasicTagList from "@component/aiPlatform/katech/atoms/basic-tag-list";
@@ -270,7 +278,8 @@ export default {
       viewOptionList: [
         { label: "목록형", option: "list", svgIconName: "list_katech" },
         { label: "카드형", option: "card", svgIconName: "list_card_katech" }
-      ]
+      ],
+      myFavoriteDataList: [1, 3, 4]
     };
   },
   methods: {
@@ -315,6 +324,19 @@ export default {
     },
     viewOptionChange(option) {
       console.log("view option: " + option);
+      this.isListCard = option === "card";
+    },
+    listKeywordClick(tagObj) {
+      console.log(tagObj.itemId + ", " + tagObj.itemName);
+    },
+    listDataBoxClick({ postId }) {
+      this.$router.push({
+        path: "/portal/ui/meta/search/fullSearch/detail",
+        query: { postId }
+      });
+    },
+    myFavoriteDataClick({ postId, bool }) {
+      console.log(postId + ", " + bool);
     },
     changeCheckboxList({ checkboxKey, changeList }) {
       this.changeSearchFilterList({
