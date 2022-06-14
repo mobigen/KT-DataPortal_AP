@@ -13,10 +13,11 @@
               <!-- 제공기관 로고 (카드형일때만 보임) -->
               <div class="badge--provider-logo">
                 <img
-                  src="~@/assets/style-product/images/common/provider_logo01.png"
-                  alt="제공기관"
-                /><!-- 로고 있는경우 로고 이미지 출력 -->
-                <!-- <span>국토교통부</span><!--로고 없는 경우 제공기관명 텍스트 출력-->
+                  v-if="item.logo !== null && item.logo.length > 0"
+                  :src="item.logo"
+                  :alt="item.provider"
+                />
+                <span v-else>{{ item.provider }}</span>
               </div>
               <!-- // 제공기관 로고 -->
               <base-badge class="badge--w-gray">
@@ -42,9 +43,10 @@
             </div>
           </div>
           <div class="data-box__content">
-            <strong class="data-box__title">
-              {{ item.title }}<mark>결빙사고</mark> 다발지역
-              <!-- 검색어에 mark 태그 적용 -->
+            <strong
+              class="data-box__title"
+              v-html="searchKeywordHighlight(item.title)"
+            >
             </strong>
             <div class="data-filetype">
               <base-badge
@@ -108,6 +110,10 @@ export default {
       default: function () {
         return [];
       }
+    },
+    searchKeyword: {
+      type: String,
+      require: true
     }
   },
   data() {
@@ -130,6 +136,17 @@ export default {
     myFavoriteDataClick(bool, name) {
       const postId = name.split("myFavoriteData").pop();
       this.$emit("myFavoriteDataClick", { postId, bool });
+    },
+    searchKeywordHighlight(title) {
+      if (this.searchKeyword === "") {
+        return title;
+      }
+
+      // 검색어에 mark 태그 적용
+      return title.replaceAll(
+        this.searchKeyword,
+        `<mark>${this.searchKeyword}</mark>`
+      );
     }
   }
 };

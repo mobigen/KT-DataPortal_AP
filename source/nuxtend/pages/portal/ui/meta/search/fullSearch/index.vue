@@ -154,6 +154,7 @@
               :class="isListCard ? 'data-box-list--card' : ''"
               :list="contents"
               :myFavoriteDataList="myFavoriteDataList"
+              :searchKeyword="searchKeyword"
               @dataBoxClick="listDataBoxClick"
               @keywordClick="listKeywordClick"
               @myFavoriteDataClick="myFavoriteDataClick"
@@ -329,7 +330,10 @@ export default {
       console.log(tagObj.itemId + ", " + tagObj.itemName);
     },
     listDataBoxClick({ postId }) {
-      console.log(postId);
+      this.$router.push({
+        path: "/portal/ui/meta/search/fullSearch/detail",
+        query: { postId }
+      });
     },
     myFavoriteDataClick({ postId, bool }) {
       console.log(postId + ", " + bool);
