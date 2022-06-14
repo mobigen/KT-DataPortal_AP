@@ -286,7 +286,11 @@ export default {
   },
   computed: {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
-    ...mapGetters("meta/search/search", ["searchTagList", "searchResultList"])
+    ...mapGetters("meta/search/search", [
+      "searchTagList",
+      "searchResultList",
+      "selectSearchFilterList"
+    ])
   },
   components: {
     BasicSearchBar,

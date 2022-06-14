@@ -41,7 +41,7 @@
       />
     </div>
 
-    <template v-if="openParam">
+    <template v-if="!openParam">
       <!--      v-if="apiObj['MODE'] === null || apiObj['MODE'] === 'MESSAGE PASSING'"-->
       <div class="api-router-row">
         <!-- message passing-->
@@ -65,7 +65,7 @@
       </div>
     </template>
 
-    <template v-if="!openParam">
+    <template v-if="openParam">
       <!-- remote call -->
 
       <div class="api-router-row">

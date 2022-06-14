@@ -14,18 +14,22 @@
     <!--
      Tree 영역
      Tree Component가 재귀적으로 실행되도록 되어있어서, 코드를 분리함.
-     author : skysora@mobigen.com
     -->
     <template>
       <div class="search-filter__body">
         <ul class="search-filter__list">
-          <li class="search-filter__item" v-for="(obj, i) in categoryObject" :key="'tree_li_' + i">
+          <li
+            class="search-filter__item"
+            v-for="(obj, i) in categoryObject"
+            :key="'tree_li_' + i"
+          >
             <div class="search-filter__item-group">
               <base-checkbox
                 class="checkbox--aside"
                 :name="obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
                 :checkbox-id="obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
                 @changeData="rootNodeClick"
+                :checked="spanSelected(obj)"
               >
                 <template v-slot:label>{{
                   obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NM]]
@@ -88,6 +92,27 @@ export default {
       return this.$store.getters["module/tree/selectedNodeList"][
         this.componentKey
       ];
+    },
+    spanSelected() {
+      return (obj) => {
+        let selectedNodeList =
+          this.$store.getters["module/tree/selectedNodeList"];
+
+        if (
+          !Object.prototype.hasOwnProperty.call(
+            selectedNodeList,
+            this.componentKey
+          )
+        ) {
+          // component key가 아예 없다면 false를 리턴한다.
+          return false;
+        } else {
+          return Object.prototype.hasOwnProperty.call(
+            selectedNodeList[this.componentKey],
+            obj[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]]
+          );
+        }
+      };
     }
   },
   data() {
@@ -101,6 +126,16 @@ export default {
     ]),
     ...mapActions("meta/search/search", ["resetSearchFilterList"]),
     allSelectClick(bool) {
+      /**
+       * TODO : 구조상 각각의 RootNode들은 따로 선택을 해주어야 한다.
+       * 만약 구조를 모든 노드를 재귀구조로 바꾼다면, RootNode를 따로 선택해주는 작업은 삭제해도 된다.
+       */
+      this.categoryObject.forEach((co) => {
+        this.selectionChange({
+          bool: bool,
+          nodeData: co
+        });
+      }, this);
       this.$nuxt.$emit("treeCompSelectionChange", bool);
     },
     rootNodeClick(bool, nodeId) {
@@ -116,7 +151,7 @@ export default {
       });
     },
     treeClear() {
-      console.log('treeClear')
+      console.log("treeClear");
       // checkbox reset
       this.resetSearchFilterList();
       // tree reset

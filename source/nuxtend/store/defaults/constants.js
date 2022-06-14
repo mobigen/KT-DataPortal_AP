@@ -72,6 +72,11 @@ export const state = () => ({
       TYPE: {
         CHECKBOX: "checkbox",
         TREE: "tree"
+      },
+      KEYS: {
+        PROVIDER: "provider",
+        TYPE: "type",
+        KEYWORD: "keyword"
       }
     },
     API_ROUTER: {
