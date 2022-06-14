@@ -37,15 +37,16 @@
         </template>
       </search-result-box>
 
-<!--      <div class="contents-top__detail">-->
-<!--        <base-button-->
-<!--          class="detail-button-default"-->
-<!--          :class="isDetailOpen ? 'detail-button-open' : ''"-->
-<!--          @click="toggleDetail"-->
-<!--          title="상세검색"-->
-<!--          >상세검색</base-button-->
-<!--        >-->
-<!--      </div>-->
+      <!-- TODO : 한자연 기획 변경 (상세검색 선택패널 삭제) 으로 삭제하였습니다.-->
+      <!--      <div class="contents-top__detail">-->
+      <!--        <base-button-->
+      <!--          class="detail-button-default"-->
+      <!--          :class="isDetailOpen ? 'detail-button-open' : ''"-->
+      <!--          @click="toggleDetail"-->
+      <!--          title="상세검색"-->
+      <!--          >상세검색</base-button-->
+      <!--        >-->
+      <!--      </div>-->
     </div>
     <div class="contents">
       <!--사이드메뉴-->

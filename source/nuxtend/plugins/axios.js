@@ -46,7 +46,6 @@ export default function ({ $axios, $config, $cookies, store, redirect }) {
 
     /**
      * TODO : API Router에서 조회하는 경우 response가 달라서 임시로 따로 처리하였습니다.
-     * - AP skysora.
      */
     if (response.config.url.includes("/apiRouter/")) {
       return response;
