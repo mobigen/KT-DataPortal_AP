@@ -36,196 +36,23 @@
           <strong>{{ numOfSearchResult }}</strong> 건이 검색되었습니다.
         </template>
       </search-result-box>
-      <div class="contents-top__detail">
-        <base-button
-          class="detail-button-default"
-          :class="isDetailOpen ? 'detail-button-open' : ''"
-          @click="toggleDetail"
-          title="상세검색"
-          >상세검색</base-button
-        >
 
-        <!-- TODO : 태그 선택 창 하다가 멈춤 - 유경책임이 진행하고 있는 basic-tag-list랑 겹침 -->
-        <!--        <organisms-filter-result-->
-        <!--          :filter-obj="filterObj"-->
-        <!--          :tree-obj="treeObj"-->
-        <!--          :is-detail-open="isDetailOpen"-->
-        <!--        />-->
-        <ul :class="isDetailOpen ? 'detail_open' : ''">
-          <li>
-            <h4>카테고리</h4>
-            <div class="search-detail__items">
-              <a href="#none">
-                미래자동차 핵심기술
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-              <a href="#none">
-                자동차제조
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-              <a href="#none">
-                화물운송
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-              <a href="#none">
-                자율주행자동차
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-            </div>
-          </li>
-          <li>
-            <h4>제공기관</h4>
-            <div class="search-detail__items">
-              <a href="#none">
-                국토교통부
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-              <a href="#none">
-                도로교통공단
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-              <a href="#none">
-                행정안전부
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-            </div>
-          </li>
-          <li>
-            <h4>데이터 타입</h4>
-            <div class="search-detail__items">
-              <a href="#none">
-                데이터셋(파일)
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-              <a href="#none">
-                링크
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-            </div>
-          </li>
-          <li>
-            <h4>키워드</h4>
-            <div class="search-detail__items">
-              <a href="#none">
-                EV
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-              <a href="#none">
-                견적
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-              <a href="#none">
-                부품
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-              <a href="#none">
-                정비
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-              <a href="#none">
-                데이터
-                <base-button class="detail__delete-button" title="삭제">
-                  <svg-icon
-                    class="svg-icon"
-                    name="close"
-                    aria-hidden="true"
-                  ></svg-icon>
-                </base-button>
-              </a>
-            </div>
-          </li>
-          <li>
-            <base-button class="detail__reset-button"
-              >검색조건 초기화</base-button
-            >
-          </li>
-        </ul>
-      </div>
+<!--      <div class="contents-top__detail">-->
+<!--        <base-button-->
+<!--          class="detail-button-default"-->
+<!--          :class="isDetailOpen ? 'detail-button-open' : ''"-->
+<!--          @click="toggleDetail"-->
+<!--          title="상세검색"-->
+<!--          >상세검색</base-button-->
+<!--        >-->
+<!--      </div>-->
     </div>
     <div class="contents">
       <!--사이드메뉴-->
       <aside>
         <h3 class="hidden">검색필터 상세선택</h3>
         <!--        높이 임시로 넣었습니다.-->
-        <div class="aside__category" style="height: 1160px">
+        <div class="aside__category">
           <div
             class="aside__category-default"
             :class="isCategoryExpand ? 'aside__category-expand' : ''"
@@ -245,187 +72,47 @@
             ></group-search-filter>
           </div>
         </div>
-        <div
-          class="aside__provider"
-          :class="isProviderExpand ? 'aside__provider-expand' : ''"
+
+        <!-- filter checkbox component : 제공기관 -->
+        <checkbox-filter-list
+          :use-expand-button="true"
+          :filter-id="CONSTANTS.FILTER.KEYS.PROVIDER"
+          filter-title="제공기관"
+          :filter-list="searchFilterList[CONSTANTS.FILTER.KEYS.PROVIDER]"
+          :select-checkbox-list="
+            selectSearchFilterList[CONSTANTS.FILTER.KEYS.PROVIDER]
+          "
+          @changeCheckboxList="changeCheckboxList"
         >
-          <h4 class="aside__title">제공기관</h4>
-          <base-button
-            class="aside__button-down"
-            :class="isProviderExpand ? 'aside__button-up' : ''"
-            @click="toggleProviderExpand"
-          ></base-button>
-          <ul>
-            <li>
-              <base-checkbox
-                class="checkbox--aside"
-                name="searchFilter"
-                checkbox-id="check-category01"
-              >
-                <template v-slot:label>국토교통부</template>
-              </base-checkbox>
-            </li>
-            <li>
-              <base-checkbox
-                class="checkbox--aside"
-                name="searchFilter"
-                checkbox-id="check-category02"
-              >
-                <template v-slot:label>도로교통공단</template>
-              </base-checkbox>
-            </li>
-            <li>
-              <base-checkbox
-                class="checkbox--aside"
-                name="searchFilter"
-                checkbox-id="check-category03"
-              >
-                <template v-slot:label>행정안전부</template>
-              </base-checkbox>
-            </li>
-            <li>
-              <base-checkbox
-                class="checkbox--aside"
-                name="searchFilter"
-                checkbox-id="check-category04"
-              >
-                <template v-slot:label>농림축산부</template>
-              </base-checkbox>
-            </li>
-            <li>
-              <base-checkbox
-                class="checkbox--aside"
-                name="searchFilter"
-                checkbox-id="check-category05"
-              >
-                <template v-slot:label>보건복지부</template>
-              </base-checkbox>
-            </li>
-            <li>
-              <base-checkbox
-                class="checkbox--aside"
-                name="searchFilter"
-                checkbox-id="check-category01"
-              >
-                <template v-slot:label>법무부</template>
-              </base-checkbox>
-            </li>
-            <li>
-              <base-checkbox
-                class="checkbox--aside"
-                name="searchFilter"
-                checkbox-id="check-category01"
-              >
-                <template v-slot:label>지방자치센터</template>
-              </base-checkbox>
-            </li>
-            <li>
-              <base-checkbox
-                class="checkbox--aside"
-                name="searchFilter"
-                checkbox-id="check-category01"
-              >
-                <template v-slot:label>전국화물협동조합</template>
-              </base-checkbox>
-            </li>
-            <li>
-              <base-checkbox
-                class="checkbox--aside"
-                name="searchFilter"
-                checkbox-id="check-category01"
-              >
-                <template v-slot:label>국토교통부</template>
-              </base-checkbox>
-            </li>
-            <li>
-              <base-checkbox
-                class="checkbox--aside"
-                name="searchFilter"
-                checkbox-id="check-category01"
-              >
-                <template v-slot:label>도로교통공단</template>
-              </base-checkbox>
-            </li>
-          </ul>
-        </div>
-        <div class="aside__type">
-          <h4 class="aside__title">데이터타입</h4>
-          <div class="aside__type-default">
-            <ul>
-              <li>
-                <base-checkbox
-                  class="checkbox--aside"
-                  name="searchFilter"
-                  checkbox-id="check-category01"
-                >
-                  <template v-slot:label>데이터셋(파일)</template>
-                </base-checkbox>
-              </li>
-              <li>
-                <base-checkbox
-                  class="checkbox--aside"
-                  name="searchFilter"
-                  checkbox-id="check-category01"
-                >
-                  <template v-slot:label>링크</template>
-                </base-checkbox>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="aside__keyword">
-          <h4 class="aside__title">키워드</h4>
-          <div class="aside__keyword-default">
-            <ul>
-              <li>
-                <base-checkbox
-                  class="checkbox--aside"
-                  name="searchFilter"
-                  checkbox-id="check-category01"
-                >
-                  <template v-slot:label>EV</template>
-                </base-checkbox>
-              </li>
-              <li>
-                <base-checkbox
-                  class="checkbox--aside"
-                  name="searchFilter"
-                  checkbox-id="check-category01"
-                >
-                  <template v-slot:label>견적</template>
-                </base-checkbox>
-              </li>
-              <li>
-                <base-checkbox
-                  class="checkbox--aside"
-                  name="searchFilter"
-                  checkbox-id="check-category01"
-                >
-                  <template v-slot:label>부품</template>
-                </base-checkbox>
-              </li>
-              <li>
-                <base-checkbox
-                  class="checkbox--aside"
-                  name="searchFilter"
-                  checkbox-id="check-category01"
-                >
-                  <template v-slot:label>정비</template>
-                </base-checkbox>
-              </li>
-              <li>
-                <base-checkbox
-                  class="checkbox--aside"
-                  name="searchFilter"
-                  checkbox-id="check-category01"
-                >
-                  <template v-slot:label>데이터</template>
-                </base-checkbox>
-              </li>
-            </ul>
-          </div>
-        </div>
+        </checkbox-filter-list>
+
+        <!-- filter checkbox component : 데이터타입-->
+        <checkbox-filter-list
+          :use-expand-button="false"
+          :filter-id="CONSTANTS.FILTER.KEYS.TYPE"
+          filter-title="데이터타입"
+          :filter-list="searchFilterList[CONSTANTS.FILTER.KEYS.TYPE]"
+          :select-checkbox-list="
+            selectSearchFilterList[CONSTANTS.FILTER.KEYS.TYPE]
+          "
+          @changeCheckboxList="changeCheckboxList"
+        >
+        </checkbox-filter-list>
+
+        <!-- filter checkbox component : 키워드 -->
+        <checkbox-filter-list
+          :use-expand-button="false"
+          :filter-id="CONSTANTS.FILTER.KEYS.KEYWORD"
+          filter-title="키워드"
+          :filter-list="searchFilterList[CONSTANTS.FILTER.KEYS.KEYWORD]"
+          :select-checkbox-list="
+            selectSearchFilterList[CONSTANTS.FILTER.KEYS.KEYWORD]
+          "
+          @changeCheckboxList="changeCheckboxList"
+        >
+        </checkbox-filter-list>
       </aside>
+
       <!-- // 사이드메뉴 -->
       <section>
         <!--탭 -->
@@ -491,11 +178,11 @@ import GroupBreadcrumb from "@component/UITeam/project/katech/molecules/group-br
 import GroupSearchFilter from "@component/aiPlatform/katech/molecules/group-search-filter/group-search-filter";
 import SearchList from "@component/UITeam/project/katech/organisms/search-list/search-list.vue";
 import SearchInputField from "@component/aiPlatform/katech/organisms/search-input-field/search-input-field.vue";
-import OrganismsFilterResult from "@component/aiPlatform/katech/organisms/filter-result";
 import SearchResultBox from "@component/aiPlatform/katech/atoms/search-result-box";
 import BasicTagList from "@component/aiPlatform/katech/atoms/basic-tag-list";
 import BasicOption from "@component/aiPlatform/katech/atoms/basic-option";
 import { mapActions, mapGetters } from "vuex";
+import CheckboxFilterList from "@component/aiPlatform/katech/molecules/checkbox-filter-list.vue";
 
 export default {
   name: "Index",
@@ -503,9 +190,14 @@ export default {
     ...mapGetters({
       contents: "meta/keyword-search/contents",
       CONSTANTS: "defaults/constants/CONSTANTS"
-    })
+    }),
+    ...mapGetters("meta/search/search", [
+      "searchFilterList",
+      "selectSearchFilterList"
+    ])
   },
   components: {
+    CheckboxFilterList,
     BaseButton,
     BaseCheckbox,
     GroupPagination,
@@ -514,7 +206,6 @@ export default {
     GroupTab,
     SearchList,
     SearchInputField,
-    OrganismsFilterResult,
     SearchResultBox,
     BasicTagList,
     BasicOption
@@ -523,7 +214,6 @@ export default {
     return {
       isDetailOpen: true,
       isCategoryExpand: false,
-      isProviderExpand: false,
       isListCard: false,
       filterObj: {
         category: {
@@ -584,17 +274,12 @@ export default {
   },
   methods: {
     ...mapActions("meta/keyword-search", ["getContents"]),
-    toggleDetail: function () {
-      this.isDetailOpen = !this.isDetailOpen;
-    },
+    ...mapActions("meta/search/search", [
+      "getSearchFilterList",
+      "changeSearchFilterList"
+    ]),
     toggleCategoryExpand: function () {
       this.isCategoryExpand = !this.isCategoryExpand;
-    },
-    toggleProviderExpand: function () {
-      this.isProviderExpand = !this.isProviderExpand;
-    },
-    toggleListCard: function () {
-      this.isListCard = !this.isListCard;
     },
     searchBtnClick(inputData) {
       this.searchKeyword = inputData.trim();
@@ -629,10 +314,19 @@ export default {
     },
     viewOptionChange(option) {
       console.log("view option: " + option);
+    },
+    changeCheckboxList({ checkboxKey, changeList }) {
+      this.changeSearchFilterList({
+        key: checkboxKey,
+        changeList: changeList
+      });
     }
   },
   mounted() {
     this.getGridData();
+  },
+  created() {
+    this.getSearchFilterList();
   }
 };
 </script>

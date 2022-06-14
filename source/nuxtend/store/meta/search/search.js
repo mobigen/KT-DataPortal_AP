@@ -123,34 +123,48 @@ export const actions = {
     //   });
     // });
 
+    // TODO : 개발 완료 후 데이터 정리, apTeam 과거 코드 삭제시 같이 삭제
+    // apTeam 데이터
     const category = [
-      { itemId: 1, itemName: "자동차부품" },
-      { itemId: 2, itemName: "자동차제조" },
-      { itemId: 3, itemName: "자동차정비" },
-      { itemId: 4, itemName: "화물운송" },
-      { itemId: 5, itemName: "관제사고" },
-      { itemId: 6, itemName: "미래차산업" }
+      { itemId: "a1", itemName: "자동차부품" },
+      { itemId: "a2", itemName: "자동차제조" },
+      { itemId: "a3", itemName: "자동차정비" },
+      { itemId: "a4", itemName: "화물운송" },
+      { itemId: "a5", itemName: "관제사고" },
+      { itemId: "a6", itemName: "미래차산업" }
     ];
-
-    const provider = [
-      { itemId: 7, itemName: "도로교통공단" },
-      { itemId: 8, itemName: "한국지질자원연구원" },
-      { itemId: 9, itemName: "한국과학기술정보연구원" },
-      { itemId: 10, itemName: "국토교통부" },
-      { itemId: 11, itemName: "한국지질자원연구원" },
-      { itemId: 12, itemName: "도로교통공단" },
-      { itemId: 13, itemName: "한국지질자원연구원" },
-      { itemId: 14, itemName: "한국과학기술정보연구원" },
-      { itemId: 15, itemName: "도로교통공단" },
-      { itemId: 16, itemName: "한국지질자원연구원" }
-    ];
-
     const dataType = [
-      { itemId: 17, itemName: "데이터셋(파일)" },
-      { itemId: 18, itemName: "데이터 서비스" }
+      { itemId: "b17", itemName: "데이터셋(파일)" },
+      { itemId: "b18", itemName: "데이터 서비스" }
     ];
 
-    const result = { category, provider, dataType };
+    // uiTeam 퍼블리시용 데이터
+    const provider = [
+      { itemId: "b7", itemName: "도로교통공단" },
+      { itemId: "b8", itemName: "한국지질자원연구원" },
+      { itemId: "b9", itemName: "한국과학기술정보연구원" },
+      { itemId: "b10", itemName: "국토교통부" },
+      { itemId: "b11", itemName: "한국지질자원연구원" },
+      { itemId: "b12", itemName: "도로교통공단1" },
+      { itemId: "b13", itemName: "한국지질자원연구원2" },
+      { itemId: "b14", itemName: "한국과학기술정보연구원3" },
+      { itemId: "b15", itemName: "도로교통공단4" },
+      { itemId: "b16", itemName: "한국지질자원연구원5" }
+    ];
+    const keyword = [
+      { itemId: "c1", itemName: "자동차부품" },
+      { itemId: "c2", itemName: "자동차제조" },
+      { itemId: "c3", itemName: "자동차정비" },
+      { itemId: "c4", itemName: "화물운송" },
+      { itemId: "c5", itemName: "관제사고" },
+      { itemId: "c6", itemName: "미래차산업" }
+    ];
+    const type = [
+      { itemId: "d17", itemName: "데이터셋(파일)" },
+      { itemId: "d18", itemName: "데이터 서비스" }
+    ];
+
+    const result = { category, dataType, provider, keyword, type };
 
     commit("setSearchFilterList", result);
   },

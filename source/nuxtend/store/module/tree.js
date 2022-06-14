@@ -71,10 +71,10 @@ export const actions = {
         // ArrayList 형태의 데이터를, children 형태의 데이터로 변경처리한다.
         let jsonHelper = {};
 
+        // rootNode 정보를 저장해둔다.
+        const rootNode = d[0];
         // 조회한 목록을 역순으로 설정한 후에, 끝에서 처음까지 돌면서 부모별로 자식들을 Object-array로 정리해둔다.
-        // 원래 데이터와 분리하기 위해 깊은 복사를 진행한다.
-        let reversed = JSON.parse(JSON.stringify(d));
-        const reverseD = reversed.reverse();
+        const reverseD = d.reverse();
 
         let objectByKey = {};
 
@@ -106,7 +106,8 @@ export const actions = {
         // root는 무조건 1개만 나오는 데이터로 가정.
         // db에서 조회한 데이터의 첫번째 row가 root node 로, 이 id를 기준으로 데이터가 정제되어 있다.
         // root를 제외하고 전달한다.
-        let newD = jsonHelper[d[0][param[CONSTANTS.TREE.TREE_KEY.NODE_ID]]][0];
+        let newD =
+          jsonHelper[rootNode[param[CONSTANTS.TREE.TREE_KEY.NODE_ID]]][0];
 
         commit("setCategoryObject", {
           componentKey: param.componentKey,

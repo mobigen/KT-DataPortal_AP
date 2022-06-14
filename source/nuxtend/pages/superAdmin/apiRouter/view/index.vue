@@ -65,14 +65,15 @@ export default {
   components: { BasicButton, BasicViewTable, BasicTable },
   watch: {
     apiInfoDetail() {
+      // view table에서 숨길 column 선택
       const row = this.apiInfoDetail.body[0];
       const MODE = row[this.CONSTANTS.API_ROUTER.PARAM.MODE];
       if (MODE === this.CONSTANTS.API_ROUTER.MODE.MESSAGE_PASSING) {
-        this.hideColumns.push(this.CONSTANTS.API_ROUTER.PARAM.URL);
-        this.hideColumns.push(this.CONSTANTS.API_ROUTER.PARAM.METH);
-      } else {
         this.hideColumns.push(this.CONSTANTS.API_ROUTER.PARAM.CMD);
         this.hideColumns.push(this.CONSTANTS.API_ROUTER.PARAM.PARAMS);
+      } else {
+        this.hideColumns.push(this.CONSTANTS.API_ROUTER.PARAM.URL);
+        this.hideColumns.push(this.CONSTANTS.API_ROUTER.PARAM.METH);
       }
 
       this.hideColumns = JSON.parse(JSON.stringify(this.hideColumns));
