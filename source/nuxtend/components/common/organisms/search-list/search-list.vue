@@ -51,8 +51,8 @@
             <div class="data-filetype">
               <base-badge
                 :class="'badge--filetype-0' + (fi + 1)"
-                v-for="(fd, fi) in item.filetype"
-                :key="fi"
+                v-for="(fd, fi) in item['filetype']"
+                :key="'badge_' + fi"
               >
                 <span class="badge__label">{{ fd }}</span>
               </base-badge>

@@ -26,8 +26,8 @@
   </div>
 </template>
 <script type="text/javascript">
-import BaseCheckbox from "@katech/atoms/base-checkbox/base-checkbox";
-import BaseButton from "@katech/atoms/base-button/base-button";
+import BaseCheckbox from "@project/katech/atoms/base-checkbox/base-checkbox";
+import BaseButton from "@project/katech/atoms/base-button/base-button";
 import { mapGetters } from "vuex";
 
 export default {

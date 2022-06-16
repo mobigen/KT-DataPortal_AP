@@ -43,7 +43,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseCheckbox from "@katech/atoms/base-checkbox/base-checkbox";
+import BaseCheckbox from "@project/katech/atoms/base-checkbox/base-checkbox";
 
 export default {
   name: "GroupSearchFilter",

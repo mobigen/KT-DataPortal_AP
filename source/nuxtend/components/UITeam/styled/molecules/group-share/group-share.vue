@@ -22,8 +22,8 @@
   </div>
 </template>
 <script type="text/javascript">
-import BaseCheckbox from "@component/project/katech/atoms/base-checkbox/base-checkbox";
-import BaseButton from "@component/project/katech/atoms/base-button/base-button";
+import BaseCheckbox from "@project/katech/atoms/base-checkbox/base-checkbox";
+import BaseButton from "@project/katech/atoms/base-button/base-button";
 
 export default {
   name: "GroupShare",

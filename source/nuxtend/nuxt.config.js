@@ -95,11 +95,18 @@ export default {
     "@component": resolve(__dirname, "./components"),
     "@common": resolve(__dirname, "./components/common"),
     "@functional": resolve(__dirname, "./components/common/functional"),
-    // "@molecules": resolve(__dirname, "./components/common/molecules"),
-    // "@organisms": resolve(__dirname, "./components/common/organisms"),
     "@styled": resolve(__dirname, "./components/UITeam/styled"),
     "@project": resolve(__dirname, "./components/UITeam/project"),
-    "@katech": resolve(__dirname, "./components/UITeam/project/katech")
+    "@katech": resolve(__dirname, "./components/UITeam/project/katech"),
+    "@atoms": resolve(__dirname, "./components/UITeam/project/katech/atoms"),
+    "@molecules": resolve(
+      __dirname,
+      "./components/UITeam/project/katech/molecules"
+    ),
+    "@organisms": resolve(
+      __dirname,
+      "./components/UITeam/project/katech/organisms"
+    )
   },
 
   // options

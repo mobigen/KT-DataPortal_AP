@@ -1,5 +1,5 @@
 import Footer from "./footer.vue";
-import { PageHeader } from "@component@styled//organisms/layout/header/header.stories";
+import { PageHeader } from "@styled/organisms/layout/header/header.stories";
 
 export default {
   title: "Styled/Organisms/[PCFC] 페이지 푸터",
