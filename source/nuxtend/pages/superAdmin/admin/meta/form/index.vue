@@ -71,7 +71,7 @@ export default {
       "editBizMeta"
     ]),
     cancel() {
-      this.$router.push({ path: "/mgnt/ui/meta/list" });
+      this.$router.push({ path: "/superAdmin/admin/meta/list" });
     },
     async addObject() {
       const dataList = this.setDataList();
@@ -82,7 +82,7 @@ export default {
         await this.addBizMeta(dataList);
       }
 
-      this.$router.push({ path: "/mgnt/ui/meta/list" });
+      this.$router.push({ path: "/superAdmin/admin/meta/list" });
     },
     setDataList() {
       let dataList = [];

@@ -55,16 +55,16 @@ export default {
     ...mapActions("meta/bizMeta", ["getBizMetaList", "removeBizMeta"]),
     viewMetaInfo(rowKey) {
       this.$router.push({
-        path: "/mgnt/ui/meta/view",
+        path: "/superAdmin/admin/meta/view",
         query: { datasetId: rowKey }
       });
     },
     addMeta() {
-      this.$router.push({ path: "/mgnt/ui/meta/form" });
+      this.$router.push({ path: "/superAdmin/admin/meta/form" });
     },
     editMeta(rowKey) {
       this.$router.push({
-        path: "/mgnt/ui/meta/form",
+        path: "/superAdmin/admin/meta/form",
         query: { datasetId: rowKey }
       });
     },

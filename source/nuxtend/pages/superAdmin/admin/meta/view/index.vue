@@ -53,7 +53,7 @@ export default {
   methods: {
     ...mapActions("meta/bizMeta", ["getBizMetaDetail"]),
     buttonOk() {
-      this.$router.push({ path: "/mgnt/ui/meta/list" });
+      this.$router.push({ path: "/superAdmin/admin/meta/list" });
     }
   },
   created() {
