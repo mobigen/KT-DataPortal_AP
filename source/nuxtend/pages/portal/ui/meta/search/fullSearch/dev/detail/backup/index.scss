@@ -7,23 +7,62 @@
   display: flex;
 }
 
+.outside-data {
+  .contents__summary-information {
+    figure {
+      display: none;
+    }
+    .information__data {
+      .badges {
+        display: none;
+      }
+      .information__data-title {
+        margin-top: 0;
+      }
+      .information__data-details {
+        dl {
+          display: none;
+        }
+        p {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .contents__summary-provider {
+    display: none;
+  }
+
+  .contents__detail {
+    display: none;
+  }
+
+  .contents-outside__detail {
+    display: block;
+  }
+
+  
+}
+
 // 데이터 요약 정보
 .contents__summary-information {
   flex-grow: 1;
   border-radius: rem(30px);
   border: 1px solid $text-03;
-  padding: rem(40px) rem(30px) rem(30px) rem(10px);
+  padding: $spacing-2xl rem(30px) rem(30px) $spacing-2xl;
   display: flex;
 
   figure {
     flex-shrink: 0;
-    width: rem(190px);
+    width: rem(150px);
     color: $secondary;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
     text-align: center;
+    margin-right: $spacing-lg;
     
     img {
       margin: 0 auto;
@@ -67,6 +106,7 @@
 
       dt{
         padding: 0;
+        color: $text-02;
       }
 
       dd{
@@ -77,6 +117,11 @@
 
       dl{
         display: flex;
+      }
+
+      p {
+        display: none;
+        color: $text-03;
       }
     }
   }
@@ -170,8 +215,24 @@
     @include font-weight("bold");
     position: relative;
   }
+}
 
-  
+.contents-outside__detail {
+  margin-top: rem(20px);
+  width: 100%;
+  position: relative;
+  display: none;
+
+  h3 {
+    width: 100%;
+    height: rem(80px);
+    line-height: rem(80px);
+    border-bottom: 2px solid $primary;
+    color: $primary;
+    @include font-size("20");
+    @include font-weight("bold");
+    position: relative;
+  }
 }
 
 // formbox
