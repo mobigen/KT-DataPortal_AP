@@ -9,7 +9,7 @@
 
 <script>
 
-import Ckeditor4 from "@component/DPTeam/ckeditor4";
+import Ckeditor4 from "@component/common/editor/ckeditor4";
 export default {
   name: "ckeditor",
   components: {Ckeditor4},
