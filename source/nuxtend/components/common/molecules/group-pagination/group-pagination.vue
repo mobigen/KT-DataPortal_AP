@@ -221,5 +221,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./group-pagination.scss";
+@import "group-pagination";
 </style>

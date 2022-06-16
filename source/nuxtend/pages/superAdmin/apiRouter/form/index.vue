@@ -156,7 +156,7 @@
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 import BasicLabel from "@/components/aiPlatform/basic/basic-label.vue";
 import BasicInput from "@/components/aiPlatform/basic/basic-input.vue";
-import BaseSelect from "@/components/aiPlatform/katech/atoms/base-select/base-select";
+import BaseSelect from "@/components/common/atoms/base-select/base-select";
 import RadioButton from "@/components/aiPlatform/basic/radio-button.vue";
 import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
 import { mapGetters } from "vuex";

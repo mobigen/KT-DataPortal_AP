@@ -24,7 +24,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseRadio from "@component/aiPlatform/katech/atoms/base-radio/base-radio";
+import BaseRadio from "@component/common/atoms/base-radio/base-radio";
 
 export default {
   name: "basic-option",

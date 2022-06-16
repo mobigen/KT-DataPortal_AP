@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
 import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button";
-import BaseTag from "@/components/aiPlatform/katech/atoms/base-tag/base-tag";
+import BaseTag from "@component/common/atoms/base-tag/base-tag";
 
 export default {
   name: "basic-tag-list",

@@ -55,8 +55,8 @@
 </template>
 
 <script type="text/javascript">
-import BaseCheckbox from "@component/aiPlatform/katech/atoms/base-checkbox/base-checkbox";
-import BasicTree from "@component/aiPlatform/katech/atoms/basic-tree.vue";
+import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox";
+import BasicTree from "@component/common/atoms/basic-tree/basic-tree.vue";
 import { mapActions, mapGetters } from "vuex";
 import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button";
 
@@ -168,5 +168,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./group-search-filter.scss";
+@import "group-search-filter";
 </style>

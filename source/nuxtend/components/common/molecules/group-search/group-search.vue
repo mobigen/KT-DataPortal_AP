@@ -94,7 +94,7 @@
 
 <script type="text/javascript">
 import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button.vue";
-import BaseInput from "@component/aiPlatform/katech/atoms/base-input/base-input";
+import BaseInput from "@component/common/atoms/base-input/base-input";
 import BaseTag from "@component/UITeam/project/katech/atoms/base-tag/base-tag";
 
 export default {
@@ -134,5 +134,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./group-search.scss";
+@import "group-search";
 </style>

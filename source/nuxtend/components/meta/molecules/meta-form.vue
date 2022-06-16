@@ -20,8 +20,8 @@
 </template>
 
 <script type="text/javascript">
-import BasicLabel from "@/components/aiPlatform/basic/basic-label.vue";
-import BasicInput from "@/components/aiPlatform/basic/basic-input.vue";
+import BasicLabel from "@component/aiPlatform/basic/basic-label.vue";
+import BasicInput from "@component/aiPlatform/basic/basic-input.vue";
 
 export default {
   name: "meta-form",

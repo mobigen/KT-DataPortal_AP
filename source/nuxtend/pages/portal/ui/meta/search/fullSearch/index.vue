@@ -181,17 +181,17 @@
 <script type="text/javascript">
 import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button";
 import BaseCheckbox from "@component/UITeam/project/katech/atoms/base-checkbox/base-checkbox";
-import GroupTab from "@component/aiPlatform/katech/molecules/group-tab/group-tab";
-import GroupPagination from "@component/aiPlatform/katech/molecules/group-pagination/group-pagination";
+import GroupTab from "@component/common/molecules/group-tab/group-tab";
+import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
 import GroupBreadcrumb from "@component/UITeam/project/katech/molecules/group-breadcrumb/group-breadcrumb";
-import GroupSearchFilter from "@component/aiPlatform/katech/molecules/group-search-filter/group-search-filter";
-import SearchList from "@component/aiPlatform/katech/organisms/search-list/search-list.vue";
-import SearchInputField from "@component/aiPlatform/katech/organisms/search-input-field/search-input-field.vue";
-import SearchResultBox from "@component/aiPlatform/katech/atoms/search-result-box";
-import BasicTagList from "@component/aiPlatform/katech/atoms/basic-tag-list";
-import BasicOption from "@component/aiPlatform/katech/atoms/basic-option";
+import GroupSearchFilter from "@component/common/molecules/group-search-filter/group-search-filter";
+import SearchList from "@component/common/organisms/search-list/search-list.vue";
+import SearchInputField from "@component/common/organisms/search-input-field/search-input-field.vue";
+import SearchResultBox from "@component/common/atoms/search-result-box/search-result-box";
+import BasicTagList from "@component/common/atoms/basic-tag-list/basic-tag-list";
+import BasicOption from "@component/common/atoms/basic-option/basic-option";
 import { mapActions, mapGetters } from "vuex";
-import CheckboxFilterList from "@component/aiPlatform/katech/molecules/checkbox-filter-list.vue";
+import CheckboxFilterList from "@component/common/molecules/checkbox-filter-list/checkbox-filter-list.vue";
 
 export default {
   name: "Index",

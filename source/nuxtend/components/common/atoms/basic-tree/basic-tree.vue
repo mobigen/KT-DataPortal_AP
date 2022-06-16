@@ -39,7 +39,7 @@
 <script type="text/javascript">
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 import { mapActions, mapGetters } from "vuex";
-import BaseCheckbox from "@component/aiPlatform/katech/atoms/base-checkbox/base-checkbox";
+import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox";
 
 export default {
   name: "item",

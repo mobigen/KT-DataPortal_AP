@@ -22,7 +22,7 @@
 </template>
 
 <script type="text/javascript">
-import GroupSearch from "@component/aiPlatform/katech/molecules/group-search/group-search";
+import GroupSearch from "@component/common/molecules/group-search/group-search";
 import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button";
 import BaseCheckbox from "@component/UITeam/project/katech/atoms/base-checkbox/base-checkbox";
 export default {
@@ -51,5 +51,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./search-input-field.scss";
+@import "search-input-field";
 </style>

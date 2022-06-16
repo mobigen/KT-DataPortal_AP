@@ -36,7 +36,7 @@
 
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
-import MetaForm from "@component/aiPlatform/meta/meta-form.vue";
+import MetaForm from "@component/meta/molecules/meta-form.vue";
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 
 export default {

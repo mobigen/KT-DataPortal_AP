@@ -55,5 +55,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./group-tab.scss";
+@import "group-tab";
 </style>
