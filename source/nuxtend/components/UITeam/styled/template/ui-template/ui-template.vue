@@ -33,8 +33,8 @@
 </template>
 <i18n src="./ui-template.json"></i18n>
 <script type="text/javascript">
-import BaseRadio from "@component/styled/atoms/base-radio/base-radio";
-import BaseButton from "@component/styled/atoms/base-button/base-button";
+import BaseRadio from "@styled/atoms/base-radio/base-radio";
+import BaseButton from "@styled/atoms/base-button/base-button";
 import { mapGetters } from "vuex";
 export default {
   name: "UiTemplate",

@@ -15,7 +15,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseRadio from "@atoms/base-radio/base-radio.vue";
+import BaseRadio from "@uiStyled/atoms/base-radio/base-radio.vue";
 
 export default {
   name: "GroupRadio",

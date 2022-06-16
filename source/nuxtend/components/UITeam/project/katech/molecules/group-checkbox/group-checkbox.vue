@@ -15,7 +15,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseCheckbox from "@component/UITeam/project/katech/atoms/base-checkbox/base-checkbox.vue";
+import BaseCheckbox from "@katech/atoms/base-checkbox/base-checkbox.vue";
 
 export default {
   name: "GroupCheckbox",

@@ -45,9 +45,9 @@
 </template>
 
 <script type="text/javascript">
-import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button.vue";
-import BaseInput from "@component/UITeam/project/katech/atoms/base-input/base-input";
-import BaseTag from "@component/UITeam/project/katech/atoms/base-tag/base-tag";
+import BaseButton from "@katech/atoms/base-button/base-button.vue";
+import BaseInput from "@katech/atoms/base-input/base-input";
+import BaseTag from "@katech/atoms/base-tag/base-tag";
 
 export default {
   name: "GroupSearch",

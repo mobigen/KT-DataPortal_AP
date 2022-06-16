@@ -90,11 +90,11 @@
 </template>
 
 <script type="text/javascript">
-import BaseBadge from "@component/project/katech/atoms/base-badge/base-badge.vue";
-import BaseButton from "@component/project/katech/atoms/base-button/base-button";
-import BaseTag from "@component/project/katech/atoms/base-tag/base-tag.vue";
-import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox.vue";
-import BasicTagList from "@component/common/atoms/basic-tag-list/basic-tag-list";
+import BaseBadge from "@project/katech/atoms/base-badge/base-badge.vue";
+import BaseButton from "@project/katech/atoms/base-button/base-button";
+import BaseTag from "@project/katech/atoms/base-tag/base-tag.vue";
+import BaseCheckbox from "@common/atoms/base-checkbox/base-checkbox.vue";
+import BasicTagList from "@common/atoms/basic-tag-list/basic-tag-list";
 
 export default {
   name: "SearchList",

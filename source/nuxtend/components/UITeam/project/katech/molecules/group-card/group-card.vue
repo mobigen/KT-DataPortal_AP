@@ -40,7 +40,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseBadge from "@component/styled/atoms/base-badge/base-badge";
+import BaseBadge from "@styled/atoms/base-badge/base-badge";
 export default {
   name: "GroupCard",
   components: { BaseBadge }

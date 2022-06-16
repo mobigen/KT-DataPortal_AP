@@ -198,9 +198,9 @@
 </template>
 
 <script type="text/javascript">
-import BaseBadge from "@atoms/base-badge/base-badge.vue";
-import BaseButton from "@atoms/base-button/base-button.vue";
-import BaseTag from "@atoms/base-tag/base-tag.vue";
+import BaseBadge from "@uiStyled/atoms/base-badge/base-badge.vue";
+import BaseButton from "@uiStyled/atoms/base-button/base-button.vue";
+import BaseTag from "@uiStyled/atoms/base-tag/base-tag.vue";
 
 export default {
   name: "SearchList",

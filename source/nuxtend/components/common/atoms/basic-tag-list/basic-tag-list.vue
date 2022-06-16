@@ -16,7 +16,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button";
+import BaseButton from "@katech/atoms/base-button/base-button";
 import BaseTag from "@component/common/atoms/base-tag/base-tag";
 
 export default {

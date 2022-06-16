@@ -40,7 +40,7 @@
 </template>
 <script type="text/javascript">
 import { mapGetters } from "vuex";
-import BaseButton from "@atoms/base-button/base-button.vue";
+import BaseButton from "@uiStyled/atoms/base-button/base-button.vue";
 
 export default {
   name: "GroupPagination",

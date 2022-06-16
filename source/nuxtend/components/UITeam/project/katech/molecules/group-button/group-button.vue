@@ -16,7 +16,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseButton from "@component/UITeam/project/katech/atomsbutton/base-button.vue";
+import BaseButton from "@katech/atoms/base-button/base-button.vue";
 
 export default {
   name: "GroupButton",

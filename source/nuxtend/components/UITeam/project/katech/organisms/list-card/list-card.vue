@@ -13,7 +13,7 @@
 </template>
 
 <script type="text/javascript">
-import GroupCard from "@molecules/group-card/group-card.vue";
+import GroupCard from "@katech/molecules/group-card/group-card.vue";
 export default {
   name: "ListCard",
   components: { GroupCard }

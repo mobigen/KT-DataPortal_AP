@@ -163,7 +163,7 @@ import { mapGetters } from "vuex";
 import {
   successAlert,
   errorAlert
-} from "@/components/aiPlatform/functional/alert/alert-default";
+} from "@functional/alert/alert-default";
 
 export default {
   name: "apiRouter-form",

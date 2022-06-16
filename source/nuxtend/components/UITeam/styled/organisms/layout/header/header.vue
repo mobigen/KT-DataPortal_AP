@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import BaseButton from "@component/styled/atoms/base-button/base-button";
+import BaseButton from "@styled/atoms/base-button/base-button";
 
 export default {
   name: "Header",

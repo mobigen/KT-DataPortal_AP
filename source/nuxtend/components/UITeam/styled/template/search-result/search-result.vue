@@ -24,7 +24,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseRadio from "@component/styled/atoms/base-radio/base-radio"
+import BaseRadio from "@styled/atoms/base-radio/base-radio"
 import SearchList from "@organisms/search-list/search-list.vue";
 import { mapGetters } from "vuex";
 export default {

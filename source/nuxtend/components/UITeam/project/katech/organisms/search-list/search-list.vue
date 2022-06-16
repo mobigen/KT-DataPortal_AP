@@ -74,10 +74,10 @@
 </template>
 
 <script type="text/javascript">
-import BaseBadge from "@component/UITeam/project/katech/atoms/base-badge/base-badge.vue";
-import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button.vue";
-import BaseTag from "@component/UITeam/project/katech/atoms/base-tag/base-tag.vue";
-import BaseCheckbox from "@component/UITeam/project/katech/atoms/base-checkbox/base-checkbox.vue";
+import BaseBadge from "@katech/atoms/base-badge/base-badge.vue";
+import BaseButton from "@katech/atoms/base-button/base-button.vue";
+import BaseTag from "@katech/atoms/base-tag/base-tag.vue";
+import BaseCheckbox from "@katech/atoms/base-checkbox/base-checkbox.vue";
 
 export default {
   name: "SearchList",
