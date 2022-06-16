@@ -483,16 +483,16 @@
 </template>
 
 <script type="text/javascript">
-import BaseRadio from "@katech/atoms/base-radio/base-radio";
-import BaseTag from "@katech/atoms/base-tag/base-tag";
-import BaseButton from "@katech/atoms/base-button/base-button";
-import BaseCheckbox from "@katech/atoms/base-checkbox/base-checkbox";
-import GroupTab from "@katech/molecules/group-tab/group-tab";
-import GroupPagination from "@katech/molecules/group-pagination/group-pagination";
-import GroupBreadcrumb from "@katech/molecules/group-breadcrumb/group-breadcrumb";
-import GroupSearchFilter from "@katech/molecules/group-search-filter/group-search-filter";
-import SearchList from "@katech/organisms/search-list/search-list.vue";
-import SearchInputField from "@katech/organisms/search-input-field/search-input-field.vue";
+import BaseRadio from "@common/atoms/base-radio/base-radio";
+import BaseTag from "@common/atoms/base-tag/base-tag";
+import BaseButton from "@common/atoms/base-button/base-button";
+import BaseCheckbox from "@common/atoms/base-checkbox/base-checkbox";
+import GroupTab from "@common/molecules/group-tab/group-tab";
+import GroupPagination from "@common/molecules/group-pagination/group-pagination";
+import GroupBreadcrumb from "@common/molecules/group-breadcrumb/group-breadcrumb";
+import GroupSearchFilter from "@common/molecules/group-search-filter/group-search-filter";
+import SearchList from "@common/organisms/search-list/search-list.vue";
+import SearchInputField from "@common/organisms/search-input-field/search-input-field.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "Index",

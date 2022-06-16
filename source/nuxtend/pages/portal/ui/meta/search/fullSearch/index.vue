@@ -179,11 +179,11 @@
 </template>
 
 <script type="text/javascript">
-import BaseButton from "@katech/atoms/base-button/base-button";
-import BaseCheckbox from "@katech/atoms/base-checkbox/base-checkbox";
+import BaseButton from "@common/atoms/base-button/base-button";
+import BaseCheckbox from "@common/atoms/base-checkbox/base-checkbox";
 import GroupTab from "@component/common/molecules/group-tab/group-tab";
 import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
-import GroupBreadcrumb from "@katech/molecules/group-breadcrumb/group-breadcrumb";
+import GroupBreadcrumb from "@common/molecules/group-breadcrumb/group-breadcrumb";
 import GroupSearchFilter from "@component/common/molecules/group-search-filter/group-search-filter";
 import SearchList from "@component/common/organisms/search-list/search-list.vue";
 import SearchInputField from "@component/common/organisms/search-input-field/search-input-field.vue";
