@@ -26,7 +26,7 @@
         <tr
           v-for="(data, i) in dataList"
           :key="'table_body_' + i"
-          @click="rowClick(data[rowKey])"
+          @click="rowClick(data[rowKey], data)"
         >
           <td v-if="useSerialNum">{{ i + 1 }}</td>
 
@@ -103,6 +103,7 @@
 <script type="text/javascript">
 import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
 import BasicSingleTag from "@/components/aiPlatform/basic/basic-single-tag.vue";
+
 export default {
   name: "basic-table",
   extends: {},
@@ -170,8 +171,8 @@ export default {
     buttonClick(rowKey, btnAction) {
       this.$emit("buttonAction", rowKey, btnAction);
     },
-    rowClick(rowKey) {
-      this.$emit("columnAction", rowKey);
+    rowClick(rowKey, rowObject) {
+      this.$emit("columnAction", rowKey, rowObject);
     },
     keyClick(rowKey, keyAction) {
       this.$emit("keyAction", rowKey, keyAction);
