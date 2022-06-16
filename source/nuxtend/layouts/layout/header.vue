@@ -47,8 +47,8 @@ export default {
           url: "/superAdmin/meta/metaName/list"
         },
         { menuName: "SuperAdmin-MetaMap", url: "/superAdmin/meta/map/list" },
-        { menuName: "Admin-MetaName", url: "/mgnt/ui/meta/List" },
-        { menuName: "Admin-MetaTree", url: "/mgnt/ui/meta/tree" }
+        { menuName: "Admin-MetaName", url: "/superAdmin/admin/meta/List" },
+        { menuName: "Admin-MetaTree", url: "/superAdmin/admin/meta/tree" }
       ]
     };
   },

@@ -52,6 +52,7 @@
               <base-badge
                 :class="'badge--filetype-0' + (fi + 1)"
                 v-for="(fd, fi) in item.filetype"
+                :key="fi"
               >
                 <span class="badge__label">{{ fd }}</span>
               </base-badge>
@@ -89,9 +90,9 @@
 </template>
 
 <script type="text/javascript">
-import BaseBadge from "@component/project/katech/atoms/base-badge/base-badge.vue";
-import BaseButton from "@component/project/katech/atoms/base-button/base-button";
-import BaseTag from "@component/project/katech/atoms/base-tag/base-tag.vue";
+import BaseBadge from "@component/UITeam/project/katech/atoms/base-badge/base-badge.vue";
+import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button";
+import BaseTag from "@component/UITeam/project/katech/atoms/base-tag/base-tag.vue";
 import BaseCheckbox from "@component/aiPlatform/katech/atoms/base-checkbox/base-checkbox.vue";
 import BasicTagList from "@component/aiPlatform/katech/atoms/basic-tag-list";
 

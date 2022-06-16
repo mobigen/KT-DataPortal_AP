@@ -104,7 +104,7 @@ export const actions = {
       return;
     }
 
-    await this.$axios.put(
+    await this.$axios.post(
       this.$config.API_META_PREFIX + "/updateMetaName",
       obj
     );
@@ -202,7 +202,7 @@ export const actions = {
       return;
     }
 
-    await this.$axios.put(this.$config.API_META_PREFIX + "/updateBizMeta", {
+    await this.$axios.post(this.$config.API_META_PREFIX + "/updateBizMeta", {
       bizDatasetId: rowKey,
       dataList: dataList
     });
