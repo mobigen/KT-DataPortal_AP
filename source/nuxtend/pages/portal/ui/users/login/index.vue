@@ -94,11 +94,6 @@ export default {
 
       await this.setPrevFullUrl(prevFullUrl);
 
-      // location.href =
-      //   `/oauth2/authorization/` +
-      //   socialType +
-      //   "?prevFullUrl=" +
-      //   encodeURIComponent(prevFullUrl);
       location.href = `/oauth2/authorization/` + socialType;
     },
     getPublicKey() {
