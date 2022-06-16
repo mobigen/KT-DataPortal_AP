@@ -5,6 +5,7 @@
       <group-breadcrumb></group-breadcrumb>
     </div>
     <div class="contents">
+      <!---- 외부 데이터의 경우 : section 태그에 class="outside-data" 추가 ---->
       <section>
         <!-- 데이터 개요 -->
         <article class="contents__summary">
@@ -43,11 +44,13 @@
               </div>
               <div class="information__data-details">
                 <dl>
-                  <dt><span>수정일</span></dt>
+                  <dt>수정일</dt>
                   <dd>2022-05-21</dd>
-                  <dt><span>등록일</span></dt>
+                  <dt>등록일</dt>
                   <dd>2022-05-21</dd>
                 </dl>
+                <!-- 외부데이터 날짜 정보-->
+                <p>Metadata Updated: November 12, 2020</p>
               </div>
             </div>
           </div>
@@ -85,7 +88,7 @@
           <!-- // 데이터 제공처 -->
         </article>
         <!-- // 데이터 개요 -->
-        <!-- 기본정보 -->
+        <!-- 기본정보 (내부) -->
         <article class="contents__detail">
           <h3>기본정보</h3>
           <table class="formbox formbox--row">
@@ -107,6 +110,67 @@
                 <td><strong>홍길동</strong></td>
                 <th scope="row">관리부서 전화번호</th>
                 <td>02-345-6789</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+        <!-- // 기본정보 -->
+        <!-- 기본정보 (외부) -->
+        <article class="contents-outside__detail">
+          <h3>About this Resource</h3>
+          <table class="formbox formbox--row">
+            <colgroup>
+              <col style="width: 200px" />
+              <col style="width: auto" />
+            </colgroup>
+            <tbody>
+              <tr>
+                <th scope="row">Last updated</th>
+                <td>unknown</td>
+              </tr>
+              <tr>
+                <th scope="row">Created</th>
+                <td>unknown</td>
+              </tr>
+              <tr>
+                <th scope="row">Name</th>
+                <td>View documentation related to this dataset</td>
+              </tr>
+              <tr>
+                <th scope="row">Format</th>
+                <td>PDF</td>
+              </tr>
+              <tr>
+                <th scope="row">License</th>
+                <td>License not specified</td>
+              </tr>
+              <tr>
+                <th scope="row">Created</th>
+                <td>over 1 year ago</td>
+              </tr>
+              <tr>
+                <th scope="row">Media type</th>
+                <td>application/pdf</td>
+              </tr>
+              <tr>
+                <th scope="row">id</th>
+                <td>0asd123asdf45a6sdf321</td>
+              </tr>
+              <tr>
+                <th scope="row">package id</th>
+                <td>0asd123asdf45a6sdf321</td>
+              </tr>
+              <tr>
+                <th scope="row">position</th>
+                <td>3</td>
+              </tr>
+              <tr>
+                <th scope="row">revision id</th>
+                <td>0asd123asdf45a6sdf321</td>
+              </tr>
+              <tr>
+                <th scope="row">state</th>
+                <td>active</td>
               </tr>
             </tbody>
           </table>
@@ -604,23 +668,30 @@
           <div class="button__left">
           </div>
           <div class="button__center">
-            <base-button class="button-page__default" title="목록">목록</base-button>
+            <base-button class="button--2xl button--tertiary">목록</base-button>
           </div>
           <div class="button__right">
-            <base-button class="button-page__default button-declaration" title="오류신고" @click="onshowDialog('declarationDialog')">
+            <base-button class="button--2xl button--tertiary button-declaration" title="오류신고" @click="onshowDialog('declarationDialog')">
               <svg-icon class="svg-icon" name="declaration_katech" aria-hidden="true"></svg-icon>
-              <p>오류신고</p>
+              오류신고
               <small>※ 데이터에 오류가 발견되면 오류신고해 주세요.</small>
             </base-button>
+            <!-- 외부 데이터 경우 제공처 바로가기 버튼 노출 (오류신고 버튼 비노출) -->
+            <!--
+            <base-button class="button--2xl button--tertiary" title="제공처 바로가기">
+              <p>제공처 바로가기</p>
+            </base-button>
+            -->
           </div>
-          <Dialog dialog-name="declarationDialog" :width="'700px'">
-            <div slot="body">
+          <!-- 오류신고 Dialog Modal -->
+          <Dialog dialog-name="declarationDialog" :width="'700px'" :height="'740px'">
+            <div slot="body" class="modal__body">
               <div class="modal__body-head">
                 <h3><svg-icon class="svg-icon" name="declaration_katech" aria-hidden="true"></svg-icon>오류신고</h3>
                 <p>오류 발생시 관련 내용을 접수해 주세요. 캡쳐한 화면을 첨부해주시면 보다 빠른 처리가 가능합니다.</p>
               </div>
               <div class="modal__body-content">
-                <ul>
+                <ul class="modal__declaration">
                   <li class="modal__body-item">
                     <div class="item__title">이름</div>
                     <div class="item__detail">홍길동</div>
@@ -631,24 +702,36 @@
                   </li>
                   <li class="modal__body-item">
                     <div class="item__title">오류 데이터명</div>
-                    <div class="item__detail">도로교통공사 결빙 다발지역도로교통공사 결빙 다발지역도로교통공사 결빙 다발지역도로교통공사 결빙 다발지역도로교통공사 결빙 다발지역도로교통공사 결빙 다발지역</div>
+                    <div class="item__detail">도로교통공사 결빙 다발지역</div>
                   </li>
                   <li class="modal__body-item">
                     <div class="item__title">화면 URL</div>
                     <div class="item__detail">http://abcdefg.com/hijklmnop/qrstuv</div>
                   </li>
-                  <li class="modal__body-item">
+                  <li class="modal__body-item bottom">
                     <div class="item__title">오류내용<span class="blit_essential">*</span></div>
-                    <div class="item__detail">인풋</div>
+                    <div class="item__detail">
+                      <BaseTextarea rows="6" class="text-area--fixed scrollCustomize" placeholder="오류 내용을 입력해주세요."></BaseTextarea>
+                      <!-- 텍스트 길이(byte) 표시 -->
+                      <div class="text-area__byte">
+                        <strong>0</strong> / 4000 bytes
+                      </div>
+                      <!-- // 텍스트 길이(byte) 표시 -->
+                    </div>
                   </li>
                   <li class="modal__body-item">
                     <div class="item__title">파일첨부</div>
-                    <div class="item__detail">파일첨부, 파일리스트</div>
+                    <div class="item__detail">
+                      <div>
+                        <GroupFileAttach></GroupFileAttach>
+                      </div>
+                    </div>
                   </li>
                 </ul>
               </div>
             </div>
           </Dialog>
+          <!-- // 오류신고 Dialog Modal -->
         </div>
         <!-- // 버튼그룹 -->
       </section>
@@ -661,10 +744,12 @@
 import BaseRadio from "@common/atoms/base-radio/base-radio";
 import BaseTag from "@common/atoms/base-tag/base-tag";
 import BaseButton from "@common/atoms/base-button/base-button";
+import BaseTextarea from "@common/atoms/base-textarea/base-textarea.vue";
 import GroupBreadcrumb from "@common/molecules/group-breadcrumb/group-breadcrumb";
+import GroupFileAttach from "@common/molecules/group-file-attach/group-file-attach";
 import SearchList from "@common/organisms/search-list/search-list.vue";
-import errorAlert from "@functional/alert/alert-default";
-import Dialog from "@component/common/functional/dialog/dialog.vue";
+import Dialog from "@functional/dialog/dialog.vue";
+
 import { mapGetters } from "vuex";
 
 export default {
@@ -698,7 +783,8 @@ export default {
     SearchList,
     GroupBreadcrumb,
     Dialog,
-    errorAlert
+    BaseTextarea,
+    GroupFileAttach
   }
 };
 </script>
