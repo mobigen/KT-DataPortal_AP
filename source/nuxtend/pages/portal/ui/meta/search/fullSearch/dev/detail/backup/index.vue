@@ -663,7 +663,7 @@ import BaseTag from "@katech/atoms/base-tag/base-tag";
 import BaseButton from "@katech/atoms/base-button/base-button";
 import GroupBreadcrumb from "@katech/molecules/group-breadcrumb/group-breadcrumb";
 import SearchList from "@katech/organisms/search-list/search-list.vue";
-import errorAlert from "@component/common/functional/alert/alert-default";
+import errorAlert from "@functional/alert/alert-default";
 import Dialog from "@component/common/functional/dialog/dialog.vue";
 import { mapGetters } from "vuex";
 
