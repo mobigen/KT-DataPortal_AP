@@ -28,10 +28,13 @@
         <div class="modal__foot">
           <div class="modal__foot-main-buttons">
             <button class="button button--link button--lg" @click="onClose">
-              <span class="button__text"> {{ $t("dialog.cancel") }} </span>
+              <span class="button__text"> {{ cancelButtonText }} </span>
             </button>
-            <button class="button button--primary button--lg" @click="onConfirm">
-              <span class="button__text"> {{ $t("dialog.confirm") }} </span>
+            <button
+              class="button button--primary button--lg"
+              @click="onConfirm"
+            >
+              <span class="button__text"> {{ confirmButtonText }} </span>
             </button>
           </div>
         </div>
@@ -64,6 +67,18 @@ export default {
     opened: {
       type: Boolean,
       default: false
+    },
+    cancelButtonText: {
+      type: String,
+      default: function () {
+        return this.$t("dialog.cancel");
+      }
+    },
+    confirmButtonText: {
+      type: String,
+      default: function () {
+        return this.$t("dialog.confirm");
+      }
     }
   },
   mounted() {
@@ -103,5 +118,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "dialog";
+@import "dialog.scss";
 </style>
