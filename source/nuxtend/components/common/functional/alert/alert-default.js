@@ -88,3 +88,27 @@ export const errorAlert = (content) => {
 
   return defaultAlert(props, config);
 };
+
+export const confirmAlert = (content, events) => {
+  const locale = $nuxt.$options.i18n.locale;
+  let i18n = i18nGenerator(locale, messages);
+  let props = {
+    title: i18n.t("alert.confirm"),
+    iconTheme: i18n.t("alert.property.icon-theme"),
+    confirmButtonTheme: i18n.t("alert.property.confirm-button-theme"),
+    confirmButtonText: "확인",
+    type: "confirm",
+    content: content,
+    width: "450"
+  };
+
+  let config = {
+    width: 300,
+    height: "auto",
+    pivotY: 0.3,
+    styles: "overflow: inherit",
+    draggable: false
+  };
+
+  return defaultAlert(props, config, events);
+};
