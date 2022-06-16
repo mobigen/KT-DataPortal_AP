@@ -1,4 +1,4 @@
-import { errorAlert } from "@component/common/functional/alert/alert-default";
+import { errorAlert } from "@functional/alert/alert-default";
 const UrlPattern = require("url-pattern");
 
 const isUserApiUrl = (path) => {

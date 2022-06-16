@@ -58,7 +58,7 @@
 import BaseCheckbox from "@common/atoms/base-checkbox/base-checkbox";
 import BasicTree from "@common/atoms/basic-tree/basic-tree.vue";
 import { mapActions, mapGetters } from "vuex";
-import BaseButton from "@katech/atoms/base-button/base-button";
+import BaseButton from "@common/atoms/base-button/base-button";
 
 export default {
   name: "GroupSearchFilter",

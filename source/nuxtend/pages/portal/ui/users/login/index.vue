@@ -16,7 +16,7 @@
 <i18n src="./index.json"></i18n>
 
 <script type="text/javascript">
-import Login from "@component/UITeam/project/sample/login/login.vue";
+import Login from "@component/users/login/login.vue";
 import RSA from "rsajs";
 import { mapGetters, mapActions } from "vuex";
 
@@ -94,11 +94,6 @@ export default {
 
       await this.setPrevFullUrl(prevFullUrl);
 
-      // location.href =
-      //   `/oauth2/authorization/` +
-      //   socialType +
-      //   "?prevFullUrl=" +
-      //   encodeURIComponent(prevFullUrl);
       location.href = `/oauth2/authorization/` + socialType;
     },
     getPublicKey() {

@@ -41,7 +41,7 @@
 </template>
 
 <script type="text/javascript">
-import { mapActions, mapGetters } from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import BasicTable from "@component/aiPlatform/basic/basic-table";
 import BasicPagination from "@component/aiPlatform/basic/basic-pagination";
 
@@ -71,7 +71,8 @@ export default {
   },
   computed: {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
-    ...mapGetters("sample/sample", ["metaNameList"])
+    ...mapGetters("sample/sample", ["metaNameList"]),
+    ...mapGetters("module/pagination", ["paging"])
   },
   components: { BasicTable, BasicPagination },
   watch: {},

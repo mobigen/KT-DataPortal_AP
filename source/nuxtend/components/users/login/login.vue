@@ -79,7 +79,7 @@
 <i18n src="./login.json"></i18n>
 
 <script type="text/javascript">
-import Locale from "../../../../../../katech_dp/source/Katech/frontend/components/UITeam/molecules/locale/locale.vue";
+import Locale from "@common/sample/locale/locale.vue";
 export default {
   name: "ModuleLogin",
   components: {

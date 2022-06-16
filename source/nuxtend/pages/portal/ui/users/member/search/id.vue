@@ -40,7 +40,7 @@ export default {
     };
   },
   methods: {
-    onIdSearch() {
+    async onIdSearch() {
       const userNm = this.userNm;
       const mobile = this.mobile;
 
@@ -48,8 +48,16 @@ export default {
         userNm: userNm,
         mobile: mobile
       };
-      const data = this.idSearch(parmas);
-      console.log("data : ".data);
+      const data = await this.idSearch(parmas);
+      if (!data || !data.userId) {
+        console.log("error : ", data);
+        return false;
+      }
+
+      this.$cookies.set("idSearch", data, 60);
+      this.$router.push({
+        path: `${this.$config.ROUTE_USERS_PREFIX}/member/search/id-result`
+      });
     },
     idSearch(params) {
       return this.$axios.post(

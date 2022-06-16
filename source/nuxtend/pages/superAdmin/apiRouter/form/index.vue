@@ -1,7 +1,5 @@
 <template lang="html">
   <div id="api-router-wrapper">
-    <p v-show="apiName">API_NM : 수정불가 (삭제 후 재등록)</p>
-
     <!-- apiRouter용 하드코딩-->
     <div class="api-router-row">
       <basic-label forProperty="">API_NM</basic-label>
@@ -41,9 +39,9 @@
       />
     </div>
 
-    <template v-if="!openParam">
+    <template>
       <!--      v-if="apiObj['MODE'] === null || apiObj['MODE'] === 'MESSAGE PASSING'"-->
-      <div class="api-router-row">
+      <div class="api-router-row" v-show="!openParam">
         <!-- message passing-->
         <basic-label forProperty="">URL</basic-label>
         <basic-input
@@ -54,7 +52,7 @@
         />
       </div>
 
-      <div class="api-router-row">
+      <div class="api-router-row" v-show="!openParam">
         <basic-label forProperty="">METH</basic-label>
         <radio-button
           :radioButtonList="methRadioOptions"
@@ -65,10 +63,10 @@
       </div>
     </template>
 
-    <template v-if="openParam">
+    <template>
       <!-- remote call -->
 
-      <div class="api-router-row">
+      <div class="api-router-row" v-show="openParam">
         <basic-label forProperty="">CMD</basic-label>
         <basic-input
           formInputType="text"
@@ -77,7 +75,7 @@
           @changeData="changeData"
         />
       </div>
-      <div class="param-table-wrap">
+      <div class="param-table-wrap" v-show="openParam">
         <h5>params</h5>
         <basic-table
           componentId=""
@@ -160,10 +158,7 @@ import BaseSelect from "@/components/common/atoms/base-select/base-select";
 import RadioButton from "@/components/aiPlatform/basic/radio-button.vue";
 import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
 import { mapGetters } from "vuex";
-import {
-  successAlert,
-  errorAlert
-} from "@functional/alert/alert-default";
+import { successAlert, errorAlert } from "@functional/alert/alert-default";
 
 export default {
   name: "apiRouter-form",
@@ -251,9 +246,6 @@ export default {
       });
 
       if (this.apiObj.MODE === this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL) {
-        params[this.CONSTANTS.API_ROUTER.PARAM.PARAMS] = [];
-        params[this.CONSTANTS.API_ROUTER.PARAM.CMD] = "";
-      } else {
         params[this.CONSTANTS.API_ROUTER.PARAM.URL] = "";
         params[this.CONSTANTS.API_ROUTER.PARAM.METH] = "";
 
@@ -271,6 +263,9 @@ export default {
                 el[this.CONSTANTS.API_ROUTER.PARAM.DEFLT_VAL]
             };
           }, this);
+      } else {
+        params[this.CONSTANTS.API_ROUTER.PARAM.PARAMS] = [];
+        params[this.CONSTANTS.API_ROUTER.PARAM.CMD] = "";
       }
 
       // NO parameter는 backend에서 처리되지 않기 때문에 삭제한다.

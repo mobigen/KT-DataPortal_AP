@@ -75,7 +75,7 @@
 
 <script type="text/javascript">
 import FamilySite from "./footer.familysite.json";
-import { errorAlert } from "@component/common/functional/alert/alert-default";
+import { errorAlert } from "@functional/alert/alert-default";
 
 export default {
   name: "Footer",

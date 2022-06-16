@@ -23,8 +23,8 @@
 
 <script type="text/javascript">
 import GroupSearch from "@common/molecules/group-search/group-search";
-import BaseButton from "@katech/atoms/base-button/base-button";
-import BaseCheckbox from "@katech/atoms/base-checkbox/base-checkbox";
+import BaseButton from "@common/atoms/base-button/base-button";
+import BaseCheckbox from "@common/atoms/base-checkbox/base-checkbox";
 export default {
   name: "SearchInputField",
   extends: {},

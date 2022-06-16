@@ -8,11 +8,9 @@
 </template>
 
 <script>
-import Header from "./layout/header.vue";
-export default {
-  name: "",
-  components: {
-    Header
-  }
-};
+  import Header from "./layout-app/header.vue";
+  export default {
+    name: "layout-app",
+    components: { Header }
+  };
 </script>
