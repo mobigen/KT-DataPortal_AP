@@ -22,7 +22,7 @@
 <i18n src="./login.json"></i18n>
 
 <script type="text/javascript">
-import Locale from "@component/UITeam/project/sample/locale/locale.vue";
+import Locale from "@project/sample/locale/locale.vue";
 export default {
   name: "Login",
   components: {

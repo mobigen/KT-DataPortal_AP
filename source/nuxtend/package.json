@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "scripts": {
+    "storybook": "cross-env NODE_ENV=local nuxt storybook --dotenv ./config/.env.local",
     "dev": "cross-env NODE_ENV=local nuxt dev --dotenv ./config/.env.local",
     "build": "cross-env NODE_ENV=local nuxt build --dotenv ./config/.env.local",
     "start": "cross-env NODE_ENV=local nuxt start --dotenv ./config/.env.local",

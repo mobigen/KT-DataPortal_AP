@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TileView from "@component/DPTeam/tileView";
+import TileView from "@component/common/tile/tileView";
 export default {
   name: "mapSearch",
   components: {TileView}

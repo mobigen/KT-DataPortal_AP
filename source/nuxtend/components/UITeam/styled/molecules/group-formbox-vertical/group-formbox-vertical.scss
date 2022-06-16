@@ -1,0 +1,57 @@
+.formbox {
+  position: relative;
+  border-top: 2px solid $primary;
+  border-bottom: 1px solid $ui-04;
+  background: $ui-02;
+}
+
+.formbox tr {
+  height: rem(60px);
+}
+
+.formbox th,
+.formbox td {
+  line-height: 1.5;
+  padding: $spacing-xs rem(20px);
+  border-top: 1px solid $ui-04;
+  vertical-align: middle;
+}
+
+.formbox tr:first-child > th,
+.formbox tr:first-child > td {
+  border-top: none;
+}
+
+/* first row */
+.formbox th {
+  font-weight: 500;
+}
+
+/* 상세폼 TH BG
+    ***************************************************************************/
+.formbox--vertical {
+  min-width: 1280px;
+}
+
+.formbox--vertical th,
+.formbox--vertical td {
+  padding: $spacing-md rem(20px);
+  border-right: 1px solid $ui-04;
+  text-align: center;
+}
+
+.formbox--vertical th:last-child,
+.formbox--vertical td:last-child {
+  border-right: none;
+}
+
+.formbox--vertical th {
+  background-color: $ui-01;
+}
+
+/* 화면 너비 0 ~ 930px */
+@include template-respond-to('breakpoint-lg') {
+  .table-box {
+    overflow-x: auto;
+  }
+}

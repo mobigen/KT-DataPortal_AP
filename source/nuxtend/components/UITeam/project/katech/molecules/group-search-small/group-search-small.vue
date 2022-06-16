@@ -49,9 +49,9 @@
 </template>
 
 <script type="text/javascript">
-import BaseButton from "@component/styled/atoms/base-button/base-button.vue";
-import BaseInput from "@component/styled/atoms/base-input/base-input";
-import BaseTag from "@component/styled/atoms/base-tag/base-tag";
+import BaseButton from "@styled/atoms/base-button/base-button.vue";
+import BaseInput from "@styled/atoms/base-input/base-input";
+import BaseTag from "@styled/atoms/base-tag/base-tag";
 
 export default {
   name: "GroupSearchSmall",

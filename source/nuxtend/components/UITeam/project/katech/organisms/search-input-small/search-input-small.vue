@@ -22,9 +22,9 @@
 </template>
 
 <script type="text/javascript">
-import GroupSearch from "@component/styled/molecules/group-search/group-search";
-import BaseButton from "@component/styled/atoms/base-button/base-button";
-import BaseCheckbox from "@component/styled/atoms/base-checkbox/base-checkbox";
+import GroupSearch from "@styled/molecules/group-search/group-search";
+import BaseButton from "@styled/atoms/base-button/base-button";
+import BaseCheckbox from "@styled/atoms/base-checkbox/base-checkbox";
 export default {
   name: "SearchInputSmall",
   extends: {},

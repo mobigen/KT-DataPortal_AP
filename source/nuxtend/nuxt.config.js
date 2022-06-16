@@ -58,12 +58,12 @@ export default {
     "@nuxtjs/style-resources",
     "@nuxtjs/svg-sprite",
     "@nuxtjs/i18n",
-    "@nuxtjs/fontawesome",
+    "@nuxtjs/fontawesome"
     // build, generate 속도 향샹
-    "nuxt-build-optimisations"
+    // "nuxt-build-optimisations"
   ],
   buildOptimisations: {
-    profile: "risky"
+    // profile: "risky"
     // profile: 'experimental' // default
     // profile: 'safe'
     // profile: false
@@ -93,10 +93,20 @@ export default {
   // alias
   alias: {
     "@component": resolve(__dirname, "./components"),
-    "@functional": resolve(__dirname, "./components/functional"),
-    "@molecules": resolve(__dirname, "./components/molecules"),
-    "@organisms": resolve(__dirname, "./components/organisms"),
-    "@project": resolve(__dirname, "./components/project")
+    "@common": resolve(__dirname, "./components/common"),
+    "@functional": resolve(__dirname, "./components/common/functional"),
+    "@styled": resolve(__dirname, "./components/UITeam/styled"),
+    "@project": resolve(__dirname, "./components/UITeam/project"),
+    "@katech": resolve(__dirname, "./components/UITeam/project/katech"),
+    "@atoms": resolve(__dirname, "./components/UITeam/project/katech/atoms"),
+    "@molecules": resolve(
+      __dirname,
+      "./components/UITeam/project/katech/molecules"
+    ),
+    "@organisms": resolve(
+      __dirname,
+      "./components/UITeam/project/katech/organisms"
+    )
   },
 
   // options
@@ -186,7 +196,7 @@ export default {
   },
 
   // custom loading bar
-  loading: "~/components/UITeam/functional/loader/loader.vue",
+  loading: "~/components/common/functional/loader/loader.vue",
 
   // 미들웨어
   router: {

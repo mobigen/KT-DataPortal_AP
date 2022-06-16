@@ -9,7 +9,7 @@
               <!-- 제공기관 로고 (카드형일때만 보임) -->
               <div class="badge--provider-logo">
                 <img src="~@/assets/style-product/images/common/provider_logo01.png" alt="제공기관"><!-- 로고 있는경우 로고 이미지 출력 -->
-                <!-- <span>국토교통부</span><!--로고 없는 경우 제공기관명 텍스트 출력-->
+                <!-- <span>국토교통부</span> 로고 없는 경우 제공기관명 텍스트 출력-->
               </div>
               <!-- // 제공기관 로고 -->
               <base-badge class="badge--w-gray">
@@ -74,10 +74,10 @@
 </template>
 
 <script type="text/javascript">
-import BaseBadge from "@component/UITeam/project/katech/atoms/base-badge/base-badge.vue";
-import BaseButton from "@component/UITeam/project/katech/atoms/base-button/base-button.vue";
-import BaseTag from "@component/UITeam/project/katech/atoms/base-tag/base-tag.vue";
-import BaseCheckbox from "@component/UITeam/project/katech/atoms/base-checkbox/base-checkbox.vue";
+import BaseBadge from "@atoms/base-badge/base-badge.vue";
+import BaseButton from "@atoms/base-button/base-button.vue";
+import BaseTag from "@atoms/base-tag/base-tag.vue";
+import BaseCheckbox from "@atoms/base-checkbox/base-checkbox.vue";
 
 export default {
   name: "SearchList",
