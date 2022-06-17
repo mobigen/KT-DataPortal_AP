@@ -13,8 +13,9 @@
     <div class="content-top">
       <div class="contents-top__search">
         <search-input-field
-          @search="searchBtnClick"
           :searchKeyword="searchKeyword"
+          @search="searchBtnClick"
+          @filterCheck="rescanFilterCheck"
         ></search-input-field>
         <div class="contents-top__recommend">
           <h4>추천검색어</h4>
@@ -31,9 +32,25 @@
         :showSearchResultBox="showSearchResultBox"
         :searchResultSuccess="searchResultSuccess"
       >
-        <template v-slot:resultSuccessTrueText>
+        <template
+          v-if="searchKeywordList.length < 2"
+          v-slot:resultSuccessTrueText
+        >
           <strong>'{{ searchKeyword }}'</strong>에 대한 검색결과 총
           <strong>{{ numOfSearchResult }}</strong> 건이 검색되었습니다.
+        </template>
+
+        <!-- TODO: '교통체증' & '대중교통' & '자전거' 와 같이 item 사이에 구분자 css 처리 필요 / 임시로 일단 처리해둠 -->
+        <template v-else v-slot:resultSuccessTrueText>
+          <strong
+            v-for="(item, index) in searchKeywordList"
+            :key="'searchKeyword_' + index"
+            >'{{ item }}'
+            <template v-if="searchKeywordList.length - 1 !== index"
+              ><sapn style="color: black">&</sapn></template
+            >
+          </strong>
+          검색 결과, 총 <strong>{{ numOfSearchResult }}</strong> 건 입니다.
         </template>
       </search-result-box>
 
@@ -155,6 +172,7 @@
               :list="contents"
               :myFavoriteDataList="myFavoriteDataList"
               :searchKeyword="searchKeyword"
+              :searchKeywordList="searchKeywordList"
               @dataBoxClick="listDataBoxClick"
               @keywordClick="listKeywordClick"
               @myFavoriteDataClick="myFavoriteDataClick"
@@ -253,6 +271,8 @@ export default {
         }
       },
       searchKeyword: "",
+      searchKeywordList: [],
+      rescanFilterChecked: false,
       numOfSearchResult: null,
       showSearchResultBox: false,
       searchResultSuccess: false,
@@ -296,8 +316,6 @@ export default {
       this.search();
     },
     search() {
-      this.numOfSearchResult = 135;
-
       if (this.searchKeyword.trim() === "") {
         this.showSearchResultBox = false;
         this.searchResultSuccess = false;
@@ -306,6 +324,24 @@ export default {
 
       this.showSearchResultBox = true;
       this.searchResultSuccess = true;
+
+      if (this.rescanFilterChecked) {
+        if (this.searchKeywordList.length >= 3) {
+          alert("결과 내 재검색 3회이상으로 추가 검색이 불가능 합니다.");
+          this.searchKeyword = "";
+          return;
+        } else if (this.searchKeywordList.includes(this.searchKeyword)) {
+          alert("동일한 검색어 입력으로 추가 검색이 불가능 합니다.");
+          return;
+        }
+        this.searchKeywordList.push(this.searchKeyword);
+
+        // searchKeywordList로 검색
+        this.numOfSearchResult = 51;
+      } else {
+        // searchKeyword로 검색
+        this.numOfSearchResult = 135;
+      }
     },
     recommendTagClick(tagObj) {
       this.searchKeyword = tagObj.itemName;
@@ -343,6 +379,16 @@ export default {
         key: checkboxKey,
         changeList: changeList
       });
+    },
+    rescanFilterCheck({ bool }) {
+      this.rescanFilterChecked = bool;
+      if (bool && this.searchKeyword !== "") {
+        this.searchKeywordList.push(this.searchKeyword);
+      } else {
+        this.searchKeywordList = [];
+        this.searchKeyword = "";
+        this.search();
+      }
     }
   },
   mounted() {

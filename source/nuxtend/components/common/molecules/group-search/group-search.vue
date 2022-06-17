@@ -7,7 +7,7 @@
       placeholder="검색어를 입력하세요"
       @input="search"
       @enterEvent="$emit('search', inputData)"
-      @keydown="isComboBoxShow = true"
+      @keydown="isComboBoxShow = false"
     ></base-input>
     <base-button class="text-input-group__clear-button" title="초기화">
       <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>

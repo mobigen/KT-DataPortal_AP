@@ -102,19 +102,26 @@ export default {
   props: {
     list: {
       type: Array,
-      default: function () {
+      default: () => {
         return [];
       }
     },
     myFavoriteDataList: {
       type: Array,
-      default: function () {
+      default: () => {
         return [];
       }
     },
     searchKeyword: {
       type: String,
       require: true
+    },
+    searchKeywordList: {
+      type: Array,
+      require: false,
+      default: () => {
+        return [];
+      }
     }
   },
   data() {
@@ -138,16 +145,24 @@ export default {
       const postId = name.split("myFavoriteData").pop();
       this.$emit("myFavoriteDataClick", { postId, bool });
     },
-    searchKeywordHighlight(title) {
-      if (this.searchKeyword === "") {
+    searchKeywordHighlight(item) {
+      let title = "";
+
+      if (this.searchKeyword === "" && this.searchKeywordList.length === 0) {
+        title = item;
+      } else if (this.searchKeywordList.length > 0) {
+        this.searchKeywordList.forEach((el) => {
+          title = item.replaceAll(el, `<mark>${el}</mark>`);
+        });
         return title;
+      } else {
+        title = item.replaceAll(
+          this.searchKeyword,
+          `<mark>${this.searchKeyword}</mark>`
+        );
       }
 
-      // 검색어에 mark 태그 적용
-      return title.replaceAll(
-        this.searchKeyword,
-        `<mark>${this.searchKeyword}</mark>`
-      );
+      return title;
     }
   }
 };

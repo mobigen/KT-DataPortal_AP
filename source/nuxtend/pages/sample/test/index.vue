@@ -74,7 +74,7 @@
 </template>
 
 <script type="text/javascript">
-import BaseButton from "@katech/atoms/base-button/base-button";
+import BaseButton from "@common/atoms/base-button/base-button";
 import Dialog from "@functional/dialog/dialog.vue";
 
 export default {
