@@ -22,6 +22,16 @@ export default ({ $axios, $config }, inject) => {
     return user;
   };
 
+  const getUserInfo = async (param) => {
+    const user = await $axios
+      .post(`${$config.API_USERS_PREFIX}/user/info`, param)
+      .catch((e) => {
+        console.log("e : ", e);
+      });
+
+    return user;
+  };
+
   const isUserRouteUrl = (path) => {
     //const pattern = new UrlPattern(/^\/user\/(.*)$/);
     //const pattern = new UrlPattern(/^\/admin\/api\/(.*)$/);
@@ -46,6 +56,7 @@ export default ({ $axios, $config }, inject) => {
 
   inject("getUser", getUser);
   inject("getAuthUser", getAuthUser);
+  inject("getUserInfo", getUserInfo);
   inject("isUserRouteUrl", isUserRouteUrl);
   inject("isAdminRouteUrl", isAdminRouteUrl);
 };

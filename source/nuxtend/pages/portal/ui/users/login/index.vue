@@ -98,6 +98,7 @@ export default {
     },
     getPublicKey() {
       return this.$axios.get(`${this.$config.API_USERS_PREFIX}/auth/key`);
+      // return this.$axios.get(`/route/portal/users/auth/key`);
     },
     auth(username, password) {
       return this.$axios.post(`${this.$config.API_USERS_PREFIX}/auth/login`, {
