@@ -6,8 +6,8 @@
   >
     <h4 class="aside__title">{{ filterTitle }}</h4>
     <base-button
-      v-show="useExpandButton"
-      class="aside__button-down"
+      v-if="useExpandButton"
+      class="aside__button-down "
       :class="isExpand ? 'aside__button-up' : ''"
       @click="toggleExpand"
     ></base-button>
