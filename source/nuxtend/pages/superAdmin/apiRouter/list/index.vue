@@ -28,6 +28,7 @@
         componentId=""
         :headerList="apiList.header"
         :dataList="apiList.body"
+        :headerLocale="$t('header')"
         rowKey="API_NM"
         :useSerialNum="true"
         serialNumText="No."
@@ -42,9 +43,11 @@
   </div>
 </template>
 
+<i18n src="./index.json"></i18n>
+
 <script type="text/javascript">
 import BasicLabel from "@component/aiPlatform/basic/basic-label.vue";
-import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
+import BasicTable from "@component/aiPlatform/basic/basic-table/basic-table.vue";
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 import BaseSelect from "@component/common/atoms/base-select/base-select";
 import { mapGetters } from "vuex";

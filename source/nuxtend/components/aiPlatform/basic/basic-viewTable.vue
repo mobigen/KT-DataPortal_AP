@@ -13,7 +13,7 @@
           :key="'body_tr_' + i"
           v-show="!hideColumns.includes(header.column_name)"
         >
-          <th>{{ header.column_name }}</th>
+          <th>{{ getHeaderLocale(header.column_name) }}</th>
           <td>{{ viewDetail.body[0][header.column_name] }}</td>
         </tr>
       </tbody>
@@ -35,6 +35,13 @@ export default {
       type: Object,
       require: true
     },
+    headerLocale: {
+      type: Object,
+      require: false,
+      default: () => {
+        return {};
+      }
+    },
     hideColumns: {
       type: Array,
       require: false,
@@ -46,7 +53,16 @@ export default {
   computed: {},
   components: {},
   watch: {},
-  methods: {},
+  methods: {
+    getHeaderLocale(headerEngNm) {
+      return Object.prototype.hasOwnProperty.call(
+        this.headerLocale,
+        headerEngNm
+      )
+        ? this.headerLocale[headerEngNm]
+        : headerEngNm;
+    }
+  },
   created() {}
 };
 </script>

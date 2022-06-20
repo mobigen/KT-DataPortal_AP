@@ -9,6 +9,7 @@
         componentId=""
         :headerList="headerList"
         :dataList="metaMapList.body"
+        :headerLocale="$t('header')"
         rowKey="ITEM_ID"
         :useSerialNum="false"
         serialNumText=""
@@ -34,9 +35,11 @@
   </div>
 </template>
 
+<i18n src="./index.json"></i18n>
+
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
-import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
+import BasicTable from "@component/aiPlatform/basic/basic-table/basic-table.vue";
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 export default {
   name: "super-admin-metaMapList",

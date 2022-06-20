@@ -4,15 +4,17 @@
       <basic-viewTable
         :useTableHead="false"
         :viewDetail="apiInfoDetail"
+        :headerLocale="$t('header')"
         :hide-columns="hideColumns"
       />
 
       <div v-show="!hideColumns.includes(CONSTANTS.API_ROUTER.PARAM.PARAMS)">
-        <div>PARAMS</div>
+        <div>{{ $t("header.PARAMS") }}</div>
         <basic-table
           componentId=""
           :headerList="apiParamsDetail.header"
           :dataList="apiParamsDetail.body"
+          :headerLocale="$t('param_header')"
           rowKey="api_name"
           :useSerialNum="true"
           serialNumText="No."
@@ -40,10 +42,12 @@
   </div>
 </template>
 
+<i18n src="./index.json"></i18n>
+
 <script type="text/javascript">
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 import BasicViewTable from "@component/aiPlatform/basic/basic-viewTable.vue";
-import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
+import BasicTable from "@component/aiPlatform/basic/basic-table/basic-table.vue";
 import { mapGetters } from "vuex";
 
 export default {

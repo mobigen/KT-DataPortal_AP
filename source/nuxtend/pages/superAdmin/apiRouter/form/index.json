@@ -1,0 +1,18 @@
+{
+  "ko": {
+    "header": {
+      "API_NM": "api명",
+      "CTGRY": "카테고리",
+      "METH": "메소드 타입",
+      "CMD": "Command",
+      "MODE": "모드",
+      "URL": "url",
+      "PARAMS": "파라메터"
+    },
+    "param_header": {
+      "NM": "파라메터명",
+      "DATA_TYPE": "데이터 타입",
+      "DEFLT_VAL": "기본값"
+    }
+  }
+}

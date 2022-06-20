@@ -7,6 +7,7 @@
       <basic-view-table
         :headerList="metaNameDetail.header"
         :dataObj="metaNameDetail.body"
+        :headerLocale="$t('header')"
         viewTableColumnCount="1"
         :useTagList="false"
         tagPreviousText=""
@@ -29,6 +30,8 @@
     </div>
   </div>
 </template>
+
+<i18n src="./index.json"></i18n>
 
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";

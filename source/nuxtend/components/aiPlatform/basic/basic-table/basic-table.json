@@ -1,0 +1,11 @@
+{
+  "ko": {
+    "header": {
+      "API_NM": "api명",
+      "CTGRY": "카테고리",
+      "METH": "메소드 타입",
+      "CMD": "Command",
+      "MODE": "모드"
+    }
+  }
+}

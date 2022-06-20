@@ -20,6 +20,7 @@
         componentId=""
         :headerList="metaNameList.header"
         :dataList="metaNameList.body"
+        :headerLocale="$t('header')"
         rowKey="NM_ID"
         :useSerialNum="true"
         serialNumText="No."
@@ -48,9 +49,11 @@
   </div>
 </template>
 
+<i18n src="./index.json"></i18n>
+
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
-import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
+import BasicTable from "@component/aiPlatform/basic/basic-table/basic-table.vue";
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 import BasicPagination from "@component/aiPlatform/basic/basic-pagination";
 
