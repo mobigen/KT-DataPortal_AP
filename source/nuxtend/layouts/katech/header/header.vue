@@ -121,22 +121,22 @@
             </div>
             <ul class="gnb">
               <li class="gnb__item" @mouseover="isLnbOpen = true">
-                <NuxtLink to="/porta/ui/meta/search/fullSearch" class="gnb__link"
+                <NuxtLink to="/portal/ui/meta/search/fullSearch" class="gnb__link"
                   ><span>데이터 검색</span></NuxtLink
                 >
                 <ul class="lnb">
                   <li class="lnb__item">
-                    <NuxtLink to="/porta/ui/meta/search/fullSearch" class="lnb__link"
+                    <NuxtLink to="/portal/ui/meta/search/fullSearch" class="lnb__link"
                       >데이터 통합검색</NuxtLink
                     >
                   </li>
                   <li class="lnb__item">
-                    <NuxtLink to="/porta/ui/meta/search/mapSearch" class="lnb__link"
+                    <NuxtLink to="/portal/ui/meta/search/mapSearch" class="lnb__link"
                       >데이터맵 검색</NuxtLink
                     >
                   </li>
                   <li class="lnb__item">
-                    <NuxtLink to="/porta/ui/meta/search/relationSearch" class="lnb__link"
+                    <NuxtLink to="/portal/ui/meta/search/relationSearch" class="lnb__link"
                       >연관관계 검색</NuxtLink
                     >
                   </li>
