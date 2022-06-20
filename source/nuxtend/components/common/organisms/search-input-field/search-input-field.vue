@@ -11,7 +11,11 @@
             ></group-search>
           </div>
           <div class="search-input-field__filter">
-            <base-checkbox name="filter-check" checkbox-id="check-1">
+            <base-checkbox
+              name="filter-check"
+              checkbox-id="'filter-check"
+              @changeData="filterCheck"
+            >
               <template v-slot:label> 결과 내 재검색 </template>
             </base-checkbox>
           </div>
@@ -43,6 +47,9 @@ export default {
   methods: {
     search(inputData) {
       this.$emit("search", inputData);
+    },
+    filterCheck(bool, name) {
+      this.$emit("filterCheck", { bool, name });
     }
   },
   beforeCreate() {},
