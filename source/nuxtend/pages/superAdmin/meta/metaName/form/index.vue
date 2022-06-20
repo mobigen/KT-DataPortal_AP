@@ -6,6 +6,7 @@
         rowKey="NM_ID"
         :labelList="metaNameDetail.header"
         :dataObject="metaNameDetail.body"
+        :headerLocale="$t('header')"
         :formInputType="formInputType"
         @changeData="setChangeData"
         placeholder="내용을 입력해주세요"
@@ -33,6 +34,8 @@
     </div>
   </div>
 </template>
+
+<i18n src="./index.json"></i18n>
 
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";

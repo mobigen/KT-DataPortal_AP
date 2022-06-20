@@ -324,7 +324,7 @@ import BasicNameTag from "@component/aiPlatform/basic/basic-name-tag.vue";
 import BasicSingleTag from "@component/aiPlatform/basic/basic-single-tag.vue";
 import BasicAccordionTable from "@component/aiPlatform/basic/basic-accordion-table.vue";
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
-import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
+import BasicTable from "@component/aiPlatform/basic/basic-table/basic-table.vue";
 import BasicTabMenu from "@component/aiPlatform/basic/basic-tab-menu.vue";
 import BasicMenu from "@component/aiPlatform/basic/basic-menu.vue";
 import NameTagList from "@component/aiPlatform/basic/name-tag-list";

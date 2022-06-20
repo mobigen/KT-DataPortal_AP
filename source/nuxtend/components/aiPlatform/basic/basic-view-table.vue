@@ -3,7 +3,7 @@
     <table :style="cssVariable">
       <tbody v-for="(data, i) in headerList">
         <tr>
-          <th>{{ data["column_name"] }}</th>
+          <th>{{ getHeaderLocale(data["column_name"]) }}</th>
           <td v-if="Array.isArray(dataObj[data['column_name']])">
             <template v-for="(ldata, li) in dataObj[data['column_name']]">
               <basic-single-tag
@@ -50,6 +50,13 @@ export default {
       type: Object,
       require: false
     },
+    headerLocale: {
+      type: Object,
+      require: false,
+      default: () => {
+        return {};
+      }
+    },
     viewTableColumnCount: {
       type: String,
       require: false,
@@ -90,6 +97,14 @@ export default {
   methods: {
     tagClick({ tagName }) {
       this.$emit("tagClick", { tagName });
+    },
+    getHeaderLocale(headerEngNm) {
+      return Object.prototype.hasOwnProperty.call(
+        this.headerLocale,
+        headerEngNm
+      )
+        ? this.headerLocale[headerEngNm]
+        : headerEngNm;
     }
   },
   created() {}

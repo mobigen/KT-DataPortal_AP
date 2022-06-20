@@ -2,7 +2,7 @@
   <div id="api-router-wrapper">
     <!-- apiRouter용 하드코딩-->
     <div class="api-router-row">
-      <basic-label forProperty="">API_NM</basic-label>
+      <basic-label forProperty="">{{ $t("header.API_NM") }}</basic-label>
 
       <basic-label v-if="apiName" forProperty="">{{
         apiObj["API_NM"]
@@ -17,7 +17,7 @@
     </div>
 
     <div class="api-router-row">
-      <basic-label forProperty="">CTGRY</basic-label>
+      <basic-label forProperty="">{{ $t("header.CTGRY") }}</basic-label>
       <base-select
         select-id="select-01"
         labelName="CTGRY"
@@ -29,7 +29,7 @@
     </div>
 
     <div class="api-router-row">
-      <basic-label forProperty="">MODE</basic-label>
+      <basic-label forProperty="">{{ $t("header.MODE") }}</basic-label>
 
       <radio-button
         :radioButtonList="modeRadioOptions"
@@ -43,7 +43,7 @@
       <!--      v-if="apiObj['MODE'] === null || apiObj['MODE'] === 'MESSAGE PASSING'"-->
       <div class="api-router-row" v-show="!openParam">
         <!-- message passing-->
-        <basic-label forProperty="">URL</basic-label>
+        <basic-label forProperty="">{{ $t("header.URL") }}</basic-label>
         <basic-input
           formInputType="text"
           labelName="URL"
@@ -53,7 +53,7 @@
       </div>
 
       <div class="api-router-row" v-show="!openParam">
-        <basic-label forProperty="">METH</basic-label>
+        <basic-label forProperty="">{{ $t("header.METH") }}</basic-label>
         <radio-button
           :radioButtonList="methRadioOptions"
           labelName="METH"
@@ -67,7 +67,7 @@
       <!-- remote call -->
 
       <div class="api-router-row" v-show="openParam">
-        <basic-label forProperty="">CMD</basic-label>
+        <basic-label forProperty="">{{ $t("header.CMD") }}</basic-label>
         <basic-input
           formInputType="text"
           labelName="CMD"
@@ -76,11 +76,12 @@
         />
       </div>
       <div class="param-table-wrap" v-show="openParam">
-        <h5>params</h5>
+        <h5>{{ $t("header.PARAMS") }}</h5>
         <basic-table
           componentId=""
           :headerList="apiParams.header"
           :dataList="apiParams.body"
+          :headerLocale="$t('param_header')"
           rowKey="API_NM"
           :useSerialNum="true"
           serialNumText="No."
@@ -97,7 +98,9 @@
           <h5>params 등록</h5>
           <div>
             <div class="api-router-row">
-              <basic-label forProperty="">NM</basic-label>
+              <basic-label forProperty="">{{
+                $t("param_header.NM")
+              }}</basic-label>
               <basic-input
                 formInputType="text"
                 labelName="NM"
@@ -106,7 +109,9 @@
               />
             </div>
             <div class="api-router-row">
-              <basic-label forProperty="">DATA_TYPE</basic-label>
+              <basic-label forProperty="">{{
+                $t("param_header.DATA_TYPE")
+              }}</basic-label>
               <base-select
                 select-id="select-02"
                 labelName="DATA_TYPE"
@@ -117,7 +122,9 @@
               />
             </div>
             <div class="api-router-row">
-              <basic-label forProperty="">DEFLT_VAL</basic-label>
+              <basic-label forProperty="">{{
+                $t("param_header.DEFLT_VAL")
+              }}</basic-label>
               <basic-input
                 formInputType="text"
                 labelName="DEFLT_VAL"
@@ -150,13 +157,15 @@
   </div>
 </template>
 
+<i18n src="./index.json"></i18n>
+
 <script type="text/javascript">
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 import BasicLabel from "@/components/aiPlatform/basic/basic-label.vue";
 import BasicInput from "@/components/aiPlatform/basic/basic-input.vue";
 import BaseSelect from "@/components/common/atoms/base-select/base-select";
 import RadioButton from "@/components/aiPlatform/basic/radio-button.vue";
-import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
+import BasicTable from "@component/aiPlatform/basic/basic-table/basic-table.vue";
 import { mapGetters } from "vuex";
 import { successAlert, errorAlert } from "@functional/alert/alert-default";
 

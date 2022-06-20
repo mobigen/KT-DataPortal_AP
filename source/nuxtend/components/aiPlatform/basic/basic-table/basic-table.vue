@@ -9,7 +9,7 @@
             :key="'header_' + hi"
             v-show="!hideColumns.includes(h['column_name'])"
           >
-            {{ h["column_name"] }}
+            {{ getHeaderLocale(h["column_name"]) }}
           </th>
           <template v-if="useTableButton">
             <th
@@ -101,8 +101,8 @@
 </template>
 
 <script type="text/javascript">
-import BasicButton from "@/components/aiPlatform/basic/basic-button.vue";
-import BasicSingleTag from "@/components/aiPlatform/basic/basic-single-tag.vue";
+import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
+import BasicSingleTag from "@component/aiPlatform/basic/basic-single-tag.vue";
 
 export default {
   name: "basic-table",
@@ -115,6 +115,13 @@ export default {
     dataList: {
       type: Array,
       require: true
+    },
+    headerLocale: {
+      type: Object,
+      require: false,
+      default: () => {
+        return {};
+      }
     },
     useSerialNum: {
       type: Boolean,
@@ -176,6 +183,14 @@ export default {
     },
     keyClick(rowKey, keyAction) {
       this.$emit("keyAction", rowKey, keyAction);
+    },
+    getHeaderLocale(headerEngNm) {
+      return Object.prototype.hasOwnProperty.call(
+        this.headerLocale,
+        headerEngNm
+      )
+        ? this.headerLocale[headerEngNm]
+        : headerEngNm;
     }
   },
   created() {}

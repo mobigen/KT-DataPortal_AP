@@ -17,6 +17,8 @@
         componentId=""
         :headerList="bizMetaList.header"
         :dataList="bizMetaList.body"
+        :headerLocale="$t('header')"
+        hideColumns="['BIZ_DATASET_ID']"
         rowKey="BIZ_DATASET_ID"
         :useSerialNum="false"
         serialNumText=""
@@ -31,9 +33,11 @@
   </div>
 </template>
 
+<i18n src="./index.json"></i18n>
+
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
-import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
+import BasicTable from "@component/aiPlatform/basic/basic-table/basic-table.vue";
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 
 export default {

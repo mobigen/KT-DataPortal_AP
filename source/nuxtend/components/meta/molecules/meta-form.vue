@@ -5,7 +5,9 @@
       v-for="(data, i) in labelList"
       :key="'input_box_' + i"
     >
-      <basic-label forProperty="">{{ data["column_name"] }}</basic-label>
+      <basic-label forProperty="">{{
+        getHeaderLocale(data["column_name"])
+      }}</basic-label>
 
       <basic-input
         :formInputType="formInputType[data['column_name']]"
@@ -40,6 +42,13 @@ export default {
       type: Array,
       require: true
     },
+    headerLocale: {
+      type: Object,
+      require: false,
+      default: () => {
+        return {};
+      }
+    },
     dataObject: {
       type: Object,
       require: true
@@ -73,6 +82,14 @@ export default {
       this.$set(this.changeDataObject, label, input);
 
       this.$emit("changeData", this.changeDataObject);
+    },
+    getHeaderLocale(headerEngNm) {
+      return Object.prototype.hasOwnProperty.call(
+        this.headerLocale,
+        headerEngNm
+      )
+        ? this.headerLocale[headerEngNm]
+        : headerEngNm;
     }
   },
   created() {}
