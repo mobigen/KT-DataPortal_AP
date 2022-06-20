@@ -24,7 +24,7 @@
 <script type="text/javascript">
 import { mapActions, mapGetters } from "vuex";
 import BasicSearchBar from "@component/aiPlatform/basic/basic-search-bar";
-import BasicTable from "@component/aiPlatform/basic/basic-table/basic-table";
+import BasicTable from "@component/aiPlatform/basic/basic-table";
 export default {
   name: "app-search-full-request-list",
   extends: {},

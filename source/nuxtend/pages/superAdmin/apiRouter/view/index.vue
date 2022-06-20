@@ -47,7 +47,7 @@
 <script type="text/javascript">
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 import BasicViewTable from "@component/aiPlatform/basic/basic-viewTable.vue";
-import BasicTable from "@component/aiPlatform/basic/basic-table/basic-table.vue";
+import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
 import { mapGetters } from "vuex";
 
 export default {

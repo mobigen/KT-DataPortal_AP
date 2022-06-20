@@ -8,7 +8,8 @@ components/
 ├── common/                       // 공통으로 사용하는 components
 │   ├── atoms/                        // 최소단위의 components
 │   ├── molecules/                    // 중간단위의 components
-│   └── organisms/                    // 큰단위의 components
+│   ├── organisms/                    // 큰단위의 components
+│   └── sample/                       // IWDF의 project/sample/
 │
 ├── meta/                         // meta쪽에서만 사용하는 components
 │   ├── atoms/                        // 상동
@@ -22,10 +23,6 @@ components/
 │
 ├── aiPlatform/                   // apTeam에서 관리합니다. 
 ├── DPTeam/                       // DPTeam에서 관리합니다.
-├── UITeam/                       // apTeam에서 관리합니다.
-│
-├── organisms                     // /ui/users/social-login 에서 사용중. DP팀에서 관리 부탁드립니다.
-├── functional                    // /ui/users/social-login 에서 사용중. DP팀에서 관리 부탁드립니다.  
 │
 ├── basic-template-code.vue       // vue component 생성시 기본으로 사용할 템플릿 파일 
 └── stories-container.vue         // storybook 파일
