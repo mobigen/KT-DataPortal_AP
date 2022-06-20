@@ -38,7 +38,7 @@
 
 <script type="text/javascript">
 import { mapActions } from "vuex";
-import BasicTable from "@component/aiPlatform/basic/basic-table/basic-table.vue";
+import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 export default {
   name: "super-admin-metaMapList",

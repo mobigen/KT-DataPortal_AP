@@ -48,7 +48,7 @@ export default {
     "@/plugins/vue-js-modal.js"
   ],
 
-  components: ["~/components/functional"],
+  components: ["~/components/common/functional"],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -58,12 +58,12 @@ export default {
     "@nuxtjs/style-resources",
     "@nuxtjs/svg-sprite",
     "@nuxtjs/i18n",
-    "@nuxtjs/fontawesome"
+    "@nuxtjs/fontawesome",
     // build, generate 속도 향샹
-    // "nuxt-build-optimisations"
+    "nuxt-build-optimisations"
   ],
   buildOptimisations: {
-    // profile: "risky"
+    profile: process.env.STORYBOOK_ENV === "storybook" ? false : "risky"
     // profile: 'experimental' // default
     // profile: 'safe'
     // profile: false
@@ -75,9 +75,9 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     // build, generate 속도 향샹
-    parallel: true,
-    cache: false,
-    hardSource: true,
+    parallel: process.env.STORYBOOK_ENV === "storybook" ? false : true,
+    hardSource: process.env.STORYBOOK_ENV === "storybook" ? false : true,
+    cache: process.env.STORYBOOK_ENV === "storybook" ? false : true,
     postcss: {
       preset: {
         features: {
@@ -150,6 +150,15 @@ export default {
       {
         target: process.env.API_USER_URL,
         pathRewrite: { "^/api/": "" },
+        changeOrigin: true,
+        secure: false
+      }
+    ],
+    [
+      "/route/portal/users",
+      {
+        target: process.env.API_USER_URL,
+        pathRewrite: { "/route/portal/users": "/portal/api/users" },
         changeOrigin: true,
         secure: false
       }
@@ -236,9 +245,12 @@ export default {
 
   storybook: {
     addons: ["@storybook/addon-actions", "@storybook/addon-controls"],
+    stories: ["~/components/**/*.stories.js"],
     modules: {
       exclude: ["svg-sprite"]
-    }
+    },
+    // Run Storybook on localhost:4001
+    port: 4002
   },
 
   server: {

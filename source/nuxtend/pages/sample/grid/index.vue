@@ -42,7 +42,7 @@
 
 <script type="text/javascript">
 import {mapActions, mapGetters} from "vuex";
-import BasicTable from "@component/aiPlatform/basic/basic-table/basic-table";
+import BasicTable from "@component/aiPlatform/basic/basic-table";
 import BasicPagination from "@component/aiPlatform/basic/basic-pagination";
 
 export default {

@@ -139,7 +139,7 @@
 
 <script>
 import BasicButton from "@component/aiPlatform/basic/basic-button";
-import BasicTable from "@component/aiPlatform/basic/basic-table/basic-table";
+import BasicTable from "@component/aiPlatform/basic/basic-table";
 import BasicComCode from "@component/DPTeam/code/basic-com-code";
 import {mapGetters} from "vuex";
 

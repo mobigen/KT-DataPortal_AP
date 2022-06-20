@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "private": false,
   "scripts": {
-    "storybook": "cross-env NODE_ENV=local nuxt storybook --dotenv ./config/.env.local",
-    "dev": "cross-env NODE_ENV=local nuxt dev --dotenv ./config/.env.local",
-    "build": "cross-env NODE_ENV=local nuxt build --dotenv ./config/.env.local",
-    "start": "cross-env NODE_ENV=local nuxt start --dotenv ./config/.env.local",
-    "generate": "cross-env NODE_ENV=local nuxt generate --dotenv ./config/.env.local",
-    "generate:dev.apache": "cross-env NODE_ENV=dev nuxt generate --dotenv ./config/.env.dev.apache",
-    "generate:dev": "cross-env NODE_ENV=dev nuxt generate --dotenv ./config/.env.dev",
-    "generate:prod": "cross-env NODE_ENV=prod nuxt generate --dotenv ./config/.env.prod"
+    "dev": "cross-env NODE_ENV=local node --max-old-space-size=5096 node_modules/nuxt/bin/nuxt.js dev --dotenv ./config/.env.local",
+    "build": "cross-env NODE_ENV=local node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js build --dotenv ./config/.env.local",
+    "start": "cross-env NODE_ENV=local node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js start --dotenv ./config/.env.local",
+    "generate": "cross-env NODE_ENV=local node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js generate --dotenv ./config/.env.local",
+    "generate:dev.apache": "cross-env NODE_ENV=dev node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js generate --dotenv ./config/.env.dev.apache",
+    "generate:dev": "cross-env NODE_ENV=dev node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js generate --dotenv ./config/.env.dev",
+    "generate:prod": "cross-env NODE_ENV=prod node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js generate --dotenv ./config/.env.prod",
+    "predev:force:win": "rd /s 'node_modules/.cache'",
+    "storybook": "cross-env STORYBOOK_ENV=storybook nuxt storybook"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.1.1",

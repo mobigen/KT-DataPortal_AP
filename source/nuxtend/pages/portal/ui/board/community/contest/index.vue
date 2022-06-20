@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import BasicTable from "@component/aiPlatform/basic/basic-table/basic-table";
+import BasicTable from "@component/aiPlatform/basic/basic-table";
 import BasicSearchBar from "@component/aiPlatform/basic/basic-search-bar";
 import BasicPagination from "@component/aiPlatform/basic/basic-pagination";
 import {mapActions, mapGetters} from "vuex";

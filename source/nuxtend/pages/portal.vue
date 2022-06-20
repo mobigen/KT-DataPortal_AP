@@ -7,6 +7,6 @@
 <script>
 export default {
   name: "index-portal",
-  layout: "katech/katech",
+  layout: "katech/katech"
 };
 </script>
