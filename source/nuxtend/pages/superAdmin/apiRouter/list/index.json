@@ -6,7 +6,8 @@
       "METH": "메소드 타입",
       "CMD": "Command",
       "MODE": "모드",
-      "URL": "url"
+      "URL": "url",
+      "ROUTE_URL": "라우터 url"
     }
   }
 }

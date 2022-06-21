@@ -102,15 +102,18 @@ export default {
     },
     removeBizMeta(rowKey) {
       const me = this;
-      confirmAlert("삭제하시겠습니까?", {
-        confirm: () => {
-          me.$axios
-            .post(me.$config.API_ROUTER_PREFIX + "/delApi?API_NM=" + rowKey)
-            .then(() => {
-              me.getApiList();
-            });
+      confirmAlert(
+        "삭제하시겠습니까? <br>" + this.$t("header.API_NM") + " : " + rowKey,
+        {
+          confirm: () => {
+            me.$axios
+              .post(me.$config.API_ROUTER_PREFIX + "/delApi?API_NM=" + rowKey)
+              .then(() => {
+                me.getApiList();
+              });
+          }
         }
-      });
+      );
     },
     viewRouterInfo(rowKey) {
       // 설정한 key action이 한개 이므로, 분기처리 하지 않는다.

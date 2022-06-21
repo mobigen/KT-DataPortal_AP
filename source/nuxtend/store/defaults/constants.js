@@ -87,6 +87,7 @@ export const state = () => ({
         MODE: "MODE",
         METH: "METH",
         CTGRY: "CTGRY",
+        ROUTE_URL: "ROUTE_URL",
         PARAMS: "PARAMS",
         NM: "NM",
         DATA_TYPE: "DATA_TYPE",
