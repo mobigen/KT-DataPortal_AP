@@ -29,6 +29,16 @@
     </div>
 
     <div class="api-router-row">
+      <basic-label forProperty="">{{ $t("header.ROUTE_URL") }}</basic-label>
+      <basic-input
+        formInputType="text"
+        labelName="ROUTE_URL"
+        :inputData="apiObj['ROUTE_URL']"
+        @changeData="changeData"
+      />
+    </div>
+
+    <div class="api-router-row">
       <basic-label forProperty="">{{ $t("header.MODE") }}</basic-label>
 
       <radio-button
@@ -269,7 +279,9 @@ export default {
               [this.CONSTANTS.API_ROUTER.PARAM.DATA_TYPE]:
                 el[this.CONSTANTS.API_ROUTER.PARAM.DATA_TYPE],
               [this.CONSTANTS.API_ROUTER.PARAM.DEFLT_VAL]:
-                el[this.CONSTANTS.API_ROUTER.PARAM.DEFLT_VAL]
+                el[this.CONSTANTS.API_ROUTER.PARAM.DEFLT_VAL],
+              [this.CONSTANTS.API_ROUTER.PARAM.ROUTE_URL]:
+                el[this.CONSTANTS.API_ROUTER.PARAM.ROUTE_URL]
             };
           }, this);
       } else {
@@ -281,7 +293,13 @@ export default {
       delete params.NO;
 
       if (!this.checkValidation(params)) {
-        const msg = "param 값이 유효하지 않습니다.";
+        const required = [
+          this.$t("header.API_NM"),
+          this.$t("header.ROUTE_URL")
+        ];
+
+        let msg = "param 값이 유효하지 않습니다.";
+        msg += "<br> * 필수입력 : " + required.join(", ");
         errorAlert(msg);
         return;
       }
@@ -307,7 +325,8 @@ export default {
       // API_NM과 CTGRY는 null이 될수 없음.
       return (
         params[this.CONSTANTS.API_ROUTER.PARAM.API_NM] &&
-        params[this.CONSTANTS.API_ROUTER.PARAM.CTGRY]
+        params[this.CONSTANTS.API_ROUTER.PARAM.CTGRY] &&
+        params[this.CONSTANTS.API_ROUTER.PARAM.ROUTE_URL]
       );
     },
     setOpenParam() {

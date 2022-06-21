@@ -7,6 +7,7 @@
       "CMD": "Command",
       "MODE": "모드",
       "URL": "url",
+      "ROUTE_URL" : "라우터 url",
       "PARAMS": "파라메터"
     },
     "param_header": {
