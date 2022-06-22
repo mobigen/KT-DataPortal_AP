@@ -1,13 +1,13 @@
 {
   "ko": {
     "header": {
-      "API_NM": "api명",
-      "CTGRY": "카테고리",
-      "METH": "메소드 타입",
-      "CMD": "Command",
-      "MODE": "모드",
-      "URL": "url",
-      "ROUTE_URL": "라우터 url"
+      "api_nm": "api명",
+      "ctgry": "카테고리",
+      "meth": "메소드 타입",
+      "cmd": "command",
+      "mode": "모드",
+      "url": "url",
+      "route_url": "라우터 url"
     }
   }
 }
