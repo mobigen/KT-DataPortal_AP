@@ -135,11 +135,21 @@ export default {
         : {};
     },
     tableHeader() {
-      return this.viewHeaderList.length > 0
-        ? this.viewHeaderList
-        : this.viewDetail.header.map((el) => {
-            return el.column_name;
-          });
+      let headerList =
+        this.viewHeaderList.length > 0
+          ? this.viewHeaderList
+          : this.viewDetail.header.map((el) => {
+              return el.column_name;
+            });
+      let i = 0;
+      this.hideColumns.forEach((hc) => {
+        if (headerList.includes(hc)) {
+          i = headerList.indexOf(hc);
+          headerList.splice(i, 1);
+        }
+      });
+
+      return headerList;
     }
   },
   components: { BasicTagList },
