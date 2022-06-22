@@ -265,9 +265,9 @@ export default {
         treeRestApi: "/getCategoryList",
         checkboxLabel: "상위자동선택",
         treeKey: {
-          NODE_NM: "NODE_NM", // node title
-          NODE_ID: "NODE_ID", // node key
-          PRNTS_ID: "PRNTS_ID" // parent key
+          NODE_NM: "node_nm", // node title
+          NODE_ID: "node_id", // node key
+          PRNTS_ID: "prnts_id" // parent key
         }
       },
       searchKeyword: "",
