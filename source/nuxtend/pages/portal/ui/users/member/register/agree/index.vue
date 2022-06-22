@@ -32,16 +32,17 @@
     <p>
       <input
         type="checkbox"
-        id="isJoinEvent"
-        ref="isJoinEvent"
-        v-model="isJoinEvent"
+        id="isPublicData"
+        ref="isPublicData"
+        v-model="isPublicData"
       />
-      <label for="isJoinEvent"><span>가입이벤트동의여부</span></label>
+      <label for="isPublicData"><span>가입이벤트동의여부</span></label>
     </p>
     <p><button @click.prevent="onAgree()">다음단계</button></p>
   </div>
 </template>
 <script type="text/javascript">
+import { mapGetters, mapActions } from "vuex";
 import { errorAlert } from "@functional/alert/alert-default";
 export default {
   name: "index",
@@ -52,58 +53,54 @@ export default {
       isTerms: false,
       isPrivacyTerms: false,
       isServiceTerms: false,
-      isJoinEvent: false,
+      isPublicData: false,
       isAgree: false
     };
   },
   beforeMount() {
-    this.userType = this.$route.query.userType;
-    console.log("this.userType : ", this.userType);
-    const socialUser = this.$cookies.get("social-user");
-    this.socialUser = socialUser;
-    this.$cookies.set("social-user", null);
+    this.init();
   },
   destroyed() {},
+  computed: {
+    ...mapGetters("users/memberRegster", ["getEmailAthn"])
+  },
   methods: {
+    ...mapActions("users/memberRegster", ["setMemberRegisterInfo"]),
+    init() {
+      this.userType = this.$route.query.userType;
+    },
     onTerms() {
       if (this.isTerms) {
         this.isPrivacyTerms = true;
         this.isServiceTerms = true;
-        this.isJoinEvent = true;
+        this.isPublicData = true;
       } else {
         this.isPrivacyTerms = false;
         this.isServiceTerms = false;
-        this.isJoinEvent = false;
+        this.isPublicData = false;
       }
     },
     async onAgree() {
-      if (!this.isPrivacyTerms) {
-        await errorAlert("개인정보수집동의여부에 동의하여 주시기 바랍니다.");
-        this.$refs.isPrivacyTerms.focus();
-        return false;
-      }
       if (!this.isServiceTerms) {
         await errorAlert("서비스이용약관동의여부에 동의하여 주시기 바랍니다.");
         this.$refs.isServiceTerms.focus();
         return false;
       }
-      if (!this.isJoinEvent) {
-        await errorAlert("가입이벤트동의여부에 동의하여 주시기 바랍니다.");
-        this.$refs.isJoinEvent.focus();
+      if (!this.isPrivacyTerms) {
+        await errorAlert("개인정보수집동의여부에 동의하여 주시기 바랍니다.");
+        this.$refs.isPrivacyTerms.focus();
         return false;
       }
 
       this.isAgree = true;
-
-      const agreeInfo = {
+      const memberRegisterInfo = {
+        userType: this.userType,
         isAgree: this.isAgree,
         isPrivacyTerms: this.isPrivacyTerms,
         isServiceTerms: this.isServiceTerms,
-        isJoinEvent: this.isJoinEvent
+        isPublicData: this.isPublicData
       };
-      this.$cookies.set("user-type", this.userType);
-      this.$cookies.set("social-user", this.socialUser);
-      this.$cookies.set("agree-info", agreeInfo);
+      this.setMemberRegisterInfo(memberRegisterInfo);
 
       this.$router.push({
         path: `${this.$config.ROUTE_USERS_PREFIX}/member/register/form`

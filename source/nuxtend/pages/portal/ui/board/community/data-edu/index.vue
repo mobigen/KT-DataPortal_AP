@@ -3,7 +3,6 @@
   <div>
     <h1>데이터 교육</h1>
     <div>자동차분야 데이터를 활용한 분석 교육을 제공합니다.</div>
-
     <BasicTabMenu
       :menu-list="tabMenuList"
       @tabMenuClick="tabMenuClick"
@@ -12,7 +11,6 @@
     @search="searchClick"
     :searchKeyWord="param.searchKeyword">
     </basic-search-bar>
-
     <div v-for="(cdata, ci) in this.dataEduRes.dataCardInfo">
         <basic-name-tag
           :nameTagObject="cdata"
@@ -69,11 +67,10 @@
       <basic-pagination
         :paging-key="paginationKey"
         :paging-object="{
-          [CONSTANTS.PAGING.ITEMS_PER_PAGE]: 5,
-          [CONSTANTS.PAGING.VISIBLE_PAGES]: 3,
-          [CONSTANTS.PAGING.PAGE]: 1,
-          totalPage: 1
+          [CONSTANTS.PAGING.ITEMS_PER_PAGE]: param.itemsPerPage,
+          [CONSTANTS.PAGING.PAGE]: param.page,
         }"
+        @pagingEvent="goPage"
       />
 
   </div>
@@ -101,8 +98,22 @@ export default {
     BasicNameTag,
     BasicPagination
   },
-  created() {
-    this.getDataEduList(this.param);
+  beforeMount() {
+    this.param.searchKeyword = this.$route.query.keyword || ''
+  },
+  mounted() {
+    let page = Number(this.$route.query.page)
+
+    if(page) {
+      // 페이징 정보 갱신
+      this.setPage({
+        key:this.paginationKey,
+        page: page
+      })
+
+      this.param.page = page
+    }
+    this.getData(this.param);
   },
   data(){
     return{
@@ -111,7 +122,7 @@ export default {
         eduType:'',
         searchKeyword:'',
         page:1,
-        itemPerPage:3
+        itemsPerPage:3
       },
       tabMenuList: [
         {menuId:'', menuName:"전체", numberOfPosts: 123},
@@ -125,28 +136,39 @@ export default {
     ...mapGetters("defaults/constants", ["CONSTANTS"]),
     ...mapGetters("module/pagination", ["paging"]),
     ...mapGetters("board/dataEdu/dataEdu", ["dataEduRes"]),
+    currentPage() {
+      return this.paging.eduPaging.page
+    },
+    query() {
+      return this.param.searchKeyword ?
+        { keyword: this.param.searchKeyword, page: this.currentPage } : { page: this.currentPage }
+    },
   },
   methods: {
     ...mapActions("board/dataEdu/dataEdu", ["getDataEduList"]),
     ...mapActions("module/pagination", ["setTotalCount","setPage"]),
-    async getResult(){
+    async getData(){
       await this.getDataEduList(this.param);
       this.setTotalCount({
         key:this.paginationKey,
-        totalCount: this.dataEduList.totCnt
+        totalCount: this.dataEduRes.totCnt
       })
-
+      this.setPage({
+        key: this.paginationKey,
+        page: this.param.page
+      })
+      this.$router.push({path: this.$route.path, query: this.query})
     },
     async tabMenuClick(menuId){
       // console.log(menuId);
+      this.param.page = 1;
       this.param.eduType=menuId;
       this.param.searchKeyword='';
-      await this.getResult();
+      await this.getData();
     },
     async searchClick(inputData){
       this.param.searchKeyword = inputData.trim();
-      await this.getResult();
-
+      await this.getData();
     },
     dataOfInterest(id) {
       alert("관심데이터/ 게시물ID: " + id);
@@ -155,19 +177,17 @@ export default {
       alert("데이터 공유하기/ 게시물ID: " + id);
     },
     nameTagClick(id) {
-      // const dataList = this.searchResultList.find((el) => {
-      //   return el.id === id;
-      // });
-      //
-      // // dataLocationKey, path 정해지면 변경
-      // if (dataList.dataLocation === "내부") {
-      //   this.$router.push({
-      //     path: "/portal/ui/meta/search/fullSearch/detail",
-      //     query: { postId: id }
-      //   });
-      // } else {
-      //   window.open("/app/search/fullSearch", "_blank");
-      // }
+      // alert(id)
+      let params = {eduId: id}
+      console.log('파람파람파람:', params)
+      this.$axios(`${this.$config.API_BOARD_PREFIX}/dataEdu/updateCnt`, {params})
+        .then(response => {})
+        .catch(error =>{})
+      this.$router.push({path: `/portal/ui/board/community/data-edu/detail/${id}`, query: this.query})
+    },
+    async goPage(){
+      this.param.page = this.paging[this.paginationKey].page
+      await this.getData()
     }
   }
 }

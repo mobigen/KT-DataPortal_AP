@@ -7,38 +7,47 @@
   </div>
 </template>
 <script type="text/javascript">
+import { mapGetters, mapActions } from "vuex";
 import { errorAlert } from "@functional/alert/alert-default";
 export default {
   name: "index",
   data() {
     return {
       user: {
-        userSeq: null,
+        userUuid: null,
         email: null,
         userNm: null
       }
     };
   },
   async beforeMount() {
-    console.log("beforeMount : ", this.$route);
-    const userSeq = this.$route.query.userSeq;
-    if (!userSeq) {
+    const userUuid = this.$route.query.userUuid;
+    if (!userUuid) {
       await errorAlert("비정상적인 접근입니다.");
       this.onHome();
       return false;
     }
-    await this.userInfo(userSeq);
+    await this.userInfo(userUuid);
   },
-  mounted() {},
+  destroyed() {
+    this.clearEmailAthn();
+    this.clearSocialUser();
+    this.clearMemberRegisterInfo();
+  },
   methods: {
+    ...mapActions("users/memberRegster", [
+      "clearEmailAthn",
+      "clearSocialUser",
+      "clearMemberRegisterInfo"
+    ]),
     onHome() {
       this.$router.push({
         path: `${this.$config.USER_INDEX_PAGE}`
       });
     },
-    async userInfo(userSeq) {
+    async userInfo(userUuid) {
       const param = {
-        userSeq: userSeq
+        userUuid: userUuid
       };
       const user = await this.$getUserInfo(param);
       this.user = user;
