@@ -14,7 +14,7 @@ export default ({ $axios, $config }, inject) => {
 
   const getAuthUser = async () => {
     const user = await $axios
-      .post(`${$config.API_USERS_PREFIX}/auth/user`)
+      .get(`${$config.API_USERS_PREFIX}/auth/user`)
       .catch((e) => {
         console.log("e : ", e);
       });
@@ -23,8 +23,11 @@ export default ({ $axios, $config }, inject) => {
   };
 
   const getUserInfo = async (param) => {
+    const config = {
+      params: param
+    };
     const user = await $axios
-      .post(`${$config.API_USERS_PREFIX}/user/info`, param)
+      .get(`${$config.API_USERS_PREFIX}/user/info`, config)
       .catch((e) => {
         console.log("e : ", e);
       });

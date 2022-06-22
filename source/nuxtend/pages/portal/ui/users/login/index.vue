@@ -123,8 +123,7 @@ export default {
         password = this.encrypt(publicKey, param.password);
       }
       let userAccessToken = await this.auth(param.username, password);
-      console.log("userAccessToken : ", userAccessToken);
-
+      
       if (userAccessToken && userAccessToken !== "") {
         // 사용자 access-token 쿠키 생성
         await this.$cookies.set(
@@ -174,10 +173,13 @@ export default {
       return this.$axios.get(`${this.$config.API_USERS_PREFIX}/auth/key`);
     },
     auth(username, password) {
-      return this.$axios.post(`${this.$config.API_USERS_PREFIX}/auth/login`, {
-        userId: username,
-        password: password
-      });
+      const config = {
+        params: {
+          userId: username,
+          password: password
+        }
+      };
+      return this.$axios.get(`${this.$config.API_USERS_PREFIX}/auth/login`, config);
     },
     encrypt(key, source) {
       const encrypt = new RSA();

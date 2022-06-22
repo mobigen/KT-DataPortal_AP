@@ -97,12 +97,16 @@ export default {
       }
     },
     async socialLogin(socialType) {
-      const data = await this.$axios.post(
-        `${this.$config.API_USERS_PREFIX}/auth/social/login`,
-        {
+      const config = {
+        params: {
           oAuthAccessToken: this.oAuthAccessToken,
           socialType: socialType
         }
+      };
+
+      const data = await this.$axios.get(
+        `${this.$config.API_USERS_PREFIX}/auth/socialLogin`,
+        config
       );
 
       return data;
