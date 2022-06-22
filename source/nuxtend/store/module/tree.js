@@ -72,13 +72,17 @@ export const actions = {
         let jsonHelper = {};
 
         // rootNode 정보를 저장해둔다.
-        const rootNode = d[0];
-        // 조회한 목록을 역순으로 설정한 후에, 끝에서 처음까지 돌면서 부모별로 자식들을 Object-array로 정리해둔다.
-        const reverseD = d.reverse();
+
+        const rootNode = d.find((el) => {
+          return (
+            el[param[CONSTANTS.TREE.TREE_KEY.NODE_ID]] ===
+            el[param[CONSTANTS.TREE.TREE_KEY.PRNTS_ID]]
+          );
+        });
 
         let objectByKey = {};
 
-        reverseD.forEach((el) => {
+        d.forEach((el) => {
           objectByKey[el[param[CONSTANTS.TREE.TREE_KEY.NODE_ID]]] = el;
 
           if (
