@@ -23,12 +23,12 @@
         required
       />
       <br />
-      <label for="mobile">핸드폰번호</label><br />
+      <label for="moblphon">핸드폰번호</label><br />
       <input
         class="text-input"
         type="text"
-        id="mobile"
-        v-model="mobile"
+        id="moblphon"
+        v-model="moblphon"
         maxlength="20"
         required
       />
@@ -47,19 +47,19 @@ export default {
     return {
       userId: null,
       userNm: null,
-      mobile: null
+      moblphon: null
     };
   },
   methods: {
     async onPwdSearch() {
       const userId = this.userId;
       const userNm = this.userNm;
-      const mobile = this.mobile;
+      const moblphon = this.moblphon;
 
       const parmas = {
         userId: userId,
-        userNm: userNm,
-        mobile: mobile
+        userNm: encodeURIComponent(userNm),
+        moblphon: moblphon
       };
       const data = await this.pwdSearch(parmas);
       if (!data || !data.userId) {
@@ -73,9 +73,13 @@ export default {
       });
     },
     pwdSearch(params) {
-      return this.$axios.post(
+      const config = {
+        params: params
+      };
+
+      return this.$axios.get(
         `${this.$config.API_USERS_PREFIX}/auth/pwdSearch`,
-        params
+        config
       );
     }
   }

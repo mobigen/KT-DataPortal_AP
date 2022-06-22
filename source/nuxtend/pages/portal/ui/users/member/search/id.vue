@@ -17,8 +17,8 @@
       <input
         class="text-input"
         type="text"
-        id="mobile"
-        v-model="mobile"
+        id="moblphon"
+        v-model="moblphon"
         maxlength="20"
         required
       />
@@ -36,17 +36,17 @@ export default {
   data() {
     return {
       userNm: null,
-      mobile: null
+      moblphon: null
     };
   },
   methods: {
     async onIdSearch() {
       const userNm = this.userNm;
-      const mobile = this.mobile;
+      const moblphon = this.moblphon;
 
       const parmas = {
-        userNm: userNm,
-        mobile: mobile
+        userNm: encodeURIComponent(userNm),
+        moblphon: moblphon
       };
       const data = await this.idSearch(parmas);
       if (!data || !data.userId) {
@@ -60,9 +60,12 @@ export default {
       });
     },
     idSearch(params) {
-      return this.$axios.post(
+      const config = {
+        params: params
+      };
+      return this.$axios.get(
         `${this.$config.API_USERS_PREFIX}/auth/idSearch`,
-        params
+        config
       );
     }
   }

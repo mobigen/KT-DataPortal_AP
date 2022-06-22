@@ -359,7 +359,7 @@ export default {
       });
     },
     async logout() {
-      const userAccessToken = await this.$axios.post(
+      const userAccessToken = await this.$axios.get(
         `${this.$config.API_USERS_PREFIX}/auth/logout`
       );
 

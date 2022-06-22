@@ -409,9 +409,12 @@ export default {
       }
     },
     isDupliacatedChk(params) {
-      return this.$axios.post(
+      const config = {
+        params: params
+      };
+      return this.$axios.get(
         `${this.$config.API_USERS_PREFIX}/auth/isDupliacatedChk`,
-        params
+        config
       );
     },
     onSearchBlngOrg() {
