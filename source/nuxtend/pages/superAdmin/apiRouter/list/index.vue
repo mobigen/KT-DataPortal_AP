@@ -108,7 +108,7 @@ export default {
       const me = this;
       confirmAlert(
         "삭제하시겠습니까? <br>" +
-          this.$t("header[" + this.CONSTANTS.API_ROUTER.PARAM.API_NM + "]") +
+          this.$t("header." + this.CONSTANTS.API_ROUTER.PARAM.API_NM) +
           " : " +
           rowKey,
         {
