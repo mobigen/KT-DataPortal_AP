@@ -2,7 +2,7 @@
   <div>
     <katech-header />
     <main class="main">
-      <nuxt />
+      <nuxt :key="$route.fullPath"/>
     </main>
     <katech-footer />
   </div>

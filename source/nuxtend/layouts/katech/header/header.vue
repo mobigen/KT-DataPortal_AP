@@ -11,19 +11,32 @@
               <li class="top-menu__item">
                 <NuxtLink to="/" class="top-menu__link" href="#">홈</NuxtLink>
               </li>
-              <li v-if="user === null" class="top-menu__item">
-                <NuxtLink to="/sample/login" class="top-menu__link" href="#"
+              <li v-if="!getUserInfo.authenticated" class="top-menu__item">
+                <NuxtLink
+                  :to="{ path: `${$config.USER_LOGIN_PAGE}` }"
+                  @click.native="onLogin"
+                  class="top-menu__link"
                   >로그인</NuxtLink
                 >
               </li>
-              <li v-if="user === null" class="top-menu__item">
-                <a class="top-menu__link" href="#">회원가입</a>
+              <li v-if="!getUserInfo.authenticated" class="top-menu__item">
+                <a
+                  class="top-menu__link"
+                  href="#"
+                  @click.prevent="onMemberRegister()"
+                  >회원가입</a
+                >
               </li>
-              <li v-if="user !== null" class="top-menu__item user-name">
-                <a class="top-menu__link" href="#">{{ user.name }}</a>
+              <li
+                v-if="getUserInfo.authenticated"
+                class="top-menu__item user-name"
+              >
+                <a class="top-menu__link" href="#">{{ getUserInfo.userNm }}</a>
               </li>
-              <li v-if="user !== null" class="top-menu__item">
-                <a class="top-menu__link" href="/logout">로그아웃</a>
+              <li v-if="getUserInfo.authenticated" class="top-menu__item">
+                <a class="top-menu__link" href="#" @click.prevent="logout()"
+                  >로그아웃</a
+                >
               </li>
               <li class="top-menu__item">
                 <a class="top-menu__link" href="/logout">마이디스크</a>
@@ -80,19 +93,31 @@
                 </base-button>
               </div>
               <ul class="top-menu">
-                <li v-if="user === null" class="top-menu__item">
+                <li v-if="!getUserInfo.authenticated" class="top-menu__item">
                   <NuxtLink to="/sample/login" class="top-menu__link" href="#"
                     >로그인</NuxtLink
                   >
                 </li>
-                <li v-if="user === null" class="top-menu__item">
-                  <a class="top-menu__link" href="#">회원가입</a>
+                <li v-if="!getUserInfo.authenticated" class="top-menu__item">
+                  <a
+                    class="top-menu__link"
+                    href="#"
+                    @click.prevent="onMemberRegister()"
+                    >회원가입</a
+                  >
                 </li>
-                <li v-if="user !== null" class="top-menu__item user-name">
-                  <a class="top-menu__link" href="#">{{ user.name }}</a>
+                <li
+                  v-if="getUserInfo.authenticated"
+                  class="top-menu__item user-name"
+                >
+                  <a class="top-menu__link" href="#">{{
+                    getUserInfo.userNm
+                  }}</a>
                 </li>
-                <li v-if="user !== null" class="top-menu__item">
-                  <a class="top-menu__link" href="/logout">로그아웃</a>
+                <li v-if="getUserInfo.authenticated" class="top-menu__item">
+                  <a class="top-menu__link" href="#" @click.prevent="logout()"
+                    >로그아웃</a
+                  >
                 </li>
                 <li class="top-menu__item">
                   <a class="top-menu__link" href="/logout">마이디스크</a>
@@ -121,22 +146,30 @@
             </div>
             <ul class="gnb">
               <li class="gnb__item" @mouseover="isLnbOpen = true">
-                <NuxtLink to="/portal/ui/meta/search/fullSearch" class="gnb__link"
+                <NuxtLink
+                  to="/portal/ui/meta/search/fullSearch"
+                  class="gnb__link"
                   ><span>데이터 검색</span></NuxtLink
                 >
                 <ul class="lnb">
                   <li class="lnb__item">
-                    <NuxtLink to="/portal/ui/meta/search/fullSearch" class="lnb__link"
+                    <NuxtLink
+                      to="/portal/ui/meta/search/fullSearch"
+                      class="lnb__link"
                       >데이터 통합검색</NuxtLink
                     >
                   </li>
                   <li class="lnb__item">
-                    <NuxtLink to="/portal/ui/meta/search/mapSearch" class="lnb__link"
+                    <NuxtLink
+                      to="/portal/ui/meta/search/mapSearch"
+                      class="lnb__link"
                       >데이터맵 검색</NuxtLink
                     >
                   </li>
                   <li class="lnb__item">
-                    <NuxtLink to="/portal/ui/meta/search/relationSearch" class="lnb__link"
+                    <NuxtLink
+                      to="/portal/ui/meta/search/relationSearch"
+                      class="lnb__link"
                       >연관관계 검색</NuxtLink
                     >
                   </li>
@@ -192,12 +225,16 @@
                 >
                 <ul class="lnb">
                   <li class="lnb__item">
-                    <NuxtLink to="/portal/ui/board/community/contest" class="lnb__link"
+                    <NuxtLink
+                      to="/portal/ui/board/community/contest"
+                      class="lnb__link"
                       >데이터 분석 경진대회</NuxtLink
                     >
                   </li>
                   <li class="lnb__item">
-                    <NuxtLink to="/portal/ui/board/community/data-edu" class="lnb__link"
+                    <NuxtLink
+                      to="/portal/ui/board/community/data-edu"
+                      class="lnb__link"
                       >데이터 교육</NuxtLink
                     >
                   </li>
@@ -209,17 +246,23 @@
                 >
                 <ul class="lnb">
                   <li class="lnb__item">
-                    <NuxtLink to="/portal/ui/board/information/notification" class="lnb__link"
+                    <NuxtLink
+                      to="/portal/ui/board/information/notification"
+                      class="lnb__link"
                       >공지사항</NuxtLink
                     >
                   </li>
                   <li class="lnb__item">
-                    <NuxtLink to="/portal/ui/board/information/faq" class="lnb__link"
+                    <NuxtLink
+                      to="/portal/ui/board/information/faq"
+                      class="lnb__link"
                       >FAQ</NuxtLink
                     >
                   </li>
                   <li class="lnb__item">
-                    <NuxtLink to="/portal/ui/board/information/qna" class="lnb__link"
+                    <NuxtLink
+                      to="/portal/ui/board/information/qna"
+                      class="lnb__link"
                       >문의하기</NuxtLink
                     >
                   </li>
@@ -269,10 +312,10 @@
 <i18n src="./header.json"></i18n>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import BaseButton from "@common/atoms/base-button/base-button";
 import BaseInput from "@common/atoms/base-input/base-input";
 // import Locale from "@project/sample/locale/locale.vue";
-import { mapGetters } from "vuex";
 
 export default {
   name: "Header",
@@ -282,7 +325,6 @@ export default {
   },
   data() {
     return {
-      user: null,
       activeElementIndex: 0,
       width: 0,
       isLnbOpen: false,
@@ -290,9 +332,7 @@ export default {
     };
   },
   computed: {
-    // ...mapGetters({
-    //   user: "user"
-    // })
+    ...mapGetters("users/user", ["getUserInfo"])
   },
   mounted() {
     window.addEventListener("resize", this.checkResize);
@@ -301,11 +341,40 @@ export default {
     window.removeEventListener("resize", this.checkResize);
   },
   methods: {
+    ...mapActions("users/user", ["setPrevFullUrl", "clearUserInfo"]),
     checkResize(event) {
       this.width = window.innerWidth;
     },
     onChangeLocale(param) {
       // this.$i18n.setLocale(param);
+    },
+    onLogin() {
+      this.setPrevPage();
+    },
+    onMemberRegister() {
+      this.setPrevPage();
+
+      this.$router.push({
+        path: `${this.$config.ROUTE_USERS_PREFIX}/member/register`
+      });
+    },
+    async logout() {
+      const userAccessToken = await this.$axios.post(
+        `${this.$config.API_USERS_PREFIX}/auth/logout`
+      );
+
+      await this.$cookies.remove(this.$config.USER_ACCESS_TOKEN_NAME);
+      await this.clearUserInfo();
+
+      await this.$router.push({
+        path: `${this.$config.USER_LOGIN_PAGE}`,
+        query: {
+          prevFullUrl: `${encodeURIComponent(this.$route.fullPath)}`
+        }
+      });
+    },
+    async setPrevPage() {
+      await this.setPrevFullUrl(this.$route.fullPath);
     }
   }
 };

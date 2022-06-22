@@ -1,22 +1,81 @@
 <template lang="html">
   <div>
-    <h1>{{ $t("index.title") }}</h1>
-    <Login
-      @login="onLogin"
-      @idSearch="onIdSearch"
-      @pwdSearch="onPwdSearch"
-      @join="onJoin"
-      @socialLogin="onSocialLogin"
-    />
-    <p><button @click="userInfo()">사용자정보</button></p>
-    <p>store 사용자 정보 : {{ getUserInfo }}</p>
+    <h1>로그인</h1>
+    <form class="form login-form" @submit.prevent="onLogin">
+      <svg-icon name="user-setting" class="svg-icon" />
+      <label for="username">아이디</label><br />
+      <input
+        class="text-input"
+        type="text"
+        id="username"
+        v-model="username"
+        maxlength="10"
+        required
+      />
+      <br />
+      <fa :icon="['fas', 'key']" />
+      <label for="password">비밀번호</label><br />
+      <input
+        class="text-input"
+        type="password"
+        id="password"
+        v-model="password"
+        maxlength="15"
+        required
+      /><br />
+
+      <br />
+      <input type="checkbox" id="idSaveChk" v-model="idSaveChk" />
+      <label for="idSaveChk"><span>아이디저장</span></label>
+      <br />
+      <button type="submit" class="button button--primary button--lg w-12_12">
+        로그인
+      </button>
+      <br />
+      <div>
+        <span><a href="" @click.prevent="onIdSearch()">아이디찾기</a></span
+        >&nbsp;
+        <span><a href="" @click.prevent="onPwdSearch()">비밀번호찾기</a></span
+        >&nbsp;
+        <span><a href="" @click.prevent="onJoin()">회원가입</a></span>
+      </div>
+      <br />
+      <button
+        type="button"
+        @click="onSocialLogin('naver')"
+        class="button button--negative button--lg w-12_12"
+      >
+        네이버
+      </button>
+      <br />
+      <button
+        type="button"
+        @click="onSocialLogin('kakao')"
+        class="button button--secondary button--lg w-12_12"
+      >
+        카카오
+      </button>
+      <br />
+      <button
+        type="button"
+        @click="onSocialLogin('google')"
+        class="button button--tertiary button--lg w-12_12"
+      >
+        구글
+      </button>
+      <br />
+      <button
+        type="button"
+        @click="onSocialLogin('facebook')"
+        class="button button--danger button--lg w-12_12"
+      >
+        페이스북
+      </button>
+    </form>
   </div>
 </template>
 
-<i18n src="./index.json"></i18n>
-
 <script type="text/javascript">
-import Login from "@component/users/login/login.vue";
 import RSA from "rsajs";
 import { mapGetters, mapActions } from "vuex";
 
@@ -24,22 +83,38 @@ export default {
   name: "index",
   data() {
     return {
+      username: "",
+      password: "",
+      idSaveChk: false,
       prevFullUrl: null
     };
   },
-  components: {
-    Login
-  },
+  components: {},
   beforeMount() {},
-  mounted() {},
+  mounted() {
+    const userSaveId = this.$cookies.get("userSaveId");
+    if (userSaveId) {
+      this.idSaveChk = true;
+      this.username = userSaveId;
+    } else {
+      this.idSaveChk = false;
+      this.username = "";
+    }
+  },
   computed: {
-    ...mapGetters("users/user", ["getterPrevFullUrl"]),
+    ...mapGetters("users/user", ["getPrevFullUrl"]),
     ...mapGetters("users/user", ["getUserInfo"])
   },
   methods: {
     ...mapActions("users/user", ["getAuthenticatedUser"]),
     ...mapActions("users/user", ["setPrevFullUrl"]),
-    async onLogin(param) {
+    async onLogin() {
+      const param = {
+        username: this.username,
+        password: this.password,
+        idSaveChk: this.idSaveChk
+      };
+
       let publicKey = await this.getPublicKey();
       if (!publicKey) return;
 
@@ -48,6 +123,7 @@ export default {
         password = this.encrypt(publicKey, param.password);
       }
       let userAccessToken = await this.auth(param.username, password);
+      console.log("userAccessToken : ", userAccessToken);
 
       if (userAccessToken && userAccessToken !== "") {
         // 사용자 access-token 쿠키 생성
@@ -69,7 +145,7 @@ export default {
         // 사용자 정보 store 저장
         await this.getAuthenticatedUser();
         // 로그인 성공 후 페이지 이동
-        const prevFullUrl = this.getPrevFullUrl();
+        const prevFullUrl = this.getPrevFullPageUrl();
         await this.$router.push({ path: `${prevFullUrl}` });
       }
     },
@@ -88,17 +164,14 @@ export default {
         path: `${this.$config.ROUTE_USERS_PREFIX}/member/register`
       });
     },
-    async onSocialLogin(param) {
-      const socialType = param.socialType;
-      const prevFullUrl = this.getPrevFullUrl();
+    async onSocialLogin(socialType) {
+      await this.setPrevPage();
 
-      await this.setPrevFullUrl(prevFullUrl);
-
-      location.href = `/oauth2/authorization/` + socialType;
+      location.href =
+        `${this.$config.API_USERS_PREFIX}/oauth2/authorization/` + socialType;
     },
     getPublicKey() {
       return this.$axios.get(`${this.$config.API_USERS_PREFIX}/auth/key`);
-      // return this.$axios.get(`/route/portal/users/auth/key`);
     },
     auth(username, password) {
       return this.$axios.post(`${this.$config.API_USERS_PREFIX}/auth/login`, {
@@ -115,7 +188,7 @@ export default {
     async userInfo() {
       const user = await this.$getAuthUser();
     },
-    getPrevFullUrl() {
+    getPrevFullPageUrl() {
       let sUrl = "";
 
       const prevFullUrl = this.$route.query.prevFullUrl;
@@ -131,38 +204,13 @@ export default {
 
       return sUrl;
     },
-    getPrevUrl() {
-      let sUrl = "";
-
-      if (this.prevPath && this.prevPath !== "") {
-        sUrl += this.prevPath;
-      }
-
-      let cnt = 0;
-      if (this.prevQuery && this.prevQuery !== "") {
-        const keys = Object.keys(this.prevQuery);
-        for (let i = 0; i < keys.length; i++) {
-          const key = keys[i];
-          const val = this.prevQuery[key];
-
-          if (val !== null && val !== "") {
-            if (cnt === 0) sUrl += "?";
-            else sUrl += "&";
-
-            sUrl += key + "=";
-            sUrl += val;
-
-            cnt++;
-          }
-        }
-      }
-
-      if (!sUrl || sUrl === "") {
-        sUrl = `${this.$config.USER_INDEX_PAGE}`;
-      }
-
-      return sUrl;
+    async setPrevPage() {
+      await this.setPrevFullUrl(this.$route.fullPath);
     }
   }
 };
 </script>
+
+<style lang="scss">
+@import "login";
+</style>

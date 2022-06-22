@@ -69,7 +69,7 @@ export default {
   components: {BasicButton, BasicViewTable},
   data() {
     return {
-      conteId: 'cnt_' + this.$route.params.id,
+      conteId: this.$route.params.id,
       contest: {
         conteId: 1,
         conteTitle: '',
@@ -95,19 +95,9 @@ export default {
     this.getContest()
   },
   methods: {
-    getContest() {
-      let params = {
-        conteId: this.conteId
-      }
-      this.$axios.post(`${this.$config.API_BOARD_PREFIX}/contest/view`, params)
-        .then((res) => {
-          // console.log('getContest return log')
-          // console.log(res)
-          this.contest = res
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
+    async getContest() {
+      let res = await this.$axios.get(`${this.$config.API_BOARD_PREFIX}/contest/view?conteId=${this.conteId}`)
+      this.contest = res
     },
     goRegister() {
       window.open(this.contest.conteUrl,'_blank')

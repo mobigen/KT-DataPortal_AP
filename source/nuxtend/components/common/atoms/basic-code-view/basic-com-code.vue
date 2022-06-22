@@ -66,12 +66,20 @@ export default {
   components: {},
   watch: {},
   methods: {
-    getCodeList() {
-      // 공통 코드 조회 API 개발 완료 후 수정 예정
-      return this.$axios.get(`${this.$config.API_BOARD_PREFIX}/test/comCode/list`)
-        .then((res) => {
-          this.codeList = res;
-        })
+    async getCodeList() {
+      if(this.$props.dataList) {
+        this.codeList = this.$props.dataList
+      } else {
+        // 공통 코드 조회 API 개발 완료 후 수정 예정
+        let res = await this.$axios.get(`${this.$config.API_BOARD_PREFIX}/test/comCode/list`)
+        this.codeList = res;
+      }
+
+      // 첫번째 값으로 세팅
+      if(this.codeList.length > 0) {
+        if(this.$props.type === "checkbox") this.selectedList[0] = this.codeList[0].codeId
+        else this.selected = this.codeList[0].codeId
+      }
     },
     onChanged() {
       if(this.$props.type === "checkbox") {
@@ -81,18 +89,8 @@ export default {
       }
     }
   },
-  async beforeMount() {
-    if(this.$props.codeId) {
-      await this.getCodeList()
-    } else {
-      this.codeList = this.$props.dataList
-    }
-    // 첫번째 값으로 세팅
-    if(this.codeList.length > 0) {
-      if(this.$props.type === "checkbox") this.selectedList[0] = this.codeList[0].codeId
-      else this.selected = this.codeList[0].codeId
-    }
-
+  beforeMount() {
+    this.getCodeList()
   }
 }
 </script>
