@@ -1,21 +1,38 @@
 <template lang="html">
   <div>
     <div>
-      <basic-viewTable
-        :useTableHead="false"
-        :viewDetail="apiInfoDetail"
-        :headerLocale="$t('header')"
+      <view-table
+        :colgroup-array="['300px', 'auto']"
+        table-title=""
+        :header-has-locale="false"
+        :view-detail="apiInfoDetail"
+        :header-locale="$t('header')"
+        :td-cnt-in-tr="1"
+        :td-colspan="2"
+        :view-header-list="[
+          this.CONSTANTS.API_ROUTER.PARAM.NO,
+          this.CONSTANTS.API_ROUTER.PARAM.API_NM,
+          this.CONSTANTS.API_ROUTER.PARAM.CTGRY,
+          this.CONSTANTS.API_ROUTER.PARAM.ROUTE_URL,
+          this.CONSTANTS.API_ROUTER.PARAM.URL,
+          this.CONSTANTS.API_ROUTER.PARAM.METH,
+          this.CONSTANTS.API_ROUTER.PARAM.CMD,
+          this.CONSTANTS.API_ROUTER.PARAM.MODE
+        ]"
         :hide-columns="hideColumns"
       />
 
-      <div v-show="!hideColumns.includes(CONSTANTS.API_ROUTER.PARAM.PARAMS)">
-        <div>{{ $t("header.PARAMS") }}</div>
+      <div
+        class="param-table"
+        v-show="!hideColumns.includes(CONSTANTS.API_ROUTER.PARAM.PARAMS)"
+      >
+        <div>{{ $t("header." + CONSTANTS.API_ROUTER.PARAM.PARAMS) }}</div>
         <basic-table
           componentId=""
           :headerList="apiParamsDetail.header"
           :dataList="apiParamsDetail.body"
           :headerLocale="$t('param_header')"
-          rowKey="api_name"
+          :rowKey="CONSTANTS.API_ROUTER.PARAM.API_NM"
           :useSerialNum="true"
           serialNumText="No."
           :useTableButton="false"
@@ -46,9 +63,9 @@
 
 <script type="text/javascript">
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
-import BasicViewTable from "@component/aiPlatform/basic/basic-viewTable.vue";
 import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
 import { mapGetters } from "vuex";
+import ViewTable from "@common/organisms/view-table/view-table";
 
 export default {
   name: "apiRouter-view",
@@ -59,14 +76,16 @@ export default {
       apiName: null,
       apiInfoDetail: {},
       apiParamsDetail: {},
-      hideColumns: [],
-      paramHideColumns: ["API_NM"]
+      hideColumns: []
     };
   },
   computed: {
-    ...mapGetters("defaults/constants", ["CONSTANTS"])
+    ...mapGetters("defaults/constants", ["CONSTANTS"]),
+    paramHideColumns() {
+      return [this.CONSTANTS.API_ROUTER.PARAM.API_NM];
+    }
   },
-  components: { BasicButton, BasicViewTable, BasicTable },
+  components: { BasicButton, BasicTable, ViewTable },
   watch: {
     apiInfoDetail() {
       // view table에서 숨길 column 선택
@@ -95,12 +114,14 @@ export default {
     this.$axios
       .get(
         this.$config.API_ROUTER_PREFIX +
-          "/getApi?API_NM=" +
+          "/getApi?" +
+          this.CONSTANTS.API_ROUTER.PARAM.API_NM +
+          "=" +
           this.$route.query.apiName
       )
       .then((d) => {
-        me.apiInfoDetail = d.data["api_info"];
-        me.apiParamsDetail = d.data["api_params"];
+        me.apiInfoDetail = d.data[this.CONSTANTS.API_ROUTER.PARAM.API_INFO];
+        me.apiParamsDetail = d.data[this.CONSTANTS.API_ROUTER.PARAM.API_PARAMS];
       });
   }
 };
@@ -108,4 +129,17 @@ export default {
 
 <style lang="scss">
 // @import ""
+.param-table {
+  margin: 20px 0;
+}
+.param-table tr {
+  height: 30px;
+}
+.param-table th,
+td {
+  padding: 5px;
+}
+.add-button {
+  margin: 20px 0;
+}
 </style>
