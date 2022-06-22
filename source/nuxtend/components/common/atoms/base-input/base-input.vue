@@ -2,7 +2,7 @@
   <input
     type="text"
     class="text-input"
-    @input="$emit('input', { label: labelName, input: $event.target.value })"
+    @input="$emit('input', { id: id, input: $event.target.value })"
     @keydown="$emit('keydown', $event)"
     @keyup.enter="$emit('enterEvent')"
     :value="inputData"
@@ -19,7 +19,7 @@ export default {
       type: String,
       require: false
     },
-    labelName: {
+    id: {
       type: String,
       require: false
     },

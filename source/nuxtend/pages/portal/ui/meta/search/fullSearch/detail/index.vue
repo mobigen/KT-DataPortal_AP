@@ -4,6 +4,71 @@
     <div class="contents-subject">
       <group-breadcrumb></group-breadcrumb>
     </div>
+    <div class="page__button" style="margin: -1.5rem 0 1rem 0">
+      <div class="button__left"></div>
+      <div class="button__center"></div>
+      <div class="button__right">
+        <base-button
+          class="button--2xl button--tertiary button-declaration"
+          title="요청하기"
+          @click="onshowDialog('requestDialog')"
+          >요청하기</base-button
+        >
+      </div>
+      <!-- 요청하기 Dialog Modal -->
+      <Dialog
+        dialog-name="requestDialog"
+        confirmButtonText="요청"
+        @confirm="confirmBtnClick"
+        :width="'700px'"
+        :height="'740px'"
+      >
+        <div slot="body" class="modal__body">
+          <div class="modal__body-head">
+            <h3>요청하기</h3>
+          </div>
+          <div class="modal__body-content">
+            <ul class="modal__declaration">
+              <li class="modal__body-item">
+                <div class="item__title">이름</div>
+                <div class="item__detail">
+                  <base-input
+                    id="inp-name"
+                    :inputData="requestData.name"
+                    @input="setRequestData"
+                  ></base-input>
+                </div>
+              </li>
+              <li class="modal__body-item">
+                <div class="item__title">사원번호</div>
+                <div class="item__detail">
+                  <base-input
+                    id="inp-emptyNum"
+                    :inputData="requestData.emptyNum"
+                    @input="setRequestData"
+                  ></base-input>
+                </div>
+              </li>
+              <li class="modal__body-item">
+                <div class="item__title">
+                  활용목적
+                  <!-- <span class="blit_essential">*</span> -->
+                </div>
+                <BaseTextarea
+                  class="item__detail"
+                  id="inp-purposeOfUse"
+                  rows="6"
+                  placeholder="활용목적을 입력해주세요."
+                  :useCheckByte="true"
+                  maxByte="4000"
+                  @input="setRequestData"
+                ></BaseTextarea>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </Dialog>
+    </div>
     <div class="contents">
       <!---- 외부 데이터의 경우 : section 태그에 class="outside-data" 추가 ---->
       <section>
@@ -827,15 +892,13 @@
                     </div>
                     <div class="item__detail">
                       <BaseTextarea
+                        class="item__detail"
+                        id="textarea-error"
                         rows="6"
-                        class="text-area--fixed scrollCustomize"
                         placeholder="오류 내용을 입력해주세요."
+                        :useCheckByte="true"
+                        maxByte="4000"
                       ></BaseTextarea>
-                      <!-- 텍스트 길이(byte) 표시 -->
-                      <div class="text-area__byte">
-                        <strong>0</strong> / 4000 bytes
-                      </div>
-                      <!-- // 텍스트 길이(byte) 표시 -->
                     </div>
                   </li>
                   <li class="modal__body-item">
@@ -869,6 +932,7 @@ import SearchList from "@common/organisms/search-list/search-list.vue";
 import Dialog from "@functional/dialog/dialog.vue";
 import ViewTable from "@common/organisms/view-table/view-table";
 import BaseBadge from "@common/atoms/base-badge/base-badge";
+import BaseInput from "@common/atoms/base-input/base-input";
 
 import { mapActions, mapGetters } from "vuex";
 
@@ -886,6 +950,12 @@ export default {
   data() {
     return {
       isPreview: false,
+      requestData: {
+        bizMetaDataset: this.$route.query.postId,
+        name: "홍길동",
+        emptyNum: "20161665",
+        purposeOfUse: ""
+      },
       viewDetail: {
         body: [
           {
@@ -996,6 +1066,15 @@ export default {
     },
     tagClick(tagClickObj) {
       console.log(tagClickObj);
+    },
+    confirmBtnClick(name) {
+      alert(name);
+      console.log(this.requestData);
+      this.$modal.hide(name);
+    },
+    setRequestData({ id, input }) {
+      const key = id.split("-").pop();
+      this.requestData[key] = input;
     }
   },
   created() {
@@ -1014,11 +1093,12 @@ export default {
     BaseTextarea,
     GroupFileAttach,
     ViewTable,
-    BaseBadge
+    BaseBadge,
+    BaseInput
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "./index.scss";
 </style>
