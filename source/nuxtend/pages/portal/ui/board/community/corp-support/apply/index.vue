@@ -140,7 +140,7 @@
 <script>
 import BasicButton from "@component/aiPlatform/basic/basic-button";
 import BasicTable from "@component/aiPlatform/basic/basic-table";
-import BasicComCode from "@component/DPTeam/code/basic-com-code";
+import BasicComCode from "@component/common/atoms/basic-code-view/basic-com-code";
 import {mapGetters} from "vuex";
 
 export default {
@@ -193,23 +193,17 @@ export default {
       this.viewSearchDataSet = false
     },
     onCodeChanged(data) {
-      console.log('compo test ======== 111')
-      console.log(data)
+      this.apyDiv = data
     },
     setData() {
       this.viewSelectedDataList = this.selectedDataList
       this.viewSearchDataSet = false
     },
-    searchDataSet() {
+    async searchDataSet() {
       this.viewSearchDataSet = true
-      let param = {
-        searchKeyworld: this.searchKeyword
-      }
-      this.$axios.post(`${this.$config.API_BOARD_PREFIX}/corpSupport/getTestDataSetList`, param)
-        .then((res) => {
-          this.dataSetTotCnt = res.totCnt
-          this.dataSetList = res.list
-        })
+      let res = await this.$axios.get(`${this.$config.API_BOARD_PREFIX}/corpSupport/getTestDataSetList?searchKeyworld=${this.searchKeyword}`)
+      this.dataSetTotCnt = res.totCnt
+      this.dataSetList = res.list
     },
     deleteDataSet(index){
       this.viewSelectedDataList.splice(index, 1)
@@ -248,7 +242,7 @@ export default {
         this.selectedDataList.splice(index, 1)
       }
     },
-    apply() {
+    async apply() {
       if(!this.checkValidate()) {
         return false
       }
@@ -261,11 +255,9 @@ export default {
         ...this.result,
         dataSetList: this.selectedDataList
       }
-      this.$axios.post(`${this.$config.API_BOARD_PREFIX}/corpSupport/save`, param)
-        .then((res) => {
-          if(res.message === 'success') alert('성공적으로 신청되었습니다.')
-          else alert('error')
-        })
+      let res = await this.$axios.post(`${this.$config.API_BOARD_PREFIX}/corpSupport/save`, param)
+      if(res.message === 'success') alert('성공적으로 신청되었습니다.')
+      else alert('error')
     }
   }
 }

@@ -2,48 +2,56 @@
   <div id="api-router-wrapper">
     <!-- apiRouter용 하드코딩-->
     <div class="api-router-row">
-      <basic-label forProperty="">{{ $t("header.API_NM") }}</basic-label>
+      <basic-label forProperty="">{{
+        $t("header." + CONSTANTS.API_ROUTER.PARAM.API_NM)
+      }}</basic-label>
 
       <basic-label v-if="apiName" forProperty="">{{
-        apiObj["API_NM"]
+        apiObj[CONSTANTS.API_ROUTER.PARAM.API_NM]
       }}</basic-label>
       <basic-input
         v-else
         formInputType="text"
-        labelName="API_NM"
-        :inputData="apiObj['API_NM']"
+        :labelName="CONSTANTS.API_ROUTER.PARAM.API_NM"
+        :inputData="apiObj[CONSTANTS.API_ROUTER.PARAM.API_NM]"
         @changeData="changeData"
       />
     </div>
 
     <div class="api-router-row">
-      <basic-label forProperty="">{{ $t("header.CTGRY") }}</basic-label>
+      <basic-label forProperty="">{{
+        $t("header." + CONSTANTS.API_ROUTER.PARAM.CTGRY)
+      }}</basic-label>
       <base-select
         select-id="select-01"
-        labelName="CTGRY"
+        :labelName="CONSTANTS.API_ROUTER.PARAM.CTGRY"
         :select-list="categoryList"
-        :selected-key="apiObj['CTGRY']"
+        :selected-key="apiObj[CONSTANTS.API_ROUTER.PARAM.CTGRY]"
         placeholder-text="선택해주세요"
         @changeData="changeData"
       />
     </div>
 
     <div class="api-router-row">
-      <basic-label forProperty="">{{ $t("header.ROUTE_URL") }}</basic-label>
+      <basic-label forProperty="">{{
+        $t("header." + CONSTANTS.API_ROUTER.PARAM.ROUTE_URL)
+      }}</basic-label>
       <basic-input
         formInputType="text"
-        labelName="ROUTE_URL"
-        :inputData="apiObj['ROUTE_URL']"
+        :labelName="CONSTANTS.API_ROUTER.PARAM.ROUTE_URL"
+        :inputData="apiObj[CONSTANTS.API_ROUTER.PARAM.ROUTE_URL]"
         @changeData="changeData"
       />
     </div>
 
     <div class="api-router-row">
-      <basic-label forProperty="">{{ $t("header.MODE") }}</basic-label>
+      <basic-label forProperty="">{{
+        $t("header." + CONSTANTS.API_ROUTER.PARAM.MODE)
+      }}</basic-label>
 
       <radio-button
         :radioButtonList="modeRadioOptions"
-        labelName="MODE"
+        :labelName="CONSTANTS.API_ROUTER.PARAM.MODE"
         :defaultValue="getModeDefaultValue()"
         @changeValue="changeData"
       />
@@ -53,20 +61,24 @@
       <!--      v-if="apiObj['MODE'] === null || apiObj['MODE'] === 'MESSAGE PASSING'"-->
       <div class="api-router-row" v-show="!openParam">
         <!-- message passing-->
-        <basic-label forProperty="">{{ $t("header.URL") }}</basic-label>
+        <basic-label forProperty="">{{
+          $t("header." + CONSTANTS.API_ROUTER.PARAM.URL)
+        }}</basic-label>
         <basic-input
           formInputType="text"
-          labelName="URL"
-          :inputData="apiObj['URL']"
+          :labelName="CONSTANTS.API_ROUTER.PARAM.URL"
+          :inputData="apiObj[CONSTANTS.API_ROUTER.PARAM.URL]"
           @changeData="changeData"
         />
       </div>
 
       <div class="api-router-row" v-show="!openParam">
-        <basic-label forProperty="">{{ $t("header.METH") }}</basic-label>
+        <basic-label forProperty="">{{
+          $t("header." + CONSTANTS.API_ROUTER.PARAM.METH)
+        }}</basic-label>
         <radio-button
           :radioButtonList="methRadioOptions"
-          labelName="METH"
+          :labelName="CONSTANTS.API_ROUTER.PARAM.METH"
           :defaultValue="getMethDefaultValue()"
           @changeValue="changeData"
         />
@@ -77,22 +89,24 @@
       <!-- remote call -->
 
       <div class="api-router-row" v-show="openParam">
-        <basic-label forProperty="">{{ $t("header.CMD") }}</basic-label>
+        <basic-label forProperty="">{{
+          $t("header." + CONSTANTS.API_ROUTER.PARAM.CMD)
+        }}</basic-label>
         <basic-input
           formInputType="text"
-          labelName="CMD"
-          :inputData="apiObj['CMD']"
+          :labelName="CONSTANTS.API_ROUTER.PARAM.CMD"
+          :inputData="apiObj[CONSTANTS.API_ROUTER.PARAM.CMD]"
           @changeData="changeData"
         />
       </div>
       <div class="param-table-wrap" v-show="openParam">
-        <h5>{{ $t("header.PARAMS") }}</h5>
+        <h5>{{ $t("header." + CONSTANTS.API_ROUTER.PARAM.PARAMS) }}</h5>
         <basic-table
           componentId=""
           :headerList="apiParams.header"
           :dataList="apiParams.body"
           :headerLocale="$t('param_header')"
-          rowKey="API_NM"
+          :rowKey="CONSTANTS.API_ROUTER.PARAM.NM"
           :useSerialNum="true"
           serialNumText="No."
           :useTableButton="true"
@@ -109,36 +123,38 @@
           <div>
             <div class="api-router-row">
               <basic-label forProperty="">{{
-                $t("param_header.NM")
+                $t("param_header." + CONSTANTS.API_ROUTER.PARAM.NM)
               }}</basic-label>
               <basic-input
                 formInputType="text"
-                labelName="NM"
-                :inputData="apiParamObj['NM']"
+                :labelName="CONSTANTS.API_ROUTER.PARAM.NM"
+                :inputData="apiParamObj[CONSTANTS.API_ROUTER.PARAM.NM]"
                 @changeData="changeDataParam"
               />
             </div>
             <div class="api-router-row">
               <basic-label forProperty="">{{
-                $t("param_header.DATA_TYPE")
+                $t("param_header." + CONSTANTS.API_ROUTER.PARAM.DATA_TYPE)
               }}</basic-label>
               <base-select
                 select-id="select-02"
-                labelName="DATA_TYPE"
+                :labelName="CONSTANTS.API_ROUTER.PARAM.DATA_TYPE"
                 :select-list="dataTypeList"
-                :selected-key="apiParamObj['DATA_TYPE']"
+                :selected-key="
+                  apiParamObj[CONSTANTS.API_ROUTER.PARAM.DATA_TYPE]
+                "
                 placeholder-text="선택해주세요"
                 @changeData="changeDataParam"
               />
             </div>
             <div class="api-router-row">
               <basic-label forProperty="">{{
-                $t("param_header.DEFLT_VAL")
+                $t("param_header." + CONSTANTS.API_ROUTER.PARAM.DEFLT_VAL)
               }}</basic-label>
               <basic-input
                 formInputType="text"
-                labelName="DEFLT_VAL"
-                :inputData="apiParamObj['DEFLT_VAL']"
+                :labelName="CONSTANTS.API_ROUTER.PARAM.DEFLT_VAL"
+                :inputData="apiParamObj[CONSTANTS.API_ROUTER.PARAM.DEFLT_VAL]"
                 @changeData="changeDataParam"
               />
             </div>
@@ -185,7 +201,7 @@ export default {
   props: {},
   data() {
     return {
-      hideColumns: ["API_NM"],
+      // hideColumns: [],
       apiName: null,
       openParam: false,
       apiObj: {},
@@ -196,11 +212,7 @@ export default {
       },
       categoryList: [],
       modeRadioOptions: [],
-      methRadioOptions: [
-        { value: "GET", label: "GET" },
-        { value: "POST", label: "POST" },
-        { value: "PUT", label: "PUT" }
-      ],
+
       buttonList: {
         remove: {
           buttonType: "icon",
@@ -214,7 +226,26 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("defaults/constants", ["CONSTANTS"])
+    ...mapGetters("defaults/constants", ["CONSTANTS"]),
+    hideColumns() {
+      return [this.CONSTANTS.API_ROUTER.PARAM.API_NM];
+    },
+    methRadioOptions() {
+      return [
+        {
+          value: this.CONSTANTS.API_ROUTER.METH.GET,
+          label: this.CONSTANTS.API_ROUTER.METH.GET
+        },
+        {
+          value: this.CONSTANTS.API_ROUTER.METH.POST,
+          label: this.CONSTANTS.API_ROUTER.METH.POST
+        },
+        {
+          value: this.CONSTANTS.API_ROUTER.METH.PUT,
+          label: this.CONSTANTS.API_ROUTER.METH.PUT
+        }
+      ];
+    }
   },
   components: {
     BasicButton,
@@ -230,11 +261,18 @@ export default {
       const me = this;
 
       await this.$axios
-        .get(this.$config.API_ROUTER_PREFIX + "/getApi?API_NM=" + '""')
+        .get(
+          this.$config.API_ROUTER_PREFIX +
+            "/getApi?" +
+            this.CONSTANTS.API_ROUTER.PARAM.API_NM +
+            '=""'
+        )
         .then((d) => {
           const _d = d.data;
 
-          _d["api_info"]["header"].forEach((e) => {
+          _d[this.CONSTANTS.API_ROUTER.PARAM.API_INFO][
+            this.CONSTANTS.API_ROUTER.PARAM.HEADER
+          ].forEach((e) => {
             let defaultVal = null;
             // default value setting
             if (e.column_name === me.CONSTANTS.API_ROUTER.PARAM.MODE) {
@@ -245,8 +283,13 @@ export default {
             me.apiObj[e.column_name] = defaultVal;
           });
 
-          me.apiParams.header = _d["api_params"]["header"];
-          _d["api_params"]["header"].forEach((e) => {
+          me.apiParams.header =
+            _d[this.CONSTANTS.API_ROUTER.PARAM.API_PARAMS][
+              this.CONSTANTS.API_ROUTER.PARAM.HEADER
+            ];
+          _d[this.CONSTANTS.API_ROUTER.PARAM.API_PARAMS][
+            this.CONSTANTS.API_ROUTER.PARAM.HEADER
+          ].forEach((e) => {
             me.apiParamObj[e.column_name] = null;
           });
         });
@@ -264,7 +307,10 @@ export default {
         }
       });
 
-      if (this.apiObj.MODE === this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL) {
+      if (
+        this.apiObj[this.CONSTANTS.API_ROUTER.PARAM.MODE] ===
+        this.CONSTANTS.API_ROUTER.MODE.REMOTE_CALL
+      ) {
         params[this.CONSTANTS.API_ROUTER.PARAM.URL] = "";
         params[this.CONSTANTS.API_ROUTER.PARAM.METH] = "";
 
@@ -290,12 +336,12 @@ export default {
       }
 
       // NO parameter는 backend에서 처리되지 않기 때문에 삭제한다.
-      delete params.NO;
+      delete params[this.CONSTANTS.API_ROUTER.PARAM.NO];
 
       if (!this.checkValidation(params)) {
         const required = [
-          this.$t("header.API_NM"),
-          this.$t("header.ROUTE_URL")
+          this.$t("header." + CONSTANTS.API_ROUTER.PARAM.API_NM),
+          this.$t("header." + CONSTANTS.API_ROUTER.PARAM.ROUTE_URL)
         ];
 
         let msg = "param 값이 유효하지 않습니다.";
@@ -353,49 +399,53 @@ export default {
           let arr = [];
           d.data["api_server_info"].forEach((el) => {
             arr.push({
-              key: el.NM,
-              text: el.NM
+              key: el[this.CONSTANTS.API_ROUTER.PARAM.NM],
+              text: el[this.CONSTANTS.API_ROUTER.PARAM.NM]
             });
           });
           me.categoryList = arr;
 
-          me.apiObj.CTGRY = arr[0].key;
+          me.apiObj[this.CONSTANTS.API_ROUTER.PARAM.CTGRY] = arr[0].key;
         });
     },
     getApi() {
       const me = this;
       this.$axios
-        .get(this.$config.API_ROUTER_PREFIX + "/getApi?API_NM=" + this.apiName)
+        .get(
+          this.$config.API_ROUTER_PREFIX +
+            "/getApi?" +
+            this.CONSTANTS.API_ROUTER.PARAM.API_NM +
+            "=" +
+            this.apiName
+        )
         .then((d) => {
           me.apiObj = JSON.parse(JSON.stringify(d.data["api_info"].body[0]));
           me.apiParams.body = JSON.parse(
-            JSON.stringify(d.data["api_params"].body)
+            JSON.stringify(
+              d.data[this.CONSTANTS.API_ROUTER.PARAM.API_PARAMS].body
+            )
           );
           me.setOpenParam();
         });
     },
     getModeDefaultValue() {
-      return this.apiObj.MODE
-        ? this.apiObj.MODE
+      return this.apiObj[this.CONSTANTS.API_ROUTER.PARAM.MODE]
+        ? this.apiObj[this.CONSTANTS.API_ROUTER.PARAM.MODE]
         : this.modeRadioOptions[0].value;
     },
     getMethDefaultValue() {
-      return this.apiObj.METH
-        ? this.apiObj.METH
+      return this.apiObj[this.CONSTANTS.API_ROUTER.PARAM.METH]
+        ? this.apiObj[this.CONSTANTS.API_ROUTER.PARAM.METH]
         : this.methRadioOptions[0].value;
     },
     tableButtonClick(rowKey) {
+      console.log(rowKey)
       // param remove
       const idx = this.apiParams.body.findIndex((el) => {
-        return el.API_NM === rowKey;
+        return el[this.CONSTANTS.API_ROUTER.PARAM.NM] === rowKey;
       });
 
       this.apiParams.body.splice(idx, 1);
-    },
-    addParam() {
-      this.showAddParam = true;
-
-      this.setParamSelect();
     },
     isDuplicated(obj, keyText, val) {
       const idx = obj.body.findIndex((el) => {
@@ -418,11 +468,20 @@ export default {
           nm
         )
       ) {
-        const msg = "Param의 NM이 중복됩니다.";
+        const msg =
+          "Param의 " + this.CONSTANTS.API_ROUTER.PARAM.NM + "이 중복됩니다.";
         errorAlert(msg);
         return;
       }
 
+      // 기본값이 공백이면?
+      if (!this.apiParamObj[this.CONSTANTS.API_ROUTER.PARAM.DEFLT_VAL]) {
+        this.apiParamObj[this.CONSTANTS.API_ROUTER.PARAM.DEFLT_VAL] =
+          this.apiParamObj[this.CONSTANTS.API_ROUTER.PARAM.DATA_TYPE] ===
+          "string"
+            ? ""
+            : 0;
+      }
       this.apiParams.body.push(this.apiParamObj);
 
       // clean filed.
@@ -448,11 +507,11 @@ export default {
     setParamSelect() {
       this.dataTypeList = [
         {
-          key: "STRING",
+          key: "string",
           text: "String"
         },
         {
-          key: "NUMBER",
+          key: "number",
           text: "Number"
         }
       ];
@@ -492,19 +551,20 @@ export default {
 }
 
 .api-router-row div:nth-child(1) {
-  width: 100px;
+  width: 200px;
+  min-width: 100px;
 }
 .api-router-row div:nth-child(2) {
   width: 500px;
 }
 .param-table-wrap {
-  width: 80%;
+  width: 90%;
   padding: 10px;
   margin: 5px;
   border: 1px solid lightgrey;
 }
 .param-add-wrap {
-  width: 500px;
+  width: 90%;
   margin: 10px;
   border: 1px solid lightgrey;
 }

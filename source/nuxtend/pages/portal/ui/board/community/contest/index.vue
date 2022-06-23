@@ -107,32 +107,19 @@ export default {
       }
       this.$router.push({path: this.$route.path, query: this.query})
     },
-    getDataList() {
-      let param = {
-        searchKeyword: this.searchKeyword,
-        rowsPerPage: this.rowsPerPage,
-        startRow: this.startRow,
-        currentPage: this.currentPage
-      }
-      this.$axios.post(`${this.$config.API_BOARD_PREFIX}/contest/list`, param)
-        .then((res) => {
-          //console.log(res)
-          this.list = res.list
-          this.totCnt = res.totCnt
-          this.setTotalCount({
-            key: this.paginationKey,
-            totalCount: this.totCnt
-          })
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
+    async getDataList() {
+      let res = await this.$axios.get(`${this.$config.API_BOARD_PREFIX}/contest/list?searchKeyword=${this.searchKeyword}&rowsPerPage=${this.rowsPerPage}
+      &startRow=${this.startRow}&currentPage=${this.currentPage}`)
+      //console.log(res)
+      this.list = res.list
+      this.totCnt = res.totCnt
+      this.setTotalCount({
+        key: this.paginationKey,
+        totalCount: this.totCnt
+      })
     },
     rowClick(key) {
-      let keySplit = key.split("cnt_");
-      if(keySplit) {
-        this.$router.push({path: `/portal/ui/board/community/contest/view/${keySplit[1]}`, query: this.query})
-      }
+      this.$router.push({path: `/portal/ui/board/community/contest/view/${key}`, query: this.query})
     }
   }
 }

@@ -22,7 +22,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "KT-Dataportal",
+    title: "Katech-Dataportal",
     htmlAttrs: {
       lang: "en"
     },
@@ -111,22 +111,22 @@ export default {
     // debug : true
   },
   proxy: [
-    [
-      "/oauth2/authorization/",
-      {
-        target: process.env.API_USER_URL,
-        changeOrigin: true,
-        secure: false
-      }
-    ],
-    [
-      "/login/oauth2",
-      {
-        target: process.env.API_USER_URL,
-        changeOrigin: true,
-        secure: false
-      }
-    ],
+    // [
+    //   "/oauth2/authorization/",
+    //   {
+    //     target: process.env.API_USER_URL,
+    //     changeOrigin: true,
+    //     secure: false
+    //   }
+    // ],
+    // [
+    //   "/login/oauth2",
+    //   {
+    //     target: process.env.API_USER_URL,
+    //     changeOrigin: true,
+    //     secure: false
+    //   }
+    // ],
     [
       "/portal/api/analysis",
       {
@@ -167,7 +167,7 @@ export default {
       "/portal/api/meta",
       {
         target: process.env.API_META_URL,
-        pathRewrite: { "/portal/api/meta/": "/route/meta/" }
+        pathRewrite: { "/portal/api/meta/": "/route/portal/api/meta/" }
       }
     ],
     [

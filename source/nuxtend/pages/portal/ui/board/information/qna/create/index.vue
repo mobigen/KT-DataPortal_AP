@@ -83,6 +83,14 @@ export default {
   computed: {
     ...mapGetters("users/user",["getUserInfo"]),
   },
+  asyncData({store,redirect}){
+    // url로 이동시 로그인 여부 체크
+    const userInfo = store.getters["users/user/getUserInfo"]
+    if(!userInfo.authenticated){
+      redirect("/portal/ui/board/information/qna")
+      if(process.client){alert("로그인후 이용가능합니다.")}
+    }
+  },
   data() {
     return {
       files:[],
@@ -166,8 +174,13 @@ export default {
       }
       console.log(createData)
       if(confirm("등록하시겠습니까")){
-        await this.createQna(createData)
-        await this.fileUpload(this.files)
+        const data = await this.createQna(createData)
+        const params = {
+          files: this.files,
+          contentId : data.qnaId,
+          service : "qna"
+        }
+        await this.fileUpload(params)
         this.$router.push(`/portal/ui/board/information/qna`)
       }
     }

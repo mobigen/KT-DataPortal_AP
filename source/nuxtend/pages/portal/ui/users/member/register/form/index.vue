@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <h1>회원가입 (등록폼)</h1>
-    <div v-if="!socialUser">
+    <div v-if="!getSocialUser">
       <form class="form login-form" @submit.self.prevent="">
         <label for="userId">아이디 필수 *</label> :
         <input
@@ -51,7 +51,7 @@
           required
         />
         <br />
-        <label for="email1">아이디(이메일)필수 *</label> :
+        <label for="email1">이메일 필수 *</label> :
         <input
           class="text-input"
           type="text"
@@ -59,7 +59,7 @@
           v-model="user.email1"
           ref="email1"
           style="width: 200px"
-          required
+          :disabled="true"
         />
         <span>@</span>
         <input
@@ -69,9 +69,8 @@
           v-model="user.email2"
           ref="email2"
           style="width: 200px"
-          required
+          :disabled="true"
         />
-        <!-- <button @click.prevent="onDuplicatedEmailChk()">중복체크</button> -->
         <br />
         <label for="moblphon1">연락처 필수 *</label> :
         <input
@@ -142,9 +141,87 @@
           v-model="user.userNm"
           ref="userNm"
           style="width: 200px"
-          disabled="disabled"
+          :disabled="true"
         />
         <br />
+        <label for="email1">이메일 필수 *</label> :
+        <input
+          class="text-input"
+          type="text"
+          id="email1"
+          v-model="user.email1"
+          ref="email1"
+          style="width: 200px"
+          :disabled="true"
+        />
+        <span>@</span>
+        <input
+          class="text-input"
+          type="text"
+          id="email2"
+          v-model="user.email2"
+          ref="email2"
+          style="width: 200px"
+          :disabled="true"
+        />
+        <br />
+        <label for="moblphon1">연락처 필수 *</label> :
+        <input
+          class="text-input"
+          type="text"
+          id="moblphon1"
+          v-model="user.moblphon1"
+          ref="moblphon1"
+          style="width: 150px"
+          maxlength="4"
+          required
+        />
+        <span>-</span>
+        <input
+          class="text-input"
+          type="text"
+          id="moblphon2"
+          v-model="user.moblphon2"
+          ref="moblphon2"
+          style="width: 150px"
+          maxlength="4"
+          required
+        />
+        <span>-</span>
+        <input
+          class="text-input"
+          type="text"
+          id="moblphon3"
+          v-model="user.moblphon3"
+          ref="moblphon3"
+          style="width: 150px"
+          maxlength="4"
+          required
+        />
+        <br />
+        <label for="blngOrgNm">소속기관 필수 *</label> :
+        <input
+          type="hidden"
+          id="blngOrgCd"
+          v-model="user.blngOrgCd"
+          ref="blngOrgCd"
+        />
+        <input
+          class="text-input"
+          type="text"
+          id="blngOrgNm"
+          v-model="user.blngOrgNm"
+          ref="blngOrgNm"
+          style="width: 150px"
+          :disabled="isInputBlngOrg"
+          required
+        />
+        <button type="button" @click.prevent="onSearchBlngOrg()">
+          소속기관 검색
+        </button>
+        <button type="button" @click.prevent="onInputBlngOrg()">
+          직접입력
+        </button>
       </form>
     </div>
     <div>
@@ -153,6 +230,7 @@
   </div>
 </template>
 <script type="text/javascript">
+import { mapGetters, mapActions } from "vuex";
 import { errorAlert } from "@functional/alert/alert-default";
 export default {
   name: "index",
@@ -175,12 +253,10 @@ export default {
         userType: null,
         loginType: null,
         socialId: null,
-        privacyTermsYn: null,
-        serviceTermsYn: null,
-        joinEventYn: null
+        privacyTermsYn: "N",
+        serviceTermsYn: "N",
+        publicDataYn: "N"
       },
-      socialUser: null,
-      agreeInfo: null,
       isUserIdChk: false,
       userIdMsg: false,
       isEmailChk: false,
@@ -191,27 +267,20 @@ export default {
     };
   },
   async beforeMount() {
-    const userType = this.$cookies.get("user-type");
-    const socialUser = this.$cookies.get("social-user");
-    const agreeInfo = this.$cookies.get("agree-info");
-    this.user.userType = userType;
-    this.socialUser = socialUser;
-    this.agreeInfo = agreeInfo;
-
-    if (!this.user.userType || !this.agreeInfo || !this.agreeInfo.isAgree) {
-      await errorAlert("비정상적인 접근 입니다.");
-      this.$router.push({
-        path: `${this.$config.ROUTE_USERS_PREFIX}/member/register`
-      });
-      return false;
-    }
-
     this.init();
   },
   destroyed() {
-    // this.$cookies.set("user-type", null);
-    // this.$cookies.set("social-user", null);
-    // this.$cookies.set("agree-info", null);
+    this.clearEmailAthn();
+    this.clearSocialUser();
+    this.clearMemberRegisterInfo();
+  },
+  computed: {
+    ...mapGetters("users/user", ["getPrevFullUrl"]),
+    ...mapGetters("users/memberRegster", [
+      "getEmailAthn",
+      "getSocialUser",
+      "getMemberRegisterInfo"
+    ])
   },
   watch: {
     "user.userId"(newVal) {
@@ -237,17 +306,49 @@ export default {
     }
   },
   methods: {
-    init() {
-      if (this.socialUser) {
-        this.user.email = this.socialUser.email;
-        this.user.userNm = this.socialUser.name;
-        this.user.loginType = this.socialUser.socialType;
-        this.user.socialId = this.socialUser.id;
+    ...mapActions("users/memberRegster", ["clearEmailAthn", "clearSocialUser", "clearMemberRegisterInfo"]),
+    async init() {
+      if (this.getEmailAthn) {
+        this.user.email = this.getEmailAthn.email;
+        this.user.email1 = this.getEmailAddress(this.user.email, "name");
+        this.user.email2 = this.getEmailAddress(this.user.email, "domain");
       }
-      if (this.agreeInfo) {
-        if (this.agreeInfo.isPrivacyTerms) this.user.privacyTermsYn = "Y";
-        if (this.agreeInfo.isServiceTerms) this.user.serviceTermsYn = "Y";
-        if (this.agreeInfo.isJoinEvent) this.user.joinEventYn = "Y";
+      if (this.getSocialUser) {
+        this.user.email = this.getSocialUser.email;
+        this.user.email1 = this.getEmailAddress(this.user.email, "name");
+        this.user.email2 = this.getEmailAddress(this.user.email, "domain");
+        this.user.userNm = this.getSocialUser.name;
+        this.user.loginType = this.getSocialUser.socialType;
+        this.user.socialId = this.getSocialUser.id;
+      }
+      if (this.getMemberRegisterInfo) {
+        this.user.userType = this.getMemberRegisterInfo.userType;
+        if (this.getMemberRegisterInfo.isPrivacyTerms)
+          this.user.privacyTermsYn = "Y";
+        if (this.getMemberRegisterInfo.isServiceTerms)
+          this.user.serviceTermsYn = "Y";
+        if (this.getMemberRegisterInfo.isPublicData)
+          this.user.publicDataYn = "Y";
+      }
+
+      if (
+        !this.user.userType ||
+        !this.getMemberRegisterInfo ||
+        !this.getMemberRegisterInfo.isAgree
+      ) {
+        await errorAlert("비정상적인 접근 입니다.");
+
+        if (this.getPrevFullUrl) {
+          this.$router.push({
+            path: `${this.getPrevFullUrl}`
+          });
+        } else {
+          this.$router.push({
+            path: `${this.$config.ROUTE_USERS_PREFIX}/member/register`
+          });
+        }
+
+        return false;
       }
     },
     async onDuplicatedUserIdChk() {
@@ -281,13 +382,13 @@ export default {
     async onDuplicatedEmailChk() {
       let email = this.user.email1 + "@" + this.user.email2;
       if (this.user.email1 == "" || this.user.email2 == "") {
-        this.$refs.email1.focus();
         await errorAlert("이메일을 입력해주세요.");
+        this.$refs.email1.focus();
         return;
       }
       if (!this.chkEmail(email)) {
-        this.$refs.email1.focus();
         await errorAlert("이메일 형식이 잘못되었습니다.");
+        this.$refs.email1.focus();
         return false;
       }
 
@@ -308,9 +409,12 @@ export default {
       }
     },
     isDupliacatedChk(params) {
-      return this.$axios.post(
+      const config = {
+        params: params
+      };
+      return this.$axios.get(
         `${this.$config.API_USERS_PREFIX}/auth/isDupliacatedChk`,
-        params
+        config
       );
     },
     onSearchBlngOrg() {
@@ -326,7 +430,7 @@ export default {
       this.user.blngOrgNm = null;
     },
     async onRegComplete() {
-      if (!this.socialUser) {
+      if (!this.getSocialUser) {
         if (this.user.userId === null || this.user.userId === "") {
           await errorAlert("아이디을 입력해주세요.");
           this.$refs.userId.focus();
@@ -426,7 +530,7 @@ export default {
       }
 
       let data;
-      if (!this.socialUser) {
+      if (!this.getSocialUser) {
         data = await this.createUser();
       } else {
         data = await this.createSocialUser();
@@ -436,7 +540,7 @@ export default {
       if (data && data.userUuid) {
         this.$router.push({
           path: `${this.$config.ROUTE_USERS_PREFIX}/member/register/complete`,
-          query: { userSeq: data.userSeq }
+          query: { userUuid: data.userUuid }
         });
       } else {
         await errorAlert(
@@ -485,11 +589,11 @@ export default {
     chkPassword() {
       const pw = this.user.userPassword;
       this.chkConfrimPassword();
-      if (!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/.test(pw)) {
+      if (!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/.test(pw)) {
         this.isUserPasswordChk = false;
-        //   "영문, 특수문자, 숫자를 모두 포함하여 8~16자로 입력해주세요.";
+        //   "영문, 특수문자, 숫자를 모두 포함하여 8~20자로 입력해주세요.";
         this.userPasswordMsg =
-          "영문, 특수문자, 숫자를 모두 포함하여 8~16자로 입력해주세요.(특수문자 : !@#$%^*+=- 만 허용됩니다. )";
+          "영문, 특수문자, 숫자를 모두 포함하여 8~20자로 입력해주세요.(특수문자 : !@#$%^*+=- 만 허용됩니다. )";
         return false;
       } else if (/(\w)\1\1\1/.test(pw)) {
         this.isUserPasswordChk = false;
@@ -533,6 +637,21 @@ export default {
       } else {
         return val;
       }
+    },
+    getEmailAddress(email, emailType) {
+      if (!email) return "";
+
+      const emailParts = email.split("@");
+      let emailName = "";
+      let emailDomain = "";
+      if (emailParts.length >= 2) {
+        emailName = emailParts[0];
+        emailDomain = emailParts[1];
+      }
+
+      if (emailType === "name") return emailName;
+      else if (emailType === "domain") return emailDomain;
+      else return "";
     }
   }
 };

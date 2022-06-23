@@ -4,7 +4,7 @@ export const state = () => ({
 });
 
 export const getters = {
-  getterPrevFullUrl: (state) => state.prevFullUrl,
+  getPrevFullUrl: (state) => state.prevFullUrl,
   getUserInfo: (state) => state.userInfo
 };
 
@@ -22,13 +22,10 @@ export const mutations = {
 
 export const actions = {
   async setPrevFullUrl({ commit }, data) {
-    console.log("setPrevFullUrl_data : ", data);
     commit("SET_PREV_FULL_URL", data);
   },
   async getAuthenticatedUser({ commit }) {
-    console.log("store user getAuthenticatedUser");
     const user = await this.$getAuthUser();
-    console.log("user : ", user);
     if (user && user.authenticated) {
       commit("SET_USER_INFO", user || { authenticated: false });
     } else {

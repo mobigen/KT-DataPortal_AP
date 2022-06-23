@@ -115,9 +115,9 @@ export const Default = (args, { argTypes }) => ({
       treeObj: {
         componentKey: "storyBookTestKey",
         treeKey: {
-          NODE_NM: "NODE_NM", // node title
-          NODE_ID: "NODE_ID", // node key
-          PRNTS_ID: "PRNTS_ID" // parent key
+          NODE_NM: "node_nm", // node title
+          NODE_ID: "node_id", // node key
+          PRNTS_ID: "prnts_id" // parent key
         }
       }
     };

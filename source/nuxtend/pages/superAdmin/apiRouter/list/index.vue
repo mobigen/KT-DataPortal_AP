@@ -1,9 +1,11 @@
 <template lang="html">
   <div>
     <div class="component flex">
-      <basic-label forProperty="">CTGRY</basic-label>
+      <basic-label forProperty="">{{
+        $t("header." + CONSTANTS.API_ROUTER.PARAM.CTGRY)
+      }}</basic-label>
       <base-select
-        labelName="CTGRY"
+        :labelName="CONSTANTS.API_ROUTER.PARAM.CTGRY"
         :select-list="selectList"
         :selected-key="selectKey"
         :use-all-option="true"
@@ -29,14 +31,16 @@
         :headerList="apiList.header"
         :dataList="apiList.body"
         :headerLocale="$t('header')"
-        rowKey="API_NM"
+        :rowKey="CONSTANTS.API_ROUTER.PARAM.API_NM"
         :useSerialNum="true"
         serialNumText="No."
         :useTableButton="true"
         :tableButtonText="this.buttonList"
         @buttonAction="tableButtonClick"
         @columnAction=""
-        :keyActionText="{ API_NM: 'viewRouterInfo' }"
+        :keyActionText="{
+          [CONSTANTS.API_ROUTER.PARAM.API_NM]: 'viewRouterInfo'
+        }"
         @keyAction="viewRouterInfo"
       />
     </div>
@@ -103,11 +107,20 @@ export default {
     removeBizMeta(rowKey) {
       const me = this;
       confirmAlert(
-        "삭제하시겠습니까? <br>" + this.$t("header.API_NM") + " : " + rowKey,
+        "삭제하시겠습니까? <br>" +
+          this.$t("header." + this.CONSTANTS.API_ROUTER.PARAM.API_NM) +
+          " : " +
+          rowKey,
         {
           confirm: () => {
             me.$axios
-              .post(me.$config.API_ROUTER_PREFIX + "/delApi?API_NM=" + rowKey)
+              .post(
+                me.$config.API_ROUTER_PREFIX +
+                  "/delApi?" +
+                  this.CONSTANTS.API_ROUTER.PARAM.API_NM +
+                  "=" +
+                  rowKey
+              )
               .then(() => {
                 me.getApiList();
               });
@@ -126,7 +139,11 @@ export default {
       // select box 값에 따라서 호출되는 API가 다르기 때문에 여기서 분리한다.
       let url = "/getApiList";
       if (this.selectKey && this.selectKey !== "all") {
-        url = "/getCategoryApiList?CTGRY=" + this.selectKey;
+        url =
+          "/getCategoryApiList?" +
+          this.CONSTANTS.API_ROUTER.PARAM.CTGRY +
+          "=" +
+          this.selectKey;
       }
 
       const me = this;
@@ -143,8 +160,8 @@ export default {
           let arr = [];
           d.data["api_server_info"].forEach((el) => {
             arr.push({
-              key: el.NM,
-              text: el.NM
+              key: el[this.CONSTANTS.API_ROUTER.PARAM.NM],
+              text: el[this.CONSTANTS.API_ROUTER.PARAM.NM]
             });
           });
           me.selectList = arr;

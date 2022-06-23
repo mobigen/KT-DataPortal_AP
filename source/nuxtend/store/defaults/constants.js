@@ -81,17 +81,21 @@ export const state = () => ({
     },
     API_ROUTER: {
       PARAM: {
-        API_NM: "API_NM",
-        CMD: "CMD",
-        URL: "URL",
-        MODE: "MODE",
-        METH: "METH",
-        CTGRY: "CTGRY",
-        ROUTE_URL: "ROUTE_URL",
-        PARAMS: "PARAMS",
-        NM: "NM",
-        DATA_TYPE: "DATA_TYPE",
-        DEFLT_VAL: "DEFLT_VAL"
+        NO: "no",
+        API_NM: "api_nm",
+        CMD: "cmd",
+        URL: "url",
+        MODE: "mode",
+        METH: "meth",
+        CTGRY: "ctgry",
+        ROUTE_URL: "route_url",
+        PARAMS: "params",
+        NM: "nm",
+        DATA_TYPE: "data_type",
+        DEFLT_VAL: "deflt_val",
+        API_INFO: "api_info",
+        API_PARAMS: "api_params",
+        HEADER: "header"
       },
       METH: {
         GET: "GET",
