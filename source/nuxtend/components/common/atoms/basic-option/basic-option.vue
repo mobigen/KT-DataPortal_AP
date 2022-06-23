@@ -55,8 +55,8 @@ export default {
   components: { BaseRadio },
   watch: {},
   methods: {
-    checkOption(option) {
-      this.$emit("checkOption", option);
+    checkOption({ input }) {
+      this.$emit("checkOption", input);
     }
   }
 };

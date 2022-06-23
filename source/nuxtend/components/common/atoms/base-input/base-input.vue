@@ -1,6 +1,6 @@
 <template lang="html">
   <input
-    type="text"
+    :type="type"
     class="text-input"
     @input="$emit('input', { label: labelName, input: $event.target.value })"
     @keydown="$emit('keydown', $event)"
@@ -17,15 +17,20 @@ export default {
   props: {
     placeholder: {
       type: String,
-      require: false
+      required: false
     },
     labelName: {
       type: String,
-      require: false
+      required: false
     },
     inputData: {
+      type: [Number, String],
+      required: false
+    },
+    type: {
       type: String,
-      require: false
+      required: false,
+      default: "text"
     }
   },
   data() {
