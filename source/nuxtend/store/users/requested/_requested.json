@@ -8,7 +8,7 @@
       "startDt": "2022-05-30",
       "expiredDt": "2022-05-31",
       "legalReview": "Y",
-      "status": "using",
+      "status": "U",
       "cnt": "1"
     },
     {
@@ -19,7 +19,7 @@
       "startDt": "2022-04-31",
       "expiredDt": "2022-05-31",
       "legalReview": "N",
-      "status": "expired",
+      "status": "E",
       "cnt": "3"
     }
   ],
