@@ -10,14 +10,14 @@
         :headerList="headerList"
         :dataList="metaMapList.body"
         :headerLocale="$t('header')"
-        rowKey="ITEM_ID"
+        rowKey="item_id"
         :useSerialNum="false"
         serialNumText=""
         :useTableButton="false"
         :tableButtonText="{}"
         @buttonAction=""
         @columnAction=""
-        :keyActionText="{ ENG_NM: 'keyActionTest01' }"
+        :keyActionText="{ eng_nm: 'keyActionTest01' }"
         @keyAction="keyClick"
       />
 
@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       // 임시
-      headerList: [{ column_name: "KOR_NM" }, { column_name: "ENG_NM" }]
+      headerList: [{ column_name: "kor_nm" }, { column_name: "eng_nm" }]
     };
   },
   props: {},
