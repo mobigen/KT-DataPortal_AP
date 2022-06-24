@@ -98,15 +98,7 @@ export default {
   },
   watch: {
     selectList() {
-      const tempList = JSON.parse(JSON.stringify(this.selectList));
-
-      if (this.useAllOption) {
-        tempList.unshift({
-          key: "all",
-          text: "전체"
-        });
-      }
-      this.newSelectList = tempList;
+      this.newSelectList = this.getNewSelectList();
     },
     // changed selection
     selectedKey() {
@@ -121,9 +113,23 @@ export default {
     changeData(input) {
       // select text에 셋팅하준다.
       this.$emit("changeData", { label: this.labelName, input: input });
+    },
+    getNewSelectList() {
+      // 부모 component에서 selectList의 값이 바뀌면 watch에서 처리한다.
+      const tempList = JSON.parse(JSON.stringify(this.selectList));
+
+      if (this.useAllOption) {
+        tempList.unshift({
+          key: "all",
+          text: "전체"
+        });
+      }
+      return tempList;
     }
   },
-  created() {}
+  created() {
+    this.newSelectList = this.getNewSelectList();
+  }
 };
 </script>
 

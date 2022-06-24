@@ -15,13 +15,14 @@ export const mutations = {
 import sampleRequestedData from "./_requested.json";
 
 export const actions = {
-  getRequestedData({ commit }) {
+  getRequestedData({ commit }, requestParam) {
     // this.$axios
     //   .get(this.$config.API_ROUTER_PREFIX + "/getRequestedData")
     //   .then((d) => {
     //     // commit("setRequestedData", d);
     //   });
 
+    console.log(requestParam);
     // sample data load
     commit("setRequestedData", sampleRequestedData);
   }

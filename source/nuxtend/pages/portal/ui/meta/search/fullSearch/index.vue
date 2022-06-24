@@ -14,6 +14,8 @@
       <div class="contents-top__search">
         <search-input-field
           :searchKeyword="searchKeyword"
+          :use-recent-search="true"
+          :use-inner-search="true"
           @search="searchBtnClick"
           @filterCheck="rescanFilterCheck"
         ></search-input-field>

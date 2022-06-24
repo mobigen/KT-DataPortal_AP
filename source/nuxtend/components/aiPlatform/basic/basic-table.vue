@@ -202,7 +202,6 @@ export default {
         : headerEngNm;
     },
     getBodyLocale(key, data) {
-      console.log(key);
       return Object.prototype.hasOwnProperty.call(this.bodyLocale, key)
         ? this.bodyLocale[key][data[key]]
         : data[key];
