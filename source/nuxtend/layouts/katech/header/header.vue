@@ -203,7 +203,7 @@
                     >
                   </li>
                   <li class="lnb__item">
-                    <NuxtLink to="/katech/search-map" class="lnb__link"
+                    <NuxtLink to="/portal/ui/analysis/visualization" class="lnb__link"
                       >데이터 분석 시각화</NuxtLink
                     >
                   </li>
@@ -275,7 +275,7 @@
                 <ul class="lnb">
                   <!-- TODO : 데모용 메뉴 -->
                   <li class="lnb__item">
-                    <NuxtLink to="/porta/ui/users/requested" class="lnb__link"
+                    <NuxtLink to="/portal/ui/users/requested" class="lnb__link"
                       >요청데이터</NuxtLink
                     >
                   </li>
