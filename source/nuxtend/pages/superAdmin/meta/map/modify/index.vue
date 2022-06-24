@@ -9,7 +9,7 @@
         :headerList="headerList"
         :dataList="useMetaNameList"
         :headerLocale="$t('header')"
-        rowKey="NM_ID"
+        rowKey="nm_id"
         :useSerialNum="false"
         serialNumText=""
         :useTableButton="true"
@@ -26,7 +26,7 @@
           buttonCss="text-button"
           :underline="false"
           :hoverColor="false"
-          @click="addObject"
+          @click="addNameIdList"
           >저장</basic-button
         >
       </div>
@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       // TODO : 임시
-      headerList: [{ column_name: "KOR_NM" }, { column_name: "ENG_NM" }],
+      headerList: [{ column_name: "kor_nm" }, { column_name: "eng_nm" }],
       buttonList: {
         textChange: {
           buttonType: "text",
@@ -70,7 +70,7 @@ export default {
           let selectButtonList = [];
           data.forEach((d) => {
             if (d["use_meta"]) {
-              selectButtonList.push(d["NM_ID"]);
+              selectButtonList.push(d["nm_id"]);
             }
           });
           this.buttonList.textChange.selectButtonList = selectButtonList;
@@ -83,7 +83,7 @@ export default {
   components: { BasicTable, BasicButton },
   methods: {
     ...mapActions("meta/bizMeta", ["getUseMetaNameList", "addMetaMap"]),
-    async addObject() {
+    async addNameIdList() {
       await this.addMetaMap(
         this.buttonList["textChange"]["selectButtonList"]
       ).then(() => {
