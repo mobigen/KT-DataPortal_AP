@@ -4,14 +4,14 @@
 .text-area {
   @include font-size("14");
   @include font-family("sans");
-  padding: $spacing-2xs $spacing-xs;
+  padding: $spacing-xs;
   width: 100%;
   min-width: rem(120px);
   min-height: rem(40px);
   color: $text-01;
   background-color: $ui-02;
   border: 1px solid $ui-04;
-  border-radius: $field-border-radius;
+  border-radius: rem(5px);
   transition: all $duration-fast-01 motion(standard, productive);
   outline: none;
   resize: vertical;
@@ -24,7 +24,6 @@
   &:active,
   &:focus {
     border-color: $secondary;
-    box-shadow: 0 0 rem(4px) rgba($secondary, 0.65);
   }
 
   // chrom에서 자동저장된 input의 배경컬러를 제어
@@ -57,7 +56,7 @@
 
   &::placeholder {
     @include font-weight("light");
-    color: $text-05;
+    color: $text-03;
   }
 }
 
