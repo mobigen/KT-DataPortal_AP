@@ -149,16 +149,14 @@ export default {
       "/portal/api/users",
       {
         target: process.env.API_USER_URL,
-        pathRewrite: { "^/api/": "" },
         changeOrigin: true,
         secure: false
       }
     ],
     [
-      "/route/portal/users",
+      "/route/portal/api/users",
       {
-        target: process.env.API_USER_URL,
-        pathRewrite: { "/route/portal/users": "/portal/api/users" },
+        target: process.env.API_ROUTE_URL,
         changeOrigin: true,
         secure: false
       }
