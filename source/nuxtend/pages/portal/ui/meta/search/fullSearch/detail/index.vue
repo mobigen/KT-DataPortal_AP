@@ -176,13 +176,17 @@
             :colgroup-array="['200px', 'auto', '200px', 'auto']"
             table-title="제공기관"
             :header-has-locale="true"
-            :view-detail="viewDetail"
-            :view-header-list="[
-              'BIZ_DATASET_ID',
-              'access_auth',
-              'category',
-              'region'
-            ]"
+            :view-detail="detail"
+            :view-header-list="['data_prv_desk']"
+            :td-cnt-in-tr="1"
+            :td-colspan="3"
+          />
+          <!-- View Table Component-->
+          <view-table
+            :colgroup-array="['200px', 'auto', '200px', 'auto']"
+            :header-has-locale="true"
+            :view-detail="detail"
+            :view-header-list="['adm_dep', 'admr_nm', 'rqt_dep', 'rqt_nm']"
           />
         </article>
         <!-- // 기본정보 -->
@@ -254,20 +258,19 @@
             :colgroup-array="['200px', 'auto', '200px', 'auto']"
             table-title="상세정보"
             :header-has-locale="true"
-            :view-detail="viewDetail"
+            :view-detail="detail"
             :view-header-list="[
-              'title',
-              'description',
-              'subcategory',
-              'subtitle',
-              'datatype',
-              'orgin_type',
-              'test',
-              'testdang',
-              'text01',
-              'heyehy',
-              'hihihi',
-              'kikiki'
+              'ctgry',
+              'data_shap',
+              'reg_date',
+              'data_updt_cyc',
+              'ltst_amd_dt',
+              'updt_nxt_date',
+              'prv_shap',
+              'law_evl_conf_yn',
+              'file_size',
+              'scrty_evl_conf_yn',
+              'open_scope'
             ]"
           />
 
@@ -275,13 +278,13 @@
           <view-table
             :colgroup-array="['200px', 'auto', '200px', 'auto']"
             :header-has-locale="true"
-            :view-detail="viewDetail"
-            :view-header-list="['korea', 'postman2']"
+            :view-detail="detail"
+            :view-header-list="['src_sys', 'src_url', 'kywrd']"
             :td-cnt-in-tr="1"
             :td-colspan="3"
             :value-type="{
-              korea: 'link',
-              postman2: 'tag'
+              src_url: 'link',
+              kywrd: 'tag'
             }"
             @tagClick="tagClick"
           />
@@ -812,7 +815,7 @@
           <div class="contents__detail-recommend">
             <!-- 추천 데이터 (카드형) 4개 출력 -->
             <search-list
-              :list="contents"
+              :list="[]"
               class="data-box-list--card quarter"
             ></search-list>
           </div>
@@ -939,11 +942,9 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Index",
   layout: "katech/katech",
-  async asyncData({ store }) {
-    await store.dispatch("meta/keyword-search/getContents");
-  },
   computed: {
     ...mapGetters({
+      detail: "meta/keyword-search/detail",
       contents: "meta/keyword-search/contents"
     })
   },
@@ -955,108 +956,11 @@ export default {
         name: "홍길동",
         emptyNum: "20161665",
         purposeOfUse: ""
-      },
-      viewDetail: {
-        body: [
-          {
-            BIZ_DATASET_ID: "국토교통부",
-            access_auth: "데이터융합처",
-            category: "홍길동",
-            region: "02-345-6789",
-            title: "자동차제조 > 스마트팩토리",
-            description: "국토교통부",
-            subcategory: "국토교통부",
-            subtitle: "한국어",
-            datatype: "2021-06-01",
-            orgin_type: "수시 (1회성 데이터)",
-            test: "2021-06-01",
-            testdang: "수시 (1회성 데이터)",
-            text01: "2022-03-22",
-            heyehy: "2023-05-16",
-            hihihi: "기관 자체 또는 다운로드",
-            kikiki: "-",
-            korea: "http://www.openapi.com/123/56789",
-            postman2: "결빙사고,사고다발지역,교통체증,대중교통,자전거"
-          }
-        ],
-        header: [
-          {
-            column_name: "BIZ_DATASET_ID",
-            KOR_NAME: "제공기관 (데이터 제공처)"
-          },
-          {
-            column_name: "access_auth",
-            KOR_NAME: "관리부서"
-          },
-          {
-            column_name: "category",
-            KOR_NAME: "담당자"
-          },
-          {
-            column_name: "region",
-            KOR_NAME: "관리부서 전화번호"
-          },
-          {
-            column_name: "title",
-            KOR_NAME: "카테고리 (분류)"
-          },
-          {
-            column_name: "description",
-            KOR_NAME: "라이선스"
-          },
-          {
-            column_name: "subcategory",
-            KOR_NAME: "데이터 유형"
-          },
-          {
-            column_name: "subtitle",
-            KOR_NAME: "사용언어"
-          },
-          {
-            column_name: "datatype",
-            KOR_NAME: "보유 근거"
-          },
-          {
-            column_name: "orgin_type",
-            KOR_NAME: "수집방법"
-          },
-          {
-            column_name: "test",
-            KOR_NAME: "등록일"
-          },
-          {
-            column_name: "testdang",
-            KOR_NAME: "데이터 갱신주기"
-          },
-          {
-            column_name: "text01",
-            KOR_NAME: "최근 수정일"
-          },
-          {
-            column_name: "heyehy",
-            KOR_NAME: "차기 등록 예정일"
-          },
-          {
-            column_name: "hihihi",
-            KOR_NAME: "제공형태 (유형)"
-          },
-          {
-            column_name: "kikiki",
-            KOR_NAME: "분석권한"
-          },
-          {
-            column_name: "korea",
-            KOR_NAME: "랜딩페이지 URL"
-          },
-          {
-            column_name: "postman2",
-            KOR_NAME: "키워드"
-          }
-        ]
       }
     };
   },
   methods: {
+    ...mapActions("meta/keyword-search", ["getDetail", "getContents"]),
     ...mapActions("meta/bizMeta", ["getBizMetaDetail"]),
     togglePreview: function () {
       this.isPreview = !this.isPreview;
@@ -1078,10 +982,13 @@ export default {
     }
   },
   created() {
-    // const rowId = this.$route.query.postId;
-    const rowId = "830cc064-62a7-46dc-a5b1-04da598c38c0";
+    const rowId = this.$route.query.postId;
+    // const rowId = "830cc064-62a7-46dc-a5b1-04da598c38c0";
     // TODO :
     // this.getBizMetaDetail(rowId);
+
+    this.getDetail(rowId);
+    this.getContents();
   },
   components: {
     BaseRadio,

@@ -1,20 +1,28 @@
 export const state = () => ({
-  _contents: []
+  _contents: {},
+  _detail: {}
 });
 
 export const getters = {
   contents(state) {
     return state._contents;
+  },
+  detail(state) {
+    return state._detail;
   }
 };
 
 export const mutations = {
   setContents(state, data) {
     state._contents = data;
+  },
+  setDetail(state, data) {
+    state._detail = data;
   }
 };
 
 import sampleContents from "./_contents.json";
+import sampleDetail from "./_detail.json";
 
 export const actions = {
   getContents({ commit, rootGetters, dispatch }, params) {
@@ -36,9 +44,14 @@ export const actions = {
       "module/pagination/setTotalCount",
       {
         key: params.paginationKey,
-        totalCount: sampleContents.length
+        totalCount: sampleContents.totalcount
       },
       { root: true }
     );
+  },
+  getDetail({ commit }, rowKey) {
+    console.log(rowKey);
+
+    commit("setDetail", sampleDetail);
   }
 };

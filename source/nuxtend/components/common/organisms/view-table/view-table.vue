@@ -131,7 +131,7 @@ export default {
     bodyData() {
       return this.viewDetail !== undefined &&
         Object.prototype.hasOwnProperty.call(this.viewDetail, "body")
-        ? this.viewDetail.body[0]
+        ? this.viewDetail.body
         : {};
     },
     tableHeader() {
@@ -163,7 +163,7 @@ export default {
         if (headerObj === undefined) {
           console.log(headerEngNm);
         } else {
-          return headerObj.KOR_NAME;
+          return headerObj.kor_name;
         }
       } else {
         return Object.prototype.hasOwnProperty.call(

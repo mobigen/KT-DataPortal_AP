@@ -169,7 +169,7 @@
             <!--   카드형인 경우, data-box-list--card 클래스 추가-->
             <search-list
               :class="isListCard ? 'data-box-list--card' : ''"
-              :list="contents"
+              :list="contents.searchList"
               :myFavoriteDataList="myFavoriteDataList"
               :searchKeyword="searchKeyword"
               :searchKeywordList="searchKeywordList"
@@ -299,7 +299,7 @@ export default {
         { label: "목록형", option: "list", svgIconName: "list_katech" },
         { label: "카드형", option: "card", svgIconName: "list_card_katech" }
       ],
-      myFavoriteDataList: [1, 3, 4]
+      myFavoriteDataList: ["1", "3", "4"]
     };
   },
   methods: {
