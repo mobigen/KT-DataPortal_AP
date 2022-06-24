@@ -7,10 +7,11 @@
           <div class="search-input-field__search">
             <group-search
               :searchKeyword="searchKeyword"
+              :useRecentSearch="useRecentSearch"
               @search="search"
             ></group-search>
           </div>
-          <div class="search-input-field__filter">
+          <div v-show="useInnerSearch" class="search-input-field__filter">
             <base-checkbox
               name="filter-check"
               checkbox-id="'filter-check"
@@ -36,6 +37,16 @@ export default {
     searchKeyword: {
       type: String,
       require: false
+    },
+    useInnerSearch: {
+      type: Boolean,
+      require: false,
+      default: false
+    },
+    useRecentSearch: {
+      type: Boolean,
+      require: false,
+      default: false
     }
   },
   data() {
