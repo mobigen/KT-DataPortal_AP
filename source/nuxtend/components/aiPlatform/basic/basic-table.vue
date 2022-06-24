@@ -59,10 +59,12 @@
                 @click.native.stop="
                   keyClick(data[rowKey], keyActionText[h['column_name']])
                 "
-                >{{ data[h["column_name"]] }}</basic-button
+                >{{ getBodyLocale(h["column_name"], data) }}</basic-button
               >
             </template>
-            <template v-else>{{ data[h["column_name"]] }}</template>
+            <template v-else>{{
+              getBodyLocale(h["column_name"], data)
+            }}</template>
           </td>
           <template v-for="(value, key, index) in tableButtonText">
             <td @click.stop v-if="useTableButton" :key="'header_button_' + key">
@@ -117,6 +119,13 @@ export default {
       require: true
     },
     headerLocale: {
+      type: Object,
+      require: false,
+      default: () => {
+        return {};
+      }
+    },
+    bodyLocale: {
       type: Object,
       require: false,
       default: () => {
@@ -191,6 +200,12 @@ export default {
       )
         ? this.headerLocale[headerEngNm]
         : headerEngNm;
+    },
+    getBodyLocale(key, data) {
+      console.log(key);
+      return Object.prototype.hasOwnProperty.call(this.bodyLocale, key)
+        ? this.bodyLocale[key][data[key]]
+        : data[key];
     }
   },
   created() {}
