@@ -50,11 +50,11 @@ export default {
       rowKey: null,
       changeData: {},
       formInputType: {
-        KOR_NM: "text",
-        ENG_NM: "text",
-        SHOW_ODRG: "number",
-        NM_ID: "text",
-        TYPE: "radio"
+        kor_nm: "text",
+        eng_nm: "text",
+        show_odrg: "number",
+        nm_id: "text",
+        type: "radio"
       }
     };
   },

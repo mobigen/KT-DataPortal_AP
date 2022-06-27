@@ -9,7 +9,9 @@
       :checked="checked"
       :disabled="disabled"
       :value="value"
-      @change="$emit('checkValue', $event.target.value)"
+      @change="
+        $emit('checkValue', { label: labelName, input: $event.target.value })
+      "
     />
     <label class="radio__label" :for="radioId">
       <slot name="label" class="radio__label">Default Label</slot>
@@ -38,8 +40,12 @@ export default {
       default: false
     },
     value: {
-      type: String,
+      type: [String, Number],
       default: false
+    },
+    labelName: {
+      type: String,
+      required: false
     }
   },
   computed: {},

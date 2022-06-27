@@ -5,25 +5,42 @@
       v-for="(data, i) in labelList"
       :key="'input_box_' + i"
     >
-      <basic-label forProperty="">{{
-        getHeaderLocale(data["column_name"])
-      }}</basic-label>
+      <label for="">{{ getHeaderLocale(data["column_name"]) }}</label>
 
-      <basic-input
-        :formInputType="formInputType[data['column_name']]"
-        :radioButtonList="metaTypeList"
-        :labelName="data['column_name']"
-        :inputData="changeDataObject[data['column_name']]"
-        :placeholder="placeholder"
-        @changeData="changeData"
-      ></basic-input>
+      <template v-if="formInputType[data['column_name']] !== 'radio'">
+        <base-input
+          :id="'inp-metaName-0' + (i + 1)"
+          :labelName="data['column_name']"
+          :inputData="changeDataObject[data['column_name']]"
+          :type="formInputType[data['column_name']]"
+          :placeholder="placeholder"
+          @input="changeData"
+        ></base-input>
+      </template>
+
+      <template v-else>
+        <base-radio
+          v-for="(rd, ri) in metaTypeList"
+          :key="'radio_metaName_' + ri"
+          :name="rd['column_name']"
+          :labelName="data['column_name']"
+          :radioId="'radio-metaName-0' + (i + 1)"
+          :checked="ri === 0"
+          :value="rd['value']"
+          @checkValue="changeData"
+        >
+          <template v-slot:label>
+            {{ rd["label"] }}
+          </template>
+        </base-radio>
+      </template>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
-import BasicLabel from "@component/aiPlatform/basic/basic-label.vue";
-import BasicInput from "@component/aiPlatform/basic/basic-input.vue";
+import BaseInput from "@common/atoms/base-input/base-input";
+import BaseRadio from "@common/atoms/base-radio/base-radio";
 
 export default {
   name: "meta-form",
@@ -74,13 +91,14 @@ export default {
       }
     }
   },
-  components: { BasicLabel, BasicInput },
+  components: { BaseInput, BaseRadio },
   watch: {},
   methods: {
     changeData({ label, input }) {
       // Object나 Array의 변동사항을 감지하기 위해 this.$set 사용
       this.$set(this.changeDataObject, label, input);
 
+      console.log(this.changeDataObject);
       this.$emit("changeData", this.changeDataObject);
     },
     getHeaderLocale(headerEngNm) {
@@ -100,11 +118,14 @@ export default {
 .input-box {
   display: flex;
   margin: 10px 0;
-  > div:first-child {
+  label {
     width: 20%;
   }
-  > div:last-child {
+  input {
     width: 40%;
+  }
+  .radio {
+    padding-right: 30px;
   }
 }
 </style>

@@ -133,11 +133,11 @@ export const actions = {
         .get(this.$config.API_META_PREFIX + "/getMetaNameDetail")
         .then((d) => {
           d.body = {
-            KOR_NM: "",
-            ENG_NM: "",
-            SHOW_ODRG: 0,
-            NM_ID: "",
-            TYPE: 0
+            kor_nm: "",
+            eng_nm: "",
+            show_odrg: 0,
+            nm_id: "",
+            type: 0
           };
           commit("setMetaNameDetail", d);
         });

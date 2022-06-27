@@ -1,0 +1,113 @@
+{
+  "body": {
+    "biz_dataset_id": "1",
+    "data_nm": "3기 신도시 사전청약 발표에도 2030 서울아파트 매수세 최고 결빙사고 다발지역",
+    "data_desc": "정부가 지난달 <em class=\"color-emphasis\">3기 신도시 </em> 사전청약\n        일정을 발표했지만 20대 이하와 30대의 서울아파트 매수세가 역대 최고치를\n        경신한 것으로 나타났다. 21일 한국감정원 아파트 매입자 연령대별 현황에\n        따르면 지난달 서울 아파트의 30대 거래량은 1천790건으로, 전체\n        거래량(4천795건)의 37.3%에 달했다. 이는 작년 1월 연령대별 통계 조사가\n        시작된 이래 역대 최고 수치다. 정부가 지난달 3기 신도시 사전청약 일정을\n        발표했지만 20대 이하와 30대의 서울아파트 매수세가 역대 최고치를 경신한\n        것으로 나타났다. 21일 한국감정원 아파트 매입자 연령대별 현황에 따르면\n        지난달 서울 아파트의 30대 거래량은 1천790건으로, 전체 거래량(4천795건)의\n        37.3%에 달했다. 이는 작년 1월 연령대별 통계 조사가 시작된 이래 역대 최고\n수치다.",
+    "data_prv_desk": "그룹사 자체 생성 데이터",
+    "adm_dep": "데이터융합처",
+    "admr_nm": "홍길동",
+    "rqt_dep": "",
+    "rqt_nm": "",
+    "ctgry": "BM,모바일",
+    "data_shap": "파일",
+    "reg_date": "2021.06.01",
+    "data_updt_cyc": "분기",
+    "ltst_amd_dt": "2022.03.22",
+    "updt_nxt_date": "2023.09.22",
+    "prv_shap": "액셀 다운로드",
+    "law_evl_conf_yn": "",
+    "file_size": "1.0 GB",
+    "scrty_evl_conf_yn": "",
+    "open_scope": "",
+    "src_sys": "",
+    "src_url": "https://www.data.go.kr/data/15044701/fileData.do",
+    "kywrd": "음식,카드,소비,트렌드"
+  },
+  "header": [
+    {
+      "column_name": "data_nm",
+      "kor_name": "데이터명"
+    },
+    {
+      "column_name": "data_desc",
+      "kor_name": "데이터 설명"
+    },
+    {
+      "column_name": "data_prv_desk",
+      "kor_name": "데이터 제공처"
+    },
+    {
+      "column_name": "adm_dep",
+      "kor_name": "관리부서"
+    },
+    {
+      "column_name": "admr_nm",
+      "kor_name": "담당자 (관리자)"
+    },
+    {
+      "column_name": "rqt_dep",
+      "kor_name": "참조부서"
+    },
+    {
+      "column_name": "rqt_nm",
+      "kor_name": "참조자 (요청자)"
+    },
+
+    {
+      "column_name": "ctgry",
+      "kor_name": "카테고리 (분류)"
+    },
+    {
+      "column_name": "data_shap",
+      "kor_name": "데이터 형태"
+    },
+    {
+      "column_name": "reg_date",
+      "kor_name": "등록일"
+    },
+    {
+      "column_name": "data_updt_cyc",
+      "kor_name": "데이터 갱신주기"
+    },
+    {
+      "column_name": "ltst_amd_dt",
+      "kor_name": "최신수정일"
+    },
+    {
+      "column_name": "updt_nxt_date",
+      "kor_name": "갱신예정일"
+    },
+    {
+      "column_name": "prv_shap",
+      "kor_name": "제공방식"
+    },
+    {
+      "column_name": "law_evl_conf_yn",
+      "kor_name": "법률검토 필요여부"
+    },
+    {
+      "column_name": "file_size",
+      "kor_name": "파일용량"
+    },
+    {
+      "column_name": "scrty_evl_conf_yn",
+      "kor_name": "보안성검토 필요여부"
+    },
+    {
+      "column_name": "open_scope",
+      "kor_name": "공개범위"
+    },
+    {
+      "column_name": "src_sys",
+      "kor_name": "원천시스템"
+    },
+    {
+      "column_name": "src_url",
+      "kor_name": "원천 URL"
+    },
+    {
+      "column_name": "kywrd",
+      "kor_name": "키워드"
+    }
+  ]
+}

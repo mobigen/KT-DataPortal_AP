@@ -39,7 +39,7 @@
           v-slot:resultSuccessTrueText
         >
           <strong>'{{ searchKeyword }}'</strong>에 대한 검색결과 총
-          <strong>{{ numOfSearchResult }}</strong> 건이 검색되었습니다.
+          <strong>{{ contents.totalcount }}</strong> 건이 검색되었습니다.
         </template>
 
         <!-- TODO: '교통체증' & '대중교통' & '자전거' 와 같이 item 사이에 구분자 css 처리 필요 / 임시로 일단 처리해둠 -->
@@ -48,11 +48,13 @@
             v-for="(item, index) in searchKeywordList"
             :key="'searchKeyword_' + index"
             >'{{ item }}'
-            <template v-if="searchKeywordList.length - 1 !== index"
-              ><sapn style="color: black">&</sapn></template
+            <span
+              v-if="searchKeywordList.length - 1 !== index"
+              style="color: black"
+              >&</span
             >
           </strong>
-          검색 결과, 총 <strong>{{ numOfSearchResult }}</strong> 건 입니다.
+          검색 결과, 총 <strong>{{ contents.totalcount }}</strong> 건 입니다.
         </template>
       </search-result-box>
 
@@ -144,7 +146,9 @@
         <!-- // 탭 -->
         <div class="contents__list">
           <div class="contents__list-head">
-            <h4>전체<span>164</span></h4>
+            <h4>
+              전체<span>{{ contents.totalcount }}</span>
+            </h4>
             <div class="list-head__options">
               <div class="list-head__options-sort">
                 <basic-option
@@ -171,7 +175,7 @@
             <!--   카드형인 경우, data-box-list--card 클래스 추가-->
             <search-list
               :class="isListCard ? 'data-box-list--card' : ''"
-              :list="contents"
+              :list="contents.searchList"
               :myFavoriteDataList="myFavoriteDataList"
               :searchKeyword="searchKeyword"
               :searchKeywordList="searchKeywordList"
@@ -214,11 +218,12 @@ import { mapActions, mapGetters } from "vuex";
 import CheckboxFilterList from "@component/common/molecules/checkbox-filter-list/checkbox-filter-list.vue";
 
 export default {
-  name: "Index",
+  name: "fullSearch",
   computed: {
     ...mapGetters({
       contents: "meta/keyword-search/contents",
-      CONSTANTS: "defaults/constants/CONSTANTS"
+      CONSTANTS: "defaults/constants/CONSTANTS",
+      keyword: "meta/keyword-search/searchKeyword"
     }),
     ...mapGetters("meta/search/search", [
       "searchFilterList",
@@ -275,7 +280,6 @@ export default {
       searchKeyword: "",
       searchKeywordList: [],
       rescanFilterChecked: false,
-      numOfSearchResult: null,
       showSearchResultBox: false,
       searchResultSuccess: false,
       tagList: [
@@ -301,11 +305,11 @@ export default {
         { label: "목록형", option: "list", svgIconName: "list_katech" },
         { label: "카드형", option: "card", svgIconName: "list_card_katech" }
       ],
-      myFavoriteDataList: [1, 3, 4]
+      myFavoriteDataList: ["1", "3", "4"]
     };
   },
   methods: {
-    ...mapActions("meta/keyword-search", ["getContents"]),
+    ...mapActions("meta/keyword-search", ["getContents", "setSearchKeyword"]),
     ...mapActions("meta/search/search", [
       "getSearchFilterList",
       "changeSearchFilterList"
@@ -317,15 +321,18 @@ export default {
       this.searchKeyword = inputData.trim();
       this.search();
     },
+    searchResultBox(show, success) {
+      this.showSearchResultBox = show;
+      this.searchResultSuccess = success;
+    },
     search() {
       if (this.searchKeyword.trim() === "") {
-        this.showSearchResultBox = false;
-        this.searchResultSuccess = false;
+        this.searchResultBox(false, false);
+        alert("값을 입력해주세요.");
         return;
+      } else {
+        this.searchResultBox(true, true);
       }
-
-      this.showSearchResultBox = true;
-      this.searchResultSuccess = true;
 
       if (this.rescanFilterChecked) {
         if (this.searchKeywordList.length >= 3) {
@@ -336,14 +343,13 @@ export default {
           alert("동일한 검색어 입력으로 추가 검색이 불가능 합니다.");
           return;
         }
-        this.searchKeywordList.push(this.searchKeyword);
-
-        // searchKeywordList로 검색
-        this.numOfSearchResult = 51;
       } else {
-        // searchKeyword로 검색
-        this.numOfSearchResult = 135;
+        this.searchKeywordList = [];
       }
+
+      this.searchKeywordList.push(this.searchKeyword);
+
+      this.getGridData();
     },
     recommendTagClick(tagObj) {
       this.searchKeyword = tagObj.itemName;
@@ -354,7 +360,8 @@ export default {
     },
     getGridData() {
       this.getContents({
-        paginationKey: this.paginationKey
+        paginationKey: this.paginationKey,
+        searchKeywordList: this.searchKeywordList
       });
     },
     sortOptionChange(option) {
@@ -384,17 +391,25 @@ export default {
     },
     rescanFilterCheck({ bool }) {
       this.rescanFilterChecked = bool;
-      if (bool && this.searchKeyword !== "") {
-        this.searchKeywordList.push(this.searchKeyword);
-      } else {
+      if (bool === false && this.searchKeyword === "") {
         this.searchKeywordList = [];
         this.searchKeyword = "";
-        this.search();
+        this.searchResultBox(false, false);
+        this.getGridData();
       }
+    },
+    searchDetailKeyword() {
+      this.search();
+      this.setSearchKeyword("");
     }
   },
   mounted() {
-    this.getGridData();
+    if (this.keyword === "") {
+      this.getGridData();
+    } else {
+      this.searchKeyword = this.keyword;
+      this.searchDetailKeyword();
+    }
   },
   created() {
     this.getSearchFilterList();
