@@ -52,7 +52,6 @@
                 <template v-else>
                   {{ bodyData[tableHeader[i + (tdCnt - 1)]] }}
                 </template>
-                <!--                {{ bodyData[tableHeader[i + (tdCnt - 1)]] }}-->
               </td>
             </template>
           </tr>
@@ -131,7 +130,7 @@ export default {
     bodyData() {
       return this.viewDetail !== undefined &&
         Object.prototype.hasOwnProperty.call(this.viewDetail, "body")
-        ? this.viewDetail.body
+        ? this.viewDetail.body[0]
         : {};
     },
     tableHeader() {
