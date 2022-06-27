@@ -12,7 +12,7 @@
     </div>
     <div class="content-top">
       <div class="contents-top__search">
-        <search-input-field></search-input-field>
+        <search-input-field :use-recent-search="true" :use-inner-search="true"></search-input-field>
         <div class="contents-top__recommend">
           <h4>추천검색어</h4>
           <div class="tags">

@@ -273,6 +273,12 @@
                   ><span>마이페이지</span></NuxtLink
                 >
                 <ul class="lnb">
+                  <!-- TODO : 데모용 메뉴 -->
+                  <li class="lnb__item">
+                    <NuxtLink to="/porta/ui/users/requested" class="lnb__link"
+                      >요청데이터</NuxtLink
+                    >
+                  </li>
                   <li class="lnb__item">
                     <NuxtLink to="/katech/search-map" class="lnb__link"
                       >마이디스크</NuxtLink

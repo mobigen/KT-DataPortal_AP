@@ -213,19 +213,10 @@ export const actions = {
     });
   },
   async addMetaMap({}, list) {
-    let dataList = [];
-
     list.sort();
-    list.forEach((data, i) => {
-      let obj = {};
-      obj.ITEM_ID = String(i + 1);
-      obj.NM_ID = data;
-      dataList.push(obj);
-    });
 
-    await this.$axios.post(
-      this.$config.API_META_PREFIX + "/insertMetaMap",
-      dataList
-    );
+    await this.$axios.post(this.$config.API_META_PREFIX + "/insertMetaMap", {
+      nm_id_list: list
+    });
   }
 };

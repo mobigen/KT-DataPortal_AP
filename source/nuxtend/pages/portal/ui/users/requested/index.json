@@ -1,0 +1,31 @@
+{
+  "ko": {
+    "header": {
+      "id": "id",
+      "title": "제목",
+      "ctgry": "분류",
+      "size": "용량",
+      "startDt": "활용시작일",
+      "expiredDt": "만료일",
+      "legalReview": "법률검토",
+      "status": "처리상태",
+      "cnt": "활용횟수"
+    },
+
+    "body": {
+      "ctgry": {
+        "M": "Mobile",
+        "T": "TV"
+      },
+      "status": {
+        "P": "처리중",
+        "U": "활용중",
+        "E": "만료"
+      },
+      "legalReview": {
+        "Y": "Y",
+        "N": ""
+      }
+    }
+  }
+}

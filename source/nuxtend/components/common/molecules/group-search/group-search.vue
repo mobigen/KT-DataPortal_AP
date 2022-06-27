@@ -19,7 +19,11 @@
       >검색</base-button
     >
     <!--    콤보박스 오픈 시 combo-box--open 추가-->
-    <div class="combo-box" :class="isComboBoxShow ? 'combo-box--open' : ''">
+    <div
+      v-if="useRecentSearch"
+      class="combo-box"
+      :class="isComboBoxShow ? 'combo-box--open' : ''"
+    >
       <div>
         <div class="combo-box__title">
           <p>최근 검색어</p>
@@ -103,6 +107,11 @@ export default {
     searchKeyword: {
       type: String,
       require: false
+    },
+    useRecentSearch: {
+      type: Boolean,
+      require: false,
+      default: false
     }
   },
   components: {

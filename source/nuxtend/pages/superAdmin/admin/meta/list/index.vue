@@ -18,7 +18,7 @@
         :headerList="bizMetaList.header"
         :dataList="bizMetaList.body"
         :headerLocale="$t('header')"
-        hideColumns="['BIZ_DATASET_ID']"
+        :hideColumns="['BIZ_DATASET_ID']"
         rowKey="BIZ_DATASET_ID"
         :useSerialNum="false"
         serialNumText=""

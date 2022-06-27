@@ -1,0 +1,55 @@
+{
+  "body": [
+    {
+      "id": "a192939",
+      "title": "CU2(SGI)_고객서비스사용일일내역 데이터 신청합니다.",
+      "ctgry": "M",
+      "size": "3,00KB",
+      "startDt": "2022-05-30",
+      "expiredDt": "2022-05-31",
+      "legalReview": "Y",
+      "status": "U",
+      "cnt": "1"
+    },
+    {
+      "id": "b192939",
+      "title": "CU2(SGI)_주거래은행추첨내역 데이터 신청합니다.",
+      "ctgry": "T",
+      "size": "2,00KB",
+      "startDt": "2022-04-31",
+      "expiredDt": "2022-05-31",
+      "legalReview": "N",
+      "status": "E",
+      "cnt": "3"
+    }
+  ],
+  "header": [
+    {
+      "column_name": "id"
+    },
+    {
+      "column_name": "title"
+    },
+    {
+      "column_name": "ctgry"
+    },
+    {
+      "column_name": "size"
+    },
+    {
+      "column_name": "startDt"
+    },
+    {
+      "column_name": "expiredDt"
+    },
+    {
+      "column_name": "legalReview"
+    },
+    {
+      "column_name": "status"
+    },
+    {
+      "column_name": "cnt"
+    }
+  ]
+}
