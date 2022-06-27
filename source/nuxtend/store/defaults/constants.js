@@ -100,7 +100,9 @@ export const state = () => ({
       METH: {
         GET: "GET",
         POST: "POST",
-        PUT: "PUT"
+        PUT: "PUT",
+        PATCH: "PATCH",
+        DELETE: "DELETE"
       },
       MODE: {
         REMOTE_CALL: "REMOTE CALL",

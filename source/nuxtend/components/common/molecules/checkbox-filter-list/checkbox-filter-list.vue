@@ -7,7 +7,7 @@
     <h4 class="aside__title">{{ filterTitle }}</h4>
     <base-button
       v-if="useExpandButton"
-      class="aside__button-down "
+      class="aside__button-down"
       :class="isExpand ? 'aside__button-up' : ''"
       @click="toggleExpand"
     ></base-button>
@@ -17,6 +17,7 @@
           class="checkbox--aside"
           :name="filterId + '_' + obj.itemId"
           :checkbox-id="filterId + obj.itemId"
+          :checked="getCheckboxChecked(obj.itemId)"
           @changeData="changeCheckboxData"
         >
           <template v-slot:label>{{ obj.itemName }}</template>
@@ -29,8 +30,6 @@
 <script type="text/javascript">
 import BaseButton from "@common/atoms/base-button/base-button";
 import BaseCheckbox from "@common/atoms/base-checkbox/base-checkbox";
-
-import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "checkbox-filter-list",
@@ -102,6 +101,12 @@ export default {
     },
     toggleExpand() {
       this.isExpand = !this.isExpand;
+    },
+    getCheckboxChecked(itemId) {
+      const selectedIndex = this.selectCheckboxList.findIndex((el) => {
+        return el.itemId === itemId;
+      });
+      return selectedIndex > -1;
     }
   },
   created() {}

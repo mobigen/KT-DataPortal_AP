@@ -52,7 +52,6 @@
                 <template v-else>
                   {{ bodyData[tableHeader[i + (tdCnt - 1)]] }}
                 </template>
-                <!--                {{ bodyData[tableHeader[i + (tdCnt - 1)]] }}-->
               </td>
             </template>
           </tr>
@@ -129,9 +128,14 @@ export default {
   },
   computed: {
     bodyData() {
+      /**
+       * TODO : view table에 사용할 body 데이터는 object를 권장하나, 개발초기에 array로 처리했던 부분이 있어서 부득이 하게 분기처리.
+       */
       return this.viewDetail !== undefined &&
         Object.prototype.hasOwnProperty.call(this.viewDetail, "body")
-        ? this.viewDetail.body
+        ? this.viewDetail.body.length > 0
+          ? this.viewDetail.body[0]
+          : this.viewDetail.body
         : {};
     },
     tableHeader() {

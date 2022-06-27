@@ -76,11 +76,13 @@
         <basic-label forProperty="">{{
           $t("header." + CONSTANTS.API_ROUTER.PARAM.METH)
         }}</basic-label>
-        <radio-button
-          :radioButtonList="methRadioOptions"
-          :labelName="CONSTANTS.API_ROUTER.PARAM.METH"
-          :defaultValue="getMethDefaultValue()"
-          @changeValue="changeData"
+        <checkbox-filter-list
+          :use-expand-button="false"
+          filter-id="METH"
+          filter-title=""
+          :filter-list="methCheckboxOption"
+          :select-checkbox-list="methSelectList"
+          @changeCheckboxList="changeCheckboxList"
         />
       </div>
     </template>
@@ -192,6 +194,7 @@ import BasicInput from "@/components/aiPlatform/basic/basic-input.vue";
 import BaseSelect from "@/components/common/atoms/base-select/base-select";
 import RadioButton from "@/components/aiPlatform/basic/radio-button.vue";
 import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
+import CheckboxFilterList from "@component/common/molecules/checkbox-filter-list/checkbox-filter-list.vue";
 import { mapGetters } from "vuex";
 import { successAlert, errorAlert } from "@functional/alert/alert-default";
 
@@ -222,7 +225,8 @@ export default {
         }
       },
       showAddParam: false,
-      dataTypeList: []
+      dataTypeList: [],
+      methSelectList: []
     };
   },
   computed: {
@@ -230,19 +234,27 @@ export default {
     hideColumns() {
       return [this.CONSTANTS.API_ROUTER.PARAM.API_NM];
     },
-    methRadioOptions() {
+    methCheckboxOption() {
       return [
         {
-          value: this.CONSTANTS.API_ROUTER.METH.GET,
-          label: this.CONSTANTS.API_ROUTER.METH.GET
+          itemId: this.CONSTANTS.API_ROUTER.METH.GET,
+          itemName: this.CONSTANTS.API_ROUTER.METH.GET
         },
         {
-          value: this.CONSTANTS.API_ROUTER.METH.POST,
-          label: this.CONSTANTS.API_ROUTER.METH.POST
+          itemId: this.CONSTANTS.API_ROUTER.METH.POST,
+          itemName: this.CONSTANTS.API_ROUTER.METH.POST
         },
         {
-          value: this.CONSTANTS.API_ROUTER.METH.PUT,
-          label: this.CONSTANTS.API_ROUTER.METH.PUT
+          itemId: this.CONSTANTS.API_ROUTER.METH.PUT,
+          itemName: this.CONSTANTS.API_ROUTER.METH.PUT
+        },
+        {
+          itemId: this.CONSTANTS.API_ROUTER.METH.PATCH,
+          itemName: this.CONSTANTS.API_ROUTER.METH.PATCH
+        },
+        {
+          itemId: this.CONSTANTS.API_ROUTER.METH.DELETE,
+          itemName: this.CONSTANTS.API_ROUTER.METH.DELETE
         }
       ];
     }
@@ -253,7 +265,8 @@ export default {
     BasicInput,
     BaseSelect,
     RadioButton,
-    BasicTable
+    BasicTable,
+    CheckboxFilterList
   },
   watch: {},
   methods: {
@@ -333,6 +346,9 @@ export default {
       } else {
         params[this.CONSTANTS.API_ROUTER.PARAM.PARAMS] = [];
         params[this.CONSTANTS.API_ROUTER.PARAM.CMD] = "";
+
+        // meth는 list로 되어있기 때문에 여기서 값을 string으로 변환하여 넣어준다.
+        params[this.CONSTANTS.API_ROUTER.PARAM.METH] = this.getMethArr();
       }
 
       // NO parameter는 backend에서 처리되지 않기 때문에 삭제한다.
@@ -419,13 +435,23 @@ export default {
             this.apiName
         )
         .then((d) => {
-          me.apiObj = JSON.parse(JSON.stringify(d.data["api_info"].body[0]));
-          me.apiParams.body = JSON.parse(
+          this.apiObj = JSON.parse(JSON.stringify(d.data["api_info"].body[0]));
+          // set meth checkbox list
+          // this.methSelectList = obj[this.CONSTANTS.API_ROUTER.PARAM.METH]
+          this.methSelectList = this.apiObj["meth"].split(",").map((el) => {
+            return {
+              itemId: this.CONSTANTS.API_ROUTER.METH[el.toUpperCase()],
+              itemName: this.CONSTANTS.API_ROUTER.METH[el.toUpperCase()]
+            };
+          });
+          this.methSelectList = JSON.parse(JSON.stringify(this.methSelectList));
+
+          this.apiParams.body = JSON.parse(
             JSON.stringify(
               d.data[this.CONSTANTS.API_ROUTER.PARAM.API_PARAMS].body
             )
           );
-          me.setOpenParam();
+          this.setOpenParam();
         });
     },
     getModeDefaultValue() {
@@ -436,10 +462,9 @@ export default {
     getMethDefaultValue() {
       return this.apiObj[this.CONSTANTS.API_ROUTER.PARAM.METH]
         ? this.apiObj[this.CONSTANTS.API_ROUTER.PARAM.METH]
-        : this.methRadioOptions[0].value;
+        : this.methCheckboxOption[0].value;
     },
     tableButtonClick(rowKey) {
-      console.log(rowKey)
       // param remove
       const idx = this.apiParams.body.findIndex((el) => {
         return el[this.CONSTANTS.API_ROUTER.PARAM.NM] === rowKey;
@@ -515,6 +540,22 @@ export default {
           text: "Number"
         }
       ];
+    },
+    changeCheckboxList({ changeList }) {
+      this.methSelectList = changeList;
+    },
+    getMethArr() {
+      const methSelectItemIds = this.methSelectList.map((el) => {
+        return el.itemId;
+      });
+
+      let newMethSelected = [];
+      this.methCheckboxOption.forEach((el) => {
+        if (methSelectItemIds.includes(el.itemId)) {
+          newMethSelected.push(el.itemId);
+        }
+      });
+      return newMethSelected.join(",");
     }
   },
   async created() {
