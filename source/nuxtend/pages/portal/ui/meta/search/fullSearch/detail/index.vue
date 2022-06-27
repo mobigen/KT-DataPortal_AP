@@ -944,8 +944,7 @@ export default {
   layout: "katech/katech",
   computed: {
     ...mapGetters({
-      detail: "meta/keyword-search/detail",
-      contents: "meta/keyword-search/contents"
+      detail: "meta/keyword-search/detail"
     })
   },
   data() {
@@ -960,7 +959,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("meta/keyword-search", ["getDetail", "getContents"]),
+    ...mapActions("meta/keyword-search", ["getDetail", "setSearchKeyword"]),
     ...mapActions("meta/bizMeta", ["getBizMetaDetail"]),
     togglePreview: function () {
       this.isPreview = !this.isPreview;
@@ -969,7 +968,10 @@ export default {
       this.$modal.show(name);
     },
     tagClick(tagClickObj) {
-      console.log(tagClickObj);
+      this.setSearchKeyword(tagClickObj.itemName);
+      this.$router.push({
+        path: "/portal/ui/meta/search/fullSearch"
+      });
     },
     confirmBtnClick(name) {
       alert(name);
@@ -988,7 +990,6 @@ export default {
     // this.getBizMetaDetail(rowId);
 
     this.getDetail(rowId);
-    this.getContents();
   },
   components: {
     BaseRadio,
