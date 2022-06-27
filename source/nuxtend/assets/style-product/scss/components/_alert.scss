@@ -13,7 +13,7 @@
 }
 
 .alert__foot {
-  @include stable-padding($spacing-xs, $spacing-sm);
+  padding: 0 0 rem(30px) 0;
   display: flex;
   background-color: $ui-02;
   border-radius: 0 0 rem(10px) rem(10px);
@@ -35,9 +35,15 @@
 
 .alert__body {
   display: flex;
-  padding: $layout-sm $layout-md;
+  padding: rem(50px) $layout-md rem(30px) $layout-md;
   background-color: $ui-02;
   border-radius: rem(10px) rem(10px) 0 0;
+}
+
+.alert__close-button {
+  position: absolute;
+  right: 0;
+  top: rem(10px);
 }
 
 .alert__icon {
@@ -56,14 +62,14 @@
 .alert__title {
   @include font-weight("medium");
   @include font-size("16");
-  color: $text-02;
+  color: $text-01;
   text-align: center;
 }
 
 .alert__text {
-  @include font-size("14");
+  @include font-size("16");
   @include line-height("body");
-  color: $text-03;
+  color: $text-01;
   word-break: keep-all;
   word-wrap: break-word;
   white-space: normal;

@@ -87,42 +87,43 @@ main {
 
 .subject_sm {
   display: flex;
-  align-items: center;
+  align-items: baseline;
+  margin-top: $spacing-lg;
 
   .subject__title {
-    padding:rem(30px) 0 rem(20px) 0; 
+    padding: 0; 
     @include font-size("32");
     @include font-weight("regular");
-    line-height: rem(32px);
     color: $text-01;
     flex-shrink: 0;     
   }
   
   .subject__desc {
-    padding:rem(50px) 0 0 rem(30px);
+    padding: 0 0 0 $spacing-sm;
     height: rem(24px) ;
     @include font-size("14");
-    line-height: rem(24px); 
     color: $text-03;
     flex-grow: 1;
   }
 
   .subject__right {
-    flex-shrink: 0; 
+    flex-shrink: 0;
+    color: $text-02;
   }
 
 }
 
 .blit_essential {
   position: relative;
-  padding: 0 rem(10px);
-  font-size: 0;
+  padding: 0 rem(3px);
+  @include font-size("12");
+  color: transparent;
 
   &::before {
     content: " ";
     position: absolute;
-    top: rem(10px);
-    left: rem(10px);
+    top: rem(1px);
+    left: rem(3px);
     width: rem(6px);
     height: rem(6px);
     border-radius: 50%;
@@ -225,6 +226,10 @@ main {
   .tags {
     display: inline-block; 
     flex-grow:0;
+
+    a + a {
+      margin-left: rem(4px);
+    }
   }
 
 }
@@ -353,52 +358,205 @@ main {
     flex-shrink: 0;
     width: rem(300px);
     display: flex;
+    * + * {
+      margin-left: rem(10px);
+    }
   }
   .button__center {
     flex-grow: 1;
     display: flex;
     justify-content: center;
+    * {
+      margin: 0 rem(5px);
+    }
   }
   .button__right {
     flex-shrink: 0;
     width: rem(300px);
     display: flex;
     justify-content: flex-end;
+    * + * {
+      margin-left: rem(10px);
+    }
   }
 }
 
 .button-declaration {
   position: relative;
-  padding: 0 rem(30px);
-
-  .svg-icon {
-    width: rem(24px);
-    height: rem(24px);
-    fill: $text-02;
-    position: absolute;
-    top: rem(14px);
-    left: rem(28px);
-  }
-  p {
-    margin-left: $spacing-xl;  
-  }
-
-  &:active {
-    .svg-icon {
-      fill: $secondary;
-    }
-  }
+  padding: 0 $spacing-xl;
 
   small {
     position: absolute;
     right: 0;
-    top: rem(42px);
+    top: 100%;
     color: $text-03;
     @include font-size("14");
     @include font-weight("regular");
   }
 }
 
+// .v--modal 스타일 변경
+.v--modal {
+  border-radius: rem(10px) !important;
+}
+
+// 오류신고 Dialog
+.modal__body-head {
+  
+  h3 {
+    @include font-weight("regular");
+    @include font-size("24");
+    color: $text-01;
+    height: rem(30px);
+    line-height: rem(30px);
+
+    .svg-icon {
+      fill: $text-01;
+      width: rem(25px);
+      height: rem(25px);
+      margin: rem(-10px) rem(10px) 0 0;
+    }
+  }
+  p {
+    @include font-weight("regular");
+    @include font-size("14");
+    color: $text-03;
+    height: rem(20px);
+    line-height: rem(20px);
+    margin: rem(10px) 0 rem(20px) 0;
+  }
+}
+
+.modal__body-top {
+  display: flex;
+  align-items: center;
+  margin: rem(32px) 0 rem(20px) 0;
+
+  .body-top__left {
+    flex-shrink: 0;
+    margin-right: $spacing-xs;
+
+    .select {
+      width: rem(100px);
+    }
+  }
+
+  .body-top__center {
+    flex-grow: 1;
+  }
+
+  .body-top__right {
+    flex-shrink: 0;
+    margin-left: $spacing-xs;
+  }
+}
+
+.modal__body-content {
+  border-top: 2px solid $text-01;
+}
+
+.modal__body-item {
+  display: flex;
+  align-content: flex-start;
+  padding: $spacing-sm 0;
+
+  .item__title {
+    flex-shrink: 0;
+    @include font-weight("regular");
+    @include font-size("14");
+    color: $text-02;
+    line-height: rem(18px);
+    width: rem(110px);  
+    word-break: break-all;  
+  }
+
+  .item__detail {
+    flex-grow: 1;
+    @include font-weight("medium");
+    @include font-size("14");
+    color: $text-01;
+    line-height: rem(18px);
+    word-break: break-all;
+  }
+}
+
+// 텍스트 길이(byte) 표시
+.text-area__byte {
+  width: 100%;
+  height: rem(18px);
+  line-height: rem(18px);
+  text-align: right;
+  @include font-size("12");
+  @include font-weight("regular");
+  color: $text-03;
+  
+  strong {
+    @include font-size("12");
+    @include font-weight("bold");
+    color: $secondary;
+  }
+}
+
+.modal__body-item.bottom {
+  padding-bottom: 0;
+}
+
+.modal__declaration {
+  margin-top: $spacing-sm;
+}
+
+//제공기관 모달
+.modal__provider {
+  margin: 0;
+}
+.modal__provider-title {
+  display: flex;
+  border-bottom: 1px solid $text-01;
+  div {
+    text-align: center !important;
+    height: rem(50px);
+    line-height: rem(50px);
+    position: relative;
+  }
+  div + div {
+    &::before {
+      content: "";
+      width: 1px;
+      height: rem(12px);
+      background: $ui-05;
+      position: absolute;
+      top: rem(10px);
+      left: 0;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+  }
+}
+.modal__provider-list {
+  display: flex;
+  border-bottom: 1px solid $ui-04;
+  align-items: center;
+  height: rem(50px);
+
+  &:hover {
+    background: $ui-05;
+  }
+}
+.modal__provider-name {
+  flex-grow: 1;
+  padding-left: rem(8px);
+  text-align: left;
+}
+.modal__provider-badge {
+  flex-shrink: 0;
+  width: rem(80px);
+  display: flex;
+  justify-content: center;
+}
+
+.modal__pagination {
+  margin-top: rem(30px);
+}
 /*
 @include template-respond-to('breakpoint-lg') {
   .contents ,

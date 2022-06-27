@@ -7,7 +7,6 @@
 - **프로젝트 스타일:** `/style-product`
   - 프로젝트에서 공통으로 사용하는 스타일을 작성한다.
 
-
 ## 📂 폴더 구조
 
 ```
@@ -34,13 +33,26 @@ assets/
 
 ## 🐙 서브모듈 사용하기
 
+### 서브모듈 등록
+git submodule add -b dev https://github.com/mobigen/IRIS-Design-Core.git source/Katech/frontend/assets/style-core
+git submodule add -f dev https://github.com/mobigen/IRIS-Design-Core.git source/Katech/frontend/assets/style-core
+
+### 서브모듈 삭제
+git rm --cached source/Katech/frontend/assets/style-core
+git submodule deinit -f source/Katech/frontend/assets/style-core
+linux : rm -rf .git/modules/source/Katech
+window : rd /s .git\modules\source\Katech
+
+
 ### 서브모듈 초기 설정
 
 처음 저장소를 클론하면 서브모듈 디렉토리가 비어있다. 아래 명령어로 서브모듈 내용을 가져온다.
+
 ```bash
 git submodule init
 git submodule udpate
 ```
+
 ## 서브모듈 업데이트 하기
 
 작업 중 서브모듈의 변경사항을 업데이트 해오는 명령어.
@@ -53,12 +65,12 @@ From https://github.com/mobigen/IRIS-Design-Core
 Submodule path 'source/nuxtend/assets/style-core': checked out '4f903acf48e0a5502830eeda15bdd15f6a48c60e'
 ```
 
-> **참조:** 
-> 
+> **참조:**
+>
 > 프로젝트에 등록된 서브모듈이 IDC 하나만 있는 경우 간편하게 위 명령어로 업데이트 할 수 있지만, 여러 서브모듈이 등록된 경우!
-> 
+>
 > 루트 디렉토리 (`IRIS-Project-Name/`)에서 아래와 같이 작성하면 style-core(IDC) 서브모듈만 콕 찝어 업데이트 할 수 있다.
-> 
+>
 > ```bash
 > git submodule update --remote source/nuxtend/assets/style-core
 > ```

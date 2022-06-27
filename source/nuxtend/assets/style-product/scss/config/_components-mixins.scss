@@ -111,6 +111,7 @@
 
   &__text {
     @include text-overflow;
+    @include font-size("14");
     @include line-height("heading");
     vertical-align: middle;
     color: $text-01;
