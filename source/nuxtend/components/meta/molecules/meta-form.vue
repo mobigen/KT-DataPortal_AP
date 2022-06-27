@@ -5,7 +5,7 @@
       v-for="(data, i) in labelList"
       :key="'input_box_' + i"
     >
-      <label for="">{{ data["column_name"] }}</label>
+      <label for="">{{ getHeaderLocale(data["column_name"]) }}</label>
 
       <template v-if="formInputType[data['column_name']] !== 'radio'">
         <base-input
