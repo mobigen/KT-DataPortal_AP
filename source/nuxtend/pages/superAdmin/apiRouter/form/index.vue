@@ -362,7 +362,7 @@ export default {
 
         let msg = "param 값이 유효하지 않습니다.";
         msg += "<br> * 필수입력 : " + required.join(", ");
-        errorAlert(msg);
+        errorAlert({ content: msg });
         return;
       }
 
@@ -375,11 +375,11 @@ export default {
             me.apiObj = JSON.parse(JSON.stringify({}));
             me.apiParamObj = JSON.parse(JSON.stringify({}));
 
-            successAlert("저장되었습니다.");
+            successAlert({ content: "저장되었습니다." });
             me.$router.push({ path: "/superAdmin/apiRouter/list" });
           } else {
             const msg = "저장에 실패하였습니다. msg:" + d.data.errorMessage;
-            errorAlert(msg);
+            errorAlert({ content: msg });
           }
         });
     },
@@ -481,7 +481,7 @@ export default {
     addParamObj() {
       if (!this.isParamValid()) {
         const msg = "param 값이 유효하지 않습니다.";
-        errorAlert(msg);
+        errorAlert({ content: msg });
         return;
       }
 
@@ -495,7 +495,7 @@ export default {
       ) {
         const msg =
           "Param의 " + this.CONSTANTS.API_ROUTER.PARAM.NM + "이 중복됩니다.";
-        errorAlert(msg);
+        errorAlert({ content: msg });
         return;
       }
 

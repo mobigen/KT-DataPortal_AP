@@ -34,7 +34,7 @@ export default {
         this.$cookies.remove("idSearch");
         this.$cookies.set("idSearch", null, -1);
       } else {
-        await errorAlert("비정상적인 접근입니다.");
+        await errorAlert({ content: "비정상적인 접근입니다." });
         this.$router.push({
           path: `${this.$config.ROUTE_USERS_PREFIX}/member/search/id`
         });
