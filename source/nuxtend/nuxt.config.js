@@ -128,25 +128,23 @@ export default {
     //   }
     // ],
     [
-      "/portal/api/analysis",
+      "/portal/analysis/api",
       {
         target: process.env.API_ANALYSIS_URL,
-        pathRewrite: { "^/api/": "" },
         changeOrigin: true,
         secure: false
       }
     ],
     [
-      "/portal/api/board",
+      "/portal/board/api",
       {
         target: process.env.API_BOARD_URL,
-        pathRewrite: { "^/api/": "" },
         changeOrigin: true,
         secure: false
       }
     ],
     [
-      "/portal/api/users",
+      "/portal/users/api",
       {
         target: process.env.API_USER_URL,
         changeOrigin: true,
@@ -154,7 +152,7 @@ export default {
       }
     ],
     [
-      "/route/portal/api/users",
+      "/route/portal/users/api",
       {
         target: process.env.API_ROUTE_URL,
         changeOrigin: true,
@@ -162,10 +160,12 @@ export default {
       }
     ],
     [
-      "/portal/api/meta",
+      "/route/portal/meta/api",
       {
         target: process.env.API_ROUTE_URL,
-        pathRewrite: { "/portal/api/meta/": "/route/portal/api/meta/" }
+        pathRewrite: { "/route/portal/meta/api": "/route/portal/api/meta" }
+        // changeOrigin: true,
+        // secure: false
       }
     ],
     [
@@ -226,6 +226,13 @@ export default {
   },
 
   publicRuntimeConfig: {
+    ROUTE_API_ANALYSIS_PREFIX:
+      process.env.ROUTE_PATH + process.env.API_ANALYSIS_PREFIX,
+    ROUTE_API_BOARD_PREFIX:
+      process.env.ROUTE_PATH + process.env.API_BOARD_PREFIX,
+    ROUTE_API_USERS_PREFIX:
+      process.env.ROUTE_PATH + process.env.API_USERS_PREFIX,
+    ROUTE_API_META_PREFIX: process.env.ROUTE_PATH + process.env.API_META_PREFIX,
     API_ANALYSIS_PREFIX: process.env.API_ANALYSIS_PREFIX,
     API_BOARD_PREFIX: process.env.API_BOARD_PREFIX,
     API_USERS_PREFIX: process.env.API_USERS_PREFIX,
@@ -248,7 +255,7 @@ export default {
       exclude: ["svg-sprite"]
     },
     // Run Storybook on localhost:4001
-    port: 4002
+    port: 4001
   },
 
   server: {
