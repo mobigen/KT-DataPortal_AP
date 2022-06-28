@@ -5,13 +5,12 @@
   display: block;
   float: left;
   @include button-normal;
-  @include font-size("13");
-  height: rem(26px);
-  line-height: rem(24px);
-  padding: 0 rem(20px);
-  border-radius: rem(15px);
-  background-color: $ui-01;
-  color: $text-02;
+  height: rem(36px);
+  line-height: rem(34px);
+  padding: 0 rem(15px);
+  border: 1px solid #e1e1e1;
+  border-radius: rem(18px);
+  background-color:#fff;
 
   &:hover:not(:disabled) {
     background-color: $hover-ui-accent;
@@ -32,9 +31,10 @@
   }
 }
 
+
 .tag__label {
   @include font-weight("regular");
-  line-height: rem(26px);
+  line-height: rem(24px);
 }
 
 .tag__remove-button {
@@ -82,7 +82,9 @@
 }
 
 .tag--sm {
-  height: rem(18px);
+  @include font-size("13");
+  height: rem(26px);
+  line-height: rem(24px);
 }
 
 // -------------------------

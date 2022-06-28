@@ -29,7 +29,7 @@
 
 // 한줄 말줄임 적용
 @mixin text-overflow($width: false) {
-  display: block;
+  display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

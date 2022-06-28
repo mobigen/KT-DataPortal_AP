@@ -1,12 +1,41 @@
 // Color Theme Variables
-$primary: #001F60 !default;
-$secondary: #367BFF !default;
+$basic:#666666 !default;
+$primary: #3bb4c0 !default;// active 포함
+$primary-dark: #28949f !default; 
+$secondary: #28949f !default;
 $negative: #ef594f !default;
-$ui-01: #EDEFF5 !default;
+
+// 강조
+$point-01: #222222 !default;
+$point-02: #333333 !default;
+$point-03: #119891 !default;
+
+// border, bg, font
+$ui-01: #333 !default;// form, tr:last
 $ui-02: #ffffff !default;
-$ui-03: #b2bdcb !default;
-$ui-04: #C8CACE !default;
-$ui-05: #F7F7FA !default; // table - bg
+$ui-03: #e5e5e5 !default;// tr
+$ui-04: #e1e1e1 !default;
+$ui-05: #fafafa !default;// th
+$ui-06: #f7fcfd !default;
+$ui-07: #909090 !default;
+$ui-08: #f26c4f !default;
+$ui-09: #999999 !default;
+$ui-10: #f45555 !default;
+$ui-11: #e4f3fb !default;
+$ui-12: #444444 !default;
+$ui-13: #f5f5f5 !default;
+
+// common status : 진행상태
+$status-01: #ee9785 !default;// 등록불가
+$status-02: #3bb4c0 !default;// 접수중,처리중
+$status-03: #cccccc !default;// 등록완료
+
+// common hover
+$hover-01: #f5f8fb !default;// 테이블오버시
+
+
+
+
 $text-01: #00010D !default;
 $text-02: #5D5D62 !default;
 $text-03: #8D8F95 !default;
@@ -28,7 +57,7 @@ $overlay-02: rgba($ui-02, 0.6) !default;
 // Interactive Tokesn
 $focus: $secondary !default;
 $default-focus: #367BFF !default;
-$hover-primary: #00339E !default;
+$hover-primary: #7492a1 !default;
 $hover-secondary: #4D8AFF !default;
 $hover-negative: #ff7e75 !default;
 $hover-ui-accent: #E2E7F5 !default;
@@ -46,3 +75,10 @@ $disabled-02: rgba(#abafba, 0.5) !default;
 //common breadcrumb
 $breadcrumb-text: $text-05 !default;
 $breadcrumb-bg: $hover-row !default;
+
+$gy-01 : #222 !default;
+$gy-02 : #333 !default;
+$line2 : #cccccc !default;
+$line3 : #e1e1e1 !default;
+$line4 : #e5e5e5 !default;
+

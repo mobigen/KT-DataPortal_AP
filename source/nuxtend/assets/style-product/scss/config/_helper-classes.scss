@@ -15,7 +15,7 @@
   text-indent: -9999px;
 }
 
-.required {
+/* .required {
   @include font-size("14");
   @include font-weight("bold");
   display: inline-block;
@@ -24,8 +24,21 @@
   padding: 0 $spacing-3xs;
   color: $negative;
   vertical-align: middle;
-}
+} */
 
+// 필수
+strong.required {    
+  display: inline-block;
+  font-size: 0;
+  margin: 0 5px;
+  vertical-align: top;
+
+  &::before {
+    content:"*"; 
+    color:$negative; 
+    font-size:18px;
+  }
+}
 .emphasis {
   @include font-weight("bold");
   display: inline;
@@ -267,6 +280,10 @@
   width: rem(80px) !important;
 }
 
+.w-107 {
+  width: rem(107px) !important;
+}
+
 .w-112 {
   width: rem(112px) !important;
 }
@@ -445,19 +462,19 @@
 }
 
 .text-left {
-  text-align: left;
+  text-align: left !important;
 }
 
 .text-center {
-  text-align: center;
+  text-align: center !important;
 }
 
 .text-right {
-  text-align: right;
+  text-align: right !important;
 }
 
 .text-justify {
-  text-align: justify;
+  text-align: justify !important;
 }
 
 .text-top {
@@ -502,10 +519,7 @@
 }
 
 .ellipsis-end {
-  display: inline-block;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  @include text-overflow;
 }
 
 .ellipsis-end--two-line {
@@ -563,4 +577,101 @@
 
 .svg-icon.svg-icon--negative {
   fill: $negative;
+}
+
+//----------------------------------------------
+// Text type 추가 2022-06-26
+// ---------------------------------------------
+/* 기본 안내용 텍스트 */
+.text-info {
+  @include font-weight("regular");
+  &--bold { 
+    @include font-weight("medium");
+  }	  
+  &--light { 
+    color: #999;
+  }		
+}
+
+/* 블릿 텍스트 */
+.bullet {
+  position: relative;
+  text-align: left;
+
+  &:before {    
+    position: absolute;
+  }
+
+  &--refer {
+    padding-left: rem(20px);
+
+    &:before {    
+      content: "※";
+      top: 0;
+      left: 0;
+    }
+  }
+
+  &--hyphen {
+    padding-left:rem(10px);
+
+    &:before {
+      content:"-";
+      top: rem(2px);
+      left: 0;
+    }
+  }    
+  
+  &--ast {
+    padding-left:rem(10px);
+
+    &:before {
+      content: "*";
+      top: rem(2px);
+      left: 0;
+    }
+  }
+}
+
+//----------------------------------------------
+// heading 추가 2022-06-27
+// ---------------------------------------------
+/* heading */
+.heading-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: -1px;
+  padding-bottom: rem(12px);
+  border-bottom: 1px solid $gy-02;
+  
+  & ~ & {
+    margin-top: rem(52px);
+  }
+}
+
+.heading-group__title {
+  @include heading-05;
+  line-height: $button-height-md;
+  color: $ui-01;
+}
+
+.heading-group__options {
+  display: flex;
+  align-items: center;
+
+  & > p {
+    color: $text-03;
+    @include font-size("14");
+    @include font-weight("regular");
+  }
+}
+
+.heading-group__notice {
+  color: $ui-07;
+
+  &:not(:last-child) {
+    margin-right: $spacing-sm;
+  }
 }

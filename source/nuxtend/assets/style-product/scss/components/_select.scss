@@ -202,7 +202,6 @@
   padding: $spacing-2xs $spacing-xl $spacing-2xs $spacing-sm;
   background-color: $ui-02;
   border: 1px solid $ui-04;
-  border-radius: rem(3px);
   /*
   &:active {
     border-color: $secondary !important;
@@ -255,7 +254,6 @@
 
 .select-selector__title {
   @include text-overflow;
-  @include font-size("12");
   @include font-weight("regular");
   color: $text-02;
 }
@@ -309,7 +307,6 @@
   max-height: inherit;
   padding: $spacing-2xs 0;
   background-color: $ui-02;
-  border-radius: rem(3px);
   border: 1px solid $ui-04;
   overflow: auto;
 }
@@ -344,7 +341,7 @@
 }
 
 .select-container__subtext {
-  @include font-size("12");
+  @include font-size("14");
   color: $text-03;
   width: 100%;
 }
@@ -556,7 +553,6 @@
 .-md {
   height: rem(40px);
   @include font-size("14");
-  border-radius: rem(5px);
 
   .select-selector__title {
     @include font-size("14");

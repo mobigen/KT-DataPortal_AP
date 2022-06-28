@@ -2,270 +2,286 @@
 // Badge
 // -------------------------
 .badges {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    overflow: hidden;
-    flex-grow: 1;
-  
-    .badge, .badge__label {
-      @include text-overflow();
-    }
-  
-    > * + * {
-      margin-right: $spacing-2xs;
-    }
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  flex-grow: 1;
+
+  .badge, .badge__label {
+    @include text-overflow();
+    line-height: rem(26px);     
+    color: #333;
   }
-  
-  .badge--icon{
-    width: rem(24px);
+
+  .badge + .badge {
+    margin: 0 0 0 rem(10px); 
   }
-  
+
   .badge {
-    @include font-family("sans");
-    @include font-weight("medium");
-    @include font-smoothing;
-    @include letter-spacing;
-    @include font-size("12");
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    height: rem(24px);
-    padding: 0 $spacing-2xs;
-    white-space: nowrap;
-    user-select: none;
-    border-radius: $field-border-radius;
-    background-color: $hover-row;
-    color: $text-03;
-    cursor: default;
-  
-    &.badge--icon {
-      padding: rem(3px);
-    }
-  }
-  
-  .badge__label {
-    @include line-height("heading");
-    @include font-weight("medium");
-  }
-  
-  // 추후 디자인 결정되면 변경 예정
-  .badge--lg {
-    @include font-size("14");
-    height: rem(32px);
-    padding: 0 $spacing-xs;
-  
-    &.badge--icon {
-      width: rem(32px);
-      padding: $spacing-2xs;
-    }
-  
-    .badge__icon {
-      width: rem(20px);
-      height: rem(20px);
-    }
-  }
-  
-  // 추후 디자인 결정되면 변경 예정
-  .badge--sm {
-    height: rem(18px);
-  
-    &.badge--icon {
-      width: rem(18px);
-      padding: 0;
-    }
-  
-    .badge__icon {
-      width: rem(12px);
-      height: rem(12px);
-    }
-  }
-  
-  // -------------------------
-  // theme별 mixin
-  // -------------------------
-  @mixin badge-theme($bg-color, $icon-color, $font-color) {
-    background-color: $bg-color;
-    color: $font-color;
-    .badge__icon {
-      fill: $icon-color;
-    }
-  }
-  
-  .badge--red {
-    @include badge-theme(#ffd7d9, #da1e28, #da1e28);
-  }
-  
-  .badge--red-deep {
-    @include badge-theme(#ff676e, $text-04, $text-04);
-  }
-  
-  .badge--cyan {
-    @include badge-theme(#bae6ff, #0089c9, #0089c9);
-  }
-  
-  .badge--cyan-deep {
-    @include badge-theme(#4abdff, $text-04, $text-04);
-  }
-  
-  .badge--green {
-    @include badge-theme(#c4f5d1, #198038, #198038);
-  }
-  
-  .badge--green-deep {
-    @include badge-theme(#59d079, $text-04, $text-04);
-  }
-  
-  .badge--teal {
-    @include badge-theme(#adf0f0, #007d79, #007d79);
-  }
-  
-  .badge--teal-deep {
-    @include badge-theme(#3de1e1, $text-04, $text-04);
-  }
-  
-  .badge--purple {
-    @include badge-theme(#decff5, #6929c4, #6929c4);
-  }
-  
-  .badge--purple-deep {
-    @include badge-theme(#a26aff, $text-04, $text-04);
-  }
-  
-  .badge--w-gray {
-    @include badge-theme($ui-02, $text-02, $text-02);
-    border-radius: rem(10px);
-    border: 1px solid $ui-04;
-    padding: 0 rem(12px);
-    height: rem(21px);
-  
-    .badge__label {
-      height: rem(20px);
-      line-height: rem(19px);
-    }
-  }
-  
-  .badge--w-primary {
-    @include badge-theme($ui-02, $primary, $primary);
-    border-radius: rem(10px);
-    border: 1px solid rgba(0, 31, 96, 0.4);
-    padding: 0 rem(12px);
-    height: rem(21px);
-  
-    .badge__label {
-      height: rem(20px);
-      line-height: rem(19px);
-    }
-  }
-  
-  .badge--filetype-01 {
-    @include badge-theme(#F0FFF4, #2F855A, #2F855A);
-    border-radius: 1px;
-    border: none;
-    height: rem(20px);
-    margin-left: rem(3px);
-    padding: 0 rem(4px);
-    line-height: 0;
-  
-    .badge__label {
-      @include font-size("12");
-      @include font-weight("regular");
-    }
-  }
-  
-  .badge--filetype-02 {
-    @include badge-theme(#EBF8FF, #2B6CB0, #2B6CB0);
-    border-radius: 1px;
-    border: none;
-    height: rem(20px);
-    margin-left: rem(3px);
-    padding: 0 rem(4px);
-    line-height: 0;
-  
-    .badge__label {
-      @include font-size("12");
-      @include font-weight("regular");
-    }
-  }
-  
-  .badge--filetype-03 {
-    @include badge-theme(#FAF5FF, #6B46C1, #6B46C1);
-    border-radius: 1px;
-    border: none;
-    height: rem(20px);
-    margin-left: rem(3px);
-    padding: 0 rem(4px);
-    line-height: 0;
-  
-    .badge__label {
-      @include font-size("12");
-      @include font-weight("regular");
-    }
-  }
-  
-  .badge--filetype-04 {
-    @include badge-theme(#FFF5F5, #C53030, #C53030);
-    border-radius: 1px;
-    border: none;
-    height: rem(20px);
-    margin-left: rem(3px);
-    padding: 0 rem(4px);
-    line-height: 0;
-  
-    .badge__label {
-      @include font-size("12");
-      @include font-weight("regular");
-    }
-  }
-  
-  .badge--filetype-05 {
-    @include badge-theme(#FFFFF0, #B7791F, #B7791F);
-    border-radius: 1px;
-    border: none;
-    height: rem(20px);
-    margin-left: rem(3px);
-    padding: 0 rem(4px);
-    line-height: 0;
-  
-    .badge__label {
-      @include font-size("12");
-      @include font-weight("regular");
-    }
-  }
-  
-  // 데이터 활용사례 
-  .badge--used {
-    width: rem(80px);
-    height: rem(30px);
-    border-radius: rem(15px);
     position: relative;
-  
-    .badge__icon {
-      width: rem(20px);
-      height: rem(20px);
+
+    &:before {
+      content: "";    
       position: absolute;
-      left: 12px;
-      top: 5px;
-    }
-    p {
-      margin-left: rem(30px);
-      line-height: rem(30px);
-      @include font-size("12");
-      text-align: center;
-      width: rem(40px);
-    }
+      left: 0;
+      top: 50%;
+      width: rem(1px);
+      height: rem(14px);
+      margin-top: rem(-7px);
+      background-color: $ui-04;      
+      
+    }        
+    &:first-child:before {
+      content: none;
+    }  
   }
-  
-  .badge--mobile {
-    @include badge-theme(#F0FFF4, #2F855A, #2F855A);
+}
+
+.badge--icon{
+  width: rem(24px);
+}
+
+.badge {
+  @include font-family("sans");
+  @include font-weight("medium");
+  @include font-smoothing;
+  @include letter-spacing;
+  @include font-size("13");
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: rem(24px);
+  padding: 0 $spacing-2xs;
+  white-space: nowrap;
+  user-select: none;
+  border-radius: $field-border-radius;
+  background-color: $hover-row;
+  color: $text-03;
+  cursor: default;
+
+  &.badge--icon {
+    padding: rem(3px);
   }
-  
-  .badge--web {
-    @include badge-theme(#EBF8FF, #2B6CB0, #2B6CB0);
+}
+
+.badge__label {
+  @include line-height("heading");
+  @include font-weight("regular"); 
+}
+
+// 벤더
+.badge--provider {
+  padding: 0 rem(16px);
+  height: rem(24px);
+  background-color: transparent;
+}
+
+// 추후 디자인 결정되면 변경 예정
+.badge--lg {
+  @include font-size("14");
+  height: rem(32px);
+  padding: 0 $spacing-xs;
+
+  &.badge--icon {
+    width: rem(32px);
+    padding: $spacing-2xs;
   }
-  
-  .badge--etc {
-    @include badge-theme(#FAF5FF, #6B46C1, #6B46C1);
+
+  .badge__icon {
+    width: rem(20px);
+    height: rem(20px);
   }
+}
+
+// 추후 디자인 결정되면 변경 예정
+.badge--sm {
+  height: rem(18px);
+
+  &.badge--icon {
+    width: rem(18px);
+    padding: 0;
+  }
+
+  .badge__icon {
+    width: rem(12px);
+    height: rem(12px);
+  }
+}
+
+// -------------------------
+// theme별 mixin
+// -------------------------
+@mixin badge-theme(
+  $bg-color,
+  $icon-color, 
+  $font-color,
+  $border-color: false
+) {
+  background-color: $bg-color;
+  border-radius: rem(3px);
+  color: $font-color;
+
+  .badge__icon {
+    fill: $icon-color;
+  }
+
+  @if ($border-color) {
+    border: 1px solid $border-color;
+    
+    .badge__label {
+      color: inherit;
+    } 
+  }
+}
+
+.badge--outline {
+  @include badge-theme($ui-02, $basic, $basic, $line2);
+}
+
+.badge--primary {
+  @include badge-theme($primary, $text-04, $text-04);
+}
+
+.badge--primary-outline {
+  @include badge-theme($ui-02, $primary, $primary, $primary);
+}
+
+.badge--secondary {
+  @include badge-theme($secondary, $text-04, $text-04);
+}
+
+.badge--secondary-outline {
+  @include badge-theme($ui-02, $secondary, $secondary, $secondary);
+}
+
+.badge--negative {
+  @include badge-theme(#f26c4f, $text-04, $text-04);
+}
+
+.badge--negative-outline {
+  @include badge-theme($ui-02, #f26c4f, #f26c4f, #f26c4f);
+}
+
+.badge--disabled {
+  @include badge-theme($ui-05, $text-04, $text-04);
+}
+
+.badge--disabled-outline {
+  @include badge-theme($ui-02, $ui-07, $ui-07, $line2);
+}
+
+.badge--w-gray {
+  @include badge-theme($ui-02, $text-02, $text-02);
+  border-radius: rem(12px);
+  border: 1px solid $ui-04;
+  padding: 0 rem(16px);
+  height: rem(24px);
+
+  .badge__label {
+    height: rem(24px);
+    line-height: rem(24px);
+  }
+}
+
+.badge--w-primary {
+  @include badge-theme($ui-02, $primary, $primary);
+  border-radius: rem(12px);
+  border: 1px solid rgba(0, 31, 96, 0.4);
+  padding: 0 rem(16px);
+  height: rem(24px);
+
+  .badge__label {
+    height: rem(24px);
+    line-height: rem(24px);
+  }
+}
+
+.badge--filetype-01 {
+  @include badge-theme(#F0FFF4, #2F855A, #2F855A);
+  border-radius: 1px;
+  border: none;
+  height: rem(20px);
+  margin-left: rem(3px);
+  padding: 0 rem(4px);
+  line-height: 0;
+
+  .badge__label {
+    @include font-size("12");
+    @include font-weight("regular");
+  }
+}
+
+.badge--filetype-02 {
+  @include badge-theme(#EBF8FF, #2B6CB0, #2B6CB0);
+  border-radius: 1px;
+  border: none;
+  height: rem(20px);
+  margin-left: rem(3px);
+  padding: 0 rem(4px);
+  line-height: 0;
+
+  .badge__label {
+    @include font-size("12");
+    @include font-weight("regular");
+  }
+}
+
+.badge--filetype-03 {
+  @include badge-theme(#FAF5FF, #6B46C1, #6B46C1);
+  border-radius: 1px;
+  border: none;
+  height: rem(20px);
+  margin-left: rem(3px);
+  padding: 0 rem(4px);
+  line-height: 0;
+
+  .badge__label {
+    @include font-size("12");
+    @include font-weight("regular");
+  }
+}
+
+.badge--filetype-04 {
+  @include badge-theme(#FFF5F5, #C53030, #C53030);
+  border-radius: 1px;
+  border: none;
+  height: rem(20px);
+  margin-left: rem(3px);
+  padding: 0 rem(4px);
+  line-height: 0;
+
+  .badge__label {
+    @include font-size("12");
+    @include font-weight("regular");
+  }
+}
+
+.badge--filetype-05 {
+  @include badge-theme(#FFFFF0, #B7791F, #B7791F);
+  border-radius: 1px;
+  border: none;
+  height: rem(20px);
+  margin-left: rem(3px);
+  padding: 0 rem(4px);
+  line-height: 0;
+
+  .badge__label {
+    @include font-size("12");
+    @include font-weight("regular");
+  }
+}  
+
+// -------------------------
+// theme별 outline mixin
+// -------------------------
+@mixin badge-theme-outline($border-color, $icon-color, $font-color) {
+  background-color: $border-color;
+  color: $font-color;
+  .badge__icon {
+    fill: $icon-color;
+  }
+}
   

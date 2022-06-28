@@ -44,10 +44,22 @@
 @mixin button {
   @include button-base;
   padding: 0 $spacing-sm;
+  border: 1px solid $ui-09;
+  background-color: $ui-02;
+
+  &:hover,
+  &:focus {
+    color: $ui-02;
+    background-color: $ui-01;
+    
+    .svg-icon {
+      fill : $ui-02;
+    }
+  }
 
   .svg-icon {
-    width: rem(20px);
-    height: rem(20px);
+    width: rem(18px);
+    height: rem(18px);
 
     & + .button__text {
       margin-left: $spacing-2xs;
@@ -55,6 +67,8 @@
   }
 
   &__text {
+    line-height: 1;
+
     & + .svg-icon {
       margin-left: $spacing-2xs;
     }
@@ -107,6 +121,21 @@
 
 @mixin button--primary {
   @include button-theme($primary, $text-04, $hover-primary, $active-primary);
+  border: 0;
+}
+
+@mixin button--primary-line {
+  @include button-theme(
+    $ui-02,
+    $text-01,
+    $ui-02,
+    $ui-02,
+    $primary
+  );
+  &:hover:not(:disabled) {
+    color: $ui-02;
+    background: $primary;
+  }
 }
 
 @mixin button--secondary {
@@ -266,6 +295,17 @@
   @include button-theme($negative, $text-04, $hover-negative, $active-negative);
 }
 
+@mixin button--outline {
+  @include button-theme($ui-02, $primary, #e1eaf7, #c6d8f2, $ui-04);
+  // support 예외 사항
+  &:hover:not(:disabled) {
+    color: $primary;
+
+    .svg-icon {
+      fill: $primary;
+    }
+  }
+}
 // -------------------------
 // button-size
 // -------------------------
@@ -322,13 +362,13 @@
 }
 
 @mixin button--md {
-  @include button-size(15px, $button-height-lg, 24px);
+  @include button-size(14px, $button-height-md, 24px);
   @include button-padding($spacing-md, $spacing-md);
   border-radius: rem(5px);
 }
 
 @mixin button--sm {
-  @include button-size(12px, $button-height-sm, 16px);
+  @include button-size(13px, $button-height-sm, 16px);
   @include button-padding($spacing-xs, $spacing-xs);
 }
 
@@ -349,6 +389,15 @@
 
 .button--primary {
   @include button--primary;
+}
+
+.button--primary-line {
+  @include button--primary-line;
+}
+
+.button--primary-outline {
+  @include button--primary-line;
+  border-width: 2px;
 }
 
 .button--secondary {

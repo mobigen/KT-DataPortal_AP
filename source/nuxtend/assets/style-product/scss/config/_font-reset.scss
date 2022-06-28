@@ -7,7 +7,7 @@ body {
   @include font-size("14");
   @include letter-spacing;
   @include line-height("body");
-  color: $text-01;
+  color: $basic;
   background-color: $ui-02;
 }
 
