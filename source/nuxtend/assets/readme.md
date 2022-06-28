@@ -34,14 +34,14 @@ assets/
 ## 🐙 서브모듈 사용하기
 
 ### 서브모듈 등록
-git submodule add -b dev https://github.com/mobigen/IRIS-Design-Core.git source/Katech/frontend/assets/style-core
-git submodule add -f dev https://github.com/mobigen/IRIS-Design-Core.git source/Katech/frontend/assets/style-core
+git submodule add -b dev https://github.com/mobigen/IRIS-Design-Core.git source/KT/frontend/assets/style-core
+git submodule add -f dev https://github.com/mobigen/IRIS-Design-Core.git source/KT/frontend/assets/style-core
 
 ### 서브모듈 삭제
-git rm --cached source/Katech/frontend/assets/style-core
-git submodule deinit -f source/Katech/frontend/assets/style-core
-linux : rm -rf .git/modules/source/Katech
-window : rd /s .git\modules\source\Katech
+git rm --cached source/KT/frontend/assets/style-core
+git submodule deinit -f source/KT/frontend/assets/style-core
+linux : rm -rf .git/modules/source/KT
+window : rd /s .git\modules\source\KT
 
 
 ### 서브모듈 초기 설정
