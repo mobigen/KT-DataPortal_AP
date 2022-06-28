@@ -164,14 +164,14 @@ export default {
     [
       "/portal/api/meta",
       {
-        target: process.env.API_META_URL,
+        target: process.env.API_ROUTE_URL,
         pathRewrite: { "/portal/api/meta/": "/route/portal/api/meta/" }
       }
     ],
     [
       "/mgnt/api/apiRouter",
       {
-        target: process.env.API_META_URL,
+        target: process.env.API_ROUTE_URL,
         pathRewrite: { "/mgnt/api/apiRouter/": "/api/" }
       }
     ]
