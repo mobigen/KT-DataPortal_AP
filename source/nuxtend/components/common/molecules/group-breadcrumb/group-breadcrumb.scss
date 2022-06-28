@@ -1,7 +1,20 @@
 /* breadcrumb */
 .breadcrumb__wrap {
   display: flex;
+  align-items: center;
   width: 100%;
+  height: rem(50px);
+  background-image: url(#{$img-path}/common/bg_breadcrumb.png), url(#{$img-path}/common/bg__breadcrumb_pattern.png), linear-gradient(to right, #59bdeb, #49c7d4);
+  background-repeat: repeat-x, no-repeat, no-repeat;
+  background-position: 0 0, center 0, 0 0;
+}
+
+.breadcrumb__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: rem(1200px);
+  margin: 0 auto;
 }
 
 .breadcrumb__list {
@@ -12,30 +25,27 @@
 
 .breadcrumb__item {
   position: relative;
-  height: rem(60px);
-  line-height: rem(60px); 
   @include font-size("14");
-  color: $text-03; 
+  color:#e4f3fb; 
   padding:0 0 0 rem(20px); 
 }
 
 .breadcrumb__item:hover {
-  color: $secondary
+  color: #fff;
 }
 
 .breadcrumb__item:before {
   content: "";
-  width: rem(4px);
-  height: rem(4px);
-  border-top: 1px solid $ui-04;
-  border-right: 1px solid $ui-04;
+  width: rem(5px);
+  height: rem(5px);
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
   display: inline-block;
   -webkit-transform: rotate(45deg) translateY(-50%);
   transform: rotate(45deg) translateY(-50%);
   position: absolute;
   top: 50%;
   left: rem(5px);
-  border-radius: 2px;
 }
 
 .breadcrumb__item--home {
@@ -43,14 +53,14 @@
 }
 
 .breadcrumb__item--home:before {
-  //background: url("../../../../assets/style-core/images/icon/home.svg") no-repeat center center;
   position: absolute;
   left: 0;
-  transform: rotate(0deg) translateY(-50%);
-  background: url(#{$img-path}/common/icon.png) no-repeat -10px -78px;
+  top:0; 
+  transform: none;
+  background: url("#{$img-path}/icon/home-wh.svg") no-repeat center center;
   border: none;
-  width: rem(16px);
-  height: rem(16px);
+  width: rem(18px);
+  height: rem(18px);
 }
 
 .breadcrumb__link {
@@ -65,14 +75,13 @@
 }
 
 .breadcrumb__button-url {
-  height: rem(25px);
-  line-height: rem(24px);
+  height: rem(30px);
+  line-height: rem(30px);
   padding: 0 $spacing-md;
-  background: $ui-02;
-  border: 1px solid $ui-04;
-  border-radius: 13px;
-  @include font-size("12");
-  color: $text-02;
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 15px;
+  color:#e4f3fb;
   
   &:hover:not(:disabled) {
     border-color: $secondary;

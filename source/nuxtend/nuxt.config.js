@@ -22,7 +22,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "Katech-Dataportal",
+    title: "KT-Dataportal",
     htmlAttrs: {
       lang: "en"
     },
@@ -58,26 +58,25 @@ export default {
     "@nuxtjs/style-resources",
     "@nuxtjs/svg-sprite",
     "@nuxtjs/i18n",
-    "@nuxtjs/fontawesome",
+    "@nuxtjs/fontawesome"
     // build, generate 속도 향샹
-    "nuxt-build-optimisations"
+    // "nuxt-build-optimisations"
   ],
-  buildOptimisations: {
-    profile: process.env.STORYBOOK_ENV === "storybook" ? false : "risky"
-    // profile: 'experimental' // default
-    // profile: 'safe'
-    // profile: false
-  },
+  // buildOptimisations: {
+  //   profile: process.env.STORYBOOK_ENV === "storybook" ? false : "risky"
+  //   // profile: 'experimental' // default
+  //   // profile: 'safe'
+  //   // profile: false
+  // },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["cookie-universal-nuxt"],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    // build, generate 속도 향샹
-    parallel: process.env.STORYBOOK_ENV === "storybook" ? false : true,
-    hardSource: process.env.STORYBOOK_ENV === "storybook" ? false : true,
-    cache: process.env.STORYBOOK_ENV === "storybook" ? false : true,
+    parallel: true,
+    //hardSource: process.env.ENV_TYPE === "development" ? true : false,
+    cache: process.env.ENV_TYPE === "local" ? true : false,
     postcss: {
       preset: {
         features: {
@@ -85,6 +84,13 @@ export default {
         }
       }
     },
+    html: {
+      minify: {
+        minifyCSS: process.env.ENV_TYPE === "local" ? false : true,
+        minifyJS: process.env.ENV_TYPE === "local" ? false : true
+      }
+    },
+    cssSourceMap: process.env.ENV_TYPE === "local" ? false : true,
     extend(config) {
       config.resolve.alias["vue"] = "vue/dist/vue.common";
     }
@@ -99,7 +105,7 @@ export default {
 
   // options
   svgSprite: {
-    input: "./assets/style-core/images/icon"
+    input: "./assets/style-product/images/icon"
   },
 
   axios: {

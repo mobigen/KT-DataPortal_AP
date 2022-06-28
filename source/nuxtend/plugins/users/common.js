@@ -2,7 +2,10 @@ const UrlPattern = require("url-pattern");
 
 export default ({ $axios, $config }, inject) => {
   const getUser = async () => {
-    console.log("common.js : getUser", `${$config.ROUTE_API_USERS_PREFIX}/user`);
+    console.log(
+      "common.js : getUser",
+      `${$config.ROUTE_API_USERS_PREFIX}/user`
+    );
     const user = await $axios
       .get(`${$config.ROUTE_API_USERS_PREFIX}/user`)
       .catch((e) => {

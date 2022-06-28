@@ -1,0 +1,210 @@
+.registraion__wrap {
+  position: relative;
+  width: 100%;
+  padding: $spacing-sm 0;
+  border-top: 2px solid $text-01;
+}
+
+.registraion__list {
+  display: flex;
+  align-content: flex-start;
+  padding: $spacing-xs 0;
+}
+
+.item__title {
+  flex-shrink: 0;
+  @include font-weight("regular");
+  @include font-size("16");
+  color: $text-01;
+  line-height: rem(18px);
+  width: rem(160px);
+  padding-top: rem(10px);  
+  word-break: break-all;
+  margin-left: $spacing-xs;  
+}
+
+.item__detail {
+  flex-grow: 1;
+  @include font-weight("medium");
+  @include font-size("14");
+  color: $text-01;
+  line-height: rem(18px);
+  word-break: break-all;
+  display: flex;
+  
+  .checkbox {
+    height: rem(36px);
+    padding-top: rem(6px);
+  }
+  .checkbox + * {
+    margin-left: $spacing-xl;
+  }
+
+}
+
+.item__length-short {
+  width: rem(180px);
+  margin-right: $spacing-xs;
+}
+
+.item__length-mid {
+  width: rem(400px);
+  margin-right: $spacing-xs;
+}
+
+.item__length-long {
+  width: rem(600px);
+  margin-right: $spacing-xs;
+}
+
+.item__length-wide {
+  width: rem(900px);
+}
+
+.cols {
+  display: flex;
+  flex-direction: column;
+}
+
+.authority {
+  border: 1px solid $text-05;
+  border-left: none;
+  border-right: none;
+  margin-top: $spacing-xl;
+  padding: $spacing-lg 0;
+}
+
+.datatype {
+  border-bottom: 1px solid $text-05;
+  padding: $spacing-lg 0 rem(36px) 0;
+}
+
+.item__datatype {
+  display: flex;
+  flex-direction: column;
+  width: rem(900px);
+
+  small {
+    margin : rem(12px) 0 rem(20px) 0;
+    color: $text-03;
+    @include font-weight("regular");
+    @include font-size("12");
+  }
+}
+
+.item__datatype-attached {
+  margin-bottom: rem(12px);
+}
+
+.item__datatype-buttongroup {
+  display: flex;
+  margin-bottom: rem(20px);
+
+  * + * {
+    margin-left: $spacing-sm;
+  }
+
+  .button {
+    @include font-weight("bold");
+  }
+}
+
+.editor-wrap {
+  position: relative;
+  flex-direction: column;
+  border-bottom: 1px solid $text-05;
+  padding: $spacing-lg 0;
+
+  .item__title {
+    margin-bottom: rem(16px);
+  }
+
+  small {
+    position: absolute;
+    top: rem(32px);
+    left: rem(168px);
+    @include font-weight("regular");
+    @include font-size("12");
+    color: $text-03;
+  }
+}
+
+// 첨부된 파일 리스트
+.attached-file__title {
+  display: flex;
+  align-items: center;
+  height: rem(32px);
+
+  h5 {
+    flex-grow: 1;
+    @include font-weight("regular");
+    @include font-size("16");
+    color: $text-01;
+    line-height: rem(32px);
+  }
+
+  small {
+    flex-shrink: 0;
+    @include font-weight("regular");
+    @include font-size("12");
+    color: $text-03;
+    height: 100%;
+    padding: $spacing-sm $spacing-xs 0 0;
+    margin: 0;
+  }
+
+  .button {
+    flex-shrink: 0;
+  }
+}
+
+.attached-file__list {
+  width: 100%;
+  max-height: rem(160px);
+  overflow: auto;
+  padding: $spacing-xs 0 $spacing-xs $spacing-sm;
+  border-radius: rem(5px);
+  border: 1px solid $hover-ui-accent;
+  margin-top: $spacing-2xs;
+}
+
+.attached-file__item {
+  display: flex;
+  height: rem(24px);
+  line-height: rem(24px);
+
+  .svg-icon {
+    width: rem(16px);
+    height: rem(16px);
+    fill: $secondary;
+
+    &:hover {
+      fill: $hover-secondary;
+    }
+    &:active {
+      fill: $active-secondary;
+    }
+  }
+}
+
+.attached-file__item-title {
+  flex-grow: 1;
+  @include font-weight("regular");
+  @include font-size("12");
+  color: $text-02;
+
+  .svg-icon {
+    width: rem(16px);
+    height: rem(16px);
+    fill: $text-05;
+  }
+}
+
+.attached-file__item-volume {
+  flex-shrink: 0;
+  width: rem(80px);
+  text-align: right;
+  @include font-weight("regular");
+  @include font-size("12");
+  color: $text-03;
+}

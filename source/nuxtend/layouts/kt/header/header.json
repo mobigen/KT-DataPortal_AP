@@ -1,0 +1,16 @@
+{
+  "ko": {
+    "nav-title": {
+      "home": "홈",
+      "search": "검색",
+      "logout": "로그아웃"
+    }
+  },
+  "en": {
+    "nav-title": {
+      "home": "Home",
+      "search": "Search",
+      "logout": "Logout"
+    }
+  }
+}
