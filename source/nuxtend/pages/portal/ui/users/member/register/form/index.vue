@@ -306,7 +306,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions("users/memberRegster", ["clearEmailAthn", "clearSocialUser", "clearMemberRegisterInfo"]),
+    ...mapActions("users/memberRegster", [
+      "clearEmailAthn",
+      "clearSocialUser",
+      "clearMemberRegisterInfo"
+    ]),
     async init() {
       if (this.getEmailAthn) {
         this.user.email = this.getEmailAthn.email;
@@ -336,7 +340,7 @@ export default {
         !this.getMemberRegisterInfo ||
         !this.getMemberRegisterInfo.isAgree
       ) {
-        await errorAlert("비정상적인 접근 입니다.");
+        await errorAlert({ content: "비정상적인 접근 입니다." });
 
         if (this.getPrevFullUrl) {
           this.$router.push({
@@ -353,12 +357,12 @@ export default {
     },
     async onDuplicatedUserIdChk() {
       if (this.user.userId === null || this.user.userId === "") {
-        await errorAlert("아이디을 입력해주세요.");
+        await errorAlert({ content: "아이디을 입력해주세요." });
         this.$refs.userId.focus();
         return false;
       }
       if (!this.chkUserId(this.user.userId)) {
-        await errorAlert("아이디 형식이 잘못되었습니다.");
+        await errorAlert({ content: "아이디 형식이 잘못되었습니다." });
         this.$refs.userId.focus();
         return false;
       }
@@ -368,26 +372,26 @@ export default {
       };
       const data = await this.isDupliacatedChk(params);
       if (data === "Y") {
-        await errorAlert("이미 가입된 아이디 입니다.");
+        await errorAlert({ content: "이미 가입된 아이디 입니다." });
         this.$refs.userId.focus();
         this.isUserIdChk = false;
       } else if (data === "N") {
-        await errorAlert("사용 가능한 아이디 입니다.");
+        await errorAlert({ content: "사용 가능한 아이디 입니다." });
         this.isUserIdChk = true;
       } else {
-        await errorAlert("아이디 중복체크 오류입니다.");
+        await errorAlert({ content: "아이디 중복체크 오류입니다." });
         this.isUserIdChk = false;
       }
     },
     async onDuplicatedEmailChk() {
       let email = this.user.email1 + "@" + this.user.email2;
       if (this.user.email1 == "" || this.user.email2 == "") {
-        await errorAlert("이메일을 입력해주세요.");
+        await errorAlert({ content: "이메일을 입력해주세요." });
         this.$refs.email1.focus();
         return;
       }
       if (!this.chkEmail(email)) {
-        await errorAlert("이메일 형식이 잘못되었습니다.");
+        await errorAlert({ content: "이메일 형식이 잘못되었습니다." });
         this.$refs.email1.focus();
         return false;
       }
@@ -397,14 +401,14 @@ export default {
       };
       const data = await this.isDupliacatedChk(params);
       if (data === "Y") {
-        await errorAlert("이미 가입된 Email 입니다.");
+        await errorAlert({ content: "이미 가입된 Email 입니다." });
         this.$refs.email1.focus();
         this.isEmailChk = false;
       } else if (data === "N") {
-        await errorAlert("사용 가능한 Email 입니다.");
+        await errorAlert({ content: "사용 가능한 Email 입니다." });
         this.isEmailChk = true;
       } else {
-        await errorAlert("이메일 중복체크 오류입니다.");
+        await errorAlert({ content: "이메일 중복체크 오류입니다." });
         this.isEmailChk = false;
       }
     },
@@ -432,27 +436,27 @@ export default {
     async onRegComplete() {
       if (!this.getSocialUser) {
         if (this.user.userId === null || this.user.userId === "") {
-          await errorAlert("아이디을 입력해주세요.");
+          await errorAlert({ content: "아이디을 입력해주세요." });
           this.$refs.userId.focus();
           return false;
         }
         if (!this.chkUserId(this.user.userId)) {
-          await errorAlert("아이디 형식이 잘못되었습니다.");
+          await errorAlert({ content: "아이디 형식이 잘못되었습니다." });
           this.$refs.userId.focus();
           return false;
         }
         if (!this.isUserIdChk) {
-          await errorAlert("아이디 중복 체크를 해주세요.");
+          await errorAlert({ content: "아이디 중복 체크를 해주세요." });
           this.$refs.userId.focus();
           return false;
         }
         if (this.user.userPassword == "") {
-          await errorAlert("비밀번호를 입력해주세요.");
+          await errorAlert({ content: "비밀번호를 입력해주세요." });
           this.$refs.userPassword.focus();
           return;
         }
         if (!this.chkPassword()) {
-          await errorAlert(this.userPasswordMsg);
+          await errorAlert({ content: this.userPasswordMsg });
           this.$refs.userPassword.focus();
           return;
         }
@@ -460,38 +464,38 @@ export default {
           this.user.confirmPassword === null ||
           this.user.confirmPassword === ""
         ) {
-          await errorAlert("비밀번호 확인을 입력해주세요.");
+          await errorAlert({ content: "비밀번호 확인을 입력해주세요." });
           this.$refs.confirmPassword.focus();
           return;
         }
         if (this.user.userPassword !== this.user.confirmPassword) {
-          await errorAlert("비밀번호가 일치하지 않습니다.");
+          await errorAlert({ content: "비밀번호가 일치하지 않습니다." });
           this.$refs.confirmPassword.focus();
           return;
         }
         if (this.user.userNm === null || this.user.userNm === "") {
-          await errorAlert("성명를 입력해주세요.");
+          await errorAlert({ content: "성명를 입력해주세요." });
           this.$refs.userNm.focus();
           return;
         }
         this.user.email = this.user.email1 + "@" + this.user.email2;
         if (this.user.email1 === null || this.user.email1 === "") {
-          await errorAlert("이메일을 입력해주세요.");
+          await errorAlert({ content: "이메일을 입력해주세요." });
           this.$refs.email1.focus();
           return false;
         }
         if (this.user.email2 === null || this.user.email2 === "") {
-          await errorAlert("이메일을 입력해주세요.");
+          await errorAlert({ content: "이메일을 입력해주세요." });
           this.$refs.email2.focus();
           return false;
         }
         if (!this.chkEmail(this.user.email)) {
-          await errorAlert("이메일 형식이 잘못되었습니다.");
+          await errorAlert({ content: "이메일 형식이 잘못되었습니다." });
           this.$refs.email1.focus();
           return false;
         }
         // if (!this.isEmailChk) {
-        //   await errorAlert("이메일 중북체크를 해주세요");
+        //   await errorAlert({content:"이메일 중북체크를 해주세요"});
         //   this.$refs.email1.focus();
         //   return false;
         // }
@@ -504,27 +508,27 @@ export default {
         "-" +
         this.user.moblphon3;
       if (this.user.moblphon1 === null || this.user.moblphon1 === "") {
-        await errorAlert("연락처을 입력해주세요.");
+        await errorAlert({ content: "연락처을 입력해주세요." });
         this.$refs.moblphon1.focus();
         return false;
       }
       if (this.user.moblphon2 === null || this.user.moblphon2 === "") {
-        await errorAlert("연락처을 입력해주세요.");
+        await errorAlert({ content: "연락처을 입력해주세요." });
         this.$refs.moblphon2.focus();
         return false;
       }
       if (this.user.moblphon3 === null || this.user.moblphon3 === "") {
-        await errorAlert("연락처을 입력해주세요.");
+        await errorAlert({ content: "연락처을 입력해주세요." });
         this.$refs.moblphon3.focus();
         return false;
       }
       if (!this.chkTelNo(this.user.moblphon)) {
-        await errorAlert("연락처 형식이 잘못되었습니다.");
+        await errorAlert({ content: "연락처 형식이 잘못되었습니다." });
         this.$refs.moblphon1.focus();
         return false;
       }
       if (this.user.blngOrgNm === null || this.user.blngOrgNm === "") {
-        await errorAlert("소속기관을 입력해주세요.");
+        await errorAlert({ content: "소속기관을 입력해주세요." });
         this.$refs.blngOrgNm.focus();
         return false;
       }
@@ -543,9 +547,10 @@ export default {
           query: { userUuid: data.userUuid }
         });
       } else {
-        await errorAlert(
-          "회원가입 중 오류입니다.시스템 사용자에게 문의하여 주시기 바랍니다."
-        );
+        await errorAlert({
+          content:
+            "회원가입 중 오류입니다.시스템 사용자에게 문의하여 주시기 바랍니다."
+        });
       }
     },
     async createUser() {

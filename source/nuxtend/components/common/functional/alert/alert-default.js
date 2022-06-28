@@ -65,16 +65,16 @@ export const successAlert = (params) => {
  * @param content
  * @returns {Promise<*>}
  */
-export const errorAlert = (content) => {
+export const errorAlert = (params) => {
   const locale = $nuxt.$options.i18n.locale;
   let i18n = i18nGenerator(locale, messages);
   let props = {
-    title: i18n.t("alert-error.title"),
+    title: params.title ? params.title : i18n.t("alert-error.title"),
     iconTheme: i18n.t("alert-error.icon-theme"),
     confirmButtonTheme: i18n.t("alert-error.confirm-button-theme"),
     confirmButtonText: i18n.t("alert-error.confirm-button-text"),
     type: i18n.t("alert-error.type"),
-    content: content,
+    content: params.content,
     width: "450"
   };
 
