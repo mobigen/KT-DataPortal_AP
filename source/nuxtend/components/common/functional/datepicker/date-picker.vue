@@ -88,10 +88,14 @@ export default {
   methods: {
     changeDateFormat() {
       if (this.range) {
-        this.dateValue = [moment(this.startDate).format(this.dateFormat), moment(this.endDate).format(this.dateFormat)];
+        this.dateValue = [
+          moment(this.startDate).format(this.dateFormat),
+          moment(this.endDate).format(this.dateFormat)
+        ];
       } else {
         this.dateValue = moment(this.date).format(this.dateFormat);
       }
+      this.$emit("change", this.dateValue);
     }
   },
   mounted() {

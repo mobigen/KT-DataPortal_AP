@@ -4,6 +4,7 @@
       type="text"
       class="text-area text-area--fixed scrollCustomize"
       @input="input = $event.target.value"
+      :placeholder="placeholder"
       :value="value"
       :rows="rows"
       @keydown="$emit('keydown', $event)"
