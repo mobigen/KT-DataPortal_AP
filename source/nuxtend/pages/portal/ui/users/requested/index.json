@@ -1,15 +1,16 @@
 {
   "ko": {
     "header": {
-      "id": "id",
-      "title": "제목",
-      "ctgry": "분류",
-      "size": "용량",
-      "startDt": "활용시작일",
-      "expiredDt": "만료일",
-      "legalReview": "법률검토",
-      "status": "처리상태",
-      "cnt": "활용횟수"
+      "use_dataset_id": "id",
+      "apyr": "신청자",
+      "data_nm": "데이터명",
+      "file_size": "용량",
+      "use_st_dt": "활용시작일",
+      "exp_date": "만료일",
+      "law_evl_conf_yn": "법률검토",
+      "trt_sttus": "처리상태",
+      "use_tmscnt": "활용횟수",
+      "apy_sbst": "신청내용<br>*활용목적"
     },
 
     "body": {
@@ -17,12 +18,12 @@
         "M": "Mobile",
         "T": "TV"
       },
-      "status": {
+      "trt_sttus": {
         "P": "처리중",
         "U": "활용중",
         "E": "만료"
       },
-      "legalReview": {
+      "law_evl_conf_yn": {
         "Y": "Y",
         "N": ""
       }
