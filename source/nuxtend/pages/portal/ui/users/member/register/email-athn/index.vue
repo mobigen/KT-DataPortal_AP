@@ -135,7 +135,7 @@ export default {
     },
     emailAthnSend(params) {
       return this.$axios.post(
-        `${this.$config.API_USERS_PREFIX}/user/emailAthnSend`,
+        `${this.$config.ROUTE_API_USERS_PREFIX}/user/emailAthnSend`,
         params
       );
     },
@@ -174,7 +174,7 @@ export default {
     },
     emailAthnCnfm(params) {
       return this.$axios.post(
-        `${this.$config.API_USERS_PREFIX}/user/emailAthnCnfm`,
+        `${this.$config.ROUTE_API_USERS_PREFIX}/user/emailAthnCnfm`,
         params
       );
     },

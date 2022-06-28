@@ -80,8 +80,8 @@ export const mutations = {
 export const actions = {
   setUrl(){ // SSR or CSR에 따른 URL 변경
     url = process.server
-      ? `http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}${process.env.API_BOARD_PREFIX}`  // SSR
-      : `${this.$config.API_BOARD_PREFIX}`  // CSR
+      ? `http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}${process.env.ROUTE_API_BOARD_PREFIX}`  // SSR
+      : `${this.$config.ROUTE_API_BOARD_PREFIX}`  // CSR
   },
   /**
    * 문의하기

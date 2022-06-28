@@ -105,7 +105,7 @@ export default {
       };
 
       const data = await this.$axios.get(
-        `${this.$config.API_USERS_PREFIX}/auth/socialLogin`,
+        `${this.$config.ROUTE_API_USERS_PREFIX}/auth/socialLogin`,
         config
       );
 

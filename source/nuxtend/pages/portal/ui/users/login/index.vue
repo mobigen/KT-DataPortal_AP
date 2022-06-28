@@ -64,13 +64,13 @@
         구글
       </button>
       <br />
-      <button
+      <!-- <button
         type="button"
         @click="onSocialLogin('facebook')"
         class="button button--danger button--lg w-12_12"
       >
         페이스북
-      </button>
+      </button> -->
     </form>
   </div>
 </template>
@@ -170,32 +170,16 @@ export default {
         `${this.$config.API_USERS_PREFIX}/oauth2/authorization/` + socialType;
     },
     getPublicKey() {
-      return this.$axios.get(`${this.$config.API_USERS_PREFIX}/auth/key`);
+      return this.$axios.get(`${this.$config.ROUTE_API_USERS_PREFIX}/auth/key`);
     },
     auth(username, password) {
-      console.log("password : ", password);
-      console.log(
-        "encodeURIComponent(password) : ",
-        encodeURIComponent(password)
-      );
-      // const config = {
-      //   params: {
-      //     userId: username,
-      //     password: encodeURIComponent(password)
-      //   }
-      // };
-      // return this.$axios.get(
-      //   `${this.$config.API_USERS_PREFIX}/auth/login`,
-      //   config
-      // );
-      
       const params = {
         userId: username,
         password: password
       };
 
       return this.$axios.post(
-        `${this.$config.API_USERS_PREFIX}/auth/login`,
+        `${this.$config.ROUTE_API_USERS_PREFIX}/auth/login`,
         params
       );
     },

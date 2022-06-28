@@ -201,7 +201,7 @@ export default {
     },
     async searchDataSet() {
       this.viewSearchDataSet = true
-      let res = await this.$axios.get(`${this.$config.API_BOARD_PREFIX}/corpSupport/getTestDataSetList?searchKeyworld=${this.searchKeyword}`)
+      let res = await this.$axios.get(`${this.$config.ROUTE_API_BOARD_PREFIX}/corpSupport/getTestDataSetList?searchKeyworld=${this.searchKeyword}`)
       this.dataSetTotCnt = res.totCnt
       this.dataSetList = res.list
     },
@@ -255,7 +255,7 @@ export default {
         ...this.result,
         dataSetList: this.selectedDataList
       }
-      let res = await this.$axios.post(`${this.$config.API_BOARD_PREFIX}/corpSupport/save`, param)
+      let res = await this.$axios.post(`${this.$config.ROUTE_API_BOARD_PREFIX}/corpSupport/save`, param)
       if(res.message === 'success') alert('성공적으로 신청되었습니다.')
       else alert('error')
     }

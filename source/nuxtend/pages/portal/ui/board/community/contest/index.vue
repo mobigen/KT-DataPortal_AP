@@ -108,7 +108,7 @@ export default {
       this.$router.push({path: this.$route.path, query: this.query})
     },
     async getDataList() {
-      let res = await this.$axios.get(`${this.$config.API_BOARD_PREFIX}/contest/list?searchKeyword=${this.searchKeyword}&rowsPerPage=${this.rowsPerPage}
+      let res = await this.$axios.get(`${this.$config.ROUTE_API_BOARD_PREFIX}/contest/list?searchKeyword=${this.searchKeyword}&rowsPerPage=${this.rowsPerPage}
       &startRow=${this.startRow}&currentPage=${this.currentPage}`)
       //console.log(res)
       this.list = res.list

@@ -180,7 +180,7 @@ export default {
       // alert(id)
       let params = {eduId: id}
       console.log('파람파람파람:', params)
-      this.$axios(`${this.$config.API_BOARD_PREFIX}/dataEdu/updateCnt`, {params})
+      this.$axios(`${this.$config.ROUTE_API_BOARD_PREFIX}/dataEdu/updateCnt`, {params})
         .then(response => {})
         .catch(error =>{})
       this.$router.push({path: `/portal/ui/board/community/data-edu/detail/${id}`, query: this.query})

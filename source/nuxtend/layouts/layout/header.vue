@@ -67,7 +67,7 @@ export default {
     ...mapActions("users/user", ["clearUserInfo"]),
     async logout() {
       const userAccessToken = await this.$axios.get(
-        `${this.$config.API_USERS_PREFIX}/auth/logout`
+        `${this.$config.ROUTE_API_USERS_PREFIX}/auth/logout`
       );
       // console.log('userAccessToken : ', userAccessToken)
       await this.$cookies.remove(this.$config.USER_ACCESS_TOKEN_NAME);
