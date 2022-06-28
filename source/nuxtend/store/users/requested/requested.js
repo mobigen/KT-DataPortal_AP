@@ -12,18 +12,20 @@ export const mutations = {
   }
 };
 
-import sampleRequestedData from "./_requested.json";
+// import sampleRequestedData from "./_requested.json";
 
 export const actions = {
   getRequestedData({ commit }, requestParam) {
-    // this.$axios
-    //   .get(this.$config.API_ROUTER_PREFIX + "/getRequestedData")
-    //   .then((d) => {
-    //     // commit("setRequestedData", d);
-    //   });
-
+    // TODO : 요청데이터 목록 조회시, 조회 filter 처리 안됨
     console.log(requestParam);
-    // sample data load
-    commit("setRequestedData", sampleRequestedData);
+    this.$axios
+      .get(this.$config.API_META_PREFIX + "/getUseBoardDataList")
+      .then((d) => {
+        commit("setRequestedData", d);
+      });
+
+    // console.log(requestParam);
+    // // sample data load
+    // commit("setRequestedData", sampleRequestedData);
   }
 };

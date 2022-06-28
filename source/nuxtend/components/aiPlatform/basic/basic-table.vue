@@ -110,6 +110,11 @@ export default {
   name: "basic-table",
   extends: {},
   props: {
+    headerHasLocale: {
+      type: Boolean,
+      require: false,
+      default: false
+    },
     headerList: {
       type: Array,
       require: true
@@ -194,12 +199,23 @@ export default {
       this.$emit("keyAction", rowKey, keyAction);
     },
     getHeaderLocale(headerEngNm) {
-      return Object.prototype.hasOwnProperty.call(
-        this.headerLocale,
-        headerEngNm
-      )
-        ? this.headerLocale[headerEngNm]
-        : headerEngNm;
+      if (this.headerHasLocale) {
+          let headerObj = this.headerList.find((el) => {
+            return el.column_name === headerEngNm;
+          });
+          if (headerObj === undefined) {
+            console.log(headerEngNm);
+          } else {
+            return headerObj.kor_column_name;
+          }
+        } else {
+          return Object.prototype.hasOwnProperty.call(
+            this.headerLocale,
+            headerEngNm
+          )
+            ? this.headerLocale[headerEngNm]
+            : headerEngNm;
+      }
     },
     getBodyLocale(key, data) {
       return Object.prototype.hasOwnProperty.call(this.bodyLocale, key)
