@@ -36,16 +36,16 @@ export default defaultAlert;
  * @param content
  * @returns {Promise<*>}
  */
-export const successAlert = (content) => {
+export const successAlert = (params) => {
   const locale = $nuxt.$options.i18n.locale;
   let i18n = i18nGenerator(locale, messages);
   let props = {
-    title: i18n.t("alert-success.title"),
+    title: params.title ? params.title : i18n.t("alert-success.title"),
     iconTheme: i18n.t("alert-success.icon-theme"),
     confirmButtonTheme: i18n.t("alert-success.confirm-button-theme"),
     confirmButtonText: i18n.t("alert-success.confirm-button-text"),
     type: i18n.t("alert-success.type"),
-    content: content,
+    content: params.content,
     width: "450"
   };
 

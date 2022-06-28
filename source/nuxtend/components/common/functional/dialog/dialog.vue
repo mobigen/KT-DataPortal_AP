@@ -32,6 +32,7 @@
             </button>
             <button
               class="button button--primary button--lg"
+              :disabled="confirmButtonDisabled"
               @click="onConfirm"
             >
               <span class="button__text"> {{ confirmButtonText }} </span>
@@ -79,6 +80,10 @@ export default {
       default: function () {
         return this.$t("dialog.confirm");
       }
+    },
+    confirmButtonDisabled: {
+      type: Boolean,
+      default: false
     }
   },
   mounted() {

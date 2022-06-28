@@ -7,6 +7,8 @@
     @keyup.enter="$emit('enterEvent')"
     :value="inputData"
     :placeholder="placeholder"
+    :disabled="disabled"
+    :readonly="readonly"
   />
 </template>
 
@@ -31,6 +33,16 @@ export default {
       type: String,
       required: false,
       default: "text"
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    readonly: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data() {
