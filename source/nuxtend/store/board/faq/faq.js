@@ -20,7 +20,7 @@ export const mutations = {
 };
 export const actions = {
   async getFaqListRes({commit},params){
-    const data = await this.$axios.get(`${this.$config.API_BOARD_PREFIX}/faq/list`, {params})
+    const data = await this.$axios.get(`${this.$config.ROUTE_API_BOARD_PREFIX}/faq/list`, {params})
     console.log("data",data)
     commit("setFaqListRes", data)
   }

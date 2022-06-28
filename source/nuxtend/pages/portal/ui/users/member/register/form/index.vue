@@ -413,7 +413,7 @@ export default {
         params: params
       };
       return this.$axios.get(
-        `${this.$config.API_USERS_PREFIX}/auth/isDupliacatedChk`,
+        `${this.$config.ROUTE_API_USERS_PREFIX}/auth/isDupliacatedChk`,
         config
       );
     },
@@ -551,7 +551,7 @@ export default {
     async createUser() {
       let param = this.user;
       const data = await this.$axios.post(
-        `${this.$config.API_USERS_PREFIX}/user/createUser`,
+        `${this.$config.ROUTE_API_USERS_PREFIX}/user/createUser`,
         param
       );
 
@@ -560,7 +560,7 @@ export default {
     async createSocialUser() {
       let param = this.user;
       const data = await this.$axios.post(
-        `${this.$config.API_USERS_PREFIX}/user/createSocialUser`,
+        `${this.$config.ROUTE_API_USERS_PREFIX}/user/createSocialUser`,
         param
       );
 

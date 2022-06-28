@@ -366,7 +366,7 @@ export default {
     },
     async logout() {
       const userAccessToken = await this.$axios.get(
-        `${this.$config.API_USERS_PREFIX}/auth/logout`
+        `${this.$config.ROUTE_API_USERS_PREFIX}/auth/logout`
       );
 
       await this.$cookies.remove(this.$config.USER_ACCESS_TOKEN_NAME);

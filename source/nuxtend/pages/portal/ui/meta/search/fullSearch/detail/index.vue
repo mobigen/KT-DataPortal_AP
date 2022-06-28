@@ -10,98 +10,59 @@
       <div class="button__right">
         <base-button
           class="button--2xl button--tertiary button-declaration"
-          title="바로활용"
+          title="요청하기"
           @click="onshowDialog('requestDialog')"
-          >바로활용</base-button
+          >요청하기</base-button
         >
       </div>
       <!-- 요청하기 Dialog Modal -->
       <Dialog
         dialog-name="requestDialog"
-        confirmButtonText="신청"
+        confirmButtonText="요청"
         @confirm="confirmBtnClick"
-        :width="'900px'"
-        :height="'900px'"
-        :confirmButtonDisabled="confirmButtonDisabled"
+        :width="'700px'"
+        :height="'740px'"
       >
         <div slot="body" class="modal__body">
           <div class="modal__body-head">
-            <h3>데이터 활용 신청하기</h3>
-            <p style="text-align: end">
-              <span style="color: red">*</span>필수 입력값입니다.
-            </p>
+            <h3>요청하기</h3>
           </div>
           <div class="modal__body-content">
             <ul class="modal__declaration">
               <li class="modal__body-item">
-                <div class="item__title">데이터명</div>
+                <div class="item__title">이름</div>
                 <div class="item__detail">
                   <base-input
-                    id="inp-data_nm"
-                    :inputData="detail.body.data_nm"
-                    :readonly="true"
+                    id="inp-name"
+                    :inputData="requestData.name"
+                    @input="setRequestData"
                   ></base-input>
-                  <span
-                    v-if="detail.body.law_evl_conf_yn === 'y'"
-                    style="color: red"
-                    >*법률검토필요</span
-                  >
                 </div>
               </li>
               <li class="modal__body-item">
-                <div class="item__title">신청자</div>
+                <div class="item__title">사원번호</div>
                 <div class="item__detail">
                   <base-input
-                    id="inp-apyr"
-                    :inputData="`${requestData.apyr} (${requestData.emp_num})`"
-                    :readonly="true"
+                    id="inp-emptyNum"
+                    :inputData="requestData.emptyNum"
+                    @input="setRequestData"
                   ></base-input>
                 </div>
               </li>
               <li class="modal__body-item">
                 <div class="item__title">
-                  신청내용 <span style="color: red">*</span> <br />
-                  (활용목적)
+                  활용목적
+                  <!-- <span class="blit_essential">*</span> -->
                 </div>
-                <base-textarea
+                <BaseTextarea
                   class="item__detail"
-                  id="inp-apy_sbst"
+                  id="inp-purposeOfUse"
                   rows="6"
-                  placeholder="데이터 신청 개요와 활용 목적을 입력하세요."
-                  :useCheckByte="false"
+                  placeholder="활용목적을 입력해주세요."
+                  :useCheckByte="true"
                   maxByte="4000"
                   @input="setRequestData"
-                ></base-textarea>
-              </li>
-              <li class="modal__body-item">
-                <div class="item__title">
-                  법률검토 <span style="color: red">*</span>
-                </div>
-                <div class="item__detail">
-                  <base-textarea
-                    id="inp-law_evl_conf"
-                    rows="6"
-                    placeholder="법률검토 대상 데이터가 포함되어 있으면 법률검토 내용을 입력하거나 파일로 첨부하세요."
-                    :useCheckByte="false"
-                    maxByte="4000"
-                    @input="setRequestData"
-                  ></base-textarea>
-                  <div>
-                    <GroupFileAttach></GroupFileAttach>
-                  </div>
-                </div>
-              </li>
-              <li class="modal__body-item">
-                <div class="item__title">
-                  기간설정 <span style="color: red">*</span>
-                </div>
-                <div class="item__detail">
-                  <date-picker
-                    :range="true"
-                    :endDate="endDate"
-                    @change="setDatePicker"
-                  ></date-picker>
-                </div>
+                ></BaseTextarea>
               </li>
             </ul>
           </div>
@@ -964,7 +925,6 @@
 </template>
 
 <script type="text/javascript">
-import moment from "moment";
 import BaseRadio from "@common/atoms/base-radio/base-radio";
 import BaseTag from "@common/atoms/base-tag/base-tag";
 import BaseButton from "@common/atoms/base-button/base-button";
@@ -976,8 +936,6 @@ import Dialog from "@functional/dialog/dialog.vue";
 import ViewTable from "@common/organisms/view-table/view-table";
 import BaseBadge from "@common/atoms/base-badge/base-badge";
 import BaseInput from "@common/atoms/base-input/base-input";
-import DatePicker from "@functional/datepicker/date-picker";
-import { successAlert, errorAlert } from "@functional/alert/alert-default";
 
 import { mapActions, mapGetters } from "vuex";
 
@@ -992,9 +950,12 @@ export default {
   data() {
     return {
       isPreview: false,
-      requestData: {},
-      endDate: moment().add(1, "Y").format(),
-      confirmButtonDisabled: false
+      requestData: {
+        bizMetaDataset: this.$route.query.postId,
+        name: "홍길동",
+        emptyNum: "20161665",
+        purposeOfUse: ""
+      }
     };
   },
   methods: {
@@ -1013,42 +974,13 @@ export default {
       });
     },
     confirmBtnClick(name) {
-      if (this.requestData.apy_sbst === "") {
-        errorAlert("신청내용은 필수값입니다. 입력해주세요.");
-        return;
-      }
-
+      alert(name);
       console.log(this.requestData);
-
-      successAlert({
-        title: "데이터 활용 신청이 완료되었습니다.",
-        content:
-          "활용신청하신 데이터는 마이페이지 > 내 활용내역에서 확인할 수 있습니다."
-      });
-
-      this.resetRequestData();
       this.$modal.hide(name);
     },
     setRequestData({ id, input }) {
       const key = id.split("-").pop();
       this.requestData[key] = input;
-
-      this.confirmButtonDisabled = this.requestData["law_evl_conf"] === "";
-    },
-    setDatePicker(e) {
-      this.requestData["start_date"] = e.at(0);
-      this.requestData["end_date"] = e.at(1);
-    },
-    resetRequestData() {
-      this.requestData = {
-        biz_dataset_id: this.$route.query.postId,
-        apyr: "홍길동",
-        emp_num: "20161665",
-        apy_sbst: "",
-        law_evl_conf: "",
-        start_date: "",
-        end_date: ""
-      };
     }
   },
   created() {
@@ -1058,8 +990,6 @@ export default {
     // this.getBizMetaDetail(rowId);
 
     this.getDetail(rowId);
-    this.resetRequestData();
-    this.confirmButtonDisabled = this.detail.body.law_evl_conf_yn === "y";
   },
   components: {
     BaseRadio,
@@ -1072,8 +1002,7 @@ export default {
     GroupFileAttach,
     ViewTable,
     BaseBadge,
-    BaseInput,
-    DatePicker
+    BaseInput
   }
 };
 </script>

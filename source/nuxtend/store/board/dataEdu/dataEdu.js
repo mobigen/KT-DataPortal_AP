@@ -44,12 +44,12 @@ export const mutations = {
 export const actions ={
   async getDataEduList({commit}, params){
     console.log(params)
-    const data = await this.$axios(`${this.$config.API_BOARD_PREFIX}/dataEdu/list`, {params});
+    const data = await this.$axios(`${this.$config.ROUTE_API_BOARD_PREFIX}/dataEdu/list`, {params});
     console.log(data)
     commit("setDataEduList", data);
   },
   getDataEduDetail({commit}, params){
-    this.$axios(`${this.$config.API_BOARD_PREFIX}/dataEdu/detail`,{params})
+    this.$axios(`${this.$config.ROUTE_API_BOARD_PREFIX}/dataEdu/detail`,{params})
       .then(response =>{
         console.log(response)
         commit("setDataEduDetail", response)

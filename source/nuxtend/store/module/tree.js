@@ -66,7 +66,7 @@ export const actions = {
     const CONSTANTS = rootGetters["defaults/constants/CONSTANTS"];
 
     this.$axios
-      .get((this.treeRestApi = this.$config.API_META_PREFIX + param.api))
+      .get((this.treeRestApi = this.$config.ROUTE_API_META_PREFIX + param.api))
       .then((d) => {
         // ArrayList 형태의 데이터를, children 형태의 데이터로 변경처리한다.
         let jsonHelper = {};
@@ -132,14 +132,14 @@ export const actions = {
 
   async updateNodeInfo({ commit }, param) {
     await this.$axios.post(
-      this.$config.API_META_PREFIX + "/updateCategory",
+      this.$config.ROUTE_API_META_PREFIX + "/updateCategory",
       param
     );
   },
 
   async addChildCategory({ commit }, param) {
     await this.$axios.post(
-      this.$config.API_META_PREFIX + "/addChildCategory",
+      this.$config.ROUTE_API_META_PREFIX + "/addChildCategory",
       param
     );
   }

@@ -96,7 +96,7 @@ export default {
   },
   methods: {
     async getContest() {
-      let res = await this.$axios.get(`${this.$config.API_BOARD_PREFIX}/contest/view?conteId=${this.conteId}`)
+      let res = await this.$axios.get(`${this.$config.ROUTE_API_BOARD_PREFIX}/contest/view?conteId=${this.conteId}`)
       this.contest = res
     },
     goRegister() {

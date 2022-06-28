@@ -79,7 +79,7 @@ export default {
       this.$router.push(`/portal/ui/board/information/qna`)
     },
     async downloadFile(fileId,fileName){
-      const res = await axios.get(`${this.$config.API_BOARD_PREFIX}/file/download?fileId=${fileId}`,{responseType:"blob"})
+      const res = await axios.get(`${this.$config.ROUTE_API_BOARD_PREFIX}/file/download?fileId=${fileId}`,{responseType:"blob"})
       if(process.client){
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");

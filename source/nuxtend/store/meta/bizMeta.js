@@ -61,7 +61,7 @@ export const actions = {
     // param with pageInfo (start, end...)
     const paramAPI = `?perPage=${paging.itemsPerPage}&curPage=${paging.page}`;
     this.$axios
-      .get(this.$config.API_META_PREFIX + "/metaNameList" + paramAPI)
+      .get(this.$config.ROUTE_API_META_PREFIX + "/metaNameList" + paramAPI)
       .then((d) => {
         commit("setMetaNameList", d);
 
@@ -78,20 +78,20 @@ export const actions = {
   },
   async getUseMetaNameList({ commit }) {
     await this.$axios
-      .get(this.$config.API_META_PREFIX + "/useMetaNameList")
+      .get(this.$config.ROUTE_API_META_PREFIX + "/useMetaNameList")
       .then((d) => {
         commit("setUseMetaNameList", d);
       });
   },
   async addMetaName({}, obj) {
     await this.$axios.post(
-      this.$config.API_META_PREFIX + "/insertMetaName",
+      this.$config.ROUTE_API_META_PREFIX + "/insertMetaName",
       obj
     );
   },
   removeMetaName({ dispatch }, rowKey) {
     this.$axios
-      .delete(this.$config.API_META_PREFIX + "/deleteMetaName", {
+      .delete(this.$config.ROUTE_API_META_PREFIX + "/deleteMetaName", {
         params: { nameId: rowKey }
       })
       .then(() => {
@@ -105,13 +105,13 @@ export const actions = {
     }
 
     await this.$axios.post(
-      this.$config.API_META_PREFIX + "/updateMetaName",
+      this.$config.ROUTE_API_META_PREFIX + "/updateMetaName",
       obj
     );
   },
   getBizMetaList({ commit }) {
     this.$axios
-      .get(this.$config.API_META_PREFIX + "/getBizMetaList")
+      .get(this.$config.ROUTE_API_META_PREFIX + "/getBizMetaList")
       .then((d) => {
         /*
          d.useRebuildBody = true;
@@ -130,7 +130,7 @@ export const actions = {
   getMetaNameDetail({ commit }, rowId) {
     if (rowId === undefined) {
       this.$axios
-        .get(this.$config.API_META_PREFIX + "/getMetaNameDetail")
+        .get(this.$config.ROUTE_API_META_PREFIX + "/getMetaNameDetail")
         .then((d) => {
           d.body = {
             kor_nm: "",
@@ -144,7 +144,9 @@ export const actions = {
     } else {
       this.$axios
         .get(
-          this.$config.API_META_PREFIX + "/getMetaNameDetail?nameId=" + rowId
+          this.$config.ROUTE_API_META_PREFIX +
+            "/getMetaNameDetail?nameId=" +
+            rowId
         )
         .then((d) => {
           commit("setMetaNameDetail", d);
@@ -154,7 +156,7 @@ export const actions = {
   async getBizMetaDetail({ commit }, rowId) {
     if (rowId === undefined) {
       await this.$axios
-        .get(this.$config.API_META_PREFIX + "/getBizMetaDetail")
+        .get(this.$config.ROUTE_API_META_PREFIX + "/getBizMetaDetail")
         .then((d) => {
           // d.useRebuildBody = true;
           commit("setBizMetaDetail", d);
@@ -162,7 +164,9 @@ export const actions = {
     } else {
       await this.$axios
         .get(
-          this.$config.API_META_PREFIX + "/getBizMetaDetail?datasetId=" + rowId
+          this.$config.ROUTE_API_META_PREFIX +
+            "/getBizMetaDetail?datasetId=" +
+            rowId
         )
         .then((d) => {
           // d.useRebuildBody = true;
@@ -172,14 +176,14 @@ export const actions = {
   },
   async getBizMetaForm({ commit }) {
     await this.$axios
-      .get(this.$config.API_META_PREFIX + "/getBizMetaForm")
+      .get(this.$config.ROUTE_API_META_PREFIX + "/getBizMetaForm")
       .then((d) => {
         commit("setBizMetaForm", d);
       });
   },
   removeBizMeta({ dispatch }, rowKey) {
     this.$axios
-      .delete(this.$config.API_META_PREFIX + "/deleteBizMeta", {
+      .delete(this.$config.ROUTE_API_META_PREFIX + "/deleteBizMeta", {
         params: { bizDatasetId: rowKey }
       })
       .then(() => {
@@ -192,7 +196,7 @@ export const actions = {
       return;
     }
     await this.$axios.post(
-      this.$config.API_META_PREFIX + "/insertBizMeta",
+      this.$config.ROUTE_API_META_PREFIX + "/insertBizMeta",
       dataList
     );
   },
@@ -202,21 +206,29 @@ export const actions = {
       return;
     }
 
-    await this.$axios.post(this.$config.API_META_PREFIX + "/updateBizMeta", {
-      bizDatasetId: rowKey,
-      dataList: dataList
-    });
+    await this.$axios.post(
+      this.$config.ROUTE_API_META_PREFIX + "/updateBizMeta",
+      {
+        bizDatasetId: rowKey,
+        dataList: dataList
+      }
+    );
   },
   getMetaMapList({ commit }) {
-    this.$axios.get(this.$config.API_META_PREFIX + "/metaMapList").then((d) => {
-      commit("setMetaMapList", d);
-    });
+    this.$axios
+      .get(this.$config.ROUTE_API_META_PREFIX + "/metaMapList")
+      .then((d) => {
+        commit("setMetaMapList", d);
+      });
   },
   async addMetaMap({}, list) {
     list.sort();
 
-    await this.$axios.post(this.$config.API_META_PREFIX + "/insertMetaMap", {
-      nm_id_list: list
-    });
+    await this.$axios.post(
+      this.$config.ROUTE_API_META_PREFIX + "/insertMetaMap",
+      {
+        nm_id_list: list
+      }
+    );
   }
 };

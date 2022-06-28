@@ -64,7 +64,7 @@ export default {
         params: params
       };
       return this.$axios.get(
-        `${this.$config.API_USERS_PREFIX}/auth/idSearch`,
+        `${this.$config.ROUTE_API_USERS_PREFIX}/auth/idSearch`,
         config
       );
     }

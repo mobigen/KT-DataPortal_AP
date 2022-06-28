@@ -78,7 +78,7 @@ export default {
       };
 
       return this.$axios.get(
-        `${this.$config.API_USERS_PREFIX}/auth/pwdSearch`,
+        `${this.$config.ROUTE_API_USERS_PREFIX}/auth/pwdSearch`,
         config
       );
     }
