@@ -4,7 +4,7 @@
     <li class="data-box" v-for="(item, index) in contents" :key="index">
       <a
         href="javascript:;"
-        @click="dataBoxClick(item.biz_dataset_id)"
+        @click="dataBoxClick(item[CONSTANTS.POST.POST_ID])"
         class="data-box__link"
       >
         <div class="data-box__information">
@@ -13,11 +13,7 @@
               <!-- 제공기관 로고 (카드형일때만 보임) -->
               <div class="badge--provider-logo">
                 <img
-                  v-if="
-                    item.logo !== null &&
-                    item.logo !== undefined &&
-                    item.logo.length > 0
-                  "
+                  v-if="item.logo"
                   :src="item.logo"
                   :alt="item.data_prv_desk"
                 />
@@ -27,23 +23,29 @@
               <base-badge class="badge--w-gray" v-if="item.data_type">
                 <span class="badge__label">{{ item.data_type }}</span>
               </base-badge>
-              <base-badge class="badge--w-primary">
+              <base-badge v-if="item.ctgry" class="badge--w-primary">
                 <span class="badge__label">{{
                   item.ctgry.split(",").pop()
                 }}</span>
               </base-badge>
-              <base-badge class="badge--w-primary badge--provider">
+              <base-badge
+                v-if="item.data_prv_desk"
+                class="badge--w-primary badge--provider"
+              >
                 <span class="badge__label">{{ item.data_prv_desk }}</span>
               </base-badge>
             </div>
             <div class="data-options" @click.stop>
               <base-checkbox
                 class="checkbox--favorite"
-                :name="'myFavoriteData' + item.biz_dataset_id"
+                :name="'myFavoriteData' + item[CONSTANTS.POST.POST_ID]"
                 :checkbox-id="
-                  'data-box__check-myfavoritedata' + item.biz_dataset_id
+                  'data-box__check-myfavoritedata' +
+                  item[CONSTANTS.POST.POST_ID]
                 "
-                :checked="myFavoriteDataList.includes(item.biz_dataset_id)"
+                :checked="
+                  myFavoriteDataList.includes(item[CONSTANTS.POST.POST_ID])
+                "
                 @changeData="myFavoriteDataClick"
               >
                 <template v-slot:label>관심데이터 추가</template>
@@ -52,6 +54,7 @@
           </div>
           <div class="data-box__content">
             <strong
+              v-if="item.data_nm"
               class="data-box__title"
               v-html="searchKeywordHighlight(item.data_nm)"
             >
@@ -59,7 +62,7 @@
             <!-- fileType 제거 -->
           </div>
           <div>
-            <p class="data-box__description">
+            <p v-if="item.data_desc" class="data-box__description">
               {{ item.data_desc }}
             </p>
           </div>
@@ -67,6 +70,7 @@
             <div class="data-box__details" @click.stop>
               <!-- tagList에만 버블링 이벤트 막는 방법 찾아서 수정필요 -->
               <basic-tag-list
+                v-if="item.kywrd"
                 :tagList="convertTagObj(item.kywrd)"
                 previousText="#"
                 :useCancelButton="false"
@@ -76,7 +80,7 @@
               <div class="data-box__details-group">
                 <dl>
                   <dt><span>수정일</span></dt>
-                  <dd>{{ item.ltst_amd_dt }}</dd>
+                  <dd v-if="item.list_amd_dt">{{ item.ltst_amd_dt }}</dd>
                   <dt><span>조회</span></dt>
                   <dd>1,222</dd>
                 </dl>
@@ -95,6 +99,7 @@ import BaseButton from "@common/atoms/base-button/base-button";
 import BaseTag from "@common/atoms/base-tag/base-tag.vue";
 import BaseCheckbox from "@common/atoms/base-checkbox/base-checkbox.vue";
 import BasicTagList from "@common/atoms/basic-tag-list/basic-tag-list";
+import { mapGetters } from "vuex";
 
 export default {
   name: "SearchList",
@@ -130,7 +135,10 @@ export default {
   computed: {
     contents: function () {
       return this.list;
-    }
+    },
+    ...mapGetters({
+      CONSTANTS: "defaults/constants/CONSTANTS"
+    })
   },
   components: { BaseBadge, BaseButton, BaseTag, BaseCheckbox, BasicTagList },
   watch: {},

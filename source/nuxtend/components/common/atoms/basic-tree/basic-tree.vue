@@ -1,5 +1,5 @@
 <template lang="html">
-  <div :class="pDepth <= 1 ? 'search-filter__next' : 'search-filter__last'">
+  <div :class="pDepth <= 0 ? 'search-filter__next' : ''">
     <!--
     TODO : 퍼블에 없는 DIV로 개발에 필요하여 추가
     -->
