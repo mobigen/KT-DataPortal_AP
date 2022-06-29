@@ -1,5 +1,5 @@
 <template lang="html">
-  <div :class="pDepth <= 1 ? 'search-filter__next' : 'search-filter__last'">
+  <div :class="pDepth <= 0 ? 'search-filter__next' : ''">
     <!--
     TODO : 퍼블에 없는 DIV로 개발에 필요하여 추가
     -->
@@ -10,7 +10,7 @@
     >
       <base-checkbox
         class="checkbox--aside"
-        :name="treeData[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
+        :name="treeData[treeKey[CONSTANTS.TRE E.TREE_KEY.NODE_ID]]"
         :checkbox-id="treeData[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
         @changeData="checkboxClick"
         :checked="spanSelected"
