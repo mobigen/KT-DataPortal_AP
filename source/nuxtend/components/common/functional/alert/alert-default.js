@@ -3,6 +3,16 @@ import AlertDefault from "./alert-default.vue";
 import i18nGenerator from "@/utility/i18n-generator";
 import messages from "./alert-default.json";
 
+function getLocale() {
+  let locale = null;
+  try {
+    locale = $nuxt.$options.i18n.locale;
+  } catch (e) {
+    console.error(e);
+  }
+  return locale;
+}
+
 /**
  * 기본적인 Alert 창의 원형
  * @param props
@@ -37,7 +47,7 @@ export default defaultAlert;
  * @returns {Promise<*>}
  */
 export const successAlert = (params) => {
-  const locale = $nuxt.$options.i18n.locale;
+  const locale = getLocale();
   let i18n = i18nGenerator(locale, messages);
   let props = {
     title: params.title ? params.title : i18n.t("alert-success.title"),
@@ -66,7 +76,7 @@ export const successAlert = (params) => {
  * @returns {Promise<*>}
  */
 export const errorAlert = (params) => {
-  const locale = $nuxt.$options.i18n.locale;
+  const locale = getLocale();
   let i18n = i18nGenerator(locale, messages);
   let props = {
     title: params.title ? params.title : i18n.t("alert-error.title"),
@@ -90,7 +100,7 @@ export const errorAlert = (params) => {
 };
 
 export const confirmAlert = (content, events) => {
-  const locale = $nuxt.$options.i18n.locale;
+  const locale = getLocale();
   let i18n = i18nGenerator(locale, messages);
   let props = {
     title: i18n.t("alert.confirm"),
