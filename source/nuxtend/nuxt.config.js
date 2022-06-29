@@ -134,7 +134,7 @@ export default {
     //   }
     // ],
     [
-      "/portal/analysis/api",
+      "/analysis/portal/api",
       {
         target: process.env.API_ANALYSIS_URL,
         changeOrigin: true,
@@ -142,7 +142,7 @@ export default {
       }
     ],
     [
-      "/portal/board/api",
+      "/board/portal/api",
       {
         target: process.env.API_BOARD_URL,
         changeOrigin: true,
@@ -150,7 +150,7 @@ export default {
       }
     ],
     [
-      "/portal/users/api",
+      "/users/portal/api",
       {
         target: process.env.API_USER_URL,
         changeOrigin: true,
@@ -158,7 +158,7 @@ export default {
       }
     ],
     [
-      "/route/portal/users/api",
+      "/route/users/portal/api",
       {
         target: process.env.API_ROUTE_URL,
         changeOrigin: true,
@@ -166,12 +166,11 @@ export default {
       }
     ],
     [
-      "/route/portal/meta/api",
+      "/route/meta/portal/api",
       {
         target: process.env.API_ROUTE_URL,
-        pathRewrite: { "/route/portal/meta/api": "/route/portal/api/meta" }
-        // changeOrigin: true,
-        // secure: false
+        changeOrigin: true,
+        secure: false
       }
     ],
     [
