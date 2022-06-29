@@ -10,7 +10,7 @@
     >
       <base-checkbox
         class="checkbox--aside"
-        :name="treeData[treeKey[CONSTANTS.TRE E.TREE_KEY.NODE_ID]]"
+        :name="treeData[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
         :checkbox-id="treeData[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
         @changeData="checkboxClick"
         :checked="spanSelected"
