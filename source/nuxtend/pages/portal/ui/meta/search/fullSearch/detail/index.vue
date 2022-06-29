@@ -36,15 +36,13 @@
               <li class="modal__body-item">
                 <div class="item__title">데이터명</div>
                 <div class="item__detail">
-                  <!--                  <base-input-->
-                  <!--                    id="inp-data_nm"-->
-                  <!--                    :inputData="detail.body.data_nm"-->
-                  <!--                    :readonly="true"-->
-                  <!--                  ></base-input>-->
-                  <!--                  <span-->
-                  <!--                    v-if="detail.body.law_evl_conf_yn === 'y'"-->
-                  <!--                    style="color: red"-->
-                  <!--                    >*법률검토필요</span-->
+                  <base-input
+                    id="inp-data_nm"
+                    :inputData="popupTitle"
+                    :readonly="true"
+                  ></base-input>
+                  <span v-if="needConfirm" style="color: red"
+                    >*법률검토필요</span
                   >
                 </div>
               </li>
@@ -985,16 +983,25 @@ export default {
   name: "Index",
   layout: "katech/katech",
   computed: {
-    ...mapGetters({
-      detail: "meta/keyword-search/detail"
-    })
+    detail() {
+      const vuex = this.$store.getters["meta/keyword-search/detail"];
+
+      if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+        this.popupTitle = vuex.body.data_nm;
+        this.confirmButtonDisabled = vuex.body.law_evl_conf_yn === "y";
+        this.needConfirm = vuex.body.law_evl_conf_yn === "y";
+      }
+      return vuex;
+    }
   },
   data() {
     return {
       isPreview: false,
       requestData: {},
       endDate: moment().add(1, "Y").format(),
-      confirmButtonDisabled: false
+      confirmButtonDisabled: false,
+      popupTitle: null,
+      needConfirm: false
     };
   },
   methods: {
@@ -1054,14 +1061,10 @@ export default {
   created() {
     const rowId = this.$route.query.postId;
 
-    // this.getDetail(rowId);
-    // this.resetRequestData();
+    this.getDetail(rowId);
+    this.resetRequestData();
   },
-  mounted() {
-    // if (this.detail.body.law_evl_conf_yn) {
-    //   this.confirmButtonDisabled = this.detail.body.law_evl_conf_yn === "y";
-    // }
-  },
+  mounted() {},
   components: {
     BaseRadio,
     BaseButton,
