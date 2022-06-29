@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <h3>{{ tableTitle }}</h3>
+    <h3 v-if="tableTitle">{{ tableTitle }}</h3>
     <table class="formbox formbox--row">
       <colgroup v-for="c in colgroupArray">
         <col :style="'width: ' + c" />
@@ -167,7 +167,7 @@ export default {
         if (headerObj === undefined) {
           console.log(headerEngNm);
         } else {
-          return headerObj.kor_name;
+          return headerObj.kor_column_name;
         }
       } else {
         return Object.prototype.hasOwnProperty.call(

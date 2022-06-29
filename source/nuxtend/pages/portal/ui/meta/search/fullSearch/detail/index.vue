@@ -36,15 +36,15 @@
               <li class="modal__body-item">
                 <div class="item__title">데이터명</div>
                 <div class="item__detail">
-                  <base-input
-                    id="inp-data_nm"
-                    :inputData="detail.body.data_nm"
-                    :readonly="true"
-                  ></base-input>
-                  <span
-                    v-if="detail.body.law_evl_conf_yn === 'y'"
-                    style="color: red"
-                    >*법률검토필요</span
+                  <!--                  <base-input-->
+                  <!--                    id="inp-data_nm"-->
+                  <!--                    :inputData="detail.body.data_nm"-->
+                  <!--                    :readonly="true"-->
+                  <!--                  ></base-input>-->
+                  <!--                  <span-->
+                  <!--                    v-if="detail.body.law_evl_conf_yn === 'y'"-->
+                  <!--                    style="color: red"-->
+                  <!--                    >*법률검토필요</span-->
                   >
                 </div>
               </li>
@@ -1053,13 +1053,14 @@ export default {
   },
   created() {
     const rowId = this.$route.query.postId;
-    // const rowId = "830cc064-62a7-46dc-a5b1-04da598c38c0";
-    // TODO :
-    // this.getBizMetaDetail(rowId);
 
-    this.getDetail(rowId);
-    this.resetRequestData();
-    this.confirmButtonDisabled = this.detail.body.law_evl_conf_yn === "y";
+    // this.getDetail(rowId);
+    // this.resetRequestData();
+  },
+  mounted() {
+    // if (this.detail.body.law_evl_conf_yn) {
+    //   this.confirmButtonDisabled = this.detail.body.law_evl_conf_yn === "y";
+    // }
   },
   components: {
     BaseRadio,
