@@ -150,7 +150,8 @@
 
 .text-input-group__clear-button {
   @include button-normal;
-  @include position-right-center(6px);
+  @include position-right-center(15px);
+  margin-right: rem(15px); 
   width: rem(18px);
   height: rem(18px);
   padding: 0;
@@ -172,15 +173,13 @@
     }
   }
 
-  // 뒤에 search-button 있는 경우
-  &:not(&:last-child) {
+  // 뒤에 search-button 있는 경우 2022-06-29 DEL
+  /* &:not(&:last-child) {
     right: $spacing-sm;
-  }
+  } */
 }
-
+  //검색버튼 positoin 2022-06-29 DEL
 .text-input-group__search-button {
-  @include position-right-center(1px);
-  z-index: z("float");
 
   .svg-icon {
     width: rem(22px);

@@ -8,37 +8,30 @@
   overflow: hidden;
   flex-grow: 1;
 
-  .badge, .badge__label {
-    @include text-overflow();
-    line-height: rem(26px);     
-    color: #333;
-  }
-
   .badge + .badge {
-    margin: 0 0 0 rem(10px); 
+    margin: 0 0 0 rem(10px);
   }
 
   .badge {
     position: relative;
 
     &:before {
-      content: "";    
+      content: "";
       position: absolute;
       left: 0;
       top: 50%;
       width: rem(1px);
       height: rem(14px);
       margin-top: rem(-7px);
-      background-color: $ui-04;      
-      
-    }        
+      background-color: $ui-04;
+    }
     &:first-child:before {
       content: none;
-    }  
+    }
   }
 }
 
-.badge--icon{
+.badge--icon {
   width: rem(24px);
 }
 
@@ -53,14 +46,20 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  min-width: rem(70px);
   height: rem(24px);
-  padding: 0 $spacing-2xs;
+  padding: 0 $spacing-sm;
   white-space: nowrap;
   user-select: none;
   border-radius: $field-border-radius;
   background-color: $hover-row;
-  color: $text-03;
+  color: $gy-02;
+  text-align: center;
   cursor: default;
+
+  &--rounded {
+    border-radius: rem(12px);
+  }
 
   &.badge--icon {
     padding: rem(3px);
@@ -68,8 +67,7 @@
 }
 
 .badge__label {
-  @include line-height("heading");
-  @include font-weight("regular"); 
+  line-height: 1;
 }
 
 // 벤더
@@ -84,6 +82,10 @@
   @include font-size("14");
   height: rem(32px);
   padding: 0 $spacing-xs;
+
+  &--rounded {
+    border-radius: rem(16px);
+  }
 
   &.badge--icon {
     width: rem(32px);
@@ -100,6 +102,10 @@
 .badge--sm {
   height: rem(18px);
 
+  &--rounded {
+    border-radius: rem(9px);
+  }
+
   &.badge--icon {
     width: rem(18px);
     padding: 0;
@@ -112,14 +118,9 @@
 }
 
 // -------------------------
-// theme별 mixin
+// theme color mixin
 // -------------------------
-@mixin badge-theme(
-  $bg-color,
-  $icon-color, 
-  $font-color,
-  $border-color: false
-) {
+@mixin badge-theme($bg-color, $icon-color, $font-color, $border-color: false) {
   background-color: $bg-color;
   border-radius: rem(3px);
   color: $font-color;
@@ -130,47 +131,63 @@
 
   @if ($border-color) {
     border: 1px solid $border-color;
-    
+
     .badge__label {
       color: inherit;
-    } 
+    }
   }
-}
-
-.badge--outline {
-  @include badge-theme($ui-02, $basic, $basic, $line2);
 }
 
 .badge--primary {
   @include badge-theme($primary, $text-04, $text-04);
 }
 
-.badge--primary-outline {
-  @include badge-theme($ui-02, $primary, $primary, $primary);
-}
-
 .badge--secondary {
   @include badge-theme($secondary, $text-04, $text-04);
 }
 
-.badge--secondary-outline {
-  @include badge-theme($ui-02, $secondary, $secondary, $secondary);
-}
-
 .badge--negative {
-  @include badge-theme(#f26c4f, $text-04, $text-04);
-}
-
-.badge--negative-outline {
-  @include badge-theme($ui-02, #f26c4f, #f26c4f, #f26c4f);
+  @include badge-theme($negative, $text-04, $text-04);
 }
 
 .badge--disabled {
-  @include badge-theme($ui-05, $text-04, $text-04);
+  @include badge-theme($ui-05, $text-04, $text-04, $line2);
+}
+
+// -------------------------
+// theme border color mixin
+// -------------------------
+@mixin badge-theme-outline($icon-color, $font-color, $border-color: false) {
+  border: 1px solid currentColor;
+  background-color: $ui-02;
+  color: $font-color;
+
+  .badge__icon {
+    fill: $icon-color;
+  }
+  @if ($border-color) {
+    border: 1px solid $border-color;
+  }
+}
+
+.badge--outline {
+  @include badge-theme-outline($basic, $gy-02, $line2);
+}
+
+.badge--primary-outline {
+  @include badge-theme-outline($primary, $primary-dark, $primary);
+}
+
+.badge--secondary-outline {
+  @include badge-theme-outline($secondary, $secondary);
+}
+
+.badge--negative-outline {
+  @include badge-theme-outline(#f26c4f, #f26c4f);
 }
 
 .badge--disabled-outline {
-  @include badge-theme($ui-02, $ui-07, $ui-07, $line2);
+  @include badge-theme-outline($line2, $line2);
 }
 
 .badge--w-gray {
@@ -200,7 +217,7 @@
 }
 
 .badge--filetype-01 {
-  @include badge-theme(#F0FFF4, #2F855A, #2F855A);
+  @include badge-theme(#f0fff4, #2f855a, #2f855a);
   border-radius: 1px;
   border: none;
   height: rem(20px);
@@ -215,7 +232,7 @@
 }
 
 .badge--filetype-02 {
-  @include badge-theme(#EBF8FF, #2B6CB0, #2B6CB0);
+  @include badge-theme(#ebf8ff, #2b6cb0, #2b6cb0);
   border-radius: 1px;
   border: none;
   height: rem(20px);
@@ -230,7 +247,7 @@
 }
 
 .badge--filetype-03 {
-  @include badge-theme(#FAF5FF, #6B46C1, #6B46C1);
+  @include badge-theme(#faf5ff, #6b46c1, #6b46c1);
   border-radius: 1px;
   border: none;
   height: rem(20px);
@@ -245,7 +262,7 @@
 }
 
 .badge--filetype-04 {
-  @include badge-theme(#FFF5F5, #C53030, #C53030);
+  @include badge-theme(#fff5f5, #c53030, #c53030);
   border-radius: 1px;
   border: none;
   height: rem(20px);
@@ -260,7 +277,7 @@
 }
 
 .badge--filetype-05 {
-  @include badge-theme(#FFFFF0, #B7791F, #B7791F);
+  @include badge-theme(#fffff0, #b7791f, #b7791f);
   border-radius: 1px;
   border: none;
   height: rem(20px);
@@ -272,16 +289,4 @@
     @include font-size("12");
     @include font-weight("regular");
   }
-}  
-
-// -------------------------
-// theme별 outline mixin
-// -------------------------
-@mixin badge-theme-outline($border-color, $icon-color, $font-color) {
-  background-color: $border-color;
-  color: $font-color;
-  .badge__icon {
-    fill: $icon-color;
-  }
 }
-  

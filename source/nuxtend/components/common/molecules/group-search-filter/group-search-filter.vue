@@ -1,172 +1,86 @@
 <template lang="html">
   <div class="search-filter">
     <div class="search-filter__head">
-      <base-checkbox
-        class="checkbox--aside"
-        name="searchFilterAll"
-        checkbox-id="searchFilterAll1"
-        @changeData="allSelectClick"
-      >
-        <template v-slot:label>전체선택</template>
+      <base-checkbox name="searchFilterAll" checkbox-id="searchFilterAll1">
+        <template v-slot:label>
+          <span>그룹선택</span><span>(5,307건)</span>
+        </template>
       </base-checkbox>
     </div>
-
-    <!--
-     Tree 영역
-     Tree Component가 재귀적으로 실행되도록 되어있어서, 코드를 분리함.
-    -->
-    <template>
-      <div class="search-filter__body">
-        <ul class="search-filter__list">
-          <li
-            class="search-filter__item"
-            v-for="(obj, i) in categoryObject"
-            :key="'tree_li_' + i"
-          >
-            <div class="search-filter__item-group">
-              <base-checkbox
-                class="checkbox--aside"
-                :name="obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
-                :checkbox-id="obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_ID]]"
-                @changeData="rootNodeClick"
-                :checked="spanSelected(obj)"
-              >
-                <template v-slot:label>{{
-                  obj[treeKey[CONSTANTS.TREE.TREE_KEY.NODE_NM]]
-                }}</template>
-              </base-checkbox>
-            </div>
-
-            <basic-tree
-              :component-key="componentKey"
-              :tree-data="obj"
-              :tree-key="treeKey"
-              @selectionChange="selectionChange"
-            />
-          </li>
-        </ul>
-      </div>
-
-      <base-button class="search-filter__button-reset" @click="treeClear"
-        >검색조건 초기화</base-button
-      >
-    </template>
+    <div class="search-filter__body">
+      <ul class="search-filter__list">
+        <li class="search-filter__item" v-for="(item, index) in searchFilterList" :key="index">
+          <!--<div class="search-filter__item-group"> 댑스가 하나라서 li 안에 checkbox  -->
+          <base-checkbox name="searchFilter" :checkbox-id="item.checkboxId">
+            <template v-slot:label>
+<!--              <span class="search-filter__icon">-->
+<!--                <svg-icon name="map" class="svg-icon" />-->
+<!--              </span>-->
+              {{ item.title }}
+            </template>
+          </base-checkbox>
+<!--          <span class="search-filter__count">22</span>-->
+<!--           </div>-->
+<!--           <div class="search-filter__next">
+            <ul class="search-filter__list">
+              <li class="search-filter__item" v-for="(nextItem, index) in item.nextSearchFilterList" :key="index">
+                <base-checkbox name="NextSearchFilter" :checkbox-id="nextItem.checkboxId">
+                  <template v-slot:label>
+                    {{ item.title }}
+                  </template>
+                </base-checkbox>
+              </li>
+            </ul>
+          </div> -->
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script type="text/javascript">
-import BaseCheckbox from "@common/atoms/base-checkbox/base-checkbox";
-import BasicTree from "@common/atoms/basic-tree/basic-tree.vue";
-import { mapActions, mapGetters } from "vuex";
-import BaseButton from "@common/atoms/base-button/base-button";
+import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox.vue";
 
 export default {
   name: "GroupSearchFilter",
-  props: {
-    componentKey: {
-      type: String,
-      require: true
-    },
-    treeKey: {
-      type: Object,
-      require: true
-    },
-    treeObj: {
-      type: Object,
-      require: true
-    }
+  props:{
   },
   components: {
-    BaseCheckbox,
-    BasicTree,
-    BaseButton
-  },
-  computed: {
-    ...mapGetters("defaults/constants", ["CONSTANTS"]),
-    categoryObject() {
-      const _r =
-        this.$store.getters["module/tree/categoryObject"][this.componentKey];
-      return _r === undefined ? _r : _r.children;
-    },
-    selectedNodeList() {
-      return this.$store.getters["module/tree/selectedNodeList"][
-        this.componentKey
-      ];
-    },
-    spanSelected() {
-      return (obj) => {
-        let selectedNodeList =
-          this.$store.getters["module/tree/selectedNodeList"];
-
-        if (
-          !Object.prototype.hasOwnProperty.call(
-            selectedNodeList,
-            this.componentKey
-          )
-        ) {
-          // component key가 아예 없다면 false를 리턴한다.
-          return false;
-        } else {
-          return Object.prototype.hasOwnProperty.call(
-            selectedNodeList[this.componentKey],
-            obj[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]]
-          );
-        }
-      };
-    }
+    BaseCheckbox
   },
   data() {
-    return {};
-  },
-  methods: {
-    ...mapActions("module/tree", [
-      "getCategoryObject",
-      "setSelectedNodeList",
-      "resetSelectedNodeList"
-    ]),
-    ...mapActions("meta/search/search", ["resetSearchFilterList"]),
-    allSelectClick(bool) {
-      /**
-       * TODO : 구조상 각각의 RootNode들은 따로 선택을 해주어야 한다.
-       * 만약 구조를 모든 노드를 재귀구조로 바꾼다면, RootNode를 따로 선택해주는 작업은 삭제해도 된다.
-       */
-      this.categoryObject.forEach((co) => {
-        this.selectionChange({
-          bool: bool,
-          nodeData: co
-        });
-      }, this);
-      this.$nuxt.$emit("treeCompSelectionChange", bool);
-    },
-    rootNodeClick(bool, nodeId) {
-      this.$nuxt.$emit("treeCompSelectionChange", bool, nodeId);
-    },
-
-    selectionChange({ bool, nodeData }) {
-      this.setSelectedNodeList({
-        componentKey: this.componentKey,
-        key: nodeData[this.treeKey[this.CONSTANTS.TREE.TREE_KEY.NODE_ID]],
-        node: nodeData,
-        bool: bool
-      });
-    },
-    treeClear() {
-      console.log("treeClear");
-      // checkbox reset
-      this.resetSearchFilterList();
-      // tree reset
-      this.resetSelectedNodeList(this.componentKey);
-    }
-  },
-  created() {
-    this.treeKey["api"] = this.treeObj.treeRestApi;
-    this.treeKey["componentKey"] = this.componentKey;
-
-    this.getCategoryObject(this.treeKey);
+    return {
+      searchFilterList: [
+        {
+          checkboxId: '1',
+          title: "필터 타이틀 1"
+        },
+        {
+          checkboxId: '2',
+          title: "필터 타이틀 2"
+        },
+        {
+          checkboxId: '3',
+          title: "필터 타이틀 3"
+        },
+        {
+          checkboxId: '4',
+          title: "필터 타이틀 4"
+        },
+        {
+          checkboxId: '5',
+          title: "필터 타이틀 5"
+        },
+        {
+          checkboxId: '6',
+          title: "필터 타이틀 6"
+        }
+      ]
+    };
   }
 };
 </script>
 
-<style lang="scss">
-@import "group-search-filter";
+<style lang="scss" scoped>
+@import "./group-search-filter.scss";
 </style>

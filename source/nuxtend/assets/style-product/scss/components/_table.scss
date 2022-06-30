@@ -117,7 +117,7 @@ th .button {
     word-break: keep-all;
 
     .badge {
-      display: inline-block;
+      display: inline-flex;
       min-width: 60px;
       padding: 0 $spacing-sm;
       text-align: center;
@@ -437,4 +437,36 @@ th .button {
 .table__summary--selected .table__summary-icon {
   display: inline-flex;
   transform: rotate(-180deg);
+}
+
+// formbox
+.formbox {
+  position: relative;
+  border-top: 1px solid $gy-02;
+  border-bottom: 1px solid $line2;
+
+  & ~ & {
+    margin-top: rem(20px);
+  }
+
+  th,
+  td {
+    height: rem(50px);
+    padding: $spacing-xs $spacing-md;
+    font-weight: inherit;
+    font-size: inherit;
+    text-align: left;
+    vertical-align: middle;
+    overflow-wrap: break-word;
+    word-break: keep-all;
+  }
+
+  tbody tr:not(:last-child) th,
+  tbody tr:not(:last-child) td {
+    border-bottom: 1px solid $line4;
+  }
+
+  th {
+    background-color: $ui-05;
+  }
 }

@@ -1,13 +1,12 @@
 .subject {
-  width: rem(1200px);
-  margin: 0 auto;
+
 }
 
 .subject__wrap {
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  padding: rem(60px) 0 rem(40px);
+  padding: 0 0 rem(40px);
 }
 
 .subject__title-wrap {
