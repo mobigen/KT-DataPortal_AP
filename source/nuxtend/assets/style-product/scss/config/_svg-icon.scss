@@ -4,6 +4,8 @@
   display: inline-block;
   vertical-align: middle;
   flex-shrink: 0;
+  clip-rule: evenodd;
+  fill-rule: evenodd;
   fill: $icon-01;
   color: $icon-01;
 }

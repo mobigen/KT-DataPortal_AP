@@ -20,6 +20,11 @@
 
 .pagination__button {
   width: rem(18px);
+  padding: 0;
+
+  & + & {
+    margin-left: $spacing-sm;
+  }
 
   &:disabled {
     opacity: .5;

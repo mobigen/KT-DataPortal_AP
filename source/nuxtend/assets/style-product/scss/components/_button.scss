@@ -27,6 +27,7 @@
   @include button-normal;
   height: $button-height-md;
   border-radius: rem(5px);
+  color: $gy-02;
   text-align: center;
 
   &:disabled,
@@ -43,7 +44,7 @@
 // button: text, text with icon combination
 @mixin button {
   @include button-base;
-  padding: 0 $spacing-sm;
+  padding: 0 rem(15px);
   border: 1px solid $ui-09;
   background-color: $ui-02;
 
@@ -53,13 +54,16 @@
     background-color: $ui-01;
     
     .svg-icon {
-      fill : $ui-02;
+      clip-rule: evenodd;
+      fill-rule: evenodd;
+      fill : currentColor;
     }
   }
 
   .svg-icon {
     width: rem(18px);
     height: rem(18px);
+    color: inherit;
 
     & + .button__text {
       margin-left: $spacing-2xs;
@@ -93,7 +97,8 @@
   $font-color,
   $hover-bg-color,
   $active-bg-color,
-  $border-color: false
+  $border-color: false,
+  $border-width: one
 ) {
   background-color: $bg-color;
   color: $font-color;
@@ -110,7 +115,13 @@
     outline: 2px solid $default-focus;
   }
 
+  @if $border-width == double {
+    border-width: rem(2px);
+  }
+
   .svg-icon {
+    clip-rule: evenodd;
+    fill-rule: evenodd;
     fill: $font-color;
   }
 
@@ -132,6 +143,7 @@
     $ui-02,
     $primary
   );
+
   &:hover:not(:disabled) {
     color: $ui-02;
     background: $primary;
