@@ -7,7 +7,13 @@
     </div>
     <div class="content-top">
       <div class="contents-top__search">
-        <search-input-field></search-input-field>
+        <search-input-field
+          :searchKeyword="searchKeyword"
+          :use-recent-search="true"
+          :use-inner-search="true"
+          @search="searchBtnClick"
+          @filterCheck="rescanFilterCheck"
+        ></search-input-field>
         <div class="contents-top__recommend">
           <!-- 추천검색어 : 검색어 입력창에 검색어 입력 없이 빈 상태일 때 추천 검색어 노출 -->
           <p>추천검색어</p>
@@ -21,12 +27,39 @@
           <!-- //추천검색어 -->
         </div>
       </div>
-      <div class="contents-search-result">
-        <p class="contents-search-result__text">
-          <strong>SGI</strong>에 대한 검색결과, 총 <strong>150</strong> 건
-          입니다.
-        </p>
-      </div>
+      <search-result-box
+        class="contents-search-result"
+        :showSearchResultBox="showSearchResultBox"
+        :searchResultSuccess="searchResultSuccess"
+      >
+        <template
+          v-if="searchKeywordList.length < 2"
+          v-slot:resultSuccessTrueText
+        >
+          <p class="contents-search-result__text">
+            <strong>{{ searchKeyword }}</strong
+            >에 대한 검색결과, 총 <strong>{{ contents.totalcount }}</strong> 건
+            입니다.
+          </p>
+        </template>
+
+        <template v-else v-slot:resultSuccessTrueText>
+          <span class="contents-search-result__text">
+            <strong
+              v-for="(item, index) in searchKeywordList"
+              :key="'searchKeyword_' + index"
+              >'{{ item }}'
+              <span
+                v-if="searchKeywordList.length - 1 !== index"
+                style="color: black"
+                >&</span
+              >
+            </strong>
+            검색 결과, 총 <strong>{{ contents.totalcount }}</strong> 건 입니다.
+          </span>
+        </template>
+      </search-result-box>
+
       <div class="contents-top__detail">
         <base-button
           class="detail-button-default"
@@ -224,7 +257,16 @@
           </div>
         </div>
         <div class="contents__pagination">
-          <group-pagination></group-pagination>
+          <group-pagination
+            :paging-key="paginationKey"
+            :paging-object="{
+              [CONSTANTS.PAGING.ITEMS_PER_PAGE]: 5,
+              [CONSTANTS.PAGING.VISIBLE_PAGES]: 3,
+              [CONSTANTS.PAGING.PAGE]: 1
+            }"
+            @pagingEvent="getGridData"
+            :show-test-table="false"
+          ></group-pagination>
         </div>
       </section>
     </div>
@@ -245,17 +287,17 @@ import Subject from "@component/common/organisms/subject/subject.vue";
 import GroupSearchFilter from "@component/common/molecules/group-search-filter/group-search-filter";
 import SearchList from "@component/common/organisms/search-list/search-list.vue";
 import SearchInputField from "@component/common/organisms/search-input-field/search-input-field.vue";
-import { mapGetters } from "vuex";
+import SearchResultBox from "@common/atoms/search-result-box/search-result-box";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Index",
   layout: "kt/kt",
-  async asyncData({ store }) {
-    await store.dispatch("kt/keyword-search/getContents");
-  },
   computed: {
     ...mapGetters({
-      contents: "kt/keyword-search/contents"
+      contents: "kt/keyword-search/contents",
+      CONSTANTS: "defaults/constants/CONSTANTS",
+      keyword: "kt/keyword-search/searchKeyword"
     })
   },
   components: {
@@ -271,7 +313,8 @@ export default {
     GroupSearchFilter,
     GroupTab,
     SearchList,
-    SearchInputField
+    SearchInputField,
+    SearchResultBox
   },
   data() {
     return {
@@ -293,17 +336,86 @@ export default {
         { itemId: 4, itemName: "트래픽" },
         { itemId: 5, itemName: "CU" },
         { itemId: 5, itemName: "RTPO" }
-      ]
+      ],
+      searchKeyword: "",
+      searchKeywordList: [],
+      rescanFilterChecked: false,
+      showSearchResultBox: false,
+      searchResultSuccess: false,
+      paginationKey: "ktFullSearchPagination"
     };
   },
   methods: {
+    ...mapActions("kt/keyword-search", ["getContents", "setSearchKeyword"]),
     toggleDetail: function () {
       this.isDetailOpen = !this.isDetailOpen;
     },
     recommendTagClick(tagObj) {
-      console.log(tagObj);
+      this.searchKeyword = tagObj.itemName;
+      this.search();
+    },
+    searchBtnClick(inputData) {
+      this.searchKeyword = inputData.trim();
+      this.search();
+    },
+    searchResultBox(show, success) {
+      this.showSearchResultBox = show;
+      this.searchResultSuccess = success;
+    },
+    search() {
+      if (this.searchKeyword.trim() === "") {
+        this.searchResultBox(false, false);
+        alert("값을 입력해주세요.");
+        return;
+      } else {
+        this.searchResultBox(true, true);
+      }
+
+      if (this.rescanFilterChecked) {
+        if (this.searchKeywordList.length >= 3) {
+          alert("결과 내 재검색 3회이상으로 추가 검색이 불가능 합니다.");
+          this.searchKeyword = "";
+          return;
+        } else if (this.searchKeywordList.includes(this.searchKeyword)) {
+          alert("동일한 검색어 입력으로 추가 검색이 불가능 합니다.");
+          return;
+        }
+      } else {
+        this.searchKeywordList = [];
+      }
+
+      this.searchKeywordList.push(this.searchKeyword);
+      this.getGridData();
+    },
+    getGridData() {
+      this.getContents({
+        paginationKey: this.paginationKey,
+        searchKeywordList: this.searchKeywordList
+      });
+    },
+    rescanFilterCheck({ bool }) {
+      this.rescanFilterChecked = bool;
+      if (!bool && this.searchKeyword && this.searchKeywordList.length > 0) {
+        this.searchKeywordList = [];
+        this.searchKeyword = "";
+        this.searchResultBox(false, false);
+        this.getGridData();
+      }
+    },
+    searchDetailKeyword() {
+      this.search();
+      this.setSearchKeyword("");
     }
-  }
+  },
+  mounted() {
+    if (this.keyword === "") {
+      this.getGridData();
+    } else {
+      this.searchKeyword = this.keyword;
+      this.searchDetailKeyword();
+    }
+  },
+  created() {}
 };
 </script>
 
