@@ -1,84 +1,77 @@
 .contents-top__detail {
   position: relative;
   width: 100%;
-  padding: rem(20px) 0 rem(30px);
-  background:#f5f5f5 url(#{$img-path}/common/bg_contents_top_detail_pattern.png) no-repeat center 0;
 
-  // 상세검색 버튼 2022-06-04 MOD
   .detail-button-default {
     position: relative;
+    display: block;
+    width: rem(100px);
+    height: rem(40px);
     margin: 0 auto;
-    padding-right: rem(70px);
-    color: #333;
-    border: none;
-    background: transparent; 
+    color: $text-01;
+    background: transparent;
     @include font-weight("medium");
-    @include font-size("24");
+    @include font-size("14");
 
     &:before {
       content: "";
-      width: rem(32px);
-      height: rem(32px);
+      width: rem(7px);
+      height: rem(7px);
+      border-top: 2px solid $text-01;
+      border-right: 2px solid $text-01;
       display: inline-block;
-      background: url("#{$img-path}/icon/angle-down.svg") no-repeat center center;
+      -webkit-transform: rotate(135deg) translateY(-50%);
+      transform: rotate(135deg) translateY(-50%);
       transition: all .1s;
       position: absolute;
-      top: calc(50% - 16px);
-      right: rem(12px);
-      z-index: 1;
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      top: rem(2px);
-      right: 0;
-      width: rem(54px);
-      height: rem(30px);
-      border: 1px solid #e1e1e1;
-      background-color: #fff;
-      border-radius: rem(15px);
-      box-shadow: 0px 5px 5px 0 rgba(0, 0, 0, 0.05);
+      top: rem(10px);
+      left: 0;
+      border-radius: 2px;
     }
   }
 
-  //상단 필터영역 2022-06-04 MOD
-  .detail-button--open {
+  .detail-button-open {
+    position: relative;
+    display: block;
+    width: rem(100px);
+    height: rem(40px);
+    margin: 0 auto;
+    color: $text-01;
+    background: transparent;
+    @include font-weight("medium");
+    @include font-size("14");
 
     &:before {
       content: "";
-      -webkit-transform: rotate(-180deg);
-      transform: rotate(-180deg);
+      width: rem(7px);
+      height: rem(7px);
+      border-top: 2px solid $text-01;
+      border-right: 2px solid $text-01;
+      display: inline-block;
+      -webkit-transform: rotate(-45deg) translateY(-50%);
+      transform: rotate(-45deg) translateY(-50%);
+      transition: all .1s;
+      position: absolute;
+      top: rem(21px);
+      left: rem(6px);
+      border-radius: 2px;
     }
   }
 
-  //상단 필터영역 2022-06-24 MOD
-  .contents-top__filter {
-    display: none;
-
-    &.contents-top__filter--open {
-      display: block; 
-      width: rem(1000px);
-      margin: 0 auto;
-    }
-  }
-  //상단 필터영역내부 2022-06-27 MOD
-  .filter-group {
-
-    .filter-group__options {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: rem(50px);
-    }
-
+  .detail_open {
+    display: block;
+    transition: all .5s;
   }
 
   ul {
     position: relative;
     width: 100%;
+    border: 1px solid $ui-04;
     border-left: none;
     border-right: none;
     padding: rem(20px) 0;
+    display: none;
+    transition: all .5s;
   }
 
   li {
@@ -160,21 +153,23 @@
   
 }
 
-.aside-category {
+.aside__category {
   position: relative;
-  width: rem(220px);
-  height: rem(1300px);
-  padding: 0 0 $spacing-2xl 0;
+  width: rem(240px);
+  height: rem(830px);
+  padding: 0 0 $layout-3xs 0;
 }
 
-.aside-category__options {
-  height: rem(40px);
-  line-height: rem(40px);
-  span {
-    padding: 0 rem(10px); 
-    @include font-size("16");
-    @include font-weight("medium");
-  }
+.aside__category-default {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: rem(250px);
+  height: rem(800px);
+  background: $ui-02;
+  border-right: 1px solid;
+  border-image: linear-gradient(to bottom, $ui-02, $ui-04, $ui-02);
+  border-image-slice: 1;
 }
 
 .aside__category-expand {
@@ -182,7 +177,7 @@
   top: 0;
   left: 0;
   width: rem(440px);
-  height: rem(1301px);
+  height: rem(831px);
   box-shadow : 5px 5px 15px -15px;
   z-index: 5;
   background: $ui-02;
@@ -213,12 +208,12 @@
     border-top: 2px solid $text-02;
     border-right: 2px solid $text-02;
     display: inline-block;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg) translateY(-50%);
+    transform: rotate(45deg) translateY(-50%);
     transition: all .1s;
     position: absolute;
-    top: rem(9px);
-    left: rem(8px);
+    top: rem(12px);
+    left: rem(5px);
     border-radius: 2px;
   }
 
@@ -263,12 +258,12 @@
     border-top: 2px solid $text-02;
     border-right: 2px solid $text-02;
     display: inline-block;
-    -webkit-transform: rotate(-135deg);
-    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg) translateY(-50%);
+    transform: rotate(-135deg) translateY(-50%);
     transition: all .1s;
     position: absolute;
-    top: rem(9px);
-    left: rem(11px);
+    top: rem(6px);
+    left: rem(14px);
     border-radius: 2px;
   }
 
@@ -331,12 +326,48 @@
     border-top: 2px solid $text-01;
     border-right: 2px solid $text-01;
     display: inline-block;
-    -webkit-transform: rotate(135deg);
-    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg) translateY(-50%);
+    transform: rotate(135deg) translateY(-50%);
     transition: all .1s;
     position: absolute;
-    top: rem(9px);
+    top: rem(7px);
     right: 0;
+    border-radius: 2px;
+  }
+
+  &:hover {
+    color: $secondary;
+  }
+}
+
+.aside__button-up {
+  position: absolute;
+  top: rem(20px);
+  right: rem(10px);
+  background: transparent;
+
+  &:before {
+    content: "접기";
+    position: absolute;
+    right: rem(16px);
+    @include font-size("14");
+    @include font-weight("regular");
+    color: $text-02;
+  }
+
+  &:after {
+    content: "";
+    width: rem(7px);
+    height: rem(7px);
+    border-top: 2px solid $text-01;
+    border-right: 2px solid $text-01;
+    display: inline-block;
+    -webkit-transform: rotate(-45deg) translateY(-50%);
+    transform: rotate(-45deg) translateY(-50%);
+    transition: all .1s;
+    position: absolute;
+    top: rem(17px);
+    right: rem(-6px);
     border-radius: 2px;
   }
 
@@ -361,7 +392,13 @@
   margin-bottom: $spacing-md;
 }
 
-
+.aside__title {
+  height: rem(52px);
+  @include font-size("18");
+  @include font-weight("bold");
+  padding-left: rem(5px);
+  line-height: rem(52px);
+}
 
 .contents__aside {
   width: 240px;
@@ -417,7 +454,7 @@
 }
 
 .contents__result {
-  width: 100%;
+  width: calc(100% - 240px);
   margin-left: auto;
   transition: all .1s;
 }
@@ -426,26 +463,21 @@
   position: relative;
 }
 
-.heading-group {
+.contents__list-head{
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
   width: 100%;
-  min-height: rem(36px);
-  /* margin-bottom: $spacing-sm; *///통합검색목록에서는 margin-bottom삭제
+  height: rem(64px);
+  border-bottom: 1px solid $text-03;
+  padding-top: rem(20px);
 
   h4 {
-    @include font-size("20");
+    @include font-size("18");
     @include font-weight("medium");
-
-    strong {
-      color: $point-03;
-    }
+    color: $text-01;
 
     span {
-      color: inherit;
-      margin-left: $spacing-xs;
+      color: $secondary;
+      padding-left: rem(8px);
     }
   }
 
@@ -454,7 +486,6 @@
     top: rem(16px);
     right: 0;
     display: flex;
-    align-items: center;
   }
 
   .list-head__options-sort {
@@ -462,10 +493,6 @@
   }
 
 }
-.options-sort {
-  display: flex;
-  align-items: center;
-} 
 
 .contents__pagination {
   padding: rem(60px) 0 rem(20px);
@@ -510,7 +537,7 @@
   margin: 0 0 $spacing-2xs $spacing-2xs;
 }
 
-/* // search-filter
+// search-filter
 
 .search-filter__icon{
   display: flex;
@@ -539,15 +566,14 @@
 }
 
 .search-filter__list{
-
+  margin-left: $spacing-md;
+  background-color: $ui-02;
 }
 
 .search-filter__item-group{
   display: flex;
   align-items: center;
-  height: rem(48px); 
   padding: $spacing-2xs $spacing-md;
-  background-color:#fafafa;
 }
 
 .search-filter__body .checkbox {
@@ -560,9 +586,9 @@
 
 
 .search-filter__next{
-  padding: $spacing-2xs;
-} */
-/*
+  margin: $spacing-2xs 0 $spacing-2xs $spacing-xl;
+}
+
 // subject
 .subject .subject__wrap {
   width: rem(1210px);
@@ -624,7 +650,7 @@
   background-repeat: no-repeat;
   background-position: 0 0;
 }
-*/
+
 /* subject > 부수설명UL */
 .subject__list {
   margin: $spacing-md 0 0 0;
@@ -645,43 +671,86 @@
   left: 0;
 }
 
-//search-filter-group.scss가 안먹음 이동 정리 2022-06-27
-.search-filter-group {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  // 수평 방향
-  &.search-filter-group--horizontal {
-    flex-direction: row;
+@include template-respond-to('breakpoint-lg') {
 
-    .search-filter {
-      flex: 1;
-      border-right: none;
-      border-top: 1px solid #333;
-
-      &:first-child {
-        border-left: none;
-      } 
-           
-      .search-filter__head {
-        border-bottom: 1px solid #ccc;
-      }
-    }
-
+  .contents__result {
+    width: 100%;
   }
 
-  // 수직 방향
-  &.search-filter-group--vertical {
-   flex-direction: column;  
-   border-radius: rem(5px); 
-   border: 1px solid #e1e1e1;
+  .contents__aside {
+    display: none;
+  }
 
-    .search-filter {
-      width: 100%;
-      border: none;      
+  .contents__list {
+    padding: $spacing-md;
+  }
 
+  .contents-top__detail-filter {
+    width: 100%;
+  }
+
+  .subject .subject__wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    padding: rem(22px) rem(20px) $spacing-md rem(20px);
+  }
+
+  .subject__menu-img-box {
+    display: none;
+  }
+
+  .subject__title-wrap {
+    width: 100%;
+  }
+
+  .subject__sub-group {
+    position: relative;
+    margin-top: $spacing-md;
+    bottom: unset;
+    right: unset;
+    height: unset;
+    align-items: flex-end;
+  }
+
+  .subject__sub-group>button:only-child {
+    position: relative;
+    top: unset;
+    min-width: rem(200px);
+  }
+
+  .subject__list-item {
+    justify-content: center;
+  }
+}
+
+@include template-respond-to('breakpoint-md') {
+
+  .contents-top__detail-filter {
+    width: 100%;
+  }
+
+  .detail-filter__group,
+  .detail-filter__checkboxes {
+    flex-direction: column;
+  }
+
+  .detail-filter__title {
+    @include font-size("15");
+    margin: 0 0 $spacing-sm 0;
+    width: auto;
+  }
+
+  .detail-filter {
+    .detail-filter__checkboxes {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
+
+
 
 
