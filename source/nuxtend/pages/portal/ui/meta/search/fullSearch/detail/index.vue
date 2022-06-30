@@ -103,117 +103,97 @@
           <!-- // 데이터 개요 -->
           <!-- 기본정보 (내부) -->
           <article class="contents__detail">
-            <div class="heading-group">
-              <h3 class="heading-group__title">기본정보</h3>
-            </div>
-            <table class="formbox">
-              <colgroup>
-                <col style="width: 180px" />
-                <col style="width: auto" />
-                <col style="width: 180px" />
-                <col style="width: auto" />
-              </colgroup>
-              <tbody>
-                <tr>
-                  <th scope="row">담당부서</th>
-                  <td>데이터 융복합팀</td>
-                  <th scope="row">담당자 (관리자)</th>
-                  <td>김하빈</td>
-                </tr>
-                <tr>
-                  <th scope="row">참조부서</th>
-                  <td>-</td>
-                  <th scope="row">참조자 (요청자)</th>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
+            <view-table
+              :colgroup-array="['180px', 'auto']"
+              table-title="기본정보"
+              :header-has-locale="true"
+              :view-detail="detail"
+              :view-header-list="['data_prv_desk']"
+              :td-cnt-in-tr="1"
+              :td-colspan="3"
+            ></view-table>
+            <view-table
+              :colgroup-array="['180px', 'auto', '180px', 'auto']"
+              :header-has-locale="true"
+              :view-detail="detail"
+              :view-header-list="['adm_dep', 'admr_nm', 'rqt_dep', 'rqt_nm']"
+            ></view-table>
           </article>
           <!-- // 기본정보 -->
           <!-- 데이터 속성 및 관리 -->
           <article class="contents__detail">
-            <div class="heading-group">
-              <h3 class="heading-group__title">데이터 속성 및 관리</h3>
-            </div>
-            <table class="formbox">
-              <colgroup>
-                <col style="width: 180px" />
-                <col style="width: auto" />
-                <col style="width: 180px" />
-                <col style="width: auto" />
-              </colgroup>
-              <tbody>
-                <tr>
-                  <th scope="row">카테고리 (분류)</th>
-                  <td>모바일</td>
-                  <th scope="row">데이터 형태</th>
-                  <td>파일</td>
-                </tr>
-                <tr>
-                  <th scope="row">등록일</th>
-                  <td>2022.06.01</td>
-                  <th scope="row">데이터 갱신주기</th>
-                  <td>1일</td>
-                </tr>
-                <tr>
-                  <th scope="row">최신 수정일</th>
-                  <td>2022.06.30</td>
-                  <th scope="row">갱신 예정일</th>
-                  <td>2022.07.01</td>
-                </tr>
-                <tr>
-                  <th scope="row">제공방식</th>
-                  <td>엑셀 다운로드</td>
-                  <th scope="row">법률검토 필요여부</th>
-                  <td>Y</td>
-                </tr>
-                <tr>
-                  <th scope="row">파일용량</th>
-                  <td>1.0GB</td>
-                  <th scope="row">보안성검토 필요여부</th>
-                  <td>Y</td>
-                </tr>
-                <tr>
-                  <th scope="row">공개범위</th>
-                  <td colspan="3">-</td>
-                </tr>
-              </tbody>
-            </table>
-            <table class="formbox">
-              <colgroup>
-                <col style="width: 180px" />
-                <col style="width: auto" />
-              </colgroup>
-              <tbody>
-                <tr>
-                  <th scope="row">원천시스템</th>
-                  <td>KDAP</td>
-                </tr>
-                <tr>
-                  <th scope="row">원천 URL</th>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th scope="row">키워드</th>
-                  <td>
-                    <div class="tags">
-                      <base-tag class="tag--sm" href="#"
-                        ><span class="tag__label">#트래픽</span></base-tag
-                      >
-                      <base-tag class="tag--sm" href="#"
-                        ><span class="tag__label">#URL</span></base-tag
-                      >
-                      <base-tag class="tag--sm" href="#"
-                        ><span class="tag__label">#관심</span></base-tag
-                      >
-                      <base-tag class="tag--sm" href="#"
-                        ><span class="tag__label">#프로파일</span></base-tag
-                      >
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <view-table
+              :colgroup-array="['180px', 'auto', '180px', 'auto']"
+              table-title="데이터 속성 및 관리"
+              :header-has-locale="true"
+              :view-detail="detail"
+              :view-header-list="[
+                'ctgry',
+                'data_shap',
+                'reg_date',
+                'data_updt_cyc',
+                'ltst_amd_dt',
+                'updt_nxt_date',
+                'prv_shap',
+                'law_evl_conf_yn',
+                'file_size',
+                'scrty_evl_conf_yn'
+              ]"
+            ></view-table>
+            <view-table
+              :colgroup-array="['180px', 'auto']"
+              :header-has-locale="true"
+              :view-detail="detail"
+              :view-header-list="['open_scope']"
+              :td-cnt-in-tr="1"
+              :td-colspan="3"
+            ></view-table>
+
+            <view-table
+              :colgroup-array="['180px', 'auto']"
+              :header-has-locale="true"
+              :view-detail="detail"
+              :view-header-list="['src_sys', 'src_url', 'kywrd']"
+              :td-cnt-in-tr="1"
+              :td-colspan="3"
+              :value-type="{
+                src_url: 'link',
+                kywrd: 'tag'
+              }"
+              @tagClick="tagClick"
+            ></view-table>
+
+            <!--            <table class="formbox">-->
+            <!--              <tbody>-->
+            <!--                <tr>-->
+            <!--                  <th scope="row">원천시스템</th>-->
+            <!--                  <td>KDAP</td>-->
+            <!--                </tr>-->
+            <!--                <tr>-->
+            <!--                  <th scope="row">원천 URL</th>-->
+            <!--                  <td></td>-->
+            <!--                </tr>-->
+            <!--                <tr>-->
+            <!--                  <th scope="row">키워드</th>-->
+            <!--                  <td>-->
+            <!--                    <div class="tags">-->
+            <!--                      <base-tag class="tag&#45;&#45;sm" href="#"-->
+            <!--                        ><span class="tag__label">#트래픽</span></base-tag-->
+            <!--                      >-->
+            <!--                      <base-tag class="tag&#45;&#45;sm" href="#"-->
+            <!--                        ><span class="tag__label">#URL</span></base-tag-->
+            <!--                      >-->
+            <!--                      <base-tag class="tag&#45;&#45;sm" href="#"-->
+            <!--                        ><span class="tag__label">#관심</span></base-tag-->
+            <!--                      >-->
+            <!--                      <base-tag class="tag&#45;&#45;sm" href="#"-->
+            <!--                        ><span class="tag__label">#프로파일</span></base-tag-->
+            <!--                      >-->
+            <!--                    </div>-->
+            <!--                  </td>-->
+            <!--                </tr>-->
+            <!--              </tbody>-->
+            <!--            </table>-->
           </article>
           <!-- // 데이터 속성 및 관리 -->
           <!--탭 -->
@@ -916,18 +896,36 @@ import GroupBreadcrumb from "@component/common/molecules/group-breadcrumb/group-
 import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
 import GroupFileAttach from "@component/common/molecules/group-file-attach/group-file-attach";
 import Dialog from "@functional/dialog/dialog.vue";
-import { mapGetters } from "vuex";
+import ViewTable from "@component/common/organisms/view-table/view-table";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Index",
-  layout: "kt/kt",
-  async asyncData({ store }) {
+  async asyncData({ store, query }) {
     await store.dispatch("kt/keyword-search/getContents");
+    // load biz meta detail
+    await store.dispatch("meta/keyword-search/getDetail", query.postId);
   },
   computed: {
     ...mapGetters({
       contents: "kt/keyword-search/contents"
-    })
+    }),
+    detail() {
+      return {
+        header: [],
+        body: []
+      };
+
+      // const vuex = this.$store.getters["meta/keyword-search/detail"];
+      //
+      // if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+      //   // this.popupTitle = vuex.body.data_nm;
+      //   // this.confirmButtonDisabled = vuex.body.law_evl_conf_yn === "y";
+      //   // this.needConfirm = vuex.body.law_evl_conf_yn === "y";
+      // }
+      // console.log(vuex);
+      // return vuex;
+    }
   },
   data() {
     return {
@@ -947,6 +945,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions("meta/keyword-search", ["setSearchKeyword"]),
     togglePreview: function () {
       this.isPreview = !this.isPreview;
     },
@@ -955,6 +954,12 @@ export default {
     },
     onshowDialog(name) {
       this.$modal.show(name);
+    },
+    tagClick(tagClickObj) {
+      this.setSearchKeyword(tagClickObj.itemName);
+      this.$router.push({
+        path: "/portal/ui/meta/search/fullSearch"
+      });
     }
   },
   components: {
@@ -967,7 +972,8 @@ export default {
     GroupBreadcrumb,
     GroupPagination,
     GroupFileAttach,
-    Dialog
+    Dialog,
+    ViewTable
   }
 };
 </script>
