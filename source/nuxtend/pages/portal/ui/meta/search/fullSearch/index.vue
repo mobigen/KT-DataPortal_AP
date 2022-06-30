@@ -3,7 +3,13 @@
     <h2 class="hidden">데이터</h2>
     <div class="contents-subject">
       <group-breadcrumb></group-breadcrumb>
-      <subject></subject>
+      <subject>
+        <template v-slot:title>데이터 검색</template>
+        <template v-slot:description>
+          관심 데이터를 기초 분석부터 시각화까지 다양한 방식으로 활용 할 수
+          있습니다.
+        </template>
+      </subject>
     </div>
     <div class="content-top">
       <div class="contents-top__search">
