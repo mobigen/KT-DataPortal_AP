@@ -189,7 +189,7 @@
           <group-pagination
             :paging-key="paginationKey"
             :paging-object="{
-              [CONSTANTS.PAGING.ITEMS_PER_PAGE]: 5,
+              [CONSTANTS.PAGING.ITEMS_PER_PAGE]: 6,
               [CONSTANTS.PAGING.VISIBLE_PAGES]: 3,
               [CONSTANTS.PAGING.PAGE]: 1
             }"
@@ -205,18 +205,17 @@
 <script type="text/javascript">
 import BaseButton from "@common/atoms/base-button/base-button";
 import BaseCheckbox from "@common/atoms/base-checkbox/base-checkbox";
-import GroupTab from "@common/molecules/group-tab/group-tab";
-import GroupPagination from "@common/molecules/group-pagination/group-pagination";
+import GroupTab from "@component/common/molecules/group-tab/group-tab";
+import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
 import GroupBreadcrumb from "@common/molecules/group-breadcrumb/group-breadcrumb";
-import GroupSearchFilter from "@common/molecules/group-search-filter/group-search-filter";
-import SearchList from "@common/organisms/search-list/search-list.vue";
-import SearchInputField from "@common/organisms/search-input-field/search-input-field.vue";
-import SearchResultBox from "@common/atoms/search-result-box/search-result-box";
-import BasicTagList from "@common/atoms/basic-tag-list/basic-tag-list";
-import BasicOption from "@common/atoms/basic-option/basic-option";
+import GroupSearchFilter from "@component/common/molecules/group-search-filter/group-search-filter";
+import SearchList from "@component/common/organisms/search-list/search-list.vue";
+import SearchInputField from "@component/common/organisms/search-input-field/search-input-field.vue";
+import SearchResultBox from "@component/common/atoms/search-result-box/search-result-box";
+import BasicTagList from "@component/common/atoms/basic-tag-list/basic-tag-list";
+import BasicOption from "@component/common/atoms/basic-option/basic-option";
 import { mapActions, mapGetters } from "vuex";
-import CheckboxFilterList from "@common/molecules/checkbox-filter-list/checkbox-filter-list.vue";
-
+import CheckboxFilterList from "@component/common/molecules/checkbox-filter-list/checkbox-filter-list.vue";
 export default {
   name: "fullSearch",
   computed: {
@@ -333,7 +332,6 @@ export default {
       } else {
         this.searchResultBox(true, true);
       }
-
       if (this.rescanFilterChecked) {
         if (this.searchKeywordList.length >= 3) {
           alert("결과 내 재검색 3회이상으로 추가 검색이 불가능 합니다.");
@@ -346,9 +344,7 @@ export default {
       } else {
         this.searchKeywordList = [];
       }
-
       this.searchKeywordList.push(this.searchKeyword);
-
       this.getGridData();
     },
     recommendTagClick(tagObj) {
@@ -391,7 +387,7 @@ export default {
     },
     rescanFilterCheck({ bool }) {
       this.rescanFilterChecked = bool;
-      if (bool === false && this.searchKeyword === "") {
+      if (!bool && this.searchKeyword && this.searchKeywordList.length > 0) {
         this.searchKeywordList = [];
         this.searchKeyword = "";
         this.searchResultBox(false, false);
