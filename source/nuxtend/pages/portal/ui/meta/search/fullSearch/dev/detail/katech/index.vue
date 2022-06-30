@@ -12,7 +12,7 @@
           class="button--2xl button--tertiary button-declaration"
           title="바로활용"
           @click="onshowDialog('requestDialog')"
-          >바로활용</base-button
+        >바로활용</base-button
         >
       </div>
       <!-- 요청하기 Dialog Modal -->
@@ -38,13 +38,11 @@
                 <div class="item__detail">
                   <base-input
                     id="inp-data_nm"
-                    :inputData="detail.body.data_nm"
+                    :inputData="popupTitle"
                     :readonly="true"
                   ></base-input>
-                  <span
-                    v-if="detail.body.law_evl_conf_yn === 'y'"
-                    style="color: red"
-                    >*법률검토필요</span
+                  <span v-if="needConfirm" style="color: red"
+                  >*법률검토필요</span
                   >
                 </div>
               </li>
@@ -238,54 +236,54 @@
               <col style="width: auto" />
             </colgroup>
             <tbody>
-              <tr>
-                <th scope="row">Last updated</th>
-                <td>unknown</td>
-              </tr>
-              <tr>
-                <th scope="row">Created</th>
-                <td>unknown</td>
-              </tr>
-              <tr>
-                <th scope="row">Name</th>
-                <td>View documentation related to this dataset</td>
-              </tr>
-              <tr>
-                <th scope="row">Format</th>
-                <td>PDF</td>
-              </tr>
-              <tr>
-                <th scope="row">License</th>
-                <td>License not specified</td>
-              </tr>
-              <tr>
-                <th scope="row">Created</th>
-                <td>over 1 year ago</td>
-              </tr>
-              <tr>
-                <th scope="row">Media type</th>
-                <td>application/pdf</td>
-              </tr>
-              <tr>
-                <th scope="row">id</th>
-                <td>0asd123asdf45a6sdf321</td>
-              </tr>
-              <tr>
-                <th scope="row">package id</th>
-                <td>0asd123asdf45a6sdf321</td>
-              </tr>
-              <tr>
-                <th scope="row">position</th>
-                <td>3</td>
-              </tr>
-              <tr>
-                <th scope="row">revision id</th>
-                <td>0asd123asdf45a6sdf321</td>
-              </tr>
-              <tr>
-                <th scope="row">state</th>
-                <td>active</td>
-              </tr>
+            <tr>
+              <th scope="row">Last updated</th>
+              <td>unknown</td>
+            </tr>
+            <tr>
+              <th scope="row">Created</th>
+              <td>unknown</td>
+            </tr>
+            <tr>
+              <th scope="row">Name</th>
+              <td>View documentation related to this dataset</td>
+            </tr>
+            <tr>
+              <th scope="row">Format</th>
+              <td>PDF</td>
+            </tr>
+            <tr>
+              <th scope="row">License</th>
+              <td>License not specified</td>
+            </tr>
+            <tr>
+              <th scope="row">Created</th>
+              <td>over 1 year ago</td>
+            </tr>
+            <tr>
+              <th scope="row">Media type</th>
+              <td>application/pdf</td>
+            </tr>
+            <tr>
+              <th scope="row">id</th>
+              <td>0asd123asdf45a6sdf321</td>
+            </tr>
+            <tr>
+              <th scope="row">package id</th>
+              <td>0asd123asdf45a6sdf321</td>
+            </tr>
+            <tr>
+              <th scope="row">position</th>
+              <td>3</td>
+            </tr>
+            <tr>
+              <th scope="row">revision id</th>
+              <td>0asd123asdf45a6sdf321</td>
+            </tr>
+            <tr>
+              <th scope="row">state</th>
+              <td>active</td>
+            </tr>
             </tbody>
           </table>
         </article>
@@ -343,126 +341,126 @@
           <div class="contents__detail-sample scrollCustomize">
             <table class="formbox formbox--col">
               <tbody>
-                <tr>
-                  <th scope="col">항목</th>
-                  <th scope="col">설명</th>
-                  <th scope="col">데이터타입</th>
-                  <th scope="col">데이터길이</th>
-                  <th scope="col">소수점</th>
-                  <th scope="col">PK</th>
-                  <th scope="col">PK POSITION</th>
-                  <th scope="col">NULL 여부</th>
-                  <th scope="col">코드여부</th>
-                  <th scope="col">DEFAULT</th>
-                </tr>
-                <tr>
-                  <td>교통정보코드</td>
-                  <td>사업지구코드</td>
-                  <td>VARCHAR2</td>
-                  <td>6</td>
-                  <td>5</td>
-                  <td>Y</td>
-                  <td>1</td>
-                  <td>Y</td>
-                  <td>Y</td>
-                  <td>SYSDATE</td>
-                </tr>
-                <tr>
-                  <td>교통정보코드교통정보코드교통정보코드</td>
-                  <td>사업지구코드</td>
-                  <td>VARCHAR2</td>
-                  <td>6</td>
-                  <td>5</td>
-                  <td>Y</td>
-                  <td>1</td>
-                  <td>Y</td>
-                  <td>Y</td>
-                  <td>SYSDATE</td>
-                </tr>
-                <tr>
-                  <td>교통정보코드</td>
-                  <td>사업지구코드</td>
-                  <td>VARCHAR2</td>
-                  <td>6</td>
-                  <td>5</td>
-                  <td>Y</td>
-                  <td>1</td>
-                  <td>Y</td>
-                  <td>Y</td>
-                  <td>SYSDATE</td>
-                </tr>
-                <tr>
-                  <td>교통정보코드</td>
-                  <td>사업지구코드</td>
-                  <td>VARCHAR2</td>
-                  <td>6</td>
-                  <td>5</td>
-                  <td>Y</td>
-                  <td>1</td>
-                  <td>Y</td>
-                  <td>Y</td>
-                  <td>SYSDATE</td>
-                </tr>
-                <tr>
-                  <td>교통정보코드</td>
-                  <td>사업지구코드</td>
-                  <td>VARCHAR2</td>
-                  <td>6</td>
-                  <td>5</td>
-                  <td>Y</td>
-                  <td>1</td>
-                  <td>Y</td>
-                  <td>Y</td>
-                  <td>SYSDATE</td>
-                </tr>
-                <tr>
-                  <td>교통정보코드</td>
-                  <td>사업지구코드</td>
-                  <td>VARCHAR2</td>
-                  <td>6</td>
-                  <td>5</td>
-                  <td>Y</td>
-                  <td>1</td>
-                  <td>Y</td>
-                  <td>Y</td>
-                  <td>SYSDATE</td>
-                </tr>
-                <tr>
-                  <td>교통정보코드</td>
-                  <td>사업지구코드</td>
-                  <td>VARCHAR2</td>
-                  <td>6</td>
-                  <td>5</td>
-                  <td>Y</td>
-                  <td>1</td>
-                  <td>Y</td>
-                  <td>Y</td>
-                  <td>SYSDATE</td>
-                </tr>
-                <tr>
-                  <td>교통정보코드</td>
-                  <td>사업지구코드</td>
-                  <td>VARCHAR2</td>
-                  <td>6</td>
-                  <td>5</td>
-                  <td>Y</td>
-                  <td>1</td>
-                  <td>Y</td>
-                  <td>Y</td>
-                  <td>SYSDATE</td>
-                </tr>
-                <tr>
-                  <td>교통정보코드</td>
-                  <td>사업지구코드</td>
-                  <td>VARCHAR2</td>
-                  <td>6</td>
-                  <td>5</td>
-                  <td>Y</td>
-                  <td>1</td>
-                  <td>Y</td>
-                  <td>Y</td>
-                  <td>SYSDATE</td>
-                </tr>
+              <tr>
+                <th scope="col">항목</th>
+                <th scope="col">설명</th>
+                <th scope="col">데이터타입</th>
+                <th scope="col">데이터길이</th>
+                <th scope="col">소수점</th>
+                <th scope="col">PK</th>
+                <th scope="col">PK POSITION</th>
+                <th scope="col">NULL 여부</th>
+                <th scope="col">코드여부</th>
+                <th scope="col">DEFAULT</th>
+              </tr>
+              <tr>
+                <td>교통정보코드</td>
+                <td>사업지구코드</td>
+                <td>VARCHAR2</td>
+                <td>6</td>
+                <td>5</td>
+                <td>Y</td>
+                <td>1</td>
+                <td>Y</td>
+                <td>Y</td>
+                <td>SYSDATE</td>
+              </tr>
+              <tr>
+                <td>교통정보코드교통정보코드교통정보코드</td>
+                <td>사업지구코드</td>
+                <td>VARCHAR2</td>
+                <td>6</td>
+                <td>5</td>
+                <td>Y</td>
+                <td>1</td>
+                <td>Y</td>
+                <td>Y</td>
+                <td>SYSDATE</td>
+              </tr>
+              <tr>
+                <td>교통정보코드</td>
+                <td>사업지구코드</td>
+                <td>VARCHAR2</td>
+                <td>6</td>
+                <td>5</td>
+                <td>Y</td>
+                <td>1</td>
+                <td>Y</td>
+                <td>Y</td>
+                <td>SYSDATE</td>
+              </tr>
+              <tr>
+                <td>교통정보코드</td>
+                <td>사업지구코드</td>
+                <td>VARCHAR2</td>
+                <td>6</td>
+                <td>5</td>
+                <td>Y</td>
+                <td>1</td>
+                <td>Y</td>
+                <td>Y</td>
+                <td>SYSDATE</td>
+              </tr>
+              <tr>
+                <td>교통정보코드</td>
+                <td>사업지구코드</td>
+                <td>VARCHAR2</td>
+                <td>6</td>
+                <td>5</td>
+                <td>Y</td>
+                <td>1</td>
+                <td>Y</td>
+                <td>Y</td>
+                <td>SYSDATE</td>
+              </tr>
+              <tr>
+                <td>교통정보코드</td>
+                <td>사업지구코드</td>
+                <td>VARCHAR2</td>
+                <td>6</td>
+                <td>5</td>
+                <td>Y</td>
+                <td>1</td>
+                <td>Y</td>
+                <td>Y</td>
+                <td>SYSDATE</td>
+              </tr>
+              <tr>
+                <td>교통정보코드</td>
+                <td>사업지구코드</td>
+                <td>VARCHAR2</td>
+                <td>6</td>
+                <td>5</td>
+                <td>Y</td>
+                <td>1</td>
+                <td>Y</td>
+                <td>Y</td>
+                <td>SYSDATE</td>
+              </tr>
+              <tr>
+                <td>교통정보코드</td>
+                <td>사업지구코드</td>
+                <td>VARCHAR2</td>
+                <td>6</td>
+                <td>5</td>
+                <td>Y</td>
+                <td>1</td>
+                <td>Y</td>
+                <td>Y</td>
+                <td>SYSDATE</td>
+              </tr>
+              <tr>
+                <td>교통정보코드</td>
+                <td>사업지구코드</td>
+                <td>VARCHAR2</td>
+                <td>6</td>
+                <td>5</td>
+                <td>Y</td>
+                <td>1</td>
+                <td>Y</td>
+                <td>Y</td>
+                <td>SYSDATE</td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -533,126 +531,126 @@
                 <div class="filedata__content scrollCustomize">
                   <table class="formbox formbox--col">
                     <tbody>
-                      <tr>
-                        <th scope="col">항목</th>
-                        <th scope="col">설명</th>
-                        <th scope="col">데이터타입</th>
-                        <th scope="col">데이터길이</th>
-                        <th scope="col">소수점</th>
-                        <th scope="col">PK</th>
-                        <th scope="col">PK POSITION</th>
-                        <th scope="col">NULL 여부</th>
-                        <th scope="col">코드여부</th>
-                        <th scope="col">DEFAULT</th>
-                      </tr>
-                      <tr>
-                        <td>교통정보코드</td>
-                        <td>사업지구코드</td>
-                        <td>VARCHAR2</td>
-                        <td>6</td>
-                        <td>5</td>
-                        <td>Y</td>
-                        <td>1</td>
-                        <td>Y</td>
-                        <td>Y</td>
-                        <td>SYSDATE</td>
-                      </tr>
-                      <tr>
-                        <td>교통정보코드교통정보코드교통정보코드</td>
-                        <td>사업지구코드</td>
-                        <td>VARCHAR2</td>
-                        <td>6</td>
-                        <td>5</td>
-                        <td>Y</td>
-                        <td>1</td>
-                        <td>Y</td>
-                        <td>Y</td>
-                        <td>SYSDATE</td>
-                      </tr>
-                      <tr>
-                        <td>교통정보코드</td>
-                        <td>사업지구코드</td>
-                        <td>VARCHAR2</td>
-                        <td>6</td>
-                        <td>5</td>
-                        <td>Y</td>
-                        <td>1</td>
-                        <td>Y</td>
-                        <td>Y</td>
-                        <td>SYSDATE</td>
-                      </tr>
-                      <tr>
-                        <td>교통정보코드</td>
-                        <td>사업지구코드</td>
-                        <td>VARCHAR2</td>
-                        <td>6</td>
-                        <td>5</td>
-                        <td>Y</td>
-                        <td>1</td>
-                        <td>Y</td>
-                        <td>Y</td>
-                        <td>SYSDATE</td>
-                      </tr>
-                      <tr>
-                        <td>교통정보코드</td>
-                        <td>사업지구코드</td>
-                        <td>VARCHAR2</td>
-                        <td>6</td>
-                        <td>5</td>
-                        <td>Y</td>
-                        <td>1</td>
-                        <td>Y</td>
-                        <td>Y</td>
-                        <td>SYSDATE</td>
-                      </tr>
-                      <tr>
-                        <td>교통정보코드</td>
-                        <td>사업지구코드</td>
-                        <td>VARCHAR2</td>
-                        <td>6</td>
-                        <td>5</td>
-                        <td>Y</td>
-                        <td>1</td>
-                        <td>Y</td>
-                        <td>Y</td>
-                        <td>SYSDATE</td>
-                      </tr>
-                      <tr>
-                        <td>교통정보코드</td>
-                        <td>사업지구코드</td>
-                        <td>VARCHAR2</td>
-                        <td>6</td>
-                        <td>5</td>
-                        <td>Y</td>
-                        <td>1</td>
-                        <td>Y</td>
-                        <td>Y</td>
-                        <td>SYSDATE</td>
-                      </tr>
-                      <tr>
-                        <td>교통정보코드</td>
-                        <td>사업지구코드</td>
-                        <td>VARCHAR2</td>
-                        <td>6</td>
-                        <td>5</td>
-                        <td>Y</td>
-                        <td>1</td>
-                        <td>Y</td>
-                        <td>Y</td>
-                        <td>SYSDATE</td>
-                      </tr>
-                      <tr>
-                        <td>교통정보코드</td>
-                        <td>사업지구코드</td>
-                        <td>VARCHAR2</td>
-                        <td>6</td>
-                        <td>5</td>
-                        <td>Y</td>
-                        <td>1</td>
-                        <td>Y</td>
-                        <td>Y</td>
-                        <td>SYSDATE</td>
-                      </tr>
+                    <tr>
+                      <th scope="col">항목</th>
+                      <th scope="col">설명</th>
+                      <th scope="col">데이터타입</th>
+                      <th scope="col">데이터길이</th>
+                      <th scope="col">소수점</th>
+                      <th scope="col">PK</th>
+                      <th scope="col">PK POSITION</th>
+                      <th scope="col">NULL 여부</th>
+                      <th scope="col">코드여부</th>
+                      <th scope="col">DEFAULT</th>
+                    </tr>
+                    <tr>
+                      <td>교통정보코드</td>
+                      <td>사업지구코드</td>
+                      <td>VARCHAR2</td>
+                      <td>6</td>
+                      <td>5</td>
+                      <td>Y</td>
+                      <td>1</td>
+                      <td>Y</td>
+                      <td>Y</td>
+                      <td>SYSDATE</td>
+                    </tr>
+                    <tr>
+                      <td>교통정보코드교통정보코드교통정보코드</td>
+                      <td>사업지구코드</td>
+                      <td>VARCHAR2</td>
+                      <td>6</td>
+                      <td>5</td>
+                      <td>Y</td>
+                      <td>1</td>
+                      <td>Y</td>
+                      <td>Y</td>
+                      <td>SYSDATE</td>
+                    </tr>
+                    <tr>
+                      <td>교통정보코드</td>
+                      <td>사업지구코드</td>
+                      <td>VARCHAR2</td>
+                      <td>6</td>
+                      <td>5</td>
+                      <td>Y</td>
+                      <td>1</td>
+                      <td>Y</td>
+                      <td>Y</td>
+                      <td>SYSDATE</td>
+                    </tr>
+                    <tr>
+                      <td>교통정보코드</td>
+                      <td>사업지구코드</td>
+                      <td>VARCHAR2</td>
+                      <td>6</td>
+                      <td>5</td>
+                      <td>Y</td>
+                      <td>1</td>
+                      <td>Y</td>
+                      <td>Y</td>
+                      <td>SYSDATE</td>
+                    </tr>
+                    <tr>
+                      <td>교통정보코드</td>
+                      <td>사업지구코드</td>
+                      <td>VARCHAR2</td>
+                      <td>6</td>
+                      <td>5</td>
+                      <td>Y</td>
+                      <td>1</td>
+                      <td>Y</td>
+                      <td>Y</td>
+                      <td>SYSDATE</td>
+                    </tr>
+                    <tr>
+                      <td>교통정보코드</td>
+                      <td>사업지구코드</td>
+                      <td>VARCHAR2</td>
+                      <td>6</td>
+                      <td>5</td>
+                      <td>Y</td>
+                      <td>1</td>
+                      <td>Y</td>
+                      <td>Y</td>
+                      <td>SYSDATE</td>
+                    </tr>
+                    <tr>
+                      <td>교통정보코드</td>
+                      <td>사업지구코드</td>
+                      <td>VARCHAR2</td>
+                      <td>6</td>
+                      <td>5</td>
+                      <td>Y</td>
+                      <td>1</td>
+                      <td>Y</td>
+                      <td>Y</td>
+                      <td>SYSDATE</td>
+                    </tr>
+                    <tr>
+                      <td>교통정보코드</td>
+                      <td>사업지구코드</td>
+                      <td>VARCHAR2</td>
+                      <td>6</td>
+                      <td>5</td>
+                      <td>Y</td>
+                      <td>1</td>
+                      <td>Y</td>
+                      <td>Y</td>
+                      <td>SYSDATE</td>
+                    </tr>
+                    <tr>
+                      <td>교통정보코드</td>
+                      <td>사업지구코드</td>
+                      <td>VARCHAR2</td>
+                      <td>6</td>
+                      <td>5</td>
+                      <td>Y</td>
+                      <td>1</td>
+                      <td>Y</td>
+                      <td>Y</td>
+                      <td>SYSDATE</td>
+                    </tr>
                     </tbody>
                   </table>
                 </div>
@@ -772,7 +770,7 @@
                 </p>
                 <p class="used__date">2022-05-16</p>
                 <base-button class="used__button" title="바로가기"
-                  >바로가기</base-button
+                >바로가기</base-button
                 >
               </li>
               <li>
@@ -788,7 +786,7 @@
                 <p class="used__description">날씨 정보를 제공하는 서비스</p>
                 <p class="used__date">2022-05-16</p>
                 <base-button class="used__button" title="바로가기"
-                  >바로가기</base-button
+                >바로가기</base-button
                 >
               </li>
               <li>
@@ -806,7 +804,7 @@
                 </p>
                 <p class="used__date">2022-05-16</p>
                 <base-button class="used__button" title="바로가기"
-                  >바로가기</base-button
+                >바로가기</base-button
                 >
               </li>
               <li>
@@ -825,7 +823,7 @@
                 </p>
                 <p class="used__date">2022-05-16</p>
                 <base-button class="used__button" title="바로가기"
-                  >바로가기</base-button
+                >바로가기</base-button
                 >
               </li>
               <li>
@@ -841,7 +839,7 @@
                 <p class="used__description">날씨 정보를 제공하는 서비스</p>
                 <p class="used__date">2022-05-16</p>
                 <base-button class="used__button" title="바로가기"
-                  >바로가기</base-button
+                >바로가기</base-button
                 >
               </li>
             </ul>
@@ -964,120 +962,126 @@
 </template>
 
 <script type="text/javascript">
-import moment from "moment";
-import BaseRadio from "@common/atoms/base-radio/base-radio";
-import BaseTag from "@common/atoms/base-tag/base-tag";
-import BaseButton from "@common/atoms/base-button/base-button";
-import BaseTextarea from "@common/atoms/base-textarea/base-textarea.vue";
-import GroupBreadcrumb from "@common/molecules/group-breadcrumb/group-breadcrumb";
-import GroupFileAttach from "@common/molecules/group-file-attach/group-file-attach";
-import SearchList from "@common/organisms/search-list/search-list.vue";
-import Dialog from "@functional/dialog/dialog.vue";
-import ViewTable from "@common/organisms/view-table/view-table";
-import BaseBadge from "@common/atoms/base-badge/base-badge";
-import BaseInput from "@common/atoms/base-input/base-input";
-import DatePicker from "@functional/datepicker/date-picker";
-import { successAlert, errorAlert } from "@functional/alert/alert-default";
+  import moment from "moment";
+  import BaseRadio from "@common/atoms/base-radio/base-radio";
+  import BaseTag from "@common/atoms/base-tag/base-tag";
+  import BaseButton from "@common/atoms/base-button/base-button";
+  import BaseTextarea from "@common/atoms/base-textarea/base-textarea.vue";
+  import GroupBreadcrumb from "@common/molecules/group-breadcrumb/group-breadcrumb";
+  import GroupFileAttach from "@common/molecules/group-file-attach/group-file-attach";
+  import SearchList from "@common/organisms/search-list/search-list.vue";
+  import Dialog from "@functional/dialog/dialog.vue";
+  import ViewTable from "@common/organisms/view-table/view-table";
+  import BaseBadge from "@common/atoms/base-badge/base-badge";
+  import BaseInput from "@common/atoms/base-input/base-input";
+  import DatePicker from "@functional/datepicker/date-picker";
+  import { successAlert, errorAlert } from "@functional/alert/alert-default";
 
-import { mapActions, mapGetters } from "vuex";
+  import { mapActions, mapGetters } from "vuex";
 
-export default {
-  name: "Index",
-  layout: "katech/katech",
-  computed: {
-    ...mapGetters({
-      detail: "meta/keyword-search/detail"
-    })
-  },
-  data() {
-    return {
-      isPreview: false,
-      requestData: {},
-      endDate: moment().add(1, "Y").format(),
-      confirmButtonDisabled: false
-    };
-  },
-  methods: {
-    ...mapActions("meta/keyword-search", ["getDetail", "setSearchKeyword"]),
-    ...mapActions("meta/bizMeta", ["getBizMetaDetail"]),
-    togglePreview: function () {
-      this.isPreview = !this.isPreview;
-    },
-    onshowDialog(name) {
-      this.$modal.show(name);
-    },
-    tagClick(tagClickObj) {
-      this.setSearchKeyword(tagClickObj.itemName);
-      this.$router.push({
-        path: "/portal/ui/meta/search/fullSearch"
-      });
-    },
-    confirmBtnClick(name) {
-      if (!this.requestData.apy_sbst) {
-        errorAlert({ content: "신청내용은 필수값입니다. 입력해주세요." });
-        return;
+  export default {
+    name: "Index",
+    layout: "katech/katech",
+    computed: {
+      detail() {
+        const vuex = this.$store.getters["meta/keyword-search/detail"];
+
+        if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+          this.popupTitle = vuex.body.data_nm;
+          this.confirmButtonDisabled = vuex.body.law_evl_conf_yn === "y";
+          this.needConfirm = vuex.body.law_evl_conf_yn === "y";
+        }
+        return vuex;
       }
-
-      console.log(this.requestData);
-
-      successAlert({
-        title: "데이터 활용 신청이 완료되었습니다.",
-        content:
-          "활용신청하신 데이터는 마이페이지 > 내 활용내역에서 확인할 수 있습니다."
-      });
-
-      this.resetRequestData();
-      this.$modal.hide(name);
     },
-    setRequestData({ id, input }) {
-      const key = id.split("-").pop();
-      this.requestData[key] = input;
-
-      this.confirmButtonDisabled = this.requestData["law_evl_conf"] === "";
-    },
-    setDatePicker(e) {
-      this.requestData["start_date"] = e.at(0);
-      this.requestData["end_date"] = e.at(1);
-    },
-    resetRequestData() {
-      this.requestData = {
-        biz_dataset_id: this.$route.query.postId,
-        apyr: "홍길동",
-        emp_num: "20161665",
-        apy_sbst: "",
-        law_evl_conf: "",
-        start_date: "",
-        end_date: ""
+    data() {
+      return {
+        isPreview: false,
+        requestData: {},
+        endDate: moment().add(1, "Y").format(),
+        confirmButtonDisabled: false,
+        popupTitle: null,
+        needConfirm: false
       };
-    }
-  },
-  created() {
-    const rowId = this.$route.query.postId;
-    // const rowId = "830cc064-62a7-46dc-a5b1-04da598c38c0";
-    // TODO :
-    // this.getBizMetaDetail(rowId);
+    },
+    methods: {
+      ...mapActions("meta/keyword-search", ["getDetail", "setSearchKeyword"]),
+      ...mapActions("meta/bizMeta", ["getBizMetaDetail"]),
+      togglePreview: function () {
+        this.isPreview = !this.isPreview;
+      },
+      onshowDialog(name) {
+        this.$modal.show(name);
+      },
+      tagClick(tagClickObj) {
+        this.setSearchKeyword(tagClickObj.itemName);
+        this.$router.push({
+          path: "/portal/ui/meta/search/fullSearch"
+        });
+      },
+      confirmBtnClick(name) {
+        if (!this.requestData.apy_sbst) {
+          errorAlert({ content: "신청내용은 필수값입니다. 입력해주세요." });
+          return;
+        }
 
-    this.getDetail(rowId);
-    this.resetRequestData();
-    this.confirmButtonDisabled = this.detail.body.law_evl_conf_yn === "y";
-  },
-  components: {
-    BaseRadio,
-    BaseButton,
-    BaseTag,
-    SearchList,
-    GroupBreadcrumb,
-    Dialog,
-    BaseTextarea,
-    GroupFileAttach,
-    ViewTable,
-    BaseBadge,
-    BaseInput,
-    DatePicker
-  }
-};
+        console.log(this.requestData);
+
+        successAlert({
+          title: "데이터 활용 신청이 완료되었습니다.",
+          content:
+            "활용신청하신 데이터는 마이페이지 > 내 활용내역에서 확인할 수 있습니다."
+        });
+
+        this.resetRequestData();
+        this.$modal.hide(name);
+      },
+      setRequestData({ id, input }) {
+        const key = id.split("-").pop();
+        this.requestData[key] = input;
+
+        this.confirmButtonDisabled = this.requestData["law_evl_conf"] === "";
+      },
+      setDatePicker(e) {
+        this.requestData["start_date"] = e.at(0);
+        this.requestData["end_date"] = e.at(1);
+      },
+      resetRequestData() {
+        this.requestData = {
+          biz_dataset_id: this.$route.query.postId,
+          apyr: "홍길동",
+          emp_num: "20161665",
+          apy_sbst: "",
+          law_evl_conf: "",
+          start_date: "",
+          end_date: ""
+        };
+      }
+    },
+    created() {
+      const rowId = this.$route.query.postId;
+
+      this.getDetail(rowId);
+      this.resetRequestData();
+    },
+    mounted() {},
+    components: {
+      BaseRadio,
+      BaseButton,
+      BaseTag,
+      SearchList,
+      GroupBreadcrumb,
+      Dialog,
+      BaseTextarea,
+      GroupFileAttach,
+      ViewTable,
+      BaseBadge,
+      BaseInput,
+      DatePicker
+    }
+  };
 </script>
 
 <style lang="scss" scoped>
-@import "index";
+  @import "./index.scss";
 </style>
