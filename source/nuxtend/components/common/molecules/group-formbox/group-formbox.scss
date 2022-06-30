@@ -1,0 +1,150 @@
+.formbox {
+  position: relative;
+  margin-bottom: $spacing-xl;
+  border-top: 2px solid $text-01;
+  border-bottom: 1px solid $ui-04;
+  background: $ui-02;
+}
+
+.formbox tr {
+  height: rem(60px);
+}
+
+.formbox th,
+.formbox td {
+  line-height: 1.5;
+  padding: $spacing-xs rem(20px);
+  border-top: 1px solid $ui-04;
+  vertical-align: middle;
+}
+
+.formbox tr:first-child>th,
+.formbox tr:first-child>td {
+  border-top: none;
+}
+
+/* first row */
+.formbox th {
+  font-weight: 500;
+  text-align: left;
+}
+
+/* 상세폼 TH BG
+    ***************************************************************************/
+.formbox--bg {
+  position: relative;
+  margin-bottom: $spacing-2xl;
+  border-top: 2px solid $text-01;
+  border-bottom: 1px solid $ui-04;
+}
+
+.formbox--bg tr {
+  height: auto;
+}
+
+.formbox--bg th,
+.formbox--bg td {
+  padding: $spacing-md rem(20px);
+  border-top: 1px solid $ui-04;
+  text-align: left;
+}
+
+.formbox--bg th {
+  align-items: flex-start;
+  background-color: $ui-01;
+  font-weight: 500;
+}
+
+.formbox--bg tr:last-child th,
+.formbox--bg tr:last-child td {
+  border-bottom: none;
+}
+
+/* 화면 너비 0 ~ 930px */
+@include template-respond-to('breakpoint-lg') {
+
+  /* 상세폼 기본테이블
+        ***************************************************************************/
+  .formbox colgroup {
+    display: none;
+  }
+
+  .formbox tr {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+
+  .formbox th,
+  .formbox td {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .formbox th {
+    padding-top: rem(18px);
+    padding-bottom: $spacing-2xs;
+    border-top: 1px solid $ui-04 !important;
+  }
+
+  .formbox td {
+    padding-top: $spacing-2xs;
+    padding-bottom: $spacing-md;
+    border-top: none;
+  }
+
+  .formbox td[colspan] {
+    border-top: 1px solid $ui-04;
+  }
+
+  /* colspan시 border보이게(th없음) */
+
+  /* 상세폼 TH BG 테이블
+        ***************************************************************************/
+  .formbox--bg tr {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: $ui-01;
+  }
+
+  .formbox--bg th {
+    @include font-size("14");
+    width: rem(150px);
+    font-weight: 500;
+    color: $text-01;
+  }
+
+  .formbox--bg th:before {
+    content: none;
+  }
+
+  .formbox--bg th,
+  .formbox--bg td {
+    display: flex;
+    align-items: center;
+    padding: $spacing-md rem(20px) !important;
+  }
+
+  .formbox--bg td {
+    width: calc(100% - 150px);
+    border-top: 1px solid $ui-04;
+    background-color: $ui-02;
+  }
+
+  .formbox--bg tr:first-child>th {
+    border-top: 1px solid $ui-04;
+  }
+
+  .formbox--bg tr:first-child>td {
+    border-top: 1px solid $ui-04;
+  }
+
+}

@@ -3,7 +3,7 @@
   position: absolute;
   width: 100%;
   background: $ui-02;
-  border: 1px solid $ui-01;
+  border: 1px solid $text-03;
   text-align: left;
   display: none;
 }
@@ -16,33 +16,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 40px;
   padding: 0 $spacing-md 0 $spacing-md;
-  background: $ui-05;
+  background: $ui-01;
   color: $text-01;
-}
-
-.recent-search_hidden {
-  display: none;
 }
 
 .autocomplete {
   position: relative;
+  background: $ui-02;
   border: none;
-  background: none;
   padding: $spacing-sm 0;
-  display: none;
-}
-
-.autocomplete_show {
-  display: block;
 }
 
 .autocomplete__item {
   height: rem(36px);
   padding: 0;
-
   &:hover {
-    background: rgba(#00479d, .04);
+    background: $ui-01;
   }
 
   &+& {
@@ -55,8 +46,8 @@
   display: flex;
   align-items: center;
   height: 100%;
-  color: $basic;
-  padding: 0 rem(30px);
+  color: $text-02;
+  padding: 0 $spacing-md;
 }
 
 .autocomplete__item .autocomplete__title {
@@ -77,52 +68,25 @@
 }
 
 .recent-search{
-  background: none;
+  background: $ui-02;
   border: none;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 rem(30px) rem(30px) rem(30px);
+  padding: $spacing-sm 0;
 }
 
 .recent-search__list{
   display: flex;
   flex-wrap: wrap;
-  padding: 0 rem(30px);
+  padding: 0 $spacing-md;
 }
 
 .keyword{
-  float: left;
-  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   border-radius: rem(15px);
-  margin: 0 $spacing-2xs $spacing-2xs 0;
-  padding: rem(5px) rem(30px) rem(5px) rem(15px);
-  border: none;
-  background: #fff;
-  @include font-size("13");
-  color: $text-01;
-
-  &:hover {
-    background: $hover-ui-accent;
-    color: $secondary;
-  }
-
-  .keyword__button {
-    position: absolute;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    right: rem(5px);
-    width: rem(16px);
-    height: rem(16px);
-    background: none;
-
-    .svg-icon {
-      width: rem(16px);
-      height: rem(16px);
-    }    
-
-  }
-  
+  margin: $spacing-3xs $spacing-2xs;
+  padding: 0 $spacing-xs;
+  border: 1px solid $ui-04;
 }
 
 // IDC 오버라이딩

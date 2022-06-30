@@ -1,0 +1,33 @@
+.lnb {
+  width: rem(220px); 
+  margin-right: rem(40px);
+}
+
+.lnb__title {
+  @include font-size("24");
+  @include font-weight("medium");
+  padding-bottom: $spacing-md;
+  border-bottom: 2px solid #333;
+
+}
+
+.lnb__list {
+  padding: rem(20px) 0;
+}
+
+.lnb__item {
+
+}
+
+.lnb__link {
+  display: block;
+  @include font-size("16");
+  padding: $spacing-md;
+  color: $text-01;
+}
+
+.lnb__item--selected .lnb__link {
+  background-color: $secondary;
+  color: $text-04;
+  border-radius: rem(5px);
+}

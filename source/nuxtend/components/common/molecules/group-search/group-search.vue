@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="text-input-group text-input-group--lg">
+  <div class="text-input-group">
     <label for="inp-search-lg-01" class="hidden">Label</label>
     <base-input
       id="inp-search-lg-01"

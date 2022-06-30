@@ -1,94 +1,90 @@
 <template lang="html">
   <!--  검색 리스트 - 리스트형 / 카드형 -->
   <ul class="data-box-list">
-    <li class="data-box" v-for="(item, index) in contents" :key="index">
-      <a
-        href="javascript:;"
-        @click="dataBoxClick(item[CONSTANTS.POST.POST_ID])"
-        class="data-box__link"
-      >
+    <li v-for="(item, index) in contents" :key="index">
+      <div class="data-box">
         <div class="data-box__information">
           <div class="data-box__top-content">
             <div class="badges">
-              <!-- 제공기관 로고 (카드형일때만 보임) -->
-              <div class="badge--provider-logo">
-                <img
-                  v-if="item.logo"
-                  :src="item.logo"
-                  :alt="item.data_prv_desk"
-                />
-                <span v-else>{{ item.data_prv_desk }}</span>
-              </div>
-              <!-- // 제공기관 로고 -->
-              <base-badge class="badge--w-gray" v-if="item.data_type">
-                <span class="badge__label">{{ item.data_type }}</span>
+              <base-badge class="badge--outline badge--rounded">
+                <span class="badge__label">모바일</span><!-- 카테고리구분 -->
               </base-badge>
-              <base-badge v-if="item.ctgry" class="badge--w-primary">
-                <span class="badge__label">{{
-                  item.ctgry.split(",").pop()
-                }}</span>
-              </base-badge>
-              <base-badge
-                v-if="item.data_prv_desk"
-                class="badge--w-primary badge--provider"
-              >
-                <span class="badge__label">{{ item.data_prv_desk }}</span>
+              <base-badge class="badge--provider">
+                <span class="badge__label">그룹사</span
+                ><!-- 벤더 -->
               </base-badge>
             </div>
-            <div class="data-options" @click.stop>
-              <base-checkbox
-                class="checkbox--favorite"
-                :name="'myFavoriteData' + item[CONSTANTS.POST.POST_ID]"
-                :checkbox-id="
-                  'data-box__check-myfavoritedata' +
-                  item[CONSTANTS.POST.POST_ID]
-                "
-                :checked="
-                  myFavoriteDataList.includes(item[CONSTANTS.POST.POST_ID])
-                "
-                @changeData="myFavoriteDataClick"
-              >
-                <template v-slot:label>관심데이터 추가</template>
-              </base-checkbox>
-            </div>
+            <dl class="data-box__options">
+              <dt>
+                <svg-icon name="heart" class="svg-icon"></svg-icon>
+                <span class="hidden">관심데이터등록수total</span>
+              </dt>
+              <dd>20</dd>
+              <dt>
+                <svg-icon name="eye" class="svg-icon"></svg-icon>
+                <span class="hidden">조회수total</span>
+              </dt>
+              <dd>156</dd>
+              <dt>
+                <svg-icon name="download" class="svg-icon"></svg-icon>
+                <span class="hidden">다운로드수total</span>
+              </dt>
+              <dd>34</dd>
+            </dl>
           </div>
           <div class="data-box__content">
-            <strong
-              v-if="item.data_nm"
-              class="data-box__title"
-              v-html="searchKeywordHighlight(item.data_nm)"
-            >
-            </strong>
-            <!-- fileType 제거 -->
-          </div>
-          <div>
-            <p v-if="item.data_desc" class="data-box__description">
-              {{ item.data_desc }}
-            </p>
+            <a href="#none" class="data-box__link">
+              <strong class="data-box__title">
+                {{ item.title }}<mark>서비스</mark>
+                <!-- 검색어에 mark 태그 적용 -->
+              </strong>
+              <p class="data-box__description">
+                {{ item.content }}
+              </p>
+            </a>
           </div>
           <div class="data-box__bottom-content">
-            <div class="data-box__details" @click.stop>
-              <!-- tagList에만 버블링 이벤트 막는 방법 찾아서 수정필요 -->
-              <basic-tag-list
-                v-if="item.kywrd"
-                :tagList="convertTagObj(item.kywrd)"
-                previousText="#"
-                :useCancelButton="false"
-                @tagClick="keywordClick"
-              ></basic-tag-list>
-
+            <div class="data-box__details">
               <div class="data-box__details-group">
                 <dl>
-                  <dt><span>수정일</span></dt>
-                  <dd v-if="item.list_amd_dt">{{ item.ltst_amd_dt }}</dd>
-                  <dt><span>조회</span></dt>
-                  <dd>1,222</dd>
+                  <dt>수정일</dt>
+                  <dd>2022-06-28</dd>
+                </dl>
+                <dl>
+                  <dt>등록일</dt>
+                  <dd>2022-06-28</dd>
+                </dl>
+                <dl>
+                  <dt>키워드</dt>
+                  <dd>
+                      <div class="tags">
+                        <base-tag class="tag--sm" href="#"><span class="tag__label">#트래픽</span></base-tag>
+                        <base-tag class="tag--sm" href="#"><span class="tag__label">#URL</span></base-tag>
+                        <base-tag class="tag--sm" href="#"><span class="tag__label">#관심</span></base-tag>
+                        <base-tag class="tag--sm" href="#"><span class="tag__label">#프로파일</span></base-tag>
+                      </div>
+                  </dd>
                 </dl>
               </div>
             </div>
           </div>
         </div>
-      </a>
+        <!-- 오른쪽 옵션 구조 추가 -->
+        <div class="data-box__buttons">
+            <base-button class="button--primary">
+              <span class="button__text">바로활용</span>
+            </base-button>
+            <base-button class="button--primary-line">
+              <span class="button__text">담아두기</span>
+            </base-button>
+            <div class="favorite-cnt">
+              <base-button class="favorite-cnt__button" :class="isToggle ? 'favorite-cnt__button--selected' : ''" @click="toggleBtn">
+                <svg-icon class="svg-icon" name="heart_md" aria-hidden="true"></svg-icon>
+                <span class="button__text">관심데이터</span>
+              </base-button>
+            </div>
+          </div>
+      </div>
     </li>
   </ul>
 </template>
@@ -98,8 +94,6 @@ import BaseBadge from "@common/atoms/base-badge/base-badge.vue";
 import BaseButton from "@common/atoms/base-button/base-button";
 import BaseTag from "@common/atoms/base-tag/base-tag.vue";
 import BaseCheckbox from "@common/atoms/base-checkbox/base-checkbox.vue";
-import BasicTagList from "@common/atoms/basic-tag-list/basic-tag-list";
-import { mapGetters } from "vuex";
 
 export default {
   name: "SearchList",
@@ -107,77 +101,30 @@ export default {
   props: {
     list: {
       type: Array,
-      default: () => {
-        return [];
-      }
-    },
-    myFavoriteDataList: {
-      type: Array,
-      default: () => {
-        return [];
-      }
-    },
-    searchKeyword: {
-      type: String,
-      require: true
-    },
-    searchKeywordList: {
-      type: Array,
-      require: false,
-      default: () => {
+      default: function () {
         return [];
       }
     }
   },
-  data() {
-    return {};
-  },
+
   computed: {
     contents: function () {
       return this.list;
-    },
-    ...mapGetters({
-      CONSTANTS: "defaults/constants/CONSTANTS"
-    })
-  },
-  components: { BaseBadge, BaseButton, BaseTag, BaseCheckbox, BasicTagList },
-  watch: {},
-  methods: {
-    dataBoxClick(id) {
-      this.$emit("dataBoxClick", { postId: id });
-    },
-    keywordClick(tagObj) {
-      this.$emit("keywordClick", tagObj);
-    },
-    myFavoriteDataClick(bool, name) {
-      const postId = name.split("myFavoriteData").pop();
-      this.$emit("myFavoriteDataClick", { postId, bool });
-    },
-    searchKeywordHighlight(item) {
-      let title = "";
-
-      if (this.searchKeyword === "" && this.searchKeywordList.length === 0) {
-        title = item;
-      } else if (this.searchKeywordList.length > 0) {
-        this.searchKeywordList.forEach((el) => {
-          title = item.replaceAll(el, `<mark>${el}</mark>`);
-          item = title;
-        });
-      } else {
-        title = item.replaceAll(
-          this.searchKeyword,
-          `<mark>${this.searchKeyword}</mark>`
-        );
-      }
-
-      return title;
-    },
-    convertTagObj(tagString) {
-      return tagString.split(",").map((el, i) => {
-        return { itemId: i, itemName: el };
-      });
     }
-  }
+  },
+  components: { BaseBadge, BaseButton, BaseTag, BaseCheckbox },
+  watch: {},
+  
+  data() {
+    return {
+      isToggle: false
+    };
+  },
+  methods: {
+    toggleBtn: function () {
+      this.isToggle = !this.isToggle;
+    }
+  } // 토글버튼 2022-06-24 ADD
 };
 </script>
 
