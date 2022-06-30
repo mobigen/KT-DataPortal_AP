@@ -28,8 +28,8 @@ export const mutations = {
   }
 };
 
-import sampleContents from "./_contents.json";
-import sampleDetail from "./_detail.json";
+// import sampleContents from "./_contents.json";
+import d from "./_detail.json";
 
 export const actions = {
   getContents({ commit, rootGetters, dispatch }, params) {
@@ -45,25 +45,25 @@ export const actions = {
     // param with pageInfo (start, end...)
 
     const keywordStr = `&keyword1=${keywordObj.keyword1}&keyword2=${keywordObj.keyword2}&keyword3=${keywordObj.keyword3}`;
-    const paramAPI =
-      `?perPage=${paging.itemsPerPage}&curPage=${paging.page}` + keywordStr;
+    const paramAPI = `?perPage=${paging.itemsPerPage}&curPage=${paging.page}`;
+    // TODO : BACKEND 서버 배포하면 주석 해제후 테스트. + keywordStr;
 
     console.log(paramAPI);
-    this.$axios
-      .get(this.$config.ROUTE_API_META_PREFIX + "/getBizMetaList" + paramAPI)
-      .then((d) => {
-        commit("setContents", d);
-
-        // setTotalPage
-        dispatch(
-          "module/pagination/setTotalCount",
-          {
-            key: params.paginationKey,
-            totalCount: d.totalcount
-          },
-          { root: true }
-        );
-      });
+    // this.$axios
+    //   .get(this.$config.ROUTE_API_META_PREFIX + "/getBizMetaList" + paramAPI)
+    //   .then((d) => {
+    commit("setContents", d);
+    //
+    //     // setTotalPage
+    dispatch(
+      "module/pagination/setTotalCount",
+      {
+        key: params.paginationKey,
+        totalCount: d.totalcount
+      },
+      { root: true }
+    );
+    //   });
   },
   async getDetail({ commit }, rowKey) {
     await this.$axios
