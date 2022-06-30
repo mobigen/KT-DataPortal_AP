@@ -33,34 +33,49 @@ import sampleDetail from "./_detail.json";
 
 export const actions = {
   getContents({ commit, rootGetters, dispatch }, params) {
-    /*
+    let keywordObj = { keyword1: "", keyword2: "", keyword3: "" };
+    params.searchKeywordList.forEach((el, index) => {
+      keywordObj["keyword" + (index + 1)] = el;
+    });
+
+    console.log(params.searchKeywordList);
+
     const paging =
       rootGetters["module/pagination/paging"][params.paginationKey];
     // param with pageInfo (start, end...)
-    const paramAPI = `?perPage=${paging.itemsPerPage}&curPage=${paging.page}`;
-    */
-    commit("setContents", sampleContents);
 
-    console.log("검색어 LIST: " + params.searchKeywordList);
+    const keywordStr = `&keyword1=${keywordObj.keyword1}&keyword2=${keywordObj.keyword2}&keyword3=${keywordObj.keyword3}`;
+    const paramAPI =
+      `?perPage=${paging.itemsPerPage}&curPage=${paging.page}` + keywordStr;
 
-    // fullSearch/backup페이지에 페이지네이션 기능 추가 안해서 생기는 에러때문에 임시로 설정
-    if (params === undefined) {
-      return;
-    }
+    console.log(paramAPI);
+    this.$axios
+      .get(this.$config.ROUTE_API_META_PREFIX + "/getBizMetaList" + paramAPI)
+      .then((d) => {
+        commit("setContents", d);
 
-    dispatch(
-      "module/pagination/setTotalCount",
-      {
-        key: params.paginationKey,
-        totalCount: sampleContents.totalcount
-      },
-      { root: true }
-    );
+        // setTotalPage
+        dispatch(
+          "module/pagination/setTotalCount",
+          {
+            key: params.paginationKey,
+            totalCount: d.totalcount
+          },
+          { root: true }
+        );
+      });
   },
-  getDetail({ commit }, rowKey) {
-    console.log(rowKey);
-
-    commit("setDetail", sampleDetail);
+  async getDetail({ commit }, rowKey) {
+    await this.$axios
+      .get(
+        this.$config.ROUTE_API_META_PREFIX +
+          "/getBizMetaDetail?datasetId=" +
+          rowKey
+      )
+      .then((d) => {
+        console.log(d);
+        commit("setDetail", d);
+      });
   },
   setSearchKeyword({ commit }, keyword) {
     commit("setSearchKeyword", keyword);

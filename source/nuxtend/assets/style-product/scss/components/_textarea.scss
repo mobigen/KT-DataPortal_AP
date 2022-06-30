@@ -14,7 +14,7 @@
   border-radius: rem(5px);
   transition: all $duration-fast-01 motion(standard, productive);
   outline: none;
-  resize: vertical;
+  resize: none;
 
   &:hover {
     background-color: rgba($ui-02, 1);

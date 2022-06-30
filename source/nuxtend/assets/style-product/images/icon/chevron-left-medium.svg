@@ -1,3 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <path fill-rule="evenodd" d="M20.207 7.793a1 1 0 010 1.414L13.914 15.5l6.293 6.293a1 1 0 01-1.414 1.414l-7-7a1 1 0 010-1.414l7-7a1 1 0 011.414 0z" clip-rule="evenodd"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="7" height="12">
+    <defs>
+        <filter id="7c6burizla">
+            <feFlood flood-color="#CCC" flood-opacity="1" result="floodOut"/>
+            <feComposite operator="atop" in="floodOut" in2="SourceGraphic" result="compOut"/>
+            <feBlend in="compOut" in2="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g filter="url(#7c6burizla)">
+        <path fill-rule="evenodd" fill="#666" d="M7 .3v11.697L.1 5.996 7 .3z"/>
+    </g>
 </svg>

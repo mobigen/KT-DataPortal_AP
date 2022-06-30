@@ -1,6 +1,13 @@
 // -------------------------
 // Tag
 // -------------------------
+.tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
 .tag {
   display: block;
   float: left;
@@ -10,11 +17,11 @@
   padding: 0 rem(15px);
   border: 1px solid #e1e1e1;
   border-radius: rem(18px);
-  background-color:#fff;
+  background-color: #fff;
 
   &:hover:not(:disabled) {
-    background-color: $hover-ui-accent;
-    color: $secondary;
+    background-color: $primary;
+    color: $text-04;
   }
 
   &:focus-visible:not(:disabled) {
@@ -29,8 +36,11 @@
       fill: $icon-01;
     }
   }
-}
 
+  & + & {
+    margin-left: $spacing-2xs;
+  }
+}
 
 .tag__label {
   @include font-weight("regular");

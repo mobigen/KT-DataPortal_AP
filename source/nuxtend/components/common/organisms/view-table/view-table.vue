@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <h3>{{ tableTitle }}</h3>
+    <h3 v-if="tableTitle">{{ tableTitle }}</h3>
     <table class="formbox formbox--row">
       <colgroup v-for="c in colgroupArray">
         <col :style="'width: ' + c" />
@@ -63,7 +63,6 @@
 
 <script type="text/javascript">
 import BasicTagList from "@common/atoms/basic-tag-list/basic-tag-list";
-
 export default {
   name: "basic-viewTable",
   extends: {},
@@ -93,7 +92,13 @@ export default {
     },
     viewDetail: {
       type: Object,
-      require: true
+      require: true,
+      default: () => {
+        return {
+          header: [],
+          body: []
+        };
+      }
     },
     headerLocale: {
       type: Object,
@@ -127,22 +132,32 @@ export default {
     }
   },
   computed: {
+    detailData() {
+      // viewDetail 값이 없거나, header(or body) 가 없으면, 기본값을 만들어 return 해준다.
+      return this.viewDetail === undefined ||
+        !Object.prototype.hasOwnProperty.call(this.viewDetail, "header")
+        ? {
+            header: [],
+            body: []
+          }
+        : this.viewDetail;
+    },
     bodyData() {
       /**
        * TODO : view table에 사용할 body 데이터는 object를 권장하나, 개발초기에 array로 처리했던 부분이 있어서 부득이 하게 분기처리.
        */
-      return this.viewDetail !== undefined &&
-        Object.prototype.hasOwnProperty.call(this.viewDetail, "body")
-        ? this.viewDetail.body.length > 0
-          ? this.viewDetail.body[0]
-          : this.viewDetail.body
+      return this.detailData !== undefined &&
+        Object.prototype.hasOwnProperty.call(this.detailData, "body")
+        ? this.detailData.body.length > 0
+          ? this.detailData.body[0]
+          : this.detailData.body
         : {};
     },
     tableHeader() {
       let headerList =
         this.viewHeaderList.length > 0
           ? this.viewHeaderList
-          : this.viewDetail.header.map((el) => {
+          : this.detailData.header.map((el) => {
               return el.column_name;
             });
       let i = 0;
@@ -152,7 +167,6 @@ export default {
           headerList.splice(i, 1);
         }
       });
-
       return headerList;
     }
   },
@@ -161,13 +175,16 @@ export default {
   methods: {
     getHeaderLocale(headerEngNm) {
       if (this.headerHasLocale) {
-        let headerObj = this.viewDetail.header.find((el) => {
+        if (this.detailData === undefined) {
+          return "";
+        }
+        let headerObj = this.detailData.header.find((el) => {
           return el.column_name === headerEngNm;
         });
         if (headerObj === undefined) {
-          console.log(headerEngNm);
+          return "";
         } else {
-          return headerObj.kor_name;
+          return headerObj.kor_column_name;
         }
       } else {
         return Object.prototype.hasOwnProperty.call(
@@ -182,9 +199,11 @@ export default {
       this.$emit("tagClick", tagObj);
     },
     convertTagObj(tagString) {
-      return tagString.split(",").map((el, i) => {
-        return { itemId: i, itemName: el };
-      });
+      return tagString === undefined
+        ? []
+        : tagString.split(",").map((el, i) => {
+            return { itemId: i, itemName: el };
+          });
     }
   },
   created() {}

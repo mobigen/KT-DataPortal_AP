@@ -3,7 +3,7 @@
   position: absolute;
   width: 100%;
   background: $ui-02;
-  border: 1px solid $text-03;
+  border: 1px solid $ui-01;
   text-align: left;
   display: none;
 }
@@ -17,7 +17,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 $spacing-md 0 $spacing-md;
-  background: $ui-01;
+  background: $ui-05;
   color: $text-01;
 }
 
@@ -40,8 +40,9 @@
 .autocomplete__item {
   height: rem(36px);
   padding: 0;
+
   &:hover {
-    background: $ui-01;
+    background: rgba(#00479d, .04);
   }
 
   &+& {
@@ -54,13 +55,13 @@
   display: flex;
   align-items: center;
   height: 100%;
-  color: $text-02;
+  color: $basic;
   padding: 0 rem(30px);
 }
 
 .autocomplete__item .autocomplete__title {
   font-weight: 500;
-  color: $secondary;
+  color: $primary;
 }
 
 .autocomplete--open-history {
@@ -96,7 +97,7 @@
   margin: 0 $spacing-2xs $spacing-2xs 0;
   padding: rem(5px) rem(30px) rem(5px) rem(15px);
   border: none;
-  background: $ui-01;
+  background: #fff;
   @include font-size("13");
   color: $text-01;
 
