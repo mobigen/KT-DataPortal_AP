@@ -1,113 +1,136 @@
 <template>
-  <div class="contents-wrap">
-    <h2 class="hidden">데이터</h2>
-    <div class="contents-subject">
+  <div class="container">
+    <div class="contents-subject"><!-- contents-subject은 나중에 따로 빠질수 있음 -->
+      <h2 class="hidden">데이터</h2>
       <group-breadcrumb></group-breadcrumb>
-      <subject></subject>
     </div>
-    <div class="content-top">
-      <div class="contents-top__search">
-        <search-input-field></search-input-field>
-        <div class="contents-top__recommend">
-          <!-- 추천검색어 : 검색어 입력창에 검색어 입력 없이 빈 상태일 때 추천 검색어 노출 -->
-          <p>추천검색어</p>
-          <div class="tags">
-            <base-tag href="#"><span class="tag__label">#데이터사업</span></base-tag>
-            <base-tag href="#"><span class="tag__label">#업종</span></base-tag>
-            <base-tag href="#"><span class="tag__label">#콜등급</span></base-tag>
-            <base-tag href="#"><span class="tag__label">#트래픽</span></base-tag>
-            <base-tag href="#"><span class="tag__label">#CU</span></base-tag>
-            <base-tag href="#"><span class="tag__label">#RTPO</span></base-tag>
+    <!-- contents-wrap -->
+    <div class="contents-wrap">
+      <!-- contents-group : subject + content-top + contents(L : R) -->
+      <div class="contents-group">
+        <subject></subject>
+        <!-- content-top : 데이터 검색/ 상세-->
+        <div class="content-top">
+          <!-- contents-top__search : 통합검색 -->
+          <div class="contents-top__search">
+            <search-input-field></search-input-field>
+            <div class="contents-top__recommend">
+              <!-- 추천검색어 : 검색어 입력창에 검색어 입력 없이 빈 상태일 때 추천 검색어 노출 -->
+              <p>추천검색어</p>
+              <div class="tags">
+                <base-tag href="#"><span class="tag__label">#데이터사업</span></base-tag>
+                <base-tag href="#"><span class="tag__label">#업종</span></base-tag>
+                <base-tag href="#"><span class="tag__label">#콜등급</span></base-tag>
+                <base-tag href="#"><span class="tag__label">#트래픽</span></base-tag>
+                <base-tag href="#"><span class="tag__label">#CU</span></base-tag>
+                <base-tag href="#"><span class="tag__label">#RTPO</span></base-tag>
+              </div>
+              <!-- // 추천검색어 -->
+            </div>
           </div>
-          <!-- //추천검색어 -->
+          <!-- contents-search-result : 결과값 -->
+          <div class="contents-search-result">
+            <p class="contents-search-result__text">
+              <strong>SGI</strong>에 대한 검색결과, 총 <strong>150</strong> 건 입니다.
+            </p>
+          </div>
+          <!-- // contents-search-result -->
+          <!-- contents-top__detail : 데이터 상세검색 토글영역 -->
+          <div class="contents-top__detail">
+            <base-button
+              class="detail-button-default"
+              :class="isDetailOpen ? 'detail-button--open' : ''" @click="toggleDetail" title="상세검색">데이터 상세검색</base-button>
+            <div class="contents-top__filter" :class="isDetailOpen ? 'contents-top__filter--open' : ''">
+              <div class="filter-group">
+                  <div class="filter-group__options">
+                    <!-- 토글스위치 -->
+                    <base-switch>
+                      <span>전체 선택</span>
+                    </base-switch>
+                    <!-- //토글스위치 -->
+                    <div class="filter-group__notice">
+                      <p class="info-text">분류를 선택하세요. (중복가능)</p>
+                    </div>
+                  </div>
+                  <!-- 필터그룹핑 -->
+                  <div class="search-filter-group search-filter-group--horizontal">
+                    <group-search-filter
+                      :component-key="treeObj.componentKey"
+                      :tree-obj="treeObj"
+                      :tree-key="treeObj.treeKey"
+                    ></group-search-filter>
+                    <group-search-filter
+                      :component-key="treeObj.componentKey"
+                      :tree-obj="treeObj"
+                      :tree-key="treeObj.treeKey"
+                    ></group-search-filter>
+                    <group-search-filter
+                      :component-key="treeObj.componentKey"
+                      :tree-obj="treeObj"
+                      :tree-key="treeObj.treeKey"
+                    ></group-search-filter>
+                  </div>
+                  <!-- //필터그룹핑 -->
+
+              </div>
+            </div>
+          </div>
+          <!-- // contents-top__detail -->
         </div>
-      </div>
-      <div class="contents-search-result">
-        <p class="contents-search-result__text">
-          <strong>SGI</strong>에 대한 검색결과, 총 <strong>150</strong> 건 입니다.
-        </p>
-        </div>
-      <div class="contents-top__detail">
-        <base-button
-          class="detail-button-default"
-          :class="isDetailOpen ? 'detail-button--open' : ''" @click="toggleDetail" title="상세검색">데이터 상세검색</base-button>
-        <div class="contents-top__filter" :class="isDetailOpen ? 'contents-top__filter--open' : ''">
-          <div class="filter-group">
-              <div class="filter-group__options">
-                <!-- 토글스위치 -->
-                <base-switch>
-                  <span>전체 선택</span>
-                </base-switch>
-                <!-- //토글스위치 -->
-                <div class="filter-group__notice">
-                  <p class="info-text">분류를 선택하세요. (중복가능)</p>
+        <!-- contents : 필터 L : 검색목록 R -->
+        <div class="contents">
+          <div class="contents-section">
+            <!-- 검색필터 상세선택 -->
+            <div class="filter-wrap">
+              <h3 class="hidden">검색필터 상세선택</h3>
+              <div class="filter">
+                <div class="filter__options">
+                  <!-- 토글스위치 -->
+                  <base-switch>
+                    <span>전체 선택</span>
+                  </base-switch>
+                  <!-- //토글스위치 -->
+                </div>
+                <div class="search-filter-group search-filter-group--vertical">
+                  <group-search-filter
+                    :component-key="treeObj.componentKey"
+                    :tree-obj="treeObj"
+                    :tree-key="treeObj.treeKey"
+                  ></group-search-filter>
+                  <group-search-filter
+                    :component-key="treeObj.componentKey"
+                    :tree-obj="treeObj"
+                    :tree-key="treeObj.treeKey"
+                  ></group-search-filter>
+                  <group-search-filter
+                    :component-key="treeObj.componentKey"
+                    :tree-obj="treeObj"
+                    :tree-key="treeObj.treeKey"
+                  ></group-search-filter>
                 </div>
               </div>
-              <!-- 필터그룹핑 -->
-              <div class="search-filter-group search-filter-group--horizontal">
-                <group-search-filter
-                  :component-key="treeObj.componentKey"
-                  :tree-obj="treeObj"
-                  :tree-key="treeObj.treeKey"
-                ></group-search-filter>
-                <group-search-filter
-                  :component-key="treeObj.componentKey"
-                  :tree-obj="treeObj"
-                  :tree-key="treeObj.treeKey"
-                ></group-search-filter>
-                <group-search-filter
-                  :component-key="treeObj.componentKey"
-                  :tree-obj="treeObj"
-                  :tree-key="treeObj.treeKey"
-                ></group-search-filter>
+            </div>
+            <!-- // 검색필터 상세선택 -->
+            <!-- 검색 목록 -->
+            <div class="data-result-wrap">
+              <!--탭 -->
+              <div class="tab tab--horizontal">
+                <ul class="tab__bar">
+                  <li
+                    class="tab__item"
+                    v-for="(item, index) in tabList"
+                    :class="item.selected ? 'tab__item--selected' : ''"
+                    :key="index"
+                  >
+                    <button type="button" class="tab__button" role="tab" aria-selected="false">
+                      <div class="tab__button-text">
+                        {{ item.title }}
+                      </div>
+                    </button>
+                  </li>
+                </ul>
               </div>
-              <!-- //필터그룹핑 -->
-
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="contents">
-      <!--사이드메뉴-->
-      <aside class="aside">
-        <h3 class="hidden">검색필터 상세선택</h3>
-        <div class="aside-category">
-          <div class="aside-category__options">
-            <!-- 토글스위치 -->
-            <base-switch>
-              <span>전체 선택</span>
-            </base-switch>
-            <!-- //토글스위치 -->
-          </div>
-          <div class="search-filter-group search-filter-group--vertical">
-            <group-search-filter
-              :component-key="treeObj.componentKey"
-              :tree-obj="treeObj"
-              :tree-key="treeObj.treeKey"
-            ></group-search-filter>
-            <group-search-filter
-              :component-key="treeObj.componentKey"
-              :tree-obj="treeObj"
-              :tree-key="treeObj.treeKey"
-            ></group-search-filter>
-            <group-search-filter
-              :component-key="treeObj.componentKey"
-              :tree-obj="treeObj"
-              :tree-key="treeObj.treeKey"
-            ></group-search-filter>
-          </div>
-        </div>
-      </aside>
-      <!-- // 사이드메뉴 -->
-      <section>
-        <div class="contents__result">
-          <!--탭 -->
-          <div class="contents__tab">
-            <group-tab></group-tab>
-          </div>
-          <!-- // 탭 -->
-          <div class="contents__list">
-            <div class="contents__list_inner">
+              <!--//탭 -->
               <!-- heading-group -->
               <div class="heading-group">
                 <h4>전체<span>(<strong>152</strong>건)</span></h4>
@@ -156,35 +179,24 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="list-head__options-view">
-                <div class="radios radios--toggle">
-                  <base-radio name="radio-test-icon" radioId="radio1" class="radio--icon" checked>
-                    <template v-slot:label>
-                      <svg-icon name="list_katech" class="svg-icon" />
-                      <span class="hidden">목록형</span>
-                    </template>
-                  </base-radio>
-                  <base-radio name="radio-test-icon" radioId="radio2" class="radio--icon">
-                    <template v-slot:label>
-                      <svg-icon name="list_card_katech" class="svg-icon" />
-                      <span class="hidden">카드형</span>
-                    </template>
-                  </base-radio>
+              <!-- // heading-group -->
+              <!-- data-result -->
+              <div class="data-result">
+                <div class="data-result__list">
+                  <!-- 검색된 목록 리스트 -->
+                  <!-- TODO: 실제 search-list 연동 필요 -->
+                  <search-list :list="contents"></search-list>
                 </div>
-              </div> 2022-06-16 DEL : KT는 카드형이 없음 -->
+              </div>
+              <!-- // data-result -->
+              <group-pagination></group-pagination>
             </div>
-          </div>
-          <div>
-            <!-- 검색된 목록 리스트 -->
-            <!-- TODO: 실제 search-list 연동 필요 -->
-            <!-- <search-list :list="contents"></search-list> -->
+            <!-- // 검색 목록 -->
           </div>
         </div>
-        <div class="contents__pagination">
-          <group-pagination></group-pagination>
-        </div>
-      </section>
+      </div>
     </div>
+    <!-- // contents-wrap -->
   </div>
 </template>
 
@@ -195,7 +207,6 @@ import BaseSelect from "@component/common/atoms/base-select/base-select";
 import BaseButton from "@component/common/atoms/base-button/base-button";
 import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox";
 import BaseSwitch from "@component/common/atoms/base-switch/base-switch";
-import GroupTab from "@component/common/molecules/group-tab/group-tab";
 import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
 import GroupBreadcrumb from "@component/common/molecules/group-breadcrumb/group-breadcrumb";
 import Subject from "@component/common/organisms/subject/subject.vue";
@@ -226,7 +237,6 @@ export default {
     GroupBreadcrumb,
     Subject,
     GroupSearchFilter,
-    GroupTab,
     SearchList,
     SearchInputField
   },
@@ -243,6 +253,11 @@ export default {
           PRNTS_ID: "prnts_id" // parent key
         }
       },
+      tabList: [
+        { title: "데이터 컨텐츠 (308)", selected: true },
+        { title: "원천 데이터 (1207)", selected: false },
+        { title: "메타데이터 (3205)", selected: false }
+      ]
     };
   },
   methods: {

@@ -1,7 +1,10 @@
 <template lang="html">
   <div>
-    <h3 v-if="tableTitle">{{ tableTitle }}</h3>
-    <table class="formbox formbox--row">
+    <div class="heading-group" v-if="tableTitle">
+      <h3 class="heading-group__title">{{ tableTitle }}</h3>
+    </div>
+
+    <table class="formbox">
       <colgroup v-for="c in colgroupArray">
         <col :style="'width: ' + c" />
       </colgroup>
@@ -50,7 +53,7 @@
                   </template>
                 </template>
                 <template v-else>
-                  {{ bodyData[tableHeader[i + (tdCnt - 1)]] }}
+                  {{ getTdVal(bodyData[tableHeader[i + (tdCnt - 1)]]) }}
                 </template>
               </td>
             </template>
@@ -63,6 +66,7 @@
 
 <script type="text/javascript">
 import BasicTagList from "@common/atoms/basic-tag-list/basic-tag-list";
+
 export default {
   name: "basic-viewTable",
   extends: {},
@@ -74,7 +78,7 @@ export default {
     },
     tableTitle: {
       type: String,
-      require: true
+      require: false
     },
     colgroupArray: {
       type: Array,
@@ -167,6 +171,7 @@ export default {
           headerList.splice(i, 1);
         }
       });
+
       return headerList;
     }
   },
@@ -204,6 +209,9 @@ export default {
         : tagString.split(",").map((el, i) => {
             return { itemId: i, itemName: el };
           });
+    },
+    getTdVal(tdValue) {
+      return tdValue ? tdValue : "-";
     }
   },
   created() {}
