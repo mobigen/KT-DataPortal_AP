@@ -1,11 +1,6 @@
 .contens {
   padding-top: 0;
 }
-.contents__summary {
-  position: relative;
-  width: 100%;
-  display: flex;
-}
 
 .outside-data {
   .contents__summary-information {
@@ -41,266 +36,34 @@
   .contents-outside__detail {
     display: block;
   }
-
-  
 }
 
 // 데이터 요약 정보
 .data-box {
-  display: flex;
-  position: relative;
-  align-items: center;
-  width: 100%;
-  padding: rem(30px);
-  border-top:2px solid #333;
+  border-top: 2px solid #333;
   border-bottom: 1px solid #ccc;
-  background-color: rgba($primary, .04);
-}
-
-.data-options {
-  flex-shrink: 0;
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-
-  > * + * {
-    margin-left: $spacing-2xs !important;
-  }
-}
-
-.data-options__tooltip {
-  position: relative;
-
-  .tooltip-studio{
-    top: calc(100% + 12px);
-    right: -6px;
-  }
-}
-
-.data-box__visual {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  margin-right: $spacing-lg;
-
-  .svg-icon {
-    width: rem(70px);
-    height: rem(70px);
-    fill: $primary;
-  }
-}
-
-.data-box__label {
-  @include text-overflow(100%);
-  @include font-size("16");
-  color: $primary;
-}
-
-.data-box__visual {
-  width: 150px;
-  height: 150px;
-  border-radius: rem(5px);
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-  }
-}
-
-.data-box__information {
-  position: relative;
-
-  &:not(:first-child):not(:last-child) {
-    flex: 1 1 0%;
-    min-width: auto;
-    margin: 0 rem(30px);
-  }
-}
-
-.data-box__link {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  width: 100%;
-}
-
-.data-box__top-content {
-  display: flex;
-  position: relative;
-  height: rem(25px);
-
-  > * + * {
-    margin-left: $spacing-xs;
-  }
-}
-
-.data-box__content {
-  margin: rem(10px) 0 0 0;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-}
-
-.data-box__title {
-  // @include multi-text-overflow(24px, 1);
-  @include font-weight("medium");
-  @include font-size("20");
-  color: $text-01;
-  flex-grow: 1;
-  overflow: hidden;
-}
-
-.data-filetype {
-  flex-shrink: 0;
-  display: flex;
-}
-
-.data-box__description {
-  @include multi-text-overflow(18px, 1);
-  margin-top: $spacing-md;
-  color: $text-02;
-}
-
-.data-box__bottom-content {
-  display: flex;
-  align-items: center;
-  width: 100%;  
-}
-
-.data-box__details {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin: $spacing-lg 0 0;  
-}
-
-.data-box__details-group {
-  display: flex;
-  flex-shrink: 0;
-
-  dl + dl {
-    margin-left: rem(25px);
-  }
-
-  dl {
-    position: relative;
-    display: flex;
-    align-items: center;
-
-    &:not(:first-child):after {
-      content:""; 
-      position: absolute; 
-      left: rem(-10px); 
-      top: 50%; 
-      width: rem(1px); 
-      height: rem(12px);  
-      margin-top: rem(-7px); 
-      background: #d4d7dc;
-    }
-    
-    dt {
-      display: flex;
-      padding-left: $spacing-md;
-      align-items: center;
-      white-space: nowrap;
-      color: $text-02;
-  
-      .svg-icon {
-        margin-right: $spacing-3xs;
-      }
-  
-      &:first-child {
-        padding: 0;
-      }
-    }
-  
-    dd {
-      position: relative;
-      margin-left: $spacing-sm; 
-      white-space: nowrap;
-      color: $text-01;
-    }
-
-  }
-
-}
-
-.data-box__buttons {
-  position: relative;
-  max-width: 110px;
-
-  button {
-    display: block;
-    width: 100%;
-    height: auto;
-    padding: rem(5px) $spacing-baseline;
-  }
-
-  button + button {
-    margin-top: $spacing-xs;
-  }
+  background-color: rgba($primary, 0.04);
 }
 
 // 관심데이터 버튼
 .favorite-cnt {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  margin-top: $spacing-xs;
-  border: 1px solid #e5e5e5;
-  border-radius: 5px;
-
   .favorite-cnt__button {
-    min-width: rem(107px); 
-    padding: rem(5px) 0; 
-    border: 1px solid #fff;
-    color: #999;
-    
-    .svg-icon {      
-      display:block;
-      width: rem(32px);
-      height: rem(32px);
+    .svg-icon {
+      display: block;
       margin: 0 auto;
-      fill-rule: evenodd;
-      clip-rule: evenodd;
-      fill:#fff;
-      stroke:#ccc; 
-      stroke-miterlimit: 10;
-    }
 
-    &.favorite-cnt__button--selected {
-      .svg-icon {
-        fill-rule: evenodd;
-        clip-rule: evenodd;
-        fill:#EA212A;
-        stroke: transparent; 
-        stroke-miterlimit: 10;
+      & + span {
+        margin: 0;
       }
-    }  
-  }
-}
-
-.tags {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  overflow: hidden;
-
-  .tag, .tag__label {
-    @include text-overflow();
-  }
-
-  .tag + .tag {
-    margin-left: $spacing-2xs;
+    }
   }
 }
 
 // 탭
 .tab {
+  position: sticky;
+  top: 100px;
+  z-index: 20;
   margin-top: 60px;
 }
 
@@ -327,82 +90,10 @@
 
 .chart__title {
   @include font-size("20");
-  @include font-weight("regular");
-  margin: $spacing-lg 0;
+  @include font-weight("medium");
+  display: block;
+  margin: $spacing-md 0 $spacing-xs;
   color: $gy-02;
-}
-
-// 데이터 제공처
-.contents__summary-provider {
-  flex-shrink: 0;
-  margin-left: rem(20px);
-  border-radius: rem(30px);
-  border: 1px solid $ui-04;
-  width: rem(260px);
-  padding: rem(20px) $spacing-xs;
-  display: flex;
-  flex-direction: column;
-
-  .provider__logo {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-
-    img {
-      margin: auto;
-      width: 78%;
-      height: auto;
-    }
-    .provider__logo-text {
-      @include font-size("24");
-      @include font-weight("bold");
-      color: $primary;
-      margin: auto;
-    }
-  }
-  .provider__datainfo {
-    flex-shrink: 0;
-    height: rem(80px);
-    display: flex;
-
-    .datainfo-views {
-      flex-shrink: 0;
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-    } 
-    .datainfo-download {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      border-left: 1px solid $ui-01;
-    }
-
-    .amount {
-      @include font-size("28");
-      @include font-weight("bold");
-      color: $text-02;
-      text-align: center;
-      flex-grow: 1;
-    }
-
-    .title {
-      @include font-size("14");
-      @include font-weight("regular");
-      color: $text-03;
-      text-align: center;
-      flex-shrink: 0;
-      height: rem(30px);
-
-      span {
-        padding-left: $spacing-2xs;
-      }
-      .svg-icon {
-        fill: $text-03;
-      }
-    }
-  }
 }
 
 // 데이터 상세정보
@@ -426,7 +117,8 @@
     margin-top: rem(20px);
   }
 
-  th, td {    
+  th,
+  td {
     height: rem(50px);
     padding: $spacing-xs $spacing-md;
     font-weight: inherit;
@@ -436,43 +128,19 @@
     overflow-wrap: break-word;
     word-break: keep-all;
   }
-  
-  tbody tr:not(:last-child) th, tbody tr:not(:last-child) td {
+
+  tbody tr:not(:last-child) th,
+  tbody tr:not(:last-child) td {
     border-bottom: 1px solid $line4;
   }
 
   th {
     background-color: $ui-05;
   }
-
-  .badges {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    
-
-    .badge--w-gray{
-      height: rem(30px);
-      border-radius: rem(15px);
-      padding: 0 rem(20px);
-      margin: 0 $spacing-2xs $spacing-2xs 0;
-    }
-
-    .badge__label {
-      height: rem(30px);
-      line-height: rem(27px);
-    }
-
-    .point {
-      color: $secondary;
-    }
-
-  }
 }
 
 // 샘플 데이터
 .contents__detail-sample {
-
   .table-scroll {
     max-height: rem(300px);
   }
@@ -483,13 +151,11 @@
   border-bottom: 1px solid $line2;
 
   li {
-
     &:not(:last-child) {
       border-bottom: 1px solid $line4;
     }
 
     &.open-filedata {
-
       .filedata__content {
         display: block;
       }
@@ -520,11 +186,17 @@
   padding: 0;
   border: 0;
 
+  &:hover,
+  &:focus {
+    color: inherit;
+    background-color: inherit;
+  }
+
   .button__text {
     display: flex;
     align-items: center;
     color: $basic;
-    
+
     &::after {
       content: "";
       margin-left: rem(10px);
@@ -561,7 +233,6 @@
 
 // 활용사례
 .contents__detail-used {
-  
   li {
     border-bottom: 1px solid $ui-04;
     height: rem(60px);
