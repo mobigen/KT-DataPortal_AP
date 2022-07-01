@@ -114,22 +114,10 @@
             <!-- 검색 목록 -->
             <div class="data-result-wrap">
               <!--탭 -->
-              <div class="tab tab--horizontal">
-                <ul class="tab__bar">
-                  <li
-                    class="tab__item"
-                    v-for="(item, index) in tabList"
-                    :class="item.selected ? 'tab__item--selected' : ''"
-                    :key="index"
-                  >
-                    <button type="button" class="tab__button" role="tab" aria-selected="false">
-                      <div class="tab__button-text">
-                        {{ item.title }}
-                      </div>
-                    </button>
-                  </li>
-                </ul>
-              </div>
+              <group-tab
+          :tabList="tabList"
+          :useTabNum="true"
+          @tabClick="tabClick"></group-tab>
               <!--//탭 -->
               <!-- heading-group -->
               <div class="heading-group">
@@ -140,16 +128,16 @@
                     <!-- radios -->
                     <div class="radios">
                       <span class="hidden">정렬선택</span>
-                      <base-radio name="radio-check" radioId="radio-sort1" class="radio--check" checked>
+                      <base-radio name="radio-check" :radioId="radio-sort1" class="radio--check" checked>
                         <template v-slot:label><span class="radio-check-first">정확도순</span></template>
                       </base-radio>
-                      <base-radio name="radio-check" radioId="radio-sort2" class="radio--check">
+                      <base-radio name="radio-check" :radioId="radio-sort2" class="radio--check">
                         <template v-slot:label><span>최신등록순</span></template>
                       </base-radio>
-                      <base-radio name="radio-check" radioId="radio-sort3" class="radio--check">
+                      <base-radio name="radio-check" :radioId="radio-sort3" class="radio--check">
                         <template v-slot:label><span>조회순</span></template>
                       </base-radio>
-                      <base-radio name="radio-check" radioId="radio-sort4" class="radio--check">
+                      <base-radio name="radio-check" :radioId="radio-sort4" class="radio--check">
                         <template v-slot:label><span>다운로드순</span></template>
                       </base-radio>
                     </div>
@@ -209,6 +197,7 @@ import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox";
 import BaseSwitch from "@component/common/atoms/base-switch/base-switch";
 import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
 import GroupBreadcrumb from "@component/common/molecules/group-breadcrumb/group-breadcrumb";
+import GroupTab from "@component/common/molecules/group-tab/group-tab";
 import Subject from "@component/common/organisms/subject/subject.vue";
 import GroupSearchFilter from "@component/common/molecules/group-search-filter/group-search-filter";
 import SearchList from "@component/common/organisms/search-list/search-list.vue";
@@ -235,6 +224,7 @@ export default {
     BaseSwitch,
     GroupPagination,
     GroupBreadcrumb,
+    GroupTab,
     Subject,
     GroupSearchFilter,
     SearchList,
@@ -253,11 +243,13 @@ export default {
           PRNTS_ID: "prnts_id" // parent key
         }
       },
+    
       tabList: [
-        { title: "데이터 컨텐츠 (308)", selected: true },
-        { title: "원천 데이터 (1207)", selected: false },
-        { title: "메타데이터 (3205)", selected: false }
-      ]
+        { num: "999+", title: "전체" },
+        { num: "133", title: "내부데이터" },
+        { num: "0", title: "CKAN" },
+        { num: "71", title: "분원데이터" }
+      ],
     };
   },
   methods: {

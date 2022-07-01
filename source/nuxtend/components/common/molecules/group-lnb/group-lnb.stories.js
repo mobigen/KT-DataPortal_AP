@@ -1,8 +1,8 @@
-import GroupSnb from "./group-lnb.vue";
+import GroupLnb from "./group-lnb.vue";
 
 export default {
   title: 'Styled/Molecules/[PCFI] 사이드네비게이션',
-  components: GroupSnb,
+  components: GroupLnb,
   decorators: [
     () => ({
       template:

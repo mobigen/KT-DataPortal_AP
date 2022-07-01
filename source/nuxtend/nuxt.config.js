@@ -17,7 +17,7 @@ export default {
     crawler: true,
     routes: ["/"],
     dir: "../../../web/htdocs"
-    // dir: process.env.ENV_TYPE === "local" ? "../../../web/htdocs" : "../../../web2/htdocs"
+    // dir: process.env.ENV_TYPE  === "local" ? "../../../web/htdocs" : "../../../web2/htdocs"
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -58,25 +58,20 @@ export default {
     "@nuxtjs/style-resources",
     "@nuxtjs/svg-sprite",
     "@nuxtjs/i18n",
-    "@nuxtjs/fontawesome"
-    // build, generate 속도 향샹
-    // "nuxt-build-optimisations"
+    "@nuxtjs/fontawesome",
+    "nuxt-webpack-optimisations"
   ],
-  // buildOptimisations: {
-  //   profile: process.env.STORYBOOK_ENV === "storybook" ? false : "risky"
-  //   // profile: 'experimental' // default
-  //   // profile: 'safe'
-  //   // profile: false
-  // },
+  webpackOptimisations: {
+    features: {
+      imageFileLoader: false
+    }
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["cookie-universal-nuxt"],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    parallel: true,
-    //hardSource: process.env.ENV_TYPE === "development" ? true : false,
-    cache: process.env.ENV_TYPE === "local" ? true : false,
     postcss: {
       preset: {
         features: {
@@ -89,6 +84,9 @@ export default {
         minifyCSS: process.env.ENV_TYPE === "local" ? false : true,
         minifyJS: process.env.ENV_TYPE === "local" ? false : true
       }
+    },
+    optimization: {
+      minimize: process.env.ENV_TYPE === "local" ? true : false
     },
     cssSourceMap: process.env.ENV_TYPE === "local" ? false : true,
     extend(config) {
@@ -201,6 +199,23 @@ export default {
   // 미들웨어
   router: {
     extendRoutes(routes, resolves) {
+      logger.info("#### process.env.ENV_TYPE: " + process.env.ENV_TYPE);
+      logger.info(
+        "#### cache: " + (process.env.ENV_TYPE === "local" ? true : false)
+      );
+      logger.info(
+        "#### minifyCSS: " + (process.env.ENV_TYPE === "local" ? false : true)
+      );
+      logger.info(
+        "#### minifyJS: " + (process.env.ENV_TYPE === "local" ? false : true)
+      );
+      logger.info(
+        "#### cssSourceMap: " +
+          (process.env.ENV_TYPE === "local" ? false : true)
+      );
+
+      logger.info("\r\n\r\n");
+
       logger.info(
         "## NuxtLink 처리: 정적 리소스에 대한 html 파일 대응을 위해 아래와 같이 alias 경로를 변경 합니다."
       );

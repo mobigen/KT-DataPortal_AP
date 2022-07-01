@@ -2,7 +2,8 @@
   <div>
     <textarea
       type="text"
-      class="text-area text-area--fixed scrollCustomize"
+      class="text-area"
+      :class="elementClass"
       @input="input = $event.target.value"
       :placeholder="placeholder"
       :value="value"
@@ -30,6 +31,10 @@ export default {
       required: false
     },
     placeholder: {
+      type: String,
+      required: false
+    },
+    elementClass: {
       type: String,
       required: false
     },

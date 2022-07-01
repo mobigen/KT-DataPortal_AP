@@ -280,63 +280,77 @@
     </div>
     <!-- // contents-wrap -->
 
-                      <!-- 데이터 활용 신청하기 Dialog -->
-                      <Dialog dialog-name="applyDialog" :width="'970px'" :height="'535px'" :title="'데이터 활용 신청하기'">
-                        <div slot="body" class="modal__body">
-                            <!-- formbox -->
-                            <table class="formbox">
-                              <caption class="hidden">
-                                데이터 활용 신청하기 게시판
-                              </caption>
-                              <colgroup>
-                                <col style="width: 140px" />
-                                <col style="width: auto" />
-                              </colgroup>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">데이터명</th>
-                                  <td>CU2(SGI)_고객 서비스 사용 일일 내역 <br>
-CU2(SGI)_검색 키워드 통계 내역</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">신청자</th>
-                                  <td>홍길동 (12345678)</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">신청내용<strong class="required">필수</strong> <br>(활용목적)</th>
-                                  <td>
-                                    <textarea class="h-120"
-                                    v-model="input"
-                                    :placeholder="placeholder"
-                                    :disabled="disabled"
-                                    :readonly="readonly"
-                                    :maxlength="maxlength"
-                                  >
-                                  </textarea></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">법률검토<strong class="required">필수</strong></th>
-                                  <td>
-
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">기간설정</th>
-                                  <td>
-                                    <Date-picker
-                                      :type="date"
-                                      :range="true"
-                                      :disabled="false"
-                                      @change="change"
-                                      />
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                            <!-- // formbox -->
-                        </div>
-                      </Dialog>
-                      <!-- // Dialog -->
+    <!-- 데이터 활용 신청하기 Dialog -->
+    <Dialog dialog-name="applyDialog" :width="'970px'" :height="'700px'" :title="'데이터 활용 신청하기'">
+      <div slot="body" class="modal__body">
+          <!-- formbox -->
+          <table class="formbox">
+            <caption class="hidden">
+              데이터 활용 신청하기 게시판
+            </caption>
+            <colgroup>
+              <col style="width: 140px" />
+              <col style="width: auto" />
+            </colgroup>
+            <tbody>
+              <tr>
+                <th scope="row">데이터명</th>
+                <td>
+                  <ul class="data-name-list">
+                    <li>CU2(SGI)_고객 서비스 사용 일일 내역 <p class="txt-info"><strong class="required">필수</strong>법률검토 필요</p></li>
+                    <li>CU2(SGI)_검색 키워드 통계 내역 <p class="txt-info"><strong class="required">필수</strong>법률검토 필요</p></li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">신청자</th>
+                <td>홍길동 (12345678)</td>
+              </tr>
+              <tr>
+                <th scope="row">신청내용<strong class="required">필수</strong> <br>(활용목적)</th>
+                <td>
+                  <BaseTextarea
+                    rows="6"
+                    element-class="text-area--fixed scrollCustomize"
+                    placeholder="활용목적을 입력해주세요."
+                    :useCheckByte="false"
+                  ></BaseTextarea>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">법률검토<strong class="required">필수</strong></th>
+                <td>
+                  <div class="v-group">   
+                    <BaseTextarea
+                      rows="6"
+                      element-class="text-area--fixed scrollCustomize"
+                      placeholder="법률검토 대상 데이터입니다. 
+법률검토 내용을 입력하거나 파일로첨부하세요. "
+                      :useCheckByte="false"
+                    ></BaseTextarea>
+                    <GroupFileAttach>
+                      
+                    </GroupFileAttach>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">기간설정</th>
+                <td>
+                  <Date-picker
+                    :type="date"
+                    :range="true"
+                    :disabled="false"
+                    @change="change"
+                    />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- // formbox -->
+      </div>
+    </Dialog>
+    <!-- // Dialog -->
   </div>
 </template>
 
@@ -364,7 +378,7 @@ export default {
   layout: "kt/kt",
   async asyncData({ store }) {
     await store.dispatch("kt/keyword-search/getContents");
-  },
+  }, 
   computed: {
     ...mapGetters({
       contents: "kt/keyword-search/contents"
@@ -386,6 +400,10 @@ export default {
     },
     onshowDialog(name) {
       this.$modal.show(name);
+    },
+    setRequestData({ id, input }) {
+      const key = id.split("-").pop();
+      this.requestData[key] = input;
     }
   },
   components: {

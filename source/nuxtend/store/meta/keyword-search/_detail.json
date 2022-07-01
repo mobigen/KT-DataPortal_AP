@@ -15,7 +15,7 @@
     "ltst_amd_dt": "2022.03.22",
     "updt_nxt_date": "2023.09.22",
     "prv_shap": "액셀 다운로드",
-    "law_evl_conf_yn": "",
+    "law_evl_conf_yn": "y",
     "file_size": "1.0 GB",
     "scrty_evl_conf_yn": "",
     "open_scope": "",
@@ -26,88 +26,88 @@
   "header": [
     {
       "column_name": "data_nm",
-      "kor_column_name": "데이터명"
+      "kor_name": "데이터명"
     },
     {
       "column_name": "data_desc",
-      "kor_column_name": "데이터 설명"
+      "kor_name": "데이터 설명"
     },
     {
       "column_name": "data_prv_desk",
-      "kor_column_name": "데이터 제공처"
+      "kor_name": "데이터 제공처"
     },
     {
       "column_name": "adm_dep",
-      "kor_column_name": "관리부서"
+      "kor_name": "관리부서"
     },
     {
       "column_name": "admr_nm",
-      "kor_column_name": "담당자 (관리자)"
+      "kor_name": "담당자 (관리자)"
     },
     {
       "column_name": "rqt_dep",
-      "kor_column_name": "참조부서"
+      "kor_name": "참조부서"
     },
     {
       "column_name": "rqt_nm",
-      "kor_column_name": "참조자 (요청자)"
+      "kor_name": "참조자 (요청자)"
     },
 
     {
       "column_name": "ctgry",
-      "kor_column_name": "카테고리 (분류)"
+      "kor_name": "카테고리 (분류)"
     },
     {
       "column_name": "data_shap",
-      "kor_column_name": "데이터 형태"
+      "kor_name": "데이터 형태"
     },
     {
       "column_name": "reg_date",
-      "kor_column_name": "등록일"
+      "kor_name": "등록일"
     },
     {
       "column_name": "data_updt_cyc",
-      "kor_column_name": "데이터 갱신주기"
+      "kor_name": "데이터 갱신주기"
     },
     {
       "column_name": "ltst_amd_dt",
-      "kor_column_name": "최신수정일"
+      "kor_name": "최신수정일"
     },
     {
       "column_name": "updt_nxt_date",
-      "kor_column_name": "갱신예정일"
+      "kor_name": "갱신예정일"
     },
     {
       "column_name": "prv_shap",
-      "kor_column_name": "제공방식"
+      "kor_name": "제공방식"
     },
     {
       "column_name": "law_evl_conf_yn",
-      "kor_column_name": "법률검토 필요여부"
+      "kor_name": "법률검토 필요여부"
     },
     {
       "column_name": "file_size",
-      "kor_column_name": "파일용량"
+      "kor_name": "파일용량"
     },
     {
       "column_name": "scrty_evl_conf_yn",
-      "kor_column_name": "보안성검토 필요여부"
+      "kor_name": "보안성검토 필요여부"
     },
     {
       "column_name": "open_scope",
-      "kor_column_name": "공개범위"
+      "kor_name": "공개범위"
     },
     {
       "column_name": "src_sys",
-      "kor_column_name": "원천시스템"
+      "kor_name": "원천시스템"
     },
     {
       "column_name": "src_url",
-      "kor_column_name": "원천 URL"
+      "kor_name": "원천 URL"
     },
     {
       "column_name": "kywrd",
-      "kor_column_name": "키워드"
+      "kor_name": "키워드"
     }
   ]
 }
