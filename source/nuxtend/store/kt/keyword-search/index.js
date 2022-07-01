@@ -35,8 +35,6 @@ export const actions = {
       keywordObj["keyword" + (index + 1)] = el;
     });
 
-    console.log(params.searchKeywordList);
-
     const paging =
       rootGetters["module/pagination/paging"][params.paginationKey];
     // param with pageInfo (start, end...)
@@ -45,7 +43,6 @@ export const actions = {
     const paramAPI =
       `?perPage=${paging.itemsPerPage}&curPage=${paging.page}` + keywordStr;
 
-    console.log(paramAPI);
     this.$axios
       .get(this.$config.ROUTE_API_META_PREFIX + "/getBizMetaList" + paramAPI)
       .then((d) => {

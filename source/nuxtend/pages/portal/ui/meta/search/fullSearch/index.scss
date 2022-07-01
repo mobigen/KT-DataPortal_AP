@@ -1,3 +1,21 @@
+//통합검색전용 레이아웃사이즈 설정 2022-06-29 MOD
+.contents-wrap {
+
+  width: 100%;
+  margin: 0;
+
+  .contents-group {
+    width: 100%;
+    .subject,
+    .contents-section {
+      width: rem(1200px);
+      margin: 0 auto;
+    }
+
+  }
+}
+
+// 상단 검색단 100%
 .contents-top__detail {
   position: relative;
   width: 100%;
@@ -11,7 +29,7 @@
     padding-right: rem(70px);
     color: #333;
     border: none;
-    background: transparent; 
+    background: transparent;
     @include font-weight("medium");
     @include font-size("24");
 
@@ -56,7 +74,7 @@
     display: none;
 
     &.contents-top__filter--open {
-      display: block; 
+      display: block;
       width: rem(1000px);
       margin: 0 auto;
     }
@@ -115,12 +133,12 @@
     background: $ui-02;
     color: $text-01;
     @include font-size("14");
-  
+
     &:hover {
       border: 1px solid $secondary;
       color: $secondary;
     }
-  
+
     .detail__delete-button {
       position: absolute;
       top: 50%;
@@ -130,14 +148,14 @@
       width: rem(16px);
       height: rem(16px);
       background: none;
-  
+
       .svg-icon {
         width: rem(16px);
         height: rem(16px);
-      }    
-  
+      }
+
     }
-      
+
   }
 
   .detail__reset-button {
@@ -150,279 +168,49 @@
     @include font-weight("regular");
     color: $text-02;
     padding-left: rem(24px);
-    background: $ui-02 url(#{$img-path}/common/icon.png) no-repeat rem(36px) rem(-218px); 
+    background: $ui-02 url(#{$img-path}/common/icon.png) no-repeat rem(36px) rem(-218px);
 
     &:hover {
       background: $ui-02 url(#{$img-path}/common/icon.png) no-repeat rem(36px) rem(-218px);
       border: 1px solid $secondary;
     }
   }
-  
+
 }
 
-.aside-category {
-  position: relative;
+//왼쪽 필터영역 2022-06-29 MOD
+.filter-wrap {
   width: rem(220px);
-  height: rem(1300px);
+  margin-right: rem(40px);
+}
+.filter {
+  position: relative;
+  width: 100%;
   padding: 0 0 $spacing-2xl 0;
 }
 
-.aside-category__options {
+.filter__options {
   height: rem(40px);
   line-height: rem(40px);
   span {
-    padding: 0 rem(10px); 
+    padding: 0 rem(10px);
     @include font-size("16");
     @include font-weight("medium");
   }
 }
 
-.aside__category-expand {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: rem(440px);
-  height: rem(1301px);
-  box-shadow : 5px 5px 15px -15px;
-  z-index: 5;
-  background: $ui-02;
-  border-right: 1px solid;
-  border-bottom: 1px solid;
-  border-image: linear-gradient(to bottom, transparent, $ui-04);
-  border-image-slice: 1;
-}
-
-.aside__button-expand {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  width: rem(30px);
-  height: rem(30px);
-  border-radius: rem(15px);
-  -webkit-transform: translate(50%,-50%);
-  transform: translate(50%,-50%);
-  background: $ui-02;
-  border: 1px solid $ui-04;
-  box-shadow : 3px 0px 10px -7px;
-  z-index: 10;
-
-  &:before {
-    content: "";
-    width: rem(7px);
-    height: rem(7px);
-    border-top: 2px solid $text-02;
-    border-right: 2px solid $text-02;
-    display: inline-block;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-    transition: all .1s;
-    position: absolute;
-    top: rem(9px);
-    left: rem(8px);
-    border-radius: 2px;
-  }
-
-  &:hover:before {
-    border-color: $secondary;
-  }
-
-  &:hover:after {
-    content: "확장";
-    position: absolute;
-    top: rem(-20px);
-    right: rem(-30px);
-    @include font-size("12");
-    @include font-weight("regular");
-    color: $ui-02;
-    background: $primary;
-    border-radius: rem(3px);
-    padding: 1px $spacing-2xs;
-  }
-
-  
-}
-
-.aside__button-default {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  width: rem(30px);
-  height: rem(30px);
-  border-radius: rem(15px);
-  -webkit-transform: translate(50%,-50%);
-  transform: translate(50%,-50%);
-  background: $ui-02;
-  border: 1px solid $ui-04;
-  box-shadow : 3px 0px 10px -7px;
-  z-index: 10;
-
-  &:before {
-    content: "";
-    width: rem(7px);
-    height: rem(7px);
-    border-top: 2px solid $text-02;
-    border-right: 2px solid $text-02;
-    display: inline-block;
-    -webkit-transform: rotate(-135deg);
-    transform: rotate(-135deg);
-    transition: all .1s;
-    position: absolute;
-    top: rem(9px);
-    left: rem(11px);
-    border-radius: 2px;
-  }
-
-  &:hover:before {
-    border-color: $secondary;
-  }
-
-  &:hover:after {
-    content: "축소";
-    position: absolute;
-    top: rem(-20px);
-    right: rem(-30px);
-    @include font-size("12");
-    @include font-weight("regular");
-    color: $ui-02;
-    background: $primary;
-    border-radius: rem(3px);
-    padding: 1px $spacing-2xs;
-  }
-}
-
-.aside__provider {
-  position: relative;
-  width: rem(240px);
-  height: rem(240px);
-  padding: $layout-3xs 0;
-  border-top: 1px solid $ui-04;
-  margin-bottom: $spacing-md;
-  overflow: hidden;
-}
-
-.aside__provider-expand {
-  position: relative;
-  width: rem(240px);
-  padding: $layout-3xs 0;
-  border-top: 1px solid $ui-04;
-  margin-bottom: $spacing-md;
-  display: table;
-}
-
-.aside__button-down {
-  position: absolute;
-  top: rem(20px);
-  right: rem(10px);
-  background: transparent;
-
-  &:before {
-    content: "전체보기";
-    position: absolute;
-    right: rem(16px);
-    @include font-size("14");
-    @include font-weight("regular");
-    color: $text-02;
-  }
-
-  &:after {
-    content: "";
-    width: rem(7px);
-    height: rem(7px);
-    border-top: 2px solid $text-01;
-    border-right: 2px solid $text-01;
-    display: inline-block;
-    -webkit-transform: rotate(135deg);
-    transform: rotate(135deg);
-    transition: all .1s;
-    position: absolute;
-    top: rem(9px);
-    right: 0;
-    border-radius: 2px;
-  }
-
-  &:hover {
-    color: $secondary;
-  }
-}
-
-.aside__type {
-  position: relative;
-  width: rem(240px);
-  padding: $layout-3xs 0;
-  border-top: 1px solid $ui-04;
-  margin-bottom: $spacing-md;
-}
-
-.aside__keyword {
-  position: relative;
-  width: rem(240px);
-  padding: $layout-3xs 0;
-  border-top: 1px solid $ui-04;
-  margin-bottom: $spacing-md;
-}
-
-
-
-.contents__aside {
-  width: 240px;
-  margin: 0;
-  border-right: 1px solid #cecece;
-  transition: all .1s;
-}
-
-.contents__aside-head {
-  display: flex;
-  width: 100%;
-  height: rem(40px);
-  padding: 0 $spacing-sm;
-  align-items: center;
-  justify-content: flex-start;
-  border: 1px solid $ui-04;
-  border-right: none;
-}
-
-.contents__aside-body {
-  padding: $spacing-sm $spacing-sm 0 0;
-}
-
-.contents__aside-checkbox {
-  margin-right: $spacing-sm;
-}
-
-.contents__aside-title {
-  @include text-overflow();
+//data-wrap
+.data-result-wrap {
   flex: 1;
 }
 
-.contents__aside-options {
-  margin-left: auto;
-}
-
-.contents-filter {
-  .search-filter + .search-filter {
-    margin-top: $spacing-md;
-  }
-}
-
-.contents-filter + .contents-filter {
-  margin-top: $spacing-md;
-}
-
-.contents-filter__reset-button {
-  margin: $spacing-md $spacing-2xs 0 $spacing-2xs;
-
-  .button {
-    width: 100%;
-  }
-}
-
-.contents__result {
+.data-result {
   width: 100%;
   margin-left: auto;
   transition: all .1s;
 }
 
-.contents__list {
+.data-result__list {
   position: relative;
 }
 
@@ -465,7 +253,7 @@
 .options-sort {
   display: flex;
   align-items: center;
-} 
+}
 
 .contents__pagination {
   padding: rem(60px) 0 rem(20px);
@@ -545,7 +333,7 @@
 .search-filter__item-group{
   display: flex;
   align-items: center;
-  height: rem(48px); 
+  height: rem(48px);
   padding: $spacing-2xs $spacing-md;
   background-color:#fafafa;
 }
@@ -661,8 +449,8 @@
 
       &:first-child {
         border-left: none;
-      } 
-           
+      }
+
       .search-filter__head {
         border-bottom: 1px solid #ccc;
       }
@@ -672,13 +460,13 @@
 
   // 수직 방향
   &.search-filter-group--vertical {
-   flex-direction: column;  
-   border-radius: rem(5px); 
-   border: 1px solid #e1e1e1;
+    flex-direction: column;
+    border-radius: rem(5px);
+    border: 1px solid #e1e1e1;
 
     .search-filter {
       width: 100%;
-      border: none;      
+      border: none;
 
     }
   }
