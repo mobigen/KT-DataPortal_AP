@@ -149,4 +149,3 @@ nbdist/
 
 ### Only this project ###
 /source/nuxtend/assets/svg/
-/source/nuxtend/assets/style-core

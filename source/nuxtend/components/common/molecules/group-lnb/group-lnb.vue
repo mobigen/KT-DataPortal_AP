@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="lnb">
     <h2 class="lnb__title">
-      마이 페이지
+      {{ title }}
     </h2>
     <ul class="lnb__list">
       <li class="lnb__item" v-for="(item, index) in list" :key="index" :class="item.isSelected ? 'lnb__item--selected' : ''">
@@ -22,6 +22,7 @@ export default {
   },
   data() {
     return {
+      title : "마이페이지",
       list: [
         {id: '1',title: '대시보드', isSelected: false},
         {id: '2',title: '관심데이터', isSelected: false},

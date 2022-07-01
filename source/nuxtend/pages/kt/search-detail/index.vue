@@ -901,6 +901,146 @@
           <!-- //데이터 문의 -->
         </div>
       </div>
+
+      <!-- Dialog : 문의하기  -->
+      <Dialog
+        dialog-name="inquiryDialog"
+        :width="'970px'"
+        :title="'데이터 문의하기'"
+      >
+        <div slot="body" class="modal__body">
+          <!-- formbox -->
+          <table class="formbox">
+            <caption class="hidden">
+              데이터 문의하기 게시판
+            </caption>
+            <colgroup>
+              <col style="width: 140px" />
+              <col style="width: auto" />
+            </colgroup>
+            <tbody>
+              <tr>
+                <th scope="row">신청유형</th>
+                <td>
+                  <div
+                    class="select"
+                    role="select"
+                    :class="isSelectOpen ? 'select--open' : ''"
+                    @click="isSelectOpen = !isSelectOpen"
+                  >
+                    <div
+                      class="select-selector"
+                      aria-expanded="false"
+                      aria-controls="select-01"
+                    >
+                      <button class="select-selector__button" type="button">
+                        <slot name="title">
+                          <span class="select-selector__title"
+                            >데이터 문의</span
+                          >
+                        </slot>
+                        <svg-icon
+                          class="svg-icon select-selector__icon"
+                          name="chevron-down-medium"
+                          aria-hidden="true"
+                        ></svg-icon>
+                      </button>
+                    </div>
+                    <div
+                      class="select-container"
+                      id="select-01"
+                      aria-haspopup="true"
+                    >
+                      <ul class="select-container__list">
+                        <slot name="list">
+                          <!-- 선택 된 객체에 select-container__item--selected 클래스 추가 -->
+                          <li
+                            class="select-container__item select-container__item--selected"
+                          >
+                            <button
+                              class="select-container__button"
+                              type="button"
+                              role="option"
+                            >
+                              <span class="select-container__text"
+                                >데이터 문의</span
+                              >
+                            </button>
+                          </li>
+                          <li class="select-container__item">
+                            <button
+                              class="select-container__button"
+                              type="button"
+                              role="option"
+                            >
+                              <span class="select-container__text">일반</span>
+                            </button>
+                          </li>
+                          <li class="select-container__item">
+                            <button
+                              class="select-container__button"
+                              type="button"
+                              role="option"
+                            >
+                              <span class="select-container__text">시스템</span>
+                            </button>
+                          </li>
+                          <li class="select-container__item">
+                            <button
+                              class="select-container__button"
+                              type="button"
+                              role="option"
+                            >
+                              <span class="select-container__text">기타</span>
+                            </button>
+                          </li>
+                        </slot>
+                      </ul>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">데이터명</th>
+                <td>테이터명이 자동으로 들어갑니다.</td>
+              </tr>
+              <tr>
+                <th scope="row">제목<strong class="required">필수</strong></th>
+                <td>
+                  <base-input
+                    type="text"
+                    placeholder="제목을 입력하세요."
+                  ></base-input>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">내용<strong class="required">필수</strong></th>
+                <td>
+                  <base-textarea :rows="10"></base-textarea>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">비밀글여부</th>
+                <td>
+                  <base-switch
+                    ><label for="toggleSwitch1" class="toggle-switch__label"
+                      >공개</label
+                    ></base-switch
+                  >
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">첨부파일</th>
+                <td>
+                  <group-file-attach></group-file-attach>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- // formbox -->
+        </div>
+      </Dialog>
+      <!-- // Dialog -->
     </div>
   </div>
 </template>
@@ -911,6 +1051,9 @@ import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox.vu
 import BaseRadio from "@component/common/atoms/base-radio/base-radio";
 import BaseTag from "@component/common/atoms/base-tag/base-tag";
 import BaseButton from "@component/common/atoms/base-button/base-button";
+import BaseInput from "@component/common/atoms/base-input/base-input";
+import BaseSelet from "@component/common/atoms/base-select/base-select";
+import BaseSwitch from "@component/common/atoms/base-switch/base-switch";
 import BaseTextarea from "@component/common/atoms/base-textarea/base-textarea.vue";
 import GroupBreadcrumb from "@component/common/molecules/group-breadcrumb/group-breadcrumb";
 import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
@@ -933,6 +1076,7 @@ export default {
     return {
       isPreview: false,
       isToggle: false,
+      isSelectOpen: false,
       tabList: [
         { href: "#articleChart", title: "데이터 상세정보", selected: true },
         { href: "#articleSample", title: "샘플 데이터", selected: false },
@@ -963,6 +1107,9 @@ export default {
     BaseRadio,
     BaseTag,
     BaseButton,
+    BaseInput,
+    BaseSelet,
+    BaseSwitch,
     BaseTextarea,
     GroupBreadcrumb,
     GroupPagination,

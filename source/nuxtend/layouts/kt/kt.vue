@@ -2,7 +2,7 @@
   <div>
     <kt-header />
     <main class="main">
-      <nuxt :key="$route.fullPath" />
+      <nuxt />
     </main>
     <kt-footer />
   </div>

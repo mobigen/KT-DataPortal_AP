@@ -56,10 +56,6 @@ export default function ({ $axios, $config, $cookies, store, redirect }) {
       if (errorMessage === null || errorMessage === "") {
         errorMessage = "여기에 시스템 에러 메세지를 넣어야 함";
       }
-      if (typeof errorMessage === "object") {
-        // errorMessage = JSON.stringify(errorMessage);
-        errorMessage = "ERROR";
-      }
       await errorAlert({ content: errorMessage });
       return Promise.resolve(false);
     }

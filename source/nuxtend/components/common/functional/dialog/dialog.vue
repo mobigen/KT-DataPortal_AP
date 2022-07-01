@@ -3,6 +3,8 @@
     :width="width"
     :height="height"
     :name="dialogName"
+    :adaptive="true"
+    :scrollable="true"
     :draggable="true"
     :clickToClose="false"
     @opened="onOpen"
@@ -55,7 +57,7 @@ export default {
     },
     height: {
       type: String,
-      default: "300"
+      default: "auto"
     },
     width: {
       type: String,

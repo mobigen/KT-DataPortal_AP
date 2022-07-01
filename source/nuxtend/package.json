@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": false,
   "scripts": {
-    "dev": "cross-env NODE_ENV=local node --max-old-space-size=8192 node_modules/nuxt/bin/nuxt.js dev --dotenv ./config/.env.local",
+    "dev:ejd": "cross-env NODE_ENV=local node --max-old-space-size=5096 node_modules/nuxt/bin/nuxt.js dev --dotenv ./config/.env.local.ejd",
+    "dev": "cross-env NODE_ENV=local node --max-old-space-size=5096 node_modules/nuxt/bin/nuxt.js dev --dotenv ./config/.env.local",
     "build": "cross-env NODE_ENV=local node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js build --dotenv ./config/.env.local",
     "start": "cross-env NODE_ENV=local node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js start --dotenv ./config/.env.local",
     "generate": "cross-env NODE_ENV=local node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js generate --dotenv ./config/.env.local",
@@ -34,7 +35,6 @@
     "lodash": "^4.17.21",
     "moment": "^2.26.0",
     "nuxt": "^2.15.8",
-    "nuxt-build-optimisations": "^1.0.7",
     "rsajs": "2.0.0",
     "url-pattern": "^1.0.3",
     "vue": "^2.6.14",
@@ -50,6 +50,7 @@
     "webpack": "^4.46.0"
   },
   "devDependencies": {
+    "nuxt-webpack-optimisations": "^2.2.3",
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
     "sass-loader": "^10.2.1"
