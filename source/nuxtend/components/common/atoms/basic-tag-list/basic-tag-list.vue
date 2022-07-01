@@ -4,8 +4,10 @@
       v-for="(data, i) in tagList"
       @tagClick="tagClick(data)"
       :key="'base_tag_' + i"
+      :class="tagClass"
     >
-      {{ previousText }}{{ data["itemName"] }}
+      <span :class="spanClass">{{ previousText }}{{ data["itemName"] }}</span>
+
       <template v-if="useCancelButton">
         <base-button title="삭제" @click="cancel(data['itemId'])">
           <svg-icon class="svg-icon" name="close" aria-hidden="true"></svg-icon>
@@ -28,30 +30,38 @@ export default {
   props: {
     tagKey: {
       type: String,
-      require: false
+      required: false
     },
     tagList: {
       type: Array,
-      require: true
+      required: true
     },
     tagType: {
       type: String,
-      require: false,
+      required: false,
       default: "checkbox"
     },
     previousText: {
       type: String,
-      require: false
+      required: false
     },
     useCancelButton: {
       type: Boolean,
-      require: false,
+      required: false,
       default: false
     },
     cursorPointer: {
       type: Boolean,
-      require: false,
+      required: false,
       default: true
+    },
+    tagClass: {
+      type: String,
+      require: false
+    },
+    spanClass: {
+      type: String,
+      require: false
     }
   },
   computed: {},

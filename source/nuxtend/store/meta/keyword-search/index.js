@@ -49,23 +49,28 @@ export const actions = {
     // TODO : BACKEND 서버 배포하면 주석 해제후 테스트. + keywordStr;
 
     console.log(paramAPI);
-    // this.$axios
-    //   .get(this.$config.ROUTE_API_META_PREFIX + "/getBizMetaList" + paramAPI)
-    //   .then((d) => {
-    commit("setContents", d);
-    //
-    //     // setTotalPage
-    dispatch(
-      "module/pagination/setTotalCount",
-      {
-        key: params.paginationKey,
-        totalCount: d.totalcount
-      },
-      { root: true }
-    );
-    //   });
+    this.$axios
+      .get(this.$config.ROUTE_API_META_PREFIX + "/getBizMetaList" + paramAPI)
+      .then((d) => {
+        commit("setContents", d);
+
+        // setTotalPage
+        dispatch(
+          "module/pagination/setTotalCount",
+          {
+            key: params.paginationKey,
+            totalCount: d.totalcount
+          },
+          { root: true }
+        );
+      });
   },
   async getDetail({ commit }, rowKey) {
+    // console.log(
+    //   this.$config.ROUTE_API_META_PREFIX +
+    //     "/getBizMetaDetail?datasetId=" +
+    //     rowKey
+    // );
     await this.$axios
       .get(
         this.$config.ROUTE_API_META_PREFIX +
@@ -73,7 +78,6 @@ export const actions = {
           rowKey
       )
       .then((d) => {
-        console.log(d);
         commit("setDetail", d);
       });
   },

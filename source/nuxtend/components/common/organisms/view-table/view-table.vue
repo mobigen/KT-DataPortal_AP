@@ -48,6 +48,8 @@
                       "
                       previousText="#"
                       :useCancelButton="false"
+                      tag-class="tag--sm"
+                      span-class="tag__label2"
                       @tagClick="tagComponentClick"
                     />
                   </template>
