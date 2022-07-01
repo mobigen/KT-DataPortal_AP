@@ -1,6 +1,5 @@
 //통합검색전용 레이아웃사이즈 설정 2022-06-29 MOD
 .contents-wrap {
-
   width: 100%;
   margin: 0;
 
@@ -11,7 +10,6 @@
       width: rem(1200px);
       margin: 0 auto;
     }
-
   }
 }
 
@@ -20,7 +18,9 @@
   position: relative;
   width: 100%;
   padding: rem(20px) 0 rem(30px);
-  background:#f5f5f5 url(#{$img-path}/common/bg_contents_top_detail_pattern.png) no-repeat center 0;
+  background: #f5f5f5
+    url(#{$img-path}/common/bg_contents_top_detail_pattern.png) no-repeat center
+    0;
 
   // 상세검색 버튼 2022-06-04 MOD
   .detail-button-default {
@@ -38,8 +38,9 @@
       width: rem(32px);
       height: rem(32px);
       display: inline-block;
-      background: url("#{$img-path}/icon/angle-down.svg") no-repeat center center;
-      transition: all .1s;
+      background: url("#{$img-path}/icon/angle-down.svg") no-repeat center
+        center;
+      transition: all 0.1s;
       position: absolute;
       top: calc(50% - 16px);
       right: rem(12px);
@@ -61,7 +62,6 @@
 
   //상단 필터영역 2022-06-04 MOD
   .detail-button--open {
-
     &:before {
       content: "";
       -webkit-transform: rotate(-180deg);
@@ -81,14 +81,12 @@
   }
   //상단 필터영역내부 2022-06-27 MOD
   .filter-group {
-
     .filter-group__options {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: rem(50px);
     }
-
   }
 
   ul {
@@ -153,9 +151,7 @@
         width: rem(16px);
         height: rem(16px);
       }
-
     }
-
   }
 
   .detail__reset-button {
@@ -168,14 +164,15 @@
     @include font-weight("regular");
     color: $text-02;
     padding-left: rem(24px);
-    background: $ui-02 url(#{$img-path}/common/icon.png) no-repeat rem(36px) rem(-218px);
+    background: $ui-02 url(#{$img-path}/common/icon.png) no-repeat rem(36px)
+      rem(-218px);
 
     &:hover {
-      background: $ui-02 url(#{$img-path}/common/icon.png) no-repeat rem(36px) rem(-218px);
+      background: $ui-02 url(#{$img-path}/common/icon.png) no-repeat rem(36px)
+        rem(-218px);
       border: 1px solid $secondary;
     }
   }
-
 }
 
 //왼쪽 필터영역 2022-06-29 MOD
@@ -207,7 +204,7 @@
 .data-result {
   width: 100%;
   margin-left: auto;
-  transition: all .1s;
+  transition: all 0.1s;
 }
 
 .data-result__list {
@@ -221,7 +218,7 @@
   align-items: center;
   width: 100%;
   min-height: rem(36px);
-  /* margin-bottom: $spacing-sm; *///통합검색목록에서는 margin-bottom삭제
+  /* margin-bottom: $spacing-sm; */ //통합검색목록에서는 margin-bottom삭제
 
   h4 {
     @include font-size("20");
@@ -248,7 +245,6 @@
   .list-head__options-sort {
     margin: rem(6px) rem(8px) 0;
   }
-
 }
 .options-sort {
   display: flex;
@@ -266,7 +262,7 @@
   margin-top: rem(35px);
 }
 
-.detail-filter__group{
+.detail-filter__group {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -275,13 +271,13 @@
   }
 }
 
-.detail-filter__toggle-button{
+.detail-filter__toggle-button {
   position: absolute;
   right: 0;
   bottom: calc(100% + 4px);
 }
 
-.detail-filter__title{
+.detail-filter__title {
   @include text-overflow(80px);
   @include font-weight("regular");
   @include font-size("14");
@@ -289,7 +285,7 @@
   text-align: right;
 }
 
-.detail-filter__checkboxes{
+.detail-filter__checkboxes {
   display: flex;
   flex-wrap: wrap;
 }
@@ -455,7 +451,6 @@
         border-bottom: 1px solid #ccc;
       }
     }
-
   }
 
   // 수직 방향
@@ -467,9 +462,6 @@
     .search-filter {
       width: 100%;
       border: none;
-
     }
   }
 }
-
-
