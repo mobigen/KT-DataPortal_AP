@@ -162,38 +162,6 @@
               }"
               @tagClick="tagClick"
             ></view-table>
-
-            <!--            <table class="formbox">-->
-            <!--              <tbody>-->
-            <!--                <tr>-->
-            <!--                  <th scope="row">원천시스템</th>-->
-            <!--                  <td>KDAP</td>-->
-            <!--                </tr>-->
-            <!--                <tr>-->
-            <!--                  <th scope="row">원천 URL</th>-->
-            <!--                  <td></td>-->
-            <!--                </tr>-->
-            <!--                <tr>-->
-            <!--                  <th scope="row">키워드</th>-->
-            <!--                  <td>-->
-            <!--                    <div class="tags">-->
-            <!--                      <base-tag class="tag&#45;&#45;sm" href="#"-->
-            <!--                        ><span class="tag__label">#트래픽</span></base-tag-->
-            <!--                      >-->
-            <!--                      <base-tag class="tag&#45;&#45;sm" href="#"-->
-            <!--                        ><span class="tag__label">#URL</span></base-tag-->
-            <!--                      >-->
-            <!--                      <base-tag class="tag&#45;&#45;sm" href="#"-->
-            <!--                        ><span class="tag__label">#관심</span></base-tag-->
-            <!--                      >-->
-            <!--                      <base-tag class="tag&#45;&#45;sm" href="#"-->
-            <!--                        ><span class="tag__label">#프로파일</span></base-tag-->
-            <!--                      >-->
-            <!--                    </div>-->
-            <!--                  </td>-->
-            <!--                </tr>-->
-            <!--              </tbody>-->
-            <!--            </table>-->
           </article>
           <!-- // 데이터 속성 및 관리 -->
           <!--탭 -->
@@ -901,31 +869,11 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Index",
-  async asyncData({ store, query }) {
-    await store.dispatch("kt/keyword-search/getContents");
-    // load biz meta detail
-    await store.dispatch("meta/keyword-search/getDetail", query.postId);
-  },
   computed: {
     ...mapGetters({
       contents: "kt/keyword-search/contents"
     }),
-    detail() {
-      return {
-        header: [],
-        body: []
-      };
-
-      // const vuex = this.$store.getters["meta/keyword-search/detail"];
-      //
-      // if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
-      //   // this.popupTitle = vuex.body.data_nm;
-      //   // this.confirmButtonDisabled = vuex.body.law_evl_conf_yn === "y";
-      //   // this.needConfirm = vuex.body.law_evl_conf_yn === "y";
-      // }
-      // console.log(vuex);
-      // return vuex;
-    }
+    ...mapGetters("meta/keyword-search", ["detail"])
   },
   data() {
     return {
@@ -945,7 +893,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("meta/keyword-search", ["setSearchKeyword"]),
+    ...mapActions("meta/keyword-search", ["getDetail", "setSearchKeyword"]),
     togglePreview: function () {
       this.isPreview = !this.isPreview;
     },
@@ -961,6 +909,12 @@ export default {
         path: "/portal/ui/meta/search/fullSearch"
       });
     }
+  },
+  created() {
+    let rowId = this.$route.query.postId;
+    rowId = "01bfea44-5b42-41e7-9901-8fad6997969c";
+
+    this.getDetail(rowId);
   },
   components: {
     BaseBadge,
