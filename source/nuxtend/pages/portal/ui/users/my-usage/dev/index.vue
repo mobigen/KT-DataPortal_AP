@@ -44,10 +44,10 @@
 <script type="text/javascript">
 import BasicTable from "@component/aiPlatform/basic/basic-table";
 import BasicLabel from "@component/aiPlatform/basic/basic-label.vue";
-import BaseSelect from "@component/common/atoms/base-select/base-select";
+import BaseSelect from "@common/atoms/base-select/base-select";
 import BasicButton from "@component/aiPlatform/basic/basic-button";
 import { mapActions, mapGetters } from "vuex";
-import SearchInputField from "@component/common/organisms/search-input-field/search-input-field.vue";
+import SearchInputField from "@common/organisms/search-input-field/search-input-field.vue";
 
 export default {
   name: "users-requested",
