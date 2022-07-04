@@ -162,27 +162,11 @@
             <!-- 검색 목록 -->
             <div class="data-result-wrap">
               <!--탭 -->
-              <div class="tab tab--horizontal">
-                <ul class="tab__bar">
-                  <li
-                    class="tab__item"
-                    v-for="(item, index) in tabList"
-                    :class="item.selected ? 'tab__item--selected' : ''"
-                    :key="index"
-                  >
-                    <button
-                      type="button"
-                      class="tab__button"
-                      role="tab"
-                      aria-selected="false"
-                    >
-                      <div class="tab__button-text">
-                        {{ item.title }}
-                      </div>
-                    </button>
-                  </li>
-                </ul>
-              </div>
+              <group-tab
+                :tabList="tabList"
+                :useTabNum="true"
+                @tabClick="tabClick"
+              ></group-tab>
               <!--//탭 -->
               <!-- heading-group -->
               <div class="heading-group">
@@ -195,6 +179,7 @@
                   <!-- sort -->
                   <div class="options-sort">
                     <!-- radios -->
+                    <span class="hidden">정렬선택</span>
                     <basic-option
                       radioClass="radio--check"
                       :optionList="sortOptionList"
@@ -202,81 +187,15 @@
                       name="radio-sort"
                       @checkOption="sortOptionChange"
                     ></basic-option>
-
-                    <!--                    <div class="radios">
-                      <span class="hidden">정렬선택</span>
-                      <base-radio
-                        name="radio-check"
-                        radioId="radio-sort1"
-                        class="radio&#45;&#45;check"
-                        checked
-                      >
-                        <template v-slot:label
-                          ><span class="radio-check-first"
-                            >정확도순</span
-                          ></template
-                        >
-                      </base-radio>
-                      <base-radio
-                        name="radio-check"
-                        radioId="radio-sort2"
-                        class="radio&#45;&#45;check"
-                      >
-                        <template v-slot:label
-                          ><span>최신등록순</span></template
-                        >
-                      </base-radio>
-                      <base-radio
-                        name="radio-check"
-                        radioId="radio-sort3"
-                        class="radio&#45;&#45;check"
-                      >
-                        <template v-slot:label><span>조회순</span></template>
-                      </base-radio>
-                      <base-radio
-                        name="radio-check"
-                        radioId="radio-sort4"
-                        class="radio&#45;&#45;check"
-                      >
-                        <template v-slot:label
-                          ><span>다운로드순</span></template
-                        >
-                      </base-radio>
-                    </div>-->
                     <!-- select -->
-                    <base-select class="select w-107">
-                      <template v-slot:title>
-                        <span class="select-selector__title">20개씩</span>
-                      </template>
-                      <template v-slot:list>
-                        <li class="select-container__item">
-                          <button
-                            class="select-container__button"
-                            type="button"
-                            role="option"
-                          >
-                            <span class="select-container__text">12개씩</span>
-                          </button>
-                        </li>
-                        <li class="select-container__item">
-                          <button
-                            class="select-container__button"
-                            type="button"
-                            role="option"
-                          >
-                            <span class="select-container__text">20개씩</span>
-                          </button>
-                        </li>
-                        <li class="select-container__item">
-                          <button
-                            class="select-container__button"
-                            type="button"
-                            role="option"
-                          >
-                            <span class="select-container__text">40개씩</span>
-                          </button>
-                        </li>
-                      </template>
+                    <base-select
+                      class="w-107"
+                      select-id="select-01"
+                      labelName="selectCategory"
+                      :select-list="selectCategoryList"
+                      :selected-key="selectedKey"
+                      @changeData="changeData"
+                    >
                     </base-select>
                   </div>
                 </div>
@@ -334,9 +253,9 @@ export default {
   layout: "kt/kt",
   computed: {
     ...mapGetters({
-      contents: "kt/keyword-search/contents",
+      contents: "meta/keyword-search/contents",
       CONSTANTS: "defaults/constants/CONSTANTS",
-      keyword: "kt/keyword-search/searchKeyword"
+      keyword: "meta/keyword-search/searchKeyword"
     })
   },
   components: {
@@ -388,11 +307,22 @@ export default {
         { label: "최신등록순", option: "updateDate" },
         { label: "조회순", option: "view" },
         { label: "다운로드순", option: "download" }
-      ]
+      ],
+      tabList: [
+        { num: "999+", title: "서비스데이터" },
+        { num: "133", title: "원천데이터" },
+        { num: "0", title: "메타데이터" }
+      ],
+      selectCategoryList: [
+        { key: "12", text: "12개씩" },
+        { key: "20", text: "20개씩" },
+        { key: "40", text: "40개씩" }
+      ],
+      selectedKey: null
     };
   },
   methods: {
-    ...mapActions("kt/keyword-search", ["getContents", "setSearchKeyword"]),
+    ...mapActions("meta/keyword-search", ["getContents", "setSearchKeyword"]),
     toggleDetail: function () {
       this.isDetailOpen = !this.isDetailOpen;
     },
@@ -454,6 +384,13 @@ export default {
     },
     sortOptionChange(option) {
       console.log("sort option: " + option);
+    },
+    tabClick({ tabObj }) {
+      console.log(tabObj);
+    },
+    changeData({ input }) {
+      console.log("key: " + input);
+      this.selectedKey = input;
     }
   },
   mounted() {
@@ -463,6 +400,7 @@ export default {
       this.searchKeyword = this.keyword;
       this.searchDetailKeyword();
     }
+    this.selectedKey = "40";
   },
   created() {}
 };
