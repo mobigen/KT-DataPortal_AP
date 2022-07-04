@@ -36,6 +36,7 @@
                 previousText="#"
                 :useCancelButton="false"
                 @tagClick="recommendTagClick"
+                spanClass="tag__label"
               ></basic-tag-list>
               <!-- // 추천검색어 -->
             </div>
@@ -265,7 +266,16 @@
                 <div class="data-result__list">
                   <!-- 검색된 목록 리스트 -->
                   <!-- TODO: 실제 search-list 연동 필요 -->
-                  <search-list :list="contents"></search-list>
+                  <search-list
+                    rowKey="biz_dataset_id"
+                    :list="contents.searchList"
+                    :searchKeyword="searchKeyword"
+                    :searchKeywordList="searchKeywordList"
+                    :myFavoriteDataList="myFavoriteDataList"
+                    @dataBoxClick="dataBoxClick"
+                    @keywordClick="dataBoxKeywordClick"
+                    @myFavoriteDataClick="myFavoriteDataClick"
+                  ></search-list>
                 </div>
               </div>
               <!-- // data-result -->
@@ -385,10 +395,14 @@ export default {
       ],
       selectedKey: null,
       switch1: false,
-      switch2: false
+      switch2: false,
       // bmChecked: false,
       // offeredUnitsChecked: false,
-      // dataType1Checked: false
+      // dataType1Checked: false,
+      myFavoriteDataList: [
+        "01bfea44-5b42-41e7-9901-8fad6997969c",
+        "2c4c3962-ab70-4f42-9681-71ecd7afbe4b"
+      ]
     };
   },
   methods: {
@@ -424,7 +438,6 @@ export default {
       if (this.rescanFilterChecked) {
         if (this.searchKeywordList.length >= 3) {
           alert("결과 내 재검색 3회이상으로 추가 검색이 불가능 합니다.");
-          this.searchKeyword = "";
           return;
         } else if (this.searchKeywordList.includes(this.searchKeyword)) {
           alert("동일한 검색어 입력으로 추가 검색이 불가능 합니다.");
@@ -502,6 +515,27 @@ export default {
           changeList: switchValue ? this.searchFilterList[key] : []
         });
       }, this);
+    },
+    dataBoxClick(id) {
+      this.$router.push({
+        path: "/portal/ui/meta/search/fullSearch/detail",
+        query: { datasetId: id }
+      });
+    },
+    dataBoxKeywordClick(tagObj) {
+      this.searchKeyword = tagObj.itemName;
+      this.search();
+    },
+    myFavoriteDataClick({ id, checked }) {
+      if (checked) {
+        this.myFavoriteDataList.push(id);
+      } else {
+        this.myFavoriteDataList = this.myFavoriteDataList.filter(
+          (el) => el !== id
+        );
+      }
+
+      console.log(this.myFavoriteDataList);
     }
   },
   mounted() {
@@ -511,7 +545,7 @@ export default {
       this.searchKeyword = this.keyword;
       this.searchDetailKeyword();
     }
-    this.selectedKey = "40";
+    this.selectedKey = "20";
   },
   created() {
     this.getSearchFilterList();
