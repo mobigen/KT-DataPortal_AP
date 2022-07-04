@@ -91,7 +91,7 @@
               <div class="filter-group">
                 <div class="filter-group__options">
                   <!-- 토글스위치 -->
-                  <base-switch>
+                  <base-switch @isSwitchChanged="isSwitchChanged1">
                     <span>전체 선택</span>
                   </base-switch>
                   <!-- //토글스위치 -->
@@ -103,21 +103,45 @@
                 <div
                   class="search-filter-group search-filter-group--horizontal"
                 >
-                  <group-search-filter
-                    :component-key="treeObj.componentKey"
-                    :tree-obj="treeObj"
-                    :tree-key="treeObj.treeKey"
-                  ></group-search-filter>
-                  <group-search-filter
-                    :component-key="treeObj.componentKey"
-                    :tree-obj="treeObj"
-                    :tree-key="treeObj.treeKey"
-                  ></group-search-filter>
-                  <group-search-filter
-                    :component-key="treeObj.componentKey"
-                    :tree-obj="treeObj"
-                    :tree-key="treeObj.treeKey"
-                  ></group-search-filter>
+                  <checkbox-filter-list
+                    :use-expand-button="true"
+                    :filter-id="CONSTANTS.FILTER.KEYS.BM"
+                    filter-title="BM"
+                    :filter-list="searchFilterList[CONSTANTS.FILTER.KEYS.BM]"
+                    :select-checkbox-list="
+                      selectSearchFilterList[CONSTANTS.FILTER.KEYS.BM]
+                    "
+                    :title-check-value="switch1"
+                    @changeCheckboxList="changeCheckboxList"
+                  />
+                  <checkbox-filter-list
+                    :use-expand-button="true"
+                    :filter-id="CONSTANTS.FILTER.KEYS.OFFERED_UNITS"
+                    filter-title="제공단위(P.key)"
+                    :filter-list="
+                      searchFilterList[CONSTANTS.FILTER.KEYS.OFFERED_UNITS]
+                    "
+                    :select-checkbox-list="
+                      selectSearchFilterList[
+                        CONSTANTS.FILTER.KEYS.OFFERED_UNITS
+                      ]
+                    "
+                    :title-check-value="switch1"
+                    @changeCheckboxList="changeCheckboxList"
+                  />
+                  <checkbox-filter-list
+                    :use-expand-button="true"
+                    :filter-id="CONSTANTS.FILTER.KEYS.DATA_TYPE1"
+                    filter-title="데이터 유형"
+                    :filter-list="
+                      searchFilterList[CONSTANTS.FILTER.KEYS.DATA_TYPE1]
+                    "
+                    :select-checkbox-list="
+                      selectSearchFilterList[CONSTANTS.FILTER.KEYS.DATA_TYPE1]
+                    "
+                    :title-check-value="switch1"
+                    @changeCheckboxList="changeCheckboxList"
+                  />
                 </div>
                 <!-- //필터그룹핑 -->
               </div>
@@ -134,27 +158,62 @@
               <div class="filter">
                 <div class="filter__options">
                   <!-- 토글스위치 -->
-                  <base-switch>
+                  <base-switch @isSwitchChanged="isSwitchChanged2">
                     <span>전체 선택</span>
                   </base-switch>
                   <!-- //토글스위치 -->
                 </div>
                 <div class="search-filter-group search-filter-group--vertical">
-                  <group-search-filter
-                    :component-key="treeObj.componentKey"
-                    :tree-obj="treeObj"
-                    :tree-key="treeObj.treeKey"
-                  ></group-search-filter>
-                  <group-search-filter
-                    :component-key="treeObj.componentKey"
-                    :tree-obj="treeObj"
-                    :tree-key="treeObj.treeKey"
-                  ></group-search-filter>
-                  <group-search-filter
-                    :component-key="treeObj.componentKey"
-                    :tree-obj="treeObj"
-                    :tree-key="treeObj.treeKey"
-                  ></group-search-filter>
+                  <checkbox-filter-list
+                    :use-expand-button="true"
+                    :filter-id="CONSTANTS.FILTER.KEYS.PROVIDER"
+                    filter-title="제공방식"
+                    :filter-list="
+                      searchFilterList[CONSTANTS.FILTER.KEYS.PROVIDER]
+                    "
+                    :select-checkbox-list="
+                      selectSearchFilterList[CONSTANTS.FILTER.KEYS.PROVIDER]
+                    "
+                    :title-check-value="switch2"
+                    @changeCheckboxList="changeCheckboxList"
+                  />
+                  <checkbox-filter-list
+                    :use-expand-button="true"
+                    :filter-id="CONSTANTS.FILTER.KEYS.DATA_TYPE2"
+                    filter-title="데이터 형태"
+                    :filter-list="
+                      searchFilterList[CONSTANTS.FILTER.KEYS.DATA_TYPE2]
+                    "
+                    :select-checkbox-list="
+                      selectSearchFilterList[CONSTANTS.FILTER.KEYS.DATA_TYPE2]
+                    "
+                    :title-check-value="switch2"
+                    @changeCheckboxList="changeCheckboxList"
+                  />
+                  <checkbox-filter-list
+                    :use-expand-button="true"
+                    :filter-id="CONSTANTS.FILTER.KEYS.DATA_SOURCE"
+                    filter-title="데이터 출처"
+                    :filter-list="
+                      searchFilterList[CONSTANTS.FILTER.KEYS.DATA_SOURCE]
+                    "
+                    :select-checkbox-list="
+                      selectSearchFilterList[CONSTANTS.FILTER.KEYS.DATA_SOURCE]
+                    "
+                    :title-check-value="switch2"
+                    @changeCheckboxList="changeCheckboxList"
+                  />
+                  <checkbox-filter-list
+                    :use-expand-button="true"
+                    :filter-id="CONSTANTS.FILTER.KEYS.KWORD"
+                    filter-title="키워드"
+                    :filter-list="searchFilterList[CONSTANTS.FILTER.KEYS.KWORD]"
+                    :select-checkbox-list="
+                      selectSearchFilterList[CONSTANTS.FILTER.KEYS.KWORD]
+                    "
+                    :title-check-value="switch2"
+                    @changeCheckboxList="changeCheckboxList"
+                  />
                 </div>
               </div>
             </div>
@@ -246,6 +305,7 @@ import SearchList from "@component/common/organisms/search-list/search-list.vue"
 import SearchInputField from "@component/common/organisms/search-input-field/search-input-field.vue";
 import SearchResultBox from "@common/atoms/search-result-box/search-result-box";
 import BasicOption from "@common/atoms/basic-option/basic-option";
+import CheckboxFilterList from "@common/molecules/checkbox-filter-list/checkbox-filter-list";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -256,7 +316,11 @@ export default {
       contents: "meta/keyword-search/contents",
       CONSTANTS: "defaults/constants/CONSTANTS",
       keyword: "meta/keyword-search/searchKeyword"
-    })
+    }),
+    ...mapGetters("meta/search/search", [
+      "searchFilterList",
+      "selectSearchFilterList"
+    ])
   },
   components: {
     BaseRadio,
@@ -273,7 +337,8 @@ export default {
     SearchList,
     SearchInputField,
     SearchResultBox,
-    BasicOption
+    BasicOption,
+    CheckboxFilterList
   },
   data() {
     return {
@@ -318,11 +383,20 @@ export default {
         { key: "20", text: "20개씩" },
         { key: "40", text: "40개씩" }
       ],
-      selectedKey: null
+      selectedKey: null,
+      switch1: false,
+      switch2: false
+      // bmChecked: false,
+      // offeredUnitsChecked: false,
+      // dataType1Checked: false
     };
   },
   methods: {
     ...mapActions("meta/keyword-search", ["getContents", "setSearchKeyword"]),
+    ...mapActions("meta/search/search", [
+      "getSearchFilterList",
+      "changeSearchFilterList"
+    ]),
     toggleDetail: function () {
       this.isDetailOpen = !this.isDetailOpen;
     },
@@ -391,6 +465,43 @@ export default {
     changeData({ input }) {
       console.log("key: " + input);
       this.selectedKey = input;
+    },
+    changeCheckboxList({ checkboxKey, changeList }) {
+      console.log(checkboxKey);
+      this.changeSearchFilterList({
+        key: checkboxKey,
+        changeList: changeList
+      });
+    },
+    isSwitchChanged1(switchValue) {
+      // 데이터 상세검색 switch
+      const checkKeys = [
+        this.CONSTANTS.FILTER.KEYS.BM,
+        this.CONSTANTS.FILTER.KEYS.OFFERED_UNITS,
+        this.CONSTANTS.FILTER.KEYS.DATA_TYPE1
+      ];
+      this.switch1 = switchValue;
+      this.switchChecked(switchValue, checkKeys);
+    },
+    isSwitchChanged2(switchValue) {
+      // 좌측 하단 필터 switch
+      // provider, dataType2, dataSource, kword
+      const checkKeys = [
+        this.CONSTANTS.FILTER.KEYS.PROVIDER,
+        this.CONSTANTS.FILTER.KEYS.DATA_TYPE2,
+        this.CONSTANTS.FILTER.KEYS.DATA_SOURCE,
+        this.CONSTANTS.FILTER.KEYS.KWORD
+      ];
+      this.switch2 = switchValue;
+      this.switchChecked(switchValue, checkKeys);
+    },
+    switchChecked(switchValue, checkKeys) {
+      checkKeys.forEach((key) => {
+        this.changeCheckboxList({
+          checkboxKey: key,
+          changeList: switchValue ? this.searchFilterList[key] : []
+        });
+      }, this);
     }
   },
   mounted() {
@@ -402,7 +513,9 @@ export default {
     }
     this.selectedKey = "40";
   },
-  created() {}
+  created() {
+    this.getSearchFilterList();
+  }
 };
 </script>
 

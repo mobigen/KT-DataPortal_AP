@@ -1,9 +1,13 @@
 <template>
   <div class="toggle-switch" role="switch">
     <slot></slot>
-    <button class="toggle-switch__switch" type="button" aria-selected="false"
-            :class="isSwitchOpen ? 'toggle-switch__switch--selected': ''"
-            @click="isSwitchOpen = !isSwitchOpen">
+    <button
+      class="toggle-switch__switch"
+      type="button"
+      aria-selected="false"
+      :class="isSwitchOpen ? 'toggle-switch__switch--selected' : ''"
+      @click="isSwitchOpen = !isSwitchOpen"
+    >
       <span class="toggle-switch__handle">
         <span class="ir-pm"></span>
       </span>
@@ -16,7 +20,12 @@ export default {
   name: "BaseSwitch",
   data() {
     return {
-      isSwitchOpen: false,
+      isSwitchOpen: false
+    };
+  },
+  watch: {
+    isSwitchOpen() {
+      this.$emit("isSwitchChanged", this.isSwitchOpen);
     }
   },
   props: {},

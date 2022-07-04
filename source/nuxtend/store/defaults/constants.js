@@ -74,9 +74,13 @@ export const state = () => ({
         TREE: "tree"
       },
       KEYS: {
+        BM: "bm",
+        OFFERED_UNITS: "offeredUnits",
+        DATA_TYPE1: "dataType1",
+        DATA_TYPE2: "dataType2",
         PROVIDER: "provider",
-        TYPE: "type",
-        KEYWORD: "keyword"
+        DATA_SOURCE: "dataSource",
+        KWORD: "kword"
       }
     },
     API_ROUTER: {

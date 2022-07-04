@@ -125,46 +125,66 @@ export const actions = {
 
     // TODO : 개발 완료 후 데이터 정리, apTeam 과거 코드 삭제시 같이 삭제
     // apTeam 데이터
-    const category = [
-      { itemId: "a1", itemName: "자동차부품" },
-      { itemId: "a2", itemName: "자동차제조" },
-      { itemId: "a3", itemName: "자동차정비" },
-      { itemId: "a4", itemName: "화물운송" },
-      { itemId: "a5", itemName: "관제사고" },
-      { itemId: "a6", itemName: "미래차산업" }
+    const bm = [
+      { itemId: "a1", itemName: "통합기본" },
+      { itemId: "a2", itemName: "모바일" },
+      { itemId: "a3", itemName: "인터넷" },
+      { itemId: "a4", itemName: "TV" },
+      { itemId: "a5", itemName: "유선전화" },
+      { itemId: "a6", itemName: "데이터사업" },
+      { itemId: "a7", itemName: "AI상품" }
     ];
-    const dataType = [
-      { itemId: "b17", itemName: "데이터셋(파일)" },
-      { itemId: "b18", itemName: "데이터 서비스" }
+    const offeredUnits = [
+      { itemId: "b17", itemName: "회선&고객" },
+      { itemId: "b18", itemName: "결합" },
+      { itemId: "b19", itemName: "가구" },
+      { itemId: "b20", itemName: "사업장" },
+      { itemId: "b21", itemName: "공간" },
+      { itemId: "b22", itemName: "시간" },
+      { itemId: "b23", itemName: "기타" }
     ];
 
-    // uiTeam 퍼블리시용 데이터
+    const dataType1 = [
+      { itemId: "c1", itemName: "기본" },
+      { itemId: "c2", itemName: "상세" },
+      { itemId: "c3", itemName: "관계" },
+      { itemId: "c4", itemName: "(발생)내역" },
+      { itemId: "c5", itemName: "(변경)이력" },
+      { itemId: "c6", itemName: "집계" },
+      { itemId: "c7", itemName: "임시" }
+    ];
+
     const provider = [
-      { itemId: "b7", itemName: "도로교통공단" },
-      { itemId: "b8", itemName: "한국지질자원연구원" },
-      { itemId: "b9", itemName: "한국과학기술정보연구원" },
-      { itemId: "b10", itemName: "국토교통부" },
-      { itemId: "b11", itemName: "한국지질자원연구원" },
-      { itemId: "b12", itemName: "도로교통공단1" },
-      { itemId: "b13", itemName: "한국지질자원연구원2" },
-      { itemId: "b14", itemName: "한국과학기술정보연구원3" },
-      { itemId: "b15", itemName: "도로교통공단4" },
-      { itemId: "b16", itemName: "한국지질자원연구원5" }
+      { itemId: "d1", itemName: "티켓팅 캠페인" },
+      { itemId: "d2", itemName: "엑셀 다운로드" },
+      { itemId: "d3", itemName: "시스템 연동" }
     ];
-    const keyword = [
-      { itemId: "c1", itemName: "자동차부품" },
-      { itemId: "c2", itemName: "자동차제조" },
-      { itemId: "c3", itemName: "자동차정비" },
-      { itemId: "c4", itemName: "화물운송" },
-      { itemId: "c5", itemName: "관제사고" },
-      { itemId: "c6", itemName: "미래차산업" }
+    const dataType2 = [
+      { itemId: "e1", itemName: "DB" },
+      { itemId: "e2", itemName: "File" }
     ];
-    const type = [
-      { itemId: "d17", itemName: "데이터셋(파일)" },
-      { itemId: "d18", itemName: "데이터 서비스" }
+    const dataSource = [
+      { itemId: "f1", itemName: "그룹사" },
+      { itemId: "f2", itemName: "공공 데이터" },
+      { itemId: "f3", itemName: "KDAP" },
+      { itemId: "f4", itemName: "BIDW" }
+    ];
+    const kword = [
+      { itemId: "g1", itemName: "EV" },
+      { itemId: "g2", itemName: "견적" },
+      { itemId: "g3", itemName: "통계" },
+      { itemId: "g4", itemName: "시간" }
     ];
 
-    const result = { category, dataType, provider, keyword, type };
+    const result = {
+      bm,
+      offeredUnits,
+      dataType1,
+      provider,
+      dataType2,
+      dataSource,
+      kword
+    };
 
     commit("setSearchFilterList", result);
   },
