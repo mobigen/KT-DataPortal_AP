@@ -188,39 +188,14 @@
                       @checkOption="sortOptionChange"
                     ></basic-option>
                     <!-- select -->
-                    <base-select class="select w-107">
-                      <template v-slot:title>
-                        <span class="select-selector__title">20개씩</span>
-                      </template>
-                      <template v-slot:list>
-                        <li class="select-container__item">
-                          <button
-                            class="select-container__button"
-                            type="button"
-                            role="option"
-                          >
-                            <span class="select-container__text">12개씩</span>
-                          </button>
-                        </li>
-                        <li class="select-container__item">
-                          <button
-                            class="select-container__button"
-                            type="button"
-                            role="option"
-                          >
-                            <span class="select-container__text">20개씩</span>
-                          </button>
-                        </li>
-                        <li class="select-container__item">
-                          <button
-                            class="select-container__button"
-                            type="button"
-                            role="option"
-                          >
-                            <span class="select-container__text">40개씩</span>
-                          </button>
-                        </li>
-                      </template>
+                    <base-select
+                      class="w-107"
+                      select-id="select-01"
+                      labelName="selectCategory"
+                      :select-list="selectCategoryList"
+                      :selected-key="selectedKey"
+                      @changeData="changeData"
+                    >
                     </base-select>
                   </div>
                 </div>
@@ -337,7 +312,13 @@ export default {
         { num: "999+", title: "서비스데이터" },
         { num: "133", title: "원천데이터" },
         { num: "0", title: "메타데이터" }
-      ]
+      ],
+      selectCategoryList: [
+        { key: "12", text: "12개씩" },
+        { key: "20", text: "20개씩" },
+        { key: "40", text: "40개씩" }
+      ],
+      selectedKey: null
     };
   },
   methods: {
@@ -406,6 +387,10 @@ export default {
     },
     tabClick({ tabObj }) {
       console.log(tabObj);
+    },
+    changeData({ input }) {
+      console.log("key: " + input);
+      this.selectedKey = input;
     }
   },
   mounted() {
@@ -415,6 +400,7 @@ export default {
       this.searchKeyword = this.keyword;
       this.searchDetailKeyword();
     }
+    this.selectedKey = "40";
   },
   created() {}
 };
