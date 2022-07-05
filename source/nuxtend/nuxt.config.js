@@ -1,9 +1,26 @@
 import { resolve } from "path";
+
+//  logger 설정 --
 function _interopDefaultLegacy(e) {
   return e && typeof e === "object" && "default" in e ? e : { default: e };
 }
 const consola__default = /*#__PURE__*/ _interopDefaultLegacy(consola);
 const logger = consola__default["default"];
+
+function _routeAlias(route) {
+  if (route.path === undefined) {
+    return;
+  }
+
+  let alias =
+    route.path.length > 1 ? `${route.path}/index.html` : "/index.html";
+  route.alias = alias;
+
+  logger.info(route.path + "---------------");
+  for (var key in route) {
+    if (key !== "children") logger.info("----" + key + " [" + route[key] + "]");
+  }
+}
 
 export default {
   ssr: true,
@@ -198,7 +215,7 @@ export default {
 
   // 미들웨어
   router: {
-    extendRoutes(routes, resolves) {
+    extendRoutes(routes) {
       logger.info("#### process.env.ENV_TYPE: " + process.env.ENV_TYPE);
       logger.info(
         "#### cache: " + (process.env.ENV_TYPE === "local" ? true : false)
@@ -220,13 +237,16 @@ export default {
         "## NuxtLink 처리: 정적 리소스에 대한 html 파일 대응을 위해 아래와 같이 alias 경로를 변경 합니다."
       );
       routes.forEach((route) => {
-        const alias =
-          route.path.length > 1 ? `${route.path}/index.html` : "/index.html";
-        route.alias = alias;
-        logger.info(route.path + "---------------");
-        for (var key in route) {
-          logger.info("----" + key + " [" + route[key] + "]");
-        }
+        routes.forEach((route) => {
+          _routeAlias(route);
+
+          // children url 처리
+          if (route.children !== undefined) {
+            route.children.forEach((child) => {
+              _routeAlias(child);
+            });
+          }
+        });
       });
     },
     // 인증, 권한 추가

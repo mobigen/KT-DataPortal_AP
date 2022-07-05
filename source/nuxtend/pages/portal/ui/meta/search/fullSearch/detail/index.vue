@@ -869,11 +869,28 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Index",
+  // async asyncData({ store, route }) {
+  //   let rowId = route.query.postId;
+  //   // TODO : asyncData 배포후에 동작 하는거 확인되면 아래 코드 사용
+  //   rowId = "01bfea44-5b42-41e7-9901-8fad6997969c";
+  //   await store.dispatch("meta/keyword-search/getDetail", rowId);
+  //   const detail = store.getters["meta/keyword-search/detail"];
+  //   return { detail };
+  // },
   computed: {
     ...mapGetters({
       contents: "kt/keyword-search/contents"
     }),
-    ...mapGetters("meta/keyword-search", ["detail"])
+    detail() {
+      const vuex = this.$store.getters["meta/keyword-search/detail"];
+
+      if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+        this.popupTitle = vuex.body.data_nm;
+        this.confirmButtonDisabled = vuex.body.law_evl_conf_yn === "y";
+        this.needConfirm = vuex.body.law_evl_conf_yn === "y";
+      }
+      return vuex;
+    }
   },
   data() {
     return {
