@@ -25,21 +25,22 @@
                 <div class="data-box__top-content">
                   <div class="badges">
                     <base-badge class="badge--outline badge--rounded">
-                      <span class="badge__label">모바일</span
+                      <span class="badge__label">{{ ctgry }}</span
                       ><!-- 카테고리구분 -->
                     </base-badge>
                     <base-badge class="badge--provider">
-                      <span class="badge__label">그룹사</span
+                      <span class="badge__label"> {{ dataPrvDesk }}</span
                       ><!-- 벤더 -->
                     </base-badge>
                   </div>
                 </div>
                 <div class="data-box__content">
                   <strong class="data-box__title">
-                    제목<mark>검색어</mark>
-                    <!-- 검색어에 mark 태그 적용 -->
+                    {{ dataNm }}
                   </strong>
-                  <p class="data-box__description">설명</p>
+                  <p class="data-box__description">
+                    {{ dataDesc }}
+                  </p>
                 </div>
                 <div class="data-box__bottom-content">
                   <div class="data-box__details">
@@ -47,11 +48,11 @@
                     <div class="data-box__details-group">
                       <dl>
                         <dt><span>수정일</span></dt>
-                        <dd>2022-06-17</dd>
+                        <dd>{{ ltstAmdDt }}</dd>
                       </dl>
                       <dl>
                         <dt><span>등록일</span></dt>
-                        <dd>2022-06-16</dd>
+                        <dd>{{ regDate }}</dd>
                       </dl>
                       <!-- 데이터 관심/조회/다운로드 -->
                       <dl class="data-box__options">
@@ -77,17 +78,30 @@
               </div>
               <!-- 오른쪽 옵션 구조 추가 -->
               <div class="data-box__buttons">
-                <base-button class="button--primary">
+                <base-button
+                  class="button--primary"
+                  @click="onshowDialog('requestDialog')"
+                >
                   <span class="button__text">바로활용</span>
                 </base-button>
+
                 <base-button class="button--primary-line">
                   <span class="button__text">담아두기</span>
                 </base-button>
                 <div class="favorite-cnt">
                   <base-button
                     class="favorite-cnt__button"
-                    :class="isToggle ? 'favorite-cnt__button--selected' : ''"
-                    @click="toggleBtn"
+                    :class="
+                      myFavoriteData === 'y'
+                        ? 'favorite-cnt__button--selected'
+                        : ''
+                    "
+                    @click="
+                      myFavoriteDataClick(
+                        bizDatasetId,
+                        !(myFavoriteData === 'y')
+                      )
+                    "
                   >
                     <svg-icon
                       class="svg-icon"
@@ -850,6 +864,104 @@
         </div>
       </div>
     </div>
+    <!-- 데이터 활용 신청하기 Dialog -->
+    <Dialog
+      dialog-name="requestDialog"
+      :width="'970px'"
+      :height="'800px'"
+      :title="'데이터 활용 신청하기'"
+      confirmButtonText="신청"
+      :confirmButtonDisabled="confirmButtonDisabled"
+      @confirm="requestConfirmBtnClick"
+      @close="resetRequestData"
+    >
+      <div slot="body" class="modal__body">
+        <!-- formbox -->
+        <table class="formbox">
+          <caption class="hidden">
+            데이터 활용 신청하기 게시판
+          </caption>
+          <colgroup>
+            <col style="width: 140px" />
+            <col style="width: auto" />
+          </colgroup>
+          <tbody>
+            <tr>
+              <th scope="row">데이터명</th>
+              <td>
+                <ul class="data-name-list">
+                  <li>
+                    {{ dataNm }}
+                    <p class="txt-info" v-if="lawEvlConfYn === 'y'">
+                      <strong class="required">필수</strong>법률검토 필요
+                    </p>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">신청자<strong class="required">필수</strong></th>
+              <td>
+                <base-input id="inp-apyr" @input="setRequestData"></base-input>
+                <!--
+                TODO: 임시로 신청자 입력하게 해놓음, 추후 수정
+                {{ `${requestData.apyr}(${requestData.emp_num})` }}
+                -->
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                신청내용<strong class="required">필수</strong> <br />(활용목적)
+              </th>
+              <td>
+                <BaseTextarea
+                  id="text-apy_sbst"
+                  rows="6"
+                  element-class="text-area--fixed scrollCustomize"
+                  placeholder="데이터 신청 개요와 활용 목적을 입력하세요."
+                  :useCheckByte="false"
+                  @input="setRequestData"
+                ></BaseTextarea>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                법률검토<strong class="required" v-if="lawEvlConfYn === 'y'"
+                  >필수</strong
+                >
+              </th>
+              <td>
+                <div class="v-group">
+                  <BaseTextarea
+                    id="text-law_evl_conf_dt"
+                    rows="6"
+                    element-class="text-area--fixed scrollCustomize"
+                    placeholder="법률검토 대상 데이터입니다. 법률검토 내용을 입력하거나 파일로첨부하세요. "
+                    :useCheckByte="false"
+                    @input="setRequestData"
+                  ></BaseTextarea>
+                  <GroupFileAttach> </GroupFileAttach>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                기간설정<strong class="required">필수</strong>
+              </th>
+              <td>
+                <Date-picker
+                  :range="true"
+                  :endDate="requestData.end_date"
+                  @change="setDatePicker"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- // formbox -->
+      </div>
+    </Dialog>
+    <!-- // Dialog -->
   </div>
 </template>
 
@@ -865,6 +977,10 @@ import GroupPagination from "@component/common/molecules/group-pagination/group-
 import GroupFileAttach from "@component/common/molecules/group-file-attach/group-file-attach";
 import Dialog from "@functional/dialog/dialog.vue";
 import ViewTable from "@component/common/organisms/view-table/view-table";
+import BaseInput from "@component/common/atoms/base-input/base-input";
+import moment from "moment";
+import DatePicker from "@functional/datepicker/date-picker.vue";
+import { successAlert, errorAlert } from "@functional/alert/alert-default";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -873,12 +989,29 @@ export default {
     ...mapGetters({
       contents: "kt/keyword-search/contents"
     }),
-    ...mapGetters("meta/keyword-search", ["detail"])
+    detail() {
+      const vuex = this.$store.getters["meta/keyword-search/detail"];
+
+      if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+        this.ctgry = vuex.body.ctgry.split(",").pop();
+        this.dataPrvDesk = vuex.body.data_prv_desk;
+        this.dataNm = vuex.body.data_nm;
+        this.dataDesc = vuex.body.data_desc;
+        this.ltstAmdDt = vuex.body.ltst_amd_dt;
+        this.regDate = vuex.body.reg_date;
+
+        // TODO: css 확인 위해 임시로 y로 설정
+        // this.lawEvlConfYn = vuex.body.law_evl_conf_yn;
+        this.lawEvlConfYn = "y";
+
+        this.myFavoriteData = "y";
+      }
+      return vuex;
+    }
   },
   data() {
     return {
       isPreview: false,
-      isToggle: false,
       tabList: [
         { href: "#articleChart", title: "데이터 상세정보", selected: true },
         { href: "#articleSample", title: "샘플 데이터", selected: false },
@@ -889,16 +1022,24 @@ export default {
           selected: false
         },
         { href: "#articleInquiry", title: "데이터 문의", selected: false }
-      ]
+      ],
+      bizDatasetId: null,
+      ctgry: null,
+      dataPrvDesk: null,
+      dataNm: null,
+      dataDesc: null,
+      ltstAmdDt: null,
+      regDate: null,
+      requestData: {},
+      lawEvlConfYn: null,
+      confirmButtonDisabled: true,
+      myFavoriteData: null
     };
   },
   methods: {
     ...mapActions("meta/keyword-search", ["getDetail", "setSearchKeyword"]),
     togglePreview: function () {
       this.isPreview = !this.isPreview;
-    },
-    toggleBtn: function () {
-      this.isToggle = !this.isToggle;
     },
     onshowDialog(name) {
       this.$modal.show(name);
@@ -908,13 +1049,80 @@ export default {
       this.$router.push({
         path: "/portal/ui/meta/search/fullSearch"
       });
+    },
+    resetRequestData() {
+      this.requestData = {
+        biz_dataset_id: this.bizDatasetId,
+        apyr: "", // 신청자
+        emp_num: "20161665", //사원번호
+        apy_sbst: "", // 신청내용
+        law_evl_conf_dt: "", // 법률검토 내용
+        start_date: "", // 활용기간 시작일
+        end_date: moment().add(1, "Y").format() // 활용기간 종료일
+      };
+
+      this.confirmButtonDisabled = this.lawEvlConfYn === "y";
+    },
+    setRequestData({ id, input }) {
+      const key = id.split("-").pop();
+      this.requestData[key] = input;
+
+      // TODO: 법률검토 or 파일 입력 안하면 버튼 비활성화, 현재 법률검토만 확인함 추후 수정해야함
+      if (this.lawEvlConfYn === "y") {
+        this.confirmButtonDisabled = !this.requestData["law_evl_conf_dt"];
+      }
+    },
+    setDatePicker(e) {
+      this.requestData["start_date"] = e.at(0);
+      this.requestData["end_date"] = e.at(1);
+    },
+    requestConfirmBtnClick(name) {
+      // TODO: 신청자를 입력값으로 받기때문에 체크, 추후 삭제
+      if (!(this.requestData.apyr && this.requestData.apy_sbst)) {
+        errorAlert({ content: "필수 값들을 입력해주세요" });
+        return;
+      }
+
+      console.log(this.requestData);
+
+      // TODO: 일단 3개의 데이터만 보냄, 추후 수정
+      let data = {};
+      data.biz_dataset_id = this.requestData.biz_dataset_id;
+      data.apyr = this.requestData.apyr;
+      data.apy_sbst = this.requestData.apy_sbst;
+
+      this.$axios
+        .post(this.$config.ROUTE_API_META_PREFIX + "/insertUseBoardData", data)
+        .catch((error) => {
+          errorAlert({ content: "이미 신청하신 데이터입니다." });
+          return;
+        });
+
+      successAlert({
+        title: "데이터 활용 신청이 완료되었습니다.",
+        content:
+          "활용신청하신 데이터는 마이페이지 > 내 활용내역에서 확인할 수 있습니다."
+      });
+
+      this.resetRequestData();
+      this.$modal.hide(name);
+    },
+    myFavoriteDataClick(id, checked) {
+      // TODO: myFavoriteData api 호출로 변경 시 수정
+      if (checked) {
+        this.myFavoriteData = "y";
+      } else {
+        this.myFavoriteData = "n";
+      }
     }
   },
   created() {
-    let rowId = this.$route.query.postId;
-    rowId = "01bfea44-5b42-41e7-9901-8fad6997969c";
+    this.bizDatasetId = this.$route.query.datasetId;
 
-    this.getDetail(rowId);
+    this.getDetail(this.bizDatasetId);
+  },
+  mounted() {
+    this.resetRequestData();
   },
   components: {
     BaseBadge,
@@ -927,7 +1135,9 @@ export default {
     GroupPagination,
     GroupFileAttach,
     Dialog,
-    ViewTable
+    ViewTable,
+    BaseInput,
+    DatePicker
   }
 };
 </script>
