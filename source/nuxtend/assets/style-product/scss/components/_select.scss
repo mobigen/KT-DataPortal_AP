@@ -12,11 +12,11 @@
   .select-selector__button,
   .select-selector__input {
     border-color: $secondary;
-
+    
     &:hover:not(:disabled) {
       border-color: $secondary;
     }
-
+    
     &:focus-visible:not(:disabled) {
       border: 2px solid $default-focus;
       box-shadow: none;
@@ -216,7 +216,7 @@
   &:hover {
     border-color: $primary;
   }
-
+  
   &:focus-visible:not(:disabled) {
     border: 1px solid $default-focus;
     box-shadow: none;
@@ -327,7 +327,7 @@
   &:focus-visible:not(:disabled) {
     background-color: $ui-05;
   }
-
+  
   .select-container__text {
     @include font-size("14");
     color: $basic;

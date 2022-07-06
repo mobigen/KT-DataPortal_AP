@@ -87,7 +87,7 @@
 
     &::after {
       content: none;
-    }
+    }    
 
   }
 }
@@ -105,7 +105,7 @@
   }
 }
 
-.radio.radio--check .radio__input:checked +
+.radio.radio--check .radio__input:checked + 
 .radio__label {
   padding: 0 0 0 rem(24px);
   color: $primary-dark;
@@ -118,7 +118,7 @@
     top: rem(2px);
     width: rem(18px);
     height: rem(18px);
-    background: $ui-02 url("#{$img-path}/icon/check-radio.svg") no-repeat center center;
+    background: $ui-02 url("#{$img-path}/icon/check-radio.svg") no-repeat center center;      
     z-index: 1;
   }
 }
