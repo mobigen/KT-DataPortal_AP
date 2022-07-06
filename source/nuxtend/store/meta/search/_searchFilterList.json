@@ -1,0 +1,50 @@
+{
+  "bm": [
+    { "itemId": "a1", "itemName": "통합기본" },
+    { "itemId": "a2", "itemName": "모바일" },
+    { "itemId": "a3", "itemName": "인터넷" },
+    { "itemId": "a4", "itemName": "TV" },
+    { "itemId": "a5", "itemName": "유선전화" },
+    { "itemId": "a6", "itemName": "데이터사업" },
+    { "itemId": "a7", "itemName": "AI상품" }
+  ],
+  "offeredUnits": [
+    { "itemId": "b17", "itemName": "회선&고객" },
+    { "itemId": "b18", "itemName": "결합" },
+    { "itemId": "b19", "itemName": "가구" },
+    { "itemId": "b20", "itemName": "사업장" },
+    { "itemId": "b21", "itemName": "공간" },
+    { "itemId": "b22", "itemName": "시간" },
+    { "itemId": "b23", "itemName": "기타" }
+  ],
+  "dataType1": [
+    { "itemId": "c1", "itemName": "기본" },
+    { "itemId": "c2", "itemName": "상세" },
+    { "itemId": "c3", "itemName": "관계" },
+    { "itemId": "c4", "itemName": "(발생)내역" },
+    { "itemId": "c5", "itemName": "(변경)이력" },
+    { "itemId": "c6", "itemName": "집계" },
+    { "itemId": "c7", "itemName": "임시" }
+  ],
+  "provider": [
+    { "itemId": "d1", "itemName": "티켓팅 캠페인" },
+    { "itemId": "d2", "itemName": "엑셀 다운로드" },
+    { "itemId": "d3", "itemName": "시스템 연동" }
+  ],
+  "dataType2": [
+    { "itemId": "e1", "itemName": "DB" },
+    { "itemId": "e2", "itemName": "File" }
+  ],
+  "dataSource": [
+    { "itemId": "f1", "itemName": "그룹사" },
+    { "itemId": "f2", "itemName": "공공 데이터" },
+    { "itemId": "f3", "itemName": "KDAP" },
+    { "itemId": "f4", "itemName": "BIDW" }
+  ],
+  "kword": [
+    { "itemId": "g1", "itemName": "EV" },
+    { "itemId": "g2", "itemName": "견적" },
+    { "itemId": "g3", "itemName": "통계" },
+    { "itemId": "g4", "itemName": "시간" }
+  ]
+}
