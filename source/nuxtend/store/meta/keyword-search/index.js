@@ -1,3 +1,5 @@
+// import axios from "axios";
+// let url = null;
 export const state = () => ({
   _contents: {},
   _detail: {},
@@ -28,10 +30,14 @@ export const mutations = {
   }
 };
 
-// import sampleContents from "./_contents.json";
-import d from "./_detail.json";
-
 export const actions = {
+  // setUrl() {
+  //   console.log(process.env);
+  //   // SSR or CSR에 따른 URL 변경
+  //   url = process.server
+  //     ? `${process.env.API_ROUTE_URL}${this.$config.ROUTE_API_META_PREFIX}` // SSR
+  //     : `${this.$config.ROUTE_API_META_PREFIX}`; // CSR
+  // },
   getContents({ commit, rootGetters, dispatch }, params) {
     let keywordObj = { keyword1: "", keyword2: "", keyword3: "" };
     params.searchKeywordList.forEach((el, index) => {
@@ -62,7 +68,13 @@ export const actions = {
         );
       });
   },
-  async getDetail({ commit }, rowKey) {
+  async getDetail({ commit, dispatch }, rowKey) {
+    // dispatch("setUrl");
+    // await this.$axios
+    //   .get(`${url}/getBizMetaDetail?datasetId=` + rowKey)
+    //   .then((d) => {
+    //     commit("setDetail", d);
+    //   });
     await this.$axios
       .get(
         this.$config.ROUTE_API_META_PREFIX +

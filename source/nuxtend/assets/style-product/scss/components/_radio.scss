@@ -11,7 +11,7 @@
 }
 
 .radios .radio:not(:last-of-type) {
-  margin-right: $spacing-xs;
+
 }
 
 .radios--vertical {
@@ -66,15 +66,19 @@
   background-color: $text-04;
 }
 
+// -------------------------
+// sort check type
+// -------------------------
 .radio.radio--check {
-  
+  margin-left: rem(30px);
+
   .radio__label {
-    padding:0 rem(5px);
+    padding: 0;
     color: $text-02;
     position: relative;
 
     &:hover {
-      color: $secondary;
+      color: $point-03;
     }
 
     &::before {
@@ -83,52 +87,38 @@
 
     &::after {
       content: none;
-    }
+    }    
 
-    span {
-      position: relative;
-
-      &::before {
-        content: "";
-        position: absolute;
-        left: rem(-10px);
-        top: 50%;
-        width: rem(3px);
-        height: rem(3px);
-        background-color: $text-03;
-        border-radius: 50%;
-      }
-
-    }
-
-    
   }
 }
 
-.radio-check-first {
+.radio.radio--check+.radio.radio--check {
+
   &::before {
-    display: none;
+    content: "";
+    position: absolute;
+    left: rem(-15px);
+    top: rem(6px);
+    width: rem(1px);
+    height: rem(12px);
+    background-color: #ddd;
   }
 }
 
 .radio.radio--check .radio__input:checked + 
 .radio__label {
-  color: $secondary;
-  padding-left: 16px;
+  padding: 0 0 0 rem(24px);
+  color: $primary-dark;
   @include font-weight("medium");
 
   span:after {
     content: "";
     position: absolute;
-    left: rem(-15px);
-    top: rem(7px);
-    width: rem(9px);
-    height: rem(6px);
-    border-top: 1px solid;
-    border-right: 1px solid;
-    border-color: $primary-dark;
-    transform: rotate(135deg) scale(1);
-    background: $ui-02;
+    left: 0;
+    top: rem(2px);
+    width: rem(18px);
+    height: rem(18px);
+    background: $ui-02 url("#{$img-path}/icon/check-radio.svg") no-repeat center center;      
     z-index: 1;
   }
 }

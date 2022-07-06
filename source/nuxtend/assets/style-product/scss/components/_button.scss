@@ -19,6 +19,7 @@
 // button--lg
 // button--md
 // button--sm
+// button--xs            || 사이즈 추가
 
 // -------------------------
 // button-base
@@ -26,7 +27,7 @@
 @mixin button-base {
   @include button-normal;
   height: $button-height-md;
-  border-radius: rem(5px);
+  border-radius: $button-border-radius;
   color: $gy-02;
   text-align: center;
 
@@ -44,7 +45,7 @@
 // button: text, text with icon combination
 @mixin button {
   @include button-base;
-  padding: 0 rem(15px);
+  padding: 0 ($spacing-lg - $spacing-2xs);
   border: 1px solid $ui-09;
   background-color: $ui-02;
 
@@ -52,6 +53,7 @@
   &:focus {
     color: $ui-02;
     background-color: $ui-01;
+    border-color: $ui-01;
     
     .svg-icon {
       clip-rule: evenodd;
@@ -80,8 +82,14 @@
 }
 
 // button--icon: icon only style
-@mixin button--icon($button--icon-padding, $icon-size) {
-  padding: 0 $button--icon-padding - 1;
+@mixin button--icon($button-size, $icon-size, $button--icon-padding:false) {
+  width: $button-size;
+
+  @if ($button--icon-padding) {
+    padding: 0 $button--icon-padding - 1;
+  } @else {
+    padding: 0;
+  }
 
   .svg-icon {
     width: $icon-size;
@@ -146,6 +154,7 @@
 
   &:hover:not(:disabled) {
     color: $ui-02;
+    border: $primary;
     background: $primary;
   }
 }
@@ -189,12 +198,13 @@
 }
 
 @mixin button--link {
-  @include button-theme(transparent, $text-02, transparent, transparent);
+  @include button-theme(transparent, $text-02, transparent, transparent, transparent);
   &:hover:not(:disabled) {
-    color: $text-03;
+    color: $basic;
+    border-color: transparent;
 
-    .svg-icon {
-      fill: $text-03;
+    .svg-icon {   
+      fill: #333;
     }
   }
 
@@ -361,8 +371,6 @@
 
 @mixin button--lg {
   @include button-size(15px, $button-height-lg, 24px);
-  @include button-padding($spacing-xl, $spacing-xl);
-  border-radius: rem(5px);
 }
 
 @mixin button--2xl {
@@ -370,17 +378,20 @@
   @include button-padding($spacing-2xl, $spacing-2xl);
   @include font-weight("medium");
   @include font-size("20");
-  border-radius: rem(5px);
 }
 
 @mixin button--md {
-  @include button-size(14px, $button-height-md, 24px);
-  @include button-padding($spacing-md, $spacing-md);
-  border-radius: rem(5px);
+  @include button-size(14px, $button-height-md, 18px);
 }
 
 @mixin button--sm {
-  @include button-size(13px, $button-height-sm, 16px);
+  @include button-size(13px, $button-height-sm, 18px);
+  @include button-padding($spacing-md - $spacing-3xs, $spacing-md - $spacing-3xs);
+  @include font-weight("regular");
+}
+//button--xs 2022-07-01 ADD 
+@mixin button--xs {
+  @include button-size(13px, $button-height-xs, 18px);
   @include button-padding($spacing-xs, $spacing-xs);
 }
 
@@ -392,7 +403,7 @@
 }
 
 .button--icon {
-  @include button--icon(6px, 20px);
+  @include button--icon($button-height-md, 18px);
 }
 
 .button--tertiary {
@@ -476,31 +487,51 @@
 
 .button--sm {
   @include button--sm;
+  
+  // 내부용은 기본과 디자인이 다름 2022-07-04 ADD 
+  &:hover,
+  &:focus {
+    border-color: $primary;
+    background-color: $ui-02;
+    color: $ui-01;
+    .svg-icon {
+      fill: $basic;
+    }
+  }
+}
+
+.button--xs {
+  @include button--xs;
 }
 
 .button--icon.button--lg {
-  @include button--icon(8px, 24px);
+  @include button--icon($button-height-lg, 32px);
 }
 
 .button--icon.button--sm {
-  @include button--icon(4px, 16px);
+  @include button--icon($button-height-sm, 18px);
+}
+
+.button--icon.button--xs {
+  @include button--icon($button-height-xs, 18px);
 }
 
 // link 테마 버튼이 icon만 사용되는 경우 예외 사항
+//icon padding/icon size
 .button--icon.button--link {
-  @include button--icon(4px, 24px);
+  @include button--icon(auto, 18px, 4px);
 }
 
 .button--icon.button--link.button--lg {
-  @include button--icon(4px, 28px);
+  @include button--icon(auto, 32px, 8px);
 }
 
 .button--icon.button--link.button--sm {
-  @include button--icon(2px, 20px);
+  @include button--icon(auto, 18px, 2px);
 }
 
 .button--icon.button--link.button--xs {
-  @include button--icon(1px, 16px);
+  @include button--icon(auto, 18px, 0);
 }
 
 // underline 테마 버튼일 때 예외 사항

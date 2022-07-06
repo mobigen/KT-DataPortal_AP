@@ -1,3 +1,34 @@
+
+// colors classes
+@each $ele, $color in $theme-colors {
+	.color--#{$ele} {
+		color: $color !important;
+	}
+}
+
+// utility classes
+@each $key, $utility in $utilities {
+	@if type-of($utility) == "map" {
+		@include generate-utility($utility);
+	}
+}
+
+// Grid Row
+@if $enable-grid-classes {
+  .row {
+    @include make-row();
+
+    > * {
+      @include make-col-ready();
+    }
+  }
+}
+
+// Grid Columns
+@if $enable-grid-classes {
+  @include make-grid-columns();
+}
+
 .screen-out {
   overflow: hidden;
   position: absolute;
@@ -15,17 +46,6 @@
   text-indent: -9999px;
 }
 
-/* .required {
-  @include font-size("14");
-  @include font-weight("bold");
-  display: inline-block;
-  width: rem(10px);
-  height: rem(17px);
-  padding: 0 $spacing-3xs;
-  color: $negative;
-  vertical-align: middle;
-} */
-
 // 필수
 strong.required {
   display: inline-block;
@@ -36,7 +56,7 @@ strong.required {
   &::before {
     content: "*";
     color: $negative;
-    font-size: 18px;
+    @include font-size("15");
   }
 }
 .emphasis {
@@ -47,22 +67,6 @@ strong.required {
 
 .color-emphasis {
   color: $primary;
-}
-
-// Row
-@if $enable-grid-classes {
-  .row {
-    @include make-row();
-
-    > * {
-      @include make-col-ready();
-    }
-  }
-}
-
-// Columns
-@if $enable-grid-classes {
-  @include make-grid-columns();
 }
 
 .hidden {
@@ -132,6 +136,12 @@ strong.required {
   flex-direction: column;
   align-items: flex-start;
 
+  > * {
+   display: block;
+   width: 100%;
+
+  }
+
   & > *:not(:last-child) {
     margin-bottom: $spacing-2xs;
   }
@@ -174,44 +184,30 @@ strong.required {
 // -------------------------
 // spacing
 // -------------------------
-.p-0 {
-  padding: 0 !important;
+@each $prop, $abbrev in (margin: m, padding: p) {
+	@each $size, $length in $spacers {
+		.#{$abbrev}-#{$size} { #{$prop}: $length !important; }
+		.#{$abbrev}t-#{$size},
+		.#{$abbrev}y-#{$size} {
+			#{$prop}-top: $length !important;
+		}
+		.#{$abbrev}r-#{$size},
+		.#{$abbrev}x-#{$size} {
+			#{$prop}-right: $length !important;
+		}
+		.#{$abbrev}b-#{$size},
+		.#{$abbrev}y-#{$size} {
+			#{$prop}-bottom: $length !important;
+		}
+		.#{$abbrev}l-#{$size},
+		.#{$abbrev}x-#{$size} {
+			#{$prop}-left: $length !important;
+		}
+	}
 }
 
-.p-4 {
-  padding: $spacing-2xs !important;
-}
-
-.px-6 {
-  padding-right: $spacing-2xs + $spacing-3xs !important;
-  padding-left: $spacing-2xs + $spacing-3xs !important;
-}
-
-// -------------------------
-// flex box
-// -------------------------
-.d-flex {
-  display: flex;
-}
-
-.self-start {
-  align-self: flex-start;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.ml-8 {
-  margin-left: $spacing-xs;
+.m-auto {
+  margin: auto !important;
 }
 
 .ml-auto {
@@ -222,16 +218,8 @@ strong.required {
   margin-right: auto !important;
 }
 
-.mr-0 {
-  margin-right: 0 !important;
-}
-
 .mt-auto {
   margin-top: auto !important;
-}
-
-.mt-8 {
-  margin-top: $spacing-xs !important;
 }
 
 .mb-auto {
@@ -246,20 +234,6 @@ strong.required {
 .my-auto {
   margin-bottom: auto !important;
   margin-top: auto !important;
-}
-
-.m-0 {
-  margin: 0 !important;
-}
-
-.mx-0 {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-.my-0 {
-  margin-bottom: 0 !important;
-  margin-top: 0 !important;
 }
 
 // .seaching-select-disable 클래스를 개선
@@ -384,6 +358,10 @@ strong.required {
   height: rem(120px) !important;
 }
 
+.h-130 {
+  height: rem(130px) !important;
+}
+
 .h-160 {
   height: rem(160px) !important;
 }
@@ -412,112 +390,6 @@ strong.required {
   max-width: rem(480px) !important;
 }
 
-// -------------------------
-// overflow
-// -------------------------
-.overflow-auto {
-  overflow: auto;
-}
-
-.overflow-y {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.overflow-x {
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-// -------------------------
-// font-size
-// -------------------------
-.font-size-11 {
-  @include font-size("11");
-}
-
-// -------------------------
-// font-style
-// -------------------------
-
-.text-bold,
-.text-bold p {
-  font-weight: 700;
-}
-
-.text-italic {
-  font-style: italic;
-}
-
-.text-underline {
-  text-decoration: underline;
-}
-
-.text-line {
-  text-decoration: line-through;
-}
-
-.text-two-line {
-  text-decoration: underline line-through;
-}
-
-.text-left {
-  text-align: left !important;
-}
-
-.text-center {
-  text-align: center !important;
-}
-
-.text-right {
-  text-align: right !important;
-}
-
-.text-justify {
-  text-align: justify !important;
-}
-
-.text-top {
-  vertical-align: top;
-}
-
-.text-middle {
-  vertical-align: middle;
-}
-
-.text-bottom {
-  vertical-align: bottom;
-}
-
-.whitespace-normal {
-  white-space: normal;
-}
-
-.whitespace-nowrap {
-  white-space: nowrap;
-}
-
-.whitespace-pre {
-  white-space: pre;
-}
-
-.whitespace-pre-line {
-  white-space: pre-line;
-}
-
-.whitespace-pre-wrap {
-  white-space: pre-wrap;
-}
-
-.break-normal {
-  overflow-wrap: normal;
-  word-break: normal;
-}
-
-.break-all {
-  word-break: break-all;
-}
-
 .ellipsis-end {
   @include text-overflow;
 }
@@ -531,10 +403,6 @@ strong.required {
   max-height: 2rem;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-}
-
-.text-negative {
-  color: $negative;
 }
 
 // element 사이 구분선
@@ -563,22 +431,6 @@ strong.required {
   }
 }
 
-// -------------------------
-// icon fill
-// -------------------------
-
-.svg-icon.svg-icon--primary {
-  fill: $primary;
-}
-
-.svg-icon.svg-icon--secondary {
-  fill: $secondary;
-}
-
-.svg-icon.svg-icon--negative {
-  fill: $negative;
-}
-
 //----------------------------------------------
 // Text type 추가 2022-06-26
 // ---------------------------------------------
@@ -594,32 +446,41 @@ strong.required {
 }
 
 /* 블릿 텍스트 */
-.bullet {
+.bullet:not(ul), .bullet > li {
   position: relative;
   text-align: left;
+  line-height: rem(22px);
+
   & + & {
     margin-top: rem(6px);
   }
-  &:before {
+
+  &:before, 
+  & > li:before {
     position: absolute;
   }
+}
 
-  &--refer {
+.bullet--refer:not(ul), .bullet--refer > li {
     padding-left: rem(20px);
 
-    &:before {
+    &:before,
+    & > li:before {
       content: "※";
       top: 0;
       left: 0;
     }
   }
 
-  &--rect {
-    padding-left: rem(20px);
 
-    &:before {
+.bullet--rect:not(ul), .bullet--rect > li {
+
+    padding-left: rem(12px);
+
+    &:before,
+    & > li:before {
       content: "";
-      top: rem(5px);
+      top: rem(9px);
       left: 0;
       width: rem(3px);
       height: rem(3px);
@@ -627,18 +488,22 @@ strong.required {
     }
   }
 
-  &--hyphen {
-    padding-left: rem(10px);
+
+.bullet--hyphen:not(ul), .bullet--hyphen > li {
+  &, & > li {
+    padding-left: rem(15px);
 
     &:before {
       content: "-";
-      top: rem(2px);
-      left: 0;
+      top: 0;
+      left: 3px;
     }
   }
+}
 
-  &--ast {
-    padding-left: rem(10px);
+.bullet--ast:not(ul), .bullet--ast > li {
+  &, & > li {
+    padding-left: rem(12px);
 
     &:before {
       content: "*";
@@ -659,7 +524,6 @@ strong.required {
   position: relative;
   margin-bottom: -1px;
   padding-bottom: rem(12px);
-  border-bottom: 1px solid $gy-02;
 
   & ~ & {
     margin-top: rem(52px);
@@ -698,7 +562,7 @@ strong.required {
 .board-head {
   display: flex;
   flex-direction: column;
-  margin-bottom: $spacing-sm;
+  margin-bottom: rem(15px);
   width: 100%;
 }
 .board-head__group {
@@ -709,13 +573,14 @@ strong.required {
 
 .total-number {
   color: $text-01;
+  line-height: 1;
   @include font-size("16");
   @include font-weight("regular");
 
   & > strong {
     font-size: inherit;
-    font-weight: inherit;
-    color: $primary;
+    color: $primary-dark;
+    padding-left: rem(3px);
   }
 }
 
@@ -729,38 +594,82 @@ strong.required {
 }
 
 //----------------------------------------------
-// 게시판용 검색분리 추가 2022-06-28
+// 검색분리 추가 2022-06-28
 // ---------------------------------------------
-/* board-head__search */
+// @contents-top__search                        || 통합용검색영역
+// @board-head__search                          || 게시판용검색
+
+// @search-input-field__search                  || 검색영역 
+// @search-input-field                          || 검색필드 
+// @search-input-field__inner > form>fieldset   || 검색필드내부
+// @search-input-field__search                  || 검색 
+// @text-input-group                            || 인풋+버튼그룹
+// @text-input                                  || 인풋
+// @text-input-group__clear-button              || 초기화버튼
+// @text-input-group__search-button             || 검색버튼
+
+.contents-top__search {
+  position: relative;
+  width: rem(1200px);
+  margin: 0 auto;
+  padding: rem(20px) 0;
+  border-radius: rem(5px);
+  background-color: #f5f5f5;
+
+  .search-input-field__search {
+    width: rem(900px);
+
+    .text-input-group {
+
+      &:hover,
+      &:focus,
+      &:hover + .text-input-group__clear-button,
+      &:focus + .text-input-group__clear-button {
+        border-color: $gy-01;
+      }
+    }
+
+    .text-input-group__search-button {
+      width: rem(78px);
+      margin-left: 0;
+    }
+  }
+}
+
 .board-head__search {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: rem(10px) 0;
+  margin: rem(10px) 0 rem(20px);
   padding: rem(20px);
   border-radius: rem(5px);
   background-color: #f5f5f5;
 
-  > * {
+  .search-input-field__search {
     width: rem(680px);
-  }
-
-  .text-input-group .text-input {
-    height: rem(36px);
+    margin: 0 auto;
   }
 }
 
-//----------------------------------------------
-// data-box 추가 2022-06-29
-// ---------------------------------------------
+// -------------------------
+// data-box 데이터 요약 정보 공통 : data-box__visual + data-box__information + data-box__buttons
+// -------------------------
+// @data-box                    || 공통데이터박스
+// @data-box__visual            || 이미지영역(svg)
+// @data-box__information       || 데이터영역information
+// @data-box__top-content       || 데이터영역information > top
+// @data-box__content           || 데이터영역information > middle
+// @data-box__bottom-content    || 데이터영역information > bottom
+// @data-box__buttons           || 오른쪽에 버튼영역
+
 /* 데이터 요약 정보 */
 .data-box {
   display: flex;
   position: relative;
   align-items: center;
   width: 100%;
-  padding: rem(30px);
+  padding: rem(15px) 0;
   border-radius: 0;
 }
 
@@ -779,7 +688,10 @@ strong.required {
 }
 
 .data-box__information {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: rem(138px); 
+  padding: rem(5px) 0;   
 
   &:not(:only-child) {
     flex: 1 1 0%;
@@ -838,7 +750,7 @@ strong.required {
   display: flex;
   align-items: center;
   width: 100%;
-  margin-top: rem(15px);
+  margin-top: auto;
 }
 
 .data-box__details {
@@ -894,17 +806,20 @@ strong.required {
 
 .data-box__buttons {
   position: relative;
-  max-width: 110px;
+  display: flex;
+  flex-direction: column;
+  max-width: 110px;     
+  height: rem(138px); 
 
   button {
     display: block;
     width: 100%;
-    height: auto;
+    height: 38px;
     padding: rem(5px) $spacing-baseline;
   }
 
   button + button {
-    margin-top: $spacing-xs;
+    margin-top: rem(7px);
   }
 
   .button--primary-line {
@@ -914,7 +829,6 @@ strong.required {
 
 // 관심데이터 버튼
 .favorite-cnt {
-  flex: 1;
   display: flex;
   align-items: center;
   margin-top: $spacing-xs;
@@ -922,9 +836,14 @@ strong.required {
   border-radius: 5px;
 
   .favorite-cnt__button {
+    display: flex;
+    align-items: center;
     min-width: rem(107px);
-    padding: rem(6px) 0;
+    height: auto;
 
+    .button__text {      
+      @include font-size("13");
+    }
     &,
     &:hover,
     &:focus {
@@ -941,7 +860,7 @@ strong.required {
       stroke-miterlimit: 10;
 
       & + span {
-        margin: 0 rem(4px) 0 rem(-4px);
+        margin: 0 rem(4px) 0 0;
       }
     }
 
@@ -983,5 +902,181 @@ strong.required {
 
   .svg-icon {
     fill: #999;
+  }
+}
+
+// -------------------------
+// datepicker 2022-07-01
+// -------------------------
+
+.mx-datepicker {
+  width: rem(213px);
+}
+
+.mx-icon-calendar,
+.mx-icon-clear {
+  right: rem(10px);
+  width: rem(18px);
+  height: rem(18px);
+  color: $text-03;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: $basic;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.mx-icon-clear svg,
+.mx-icon-calendar svg {
+  display: none;
+}
+
+.mx-icon-clear {
+  background: url("#{$img-path}/icon/clear.svg") no-repeat center center;
+  width: rem(18px);
+  height: rem(18px);
+}
+
+.mx-icon-calendar {
+  background: url("#{$img-path}/icon/calendar.svg") no-repeat center center;
+  width: rem(18px);
+  height: rem(18px);
+}
+
+
+
+
+// -------------------------
+// 데이터명리스트 2022-07-01 
+// -------------------------
+.data-name-list {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+
+  li {
+      display: flex;  
+      align-items: center;
+      width: 100%;
+      p {
+        margin-left: rem(15px); 
+      }
+  }
+}
+
+
+
+// -------------------------
+// 텍스트색상값 2022-07-01 
+// -------------------------
+
+.file-download { 
+  color: $primary;
+  text-decoration: underline;
+}
+
+//search-filter-group.scss가 안먹음 이동 정리 2022-06-27
+//-------------------------------------------
+//  search-filter-group 필터 그룹 : search-filter + search-filter
+// ------------------------------------------
+// @search-filter-group--horizontal    || 수평 방향
+// @search-filter-group--vertical      || 수직 방향
+
+.search-filter-group {
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  // 수평 방향
+  &.search-filter-group--horizontal {
+    flex-direction: row;
+    .search-filter:first-child .search-filter__head,
+    .search-filter:first-child .search-filter__body {
+      border-left: none;
+    }
+    .search-filter {
+      flex: 1;
+      border-top: 1px solid $ui-01;
+      border-bottom: 1px solid #ccc;
+
+      .search-filter__head {
+        height: rem(50px);
+        padding: 0 rem(18px); 
+        border-left: 1px solid $ui-03;
+        border-bottom:1px solid #ccc;
+      }
+
+      .search-filter__body {
+        height: rem(230px);
+        padding: rem(12px) rem(18px);
+        overflow-y: auto;
+        border-left: 1px solid $ui-03;        
+        
+        //search-filter__body > ul > li : kt디자인 수정 2022-06-27 
+        .search-filter__item {
+          margin-top: rem(6px); 
+        
+          &:first-child {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+
+  }
+  
+  // 수직 방향
+  &.search-filter-group--vertical {
+    overflow: hidden;
+    flex-direction: column;
+    border: 1px solid #e1e1e1;
+    border-radius: rem(5px);  
+
+    .search-filter {
+      width: 100%;
+      border-bottom: none;
+    }    
+    
+    .search-filter__head {
+      height: rem(48px);
+      padding: 0 rem(23px); 
+    }
+
+    .search-filter__body {
+      padding: rem(17px) rem(23px);   
+
+      //search-filter__body > ul > li : kt디자인 수정 2022-06-27 
+      .search-filter__item {
+        margin-top: rem(12px); 
+      
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
+
+//search-filter > checkbox 디자인다름(변경가능성 높음) 2022-07-05 MOD
+.search-filter {
+  .checkbox__label {
+    padding-left: rem(24px);
+  }
+  .checkbox__label::before {
+    width: rem(12px);
+    height: rem(12px);
+    top: rem(4px);
+    border-color: $line2;
+  }
+  .checkbox__label::after {
+    display: none;
+  }
+  .checkbox__input:checked + .checkbox__label {
+    color: $basic;
   }
 }

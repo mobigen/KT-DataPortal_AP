@@ -10,3 +10,4 @@ export const Default = () => ({
   components: { GroupSearch },
   template: '<GroupSearch></GroupSearch>'
 });
+

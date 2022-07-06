@@ -4,6 +4,36 @@ $primary: #3bb4c0 !default;// active 포함
 $primary-dark: #28949f !default; 
 $secondary: #28949f !default;
 $negative: #ef594f !default;
+$positive: #5180e0 !default;
+$success: #2fa087 !default; 
+$danger: #ea212a !default;
+
+$dark: #333 !default;
+$white: #fff !default;
+$black: #000 !default;
+$light: #909090 !default;
+$red: $danger !default;
+$blue: $success !default;
+$green: $positive !default;
+$orange: #e5765c !default;
+
+$theme-colors: () !default;
+$theme-colors: map-merge(
+	(
+		"basic": $basic,
+		"primary": $primary,
+		"secondary": $secondary,
+		"negative": $negative,
+		"positive": $positive,
+		"success": $success,
+		"danger": $danger,
+		"white": $white,
+		"black": $black,
+		"light": $light,
+		"orange": $orange
+	),
+	$theme-colors
+);
 
 // 강조
 $point-01: #222222 !default;
@@ -33,10 +63,7 @@ $status-03: #cccccc !default;// 등록완료
 // common hover
 $hover-01: #f5f8fb !default;// 테이블오버시
 
-
-
-
-$text-01: #00010D !default;
+$text-01: #333 !default;
 $text-02: #5D5D62 !default;
 $text-03: #8D8F95 !default;
 $text-04: #ffffff !default;
@@ -58,14 +85,14 @@ $overlay-02: rgba($ui-02, 0.6) !default;
 $focus: $secondary !default;
 $default-focus: #367BFF !default;
 $hover-primary: #7492a1 !default;
-$hover-secondary: #4D8AFF !default;
+$hover-secondary: #3bb4c0 !default;
 $hover-negative: #ff7e75 !default;
 $hover-ui-accent: #E2E7F5 !default;
 $hover-field-border: #b2bdcb !default;
 $hover-row: #f0f3f6 !default;
 $odd-row: #fafafa !default;
-$active-primary: #0050b6 !default;
-$active-secondary: #3375F2 !default;
+$active-primary: #28949f !default;
+$active-secondary: #3bb4c0 !default;
 $active-negative: #e24d43 !default;
 $active-danger: #e24d43 !default;
 $active-ui-accent: #d9e8ff !default;

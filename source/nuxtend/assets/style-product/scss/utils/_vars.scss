@@ -11,6 +11,7 @@ $button-border-radius: 5px !default;
 $button-height-lg: 48px !default;
 $button-height-md: 36px !default;
 $button-height-sm: 32px !default;
+$button-height-xs: 20px !default;
 
 // fields
 $field-border-radius: 2px !default;
@@ -20,6 +21,7 @@ $min-form-label-width-fixed: 220px;
 $min-form-label-width: 18%;
 $max-form-label-width: 30%;
 $row-form-margin: $spacing-xs;
+$form-border-radius: 0 !default;
 
 // loader
 $transition-base: 160ms !default;
@@ -66,3 +68,141 @@ $gutters: $spacers !default;
 
 // layout
 $editor-layout-body__side-penal: 300px !default;
+
+// utilities
+$utilities: () !default;
+$utilities: map-merge(
+	(
+		"display": (
+			property: display,
+			class: display,
+			values: none inline inline-block block table table-row table-cell flex inline-flex grid
+		),
+		"flex": (
+			property: flex,
+			values: (
+				auto: 1 1 auto,
+				fill: 1,
+			)
+		),
+		"flex-direction": (
+			property: flex-direction,
+			class: flex,
+			values: row column row-reverse column-reverse
+		),
+		"flex-grow": (
+			property: flex-grow,
+			class: flex,
+			values: (
+				grow-0: 0,
+				grow-1: 1,
+			)
+		),
+		"flex-shrink": (
+			property: flex-shrink,
+			class: flex,
+			values: (
+				shrink-0: 0,
+				shrink-1: 1,
+			)
+		),
+		"flex-wrap": (
+			property: flex-wrap,
+			class: flex,
+			values: wrap nowrap wrap-reverse
+		),
+		"justify-content": (
+			property: justify-content,
+			values: (
+				start: flex-start,
+				end: flex-end,
+				center: center,
+				between: space-between,
+				around: space-around,
+			)
+		),
+		"justify-self": (
+			property: justify-self,
+			values: (
+				auto: auto,
+				start: flex-start,
+				end: flex-end,
+				center: center,
+				baseline: baseline,
+			)
+		),
+		"align-items": (
+			property: align-items,
+			values: (
+				start: flex-start,
+				end: flex-end,
+				center: center,
+				baseline: baseline,
+				stretch: stretch,
+			)
+		),
+		"align-content": (
+			property: align-content,
+			values: (
+				start: flex-start,
+				end: flex-end,
+				center: center,
+				between: space-between,
+				around: space-around,
+				stretch: stretch,
+			)
+		),
+		"align-self": (
+			property: align-self,
+			values: (
+				auto: auto,
+				start: flex-start,
+				end: flex-end,
+				center: center,
+				baseline: baseline,
+				stretch: stretch,
+			)
+		),
+		"float": (
+			property: float,
+			values: left right none
+		),
+		"overflow": (
+			property: overflow,
+			values: auto hidden,
+		),
+		"font-weight": (
+			property: font-weight,
+			class: font,
+			values: left right center justify
+		),
+		"text-align": (
+			property: text-align,
+			class: text,
+			values: left right center justify
+		),
+		"word-break": (
+			property: word-break,
+			class: word,
+			values: break-all keep-all break-word
+		),
+		"white-space": (
+			property: white-space,
+			values: normal nowrap pre pre-line pre-wrap
+		),
+		"text-decoration": (
+			property: text-decoration,
+			class: text,
+			values: (
+        underline: underline,
+        through: line-through,
+      )
+		),
+		"vertical-align": (
+			property: vertical-align,
+			class: vertical,
+			values: baseline top middle bottom
+		),
+	),
+	$utilities
+);

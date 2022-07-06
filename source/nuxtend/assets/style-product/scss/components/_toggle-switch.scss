@@ -9,13 +9,12 @@
 .toggle-switch__switch {
   @include button-normal;
   justify-content: flex-start;
-  width: rem(45px);
-  height: rem(22px);
-  padding: $spacing-3xs;
-  background-color: $text-05;
+  width: rem(50px);
+  height: rem(24px);
+  padding: rem(3px);
+  background-color: #ccc;
   border: none;
-  border-radius: 16px;
-  opacity: 0.5;
+  border-radius: 12px;
   transition-duration: $duration-fast-02;
   transition-timing-function: ease-in-out;
 
@@ -40,7 +39,7 @@
 }
 
 .toggle-switch__switch--selected {
-  background-color: $primary;
+  background-color: $primary-dark;
   opacity: 1;
 
   .toggle-switch__handle {

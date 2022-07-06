@@ -5,7 +5,7 @@
       <group-breadcrumb></group-breadcrumb>
     </div>
     <!-- contents-wrap -->
-    <div class="contents-wrap"> 
+    <div class="contents-wrap">
       <!-- lnb -->
       <group-lnb></group-lnb>
       <!-- //lnb -->
@@ -20,16 +20,16 @@
           <!-- // heading-group -->
           <div class="board-wrap">
             <!-- board-head -->
-            <div class="board-head">      
-              <div class="board-head__group">                                     
-                <p class="total-number">총<strong>1,000</strong>건</p>                                            
+            <div class="board-head">
+              <div class="board-head__group">
+                <p class="total-number">총<strong>1,000</strong>건</p>
                 <div class="board-head__options">
-                  <base-button class="button--md button--primary">
+                  <base-button class="button--primary">
                     <svg-icon class="svg-icon" name="check"></svg-icon>
                     <span class="button__text">일괄신청</span>
                   </base-button>
-                </div> 
-              </div>                                                                                    
+                </div>
+              </div>
             </div>
             <div class="board-body">
               <!-- table : 담아두기 -->
@@ -43,7 +43,7 @@
                   <col style="width: 90px" />
                   <col style="width: 100px" />
                   <col style="width: 100px" />
-                  <col style="width: 120px" />
+                  <col style="width: 130px" />
                 </colgroup>
                 <thead>
                   <tr>
@@ -64,18 +64,18 @@
                 <tbody>
                   <tr>
                     <td>
-                      <base-checkbox :name="name" :checkboxId="checkboxId1" :class="checkboxClass" title="행선택">
+                      <base-checkbox :name="name" :checkboxId="checkboxId1" :class="checkboxClass" title="행선택" checked>
                         <template v-slot:label>
                           <slot name="label1"><span class="hidden">선택</span></slot>
                         </template>
                       </base-checkbox>
                     </td>
-                    <td class="text-left">CU2(SGI)_고객서비스 사용 일일 내역</td>
+                    <td class="text-left"><a href="" class="ellipsis-end">CU2(SGI)_고객서비스 사용 일일 내역</a></td>
                     <td>모바일</td>
                     <td>2022-06-23</td>
                     <td>검토대상</td>
                     <td>
-                      <base-button class="button--sm" @click="onshowDialog('applyDialog')">
+                      <base-button class="button--sm" @click="onshowDialog('applyDialog')" title="새창열림">
                         <span class="button__text">활용신청하기</span>
                       </base-button>
                     </td>
@@ -88,12 +88,12 @@
                         </template>
                       </base-checkbox>
                     </td>
-                    <td class="text-left">CU2(SGI)_고객서비스 사용 일일 내역</td>
+                    <td class="text-left"><a href="" class="ellipsis-end">CU2(SGI)_고객서비스 사용 일일 내역</a></td>
                     <td>모바일</td>
                     <td>2022-06-23</td>
                     <td>검토대상</td>
                     <td>
-                      <base-button class="button--sm">
+                      <base-button class="button--sm" title="새창열림">
                         <span class="button__text">활용신청하기</span>
                       </base-button>
                     </td>
@@ -106,21 +106,21 @@
                         </template>
                       </base-checkbox>
                     </td>
-                    <td class="text-left">CU2(SGI)_고객서비스 사용 일일 내역</td>
+                    <td class="text-left"><a href="" class="ellipsis-end">CU2(SGI)_고객서비스 사용 일일 내역</a></td>
                     <td>모바일</td>
                     <td>2022-06-23</td>
                     <td>검토대상</td>
                     <td>
-                      <base-button class="button--sm">
+                      <base-button class="button--sm" title="새창열림">
                         <span class="button__text">활용신청하기</span>
                       </base-button>
                     </td>
                   </tr>
                 </tbody>
-              </table> 
+              </table>
               <!-- // table -->
             </div>
-            <group-pagination></group-pagination>                                                                                    
+            <group-pagination></group-pagination>
           </div>
           <!-- heading-group -->
           <div class="heading-group">
@@ -133,15 +133,15 @@
           </ul>
           <div class="board-wrap">
             <!-- board-head -->
-            <div class="board-head">    
+            <div class="board-head">
               <!-- board-head__search : 게시물검색용 -->
               <div class="board-head__search">
-                <search-input-field></search-input-field>
-              </div>   
-              <div class="board-head__group">                                    
-                <p class="total-number">총<strong>1,000</strong>건</p>                                            
+                <search-input-board></search-input-board>
+              </div>
+              <div class="board-head__group">
+                <p class="total-number">총<strong>1,000</strong>건</p>
                 <div class="board-head__options">
-                  <div class="options-sort"> 
+                  <div class="options-sort">
                     <span class="label">처리상태</span>
                       <!-- select -->
                       <base-select class="select w-107">
@@ -172,7 +172,7 @@
                     <span class="button__text">다시신청</span>
                   </base-button>
                 </div>
-              </div>                                                                                     
+              </div>
             </div>
             <div class="board-body">
               <!-- table : 신청내역 목록 -->
@@ -217,11 +217,11 @@
                         </template>
                       </base-checkbox>
                     </td>
-                    <td class="text-left">CU2(SGI)_고객서비스 사용 일일 내역</td>
+                    <td class="text-left"><a href="" class="ellipsis-end">CU2(SGI)_고객서비스 사용 일일 내역</a></td>
                     <td>모바일</td>
                     <td>2022-06-23</td>
                     <td>2022-06-23</td>
-                    <td>Y</td>
+                    <td><a href="" class="file-download" title="법률검토 첨부파일다운로드">Y</a></td>
                     <td>
                       <base-badge class="badge--primary-outline">
                         <span class="badge__label">처리중</span>
@@ -237,13 +237,13 @@
                         </template>
                       </base-checkbox>
                     </td>
-                    <td class="text-left">CU2(SGI)_고객서비스 사용 일일 내역</td>
+                    <td class="text-left"><a href="" class="ellipsis-end">CU2(SGI)_고객서비스 사용 일일 내역</a></td>
                     <td>모바일</td>
                     <td>2022-06-23</td>
                     <td>2022-06-23</td>
-                    <td>Y</td>
+                    <td><a href="" class="file-download" title="법률검토 첨부파일다운로드">Y</a></td>
                     <td>
-                      <base-badge class="badge--primary-outline">
+                      <base-badge class="badge--positive-outline">
                         <span class="badge__label">활용중</span>
                       </base-badge>
                     </td>
@@ -257,21 +257,38 @@
                         </template>
                       </base-checkbox>
                     </td>
-                    <td class="text-left">CU2(SGI)_고객서비스 사용 일일 내역</td>
+                    <td class="text-left"><a href="" class="ellipsis-end">CU2(SGI)_메타 서비스 도메인 통합 매핑 기본CU2(SGI)_메타 서비스 도메인 통합 매핑 기본</a></td>
                     <td>모바일</td>
                     <td>2022-06-23</td>
                     <td>2022-06-23</td>
-                    <td>Y</td>
+                    <td></td>
                     <td>
-                      <base-badge class="badge--disabled-outline">
-                        <span class="badge__label">만료</span>
+                      <base-badge class="badge--negative-outline">
+                        <span class="badge__label">만료예정</span>
                       </base-badge>
+                    </td>
+                    <td>1회</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <base-checkbox :name="name" :checkboxId="checkboxId1" :class="checkboxClass" title="행선택">
+                        <template v-slot:label>
+                          <slot name="label1"><span class="hidden">선택</span></slot>
+                        </template>
+                      </base-checkbox>
+                    </td>
+                    <td class="text-left"><a href="" class="ellipsis-end">CU2(SGI)_고객서비스 사용 일일 내역</a></td>
+                    <td>모바일</td>
+                    <td>2022-06-23</td>
+                    <td>2022-06-23</td>
+                    <td><a href="" class="file-download" title="법률검토 첨부파일다운로드">Y</a></td>
+                    <td>만료
                     </td>
                     <td>1회</td>
                   </tr>
                 </tbody>
               </table>
-              <!-- // table -->                                                                                    
+              <!-- // table -->
             </div>
             <group-pagination></group-pagination>
           </div>
@@ -281,7 +298,15 @@
     <!-- // contents-wrap -->
 
     <!-- 데이터 활용 신청하기 Dialog -->
-    <Dialog dialog-name="applyDialog" :width="'970px'" :height="'700px'" :title="'데이터 활용 신청하기'">
+    <Dialog
+    dialog-name="applyDialog"
+    :width="'970px'"
+    :height="'auto'"
+    :cancelButtonText="'취소'"
+    :confirmButtonText="'신청'"
+    :title="'데이터 활용 신청하기'"
+    :confirmButtonDisabled="confirmButtonDisabled"
+    >
       <div slot="body" class="modal__body">
           <!-- formbox -->
           <table class="formbox">
@@ -297,8 +322,8 @@
                 <th scope="row">데이터명</th>
                 <td>
                   <ul class="data-name-list">
-                    <li>CU2(SGI)_고객 서비스 사용 일일 내역 <p class="txt-info"><strong class="required">필수</strong>법률검토 필요</p></li>
-                    <li>CU2(SGI)_검색 키워드 통계 내역 <p class="txt-info"><strong class="required">필수</strong>법률검토 필요</p></li>
+                    <li>CU2(SGI)_고객 서비스 사용 일일 내역 <p class="txt-info color--danger"><strong class="required">필수</strong>법률검토 필요</p></li>
+                    <li>CU2(SGI)_검색 키워드 통계 내역 <p class="txt-info color--danger"><strong class="required">필수</strong>법률검토 필요</p></li>
                   </ul>
                 </td>
               </tr>
@@ -320,17 +345,15 @@
               <tr>
                 <th scope="row">법률검토<strong class="required">필수</strong></th>
                 <td>
-                  <div class="v-group">   
+                  <div class="v-group">
                     <BaseTextarea
                       rows="6"
                       element-class="text-area--fixed scrollCustomize"
-                      placeholder="법률검토 대상 데이터입니다. 
+                      placeholder="법률검토 대상 데이터입니다.
 법률검토 내용을 입력하거나 파일로첨부하세요. "
                       :useCheckByte="false"
                     ></BaseTextarea>
-                    <GroupFileAttach>
-                      
-                    </GroupFileAttach>
+                    <GroupFileAttach></GroupFileAttach>
                   </div>
                 </td>
               </tr>
@@ -366,7 +389,7 @@ import GroupBreadcrumb from "@component/common/molecules/group-breadcrumb/group-
 import Subject from "@component/common/organisms/subject/subject.vue";
 import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
 import GroupFileAttach from "@component/common/molecules/group-file-attach/group-file-attach";
-import SearchInputField from "@component/common/organisms/search-input-field/search-input-field.vue";
+import SearchInputBoard from "@component/common/organisms/search-input-board/search-input-board.vue";
 import SearchList from "@component/common/organisms/search-list/search-list.vue";
 import GroupLnb from "@component/common/molecules/group-lnb/group-lnb.vue";
 import Dialog from "@functional/dialog/dialog.vue";
@@ -378,7 +401,7 @@ export default {
   layout: "kt/kt",
   async asyncData({ store }) {
     await store.dispatch("kt/keyword-search/getContents");
-  }, 
+  },
   computed: {
     ...mapGetters({
       contents: "kt/keyword-search/contents"
@@ -391,7 +414,7 @@ export default {
       checkboxId1:""
     };
   },
-  methods: {    
+  methods: {
     togglePreview: function () {
       this.isPreview = !this.isPreview;
     },
@@ -420,9 +443,9 @@ export default {
     Dialog,
     BaseTextarea,
     GroupFileAttach,
-    SearchInputField,
     GroupLnb,
-    DatePicker
+    DatePicker,
+    SearchInputBoard
   }
 };
 </script>

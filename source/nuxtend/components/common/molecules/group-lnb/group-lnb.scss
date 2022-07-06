@@ -1,33 +1,45 @@
+//----------------------------------------------
+// lnb
+// ---------------------------------------------
+// @lnb                              || 공통LNB
+// @lnb__title                       || 타이틀
+// @lnb__list                        || 메뉴 ul
+// @lnb__item                        || 메뉴 ul li
+// @lnb__link                        || 메뉴링크 ul li a
+// @lnb__item.lnb__item--selected    || 선택된 메뉴
+
 .lnb {
-  width: rem(220px); 
+  width: rem(220px);
   margin-right: rem(40px);
 }
 
 .lnb__title {
   @include font-size("24");
   @include font-weight("medium");
-  padding-bottom: $spacing-md;
+  padding-bottom: rem(24px);
   border-bottom: 2px solid #333;
-
+  line-height: 1;
+  color: #333;
 }
 
 .lnb__list {
   padding: rem(20px) 0;
 }
 
-.lnb__item {
-
+.lnb__item + .lnb__item {
+ margin-top: rem(1px);
 }
 
 .lnb__link {
   display: block;
   @include font-size("16");
-  padding: $spacing-md;
+  padding: rem(12px) rem(16px);
   color: $text-01;
 }
 
+.lnb__link:hover,
 .lnb__item--selected .lnb__link {
-  background-color: $secondary;
+  background-color: $primary;
   color: $text-04;
   border-radius: rem(5px);
 }

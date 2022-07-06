@@ -118,8 +118,11 @@ th .button {
 
     .badge {
       display: inline-flex;
-      min-width: 60px;
-      padding: 0 $spacing-sm;
+      min-width: 65px;
+      height: rem(26px);
+      padding: 0 rem(5px);
+      border-radius: rem(3px);  
+      @include font-weight("regular");
       text-align: center;
     }
   }

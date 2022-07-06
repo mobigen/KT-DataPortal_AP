@@ -17,7 +17,7 @@
                     3. 기타 : icon_summary_etc.png
                 -->
                 <img
-                  src="~@/assets/style-product/images/common/icon_summary_etc.png"
+                  src="~@/assets/style-product/images/temp/@temp-thumb-databox.jpg"
                   alt="기타"
                 />
               </div>
@@ -202,7 +202,7 @@
           </div>
           <!--//탭 -->
           <!-- 데이터 품질지표 -->
-          <article id="aticleChart" class="contents__detail">
+          <article id="articleChart" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">데이터 품질지표</h3>
             </div>
@@ -258,7 +258,7 @@
           </article>
           <!-- // 데이터 품질지표 -->
           <!-- 샘플 데이터 -->
-          <article id="aticleSample" class="contents__detail">
+          <article id="articleSample" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">샘플 데이터</h3>
               <div class="heading-group__options">
@@ -468,14 +468,20 @@
                       >
                     </p>
                     <base-button
-                      class="filedata__button-preview"
+                      class="button--sm filedata__button-preview"
                       :class="isPreview ? 'filedata__button-close' : ''"
                       @click="togglePreview"
                     >
-                      <span class="button__text">미리보기</span>
+                      <span class="button__text">{{ toggleButtonText }}</span>
                     </base-button>
-                    <base-button class="filedata__button-download">
-                      <svg-icon class="svg-icon" name="download"></svg-icon>
+                    <base-button
+                      class="button--sm filedata__button-download"
+                      title="파일다운로드"
+                    >
+                      <svg-icon
+                        class="svg-icon"
+                        name="download-light"
+                      ></svg-icon>
                       <span class="button__text">다운로드</span>
                     </base-button>
                   </div>
@@ -622,8 +628,11 @@
                         >고객 서비스 사용 일일 내역</span
                       >
                     </p>
-                    <base-button class="filedata__button-download">
-                      <svg-icon class="svg-icon" name="download"></svg-icon>
+                    <base-button class="button--sm filedata__button-download">
+                      <svg-icon
+                        class="svg-icon"
+                        name="download-light"
+                      ></svg-icon>
                       <span class="button__text">다운로드</span>
                     </base-button>
                   </div>
@@ -635,8 +644,11 @@
                         >고객 서비스 사용 일일 내역</span
                       >
                     </p>
-                    <base-button class="filedata__button-download">
-                      <svg-icon class="svg-icon" name="download"></svg-icon>
+                    <base-button class="button--sm filedata__button-download">
+                      <svg-icon
+                        class="svg-icon"
+                        name="download-light"
+                      ></svg-icon>
                       <span class="button__text">다운로드</span>
                     </base-button>
                   </div>
@@ -648,8 +660,11 @@
                         >고객 서비스 사용 일일 내역</span
                       >
                     </p>
-                    <base-button class="filedata__button-download">
-                      <svg-icon class="svg-icon" name="download"></svg-icon>
+                    <base-button class="button--sm filedata__button-download">
+                      <svg-icon
+                        class="svg-icon"
+                        name="download-light"
+                      ></svg-icon>
                       <span class="button__text">다운로드</span>
                     </base-button>
                   </div>
@@ -661,8 +676,11 @@
                         >고객 서비스 사용 일일 내역</span
                       >
                     </p>
-                    <base-button class="filedata__button-download">
-                      <svg-icon class="svg-icon" name="download"></svg-icon>
+                    <base-button class="button--sm filedata__button-download">
+                      <svg-icon
+                        class="svg-icon"
+                        name="download-light"
+                      ></svg-icon>
                       <span class="button__text">다운로드</span>
                     </base-button>
                   </div>
@@ -672,7 +690,7 @@
           </article>
           <!-- // 파일데이터 -->
           <!-- 데이터 연관관계 -->
-          <article id="aticleDiagram" class="contents__detail">
+          <article id="articleDiagram" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">데이터 연관관계</h3>
             </div>
@@ -700,7 +718,7 @@
                     KT 고객 대상 폐쇄형 커머스몰 개인화 추천 문자 마케팅
                   </p>
                   <p class="used__date">수정일 <b>2022-06-27</b></p>
-                  <base-button>
+                  <base-button class="button--sm">
                     <svg-icon class="svg-icon" name="external-link"></svg-icon>
                     <span class="button__text">바로가기</span>
                   </base-button>
@@ -714,7 +732,7 @@
                     KT 고객 대상 문자형 타겟 광고 마케팅
                   </p>
                   <p class="used__date">수정일 <b>2022-06-27</b></p>
-                  <base-button>
+                  <base-button class="button--sm">
                     <svg-icon class="svg-icon" name="external-link"></svg-icon>
                     <span class="button__text">바로가기</span>
                   </base-button>
@@ -728,7 +746,7 @@
                     알뜰폰 요금제 이탈 예상고객 대상 선제적 이탈 방어 활동
                   </p>
                   <p class="used__date">수정일 <b>2022-06-27</b></p>
-                  <base-button>
+                  <base-button class="button--sm">
                     <svg-icon class="svg-icon" name="external-link"></svg-icon>
                     <span class="button__text">바로가기</span>
                   </base-button>
@@ -742,7 +760,7 @@
                     통신 이용 이력정보를 기반으로 생성하는 개인 금융 신용점수
                   </p>
                   <p class="used__date">수정일 <b>2022-06-27</b></p>
-                  <base-button>
+                  <base-button class="button--sm">
                     <svg-icon class="svg-icon" name="external-link"></svg-icon>
                     <span class="button__text">바로가기</span>
                   </base-button>
@@ -756,7 +774,7 @@
                     기가지니 셋탑을 통해 수행되는 개인화 마케팅 추천 엔진
                   </p>
                   <p class="used__date">수정일 <b>2022-06-27</b></p>
-                  <base-button>
+                  <base-button class="button--sm">
                     <svg-icon class="svg-icon" name="external-link"></svg-icon>
                     <span class="button__text">바로가기</span>
                   </base-button>
@@ -766,7 +784,7 @@
           </article>
           <!-- // 활용사례 -->
           <!-- 법률검토 및 규정안내 -->
-          <article id="aticleRule" class="contents__detail">
+          <article id="articleRule" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">법률검토 및 규정안내</h3>
             </div>
@@ -794,7 +812,7 @@
           </article>
           <!-- // 법률검토 및 규정안내 -->
           <!-- 데이터 문의 -->
-          <article id="aticleInquiry" class="contents__detail">
+          <article id="articleInquiry" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">데이터 문의</h3>
               <div class="heading-group__options">
@@ -834,7 +852,7 @@
                       >
                       <svg-icon
                         class="svg-icon"
-                        name="lock"
+                        name="lock-locked"
                         title="비밀글"
                       ></svg-icon>
                     </td>
@@ -985,6 +1003,14 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Index",
+  // async asyncData({ store, route }) {
+  //   let rowId = route.query.postId;
+  //   // TODO : asyncData 배포후에 동작 하는거 확인되면 아래 코드 사용
+  //   rowId = "01bfea44-5b42-41e7-9901-8fad6997969c";
+  //   await store.dispatch("meta/keyword-search/getDetail", rowId);
+  //   const detail = store.getters["meta/keyword-search/detail"];
+  //   return { detail };
+  // },
   computed: {
     ...mapGetters({
       contents: "kt/keyword-search/contents"
