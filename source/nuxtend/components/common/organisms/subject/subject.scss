@@ -1,3 +1,15 @@
+// -------------------------
+// subject 공통
+// -------------------------
+// @subject            || 타이틀박스전체
+// @subject__wrap      || 타이틀영역
+// @subject__title     || 페이지 타이틀
+// @subject__desc      || 페이지 설명글
+// @subject__list      || 페이지 부수적인설명글 UL
+// @subject__list-item || 페이지 부수적인설명글 UL li
+// @subject__menu-img-box || 타이틀 왼쪽 이미지 선택형 영역(svg)
+// @subject__sub-group || 페이지 오른쪽 선택형 영역
+
 .subject {
 
 }
@@ -6,7 +18,7 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  padding: 0 0 rem(40px);
+  padding: 0 0 rem(33px);
 }
 
 .subject__title-wrap {
@@ -23,7 +35,7 @@
   font-size: 32px;
   font-weight: 500;
   line-height: 1;
-  margin-bottom: $spacing-md;
+  margin-bottom: rem(15px);
 }
 
 .subject__desc {
@@ -35,6 +47,9 @@
 }
 
 .subject__menu-img-box {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
   margin: rem(-5px) $spacing-xl 0 $spacing-md;
 }
 
@@ -42,12 +57,6 @@
   width: 100%;
   height: 100%;
   fill: $primary;
-}
-
-.subject__menu-img-box {
-  display: inline-block;
-  width: 100px;
-  height: 100px;
 }
 
 .subject__menu {
@@ -76,42 +85,4 @@
   position: absolute;
   top: $spacing-3xs;
   left: 0;
-}
-
-@include template-respond-to('breakpoint-lg') {
-
-  .subject .subject__wrap {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0;
-    padding: rem(22px) rem(20px) $spacing-md rem(20px);
-  }
-
-  .subject__menu-img-box {
-    display: none;
-  }
-
-  .subject__title-wrap {
-    width: 100%;
-  }
-
-  .subject__sub-group {
-    position: relative;
-    margin-top: $spacing-md;
-    bottom: unset;
-    right: unset;
-    height: unset;
-    align-items: flex-end;
-  }
-
-  .subject__sub-group>button:only-child {
-    position: relative;
-    top: unset;
-    min-width: rem(200px);
-  }
-
-  .subject__list-item {
-    justify-content: center;
-  }
 }

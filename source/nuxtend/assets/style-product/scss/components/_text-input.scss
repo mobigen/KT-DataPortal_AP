@@ -9,10 +9,11 @@
   position: relative;
   background-color: $ui-02;
   width: 100%;
-  height: rem(32px);
-  padding: 0 $spacing-sm;
+  height: $button-height-md;
+  padding: 0 $spacing-md;
   color: $text-01;
-  border: 1px solid $ui-04;
+  border: 1px solid $line2;
+  border-radius: $form-border-radius;
   transition: all $duration-fast-01 motion(standard, productive);
   outline: none;
 
@@ -21,13 +22,9 @@
     display: none;
   }
 
-  &:hover {
-    border-color: darken($ui-04, 15%);
-  }
-
-  &:active,
+  &:hover,
   &:focus {
-    border-color: $secondary;
+    border-color: $primary;
     box-shadow: none;
   }
 
@@ -61,23 +58,23 @@
 
   &::placeholder {
     @include font-weight("light");
-    color: $text-05;
+    color: #aaa;
   }
 }
 
 @mixin text-input--lg {
   @include font-size("16");
-  height: rem(48px);
+  height: $button-height-lg;
 }
 
 @mixin text-input--md {
-  height: rem(36px);
+  height: $button-height-md;
 }
 
 @mixin text-input--sm {
   @include font-size("13");
-  padding: 0 $spacing-xs;
-  height: rem(32px);
+  height: $button-height-sm;
+  padding: 0 $spacing-sm;
 }
 
 // -------------------------
@@ -106,16 +103,29 @@
 // TODO: IMA 반영시 주의해야할 점
 // 1. .text-input-group__input -> .text-input 으로 변경
 .text-input-group {
+  display: flex;
+  align-items: stretch;
   position: relative;
 
   .text-input {
     // 뒤에 button이 있는 경우
     &:not(&:last-child) {
-      padding-right: $spacing-lg;
+      flex: 1 1 0%;
+      min-width: 0;
+      border-right: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
     }
 
     &:nth-last-child(3):not(div) {
       padding-right: ($spacing-xl * 2) - $spacing-3xs !important;
+    }
+
+    &:hover,
+    &:focus,
+    &:hover + .text-input-group__clear-button,
+    &:focus + .text-input-group__clear-button {
+      border-color: $primary;
     }
   }
 }
@@ -130,8 +140,8 @@
   top: 50%;
   transform: translateY(-50%);
   left: $spacing-xs;
-  width: rem(20px);
-  height: rem(20px);
+  width: rem(18px);
+  height: rem(18px);
   border: none;
   padding: 0;
   z-index: z("float");
@@ -143,72 +153,62 @@
   }
 
   & ~ .text-input {
-    $icon-spacing: 8px + 20px + 4px;
+    $icon-spacing: 8px + 18px + 4px;
     padding-left: $icon-spacing;
   }
 }
 
 .text-input-group__clear-button {
   @include button-normal;
-  @include position-right-center(15px);
-  margin-right: rem(15px); 
-  width: rem(18px);
-  height: rem(18px);
+  width: rem(36px);
+  height: auto;
   padding: 0;
-  border: 0;
-  background-color: transparent;
+  border: 1px solid $line2;
+  border-left: 0;
+  border-radius: 0;
+  border-top-right-radius: $form-border-radius;
+  border-bottom-right-radius: $form-border-radius;
+  background-color: $ui-02;
   z-index: z("float");
   cursor: pointer;
 
-  .svg-icon {
-    width: rem(18px);
-    height: rem(18px);
-    fill: lighten($icon-01, 18%);
+  &:last-child {
+    margin-right: $spacing-sm;
   }
 
   &:hover,
+  &:focus,
   &:focus-visible:not(:disabled) {
-    .svg-icon {
-      fill: $icon-01;
-    }
+    border-color: $line2;
+    background-color: $ui-02;
   }
-
-  // 뒤에 search-button 있는 경우 2022-06-29 DEL
-  /* &:not(&:last-child) {
-    right: $spacing-sm;
-  } */
 }
-  //검색버튼 positoin 2022-06-29 DEL
+
 .text-input-group__search-button {
+  min-width: rem(70px);
+  height: auto;
+  margin-left: $spacing-xs;
+  border-radius: $form-border-radius;
+  color: #fff;
+  border-color: $gy-01;
+  background-color: $gy-01;
+
+  &:hover,
+  &:focus {
+    border-color: lighten($gy-01, 14%);
+    background-color: lighten($gy-01, 14%);
+  }
 
   .svg-icon {
     width: rem(22px);
     height: rem(22px);
+    fill: currentColor;
   }
 }
 
 .text-input-group__button {
-  
-  @include button-normal;
-  @include position-right-center(8px);
-  width: rem(20px);
-  height: rem(20px);
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background-color: transparent;
-  z-index: z("float");
-  cursor: pointer;
-
-  .svg-icon {
-    fill: lighten($icon-01, 18%);
-  }
-
-  &:hover {
-    .svg-icon {
-      fill: $icon-01;
-    }
-  }
+  height: auto;
+  margin-left: $spacing-xs;
 }
 
 .text-input-group--lg {
@@ -229,19 +229,8 @@
     }
   }
   .text-input-group__clear-button {
-    width: rem(20px);
-    height: rem(20px);
-
-    // 뒤에 search-button 있는 경우
-    &:not(&:last-child) {
-      right: rem(100px);
-    }
-    .svg-icon {
-      width: rem(20px);
-      height: rem(20px);
-    }
+    width: $button-height-lg;
   }
-
 }
 
 .text-input-group--sm {
@@ -264,27 +253,8 @@
     }
   }
 
-  .text-input-group__clear-button,
-  .text-input-group__button {
-    right: rem(4px);
-    width: rem(14px);
-    height: rem(14px);
-  }
-
   .text-input-group__clear-button {
-    // 뒤에 search-button 있는 경우
-    &:not(&:last-child) {
-      right: $spacing-xl;
-    }
-
-    .svg-icon {
-      width: rem(14px);
-      height: rem(14px);
-    }
-  }
-
-  .text-input-group__search-button {
-    height: rem(22px);
+    width: $button-height-sm;
   }
 }
 

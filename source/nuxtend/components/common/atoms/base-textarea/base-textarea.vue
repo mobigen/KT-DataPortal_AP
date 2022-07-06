@@ -1,11 +1,11 @@
 <template lang="html">
-  <div>
+  <div class="textarea">
     <textarea
       type="text"
       class="text-area"
+
       :class="elementClass"
       @input="input = $event.target.value"
-      :placeholder="placeholder"
       :value="value"
       :rows="rows"
       @keydown="$emit('keydown', $event)"

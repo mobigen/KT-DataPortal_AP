@@ -18,9 +18,10 @@
           </span>
         </div>
         <div class="modal__head-close-button">
-          <button class="button button--link button--sm" @click="onClose">
-            <svg-icon name="close" class="svg-icon"></svg-icon>
-          </button>
+          <base-button class="button--lg button--icon button--link" @click="onClose">
+            <svg-icon name="close-large" class="svg-icon"></svg-icon>
+            <span class="hidden">팝업창닫기</span>
+          </base-button>
         </div>
       </div>
 
@@ -29,16 +30,14 @@
       <slot name="foot">
         <div class="modal__foot">
           <div class="modal__foot-main-buttons">
-            <button class="button button--link button--lg" @click="onClose">
+            <base-button class="button--lg" @click="onClose">
               <span class="button__text"> {{ cancelButtonText }} </span>
-            </button>
-            <button
-              class="button button--primary button--lg"
+            </base-button>
+            <base-button class="button--lg button--primary"
               :disabled="confirmButtonDisabled"
-              @click="onConfirm"
-            >
+              @click="onConfirm">
               <span class="button__text"> {{ confirmButtonText }} </span>
-            </button>
+            </base-button>
           </div>
         </div>
       </slot>
@@ -49,8 +48,13 @@
 <i18n src="./dialog.json"></i18n>
 
 <script type="text/javascript">
+import BaseButton from "@common/atoms/base-button/base-button";
+
 export default {
   name: "Dialog",
+  components: {
+    BaseButton
+  },
   props: {
     title: {
       type: String

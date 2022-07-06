@@ -1,14 +1,26 @@
+// -------------------------
+// data-box-list 검색된 리스트 공통
+// -------------------------
+// @data-box-list            || 검색된 리스트 UL
+// @data-box-list li      || 검색된 리스트 UL li
+// @data-box     || 공통데이터박스
+// @data-box__title      || 검색 설명글 strong
+// @data-box__description      || 검색 부수적인설명글 p
+
 .data-box-list {
   width: 100%;
-  padding: $spacing-lg 0;
+  border-top: 1px solid #333;
 
   & > li {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  & > li:last-child {
+    border-color: #ccc;
   }
 }
 
 .data-box {
-  padding: rem(20px) 0;
+
 }
 
 .data-box__title {

@@ -1,6 +1,12 @@
 // -------------------------
 // Pagenation
 // -------------------------
+// @pagination__button              || 버튼4개
+// @pagination__list                || 페이지링크 ul
+// @pagination__item                || 페이지링크 ul li
+// @pagination__link                || 페이지링크 ul li a
+// @pagination__link--selected      || 페이지링크 ul li a 현재페이지
+
 .pagination {
   display: flex;
   flex-direction: row;
@@ -31,7 +37,7 @@
   }
 
   .svg-icon {
-    height: rem(12px);
+    height: rem(18px);
   }
 }
 
@@ -39,14 +45,14 @@
   width: $button-height-md;
 
   &:hover:not(:disabled) {
-    color: $primary;
-    text-decoration: underline;
+    color: $ui-02;
+    text-decoration: none;
   }
 
   &:focus,
   &:focus:hover {
-    color: $primary;
-    text-decoration: underline;
+    color: $ui-02;
+    text-decoration: none;
 
     .svg-icon {
       fill: $primary;

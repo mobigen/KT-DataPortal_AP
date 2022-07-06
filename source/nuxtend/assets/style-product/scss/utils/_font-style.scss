@@ -169,7 +169,7 @@ $font-size-map: (
 
 @mixin heading-05 {
   @include font-size("20");
-  @include font-weight("bold");
+  @include font-weight("medium");
   line-height: 1.44;
 }
 

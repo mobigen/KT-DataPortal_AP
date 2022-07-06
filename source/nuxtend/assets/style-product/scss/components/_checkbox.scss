@@ -213,12 +213,12 @@
 }
 
 .checkbox__label {
-  @include line-height("heading");
+  line-height: rem(24px);
   @include font-weight("regular");
   display: inline-flex;
   align-items: center;
   position: relative;
-  padding-left: $spacing-lg;
+  padding-left: rem(30px);
   min-height: rem(24px);
   color: #666;
   white-space: nowrap;
@@ -226,27 +226,36 @@
   cursor: pointer;
 }
 
-/* .checkbox__label::before {
+.checkbox__label::before,
+.checkbox__label::after {
+  box-sizing: border-box;
+  transition: all $duration-fast-01 motion(entrance, productive);
+}
+
+.checkbox__label::before {
   content: "";
-  width: rem(12px);
-  height: rem(12px);
+  width: rem(18px);
+  height: rem(18px);
   margin: $spacing-3xs;
   position: absolute;
   left: 0;
-  top: rem(2px);
-  background-color: $ui-01;
-  border: 1px solid $ui-02;
-} */
+  top: rem(1px);
+  background-color: $ui-02;
+  border: 1px solid $basic;
+}
 
 .checkbox__label::after {
   content: "";
   position: absolute;
   left: rem(6px);
-  top: rem(4px);
+  top: rem(1px);
   width: rem(12px);
-  height: rem(12px);
-  background-color: #fff;
-  border: 1px solid #ccc;
+  height: rem(7px);
+  background: $primary;
+  border-left: 2px solid $text-04;
+  border-bottom: 2px solid $text-04;
+  transform: scale(0) rotate(-45deg);
+  transform-origin: bottom right;
 }
 
 // -------------------------
@@ -270,13 +279,13 @@
 }
 
 .checkbox__input:checked + .checkbox__label::before {
-
+  background-color: $primary;
+  border-color: $primary;
 }
 
 .checkbox__input:checked + .checkbox__label::after {
-  background-color: $primary;
-  border-color: $primary;
- 
+  transform: scale(1) rotate(-45deg);
+
 }
 
 // 부분 선택 상태
@@ -405,7 +414,6 @@
 // -------------------------
 // aside checkbox 스타일
 // -------------------------
-
 
 
 // -------------------------

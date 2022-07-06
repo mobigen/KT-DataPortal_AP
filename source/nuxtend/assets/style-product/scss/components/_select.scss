@@ -12,11 +12,11 @@
   .select-selector__button,
   .select-selector__input {
     border-color: $secondary;
-    
+
     &:hover:not(:disabled) {
       border-color: $secondary;
     }
-    
+
     &:focus-visible:not(:disabled) {
       border: 2px solid $default-focus;
       box-shadow: none;
@@ -201,7 +201,8 @@
   height: 100%;
   padding: $spacing-2xs $spacing-xl $spacing-2xs $spacing-sm;
   background-color: $ui-02;
-  border: 1px solid $ui-04;
+  border: 1px solid $line2;
+  border-radius: $form-border-radius;
   /*
   &:active {
     border-color: $secondary !important;
@@ -213,9 +214,9 @@
   }
   */
   &:hover {
-    border-color: darken($ui-04, 15%);
+    border-color: $primary;
   }
-  
+
   &:focus-visible:not(:disabled) {
     border: 1px solid $default-focus;
     box-shadow: none;
@@ -307,7 +308,8 @@
   max-height: inherit;
   padding: $spacing-2xs 0;
   background-color: $ui-02;
-  border: 1px solid $ui-04;
+  border: 1px solid $line2;
+  border-radius: $form-border-radius;
   overflow: auto;
 }
 
@@ -321,10 +323,14 @@
   position: relative;
   padding: $spacing-2xs $spacing-sm;
   height: rem(30px);
-  @include font-size("12");
 
   &:focus-visible:not(:disabled) {
     background-color: $ui-05;
+  }
+
+  .select-container__text {
+    @include font-size("14");
+    color: $basic;
   }
 }
 
@@ -407,6 +413,7 @@
 
     .select-container__text {
       @include font-size("12");
+      color: $basic;
     }
   }
 }
@@ -522,7 +529,7 @@
   .color-picker__color {
     width: rem(24px);
     height: 100%;
-    border: 1px solid $ui-04;
+    border: 1px solid $line2;
   }
 }
 

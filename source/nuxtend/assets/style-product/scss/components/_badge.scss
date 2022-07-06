@@ -58,7 +58,7 @@
   cursor: default;
 
   &--rounded {
-    border-radius: rem(12px);
+    border-radius: rem(12px) !important;
   }
 
   &.badge--icon {
@@ -77,14 +77,17 @@
   background-color: transparent;
 }
 
+// -------------------------
+// badge size
 // 추후 디자인 결정되면 변경 예정
+// -------------------------
 .badge--lg {
   @include font-size("14");
   height: rem(32px);
   padding: 0 $spacing-xs;
 
   &--rounded {
-    border-radius: rem(16px);
+    border-radius: rem(16px) !important;
   }
 
   &.badge--icon {
@@ -98,12 +101,11 @@
   }
 }
 
-// 추후 디자인 결정되면 변경 예정
 .badge--sm {
   height: rem(18px);
 
   &--rounded {
-    border-radius: rem(9px);
+    border-radius: rem(9px) !important;
   }
 
   &.badge--icon {
@@ -150,6 +152,18 @@
   @include badge-theme($negative, $text-04, $text-04);
 }
 
+.badge--positive {
+  @include badge-theme($positive, $text-04, $text-04);
+}
+
+.badge--success {
+  @include badge-theme($success, $text-04, $text-04);
+}
+
+.badge--dark {
+  @include badge-theme($dark, $text-04, $text-04);
+}
+
 .badge--disabled {
   @include badge-theme($ui-05, $text-04, $text-04, $line2);
 }
@@ -175,21 +189,34 @@
 }
 
 .badge--primary-outline {
-  @include badge-theme-outline($primary, $primary-dark, $primary);
+  @include badge-theme-outline($primary, darken($primary, 10%), $primary);
 }
 
 .badge--secondary-outline {
-  @include badge-theme-outline($secondary, $secondary);
+  @include badge-theme-outline($secondary, $secondary, $secondary);
 }
 
 .badge--negative-outline {
-  @include badge-theme-outline(#f26c4f, #f26c4f);
+  @include badge-theme-outline(#f45555, #f45555, #f45555);
+}
+
+.badge--positive-outline {
+  @include badge-theme-outline($positive, $positive, $positive);
+}
+
+.badge--success-outline {
+  @include badge-theme-outline($success, $success, $success);
+}
+
+.badge--dark-outline {
+  @include badge-theme-outline($basic, $dark, $dark);
 }
 
 .badge--disabled-outline {
-  @include badge-theme-outline($line2, $line2);
+  @include badge-theme-outline($light, $light, $line2);
 }
 
+// 한자연 소스 : KT 및 공통요소 불필요 소스(추후 삭세 요함)
 .badge--w-gray {
   @include badge-theme($ui-02, $text-02, $text-02);
   border-radius: rem(12px);

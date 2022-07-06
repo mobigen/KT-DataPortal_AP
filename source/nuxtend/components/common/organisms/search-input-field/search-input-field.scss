@@ -1,10 +1,19 @@
+//-------------------------------------------
+//  search-input-field 기본 검색
+// ------------------------------------------
+// @search-filter    || 필터박스
+// @search-filter__head    || 필터박스 > 헤더
+// @search-filter__body    || 필터박스 > 바디
+// @search-filter__list   || 필터박스 > 바디 > ul
+// @search-filter__item   || 필터박스 > 바디 > ul > li
+
 .search-input-field {
   position: relative;
 }
 
 .search-input-field__inner {
   display: flex;
-  align-items: center;    
+  align-items: center;
   justify-content: center;
 }
 
@@ -17,13 +26,10 @@
 }
 
 .search-input-field__search {
-  flex: 1;
+
 }
 //2022-06-29 MOD
 .search-input-field__search .text-input-group {
-  display: flex;
-  align-items: center;
-  flex: 1;
 
   & ~ * {
     margin-left: $spacing-xs;

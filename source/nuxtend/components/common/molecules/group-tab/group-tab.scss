@@ -12,10 +12,9 @@
   }
 
   .tab__button-subtext{
-    @include font-size("12");
+    display: inline-block;
     @include font-weight("regular");
-    line-height: rem(12px);
-    color: $text-03;
+    color: $ui-01;
   }
   .tab__item--selected {
     .tab__button-subtext {

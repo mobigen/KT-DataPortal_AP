@@ -26,8 +26,8 @@ export default {
       list: [
         {id: '1',title: '대시보드', isSelected: false},
         {id: '2',title: '관심데이터', isSelected: false},
-        {id: '3',title: '내 활용내역', isSelected: false},
-        {id: '4',title: '내 활용사례', isSelected: true},
+        {id: '3',title: '내 활용내역', isSelected: true},
+        {id: '4',title: '내 활용사례', isSelected: false},
         {id: '5',title: '내 문의내역', isSelected: false},
         {id: '4',title: '프로젝트 관리', isSelected: false},
         {id: '5',title: '개인정보 관리', isSelected: false},

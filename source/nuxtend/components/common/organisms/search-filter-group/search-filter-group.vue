@@ -8,7 +8,7 @@
 </template>
 
 <script type="text/javascript">
-import GroupSearchFilter from "@component/project/kt/molecules/group-search-filter/group-search-filter";
+import GroupSearchFilter from "@common/molecules/group-search-filter/group-search-filter";
 export default {
   name: "SearchFilterGroup",
   extends: {},

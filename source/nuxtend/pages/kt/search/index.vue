@@ -9,11 +9,14 @@
       <!-- contents-group : subject + content-top + contents(L : R) -->
       <div class="contents-group">
         <subject></subject>
-        <!-- content-top : 데이터 검색/ 상세-->
-        <div class="content-top">
+        <!-- contents-top : 데이터 검색/ 상세-->
+        <div class="contents-top">
           <!-- contents-top__search : 통합검색 -->
           <div class="contents-top__search">
-            <search-input-field></search-input-field>
+            <search-input-field
+            :searchKeyword="searchKeyword"
+            :use-recent-search="true"
+            :use-inner-search="true"></search-input-field>
             <div class="contents-top__recommend">
               <!-- 추천검색어 : 검색어 입력창에 검색어 입력 없이 빈 상태일 때 추천 검색어 노출 -->
               <p>추천검색어</p>
@@ -31,7 +34,7 @@
           <!-- contents-search-result : 결과값 -->
           <div class="contents-search-result">
             <p class="contents-search-result__text">
-              <strong>SGI</strong>에 대한 검색결과, 총 <strong>150</strong> 건 입니다.
+              <mark>SGI</mark>에 대한 검색결과, 총 <strong>150</strong> 건 입니다.
             </p>
           </div>
           <!-- // contents-search-result -->
@@ -45,7 +48,7 @@
                   <div class="filter-group__options">
                     <!-- 토글스위치 -->
                     <base-switch>
-                      <span>전체 선택</span>
+                      <span class="toggle-switch__label">전체 선택</span>
                     </base-switch>
                     <!-- //토글스위치 -->
                     <div class="filter-group__notice">
@@ -87,7 +90,7 @@
                 <div class="filter__options">
                   <!-- 토글스위치 -->
                   <base-switch>
-                    <span>전체 선택</span>
+                    <span class="toggle-switch__label">전체 선택</span>
                   </base-switch>
                   <!-- //토글스위치 -->
                 </div>
@@ -121,7 +124,7 @@
               <!--//탭 -->
               <!-- heading-group -->
               <div class="heading-group">
-                <h4>전체<span>(<strong>152</strong>건)</span></h4>
+                <h4 class="heading-group__title">전체<span>(<strong>152</strong>건)</span></h4>
                 <div class="heading-group__options">
                   <!-- sort -->
                   <div class="options-sort">
@@ -129,7 +132,7 @@
                     <div class="radios">
                       <span class="hidden">정렬선택</span>
                       <base-radio name="radio-check" :radioId="radio-sort1" class="radio--check" checked>
-                        <template v-slot:label><span class="radio-check-first">정확도순</span></template>
+                        <template v-slot:label><span>정확도순</span></template>
                       </base-radio>
                       <base-radio name="radio-check" :radioId="radio-sort2" class="radio--check">
                         <template v-slot:label><span>최신등록순</span></template>
@@ -174,6 +177,18 @@
                   <!-- 검색된 목록 리스트 -->
                   <!-- TODO: 실제 search-list 연동 필요 -->
                   <search-list :list="contents"></search-list>
+
+                  <!-- data-none : 검색된 데이터가 없는경우 -->
+                  <div class="data-none">
+                    <p class="data-none__title">
+                      <mark>검색조건MARK</mark>에 대한 검색 결과가 없습니다.
+                    </p>
+                    <p class="data-none__description">정확한 검색어인지 확인하시고 다시 검색해 주세요.
+                      <span>단어의 철자, 보다 일반적인 검색어로 다시 검색해 보세요. <br>
+                    검색어의 띄어쓰기를 다르게 해보세요.</span>
+                    </p>
+                  </div>
+                  <!-- // data-none  -->
                 </div>
               </div>
               <!-- // data-result -->
@@ -199,7 +214,7 @@ import GroupPagination from "@component/common/molecules/group-pagination/group-
 import GroupBreadcrumb from "@component/common/molecules/group-breadcrumb/group-breadcrumb";
 import GroupTab from "@component/common/molecules/group-tab/group-tab";
 import Subject from "@component/common/organisms/subject/subject.vue";
-import GroupSearchFilter from "@component/common/molecules/group-search-filter/group-search-filter";
+import GroupSearchFilter from "@component/common/molecules/group-search-filter/group-search-filter.vue";
 import SearchList from "@component/common/organisms/search-list/search-list.vue";
 import SearchInputField from "@component/common/organisms/search-input-field/search-input-field.vue";
 import { mapGetters } from "vuex";
@@ -243,12 +258,11 @@ export default {
           PRNTS_ID: "prnts_id" // parent key
         }
       },
-    
+
       tabList: [
-        { num: "999+", title: "전체" },
-        { num: "133", title: "내부데이터" },
-        { num: "0", title: "CKAN" },
-        { num: "71", title: "분원데이터" }
+        { num: "(50)", title: "데이터컨텐츠" },
+        { num: "(184)", title: "원천데이터" },
+        { num: "(56)", title: "메타데이터" }
       ],
     };
   },

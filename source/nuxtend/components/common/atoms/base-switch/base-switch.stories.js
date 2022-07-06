@@ -17,7 +17,7 @@ export const Default = () => ({
   template:
     "<StoriesContainer>" +
     '<BaseSwitch></BaseSwitch><br/>' +
-    '<BaseSwitch><label for="toggleSwitch1" class="toggle-switch__label">label</label></BaseSwitch>' +
+    '<BaseSwitch><span class="toggle-switch__label">label</span></BaseSwitch>' +
     "</StoriesContainer>",
 });
 
@@ -26,7 +26,7 @@ export const SwichSmall = () => ({
   template:
     "<StoriesContainer>" +
     '<BaseSwitch class="toggle-switch--sm"></BaseSwitch><br/>' +
-    '<BaseSwitch class="toggle-switch--sm"><label for="toggleSwitch1" class="toggle-switch__label">label</label></BaseSwitch>' +
+    '<BaseSwitch class="toggle-switch--sm"><span class="toggle-switch__label">label</span></BaseSwitch>' +
     "</StoriesContainer>",
 });
 
