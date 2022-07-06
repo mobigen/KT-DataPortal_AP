@@ -7,7 +7,8 @@ export const state = () => ({
   fileData: [],
   recommendData: [],
   dataUseCases: {},
-  requireObj: {}
+  requireObj: {},
+  sampleData: {}
 });
 
 export const getters = {
@@ -37,6 +38,9 @@ export const getters = {
   },
   requireObj(state) {
     return state.requireObj;
+  },
+  sampleData(state) {
+    return state.sampleData;
   }
 };
 
@@ -97,8 +101,13 @@ export const mutations = {
   },
   setRequireObj(state, data) {
     state.requireObj = data;
+  },
+  setSampleData(state, data) {
+    state.sampleData = data;
   }
 };
+
+import _sampleData from "./_sampleData.json";
 
 export const actions = {
   getSearchTagList({ commit }) {
@@ -575,6 +584,16 @@ export const actions = {
 
     commit("setDataUseCases", dataUseCases);
   },
+  getSampleData({ commit }, rowId) {
+    // TODO : sampleData api 구현 완료시, _sampleData.json 삭제 후 api 연결 코드로 대체.
+    // this.$axios
+    //   .get(this.$config.ROUTE_API_META_PREFIX + "/getSampleData", {'datasetId' : rowId}})
+    //   .then((d) => {
+    //     commit("setSampleData", d);
+    //   });
+    commit("setSampleData", _sampleData);
+  },
+
   getRequireObj({ commit }, { searchCriteria, searchKeyword }) {
     console.log(searchCriteria);
     console.log(searchKeyword);

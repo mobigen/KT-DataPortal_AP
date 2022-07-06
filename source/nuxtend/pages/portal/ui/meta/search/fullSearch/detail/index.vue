@@ -270,170 +270,33 @@
             </div>
             <div class="contents__detail-sample">
               <div class="table-scroll scrollCustomize">
-                <table class="table table--data">
-                  <caption class="hidden">
-                    샘플데이터 상세정보 안내표
-                  </caption>
-                  <colgroup>
-                    <col style="width: 150px" />
-                    <col style="width: 230px" />
-                    <col style="width: auto" span="11" />
-                  </colgroup>
-                  <thead>
-                    <tr>
-                      <th scope="col">cust_pty_sbt_id</th>
-                      <th scope="col">svc_cont_id</th>
-                      <th scope="col">conn_date</th>
-                      <th scope="col">timezn_div_cd</th>
-                      <th scope="col">app_nm</th>
-                      <th scope="col">app_cmpn_nm</th>
-                      <th scope="col">ctgry_nm</th>
-                      <th scope="col">ctgry_dtl_nm</th>
-                      <th scope="col">svc_nm</th>
-                      <th scope="col">log_cascnt</th>
-                      <th scope="col">byte_size</th>
-                      <th scope="col">etl_dt</th>
-                      <th scope="col">base_date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1271665706</td>
-                      <td>KEn/ygDs3q3VQ4HCCWUg9A==</td>
-                      <td>20220608</td>
-                      <td>C_0600_1000</td>
-                      <td></td>
-                      <td></td>
-                      <td>종합쇼핑</td>
-                      <td>해외/구매대행</td>
-                      <td>AMAZON</td>
-                      <td>2</td>
-                      <td>25262</td>
-                      <td>20220610080034</td>
-                      <td>20220608</td>
-                    </tr>
-                    <tr>
-                      <td>1271665706</td>
-                      <td>mF6QV7SwMKjpauEOb0Hg8g==</td>
-                      <td>20220608</td>
-                      <td>C_0600_1000</td>
-                      <td></td>
-                      <td></td>
-                      <td>IT/통신</td>
-                      <td>포털서비스</td>
-                      <td>카카오</td>
-                      <td>2</td>
-                      <td>25262</td>
-                      <td>20220610080034</td>
-                      <td>20220608</td>
-                    </tr>
-                    <tr>
-                      <td>1271665706</td>
-                      <td>FaQM3GdzPJRrD5KVkq/vhw==</td>
-                      <td>20220608</td>
-                      <td>C_0600_1000</td>
-                      <td></td>
-                      <td></td>
-                      <td>IT/통신</td>
-                      <td>포털서비스</td>
-                      <td>카카오</td>
-                      <td>2</td>
-                      <td>25262</td>
-                      <td>20220610080034</td>
-                      <td>20220608</td>
-                    </tr>
-                    <tr>
-                      <td>1271665706</td>
-                      <td>lqXdr5QSSCvxnYkPqAheLw==</td>
-                      <td>20220608</td>
-                      <td>C_0600_1000</td>
-                      <td></td>
-                      <td></td>
-                      <td>종합쇼핑</td>
-                      <td>해외/구매대행</td>
-                      <td>AMAZON</td>
-                      <td>2</td>
-                      <td>25262</td>
-                      <td>20220610080034</td>
-                      <td>20220608</td>
-                    </tr>
-                    <tr>
-                      <td>1271665706</td>
-                      <td>wlXAwzcuNSRmPSgdRVFh/w==</td>
-                      <td>20220608</td>
-                      <td>C_0600_1000</td>
-                      <td></td>
-                      <td></td>
-                      <td>종합쇼핑</td>
-                      <td>해외/구매대행</td>
-                      <td>AMAZON</td>
-                      <td>2</td>
-                      <td>25262</td>
-                      <td>20220610080034</td>
-                      <td>20220608</td>
-                    </tr>
-                    <tr>
-                      <td>1271665706</td>
-                      <td>sEz/OcHT6ge88gJ3XFzkWw==</td>
-                      <td>20220608</td>
-                      <td>C_0600_1000</td>
-                      <td></td>
-                      <td></td>
-                      <td>종합쇼핑</td>
-                      <td>해외/구매대행</td>
-                      <td>AMAZON</td>
-                      <td>2</td>
-                      <td>25262</td>
-                      <td>20220610080034</td>
-                      <td>20220608</td>
-                    </tr>
-                    <tr>
-                      <td>1271665706</td>
-                      <td>KEn/ygDs3q3VQ4HCCWUg9A==</td>
-                      <td>20220608</td>
-                      <td>C_0600_1000</td>
-                      <td></td>
-                      <td></td>
-                      <td>종합쇼핑</td>
-                      <td>해외/구매대행</td>
-                      <td>AMAZON</td>
-                      <td>2</td>
-                      <td>25262</td>
-                      <td>20220610080034</td>
-                      <td>20220608</td>
-                    </tr>
-                    <tr>
-                      <td>1271665706</td>
-                      <td>KEn/ygDs3q3VQ4HCCWUg9A==</td>
-                      <td>20220608</td>
-                      <td>C_0600_1000</td>
-                      <td></td>
-                      <td></td>
-                      <td>종합쇼핑</td>
-                      <td>해외/구매대행</td>
-                      <td>AMAZON</td>
-                      <td>2</td>
-                      <td>25262</td>
-                      <td>20220610080034</td>
-                      <td>20220608</td>
-                    </tr>
-                    <tr>
-                      <td>1271665706</td>
-                      <td>KEn/ygDs3q3VQ4HCCWUg9A==</td>
-                      <td>20220608</td>
-                      <td>C_0600_1000</td>
-                      <td></td>
-                      <td></td>
-                      <td>종합쇼핑</td>
-                      <td>해외/구매대행</td>
-                      <td>AMAZON</td>
-                      <td>2</td>
-                      <td>25262</td>
-                      <td>20220610080034</td>
-                      <td>20220608</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <basic-table
+                  component-id=""
+                  table-class="table--data"
+                  :use-checkbox="false"
+                  :view-detail="sampleData"
+                  :header-has-locale="false"
+                  :view-header-list="[
+                    'cust_pty_sbt_id',
+                    'svc_cont_id',
+                    'conn_date',
+                    'timezn_div_cd',
+                    'app_nm',
+                    'app_cmpn_nm',
+                    'ctgry_nm',
+                    'ctgry_dtl_nm',
+                    'svc_nm',
+                    'log_cascnt',
+                    'byte_size',
+                    'etl_dt',
+                    'base_date'
+                  ]"
+                  rowKey="cust_pty_sbt_id"
+                  :colgroup-array="['150px', '230px', 'auto:span=11']"
+                  @buttonAction=""
+                  @columnAction=""
+                  @keyAction=""
+                />
               </div>
             </div>
           </article>
@@ -999,12 +862,13 @@ import BaseInput from "@component/common/atoms/base-input/base-input";
 import moment from "moment";
 import DatePicker from "@functional/datepicker/date-picker.vue";
 import { successAlert, errorAlert } from "@functional/alert/alert-default";
+import BasicTable from "@component/common/organisms/basic-table/basic-table.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Index",
   // async asyncData({ store, route }) {
-  //   let rowId = route.query.postId;
+  //   let rowId = route.query.datasetId;
   //   // TODO : asyncData 배포후에 동작 하는거 확인되면 아래 코드 사용
   //   rowId = "01bfea44-5b42-41e7-9901-8fad6997969c";
   //   await store.dispatch("meta/keyword-search/getDetail", rowId);
@@ -1015,6 +879,7 @@ export default {
     ...mapGetters({
       contents: "kt/keyword-search/contents"
     }),
+    ...mapGetters("meta/search/search", ["sampleData"]),
     detail() {
       const vuex = this.$store.getters["meta/keyword-search/detail"];
 
@@ -1049,6 +914,7 @@ export default {
         },
         { href: "#articleInquiry", title: "데이터 문의", selected: false }
       ],
+      toggleButtonText: "test",
       bizDatasetId: null,
       ctgry: null,
       dataPrvDesk: null,
@@ -1064,6 +930,7 @@ export default {
   },
   methods: {
     ...mapActions("meta/keyword-search", ["getDetail", "setSearchKeyword"]),
+    ...mapActions("meta/search/search", ["getSampleData"]),
     togglePreview: function () {
       this.isPreview = !this.isPreview;
     },
@@ -1146,6 +1013,7 @@ export default {
     this.bizDatasetId = this.$route.query.datasetId;
 
     this.getDetail(this.bizDatasetId);
+    this.getSampleData(rowId);
   },
   mounted() {
     this.resetRequestData();
@@ -1163,7 +1031,8 @@ export default {
     Dialog,
     ViewTable,
     BaseInput,
-    DatePicker
+    DatePicker,
+    BasicTable
   }
 };
 </script>
