@@ -1,12 +1,12 @@
 <template lang="html">
   <div>
-    <table class="table table--board">
+    <table class="table" :class="tableClass">
       <caption class="hidden">
         신청내역 목록 게시판
       </caption>
 
       <colgroup v-for="c in colgroupArray">
-        <col :style="'width: ' + c" />
+        <col :style="getColStyle(c)" :span="getColSpan(c)" />
       </colgroup>
 
       <thead v-if="useHeader">
@@ -82,11 +82,11 @@
                 @click.native.stop="
                   keyClick(data[rowKey], keyActionText[h['column_name']])
                 "
-                >{{ bodyData[h] }}</basic-button
+                >{{ data[h] }}</basic-button
               >
             </template>
 
-            <template v-else>{{ bodyData[h] }}</template>
+            <template v-else>{{ data[h] }}</template>
           </td>
 
           <template v-for="(value, key, index) in tableButtonText">
@@ -140,7 +140,7 @@ export default {
     },
     viewDetail: {
       type: Object,
-      require: true,
+      required: true,
       default: () => {
         return {
           header: [],
@@ -230,26 +230,32 @@ export default {
     },
     valueType: {
       type: Object,
-      require: false,
+      required: false,
       default: () => {
         return {};
       }
     },
     columnKey: {
       type: String,
-      require: false,
+      required: false,
       default: "kor_column_name"
     },
     viewHeaderList: {
       type: Array,
-      require: false,
+      required: false,
       default: () => {
         return [];
       }
+    },
+    tableClass: {
+      type: String,
+      required: false,
+      default: "table--board"
     }
   },
   computed: {
     detailData() {
+      console.log(this.viewDetail);
       // viewDetail 값이 없거나, header(or body) 가 없으면, 기본값을 만들어 return 해준다.
       return this.viewDetail === undefined ||
         !Object.prototype.hasOwnProperty.call(this.viewDetail, "header")
@@ -265,10 +271,8 @@ export default {
        */
       return this.detailData !== undefined &&
         Object.prototype.hasOwnProperty.call(this.detailData, "body")
-        ? this.detailData.body.length > 0
-          ? this.detailData.body[0]
-          : this.detailData.body
-        : {};
+        ? this.detailData.body
+        : [];
     },
     tableHeader() {
       let headerList =
@@ -324,6 +328,21 @@ export default {
     },
     getTdVal(tdValue) {
       return tdValue ? tdValue : "-";
+    },
+    getColStyle(colVal) {
+      let widthText = colVal;
+      if (colVal.indexOf(":") > -1) {
+        widthText = colVal.split(":").pop();
+      }
+      return `style="width:${widthText}"`;
+    },
+    getColSpan(colVal) {
+      let spanText = "";
+
+      if (colVal.indexOf(":span") > -1) {
+        spanText = colVal.split(":span=").shift();
+      }
+      return `span="${spanText}"`;
     }
     // getBodyLocale(key, data) {
     //   return Object.prototype.hasOwnProperty.call(this.bodyLocale, key)
@@ -335,36 +354,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-//#simpleTable {
-//  //height: 200px;
-//  overflow: auto;
-//  border-bottom: solid 1px gray;
-//  table {
-//    width: 100%;
-//    text-align: center;
-//    thead {
-//      th {
-//        background-color: lightgray;
-//        border-bottom: solid 1px rgb(192, 190, 190);
-//        position: sticky;
-//        top: 0px;
-//      }
-//    }
-//    tbody {
-//      tr,
-//      td {
-//        border-bottom: 1px solid lightgray !important;
-//      }
-//      tr:nth-child(1) {
-//        td {
-//          border-top: solid 1px rgb(192, 190, 190);
-//        }
-//      }
-//      tr:hover {
-//        background-color: rgba(250, 240, 240, 0.952);
-//      }
-//    }
-//  }
-//}
-</style>
+<style lang="scss" scoped></style>
