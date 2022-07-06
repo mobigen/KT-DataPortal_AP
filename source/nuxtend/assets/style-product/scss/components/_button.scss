@@ -54,7 +54,7 @@
     color: $ui-02;
     background-color: $ui-01;
     border-color: $ui-01;
-
+    
     .svg-icon {
       clip-rule: evenodd;
       fill-rule: evenodd;
@@ -203,7 +203,7 @@
     color: $basic;
     border-color: transparent;
 
-    .svg-icon {
+    .svg-icon {   
       fill: #333;
     }
   }
@@ -389,7 +389,7 @@
   @include button-padding($spacing-md - $spacing-3xs, $spacing-md - $spacing-3xs);
   @include font-weight("regular");
 }
-//button--xs 2022-07-01 ADD
+//button--xs 2022-07-01 ADD 
 @mixin button--xs {
   @include button-size(13px, $button-height-xs, 18px);
   @include button-padding($spacing-xs, $spacing-xs);
@@ -487,8 +487,8 @@
 
 .button--sm {
   @include button--sm;
-
-  // 내부용은 기본과 디자인이 다름 2022-07-04 ADD
+  
+  // 내부용은 기본과 디자인이 다름 2022-07-04 ADD 
   &:hover,
   &:focus {
     border-color: $primary;

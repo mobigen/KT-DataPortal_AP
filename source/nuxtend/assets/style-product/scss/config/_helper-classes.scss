@@ -358,6 +358,10 @@ strong.required {
   height: rem(120px) !important;
 }
 
+.h-130 {
+  height: rem(130px) !important;
+}
+
 .h-160 {
   height: rem(160px) !important;
 }
@@ -451,7 +455,7 @@ strong.required {
     margin-top: rem(6px);
   }
 
-  &:before,
+  &:before, 
   & > li:before {
     position: absolute;
   }
@@ -495,6 +499,7 @@ strong.required {
       left: 3px;
     }
   }
+}
 
 .bullet--ast:not(ul), .bullet--ast > li {
   &, & > li {
@@ -594,10 +599,10 @@ strong.required {
 // @contents-top__search                        || 통합용검색영역
 // @board-head__search                          || 게시판용검색
 
-// @search-input-field__search                  || 검색영역
-// @search-input-field                          || 검색필드
+// @search-input-field__search                  || 검색영역 
+// @search-input-field                          || 검색필드 
 // @search-input-field__inner > form>fieldset   || 검색필드내부
-// @search-input-field__search                  || 검색
+// @search-input-field__search                  || 검색 
 // @text-input-group                            || 인풋+버튼그룹
 // @text-input                                  || 인풋
 // @text-input-group__clear-button              || 초기화버튼
@@ -645,20 +650,6 @@ strong.required {
     width: rem(680px);
     margin: 0 auto;
   }
-
-  .text-input-group .text-input {
-    height: rem(36px);
-  }
-}
-
-/* 데이터 요약 정보 */
-.data-box {
-  display: flex;
-  position: relative;
-  align-items: center;
-  width: 100%;
-  padding: rem(15px) 0;
-  border-radius: 0;
 }
 
 // -------------------------
@@ -671,6 +662,16 @@ strong.required {
 // @data-box__content           || 데이터영역information > middle
 // @data-box__bottom-content    || 데이터영역information > bottom
 // @data-box__buttons           || 오른쪽에 버튼영역
+
+/* 데이터 요약 정보 */
+.data-box {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 100%;
+  padding: rem(15px) 0;
+  border-radius: 0;
+}
 
 .data-box__visual {
   width: 150px;
@@ -689,8 +690,8 @@ strong.required {
 .data-box__information {
   display: flex;
   flex-direction: column;
-  min-height: rem(138px);
-  padding: rem(5px) 0;
+  min-height: rem(138px); 
+  padding: rem(5px) 0;   
 
   &:not(:only-child) {
     flex: 1 1 0%;
@@ -785,7 +786,6 @@ strong.required {
       }
     }
   }
-}
 
   dt {
     display: flex;
@@ -808,8 +808,8 @@ strong.required {
   position: relative;
   display: flex;
   flex-direction: column;
-  max-width: 110px;
-  height: rem(138px);
+  max-width: 110px;     
+  height: rem(138px); 
 
   button {
     display: block;
@@ -841,7 +841,7 @@ strong.required {
     min-width: rem(107px);
     height: auto;
 
-    .button__text {
+    .button__text {      
       @include font-size("13");
     }
     &,
@@ -952,30 +952,30 @@ strong.required {
 
 
 // -------------------------
-// 데이터명리스트 2022-07-01
+// 데이터명리스트 2022-07-01 
 // -------------------------
 .data-name-list {
-  display: flex;
-  flex-direction: column;
+  display: flex; 
+  flex-direction: column; 
   align-items: center;
 
   li {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    p {
-      margin-left: rem(15px);
-    }
+      display: flex;  
+      align-items: center;
+      width: 100%;
+      p {
+        margin-left: rem(15px); 
+      }
   }
 }
 
 
 
 // -------------------------
-// 텍스트색상값 2022-07-01
+// 텍스트색상값 2022-07-01 
 // -------------------------
 
-.file-download {
+.file-download { 
   color: $primary;
   text-decoration: underline;
 }
@@ -1006,7 +1006,7 @@ strong.required {
 
       .search-filter__head {
         height: rem(50px);
-        padding: 0 rem(18px);
+        padding: 0 rem(18px); 
         border-left: 1px solid $ui-03;
         border-bottom:1px solid #ccc;
       }
@@ -1015,12 +1015,12 @@ strong.required {
         height: rem(230px);
         padding: rem(12px) rem(18px);
         overflow-y: auto;
-        border-left: 1px solid $ui-03;
-
-        //search-filter__body > ul > li : kt디자인 수정 2022-06-27
+        border-left: 1px solid $ui-03;        
+        
+        //search-filter__body > ul > li : kt디자인 수정 2022-06-27 
         .search-filter__item {
-          margin-top: rem(6px);
-
+          margin-top: rem(6px); 
+        
           &:first-child {
             margin-top: 0;
           }
@@ -1029,31 +1029,31 @@ strong.required {
     }
 
   }
-
+  
   // 수직 방향
   &.search-filter-group--vertical {
     overflow: hidden;
     flex-direction: column;
     border: 1px solid #e1e1e1;
-    border-radius: rem(5px);
+    border-radius: rem(5px);  
 
     .search-filter {
       width: 100%;
       border-bottom: none;
-    }
-
+    }    
+    
     .search-filter__head {
       height: rem(48px);
-      padding: 0 rem(23px);
+      padding: 0 rem(23px); 
     }
 
     .search-filter__body {
-      padding: rem(17px) rem(23px);
+      padding: rem(17px) rem(23px);   
 
-      //search-filter__body > ul > li : kt디자인 수정 2022-06-27
+      //search-filter__body > ul > li : kt디자인 수정 2022-06-27 
       .search-filter__item {
-        margin-top: rem(12px);
-
+        margin-top: rem(12px); 
+      
         &:first-child {
           margin-top: 0;
         }

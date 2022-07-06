@@ -121,12 +121,12 @@ th .button {
       min-width: 65px;
       height: rem(26px);
       padding: 0 rem(5px);
-      border-radius: rem(3px);
+      border-radius: rem(3px);  
       @include font-weight("regular");
       text-align: center;
     }
   }
-
+  
   tbody tr:not(:last-child) td {
     border-bottom: 1px solid $line4;
   }
@@ -166,7 +166,7 @@ th .button {
     overflow-wrap: break-word;
     word-break: keep-all;
   }
-
+  
   tbody tr:not(:last-child) td {
     border-bottom: 1px solid $line4;
   }
@@ -365,7 +365,7 @@ th .button {
   table {
     width: auto;
     min-width: 100%;
-
+   
     th, td {
       white-space: nowrap;
     }

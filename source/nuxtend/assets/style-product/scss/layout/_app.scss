@@ -75,7 +75,7 @@ main {
 //데이터 검색영역
 .contents-top {
   width: 100%;
-  margin-bottom: rem(30px);
+  margin-bottom: rem(30px); 
 }
 
 //contents
@@ -155,13 +155,13 @@ main {
 
 .options-sort {
   display: flex;
-  align-items: center;
+  align-items: center; 
 
   > * + * {
     margin-left: rem(25px);
   }
-
-  .label + * {
+  
+  .label + * {  
     margin-left: rem(14px);
   }
 }

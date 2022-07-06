@@ -182,12 +182,12 @@
     border: 1px;
     padding-bottom: $spacing-3xs;
     border: 1px solid $ui-04;
-    border-right: none;
+    border-right: none; 
 
     &:first-child {
       border-radius: rem(5px) 0 0 rem(5px) ;
     }
-
+  
     &:last-child {
       border: 1px solid $ui-04;
       border-right: 1px solid $ui-04;
