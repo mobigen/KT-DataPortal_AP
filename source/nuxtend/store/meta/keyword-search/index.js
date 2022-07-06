@@ -30,9 +30,6 @@ export const mutations = {
   }
 };
 
-// import sampleContents from "./_contents.json";
-import d from "./_detail.json";
-
 export const actions = {
   // setUrl() {
   //   console.log(process.env);
@@ -47,17 +44,14 @@ export const actions = {
       keywordObj["keyword" + (index + 1)] = el;
     });
 
-    console.log(params.searchKeywordList);
-
     const paging =
       rootGetters["module/pagination/paging"][params.paginationKey];
     // param with pageInfo (start, end...)
 
     const keywordStr = `&keyword1=${keywordObj.keyword1}&keyword2=${keywordObj.keyword2}&keyword3=${keywordObj.keyword3}`;
-    const paramAPI = `?perPage=${paging.itemsPerPage}&curPage=${paging.page}`;
-    // TODO : BACKEND 서버 배포하면 주석 해제후 테스트. + keywordStr;
+    const paramAPI =
+      `?perPage=${paging.itemsPerPage}&curPage=${paging.page}` + keywordStr;
 
-    console.log(paramAPI);
     this.$axios
       .get(this.$config.ROUTE_API_META_PREFIX + "/getBizMetaList" + paramAPI)
       .then((d) => {
