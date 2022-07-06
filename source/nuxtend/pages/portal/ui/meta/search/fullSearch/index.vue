@@ -67,8 +67,8 @@
                   <span
                     v-if="searchKeywordList.length - 1 !== index"
                     style="color: black"
-                    >&</span
-                  >
+                    >&
+                  </span>
                 </mark>
                 검색 결과, 총 <strong>{{ contents.totalcount }}</strong> 건
                 입니다.
@@ -278,9 +278,24 @@
                   ></search-list>
 
                   <!-- data-none : 검색된 데이터가 없는경우 -->
-                  <div class="data-none">
-                    <p class="data-none__title">
-                      <mark>검색조건MARK</mark>에 대한 검색 결과가 없습니다.
+                  <div v-if="contents.totalcount === 0" class="data-none">
+                    <p
+                      class="data-none__title"
+                      v-if="searchKeywordList.length < 2"
+                    >
+                      <mark>{{ searchKeyword }}</mark>
+                      에 대한 검색 결과가 없습니다.
+                    </p>
+                    <p class="data-none__title" v-else>
+                      <template v-for="(item, index) in searchKeywordList">
+                        <mark :key="'searchKeyword_' + index">{{ item }}</mark>
+                        <span
+                          v-if="searchKeywordList.length - 1 !== index"
+                          style="color: black"
+                          >&
+                        </span>
+                      </template>
+                      에 대한 검색 결과가 없습니다.
                     </p>
                     <p class="data-none__description">
                       정확한 검색어인지 확인하시고 다시 검색해 주세요.
