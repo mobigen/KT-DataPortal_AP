@@ -18,7 +18,7 @@
         </slot>
         <svg-icon
           class="svg-icon select-selector__icon"
-          name="chevron-down-medium"
+          name="caret-down"
           aria-hidden="true"
         ></svg-icon>
       </button>

@@ -1,5 +1,13 @@
+//----------------------------------------------
+// search-detail index
+// ---------------------------------------------
+
 .contens {
   padding-top: 0;
+}
+
+.heading-group {
+  border-bottom: 1px solid #333;
 }
 
 .outside-data {
@@ -43,17 +51,26 @@
   border-top: 2px solid #333;
   border-bottom: 1px solid #ccc;
   background-color: rgba($primary, 0.04);
+  padding: rem(28px) rem(30px) rem(30px);
+  & >* {
+    height: rem(150px);
+  }
+}
+
+.data-box__information {
+  padding: 0;
 }
 
 // 관심데이터 버튼
 .favorite-cnt {
   .favorite-cnt__button {
+    flex-direction: column;
     .svg-icon {
       display: block;
       margin: 0 auto;
 
       & + span {
-        margin: 0;
+        margin: 0 0 5px 0;
       }
     }
   }
@@ -63,8 +80,10 @@
 .tab {
   position: sticky;
   top: 100px;
-  z-index: 20;
-  margin-top: 60px;
+  z-index: 10;
+  margin: rem(52px) 0 0;
+  padding: rem(12px) 0;
+  background-color: $ui-02;
 }
 
 // 데이터 품질지표
@@ -98,44 +117,12 @@
 
 // 데이터 상세정보
 .contents__detail {
-  margin-top: rem(20px);
+  margin-top: rem(52px);
   width: 100%;
   position: relative;
 
   & ~ & {
     margin-top: rem(52px);
-  }
-}
-
-// formbox
-.formbox {
-  position: relative;
-  border-top: 1px solid $gy-02;
-  border-bottom: 1px solid $line2;
-
-  & ~ & {
-    margin-top: rem(20px);
-  }
-
-  th,
-  td {
-    height: rem(50px);
-    padding: $spacing-xs $spacing-md;
-    font-weight: inherit;
-    font-size: inherit;
-    text-align: left;
-    vertical-align: middle;
-    overflow-wrap: break-word;
-    word-break: keep-all;
-  }
-
-  tbody tr:not(:last-child) th,
-  tbody tr:not(:last-child) td {
-    border-bottom: 1px solid $line4;
-  }
-
-  th {
-    background-color: $ui-05;
   }
 }
 
@@ -212,6 +199,15 @@
     height: rem(12px);
     margin-left: $spacing-md;
     background-color: #ddd;
+  }
+}
+
+.filedata__button-preview.filedata__button-close {
+  .button__text {
+    &::after {
+      transform: rotate(-180deg);
+      transition: all 0.1s;
+    }
   }
 }
 

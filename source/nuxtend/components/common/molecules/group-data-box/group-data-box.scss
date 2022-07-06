@@ -1,4 +1,15 @@
 
+// -------------------------
+// data-box 데이터 요약 정보 : data-box__visual + data-box__information + data-box__buttons
+// -------------------------
+// @data-box                    || 공통데이터박스
+// @data-box__visual            || 이미지영역(svg)
+// @data-box__information       || 데이터영역information
+// @data-box__top-content       || 데이터영역information > top
+// @data-box__content           || 데이터영역information > middle
+// @data-box__bottom-content    || 데이터영역information > bottom
+// @data-box__buttons           || 오른쪽에 버튼영역
+
 .data-box {
   display: flex;
   position: relative;
@@ -11,13 +22,6 @@
     border-top: rem(1px) solid $ui-03;
   }
 }
-
-.data-box__inner {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
 
 .data-box__visual {
   display: flex;

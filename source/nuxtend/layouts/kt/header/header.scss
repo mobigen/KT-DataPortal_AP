@@ -22,7 +22,7 @@ header {
   background: $ui-02;
 }
 
-.header .header__inner { 
+.header .header__inner {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -39,7 +39,8 @@ header {
   top: rem(100px);
   left: 0;
   width: 100%;
-  border-bottom: 1px solid $ui-04;
+  height: 1px;
+  background-image: linear-gradient(to right, #59bdeb, #49c7d4);
   z-index: -1;
 }
 
@@ -52,7 +53,7 @@ h1.logo a {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: transparent; 
+  color: transparent;
   background: url(#{$img-path}/common/logo_header.png) no-repeat 0 center;
   height: 100%;
   @include font-size("16")
@@ -77,35 +78,37 @@ h1.logo span {
   margin-left: auto;
 }
 
+.top-menu__item {
+  position: relative;
+  margin: 0 0 0 rem(15px);
+  padding: 0 0 0 rem(15px);
+
+  &:not(:last-child):after {
+    content: "";
+    position: absolute;
+    right: rem(-15px);
+    top: 50%;
+    width: rem(1px);
+    height: rem(12px);
+    margin-top: rem(-7px);
+    background: #ccc;
+  }
+}
+
 .top-menu__link {
+  display: inline-flex;
+  align-items: center;
   color: $text-01;
-  height: rem(40px); 
-}
 
-.top-menu__link:hover,
-.top-menu__link:focus {
-  color: $secondary;
-}
+  &:hover, &focus {
+    color: $secondary;
+  }
 
-.top-menu .top-menu__item {
-  position: relative; 
-  margin: 0 0 0 rem(15px); 
-  padding: 0 0 0 rem(15px); 
-}
-
-.top-menu .top-menu__item:after {
-  content: ""; 
-  position: absolute; 
-  right: rem(-15px);  
-  top: 50%; 
-  width: rem(1px); 
-  height: rem(12px);
-  margin-top: rem(-7px); 
-  background: #ccc;
-}
-
-.top-menu .top-menu__item:last-child:after {
-  content: none;
+  .badge {
+    min-width: rem(38px);
+    margin-left: rem(10px);
+    padding: 0;
+  }
 }
 
 .top-menu__search {
@@ -114,9 +117,9 @@ h1.logo span {
 }
 .top-menu__input {
   position: relative;
-  border-radius: rem(15px); 
+  border-radius: rem(15px);
   width: 100%;
-  height: rem(28px); 
+  height: rem(28px);
   @include font-size("12");
 }
 
@@ -164,7 +167,7 @@ h1.logo span {
 
 .top-menu-input__search-button:hover {
   background: transparent;
-  
+
   .svg-icon__search-button {
     fill: $secondary;
     background: transparent;
@@ -198,8 +201,8 @@ h1.logo span {
   display: inline-block;
   height: rem(100px);
   width: 100%;
-  padding: rem(40px) 0 0 0; 
-  color: $text-01;
+  padding: rem(40px) 0 0 0;
+  color: #222;
   text-align: center;
 }
 
@@ -222,14 +225,14 @@ h1.logo span {
   position: relative;
 }
 
-.gnb__item .gnb__link span:after {
+/* .gnb__item .gnb__link span:after {
   content: "";
   position: absolute;
   bottom: rem(-27px);
   left: 0;
   width: 0;
   height: 4px;
-  border-radius: 2px; 
+  border-radius: 2px;
   background: $secondary;
   transition: all ease .5s;
 }
@@ -238,7 +241,7 @@ h1.logo span {
 .gnb__item:focus .gnb__link span:after {
   left: 0;
   width: 100%;
-}
+} 디자인 변경 가능 나중에 삭제 결정2022-07-01 */
 
 .gnb__item.lnb__item--current .lnb__link:before {
   left: 0;
@@ -264,7 +267,8 @@ h1.logo span {
   left: 0;
   line-height: 31px;
   white-space: nowrap;
-  color: $text-01;
+  color: #222;
+  @include font-size("16");
 }
 
 .lnb__link:hover,
@@ -324,9 +328,9 @@ header.open-header .nav {
 }
 
 header.open-header .header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
   background: $ui-02;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 5px 0 rgba(51, 51, 51, 0.2);
 }
 
 header.open-header .lnb {
@@ -338,266 +342,3 @@ header.open-header+main .main-container {
   padding-top: 94px;
 }
 
-/* 화면 너비 0 ~ 1210px 
-@media (max-width: 1210px) {
-
-  .header .header__inner {
-    width: 100%;
-    min-width: 100%;
-    height: 100%;
-  }
-  .header .header__inner .gnb__item {
-    position: relative;
-    height: auto;
-    padding: 0 1.2%;
-  }
-}
-*/
-/* 화면 너비 0 ~ 1024px 
-@media (max-width: 1024px) {
-   header,
-  .header {
-    height: 70px;
-  }
-
-  .header .header__inner {
-    position: fixed;
-    padding: 0 20px;
-    height: 70px;
-  }
-
-  .header:after {
-    top: unset;
-    bottom: 0;
-  }
-
-  h1.logo {
-    position: absolute;
-    height: 100%;
-  }
-
-  h1.logo a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: transparent; 
-    background: url(#{$img-path}/common/logo.png) no-repeat 0 center;
-    height: 100%;
-  
-  }
-
-  .top-menu {
-    display: none;
-  }
-
-  .header-mobile__menu-button {
-    display: block;
-    position: absolute;
-    top: 20px;
-    right: 16px;
-  }
-
-  .nav {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: -500px;
-    padding-top: 0;
-    width: 320px !important;
-    height: 100% !important;
-    z-index: 10;
-    overflow: inherit;
-  }
-
-  .nav:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: $ui-02;
-    z-index: -1;
-  }
-
-  .nav .gnb {
-    position: relative;
-    width: 100%;
-    min-width: auto;
-    height: calc(100% - 60px);
-    margin: 0 auto;
-    display: block;
-    overflow: auto;
-    z-index: 1;
-    background-color: $ui-02;
-    flex-direction: unset;
-    justify-content: unset;
-  }
-
-  .svg-icon.gnb__arrow-icon{
-    display: block;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    transition: all .3s;
-  }
-
-
-  .gnb__link {
-    position: relative;
-    display: block;
-    font-size: 16px;
-    color: $text-01;
-    height: 50px;
-    line-height: 50px;
-    text-align: left;
-    border-bottom: 1px solid rgba(0, 0, 0, .15);
-    padding: 0 20px;
-  }
-
-  .gnb__item {
-    width: 100%;
-    padding:0;
-  }
-
-  .gnb__item:hover .gnb__link,
-  .gnb__item .gnb__link:focus {
-    @include font-weight("medium");
-    color: $secondary;
-  }
-
-  .gnb__item .gnb__link:before {
-    content: none;
-  }
-
-  .gnb__item:hover .gnb__link:before,
-  .gnb__item .gnb__link:focus:before {
-    left: 0;
-    width: 100%;
-  }
-
-  .lnb {
-    top: 0;
-    padding: 0;
-    opacity: 1;
-    height: auto;
-    transition: all .5s .2s;
-  }
-
-  .lnb__item {
-    position: relative;
-    height: 31px;
-    text-align: left;
-  }
-
-  .lnb__link {
-    position: relative;
-    white-space: nowrap;
-  }
-
-  .lnb__link:hover,
-  .lnb__link:focus {
-    @include font-weight("medium");
-    color: $secondary;
-  }
-
-  .lnb__link:hover:before,
-  .lnb__link:focus:before {
-    background: $secondary;
-  }
-
-  .lnb {
-    display: none;
-    position: relative;
-    border-bottom: 1px solid #e4e7eb;
-  }
-
-  .gnb__item.gnb__item--active,
-  .gnb__item:hover{
-    .lnb{
-      display: block;
-      background: #f0f3f9;
-      padding: 12px 20px;
-    }
-    .svg-icon.gnb__arrow-icon {
-      transform: rotate(180deg);
-    }
-  }
-
-  .gnb__item .gnb__link span:after {
-    content: none;
-  }
-
-  
-  .nav.nav--open {
-    display: block;
-    right: 0;
-    padding-right: 0;
-  }
-
-  .nav.nav--open .header-mobile__close-button {
-    display: block;
-  }
-
-  .nav.nav--open+.nav-dim {
-    content: '';
-    display: block;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background: $text-01;
-    opacity: 0.7;
-  }
-
-  .mobile-top-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    height: 60px;
-    padding: 15px 20px;
-    border-bottom: 1px solid $ui-04;
-    background: $ui-02;
-  }
-
-  .mobile-top-bar .top-menu {
-    display: flex;
-    justify-content: flex-end;
-    flex: 1;
-  }
-
-  .header-mobile__close-button {
-    display: none;
-    position: absolute;
-    top: 8px;
-    left: -40px;
-  }
-
-  .mobile-top-bar__home-button {
-    display: block;
-    position: absolute;
-    top: 14px;
-    left: 16px;
-  }
-
-  .header-mobile .nav {
-    display: block;
-    transition: all .3s;
-  }
-
-  header.open-header .nav:before {
-    content: none;
-  }
-
-  header.open-header {
-    .h1.logo a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: transparent; 
-    background: url(#{$img-path}/common/logo.png) no-repeat 0 center;
-    height: 100%;
-    }
-  }
-}
-*/

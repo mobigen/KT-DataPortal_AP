@@ -6,7 +6,7 @@
         <base-button class="button--link pagination__button" @click="gotoFirst">
           <svg-icon
             class="svg-icon"
-            name="chevron-double-left-medium"
+            name="chevron-double-left"
             aria-hidden="true"
           ></svg-icon>
           <span class="hidden">맨 처음으로 이동</span>
@@ -16,7 +16,7 @@
         <base-button class="button--link pagination__button" @click="gotoPrev">
           <svg-icon
             class="svg-icon"
-            name="chevron-left-medium"
+            name="chevron-left"
             aria-hidden="true"
           ></svg-icon>
           <span class="hidden">이전 페이지로 이동</span>
@@ -32,6 +32,7 @@
             :class="
               paging.page === getPageNo(vp) ? 'pagination__link--selected' : ''
             "
+            title="현재페이지"
             >{{ getPageNo(vp) }}</a
           >
         </li>
@@ -41,7 +42,7 @@
         <base-button class="button--link pagination__button" @click="gotoNext">
           <svg-icon
             class="svg-icon"
-            name="chevron-right-medium"
+            name="chevron-right"
             aria-hidden="true"
           ></svg-icon>
           <span class="hidden">다음 페이지로 이동</span>
@@ -51,7 +52,7 @@
         <base-button class="button--link pagination__button" @click="gotoEnd">
           <svg-icon
             class="svg-icon"
-            name="chevron-double-right-medium"
+            name="chevron-double-right"
             aria-hidden="true"
           ></svg-icon>
           <span class="hidden">맨 마지막으로 이동</span>
