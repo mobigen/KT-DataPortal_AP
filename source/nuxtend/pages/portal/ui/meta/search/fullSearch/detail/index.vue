@@ -871,8 +871,8 @@ export default {
   //   let rowId = route.query.datasetId;
   //   // TODO : asyncData 배포후에 동작 하는거 확인되면 아래 코드 사용
   //   rowId = "01bfea44-5b42-41e7-9901-8fad6997969c";
-  //   await store.dispatch("meta/keyword-search/getDetail", rowId);
-  //   const detail = store.getters["meta/keyword-search/detail"];
+  //   await store.dispatch("meta/search/search/getDetail", rowId);
+  //   const detail = store.getters["meta/search/search/detail"];
   //   return { detail };
   // },
   computed: {
@@ -881,7 +881,7 @@ export default {
     }),
     ...mapGetters("meta/search/search", ["sampleData"]),
     detail() {
-      const vuex = this.$store.getters["meta/keyword-search/detail"];
+      const vuex = this.$store.getters["meta/search/search/detail"];
 
       if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
         this.ctgry = vuex.body.ctgry.split(",").pop();
@@ -929,7 +929,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("meta/keyword-search", ["getDetail", "setSearchKeyword"]),
+    ...mapActions("meta/search/search", ["getDetail", "setSearchKeyword"]),
     ...mapActions("meta/search/search", ["getSampleData"]),
     togglePreview: function () {
       this.isPreview = !this.isPreview;
@@ -1013,7 +1013,7 @@ export default {
     this.bizDatasetId = this.$route.query.datasetId;
 
     this.getDetail(this.bizDatasetId);
-    this.getSampleData(rowId);
+    this.getSampleData(this.bizDatasetId);
   },
   mounted() {
     this.resetRequestData();
