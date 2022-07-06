@@ -1,0 +1,104 @@
+{
+  "mainProductInfo": {
+    "dataType": "교통",
+    "category": "자동차부품",
+    "dataLocation": "내부",
+    "dataSource": "도로교통공단",
+    "fileType": ["CSV", "XML"],
+    "title": "도로교통공단_결빙사고 다발지역",
+    "body": "노면상태가 '서리/결빙'인 교통사고에 대한 사고다발지역 정보",
+    "date": "2022-05-09",
+    "updateDate": "YYYY-MM-DD",
+    "download": 180,
+    "hit": 200
+  },
+  "providerInfo": {
+    "header": [
+      {
+        "column_name": "provider"
+      },
+      {
+        "column_name": "department"
+      },
+      {
+        "column_name": "manager"
+      },
+      {
+        "column_name": "deptPhoneNo"
+      }
+    ],
+    "body": {
+      "provider": "도로교통공사",
+      "department": "데이터융합처",
+      "manager": "홍길동",
+      "deptPhoneNo": "02-234-5678"
+    }
+  },
+  "dataInfo": {
+    "header": [
+      {
+        "column_name": "category"
+      },
+      {
+        "column_name": "license"
+      },
+      {
+        "column_name": "dataType"
+      },
+      {
+        "column_name": "language"
+      },
+      {
+        "column_name": "basisPossess"
+      },
+      {
+        "column_name": "collectionMethod"
+      },
+      {
+        "column_name": "date"
+      },
+      {
+        "column_name": "dateUpdateCycle"
+      },
+      {
+        "column_name": "updateDate"
+      },
+      {
+        "column_name": "updateDueDate"
+      },
+      {
+        "column_name": "formProvision"
+      },
+      {
+        "column_name": "licenseRange"
+      },
+      {
+        "column_name": "provideUrl"
+      },
+      {
+        "column_name": "description"
+      },
+      {
+        "column_name": "keyword"
+      }
+    ],
+    "body": {
+      "category": "자동차제조 > 스마트팩토리",
+      "license": "국토교통부34개",
+      "dataType": "데이터셋",
+      "language": "한국어",
+      "basisPossess": null,
+      "collectionMethod": "수시(1회성 데이터)",
+      "date": "2021.06.01",
+      "dateUpdateCycle": "수시(1회성 데이터)",
+      "updateDate": "2022.03.22",
+      "updateDueDate": "2022.03.22",
+      "formProvision": "기관 자체 또는 다운로드",
+      "licenseRange": "제한없음",
+      "provideUrl": "http://openapi/grid/selectOpenApiSvcDtlView.do?apiSvcCd=CM",
+      "description": "지역별 결빙사고다발지역에 대한 주요 정보를 제공합니다.",
+      "keyword": "결빙,키워드,다발지역,교통"
+    }
+  },
+  "mainTextInfo": "Editor작성 내용 노출"
+}
