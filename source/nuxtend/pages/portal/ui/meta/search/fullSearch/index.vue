@@ -354,9 +354,9 @@ export default {
   layout: "kt/kt",
   computed: {
     ...mapGetters({
-      contents: "meta/keyword-search/contents",
+      contents: "meta/search/search/contents",
       CONSTANTS: "defaults/constants/CONSTANTS",
-      keyword: "meta/keyword-search/searchKeyword"
+      keyword: "meta/search/search/searchKeyword"
     }),
     ...mapGetters("meta/search/search", [
       "searchFilterList",
@@ -437,7 +437,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("meta/keyword-search", ["getContents", "setSearchKeyword"]),
+    ...mapActions("meta/search/search", ["getContents", "setSearchKeyword"]),
     ...mapActions("meta/search/search", [
       "getSearchFilterList",
       "changeSearchFilterList"

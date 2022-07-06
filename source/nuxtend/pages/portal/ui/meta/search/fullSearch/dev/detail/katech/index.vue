@@ -984,7 +984,7 @@
     layout: "katech/katech",
     computed: {
       detail() {
-        const vuex = this.$store.getters["meta/keyword-search/detail"];
+        const vuex = this.$store.getters["meta/search/search/detail"];
 
         if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
           this.popupTitle = vuex.body.data_nm;
@@ -1005,7 +1005,7 @@
       };
     },
     methods: {
-      ...mapActions("meta/keyword-search", ["getDetail", "setSearchKeyword"]),
+      ...mapActions("meta/search/search", ["getDetail", "setSearchKeyword"]),
       ...mapActions("meta/bizMeta", ["getBizMetaDetail"]),
       togglePreview: function () {
         this.isPreview = !this.isPreview;

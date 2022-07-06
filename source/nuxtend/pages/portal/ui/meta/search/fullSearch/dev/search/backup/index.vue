@@ -498,11 +498,11 @@ export default {
   name: "Index",
   layout: "katech/katech",
   async asyncData({ store }) {
-    await store.dispatch("meta/keyword-search/getContents");
+    await store.dispatch("meta/search/search/getContents");
   },
   computed: {
     ...mapGetters({
-      contents: "meta/keyword-search/contents"
+      contents: "meta/search/search/contents"
     })
   },
   components: {
