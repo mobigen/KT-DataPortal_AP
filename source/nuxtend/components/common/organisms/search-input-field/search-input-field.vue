@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="search-input-field">
     <div class="search-input-field__inner">
-      <form action="">
+      <form @submit.prevent>
         <fieldset>
           <legend class="hidden">검색 정보입력</legend>
           <div class="search-input-field__search">

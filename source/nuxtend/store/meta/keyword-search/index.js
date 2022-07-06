@@ -69,12 +69,6 @@ export const actions = {
       });
   },
   async getDetail({ commit, dispatch }, rowKey) {
-    // dispatch("setUrl");
-    // await this.$axios
-    //   .get(`${url}/getBizMetaDetail?datasetId=` + rowKey)
-    //   .then((d) => {
-    //     commit("setDetail", d);
-    //   });
     await this.$axios
       .get(
         this.$config.ROUTE_API_META_PREFIX +

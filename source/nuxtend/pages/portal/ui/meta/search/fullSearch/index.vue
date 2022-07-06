@@ -16,8 +16,8 @@
             있습니다.
           </template>
         </subject>
-        <!-- content-top : 데이터 검색/ 상세-->
-        <div class="content-top">
+        <!-- contents-top : 데이터 검색/ 상세-->
+        <div class="contents-top">
           <!-- contents-top__search : 통합검색 -->
           <div class="contents-top__search">
             <search-input-field
@@ -52,7 +52,7 @@
               v-slot:resultSuccessTrueText
             >
               <p class="contents-search-result__text">
-                <strong>{{ searchKeyword }}</strong
+                <mark>{{ searchKeyword }}</mark
                 >에 대한 검색결과, 총
                 <strong>{{ contents.totalcount }}</strong> 건 입니다.
               </p>
@@ -60,16 +60,16 @@
 
             <template v-else v-slot:resultSuccessTrueText>
               <span class="contents-search-result__text">
-                <strong
+                <mark
                   v-for="(item, index) in searchKeywordList"
                   :key="'searchKeyword_' + index"
                   >'{{ item }}'
                   <span
                     v-if="searchKeywordList.length - 1 !== index"
                     style="color: black"
-                    >&</span
-                  >
-                </strong>
+                    >&
+                  </span>
+                </mark>
                 검색 결과, 총 <strong>{{ contents.totalcount }}</strong> 건
                 입니다.
               </span>
@@ -93,7 +93,7 @@
                 <div class="filter-group__options">
                   <!-- 토글스위치 -->
                   <base-switch @isSwitchChanged="isSwitchChanged1">
-                    <span>전체 선택</span>
+                    <span class="toggle-switch__label">전체 선택</span>
                   </base-switch>
                   <!-- //토글스위치 -->
                   <div class="filter-group__notice">
@@ -160,7 +160,7 @@
                 <div class="filter__options">
                   <!-- 토글스위치 -->
                   <base-switch @isSwitchChanged="isSwitchChanged2">
-                    <span>전체 선택</span>
+                    <span class="toggle-switch__label">전체 선택</span>
                   </base-switch>
                   <!-- //토글스위치 -->
                 </div>
@@ -230,7 +230,7 @@
               <!--//탭 -->
               <!-- heading-group -->
               <div class="heading-group">
-                <h4>
+                <h4 class="heading-group__title">
                   전체<span>
                     (<strong>{{ contents.totalcount }}</strong> 건)
                   </span>
@@ -276,6 +276,37 @@
                     @keywordClick="dataBoxKeywordClick"
                     @myFavoriteDataClick="myFavoriteDataClick"
                   ></search-list>
+
+                  <!-- data-none : 검색된 데이터가 없는경우 -->
+                  <div v-if="contents.totalcount === 0" class="data-none">
+                    <p
+                      class="data-none__title"
+                      v-if="searchKeywordList.length < 2"
+                    >
+                      <mark>{{ searchKeyword }}</mark>
+                      에 대한 검색 결과가 없습니다.
+                    </p>
+                    <p class="data-none__title" v-else>
+                      <template v-for="(item, index) in searchKeywordList">
+                        <mark :key="'searchKeyword_' + index">{{ item }}</mark>
+                        <span
+                          v-if="searchKeywordList.length - 1 !== index"
+                          style="color: black"
+                          >&
+                        </span>
+                      </template>
+                      에 대한 검색 결과가 없습니다.
+                    </p>
+                    <p class="data-none__description">
+                      정확한 검색어인지 확인하시고 다시 검색해 주세요.
+                      <span
+                        >단어의 철자, 보다 일반적인 검색어로 다시 검색해 보세요.
+                        <br />
+                        검색어의 띄어쓰기를 다르게 해보세요.</span
+                      >
+                    </p>
+                  </div>
+                  <!-- // data-none  -->
                 </div>
               </div>
               <!-- // data-result -->
@@ -384,9 +415,9 @@ export default {
         { label: "다운로드순", option: "download" }
       ],
       tabList: [
-        { num: "999+", title: "서비스데이터" },
-        { num: "133", title: "원천데이터" },
-        { num: "0", title: "메타데이터" }
+        { num: "(50)", title: "데이터컨텐츠" },
+        { num: "(184)", title: "원천데이터" },
+        { num: "(56)", title: "메타데이터" }
       ],
       selectCategoryList: [
         { key: "12", text: "12개씩" },
