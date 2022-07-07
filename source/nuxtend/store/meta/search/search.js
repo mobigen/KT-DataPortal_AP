@@ -19,7 +19,8 @@ export const state = () => ({
   recommendData: [],
   dataUseCases: {},
   requireObj: {},
-  sampleData: {}
+  sampleData: {},
+  dataQualityScore: {}
 });
 
 export const getters = {
@@ -61,6 +62,9 @@ export const getters = {
   },
   sampleData(state) {
     return state.sampleData;
+  },
+  dataQualityScore(state) {
+    return state.dataQualityScore;
   }
 };
 
@@ -133,6 +137,9 @@ export const mutations = {
   },
   setSampleData(state, data) {
     state.sampleData = data;
+  },
+  getDataQualityScore(state, data) {
+    state.dataQualityScore = data;
   }
 };
 
@@ -243,6 +250,7 @@ export const actions = {
     commit("setDataUseCases", _dataUseCases);
   },
   getSampleData({ commit }, rowId) {
+    // TODO : TEST CODE
     rowId = 1;
     this.$axios
       .get(
@@ -254,11 +262,23 @@ export const actions = {
         commit("setSampleData", d);
       });
   },
-
   getRequireObj({ commit }, { searchCriteria, searchKeyword }) {
     console.log(searchCriteria);
     console.log(searchKeyword);
 
     commit("setRequireObj", _requireObject);
+  },
+  getDataQualityScore({ commit }, rowId) {
+    console.log(rowId);
+    rowId = 1;
+    this.$axios
+      .get(
+        this.$config.ROUTE_API_META_PREFIX +
+          "/getBizMetaDetailDq?datasetId=" +
+          rowId
+      )
+      .then((d) => {
+        commit("getDataQualityScore", d);
+      });
   }
 };
