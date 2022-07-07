@@ -43,7 +43,6 @@ export default function ({ $axios, $config, $cookies, store, redirect }) {
   $axios.onResponse(async (response) => {
     hideLoader();
     let data = response.data;
-
     /**
      * TODO : API Router에서 조회하는 경우 response가 달라서 임시로 따로 처리하였습니다.
      */
@@ -52,10 +51,23 @@ export default function ({ $axios, $config, $cookies, store, redirect }) {
     }
 
     if (data.hasOwnProperty("result") && data.result === 0) {
+      const CONSTANTS = store.getters["defaults/constants/CONSTANTS"];
       let errorMessage = data.errorMessage;
+      let urlCode = response.config.url.split("/").pop().split("?").shift();
+
       if (errorMessage === null || errorMessage === "") {
         errorMessage = "여기에 시스템 에러 메세지를 넣어야 함";
       }
+
+      if (
+        CONSTANTS.MSG[urlCode] !== undefined &&
+        CONSTANTS.MSG[urlCode][errorMessage] !== undefined
+      ) {
+        errorMessage = CONSTANTS.MSG[urlCode][errorMessage];
+      } else if (CONSTANTS.MSG[errorMessage] !== undefined) {
+        errorMessage = CONSTANTS.MSG[errorMessage];
+      }
+
       await errorAlert({ content: errorMessage });
       return Promise.resolve(false);
     }
