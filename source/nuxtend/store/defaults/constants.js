@@ -115,6 +115,13 @@ export const state = () => ({
         REMOTE_CALL: "REMOTE CALL",
         MESSAGE_PASSING: "MESSAGE PASSING"
       }
+    },
+    DETAIL: {
+      CHART: "CHART",
+      SAMPLE: "SAMPLE",
+      DIAGRAM: "DIAGRAM",
+      RULE: "RULE",
+      INQUIRY: "INQUIRY"
     }
   })
 });

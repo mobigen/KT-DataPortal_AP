@@ -159,7 +159,6 @@
 }
 
 .text-input-group__clear-button {
-  @include button-normal;
   width: rem(36px);
   height: auto;
   padding: 0;

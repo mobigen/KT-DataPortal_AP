@@ -184,7 +184,7 @@
               <li
                 class="tab__item"
                 v-for="(item, index) in tabList"
-                :class="item.selected ? 'tab__item--selected' : ''"
+                :class="tabSelected === item.id ? 'tab__item--selected' : ''"
                 :key="index"
               >
                 <a
@@ -192,9 +192,10 @@
                   class="tab__button"
                   role="tab"
                   aria-selected="false"
+                  @click="tabClick(item.id)"
                 >
                   <div class="tab__button-text">
-                    {{ item.title }}
+                    {{ $t("tab." + item.id) }}
                   </div>
                 </a>
               </li>
@@ -209,34 +210,42 @@
             <div class="contents__detail-chart">
               <ul class="chart">
                 <li>
-                  <div class="chart__graph"></div>
+                  <div class="chart__graph">
+                    {{ dataQualityScore.timeliness_score }}
+                  </div>
                   <div class="chart__information">
-                    <strong class="chart__title">적시성</strong>
+                    <strong class="chart__title">적시성 (timeliness)</strong>
                     <p class="chart__description">
                       전체건수, 그룹건수, 최대값, 최소값, 중복건수, 오류건수
                     </p>
                   </div>
                 </li>
                 <li>
-                  <div class="chart__graph"></div>
+                  <div class="chart__graph">
+                    {{ dataQualityScore.validation_score }}
+                  </div>
                   <div class="chart__information">
-                    <strong class="chart__title">유효성</strong>
+                    <strong class="chart__title">유효성 (validation)</strong>
                     <p class="chart__description">
                       데이터 형식(도메인)과 데이터 값의 일치 여부 확인
                     </p>
                   </div>
                 </li>
                 <li>
-                  <div class="chart__graph"></div>
+                  <div class="chart__graph">
+                    {{ dataQualityScore.completeness_score }}
+                  </div>
                   <div class="chart__information">
-                    <strong class="chart__title">완전성</strong>
+                    <strong class="chart__title">완전성 (completeness)</strong>
                     <p class="chart__description">
                       Null건수, 공백건수, 컬럼내 그룹건수 등 업무규칙(BR) 반영
                     </p>
                   </div>
                 </li>
                 <li>
-                  <div class="chart__graph"></div>
+                  <div class="chart__graph">
+                    {{ dataQualityScore.usability_score }}
+                  </div>
                   <div class="chart__information">
                     <strong class="chart__title">유용성</strong>
                     <p class="chart__description">
@@ -245,7 +254,9 @@
                   </div>
                 </li>
                 <li>
-                  <div class="chart__graph"></div>
+                  <div class="chart__graph">
+                    {{ dataQualityScore.security_score }}
+                  </div>
                   <div class="chart__information">
                     <strong class="chart__title">보안성</strong>
                     <p class="chart__description">
@@ -276,21 +287,7 @@
                   :use-checkbox="false"
                   :view-detail="sampleData"
                   :header-has-locale="false"
-                  :view-header-list="[
-                    'cust_pty_sbt_id',
-                    'svc_cont_id',
-                    'conn_date',
-                    'timezn_div_cd',
-                    'app_nm',
-                    'app_cmpn_nm',
-                    'ctgry_nm',
-                    'ctgry_dtl_nm',
-                    'svc_nm',
-                    'log_cascnt',
-                    'byte_size',
-                    'etl_dt',
-                    'base_date'
-                  ]"
+                  :view-header-list="sampleDataViewHeaderList"
                   rowKey="cust_pty_sbt_id"
                   :colgroup-array="['150px', '230px', 'auto:span=11']"
                   @buttonAction=""
@@ -849,6 +846,8 @@
   </div>
 </template>
 
+<i18n src="./index.json"></i18n>
+
 <script type="text/javascript">
 import BaseBadge from "@component/common/atoms/base-badge/base-badge.vue";
 import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox.vue";
@@ -880,9 +879,24 @@ export default {
   // },
   computed: {
     ...mapGetters({
-      contents: "kt/keyword-search/contents"
+      CONSTANTS: "defaults/constants/CONSTANTS"
     }),
-    ...mapGetters("meta/search/search", ["sampleData"]),
+    sampleData() {
+      const vuex = this.$store.getters["meta/search/search/sampleData"];
+
+      if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+        const h = vuex.header;
+        this.sampleDataViewHeaderList = h.map((hEl) => {
+          return hEl.column_name;
+        });
+      } else {
+        return {
+          header: [],
+          false: []
+        };
+      }
+      return vuex;
+    },
     detail() {
       const vuex = this.$store.getters["meta/search/search/detail"];
 
@@ -901,21 +915,43 @@ export default {
         this.myFavoriteData = "y";
       }
       return vuex;
+    },
+    dataQualityScore() {
+      const vuex = this.$store.getters["meta/search/search/dataQualityScore"];
+
+      if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+        return vuex.body[0];
+      }
+      return {
+        header: [],
+        body: []
+      };
     }
   },
   data() {
     return {
       isPreview: false,
       tabList: [
-        { href: "#articleChart", title: "데이터 상세정보", selected: true },
-        { href: "#articleSample", title: "샘플 데이터", selected: false },
-        { href: "#articleDiagram", title: "활용사례", selected: false },
         {
-          href: "#articleRule",
-          title: "법률검토 및 규정안내",
-          selected: false
+          id: "CHART",
+          href: "#articleChart"
         },
-        { href: "#articleInquiry", title: "데이터 문의", selected: false }
+        {
+          id: "SAMPLE",
+          href: "#articleSample"
+        },
+        {
+          id: "DIAGRAM",
+          href: "#articleDiagram"
+        },
+        {
+          id: "RULE",
+          href: "#articleRule"
+        },
+        {
+          id: "INQUIRY",
+          href: "#articleInquiry"
+        }
       ],
       toggleButtonText: "test",
       bizDatasetId: null,
@@ -928,12 +964,17 @@ export default {
       requestData: {},
       lawEvlConfYn: null,
       confirmButtonDisabled: true,
-      myFavoriteData: null
+      myFavoriteData: null,
+      sampleDataViewHeaderList: [],
+      tabSelected: "CHART"
     };
   },
   methods: {
     ...mapActions("meta/search/search", ["getDetail", "setSearchKeyword"]),
-    ...mapActions("meta/search/search", ["getSampleData"]),
+    ...mapActions("meta/search/search", [
+      "getSampleData",
+      "getDataQualityScore"
+    ]),
     togglePreview: function () {
       this.isPreview = !this.isPreview;
     },
@@ -1009,13 +1050,32 @@ export default {
       } else {
         this.myFavoriteData = "n";
       }
+    },
+    tabClick(tabId) {
+      this.tabSelected = tabId;
+
+      if (tabId === this.CONSTANTS.DETAIL.CHART) {
+        // 데이터 상세정보
+        this.getDataQualityScore(this.bizDatasetId);
+      } else if (tabId === this.CONSTANTS.DETAIL.SAMPLE) {
+        // 샘플 데이터
+        this.getSampleData(this.bizDatasetId);
+      } else if (tabId === this.CONSTANTS.DETAIL.DIAGRAM) {
+        // 활용사례
+      } else if (tabId === this.CONSTANTS.DETAIL.RULE) {
+        // 법률검토 및 규정안내
+      } else if (tabId === this.CONSTANTS.DETAIL.INQUIRY) {
+        // 데이터 문의
+      }
     }
   },
   created() {
     this.bizDatasetId = this.$route.query.datasetId;
 
     this.getDetail(this.bizDatasetId);
-    this.getSampleData(this.bizDatasetId);
+
+    // 첫번째 tab을 클릭해준다.
+    this.tabClick(this.tabList[0].id);
   },
   mounted() {
     this.resetRequestData();

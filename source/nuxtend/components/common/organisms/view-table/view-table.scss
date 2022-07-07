@@ -1,6 +1,22 @@
 // TODO : 개발자 임의 구현
 // 검색-상세 페이지의 index.scss 파일을 붙여넣디.
+// 07.06 공통 style이 존재함으로 불필요한 scss 소스임에 주석처리합니다.
+// view--table component 스타일 문제점 임시 보완.
+.contents__detail--temp {
+  table {
+    border-bottom-color: $line4;
+  }
 
+  & ~ & > .table-wrap {
+    margin-top: 0;
+
+    table {
+      border-top: 0;
+    }
+  }
+}
+
+/*
 .contens {
   padding-top: 0;
 }
@@ -282,13 +298,13 @@
 
 }
 
-/* first row */
+// first row
 .formbox th {
   text-align: left;
   color: $text-01;
 }
 
-/* 가로형 */
+// 가로형
 .formbox--row {
   position: relative;
 }
@@ -317,7 +333,7 @@
   border-right: none;
 }
 
-/* 세로형 */
+// 세로형
 .formbox--col tr {
   height: rem(50px);
 }
@@ -654,3 +670,4 @@
 
 
 }
+*/
