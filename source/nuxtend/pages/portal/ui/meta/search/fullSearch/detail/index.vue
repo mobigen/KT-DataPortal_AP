@@ -276,21 +276,7 @@
                   :use-checkbox="false"
                   :view-detail="sampleData"
                   :header-has-locale="false"
-                  :view-header-list="[
-                    'cust_pty_sbt_id',
-                    'svc_cont_id',
-                    'conn_date',
-                    'timezn_div_cd',
-                    'app_nm',
-                    'app_cmpn_nm',
-                    'ctgry_nm',
-                    'ctgry_dtl_nm',
-                    'svc_nm',
-                    'log_cascnt',
-                    'byte_size',
-                    'etl_dt',
-                    'base_date'
-                  ]"
+                  :view-header-list="sampleDataViewHeaderList"
                   rowKey="cust_pty_sbt_id"
                   :colgroup-array="['150px', '230px', 'auto:span=11']"
                   @buttonAction=""
@@ -879,7 +865,22 @@ export default {
     ...mapGetters({
       contents: "kt/keyword-search/contents"
     }),
-    ...mapGetters("meta/search/search", ["sampleData"]),
+    sampleData() {
+      const vuex = this.$store.getters["meta/search/search/sampleData"];
+
+      if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+        const h = vuex.header;
+        this.sampleDataViewHeaderList = h.map((hEl) => {
+          return hEl.column_name;
+        });
+      } else {
+        return {
+          header: [],
+          false: []
+        };
+      }
+      return vuex;
+    },
     detail() {
       const vuex = this.$store.getters["meta/search/search/detail"];
 
@@ -925,7 +926,8 @@ export default {
       requestData: {},
       lawEvlConfYn: null,
       confirmButtonDisabled: true,
-      myFavoriteData: null
+      myFavoriteData: null,
+      sampleDataViewHeaderList: []
     };
   },
   methods: {

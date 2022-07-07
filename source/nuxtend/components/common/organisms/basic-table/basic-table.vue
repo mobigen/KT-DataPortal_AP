@@ -255,7 +255,6 @@ export default {
   },
   computed: {
     detailData() {
-      console.log(this.viewDetail);
       // viewDetail 값이 없거나, header(or body) 가 없으면, 기본값을 만들어 return 해준다.
       return this.viewDetail === undefined ||
         !Object.prototype.hasOwnProperty.call(this.viewDetail, "header")
