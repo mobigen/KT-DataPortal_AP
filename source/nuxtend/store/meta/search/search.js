@@ -1,6 +1,5 @@
 import _searchTagList from "./_searchTagList.json";
 import _searchFilterList from "./_searchFilterList.json";
-import _sampleData from "./_sampleData.json";
 import _searchResultList from "./_searchResultList.json";
 import _searchDetailObject from "./_searchDetailObject.json";
 import _fileData from "./_fileData.json";
@@ -20,7 +19,8 @@ export const state = () => ({
   recommendData: [],
   dataUseCases: {},
   requireObj: {},
-  sampleData: {}
+  sampleData: {},
+  dataQualityScore: {}
 });
 
 export const getters = {
@@ -62,6 +62,9 @@ export const getters = {
   },
   sampleData(state) {
     return state.sampleData;
+  },
+  dataQualityScore(state) {
+    return state.dataQualityScore;
   }
 };
 
@@ -134,6 +137,9 @@ export const mutations = {
   },
   setSampleData(state, data) {
     state.sampleData = data;
+  },
+  getDataQualityScore(state, data) {
+    state.dataQualityScore = data;
   }
 };
 
@@ -244,19 +250,35 @@ export const actions = {
     commit("setDataUseCases", _dataUseCases);
   },
   getSampleData({ commit }, rowId) {
-    // TODO : sampleData api 구현 완료시, _sampleData.json 삭제 후 api 연결 코드로 대체.
-    // this.$axios
-    //   .get(this.$config.ROUTE_API_META_PREFIX + "/getSampleData", {'datasetId' : rowId}})
-    //   .then((d) => {
-    //     commit("setSampleData", d);
-    //   });
-    commit("setSampleData", _sampleData);
+    // TODO : TEST CODE
+    rowId = 1;
+    this.$axios
+      .get(
+        this.$config.ROUTE_API_META_PREFIX +
+          "/getBizMetaDetailSample?datasetId=" +
+          rowId
+      )
+      .then((d) => {
+        commit("setSampleData", d);
+      });
   },
-
   getRequireObj({ commit }, { searchCriteria, searchKeyword }) {
     console.log(searchCriteria);
     console.log(searchKeyword);
 
     commit("setRequireObj", _requireObject);
+  },
+  getDataQualityScore({ commit }, rowId) {
+    console.log(rowId);
+    rowId = 1;
+    this.$axios
+      .get(
+        this.$config.ROUTE_API_META_PREFIX +
+          "/getBizMetaDetailDq?datasetId=" +
+          rowId
+      )
+      .then((d) => {
+        commit("getDataQualityScore", d);
+      });
   }
 };
