@@ -1,68 +1,70 @@
 <template lang="html">
-  <div>
+  <div class="contents__detail--temp">
     <div class="heading-group" v-if="tableTitle">
       <h3 class="heading-group__title">{{ tableTitle }}</h3>
     </div>
 
-    <table class="formbox">
-      <colgroup v-for="c in colgroupArray">
-        <col :style="'width: ' + c" />
-      </colgroup>
-      <tbody>
-        <template v-for="(h, i) in tableHeader">
-          <tr v-if="i % tdCntInTr === 0" :key="'body_tr_' + i">
-            <template v-for="tdCnt in tdCntInTr">
-              <th scope="row" :key="'tdCnt_th_' + i + '_' + (tdCnt - 1)">
-                {{ getHeaderLocale(tableHeader[i + (tdCnt - 1)]) }}
-              </th>
-              <td
-                :key="'tdCnt_td_' + i + '_' + (tdCnt - 1)"
-                :colspan="tdColspan"
-              >
-                <template
-                  v-if="
-                    Object.prototype.hasOwnProperty.call(
-                      valueType,
-                      tableHeader[i + (tdCnt - 1)]
-                    )
-                  "
+    <div class="table-wrap">
+      <table class="formbox">
+        <colgroup v-for="c in colgroupArray">
+          <col :style="'width: ' + c" />
+        </colgroup>
+        <tbody>
+          <template v-for="(h, i) in tableHeader">
+            <tr v-if="i % tdCntInTr === 0" :key="'body_tr_' + i">
+              <template v-for="tdCnt in tdCntInTr">
+                <th scope="row" :key="'tdCnt_th_' + i + '_' + (tdCnt - 1)">
+                  {{ getHeaderLocale(tableHeader[i + (tdCnt - 1)]) }}
+                </th>
+                <td
+                  :key="'tdCnt_td_' + i + '_' + (tdCnt - 1)"
+                  :colspan="tdColspan"
                 >
                   <template
-                    v-if="valueType[tableHeader[i + (tdCnt - 1)]] === 'link'"
-                  >
-                    <a
-                      :href="bodyData[tableHeader[i + (tdCnt - 1)]]"
-                      target="_blank"
-                      title="새창열기"
-                      >{{ bodyData[tableHeader[i + (tdCnt - 1)]] }}</a
-                    >
-                  </template>
-                  <template
-                    v-else-if="
-                      valueType[tableHeader[i + (tdCnt - 1)]] === 'tag'
+                    v-if="
+                      Object.prototype.hasOwnProperty.call(
+                        valueType,
+                        tableHeader[i + (tdCnt - 1)]
+                      )
                     "
                   >
-                    <basic-tag-list
-                      :tagList="
-                        convertTagObj(bodyData[tableHeader[i + (tdCnt - 1)]])
+                    <template
+                      v-if="valueType[tableHeader[i + (tdCnt - 1)]] === 'link'"
+                    >
+                      <a
+                        :href="bodyData[tableHeader[i + (tdCnt - 1)]]"
+                        target="_blank"
+                        title="새창열기"
+                        >{{ bodyData[tableHeader[i + (tdCnt - 1)]] }}</a
+                      >
+                    </template>
+                    <template
+                      v-else-if="
+                        valueType[tableHeader[i + (tdCnt - 1)]] === 'tag'
                       "
-                      previousText="#"
-                      :useCancelButton="false"
-                      tag-class="tag--sm"
-                      span-class="tag__label2"
-                      @tagClick="tagComponentClick"
-                    />
+                    >
+                      <basic-tag-list
+                        :tagList="
+                          convertTagObj(bodyData[tableHeader[i + (tdCnt - 1)]])
+                        "
+                        previousText="#"
+                        :useCancelButton="false"
+                        tag-class="tag--sm"
+                        span-class="tag__label2"
+                        @tagClick="tagComponentClick"
+                      />
+                    </template>
                   </template>
-                </template>
-                <template v-else>
-                  {{ getTdVal(bodyData[tableHeader[i + (tdCnt - 1)]]) }}
-                </template>
-              </td>
-            </template>
-          </tr>
-        </template>
-      </tbody>
-    </table>
+                  <template v-else>
+                    {{ getTdVal(bodyData[tableHeader[i + (tdCnt - 1)]]) }}
+                  </template>
+                </td>
+              </template>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
