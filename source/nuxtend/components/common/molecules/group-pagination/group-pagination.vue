@@ -82,17 +82,29 @@
       </button>
     </div>
 
-    <basic-view-table
-      :headerList="pagingViewTable.header"
-      :dataObj="pagingViewTable.body"
-      viewTableColumnCount="1"
-    ></basic-view-table>
+    <view-table
+      v-if="showTestTable"
+      :colgroup-array="['180px', 'auto']"
+      table-title="페이징 정보"
+      :header-has-locale="false"
+      :view-detail="pagingViewTable"
+      :view-header-list="[
+        'pageSet',
+        'totalCount',
+        'itemsPerPage',
+        'visiblePages',
+        'page',
+        'totalPage'
+      ]"
+      :td-cnt-in-tr="1"
+      :td-colspan="2"
+    ></view-table>
   </div>
 </template>
 <script type="text/javascript">
 import { mapActions } from "vuex";
 import BaseButton from "@common/atoms/base-button/base-button.vue";
-import BasicViewTable from "@component/aiPlatform/basic/basic-view-table";
+import ViewTable from "@common/organisms/view-table/view-table";
 
 export default {
   name: "GroupPagination",
@@ -159,7 +171,7 @@ export default {
       return paging;
     }
   },
-  components: { BaseButton, BasicViewTable },
+  components: { BaseButton, ViewTable },
   watch: {},
   methods: {
     ...mapActions("module/pagination", ["setNewPagination", "setPage"]),
