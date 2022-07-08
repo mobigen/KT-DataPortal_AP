@@ -1065,6 +1065,13 @@ export default {
         path: "/portal/ui/meta/search/fullSearch"
       });
     },
+    tabGotoClick(item, index, refName) {
+      this.tabClick(item.id);
+
+      var ele = this.$refs[refName];
+      var scrollTop = ele.offsetTop - 52;
+      window.scrollTo(0, scrollTop);
+    },
     resetRequestData() {
       this.requestData = {
         biz_dataset_id: this.bizDatasetId,
