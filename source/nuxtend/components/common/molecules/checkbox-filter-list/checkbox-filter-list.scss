@@ -18,7 +18,7 @@
   align-items: center;
   position: relative;
   height: rem(50px);
-  padding: rem(15px);
+  padding: rem(15px); 
   padding: $spacing-2xs $spacing-xs;
   background-color: #fafafa;
 }
@@ -31,7 +31,7 @@
   background-color: $ui-02;
 }
 
-.search-filter__list{
+.search-filter__list{  
   height: 100%;
 }
 
@@ -54,9 +54,9 @@
   margin: $spacing-2xs 0 $spacing-2xs $spacing-xl;
 }
 
-//kt디자인 수정 2022-06-27
+//kt디자인 수정 2022-06-27 
 .search-filter__item {
-  margin-top: rem(10px);
+  margin-top: rem(10px); 
 
   &:first-child {
     margin-top: 0;

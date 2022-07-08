@@ -199,7 +199,7 @@ export default {
 
   i18n: {
     locales: [
-      // { code: "en", iso: "en-US", file: "en.json" },
+      { code: "en", iso: "en-US", file: "en.json" },
       { code: "ko", iso: "ko-KR", file: "ko.json" }
     ],
     defaultLocale: "ko",

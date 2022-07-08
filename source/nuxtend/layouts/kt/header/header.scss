@@ -22,7 +22,7 @@ header {
   background: $ui-02;
 }
 
-.header .header__inner {
+.header .header__inner { 
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -53,7 +53,7 @@ h1.logo a {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: transparent;
+  color: transparent; 
   background: url(#{$img-path}/common/logo_header.png) no-repeat 0 center;
   height: 100%;
   @include font-size("16")
@@ -79,18 +79,18 @@ h1.logo span {
 }
 
 .top-menu__item {
-  position: relative;
-  margin: 0 0 0 rem(15px);
+  position: relative; 
+  margin: 0 0 0 rem(15px); 
   padding: 0 0 0 rem(15px);
-
+  
   &:not(:last-child):after {
-    content: "";
-    position: absolute;
-    right: rem(-15px);
-    top: 50%;
-    width: rem(1px);
+    content: ""; 
+    position: absolute; 
+    right: rem(-15px);  
+    top: 50%; 
+    width: rem(1px); 
     height: rem(12px);
-    margin-top: rem(-7px);
+    margin-top: rem(-7px); 
     background: #ccc;
   }
 }
@@ -117,9 +117,9 @@ h1.logo span {
 }
 .top-menu__input {
   position: relative;
-  border-radius: rem(15px);
+  border-radius: rem(15px); 
   width: 100%;
-  height: rem(28px);
+  height: rem(28px); 
   @include font-size("12");
 }
 
@@ -167,7 +167,7 @@ h1.logo span {
 
 .top-menu-input__search-button:hover {
   background: transparent;
-
+  
   .svg-icon__search-button {
     fill: $secondary;
     background: transparent;
@@ -201,7 +201,7 @@ h1.logo span {
   display: inline-block;
   height: rem(100px);
   width: 100%;
-  padding: rem(40px) 0 0 0;
+  padding: rem(40px) 0 0 0; 
   color: #222;
   text-align: center;
 }
@@ -232,7 +232,7 @@ h1.logo span {
   left: 0;
   width: 0;
   height: 4px;
-  border-radius: 2px;
+  border-radius: 2px; 
   background: $secondary;
   transition: all ease .5s;
 }

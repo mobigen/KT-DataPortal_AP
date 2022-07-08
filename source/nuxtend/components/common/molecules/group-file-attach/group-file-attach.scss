@@ -206,7 +206,7 @@
 .attached-file__item-title {
   /* flex-grow: 1; *///2022-07-01 DEL
   @include font-weight("regular");
-  margin-right: rem(10px);
+  margin-right: rem(10px); 
   color: $text-02;
 
   .svg-icon {

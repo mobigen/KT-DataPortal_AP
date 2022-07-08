@@ -5,11 +5,11 @@
     margin: 0;
 
     .contents-group {
-      width: 100%;
-      .subject,
-      .contents-section {
+      width: 100%;    
+      .subject, 
+      .contents-section {      
         width: rem(1200px);
-        margin: 0 auto;
+        margin: 0 auto;  
       }
 
   }
@@ -29,16 +29,16 @@
     padding-right: rem(70px);
     color: #333;
     border: none;
-    background: transparent;
+    background: transparent; 
     @include font-weight("medium");
     @include font-size("24");
 
     &:hover::before {
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath fill-rule='evenodd' fill='%233bb4c0' d='m22.998 13.944-6.588 6.054-.411-.377-.41.377L9.1 13.944l.899-.945 6 5.477 6-5.477.999.945z'/%3E%3C/svg%3E") no-repeat center center;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath fill-rule='evenodd' fill='%233bb4c0' d='m22.998 13.944-6.588 6.054-.411-.377-.41.377L9.1 13.944l.899-.945 6 5.477 6-5.477.999.945z'/%3E%3C/svg%3E") no-repeat center center; 
     }
 
     &:hover::after {
-      border-color: $primary;
+      border-color: $primary; 
     }
 
     &:before {
@@ -51,9 +51,9 @@
       position: absolute;
       top: calc(50% - 16px);
       right: rem(12px);
-      z-index: 1;
+      z-index: 1; 
     }
-
+    
     &::after {
       content: "";
       position: absolute;
@@ -84,7 +84,7 @@
     display: none;
 
     &.contents-top__filter--open {
-      display: block;
+      display: block; 
       width: rem(1000px);
       margin: 0 auto;
     }
@@ -151,12 +151,12 @@
     background: $ui-02;
     color: $text-01;
     @include font-size("14");
-
+  
     &:hover {
       border: 1px solid $secondary;
       color: $secondary;
     }
-
+  
     .detail__delete-button {
       position: absolute;
       top: 50%;
@@ -166,14 +166,14 @@
       width: rem(16px);
       height: rem(16px);
       background: none;
-
+  
       .svg-icon {
         width: rem(16px);
         height: rem(16px);
-      }
-
+      }    
+  
     }
-
+      
   }
 
   .detail__reset-button {
@@ -186,7 +186,7 @@
     @include font-weight("regular");
     color: $text-02;
     padding-left: rem(24px);
-    background: $ui-02 url(#{$img-path}/common/icon.png) no-repeat rem(36px) rem(-218px);
+    background: $ui-02 url(#{$img-path}/common/icon.png) no-repeat rem(36px) rem(-218px); 
 
     &:hover {
       background: $ui-02 url(#{$img-path}/common/icon.png) no-repeat rem(36px) rem(-218px);
@@ -213,13 +213,13 @@
   height: rem(40px);
 
   .toggle-switch {
-
+    
     .toggle-switch__label {
       @include font-size("16");
       @include font-weight("medium");
       color: $ui-01;
       padding: 0 rem(10px);
-    }
+    } 
   }
 }
 
@@ -242,13 +242,13 @@
 
 //통합검색 결과없음
 .data-none {
-  padding: rem(120px) 0;
+  padding: rem(120px) 0; 
   text-align: center;
 
-  &:before {
+  &:before {       
     content: "";
     display: block;
-    margin: 0 auto 37px;
+    margin: 0 auto 37px; 
     width: rem(94px);
     height: rem(94px);
     background: url(#{$img-path}/icon/no-data.svg) no-repeat 0 0;
@@ -260,10 +260,10 @@
     margin-bottom: rem(20px);
     mark {
       margin-right: rem(5px);
-      &::before {
+      &::before {            
         content: "‘";
       }
-      &::after {
+      &::after {            
         content: "’";
       }
 
@@ -277,11 +277,11 @@
       display: block;
       @include font-size("14");
       @include font-weight("medium");
-      padding-top: rem(10px);
+      padding-top: rem(10px); 
       color: $light;
 
     }
-  }
+  }  
 
 }
 
@@ -324,7 +324,7 @@
 .options-sort {
   display: flex;
   align-items: center;
-}
+} 
 
 .contents__pagination {
   padding: rem(60px) 0 rem(20px);

@@ -14,8 +14,8 @@
           <!-- contents-top__search : 통합검색 -->
           <div class="contents-top__search">
             <search-input-field
-            :searchKeyword="searchKeyword"
-            :use-recent-search="true"
+            :searchKeyword="searchKeyword" 
+            :use-recent-search="true" 
             :use-inner-search="true"></search-input-field>
             <div class="contents-top__recommend">
               <!-- 추천검색어 : 검색어 입력창에 검색어 입력 없이 빈 상태일 때 추천 검색어 노출 -->
@@ -89,7 +89,7 @@
               <div class="filter">
                 <div class="filter__options">
                   <!-- 토글스위치 -->
-                  <base-switch>
+                  <base-switch>                   
                     <span class="toggle-switch__label">전체 선택</span>
                   </base-switch>
                   <!-- //토글스위치 -->
@@ -177,14 +177,14 @@
                   <!-- 검색된 목록 리스트 -->
                   <!-- TODO: 실제 search-list 연동 필요 -->
                   <search-list :list="contents"></search-list>
-
+                  
                   <!-- data-none : 검색된 데이터가 없는경우 -->
                   <div class="data-none">
                     <p class="data-none__title">
-                      <mark>검색조건MARK</mark>에 대한 검색 결과가 없습니다.
+                      <mark>검색조건MARK</mark>에 대한 검색 결과가 없습니다. 
                     </p>
                     <p class="data-none__description">정확한 검색어인지 확인하시고 다시 검색해 주세요.
-                      <span>단어의 철자, 보다 일반적인 검색어로 다시 검색해 보세요. <br>
+                      <span>단어의 철자, 보다 일반적인 검색어로 다시 검색해 보세요. <br> 
                     검색어의 띄어쓰기를 다르게 해보세요.</span>
                     </p>
                   </div>
@@ -258,7 +258,7 @@ export default {
           PRNTS_ID: "prnts_id" // parent key
         }
       },
-
+    
       tabList: [
         { num: "(50)", title: "데이터컨텐츠" },
         { num: "(184)", title: "원천데이터" },
