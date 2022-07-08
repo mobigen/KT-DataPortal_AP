@@ -746,7 +746,7 @@
     <Dialog
       dialog-name="requestDialog"
       :width="'970px'"
-      :height="'800px'"
+      :height="'auto'"
       :title="'데이터 활용 신청하기'"
       confirmButtonText="신청"
       :confirmButtonDisabled="confirmButtonDisabled"
@@ -770,7 +770,10 @@
                 <ul class="data-name-list">
                   <li>
                     {{ dataNm }}
-                    <p class="txt-info" v-if="lawEvlConfYn === 'y'">
+                    <p
+                      class="txt-info color--danger"
+                      v-if="lawEvlConfYn === 'y'"
+                    >
                       <strong class="required">필수</strong>법률검토 필요
                     </p>
                   </li>
@@ -907,7 +910,7 @@ export default {
 
         // TODO: css 확인 위해 임시로 y로 설정
         // this.lawEvlConfYn = vuex.body.law_evl_conf_yn;
-        this.lawEvlConfYn = "y";
+        this.lawEvlConfYn = "n";
 
         this.myFavoriteData = "y";
       }
@@ -1027,19 +1030,18 @@ export default {
 
       this.$axios
         .post(this.$config.ROUTE_API_META_PREFIX + "/insertUseBoardData", data)
-        .catch((error) => {
-          errorAlert({ content: "이미 신청하신 데이터입니다." });
-          return;
+        .then((res) => {
+          if (res !== false) {
+            successAlert({
+              title: "데이터 활용 신청이 완료되었습니다.",
+              content:
+                "활용신청하신 데이터는 마이페이지 > 내 활용내역에서 확인할 수 있습니다."
+            });
+
+            this.resetRequestData();
+            this.$modal.hide(name);
+          }
         });
-
-      successAlert({
-        title: "데이터 활용 신청이 완료되었습니다.",
-        content:
-          "활용신청하신 데이터는 마이페이지 > 내 활용내역에서 확인할 수 있습니다."
-      });
-
-      this.resetRequestData();
-      this.$modal.hide(name);
     },
     myFavoriteDataClick(id, checked) {
       // TODO: myFavoriteData api 호출로 변경 시 수정

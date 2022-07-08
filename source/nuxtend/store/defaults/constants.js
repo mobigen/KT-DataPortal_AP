@@ -32,7 +32,10 @@ export const state = () => ({
       }
     },
     MSG: {
-      PLACEHOLDER: "값을 입력해 주세요."
+      PLACEHOLDER: "값을 입력해 주세요.",
+      insertUseBoardData: {
+        UNIQUE_VIOLATION: "이미 요청하신 데이터입니다."
+      }
     },
     TREE: {
       TREE_TYPE: {
