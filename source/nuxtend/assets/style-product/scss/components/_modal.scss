@@ -34,7 +34,7 @@
   width: calc(100% - 140px);
 }
 
-.modal__head-title-text {  
+.modal__head-title-text {
   @include font-size("20");
   @include font-weight("medium");
   color: $ui-01;
@@ -91,6 +91,10 @@
   padding: rem(30px) rem(30px) rem(40px);
   display: flex;
   justify-content: center;
+
+  .button {
+    min-width: rem(94px);
+  }
 }
 
 .modal__foot .button,

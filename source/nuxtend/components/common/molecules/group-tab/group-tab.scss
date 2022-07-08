@@ -13,12 +13,19 @@
 
   .tab__button-subtext{
     display: inline-block;
-    @include font-weight("regular");
-    color: $ui-01;
+    &::before {
+      content:"(";
+      margin-right: rem(2px);
+    }
+    &::after {
+      content:")";
+      margin-left: rem(2px);
+    }
   }
   .tab__item--selected {
     .tab__button-subtext {
       color: $ui-02;
+      font-weight: inherit;
     }
   }
 }

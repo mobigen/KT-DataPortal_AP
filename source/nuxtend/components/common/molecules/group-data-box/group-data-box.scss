@@ -52,7 +52,17 @@
     min-width: auto;
     margin: 0 rem(40px) 0 rem(30px);
   }
-}
+  min-height: rem(138px);
+  padding: rem(5px) 0;
+
+  &:not(:only-child) {
+    flex: 1 1 0%;
+    min-width: auto;
+  }
+
+  &:not(:only-child):first-child {
+    margin-right: rem(40px);
+  }
 
 .data-box__top-content {
   display: flex;
@@ -166,6 +176,7 @@
     height: rem(38px);
     padding: rem(5px) 0;
   }
+}
 
   .button--primary-line {
     border-width: 2px;

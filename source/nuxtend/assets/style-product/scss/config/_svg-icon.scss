@@ -8,32 +8,10 @@
   fill-rule: evenodd;
   fill: $icon-01;
   color: $icon-01;
+}
 
-  &--primary {
-    fill: $primary;
-  }
-
-  &--secondary {
-    fill: $secondary;
-  }
-
-  &--negative {
-    fill: $negative;
-  }
-
-  &--positive {
-    fill: $positive;
-  }
-  
-  &--success {
-    fill: $success;
-  }
-  
-  &--dark {
-    fill: $dark;
-  }
-  
-  &--white {
-    fill: $white;
+@each $name, $color in $theme-colors {
+  .svg-icon--#{$name} {
+    fill : $color;
   }
 }

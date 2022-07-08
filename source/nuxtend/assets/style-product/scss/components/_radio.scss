@@ -87,7 +87,7 @@
 
     &::after {
       content: none;
-    }    
+    }
 
   }
 }
@@ -105,7 +105,7 @@
   }
 }
 
-.radio.radio--check .radio__input:checked + 
+.radio.radio--check .radio__input:checked +
 .radio__label {
   padding: 0 0 0 rem(24px);
   color: $primary-dark;
@@ -118,7 +118,7 @@
     top: rem(2px);
     width: rem(18px);
     height: rem(18px);
-    background: $ui-02 url("#{$img-path}/icon/check-radio.svg") no-repeat center center;      
+    background: $ui-02 url("#{$img-path}/icon/check-radio.svg") no-repeat center center;
     z-index: 1;
   }
 }
@@ -266,9 +266,8 @@
 
 .radios--toggle .radio .radio__label {
   position: relative;
-  width: rem(36px);
-  height: rem(36px);
-  padding: 0 15px;
+  height: $button-height-md;
+  padding: 0 ($spacing-md + $spacing-2xs);
   border: 1px solid $ui-04;
   transition: all 0.3s ease;
 }
@@ -293,7 +292,7 @@
 }
 
 .radios--toggle .radio .radio__input:checked+.radio__label {
-  border-color: $secondary;
+  border-color: $primary;
   background-color: $ui-02;
   z-index: 1;
 }
