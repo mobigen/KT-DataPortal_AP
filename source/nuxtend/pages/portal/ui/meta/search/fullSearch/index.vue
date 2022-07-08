@@ -331,257 +331,253 @@
 </template>
 
 <script type="text/javascript">
-import BaseRadio from "@component/common/atoms/base-radio/base-radio";
-import BasicTagList from "@component/common/atoms/basic-tag-list/basic-tag-list";
-import BaseSelect from "@component/common/atoms/base-select/base-select";
-import BaseButton from "@component/common/atoms/base-button/base-button";
-import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox";
-import BaseSwitch from "@component/common/atoms/base-switch/base-switch";
-import GroupTab from "@component/common/molecules/group-tab/group-tab";
-import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
-import GroupBreadcrumb from "@component/common/molecules/group-breadcrumb/group-breadcrumb";
-import Subject from "@component/common/organisms/subject/subject.vue";
-import GroupSearchFilter from "@component/common/molecules/group-search-filter/group-search-filter";
-import SearchList from "@component/common/organisms/search-list/search-list.vue";
-import SearchInputField from "@component/common/organisms/search-input-field/search-input-field.vue";
-import SearchResultBox from "@common/atoms/search-result-box/search-result-box";
-import BasicOption from "@common/atoms/basic-option/basic-option";
-import CheckboxFilterList from "@common/molecules/checkbox-filter-list/checkbox-filter-list";
-import { mapActions, mapGetters } from "vuex";
-
-export default {
-  name: "Index",
-  layout: "kt/kt",
-  computed: {
-    ...mapGetters({
-      contents: "meta/search/search/contents",
-      CONSTANTS: "defaults/constants/CONSTANTS",
-      keyword: "meta/search/search/searchKeyword"
-    }),
-    ...mapGetters("meta/search/search", [
-      "searchFilterList",
-      "selectSearchFilterList"
-    ])
-  },
-  components: {
-    BaseRadio,
-    BaseButton,
-    BasicTagList,
-    BaseSelect,
-    BaseCheckbox,
-    BaseSwitch,
-    GroupPagination,
-    GroupBreadcrumb,
-    Subject,
-    GroupSearchFilter,
-    GroupTab,
-    SearchList,
-    SearchInputField,
-    SearchResultBox,
-    BasicOption,
-    CheckboxFilterList
-  },
-  data() {
-    return {
-      isDetailOpen: false,
-      treeObj: {
-        componentKey: "metaTreeKey",
-        treeRestApi: "/getCategoryList",
-        checkboxLabel: "상위자동선택",
-        treeKey: {
-          NODE_NM: "node_nm", // node title
-          NODE_ID: "node_id", // node key
-          PRNTS_ID: "prnts_id" // parent key
+  import BaseRadio from "@component/common/atoms/base-radio/base-radio";
+  import BasicTagList from "@component/common/atoms/basic-tag-list/basic-tag-list";
+  import BaseSelect from "@component/common/atoms/base-select/base-select";
+  import BaseButton from "@component/common/atoms/base-button/base-button";
+  import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox";
+  import BaseSwitch from "@component/common/atoms/base-switch/base-switch";
+  import GroupTab from "@component/common/molecules/group-tab/group-tab";
+  import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
+  import GroupBreadcrumb from "@component/common/molecules/group-breadcrumb/group-breadcrumb";
+  import Subject from "@component/common/organisms/subject/subject.vue";
+  import GroupSearchFilter from "@component/common/molecules/group-search-filter/group-search-filter";
+  import SearchList from "@component/common/organisms/search-list/search-list.vue";
+  import SearchInputField from "@component/common/organisms/search-input-field/search-input-field.vue";
+  import SearchResultBox from "@common/atoms/search-result-box/search-result-box";
+  import BasicOption from "@common/atoms/basic-option/basic-option";
+  import CheckboxFilterList from "@common/molecules/checkbox-filter-list/checkbox-filter-list";
+  import { mapActions, mapGetters } from "vuex";
+  export default {
+    name: "Index",
+    layout: "kt/kt",
+    computed: {
+      ...mapGetters({
+        contents: "meta/search/search/contents",
+        CONSTANTS: "defaults/constants/CONSTANTS",
+        keyword: "meta/search/search/searchKeyword"
+      }),
+      ...mapGetters("meta/search/search", [
+        "searchFilterList",
+        "selectSearchFilterList"
+      ])
+    },
+    components: {
+      BaseRadio,
+      BaseButton,
+      BasicTagList,
+      BaseSelect,
+      BaseCheckbox,
+      BaseSwitch,
+      GroupPagination,
+      GroupBreadcrumb,
+      Subject,
+      GroupSearchFilter,
+      GroupTab,
+      SearchList,
+      SearchInputField,
+      SearchResultBox,
+      BasicOption,
+      CheckboxFilterList
+    },
+    data() {
+      return {
+        isDetailOpen: false,
+        treeObj: {
+          componentKey: "metaTreeKey",
+          treeRestApi: "/getCategoryList",
+          checkboxLabel: "상위자동선택",
+          treeKey: {
+            NODE_NM: "node_nm", // node title
+            NODE_ID: "node_id", // node key
+            PRNTS_ID: "prnts_id" // parent key
+          }
+        },
+        recommendTagList: [
+          { itemId: 1, itemName: "데이터사업" },
+          { itemId: 2, itemName: "업종" },
+          { itemId: 3, itemName: "콜등급" },
+          { itemId: 4, itemName: "트래픽" },
+          { itemId: 5, itemName: "CU" },
+          { itemId: 5, itemName: "RTPO" }
+        ],
+        searchKeyword: "",
+        searchKeywordList: [],
+        rescanFilterChecked: false,
+        showSearchResultBox: false,
+        searchResultSuccess: false,
+        paginationKey: "ktFullSearchPagination",
+        sortOptionList: [
+          { label: "정확도순", option: "accuracy" },
+          { label: "최신등록순", option: "updateDate" },
+          { label: "조회순", option: "view" },
+          { label: "다운로드순", option: "download" }
+        ],
+        tabList: [
+          { num: "(50)", title: "데이터컨텐츠" },
+          { num: "(184)", title: "원천데이터" },
+          { num: "(56)", title: "메타데이터" }
+        ],
+        selectCategoryList: [
+          { key: "12", text: "12개씩" },
+          { key: "20", text: "20개씩" },
+          { key: "40", text: "40개씩" }
+        ],
+        selectedKey: null,
+        switch1: false,
+        switch2: false,
+        // bmChecked: false,
+        // offeredUnitsChecked: false,
+        // dataType1Checked: false,
+        myFavoriteDataList: [
+          "01bfea44-5b42-41e7-9901-8fad6997969c",
+          "2c4c3962-ab70-4f42-9681-71ecd7afbe4b"
+        ]
+      };
+    },
+    methods: {
+      ...mapActions("meta/search/search", ["getContents", "setSearchKeyword"]),
+      ...mapActions("meta/search/search", [
+        "getSearchFilterList",
+        "changeSearchFilterList"
+      ]),
+      toggleDetail: function () {
+        this.isDetailOpen = !this.isDetailOpen;
+      },
+      recommendTagClick(tagObj) {
+        this.searchKeyword = tagObj.itemName;
+        this.search();
+      },
+      searchBtnClick(inputData) {
+        this.searchKeyword = inputData.trim();
+        this.search();
+      },
+      searchResultBox(show, success) {
+        this.showSearchResultBox = show;
+        this.searchResultSuccess = success;
+      },
+      search() {
+        if (this.searchKeyword.trim() === "") {
+          this.searchResultBox(false, false);
+          alert("값을 입력해주세요.");
+          return;
+        } else {
+          this.searchResultBox(true, true);
+        }
+        if (this.rescanFilterChecked) {
+          if (this.searchKeywordList.length >= 3) {
+            alert("결과 내 재검색 3회이상으로 추가 검색이 불가능 합니다.");
+            return;
+          } else if (this.searchKeywordList.includes(this.searchKeyword)) {
+            alert("동일한 검색어 입력으로 추가 검색이 불가능 합니다.");
+            return;
+          }
+        } else {
+          this.searchKeywordList = [];
+        }
+        this.searchKeywordList.push(this.searchKeyword);
+        this.getGridData();
+      },
+      getGridData() {
+        this.getContents({
+          paginationKey: this.paginationKey,
+          searchKeywordList: this.searchKeywordList
+        });
+      },
+      rescanFilterCheck({ bool }) {
+        this.rescanFilterChecked = bool;
+        if (!bool && this.searchKeyword && this.searchKeywordList.length > 0) {
+          this.searchKeywordList = [];
+          this.searchKeyword = "";
+          this.searchResultBox(false, false);
+          this.getGridData();
         }
       },
-      recommendTagList: [
-        { itemId: 1, itemName: "데이터사업" },
-        { itemId: 2, itemName: "업종" },
-        { itemId: 3, itemName: "콜등급" },
-        { itemId: 4, itemName: "트래픽" },
-        { itemId: 5, itemName: "CU" },
-        { itemId: 5, itemName: "RTPO" }
-      ],
-      searchKeyword: "",
-      searchKeywordList: [],
-      rescanFilterChecked: false,
-      showSearchResultBox: false,
-      searchResultSuccess: false,
-      paginationKey: "ktFullSearchPagination",
-      sortOptionList: [
-        { label: "정확도순", option: "accuracy" },
-        { label: "최신등록순", option: "updateDate" },
-        { label: "조회순", option: "view" },
-        { label: "다운로드순", option: "download" }
-      ],
-      tabList: [
-        { num: "(50)", title: "데이터컨텐츠" },
-        { num: "(184)", title: "원천데이터" },
-        { num: "(56)", title: "메타데이터" }
-      ],
-      selectCategoryList: [
-        { key: "12", text: "12개씩" },
-        { key: "20", text: "20개씩" },
-        { key: "40", text: "40개씩" }
-      ],
-      selectedKey: null,
-      switch1: false,
-      switch2: false,
-      // bmChecked: false,
-      // offeredUnitsChecked: false,
-      // dataType1Checked: false,
-      myFavoriteDataList: [
-        "01bfea44-5b42-41e7-9901-8fad6997969c",
-        "2c4c3962-ab70-4f42-9681-71ecd7afbe4b"
-      ]
-    };
-  },
-  methods: {
-    ...mapActions("meta/search/search", ["getContents", "setSearchKeyword"]),
-    ...mapActions("meta/search/search", [
-      "getSearchFilterList",
-      "changeSearchFilterList"
-    ]),
-    toggleDetail: function () {
-      this.isDetailOpen = !this.isDetailOpen;
-    },
-    recommendTagClick(tagObj) {
-      this.searchKeyword = tagObj.itemName;
-      this.search();
-    },
-    searchBtnClick(inputData) {
-      this.searchKeyword = inputData.trim();
-      this.search();
-    },
-    searchResultBox(show, success) {
-      this.showSearchResultBox = show;
-      this.searchResultSuccess = success;
-    },
-    search() {
-      if (this.searchKeyword.trim() === "") {
-        this.searchResultBox(false, false);
-        alert("값을 입력해주세요.");
-        return;
-      } else {
-        this.searchResultBox(true, true);
-      }
-
-      if (this.rescanFilterChecked) {
-        if (this.searchKeywordList.length >= 3) {
-          alert("결과 내 재검색 3회이상으로 추가 검색이 불가능 합니다.");
-          return;
-        } else if (this.searchKeywordList.includes(this.searchKeyword)) {
-          alert("동일한 검색어 입력으로 추가 검색이 불가능 합니다.");
-          return;
-        }
-      } else {
-        this.searchKeywordList = [];
-      }
-
-      this.searchKeywordList.push(this.searchKeyword);
-      this.getGridData();
-    },
-    getGridData() {
-      this.getContents({
-        paginationKey: this.paginationKey,
-        searchKeywordList: this.searchKeywordList
-      });
-    },
-    rescanFilterCheck({ bool }) {
-      this.rescanFilterChecked = bool;
-      if (!bool && this.searchKeyword && this.searchKeywordList.length > 0) {
-        this.searchKeywordList = [];
-        this.searchKeyword = "";
-        this.searchResultBox(false, false);
-        this.getGridData();
-      }
-    },
-    searchDetailKeyword() {
-      this.search();
-      this.setSearchKeyword("");
-    },
-    sortOptionChange(option) {
-      console.log("sort option: " + option);
-    },
-    tabClick({ tabObj }) {
-      console.log(tabObj);
-    },
-    changeData({ input }) {
-      console.log("key: " + input);
-      this.selectedKey = input;
-    },
-    changeCheckboxList({ checkboxKey, changeList }) {
-      console.log(checkboxKey);
-      this.changeSearchFilterList({
-        key: checkboxKey,
-        changeList: changeList
-      });
-    },
-    isSwitchChanged1(switchValue) {
-      // 데이터 상세검색 switch
-      const checkKeys = [
-        this.CONSTANTS.FILTER.KEYS.BM,
-        this.CONSTANTS.FILTER.KEYS.OFFERED_UNITS,
-        this.CONSTANTS.FILTER.KEYS.DATA_TYPE1
-      ];
-      this.switch1 = switchValue;
-      this.switchChecked(switchValue, checkKeys);
-    },
-    isSwitchChanged2(switchValue) {
-      // 좌측 하단 필터 switch
-      // provider, dataType2, dataSource, kword
-      const checkKeys = [
-        this.CONSTANTS.FILTER.KEYS.PROVIDER,
-        this.CONSTANTS.FILTER.KEYS.DATA_TYPE2,
-        this.CONSTANTS.FILTER.KEYS.DATA_SOURCE,
-        this.CONSTANTS.FILTER.KEYS.KWORD
-      ];
-      this.switch2 = switchValue;
-      this.switchChecked(switchValue, checkKeys);
-    },
-    switchChecked(switchValue, checkKeys) {
-      checkKeys.forEach((key) => {
-        this.changeCheckboxList({
-          checkboxKey: key,
-          changeList: switchValue ? this.searchFilterList[key] : []
+      searchDetailKeyword() {
+        this.search();
+        this.setSearchKeyword("");
+      },
+      sortOptionChange(option) {
+        console.log("sort option: " + option);
+      },
+      tabClick({ tabObj }) {
+        console.log(tabObj);
+      },
+      changeData({ input }) {
+        console.log("key: " + input);
+        this.selectedKey = input;
+      },
+      changeCheckboxList({ checkboxKey, changeList }) {
+        console.log(checkboxKey);
+        this.changeSearchFilterList({
+          key: checkboxKey,
+          changeList: changeList
         });
-      }, this);
-    },
-    dataBoxClick(id) {
-      this.$router.push({
-        path: "/portal/ui/meta/search/fullSearch/detail",
-        query: { datasetId: id }
-      });
-    },
-    dataBoxKeywordClick(tagObj) {
-      this.searchKeyword = tagObj.itemName;
-      this.search();
-    },
-    myFavoriteDataClick({ id, checked }) {
-      if (checked) {
-        this.myFavoriteDataList.push(id);
-      } else {
-        this.myFavoriteDataList = this.myFavoriteDataList.filter(
-          (el) => el !== id
-        );
+      },
+      isSwitchChanged1(switchValue) {
+        // 데이터 상세검색 switch
+        const checkKeys = [
+          this.CONSTANTS.FILTER.KEYS.BM,
+          this.CONSTANTS.FILTER.KEYS.OFFERED_UNITS,
+          this.CONSTANTS.FILTER.KEYS.DATA_TYPE1
+        ];
+        this.switch1 = switchValue;
+        this.switchChecked(switchValue, checkKeys);
+      },
+      isSwitchChanged2(switchValue) {
+        // 좌측 하단 필터 switch
+        // provider, dataType2, dataSource, kword
+        const checkKeys = [
+          this.CONSTANTS.FILTER.KEYS.PROVIDER,
+          this.CONSTANTS.FILTER.KEYS.DATA_TYPE2,
+          this.CONSTANTS.FILTER.KEYS.DATA_SOURCE,
+          this.CONSTANTS.FILTER.KEYS.KWORD
+        ];
+        this.switch2 = switchValue;
+        this.switchChecked(switchValue, checkKeys);
+      },
+      switchChecked(switchValue, checkKeys) {
+        checkKeys.forEach((key) => {
+          this.changeCheckboxList({
+            checkboxKey: key,
+            changeList: switchValue ? this.searchFilterList[key] : []
+          });
+        }, this);
+      },
+      dataBoxClick(id) {
+        this.$router.push({
+          path: "/portal/ui/meta/search/fullSearch/detail",
+          query: { datasetId: id }
+        });
+      },
+      dataBoxKeywordClick(tagObj) {
+        this.searchKeyword = tagObj.itemName;
+        this.search();
+      },
+      myFavoriteDataClick({ id, checked }) {
+        if (checked) {
+          this.myFavoriteDataList.push(id);
+        } else {
+          this.myFavoriteDataList = this.myFavoriteDataList.filter(
+            (el) => el !== id
+          );
+        }
+        console.log(this.myFavoriteDataList);
       }
-
-      console.log(this.myFavoriteDataList);
+    },
+    mounted() {
+      if (this.keyword === "") {
+        this.getGridData();
+      } else {
+        this.searchKeyword = this.keyword;
+        this.searchDetailKeyword();
+      }
+      this.selectedKey = "20";
+    },
+    created() {
+      this.getSearchFilterList();
     }
-  },
-  mounted() {
-    if (this.keyword === "") {
-      this.getGridData();
-    } else {
-      this.searchKeyword = this.keyword;
-      this.searchDetailKeyword();
-    }
-    this.selectedKey = "20";
-  },
-  created() {
-    this.getSearchFilterList();
-  }
-};
+  };
 </script>
 
 <style lang="scss" scoped>

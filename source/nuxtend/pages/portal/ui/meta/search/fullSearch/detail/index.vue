@@ -927,262 +927,247 @@
 <i18n src="./index.json"></i18n>
 
 <script type="text/javascript">
-import BaseBadge from "@component/common/atoms/base-badge/base-badge.vue";
-import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox.vue";
-import BaseRadio from "@component/common/atoms/base-radio/base-radio";
-import BaseTag from "@component/common/atoms/base-tag/base-tag";
-import BaseButton from "@component/common/atoms/base-button/base-button";
-import BaseTextarea from "@component/common/atoms/base-textarea/base-textarea.vue";
-import GroupBreadcrumb from "@component/common/molecules/group-breadcrumb/group-breadcrumb";
-import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
-import GroupFileAttach from "@component/common/molecules/group-file-attach/group-file-attach";
-import Dialog from "@functional/dialog/dialog.vue";
-import ViewTable from "@component/common/organisms/view-table/view-table";
-import BaseInput from "@component/common/atoms/base-input/base-input";
-import moment from "moment";
-import DatePicker from "@functional/datepicker/date-picker.vue";
-import { successAlert, errorAlert } from "@functional/alert/alert-default";
-import BasicTable from "@component/common/organisms/basic-table/basic-table.vue";
-import { mapActions, mapGetters } from "vuex";
-
-export default {
-  name: "Index",
-  // async asyncData({ store, route }) {
-  //   let rowId = route.query.datasetId;
-  //   // TODO : asyncData 배포후에 동작 하는거 확인되면 아래 코드 사용
-  //   rowId = "01bfea44-5b42-41e7-9901-8fad6997969c";
-  //   await store.dispatch("meta/search/search/getDetail", rowId);
-  //   const detail = store.getters["meta/search/search/detail"];
-  //   return { detail };
-  // },
-  computed: {
-    ...mapGetters({
-      CONSTANTS: "defaults/constants/CONSTANTS"
-    }),
-    sampleData() {
-      const vuex = this.$store.getters["meta/search/search/sampleData"];
-
-      if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
-        const h = vuex.header;
-        this.sampleDataViewHeaderList = h.map((hEl) => {
-          return hEl.column_name;
-        });
-      } else {
+  import BaseBadge from "@component/common/atoms/base-badge/base-badge.vue";
+  import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox.vue";
+  import BaseRadio from "@component/common/atoms/base-radio/base-radio";
+  import BaseTag from "@component/common/atoms/base-tag/base-tag";
+  import BaseButton from "@component/common/atoms/base-button/base-button";
+  import BaseTextarea from "@component/common/atoms/base-textarea/base-textarea.vue";
+  import GroupBreadcrumb from "@component/common/molecules/group-breadcrumb/group-breadcrumb";
+  import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
+  import GroupFileAttach from "@component/common/molecules/group-file-attach/group-file-attach";
+  import Dialog from "@functional/dialog/dialog.vue";
+  import ViewTable from "@component/common/organisms/view-table/view-table";
+  import BaseInput from "@component/common/atoms/base-input/base-input";
+  import moment from "moment";
+  import DatePicker from "@functional/datepicker/date-picker.vue";
+  import { successAlert, errorAlert } from "@functional/alert/alert-default";
+  import BasicTable from "@component/common/organisms/basic-table/basic-table.vue";
+  import { mapActions, mapGetters } from "vuex";
+  export default {
+    name: "Index",
+    // async asyncData({ store, route }) {
+    //   let rowId = route.query.datasetId;
+    //   // TODO : asyncData 배포후에 동작 하는거 확인되면 아래 코드 사용
+    //   rowId = "01bfea44-5b42-41e7-9901-8fad6997969c";
+    //   await store.dispatch("meta/search/search/getDetail", rowId);
+    //   const detail = store.getters["meta/search/search/detail"];
+    //   return { detail };
+    // },
+    computed: {
+      ...mapGetters({
+        CONSTANTS: "defaults/constants/CONSTANTS"
+      }),
+      sampleData() {
+        const vuex = this.$store.getters["meta/search/search/sampleData"];
+        if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+          const h = vuex.header;
+          this.sampleDataViewHeaderList = h.map((hEl) => {
+            return hEl.column_name;
+          });
+        } else {
+          return {
+            header: [],
+            false: []
+          };
+        }
+        return vuex;
+      },
+      detail() {
+        const vuex = this.$store.getters["meta/search/search/detail"];
+        if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+          this.ctgry = vuex.body.ctgry.split(",").pop();
+          this.dataPrvDesk = vuex.body.data_prv_desk;
+          this.dataNm = vuex.body.data_nm;
+          this.dataDesc = vuex.body.data_desc;
+          this.ltstAmdDt = vuex.body.ltst_amd_dt;
+          this.regDate = vuex.body.reg_date;
+          // TODO: css 확인 위해 임시로 y로 설정
+          // this.lawEvlConfYn = vuex.body.law_evl_conf_yn;
+          this.lawEvlConfYn = "n";
+          this.myFavoriteData = "y";
+        }
+        return vuex;
+      },
+      dataQualityScore() {
+        const vuex = this.$store.getters["meta/search/search/dataQualityScore"];
+        if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+          return vuex.body[0];
+        }
         return {
           header: [],
-          false: []
+          body: []
         };
       }
-      return vuex;
     },
-    detail() {
-      const vuex = this.$store.getters["meta/search/search/detail"];
-
-      if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
-        this.ctgry = vuex.body.ctgry.split(",").pop();
-        this.dataPrvDesk = vuex.body.data_prv_desk;
-        this.dataNm = vuex.body.data_nm;
-        this.dataDesc = vuex.body.data_desc;
-        this.ltstAmdDt = vuex.body.ltst_amd_dt;
-        this.regDate = vuex.body.reg_date;
-
-        // TODO: css 확인 위해 임시로 y로 설정
-        // this.lawEvlConfYn = vuex.body.law_evl_conf_yn;
-        this.lawEvlConfYn = "n";
-
-        this.myFavoriteData = "y";
-      }
-      return vuex;
-    },
-    dataQualityScore() {
-      const vuex = this.$store.getters["meta/search/search/dataQualityScore"];
-
-      if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
-        return vuex.body[0];
-      }
+    data() {
       return {
-        header: [],
-        body: []
-      };
-    }
-  },
-  data() {
-    return {
-      isPreview: false,
-      tabList: [
-        {
-          id: "CHART",
-          href: "#articleChart"
-        },
-        {
-          id: "SAMPLE",
-          href: "#articleSample"
-        },
-        {
-          id: "DIAGRAM",
-          href: "#articleDiagram"
-        },
-        {
-          id: "RULE",
-          href: "#articleRule"
-        },
-        {
-          id: "INQUIRY",
-          href: "#articleInquiry"
-        }
-      ],
-      toggleButtonText: "test",
-      bizDatasetId: null,
-      ctgry: null,
-      dataPrvDesk: null,
-      dataNm: null,
-      dataDesc: null,
-      ltstAmdDt: null,
-      regDate: null,
-      requestData: {},
-      lawEvlConfYn: null,
-      confirmButtonDisabled: true,
-      myFavoriteData: null,
-      sampleDataViewHeaderList: [],
-      tabSelected: "CHART"
-    };
-  },
-  methods: {
-    ...mapActions("meta/search/search", ["getDetail", "setSearchKeyword"]),
-    ...mapActions("meta/search/search", [
-      "getSampleData",
-      "getDataQualityScore"
-    ]),
-    togglePreview: function () {
-      this.isPreview = !this.isPreview;
-    },
-    onshowDialog(name) {
-      this.$modal.show(name);
-    },
-    tagClick(tagClickObj) {
-      this.setSearchKeyword(tagClickObj.itemName);
-      this.$router.push({
-        path: "/portal/ui/meta/search/fullSearch"
-      });
-    },
-    tabGotoClick(item, index, refName) {
-      this.tabClick(item.id);
-
-      var ele = this.$refs[refName];
-      var scrollTop = ele.offsetTop - 52;
-      window.scrollTo(0, scrollTop);
-    },
-    resetRequestData() {
-      this.requestData = {
-        biz_dataset_id: this.bizDatasetId,
-        apyr: "", // 신청자
-        emp_num: "20161665", //사원번호
-        apy_sbst: "", // 신청내용
-        law_evl_conf_dt: "", // 법률검토 내용
-        start_date: "", // 활용기간 시작일
-        end_date: moment().add(1, "Y").format() // 활용기간 종료일
-      };
-
-      this.confirmButtonDisabled = this.lawEvlConfYn === "y";
-    },
-    setRequestData({ id, input }) {
-      const key = id.split("-").pop();
-      this.requestData[key] = input;
-
-      // TODO: 법률검토 or 파일 입력 안하면 버튼 비활성화, 현재 법률검토만 확인함 추후 수정해야함
-      if (this.lawEvlConfYn === "y") {
-        this.confirmButtonDisabled = !this.requestData["law_evl_conf_dt"];
-      }
-    },
-    setDatePicker(e) {
-      this.requestData["start_date"] = e.at(0);
-      this.requestData["end_date"] = e.at(1);
-    },
-    requestConfirmBtnClick(name) {
-      // TODO: 신청자를 입력값으로 받기때문에 체크, 추후 삭제
-      if (!(this.requestData.apyr && this.requestData.apy_sbst)) {
-        errorAlert({ content: "필수 값들을 입력해주세요" });
-        return;
-      }
-
-      console.log(this.requestData);
-
-      // TODO: 일단 3개의 데이터만 보냄, 추후 수정
-      let data = {};
-      data.biz_dataset_id = this.requestData.biz_dataset_id;
-      data.apyr = this.requestData.apyr;
-      data.apy_sbst = this.requestData.apy_sbst;
-
-      this.$axios
-        .post(this.$config.ROUTE_API_META_PREFIX + "/insertUseBoardData", data)
-        .then((res) => {
-          if (res !== false) {
-            successAlert({
-              title: "데이터 활용 신청이 완료되었습니다.",
-              content:
-                "활용신청하신 데이터는 마이페이지 > 내 활용내역에서 확인할 수 있습니다."
-            });
-
-            this.resetRequestData();
-            // setTimeout(() => this.$modal.hide(name), 3000);
-            this.$modal.hide(name);
+        isPreview: false,
+        tabList: [
+          {
+            id: "CHART",
+            ref: "articleChart"
+          },
+          {
+            id: "SAMPLE",
+            ref: "articleSample"
+          },
+          {
+            id: "DIAGRAM",
+            ref: "articleDiagram"
+          },
+          {
+            id: "RULE",
+            ref: "articleRule"
+          },
+          {
+            id: "INQUIRY",
+            ref: "articleInquiry"
           }
+        ],
+        toggleButtonText: "test",
+        bizDatasetId: null,
+        ctgry: null,
+        dataPrvDesk: null,
+        dataNm: null,
+        dataDesc: null,
+        ltstAmdDt: null,
+        regDate: null,
+        requestData: {},
+        lawEvlConfYn: null,
+        confirmButtonDisabled: true,
+        myFavoriteData: null,
+        sampleDataViewHeaderList: [],
+        tabSelected: "CHART"
+      };
+    },
+    methods: {
+      ...mapActions("meta/search/search", ["getDetail", "setSearchKeyword"]),
+      ...mapActions("meta/search/search", [
+        "getSampleData",
+        "getDataQualityScore"
+      ]),
+      togglePreview: function () {
+        this.isPreview = !this.isPreview;
+      },
+      onshowDialog(name) {
+        this.$modal.show(name);
+      },
+      tagClick(tagClickObj) {
+        this.setSearchKeyword(tagClickObj.itemName);
+        this.$router.push({
+          path: "/portal/ui/meta/search/fullSearch"
         });
-    },
-    myFavoriteDataClick(id, checked) {
-      // TODO: myFavoriteData api 호출로 변경 시 수정
-      if (checked) {
-        this.myFavoriteData = "y";
-      } else {
-        this.myFavoriteData = "n";
-      }
-    },
-    tabClick(tabId) {
-      this.tabSelected = tabId;
+      },
 
-      if (tabId === this.CONSTANTS.DETAIL.CHART) {
-        // 데이터 상세정보
-        this.getDataQualityScore(this.bizDatasetId);
-      } else if (tabId === this.CONSTANTS.DETAIL.SAMPLE) {
-        // 샘플 데이터
-        this.getSampleData(this.bizDatasetId);
-      } else if (tabId === this.CONSTANTS.DETAIL.DIAGRAM) {
-        // 활용사례
-      } else if (tabId === this.CONSTANTS.DETAIL.RULE) {
-        // 법률검토 및 규정안내
-      } else if (tabId === this.CONSTANTS.DETAIL.INQUIRY) {
-        // 데이터 문의
+      tabGotoClick(item, index, refName) {
+        this.tabClick(item.id);
+
+        var ele = this.$refs[refName];
+        var scrollTop = ele.offsetTop - 52;
+        window.scrollTo(0, scrollTop);
+      },
+      resetRequestData() {
+        this.requestData = {
+          biz_dataset_id: this.bizDatasetId,
+          apyr: "", // 신청자
+          emp_num: "20161665", //사원번호
+          apy_sbst: "", // 신청내용
+          law_evl_conf_dt: "", // 법률검토 내용
+          start_date: "", // 활용기간 시작일
+          end_date: moment().add(1, "Y").format() // 활용기간 종료일
+        };
+        this.confirmButtonDisabled = this.lawEvlConfYn === "y";
+      },
+      setRequestData({ id, input }) {
+        const key = id.split("-").pop();
+        this.requestData[key] = input;
+        // TODO: 법률검토 or 파일 입력 안하면 버튼 비활성화, 현재 법률검토만 확인함 추후 수정해야함
+        if (this.lawEvlConfYn === "y") {
+          this.confirmButtonDisabled = !this.requestData["law_evl_conf_dt"];
+        }
+      },
+      setDatePicker(e) {
+        this.requestData["start_date"] = e.at(0);
+        this.requestData["end_date"] = e.at(1);
+      },
+      requestConfirmBtnClick(name) {
+        // TODO: 신청자를 입력값으로 받기때문에 체크, 추후 삭제
+        if (!(this.requestData.apyr && this.requestData.apy_sbst)) {
+          errorAlert({ content: "필수 값들을 입력해주세요" });
+          return;
+        }
+        console.log(this.requestData);
+        // TODO: 일단 3개의 데이터만 보냄, 추후 수정
+        let data = {};
+        data.biz_dataset_id = this.requestData.biz_dataset_id;
+        data.apyr = this.requestData.apyr;
+        data.apy_sbst = this.requestData.apy_sbst;
+        this.$axios
+          .post(this.$config.ROUTE_API_META_PREFIX + "/insertUseBoardData", data)
+          .then((res) => {
+            if (res !== false) {
+              successAlert({
+                title: "데이터 활용 신청이 완료되었습니다.",
+                content:
+                  "활용신청하신 데이터는 마이페이지 > 내 활용내역에서 확인할 수 있습니다."
+              });
+              this.resetRequestData();
+              this.$modal.hide(name);
+            }
+          });
+      },
+      myFavoriteDataClick(id, checked) {
+        // TODO: myFavoriteData api 호출로 변경 시 수정
+        if (checked) {
+          this.myFavoriteData = "y";
+        } else {
+          this.myFavoriteData = "n";
+        }
+      },
+      tabClick(tabId) {
+        this.tabSelected = tabId;
+        if (tabId === this.CONSTANTS.DETAIL.CHART) {
+          // 데이터 상세정보
+          this.getDataQualityScore(this.bizDatasetId);
+        } else if (tabId === this.CONSTANTS.DETAIL.SAMPLE) {
+          // 샘플 데이터
+          this.getSampleData(this.bizDatasetId);
+        } else if (tabId === this.CONSTANTS.DETAIL.DIAGRAM) {
+          // 활용사례
+        } else if (tabId === this.CONSTANTS.DETAIL.RULE) {
+          // 법률검토 및 규정안내
+        } else if (tabId === this.CONSTANTS.DETAIL.INQUIRY) {
+          // 데이터 문의
+        }
       }
+    },
+    created() {
+      this.bizDatasetId = this.$route.query.datasetId;
+      this.getDetail(this.bizDatasetId);
+      // 첫번째 tab을 클릭해준다.
+      this.tabClick(this.tabList[0].id);
+    },
+    mounted() {
+      this.resetRequestData();
+    },
+    components: {
+      BaseBadge,
+      BaseCheckbox,
+      BaseRadio,
+      BaseTag,
+      BaseButton,
+      BaseTextarea,
+      GroupBreadcrumb,
+      GroupPagination,
+      GroupFileAttach,
+      Dialog,
+      ViewTable,
+      BaseInput,
+      DatePicker,
+      BasicTable
     }
-  },
-  created() {
-    this.bizDatasetId = this.$route.query.datasetId;
-
-    this.getDetail(this.bizDatasetId);
-
-    // 첫번째 tab을 클릭해준다.
-    this.tabClick(this.tabList[0].id);
-  },
-  mounted() {
-    this.resetRequestData();
-  },
-  components: {
-    BaseBadge,
-    BaseCheckbox,
-    BaseRadio,
-    BaseTag,
-    BaseButton,
-    BaseTextarea,
-    GroupBreadcrumb,
-    GroupPagination,
-    GroupFileAttach,
-    Dialog,
-    ViewTable,
-    BaseInput,
-    DatePicker,
-    BasicTable
-  }
-};
+  };
 </script>
 
 <style lang="scss" scoped>
