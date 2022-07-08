@@ -20,7 +20,8 @@ export const state = () => ({
   dataUseCases: {},
   requireObj: {},
   sampleData: {},
-  dataQualityScore: {}
+  dataQualityScore: {},
+  keywordObj: {}
 });
 
 export const getters = {
@@ -140,6 +141,9 @@ export const mutations = {
   },
   getDataQualityScore(state, data) {
     state.dataQualityScore = data;
+  },
+  setKeywordObj(state, data) {
+    state.keywordObj = data;
   }
 };
 
@@ -151,11 +155,24 @@ export const actions = {
   //     ? `${process.env.API_ROUTE_URL}${this.$config.ROUTE_API_META_PREFIX}` // SSR
   //     : `${this.$config.ROUTE_API_META_PREFIX}`; // CSR
   // },
-  getContents({ commit, rootGetters, dispatch }, params) {
+  getContents({ commit, rootGetters, dispatch, state }, params) {
     let keywordObj = { keyword1: "", keyword2: "", keyword3: "" };
     params.searchKeywordList.forEach((el, index) => {
       keywordObj["keyword" + (index + 1)] = el;
     });
+
+    // 다른페이지로 넘긴 후 다른 keyword로 검색시 페이지값 남아있으면서 에러가 생김
+    // 검색시 keywordObj 다를경우 페이지네이션의 페이지값 1로 셋팅
+    if (JSON.stringify(keywordObj) !== JSON.stringify(state.keywordObj)) {
+      dispatch(
+        "module/pagination/setPage",
+        {
+          key: params.paginationKey,
+          page: 1
+        },
+        { root: true }
+      );
+    }
 
     const paging =
       rootGetters["module/pagination/paging"][params.paginationKey];
@@ -169,6 +186,7 @@ export const actions = {
       .get(this.$config.ROUTE_API_META_PREFIX + "/getBizMetaList" + paramAPI)
       .then((d) => {
         commit("setContents", d);
+        commit("setKeywordObj", keywordObj);
 
         // setTotalPage
         dispatch(
