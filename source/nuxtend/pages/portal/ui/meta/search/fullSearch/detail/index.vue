@@ -1059,6 +1059,7 @@
           path: "/portal/ui/meta/search/fullSearch"
         });
       },
+
       tabGotoClick(item, index, refName) {
         this.tabClick(item.id);
 
