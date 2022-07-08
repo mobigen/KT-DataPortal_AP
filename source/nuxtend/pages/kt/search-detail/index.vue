@@ -39,7 +39,8 @@
                     제목<mark>검색어</mark>
                     <!-- 검색어에 mark 태그 적용 -->
                   </strong>
-                  <p class="data-box__description">설명</p>
+                  <p class="data-box__description">고객 혜택 수신을 위한 마케팅 동의 및 영리목적 광고성 정보 수신 동의를 받은 광고ID에 대해 당사의 특정 서비스에 관한 앱 푸쉬, 온라인 배너 등으로 광고하는 것은 가능할 것임.
+- 당사가 광고 및 마케팅 수신동의를 받지 않은 KT 멤버쉽 고객을 대상으로 하여 생일쿠폰 혜택 관련 앱 푸쉬를 발송하였다가 당사에 민원 제기 및 KISA에 위반사실 확인을 요청한 사례 있음 (기검토 21-CL03886, 21-CL03458)</p>
                 </div>
                 <div class="data-box__bottom-content">
                   <div class="data-box__details">
@@ -240,7 +241,7 @@
           </div>
           <!--//탭 -->
           <!-- 데이터 품질지표 -->
-          <article id="articleChart" class="contents__detail">
+          <article id="articleChart" ref="articleChart" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">데이터 품질지표</h3>
             </div>
@@ -296,7 +297,7 @@
           </article>
           <!-- // 데이터 품질지표 -->
           <!-- 샘플 데이터 -->
-          <article id="articleSample" class="contents__detail">
+          <article id="articleSample" ref="articleSample" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">샘플 데이터</h3>
               <div class="heading-group__options">
@@ -512,7 +513,7 @@
                     >
                       <span class="button__text">{{ toggleButtonText }}</span>
                     </base-button>
-                    <base-button class="button--sm filedata__button-download" title="파일다운로드">
+                    <base-button class="button--sm filedata__button-download">
                       <svg-icon class="svg-icon" name="download-light"></svg-icon>
                       <span class="button__text">다운로드</span>
                     </base-button>
@@ -710,7 +711,7 @@
           </article>
           <!-- // 파일데이터 -->
           <!-- 데이터 연관관계 -->
-          <article id="articleDiagram" class="contents__detail">
+          <article id="articleDiagram" ref="articleDiagram" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">데이터 연관관계</h3>
             </div>
@@ -832,7 +833,7 @@
           </article>
           <!-- // 법률검토 및 규정안내 -->
           <!-- 데이터 문의 -->
-          <article id="articleInquiry" class="contents__detail">
+          <article id="articleInquiry" ref="articleInquiry" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">데이터 문의</h3>
               <div class="heading-group__options">
@@ -845,7 +846,8 @@
               </div>
             </div>
             <div class="contents__detail-inquiry">
-              <table class="table table--board">
+              <div class="table-wrap">
+                <table class="table table--board">
                 <caption class="hidden">
                   번호, 제목, 등록일, 처리현황으로 구성된 데이터 문의 게시판
                 </caption>
@@ -872,7 +874,7 @@
                       >
                       <svg-icon
                         class="svg-icon"
-                        name="lock-locked"
+                        name="lock"
                         title="비밀글"
                       ></svg-icon>
                     </td>
@@ -894,7 +896,8 @@
                     <td>답변완료</td>
                   </tr>
                 </tbody>
-              </table>
+                </table>
+              </div>
             </div>
             <group-pagination></group-pagination>
           </article>
@@ -906,8 +909,8 @@
       <Dialog
         dialog-name="inquiryDialog"
         :width="'970px'"
-        :cancelButtonText="'취소'" 
-        :confirmButtonText="'문의등록'" 
+        :cancelButtonText="'취소'"
+        :confirmButtonText="'문의등록'"
         :title="'데이터 문의하기'"
       >
         <div slot="body" class="modal__body">
@@ -1075,20 +1078,18 @@ export default {
   data() {
     return {
       isPreview: false,
+      toggleButtonText :"미리보기",
       isToggle: false,
-      isSelectOpen: false, 
+      isSelectOpen: false,
       toggleButtonText :"미리보기",
       tabList: [
-        { href: "#articleChart", title: "데이터 상세정보", selected: true },
-        { href: "#articleSample", title: "샘플 데이터", selected: false },
-        { href: "#articleDiagram", title: "활용사례", selected: false },
-        {
-          href: "#articleRule",
-          title: "법률검토 및 규정안내",
-          selected: false
-        },
-        { href: "#articleInquiry", title: "데이터 문의", selected: false }
-      ]
+        { ref: "articleChart", title: "데이터 상세정보"},
+        { ref: "articleSample", title: "샘플 데이터"},
+        { ref: "articleDiagram", title: "활용사례"},
+        { ref: "articleRule", title: "법률검토 및 규정안내"},
+        { ref: "articleInquiry", title: "데이터 문의" }
+      ],
+      currentTabIdx: 0,
     };
   },
   methods: {

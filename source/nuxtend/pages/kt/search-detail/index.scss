@@ -53,12 +53,12 @@
   background-color: rgba($primary, 0.04);
   padding: rem(28px) rem(30px) rem(30px);
   & >* {
-    height: rem(150px); 
+    height: rem(150px);
   }
 }
 
-.data-box__information {  
-  padding: 0; 
+.data-box__information {
+  padding: 0;
 }
 
 // 관심데이터 버튼
@@ -80,7 +80,7 @@
 .tab {
   position: sticky;
   top: 100px;
-  z-index: 10; 
+  z-index: 10;
   margin: rem(52px) 0 0;
   padding: rem(12px) 0;
   background-color: $ui-02;
