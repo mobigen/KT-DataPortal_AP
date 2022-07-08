@@ -9,7 +9,7 @@
 // @lnb__item.lnb__item--selected    || 선택된 메뉴
 
 .lnb {
-  width: rem(220px);
+  width: rem(220px); 
   margin-right: rem(40px);
 }
 
@@ -27,7 +27,7 @@
 }
 
 .lnb__item + .lnb__item {
- margin-top: rem(1px);
+ margin-top: rem(1px); 
 }
 
 .lnb__link {
@@ -37,7 +37,7 @@
   color: $text-01;
 }
 
-.lnb__link:hover,
+.lnb__link:hover, 
 .lnb__item--selected .lnb__link {
   background-color: $primary;
   color: $text-04;

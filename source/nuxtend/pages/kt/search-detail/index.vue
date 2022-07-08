@@ -29,7 +29,7 @@
                       ><!-- 카테고리구분 -->
                     </base-badge>
                     <base-badge class="badge--provider">
-                      <span class="badge__label">D-Ocean</span
+                      <span class="badge__label">그룹사</span
                       ><!-- 벤더 -->
                     </base-badge>
                   </div>
@@ -39,8 +39,7 @@
                     제목<mark>검색어</mark>
                     <!-- 검색어에 mark 태그 적용 -->
                   </strong>
-                  <p class="data-box__description">고객 혜택 수신을 위한 마케팅 동의 및 영리목적 광고성 정보 수신 동의를 받은 광고ID에 대해 당사의 특정 서비스에 관한 앱 푸쉬, 온라인 배너 등으로 광고하는 것은 가능할 것임.
-- 당사가 광고 및 마케팅 수신동의를 받지 않은 KT 멤버쉽 고객을 대상으로 하여 생일쿠폰 혜택 관련 앱 푸쉬를 발송하였다가 당사에 민원 제기 및 KISA에 위반사실 확인을 요청한 사례 있음 (기검토 21-CL03886, 21-CL03458)</p>
+                  <p class="data-box__description">설명</p>
                 </div>
                 <div class="data-box__bottom-content">
                   <div class="data-box__details">
@@ -223,26 +222,25 @@
               <li
                 class="tab__item"
                 v-for="(item, index) in tabList"
-                :class="currentTabIdx === index ? 'tab__item--selected' : ''"
+                :class="item.selected ? 'tab__item--selected' : ''"
                 :key="index"
               >
-                <button
-                  type="button"
+                <a
+                  :href="item.href"
                   class="tab__button"
                   role="tab"
                   aria-selected="false"
-                  @click="tabGotoClick(item, index, item.ref)"
                 >
                   <div class="tab__button-text">
                     {{ item.title }}
                   </div>
-                </button>
+                </a>
               </li>
             </ul>
           </div>
           <!--//탭 -->
           <!-- 데이터 품질지표 -->
-          <article id="articleChart" ref="articleChart" class="contents__detail">
+          <article id="articleChart" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">데이터 품질지표</h3>
             </div>
@@ -298,7 +296,7 @@
           </article>
           <!-- // 데이터 품질지표 -->
           <!-- 샘플 데이터 -->
-          <article id="articleSample" ref="articleSample" class="contents__detail">
+          <article id="articleSample" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">샘플 데이터</h3>
               <div class="heading-group__options">
@@ -309,7 +307,7 @@
               </div>
             </div>
             <div class="contents__detail-sample">
-              <div class="table-wrap table-scroll scrollCustomize">
+              <div class="table-scroll scrollCustomize">
                 <table class="table table--data">
                   <caption class="hidden">
                     샘플데이터 상세정보 안내표
@@ -485,10 +483,14 @@
               <div class="heading-group__options">
                 <div class="heading-group__notice">
                   <p class="bullet bullet--refer">
-                    파일 데이터의 일부 내용을 미리보기로 제공합니다, 전체 내용이 필요한 경우 해당 파일을 다운로드 받으시기 바랍니다.
+                    파일 데이터의 일부 내용을 미리보기로 제공합니다, 전체 내용이
+                    필요한 경우 해당 파일을 다운로드 받으시기 바랍니다.
                   </p>
                 </div>
-                <base-button class="button--primary">
+                <base-button
+                  class="button button--primary"
+                  title="전체다운로드"
+                >
                   <svg-icon class="svg-icon" name="download"></svg-icon>
                   <span class="button__text">파일 전체 다운로드</span>
                 </base-button>
@@ -499,7 +501,9 @@
                 <li :class="isPreview ? 'open-filedata' : ''">
                   <div class="filedata__item">
                     <p class="filedata__item-title">
-                      <span class="ellipsis-end">고객 서비스 사용 일일 내역</span>
+                      <span class="ellipsis-end"
+                        >고객 서비스 사용 일일 내역</span
+                      >
                     </p>
                     <base-button
                       class="button--sm filedata__button-preview"
@@ -508,14 +512,14 @@
                     >
                       <span class="button__text">{{ toggleButtonText }}</span>
                     </base-button>
-                    <base-button class="button--sm filedata__button-download">
+                    <base-button class="button--sm filedata__button-download" title="파일다운로드">
                       <svg-icon class="svg-icon" name="download-light"></svg-icon>
                       <span class="button__text">다운로드</span>
                     </base-button>
                   </div>
                   <!-- 파일 미리보기 -->
                   <div class="filedata__content">
-                    <div class="table-wrap table-scroll scrollCustomize">
+                    <div class="table-scroll scrollCustomize">
                       <table class="table table--data">
                         <caption class="hidden">
                           데이터 상세내용
@@ -652,7 +656,9 @@
                 <li>
                   <div class="filedata__item">
                     <p class="filedata__item-title">
-                      <span class="ellipsis-end">고객 서비스 사용 일일 내역</span>
+                      <span class="ellipsis-end"
+                        >고객 서비스 사용 일일 내역</span
+                      >
                     </p>
                     <base-button class="button--sm filedata__button-download">
                       <svg-icon class="svg-icon" name="download-light"></svg-icon>
@@ -663,7 +669,9 @@
                 <li>
                   <div class="filedata__item">
                     <p class="filedata__item-title">
-                      <span class="ellipsis-end">고객 서비스 사용 일일 내역</span>
+                      <span class="ellipsis-end"
+                        >고객 서비스 사용 일일 내역</span
+                      >
                     </p>
                     <base-button class="button--sm filedata__button-download">
                       <svg-icon class="svg-icon" name="download-light"></svg-icon>
@@ -674,7 +682,9 @@
                 <li>
                   <div class="filedata__item">
                     <p class="filedata__item-title">
-                      <span class="ellipsis-end">고객 서비스 사용 일일 내역</span>
+                      <span class="ellipsis-end"
+                        >고객 서비스 사용 일일 내역</span
+                      >
                     </p>
                     <base-button class="button--sm filedata__button-download">
                       <svg-icon class="svg-icon" name="download-light"></svg-icon>
@@ -685,7 +695,9 @@
                 <li>
                   <div class="filedata__item">
                     <p class="filedata__item-title">
-                      <span class="ellipsis-end">고객 서비스 사용 일일 내역</span>
+                      <span class="ellipsis-end"
+                        >고객 서비스 사용 일일 내역</span
+                      >
                     </p>
                     <base-button class="button--sm filedata__button-download">
                       <svg-icon class="svg-icon" name="download-light"></svg-icon>
@@ -698,7 +710,7 @@
           </article>
           <!-- // 파일데이터 -->
           <!-- 데이터 연관관계 -->
-          <article id="articleDiagram" ref="articleDiagram" class="contents__detail">
+          <article id="articleDiagram" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">데이터 연관관계</h3>
             </div>
@@ -792,7 +804,7 @@
           </article>
           <!-- // 활용사례 -->
           <!-- 법률검토 및 규정안내 -->
-          <article id="articleRule" ref="articleRule" class="contents__detail">
+          <article id="articleRule" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">법률검토 및 규정안내</h3>
             </div>
@@ -820,7 +832,7 @@
           </article>
           <!-- // 법률검토 및 규정안내 -->
           <!-- 데이터 문의 -->
-          <article id="articleInquiry" ref="articleInquiry" class="contents__detail">
+          <article id="articleInquiry" class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">데이터 문의</h3>
               <div class="heading-group__options">
@@ -833,8 +845,7 @@
               </div>
             </div>
             <div class="contents__detail-inquiry">
-              <div class="table-wrap">
-                <table class="table table--board">
+              <table class="table table--board">
                 <caption class="hidden">
                   번호, 제목, 등록일, 처리현황으로 구성된 데이터 문의 게시판
                 </caption>
@@ -861,7 +872,7 @@
                       >
                       <svg-icon
                         class="svg-icon"
-                        name="lock"
+                        name="lock-locked"
                         title="비밀글"
                       ></svg-icon>
                     </td>
@@ -883,23 +894,11 @@
                     <td>답변완료</td>
                   </tr>
                 </tbody>
-                </table>
-              </div>
+              </table>
             </div>
             <group-pagination></group-pagination>
           </article>
           <!-- //데이터 문의 -->
-          <div class="button-group justify-content-end">
-            <a href="./" class="button button--lg">
-              <span class="button__text">목록</span>
-            </a>
-            <base-button
-              class="button--lg button--primary-line"
-              @click="onshowDialog('errorDialog')"
-            >
-              <span class="button__text">데이터 오류신고</span>
-            </base-button>
-          </div>
         </div>
       </div>
 
@@ -907,6 +906,8 @@
       <Dialog
         dialog-name="inquiryDialog"
         :width="'970px'"
+        :cancelButtonText="'취소'" 
+        :confirmButtonText="'문의등록'" 
         :title="'데이터 문의하기'"
       >
         <div slot="body" class="modal__body">
@@ -942,7 +943,7 @@
                         </slot>
                         <svg-icon
                           class="svg-icon select-selector__icon"
-                          name="chevron-down-medium"
+                          name="chevron-down"
                           aria-hidden="true"
                         ></svg-icon>
                       </button>
@@ -1023,11 +1024,9 @@
               <tr>
                 <th scope="row">비밀글여부</th>
                 <td>
-                  <base-switch
-                    ><label for="toggleSwitch1" class="toggle-switch__label"
-                      >공개</label
-                    ></base-switch
-                  >
+                  <base-switch>
+                    <span class="toggle-switch__label">공개</span>
+                  </base-switch>
                 </td>
               </tr>
               <tr>
@@ -1076,17 +1075,20 @@ export default {
   data() {
     return {
       isPreview: false,
-      toggleButtonText :"미리보기",
       isToggle: false,
-      isSelectOpen: false,
+      isSelectOpen: false, 
+      toggleButtonText :"미리보기",
       tabList: [
-        { ref: "articleChart", title: "데이터 상세정보"},
-        { ref: "articleSample", title: "샘플 데이터"},
-        { ref: "articleDiagram", title: "활용사례"},
-        { ref: "articleRule", title: "법률검토 및 규정안내"},
-        { ref: "articleInquiry", title: "데이터 문의" }
-      ],
-      currentTabIdx: 0,
+        { href: "#articleChart", title: "데이터 상세정보", selected: true },
+        { href: "#articleSample", title: "샘플 데이터", selected: false },
+        { href: "#articleDiagram", title: "활용사례", selected: false },
+        {
+          href: "#articleRule",
+          title: "법률검토 및 규정안내",
+          selected: false
+        },
+        { href: "#articleInquiry", title: "데이터 문의", selected: false }
+      ]
     };
   },
   methods: {

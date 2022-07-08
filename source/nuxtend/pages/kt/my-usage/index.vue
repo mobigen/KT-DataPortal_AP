@@ -5,7 +5,7 @@
       <group-breadcrumb></group-breadcrumb>
     </div>
     <!-- contents-wrap -->
-    <div class="contents-wrap">
+    <div class="contents-wrap"> 
       <!-- lnb -->
       <group-lnb></group-lnb>
       <!-- //lnb -->
@@ -20,16 +20,16 @@
           <!-- // heading-group -->
           <div class="board-wrap">
             <!-- board-head -->
-            <div class="board-head">
-              <div class="board-head__group">
-                <p class="total-number">총<strong>1,000</strong>건</p>
+            <div class="board-head">      
+              <div class="board-head__group">                                     
+                <p class="total-number">총<strong>1,000</strong>건</p>                                            
                 <div class="board-head__options">
                   <base-button class="button--primary">
                     <svg-icon class="svg-icon" name="check"></svg-icon>
                     <span class="button__text">일괄신청</span>
                   </base-button>
-                </div>
-              </div>
+                </div> 
+              </div>                                                                                    
             </div>
             <div class="board-body">
               <!-- table : 담아두기 -->
@@ -117,10 +117,10 @@
                     </td>
                   </tr>
                 </tbody>
-              </table>
+              </table> 
               <!-- // table -->
             </div>
-            <group-pagination></group-pagination>
+            <group-pagination></group-pagination>                                                                                    
           </div>
           <!-- heading-group -->
           <div class="heading-group">
@@ -133,15 +133,15 @@
           </ul>
           <div class="board-wrap">
             <!-- board-head -->
-            <div class="board-head">
+            <div class="board-head">    
               <!-- board-head__search : 게시물검색용 -->
               <div class="board-head__search">
                 <search-input-board></search-input-board>
-              </div>
-              <div class="board-head__group">
-                <p class="total-number">총<strong>1,000</strong>건</p>
+              </div>   
+              <div class="board-head__group">                                    
+                <p class="total-number">총<strong>1,000</strong>건</p>                                            
                 <div class="board-head__options">
-                  <div class="options-sort">
+                  <div class="options-sort"> 
                     <span class="label">처리상태</span>
                       <!-- select -->
                       <base-select class="select w-107">
@@ -172,7 +172,7 @@
                     <span class="button__text">다시신청</span>
                   </base-button>
                 </div>
-              </div>
+              </div>                                                                                     
             </div>
             <div class="board-body">
               <!-- table : 신청내역 목록 -->
@@ -288,7 +288,7 @@
                   </tr>
                 </tbody>
               </table>
-              <!-- // table -->
+              <!-- // table -->                                                                                    
             </div>
             <group-pagination></group-pagination>
           </div>
@@ -298,12 +298,12 @@
     <!-- // contents-wrap -->
 
     <!-- 데이터 활용 신청하기 Dialog -->
-    <Dialog
-    dialog-name="applyDialog"
-    :width="'970px'"
+    <Dialog 
+    dialog-name="applyDialog" 
+    :width="'970px'" 
     :height="'auto'"
-    :cancelButtonText="'취소'"
-    :confirmButtonText="'신청'"
+    :cancelButtonText="'취소'" 
+    :confirmButtonText="'신청'" 
     :title="'데이터 활용 신청하기'"
     :confirmButtonDisabled="confirmButtonDisabled"
     >
@@ -345,11 +345,11 @@
               <tr>
                 <th scope="row">법률검토<strong class="required">필수</strong></th>
                 <td>
-                  <div class="v-group">
+                  <div class="v-group">   
                     <BaseTextarea
                       rows="6"
                       element-class="text-area--fixed scrollCustomize"
-                      placeholder="법률검토 대상 데이터입니다.
+                      placeholder="법률검토 대상 데이터입니다. 
 법률검토 내용을 입력하거나 파일로첨부하세요. "
                       :useCheckByte="false"
                     ></BaseTextarea>
@@ -401,7 +401,7 @@ export default {
   layout: "kt/kt",
   async asyncData({ store }) {
     await store.dispatch("kt/keyword-search/getContents");
-  },
+  }, 
   computed: {
     ...mapGetters({
       contents: "kt/keyword-search/contents"
@@ -414,7 +414,7 @@ export default {
       checkboxId1:""
     };
   },
-  methods: {
+  methods: {    
     togglePreview: function () {
       this.isPreview = !this.isPreview;
     },

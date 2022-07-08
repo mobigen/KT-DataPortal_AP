@@ -3,7 +3,7 @@
     <textarea
       type="text"
       class="text-area"
-
+      
       :class="elementClass"
       @input="input = $event.target.value"
       :value="value"

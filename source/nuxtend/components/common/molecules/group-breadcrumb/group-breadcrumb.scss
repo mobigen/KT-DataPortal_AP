@@ -26,8 +26,8 @@
 .breadcrumb__item {
   position: relative;
   @include font-size("14");
-  color:#e4f3fb;
-  padding:0 0 0 rem(34px);
+  color:#e4f3fb; 
+  padding:0 0 0 rem(34px); 
 
   &:last-child {
     @include font-weight("medium");
@@ -60,7 +60,7 @@
 .breadcrumb__item--home:before {
   position: absolute;
   left: 0;
-  top:0;
+  top:0; 
   transform: none;
   background: url("#{$img-path}/icon/home-wh.svg") no-repeat center center;
   border: none;
@@ -87,7 +87,7 @@
   border: none;
   border-radius: 15px;
   color:#e4f3fb;
-
+  
   &:hover:not(:disabled) {
     border-color: $secondary;
   }

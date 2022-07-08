@@ -12,14 +12,14 @@
   }
 
   .tab__button-subtext{
-    display: inline-block;
+    display: inline-block;  
     &::before {
       content:"(";
-      margin-right: rem(2px);
-    }
+      margin-right: rem(2px); 
+    }      
     &::after {
       content:")";
-      margin-left: rem(2px);
+      margin-left: rem(2px); 
     }
   }
   .tab__item--selected {

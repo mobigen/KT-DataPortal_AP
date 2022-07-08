@@ -33,7 +33,7 @@
             <base-button class="button--lg" @click="onClose">
               <span class="button__text"> {{ cancelButtonText }} </span>
             </base-button>
-            <base-button class="button--lg button--primary"
+            <base-button class="button--lg button--primary" 
               :disabled="confirmButtonDisabled"
               @click="onConfirm">
               <span class="button__text"> {{ confirmButtonText }} </span>
@@ -51,7 +51,7 @@
 import BaseButton from "@common/atoms/base-button/base-button";
 
 export default {
-  name: "Dialog",
+  name: "Dialog",  
   components: {
     BaseButton
   },

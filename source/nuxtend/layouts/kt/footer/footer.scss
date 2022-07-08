@@ -51,7 +51,7 @@
     width: rem(190px);
   }
   .select-selector {
-    width: rem(190px);
+    width: rem(190px); 
     height: rem(59px);
     border-radius: 0;
     button {
@@ -119,18 +119,18 @@
 
 .footer-bottom__info-text {
   position: relative;
-  margin: 0 rem(15px) 0 0;
-  padding: 0 rem(15px) 0 0;
+  margin: 0 rem(15px) 0 0; 
+  padding: 0 rem(15px) 0 0; 
   @include font-size("12");
 
   &:after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 50%;
-    width: rem(1px);
+    content: ""; 
+    position: absolute; 
+    right: 0;  
+    top: 50%; 
+    width: rem(1px); 
     height: rem(12px);
-    margin-top: rem(-6px);
+    margin-top: rem(-6px); 
     background: #ccc;
   }
   &:last-child:after {

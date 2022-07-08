@@ -6,51 +6,6 @@
   padding-top: 0;
 }
 
-//통합검색 결과없음
-.data-none {
-padding: rem(120px) 0;
-text-align: center;
-
-&:before {
-  content: "";
-  display: block;
-  margin: 0 auto 37px;
-  width: rem(94px);
-  height: rem(94px);
-  background: url(#{$img-path}/icon/no-data.svg) no-repeat 0 0;
-}
-.data-none__title {
-  @include font-size("20");
-  @include font-weight("medium");
-  color: $ui-01;
-  margin-bottom: rem(20px);
-  mark {
-    margin-right: rem(5px);
-    &::before {
-      content: "‘";
-    }
-    &::after {
-      content: "’";
-    }
-
-  }
-}
-.data-none__description {
-  @include font-size("16");
-  @include font-weight("medium");
-  color: $ui-01;
-  span {
-    display: block;
-    @include font-size("14");
-    @include font-weight("medium");
-    padding-top: rem(10px);
-    color: $light;
-
-  }
-}
-
-}
-
 .heading-group {
   border-bottom: 1px solid #333;
 }
@@ -97,10 +52,13 @@ text-align: center;
   border-bottom: 1px solid #ccc;
   background-color: rgba($primary, 0.04);
   padding: rem(28px) rem(30px) rem(30px);
+  & >* {
+    height: rem(150px); 
+  }
 }
 
-.data-box__information {
-  padding: 0;
+.data-box__information {  
+  padding: 0; 
 }
 
 // 관심데이터 버튼
@@ -115,15 +73,14 @@ text-align: center;
         margin: 0 0 5px 0;
       }
     }
-
-}
+  }
 }
 
 // 탭
 .tab {
   position: sticky;
   top: 100px;
-  z-index: 10;
+  z-index: 10; 
   margin: rem(52px) 0 0;
   padding: rem(12px) 0;
   background-color: $ui-02;
@@ -242,12 +199,8 @@ text-align: center;
     height: rem(12px);
     margin-left: $spacing-md;
     background-color: #ddd;
-    color: $ui-01;
-    padding: 0 rem(10px);
   }
 }
-}
-
 
 .filedata__button-preview.filedata__button-close {
   .button__text {

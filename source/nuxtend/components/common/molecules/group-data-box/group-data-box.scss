@@ -35,8 +35,8 @@
 .data-box__information {
   display: flex;
   flex-direction: column;
-  min-height: rem(138px);
-  padding: rem(5px) 0;
+  min-height: rem(138px); 
+  padding: rem(5px) 0;   
 
   &:not(:only-child) {
     flex: 1 1 0%;
@@ -52,17 +52,7 @@
     min-width: auto;
     margin: 0 rem(40px) 0 rem(30px);
   }
-  min-height: rem(138px);
-  padding: rem(5px) 0;
-
-  &:not(:only-child) {
-    flex: 1 1 0%;
-    min-width: auto;
-  }
-
-  &:not(:only-child):first-child {
-    margin-right: rem(40px);
-  }
+}
 
 .data-box__top-content {
   display: flex;
@@ -176,7 +166,6 @@
     height: rem(38px);
     padding: rem(5px) 0;
   }
-}
 
   .button--primary-line {
     border-width: 2px;
@@ -196,7 +185,7 @@
     align-items: center;
     height: auto;
 
-    .button__text {
+    .button__text {      
       @include font-size("13");
     }
 
@@ -276,7 +265,7 @@
   .data-box__title {
     @include multi-text-overflow(24px, 1);
   }
-
+  
   .data-box__description {
     @include multi-text-overflow(18px, 1);
   }
