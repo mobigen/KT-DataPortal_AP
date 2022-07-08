@@ -593,6 +593,20 @@ strong.required {
   }
 }
 
+// 게시물 정렬
+.options-sort {
+  display: flex;
+  align-items: center;
+
+  > * + * {
+    margin-left: rem(25px);
+  }
+
+  .label + * {
+    margin-left: rem(14px);
+  }
+}
+
 //----------------------------------------------
 // 검색분리 추가 2022-06-28
 // ---------------------------------------------
@@ -1008,6 +1022,10 @@ strong.required {
         padding: 0 rem(18px);
         border-left: 1px solid $ui-03;
         border-bottom:1px solid #ccc;
+        .checkbox__label {
+          @include font-size("14");
+          @include font-weight("regular");
+        }
       }
 
       .search-filter__body {
@@ -1044,6 +1062,10 @@ strong.required {
     .search-filter__head {
       height: rem(48px);
       padding: 0 rem(23px);
+      .checkbox__label {
+        @include font-size("16");
+        @include font-weight("medium");
+      }
     }
 
     .search-filter__body {

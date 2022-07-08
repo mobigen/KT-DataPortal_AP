@@ -7,17 +7,44 @@
 // @pagination__link                || 페이지링크 ul li a
 // @pagination__link--selected      || 페이지링크 ul li a 현재페이지
 
+.pagination-wrap {
+  position: relative;
+  text-align: center;
+  margin-top: rem(30px);
+
+  & > .ui-template {
+    display: inline-flex;
+  }
+
+  & > .button {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  & > .ui-template ~ .button {
+    right:0;
+    left: auto;
+  }
+
+  .pagination {
+    margin-top: 0;
+  }
+}
+
 .pagination {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  position:relative;
   margin-top: rem(30px);
 }
 
 .pagination__button,
 .pagination__link {
   @include button-normal;
+
   height: $button-height-md;
   background-color: transparent;
   border-radius: rem(5px);
@@ -27,6 +54,14 @@
 .pagination__button {
   width: rem(18px);
   padding: 0;
+
+  &:hover:not(:disabled),
+  &:focus:not(:disabled),
+  &:active:not(:disabled) {
+    opacity: .75;
+    border-color: transparent;
+    background-color: transparent;
+  }
 
   & + & {
     margin-left: $spacing-sm;

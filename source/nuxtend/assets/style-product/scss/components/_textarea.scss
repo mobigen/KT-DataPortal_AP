@@ -73,3 +73,16 @@
   @include line-height("title");
   color: $text-03;
 }
+
+// 텍스트 길이(byte) 표시
+.text-area__byte {
+  @include font-size("12");
+  @include font-weight("regular");
+  text-align: right;
+  color: $text-03;
+
+  strong {
+    @include font-weight("bold");
+    color: $secondary;
+  }
+}

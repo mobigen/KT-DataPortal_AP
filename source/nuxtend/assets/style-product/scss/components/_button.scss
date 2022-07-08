@@ -54,7 +54,7 @@
     color: $ui-02;
     background-color: $ui-01;
     border-color: $ui-01;
-    
+
     .svg-icon {
       clip-rule: evenodd;
       fill-rule: evenodd;
@@ -111,7 +111,8 @@
   background-color: $bg-color;
   color: $font-color;
 
-  &:hover:not(:disabled) {
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
     background-color: $hover-bg-color;
   }
 
@@ -139,51 +140,17 @@
 }
 
 @mixin button--primary {
-  @include button-theme($primary, $text-04, $hover-primary, $active-primary);
+  @include button-theme($primary, $white, $hover-primary, $active-primary);
   border: 0;
 }
 
-@mixin button--primary-line {
-  @include button-theme(
-    $ui-02,
-    $text-01,
-    $ui-02,
-    $ui-02,
-    $primary
-  );
-
-  &:hover:not(:disabled) {
-    color: $ui-02;
-    border: $primary;
-    background: $primary;
-  }
-}
-
 @mixin button--secondary {
-  @include button-theme(
-    $secondary,
-    $text-04,
-    $hover-secondary,
-    $active-secondary
-  );
-}
-
-@mixin button--secondary-line {
-  @include button-theme(
-    $ui-02,
-    $secondary,
-    $ui-02,
-    $ui-02,
-    $secondary
-  );
-  &:hover:not(:disabled) {
-    color: $ui-02;
-    background: $secondary;
-  }
+  @include button-theme($secondary, $white, $hover-secondary, $active-secondary);
 }
 
 @mixin button--tertiary {
-  @include button-theme($ui-02, $text-02, $ui-02, $ui-02, $ui-04);
+  @include button-theme($white, $text-02, $white, $white, $ui-04);
+
   &:hover:not(:disabled) {
     border-color: $secondary;
   }
@@ -191,10 +158,15 @@
   &:active:not(:disabled) {
     border-color: $secondary;
     color: $secondary;
+
     .svg-icon {
       fill: $secondary;
     }
   }
+}
+
+@mixin button--negative {
+  @include button-theme($negative, $white, $hover-negative, $active-negative);
 }
 
 @mixin button--link {
@@ -203,7 +175,7 @@
     color: $basic;
     border-color: transparent;
 
-    .svg-icon {   
+    .svg-icon {
       fill: #333;
     }
   }
@@ -242,14 +214,12 @@
   }
 }
 
-@mixin button--negative {
-  @include button-theme($negative, $text-04, $hover-negative, $active-negative);
-}
-
 @mixin button--underline {
   @include button-theme(transparent, $text-02, transparent, transparent);
+
   text-decoration: underline;
   padding: 0;
+
   &:hover:not(:disabled),
   &:focus-visible:not(:disabled) {
     color: $text-03;
@@ -270,6 +240,7 @@
 
 @mixin button--underline-support {
   @include button-theme(transparent, $primary, transparent, transparent);
+
   text-decoration: underline;
   padding: 0;
 
@@ -292,6 +263,7 @@
 
 @mixin button--underline-negative {
   @include button-theme(transparent, $negative, transparent, transparent);
+
   padding: 0;
   text-decoration: underline;
 
@@ -313,12 +285,10 @@
   }
 }
 
-@mixin button--negative {
-  @include button-theme($negative, $text-04, $hover-negative, $active-negative);
-}
 
 @mixin button--outline {
   @include button-theme($ui-02, $primary, #e1eaf7, #c6d8f2, $ui-04);
+
   // support 예외 사항
   &:hover:not(:disabled) {
     color: $primary;
@@ -364,7 +334,10 @@
   }
 }
 
-@mixin button-padding($padding-right, $padding-left) {
+@mixin button-padding(
+  $padding-right,
+  $padding-left
+) {
   padding-right: $padding-right;
   padding-left: $padding-left;
 }
@@ -389,7 +362,7 @@
   @include button-padding($spacing-md - $spacing-3xs, $spacing-md - $spacing-3xs);
   @include font-weight("regular");
 }
-//button--xs 2022-07-01 ADD 
+//button--xs 2022-07-01 ADD
 @mixin button--xs {
   @include button-size(13px, $button-height-xs, 18px);
   @include button-padding($spacing-xs, $spacing-xs);
@@ -404,31 +377,35 @@
 
 .button--icon {
   @include button--icon($button-height-md, 18px);
+
+  &.button--lg {
+    @include button--icon($button-height-lg, 32px);
+  }
+
+  &.button--sm {
+    @include button--icon($button-height-sm, 18px);
+  }
+
+  &.button--xs {
+    @include button--icon($button-height-xs, 14px);
+  }
 }
 
-.button--tertiary {
-  @include button--tertiary;
-}
-
+// button theme color classes
 .button--primary {
   @include button--primary;
-}
-
-.button--primary-line {
-  @include button--primary-line;
-}
-
-.button--primary-outline {
-  @include button--primary-line;
-  border-width: 2px;
 }
 
 .button--secondary {
   @include button--secondary;
 }
 
-.button--secondary-line {
-  @include button--secondary-line;
+.button--tertiary {
+  @include button--tertiary;
+}
+
+.button--negative {
+  @include button--negative;
 }
 
 .button--link {
@@ -443,10 +420,6 @@
   @include button--danger;
 }
 
-.button--negative {
-  @include button--negative;
-}
-
 .button--underline {
   @include button--underline;
 }
@@ -459,6 +432,21 @@
   @include button--underline-negative;
 }
 
+// button theme color bordered classes
+@each $name, $color in $button-colors {
+	.button--#{$name}-line {
+		@include button-theme($white, $gy-02, $color, dargen($color, 5%), $color);
+
+    &:hover:not(:disabled),
+    &:focus:not(:disabled),
+    &:active:not(:disabled) {
+      color: $white;
+      border-color: $color;
+    }
+	}
+}
+
+// button size classes
 .button--md {
   @include button--md;
 }
@@ -473,6 +461,7 @@
 
 .button--2xl {
   @include button--2xl;
+
   .svg-icon {
     @include svg-icon-size(24px);
     margin-right: $spacing-xs;
@@ -487,8 +476,8 @@
 
 .button--sm {
   @include button--sm;
-  
-  // 내부용은 기본과 디자인이 다름 2022-07-04 ADD 
+
+  // 내부용은 기본과 디자인이 다름 2022-07-04 ADD
   &:hover,
   &:focus {
     border-color: $primary;
@@ -502,18 +491,6 @@
 
 .button--xs {
   @include button--xs;
-}
-
-.button--icon.button--lg {
-  @include button--icon($button-height-lg, 32px);
-}
-
-.button--icon.button--sm {
-  @include button--icon($button-height-sm, 18px);
-}
-
-.button--icon.button--xs {
-  @include button--icon($button-height-xs, 18px);
 }
 
 // link 테마 버튼이 icon만 사용되는 경우 예외 사항
@@ -545,57 +522,37 @@
   padding-right: 0;
 }
 
-.button-group__button.select {
-  min-width: auto;
-}
-
-.button-group__button:first-child,
-.button-group__button:first-child .select-selector__button {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.button-group__button:last-child,
-.button-group__button:first-child .select-selector__button {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.button-group__button + .button-group__button,
-.button-group__button + .button-group__button .select-selector__button {
-  border-left-width: 0;
-}
-
-.button-group__button .svg-icon {
-  @include svg-icon-size(20px);
-}
-
-.button-group__button .select-selector__button {
-  padding-left: $spacing-xs;
-  padding-right: $spacing-lg;
-}
-
 // -------------------------
-// Button
+// Button group
 // -------------------------
 .button-group {
   position: relative;
   display: flex;
   justify-content: center;
-}
+  margin-top: rem(30px);
 
-.button-group button+button {
-  margin-left: 10px;
-}
+  .button {
+    @include button--lg;
+    min-width: rem(94px);
 
-.button--right {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
+    &.button--icon {
+      @include button--icon($button-height-lg, 32px);
+    }
+  }
 
-.button--left {
-  position: absolute;
-  top: 0;
-  left: 0;
+  .button + .button {
+    margin-left: rem(10px);
+  }
+
+  .button--right {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .button--left {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }

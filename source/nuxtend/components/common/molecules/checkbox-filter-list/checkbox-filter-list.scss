@@ -24,9 +24,7 @@
 }
 
 .search-filter__head .checkbox__label {
-  @include font-size("14");
-  @include font-weight("regular");
-  color: $text-03;
+  color: $text-01;
 }
 
 .search-filter__body {

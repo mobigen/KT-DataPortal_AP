@@ -17,7 +17,7 @@
                     3. 기타 : icon_summary_etc.png
                 -->
                 <img
-                  src="~@/assets/style-product/images/common/icon_summary_etc.png"
+                  src="~@/assets/style-product/images/temp/@temp-thumb-databox.jpg"
                   alt="기타"
                 />
               </div>
@@ -29,7 +29,7 @@
                       ><!-- 카테고리구분 -->
                     </base-badge>
                     <base-badge class="badge--provider">
-                      <span class="badge__label">그룹사</span
+                      <span class="badge__label">D-Ocean</span
                       ><!-- 벤더 -->
                     </base-badge>
                   </div>
@@ -889,6 +889,17 @@
             <group-pagination></group-pagination>
           </article>
           <!-- //데이터 문의 -->
+          <div class="button-group justify-content-end">
+            <a href="./" class="button button--lg">
+              <span class="button__text">목록</span>
+            </a>
+            <base-button
+              class="button--lg button--primary-line"
+              @click="onshowDialog('errorDialog')"
+            >
+              <span class="button__text">데이터 오류신고</span>
+            </base-button>
+          </div>
         </div>
       </div>
 

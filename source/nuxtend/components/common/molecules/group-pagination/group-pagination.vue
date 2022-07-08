@@ -3,7 +3,7 @@
     <!-- pagination -->
     <div class="pagination pc-only">
       <template v-show="showGotoFirst">
-        <base-button class="button--link pagination__button" @click="gotoFirst">
+        <base-button class="pagination__button" @click="gotoFirst">
           <svg-icon
             class="svg-icon"
             name="chevron-double-left"
@@ -13,7 +13,7 @@
         </base-button>
       </template>
       <template v-show="showGotoPrev">
-        <base-button class="button--link pagination__button" @click="gotoPrev">
+        <base-button class="pagination__button" @click="gotoPrev">
           <svg-icon
             class="svg-icon"
             name="chevron-left"
@@ -39,7 +39,7 @@
       </ul>
 
       <template v-show="showGotoNext">
-        <base-button class="button--link pagination__button" @click="gotoNext">
+        <base-button class="pagination__button" @click="gotoNext">
           <svg-icon
             class="svg-icon"
             name="chevron-right"
@@ -49,7 +49,7 @@
         </base-button>
       </template>
       <template v-show="showGotoEnd">
-        <base-button class="button--link pagination__button" @click="gotoEnd">
+        <base-button class="pagination__button" @click="gotoEnd">
           <svg-icon
             class="svg-icon"
             name="chevron-double-right"
