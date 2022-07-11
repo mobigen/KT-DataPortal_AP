@@ -12,14 +12,14 @@
       <!-- //lnb -->
       <!-- contents-group : subject + contents -->
       <div class="contents-group">
-        <subject></subject>
+        <subject v-if="false"></subject>
         <div class="contents">
           <!-- heading-group -->
-          <div class="heading-group">
+          <div class="heading-group" v-if="false">
             <h4 class="heading-group__title">담아두기 목록</h4>
           </div>
           <!-- // heading-group -->
-          <div class="board-wrap">
+          <div class="board-wrap" v-if="false">
             <!-- board-head -->
             <div class="board-head">
               <div class="board-head__group">
