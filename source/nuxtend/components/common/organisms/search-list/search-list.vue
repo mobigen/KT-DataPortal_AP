@@ -83,7 +83,10 @@
         </div>
         <!-- 오른쪽 옵션 구조 추가 -->
         <div class="data-box__buttons">
-          <base-button class="button--primary">
+          <base-button
+            class="button--primary"
+            @click="onshowDialog('requestDialog_' + index)"
+          >
             <span class="button__text">바로활용</span>
           </base-button>
           <base-button class="button--primary-line">
@@ -113,6 +116,13 @@
             </base-button>
           </div>
         </div>
+
+        <!-- 데이터 활용 신청하기 Dialog -->
+        <request-data-dialog
+          :name="'requestDialog_' + index"
+          :data="item"
+        ></request-data-dialog>
+        <!-- // Dialog -->
       </div>
     </li>
   </ul>
@@ -124,6 +134,7 @@ import BaseButton from "@common/atoms/base-button/base-button";
 import BaseTag from "@common/atoms/base-tag/base-tag.vue";
 import BaseCheckbox from "@common/atoms/base-checkbox/base-checkbox.vue";
 import BasicTagList from "@common/atoms/basic-tag-list/basic-tag-list";
+import requestDataDialog from "@component/users/modal/requestDataDialog/requestDataDialog";
 
 export default {
   name: "SearchList",
@@ -163,7 +174,14 @@ export default {
       return this.list;
     }
   },
-  components: { BaseBadge, BaseButton, BaseTag, BaseCheckbox, BasicTagList },
+  components: {
+    BaseBadge,
+    BaseButton,
+    BaseTag,
+    BaseCheckbox,
+    BasicTagList,
+    requestDataDialog
+  },
   watch: {},
   data() {
     return {};
@@ -201,6 +219,9 @@ export default {
     },
     myFavoriteDataClick(id, checked) {
       this.$emit("myFavoriteDataClick", { id, checked: !checked });
+    },
+    onshowDialog(name) {
+      this.$modal.show(name);
     }
   }
 };
