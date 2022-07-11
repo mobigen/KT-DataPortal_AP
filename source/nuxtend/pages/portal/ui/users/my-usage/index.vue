@@ -275,7 +275,16 @@
                 }"
               ></basic-table>
             </div>
-            <group-pagination></group-pagination>
+            <group-pagination
+              :paging-key="requestedPaginationKey"
+              :paging-object="{
+                [CONSTANTS.PAGING.ITEMS_PER_PAGE]: 5,
+                [CONSTANTS.PAGING.VISIBLE_PAGES]: 3,
+                [CONSTANTS.PAGING.PAGE]: 1
+              }"
+              @pagingEvent="getRequestedData"
+              :show-test-table="false"
+            ></group-pagination>
           </div>
         </div>
       </div>
@@ -400,7 +409,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      contents: "kt/keyword-search/contents"
+      contents: "kt/keyword-search/contents",
+      CONSTANTS: "defaults/constants/CONSTANTS"
     }),
     ...mapGetters("users/requested/requested", ["requestedData"])
   },
@@ -409,7 +419,8 @@ export default {
       isPreview: false,
       isToggle: false,
       checkboxId1: "",
-      date: "date"
+      date: "date",
+      requestedPaginationKey: "requestedDataPagination"
     };
   },
   methods: {
@@ -434,7 +445,10 @@ export default {
       if (paramKey !== undefined) {
         this.searchParam[paramKey] = paramValue;
       }
-      this.restApiRequestedData(this.searchParam);
+      this.restApiRequestedData({
+        paginationKey: this.requestedPaginationKey,
+        searchParam: this.searchParam
+      });
     },
     change() {
       console.log("data changed");
