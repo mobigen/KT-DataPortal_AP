@@ -5,8 +5,13 @@
         신청내역 목록 게시판
       </caption>
 
-      <colgroup v-for="c in colgroupArray">
-        <col :style="getColStyle(c)" :span="getColSpan(c)" />
+      <colgroup>
+        <col
+          v-for="(c, colI) in colgroupArray"
+          :key="'colGroup_' + colI"
+          :style="getColStyle(c)"
+          :span="getColSpan(c)"
+        />
       </colgroup>
 
       <thead v-if="useHeader">
@@ -56,17 +61,6 @@
             </base-checkbox>
           </td>
 
-          <!--          <td v-if="useTagList">-->
-          <!--            <template v-for="data in data['tagList']">-->
-          <!--              <basic-single-tag-->
-          <!--                :tagName="data"-->
-          <!--                previousText=""-->
-          <!--                :cursorPointer="false"-->
-          <!--                @tagClick=""-->
-          <!--              ></basic-single-tag>-->
-          <!--            </template>-->
-          <!--          </td>-->
-
           <td v-for="(h, hi) in tableHeader" :key="'header_' + hi">
             <!-- button type 인 경우,-->
             <template
@@ -86,7 +80,20 @@
               >
             </template>
 
-            <template v-else>{{ data[h] }}</template>
+            <template v-else-if="valueType[h] === 'badge'">
+              <base-badge
+                :class="'badge--' + formatter[h][data[h]] + '-outline'"
+              >
+                <span class="badge__label">{{ data[h] }}</span>
+              </base-badge>
+            </template>
+            <template v-else-if="valueType[h] === 'valueMatch'">
+              {{ getValueMatch(h, data[h]) }}
+            </template>
+            <template v-else-if="valueType[h] === 'stringFromat'">
+              {{ getStringFormat(h, data[h]) }}
+            </template>
+            <template v-else> {{ data[h] }}</template>
           </td>
 
           <template v-for="(value, key, index) in tableButtonText">
@@ -128,6 +135,7 @@
 import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
 import BasicSingleTag from "@component/aiPlatform/basic/basic-single-tag.vue";
 import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox.vue";
+import BaseBadge from "@component/common/atoms/base-badge/base-badge.vue";
 
 export default {
   name: "basic-table",
@@ -251,6 +259,13 @@ export default {
       type: String,
       required: false,
       default: "table--board"
+    },
+    formatter: {
+      type: Object,
+      required: false,
+      default: () => {
+        return {};
+      }
     }
   },
   computed: {
@@ -291,7 +306,7 @@ export default {
       return headerList;
     }
   },
-  components: { BasicButton, BasicSingleTag, BaseCheckbox },
+  components: { BasicButton, BasicSingleTag, BaseCheckbox, BaseBadge },
   watch: {},
   methods: {
     buttonClick(rowKey, btnAction) {
@@ -333,21 +348,47 @@ export default {
       if (colVal.indexOf(":") > -1) {
         widthText = colVal.split(":").pop();
       }
-      return `style="width:${widthText}"`;
+      return `width: ${widthText}`;
     },
     getColSpan(colVal) {
       let spanText = "";
+      let colSpan = "";
 
       if (colVal.indexOf(":span") > -1) {
         spanText = colVal.split(":span=").shift();
+        colSpan = `${spanText}`;
       }
-      return `span="${spanText}"`;
+      return colSpan;
+    },
+    /**
+     * value match
+     * ex :
+     * T : "사용함"
+     * F : "사용안함"
+     * @param header
+     * @param metaValue
+     * @returns {*}
+     */
+    getValueMatch(header, metaValue) {
+      try {
+        return this.formatter[header][metaValue];
+      } catch (e) {
+        return metaValue;
+      }
+    },
+    /**
+     * "{0}건" 같은 한개의 formating 만 처리가능.
+     * @param header
+     * @param metaValue
+     * @returns {*}
+     */
+    getStringFormat(header, metaValue) {
+      var formatted = this.formatter[header];
+      for (var arg in arguments) {
+        formatted = formatted.replace("{" + arg + "}", metaValue);
+      }
+      return formatted;
     }
-    // getBodyLocale(key, data) {
-    //   return Object.prototype.hasOwnProperty.call(this.bodyLocale, key)
-    //     ? this.bodyLocale[key][data[key]]
-    //     : data[key];
-    // }
   },
   created() {}
 };
