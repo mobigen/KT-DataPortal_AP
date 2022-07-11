@@ -64,18 +64,13 @@
           <td v-for="(h, hi) in tableHeader" :key="'header_' + hi">
             <!-- button type 인 경우,-->
             <template
-              v-if="
-                keyActionText &&
-                Object.keys(keyActionText).includes(h['column_name'])
-              "
+              v-if="keyActionText && Object.keys(keyActionText).includes(h)"
             >
               <basic-button
                 buttonCss="link-button"
                 underline
                 hoverColor
-                @click.native.stop="
-                  keyClick(data[rowKey], keyActionText[h['column_name']])
-                "
+                @click.native.stop="keyClick(data[rowKey], keyActionText[h])"
                 >{{ data[h] }}</basic-button
               >
             </template>
@@ -316,6 +311,7 @@ export default {
       this.$emit("columnAction", rowKey, rowObject);
     },
     keyClick(rowKey, keyAction) {
+      console.log(keyAction);
       this.$emit("keyAction", rowKey, keyAction);
     },
     getHeaderLocale(headerEngNm) {

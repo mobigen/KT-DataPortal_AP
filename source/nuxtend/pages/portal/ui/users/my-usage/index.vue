@@ -180,7 +180,10 @@
                 <search-input-field></search-input-field>
               </div>
               <div class="board-head__group">
-                <p class="total-number">총<strong>1,000</strong>건</p>
+                <p class="total-number">
+                  총<strong>{{ requestedTotalCount }}</strong
+                  >건
+                </p>
                 <div class="board-head__options">
                   <div class="options-sort">
                     <span class="label">처리상태</span>
@@ -255,7 +258,6 @@
                 ]"
                 @buttonAction=""
                 @columnAction=""
-                @keyAction=""
                 :value-type="{
                   law_evl_conf_yn: 'valueMatch',
                   trt_sttus: 'badge',
@@ -273,6 +275,10 @@
                   },
                   use_tmscnt: '{0}회'
                 }"
+                :keyActionText="{
+                  data_nm: 'showDetailDialog'
+                }"
+                @keyAction="showDetailDialog"
               ></basic-table>
             </div>
             <group-pagination
@@ -379,6 +385,72 @@
       </div>
     </Dialog>
     <!-- // Dialog -->
+
+    <!-- 데이터 활용 신청하기 Dialog -->
+    <Dialog
+      dialog-name="viewRequestDetailDialog"
+      :width="'970px'"
+      :height="'auto'"
+      :title="'데이터 활용 신청내역 상세 조회'"
+      :confirmButtonDisabled="true"
+      cancelButtonText="확인"
+    >
+      <div slot="body" class="modal__body">
+        <div class="table-wrap">
+          <!-- formbox -->
+          <table class="formbox">
+            <caption class="hidden">
+              데이터 활용 신청하기 게시판
+            </caption>
+            <colgroup>
+              <col style="width: 140px" />
+              <col style="width: auto" />
+            </colgroup>
+            <tbody>
+              <tr>
+                <th scope="row">데이터명</th>
+                <td>
+                  <p>{{ selectedObj.data_nm }}</p>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  신청자<strong class="required">필수</strong>
+                </th>
+                <td>
+                  <p>{{ selectedObj.apyr }}</p>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  신청내용<strong class="required">필수</strong>
+                  <br />(활용목적)
+                </th>
+                <td>
+                  <pre>{{ selectedObj.apy_sbst }}</pre>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">법률검토</th>
+                <td>
+                  {{ selectedObj.law_evl_conf_yn === "Y" ? "필수" : "" }}
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  기간설정<strong class="required">필수</strong>
+                </th>
+                <td>
+                  <Date-picker :range="true" :disabled="true" @change="" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- // formbox -->
+        </div>
+      </div>
+    </Dialog>
+    <!-- // Dialog -->
   </div>
 </template>
 
@@ -412,7 +484,20 @@ export default {
       contents: "kt/keyword-search/contents",
       CONSTANTS: "defaults/constants/CONSTANTS"
     }),
-    ...mapGetters("users/requested/requested", ["requestedData"])
+    requestedData() {
+      const vuex =
+        this.$store.getters["users/requested/requested/requestedData"];
+
+      if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+        this.requestedTotalCount = vuex.totalCount;
+      } else {
+        return {
+          header: [],
+          body: []
+        };
+      }
+      return vuex;
+    }
   },
   data() {
     return {
@@ -420,7 +505,9 @@ export default {
       isToggle: false,
       checkboxId1: "",
       date: "date",
-      requestedPaginationKey: "requestedDataPagination"
+      requestedPaginationKey: "requestedDataPagination",
+      selectedObj: {},
+      requestedTotalCount: 0
     };
   },
   methods: {
@@ -449,6 +536,12 @@ export default {
         paginationKey: this.requestedPaginationKey,
         searchParam: this.searchParam
       });
+    },
+    showDetailDialog(rowKey, keyAction) {
+      this.selectedObj = this.requestedData.body.find((d) => {
+        return d.use_dataset_id === rowKey;
+      });
+      this.onshowDialog("viewRequestDetailDialog");
     },
     change() {
       console.log("data changed");
