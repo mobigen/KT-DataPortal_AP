@@ -29,7 +29,7 @@
                     {{ data.data_nm }}
                     <p
                       class="txt-info color--danger"
-                      v-if="data.law_evl_conf_yn === 'y'"
+                      v-if="data.law_evl_conf_yn === 'Y'"
                     >
                       <strong class="required">필수</strong>법률검토 필요
                     </p>
@@ -66,7 +66,7 @@
               <th scope="row">
                 법률검토<strong
                   class="required"
-                  v-if="data.law_evl_conf_yn === 'y'"
+                  v-if="data.law_evl_conf_yn === 'Y'"
                   >필수</strong
                 >
               </th>
@@ -132,6 +132,7 @@ export default {
     BaseInput,
     DatePicker
   },
+  computed: {},
   data() {
     return {
       requestData: {},
@@ -149,13 +150,13 @@ export default {
         start_date: "", // 활용기간 시작일
         end_date: moment().add(1, "Y").format() // 활용기간 종료일
       };
-      this.confirmButtonDisabled = this.data.law_evl_conf_yn === "y";
+      this.confirmButtonDisabled = this.data.law_evl_conf_yn === "Y";
     },
     setRequestData({ id, input }) {
       const key = id.split("-").pop();
       this.requestData[key] = input;
       // TODO: 법률검토 or 파일 입력 안하면 버튼 비활성화, 현재 법률검토만 확인함 추후 수정해야함
-      if (this.data.law_evl_conf_yn === "y") {
+      if (this.data.law_evl_conf_yn === "Y") {
         this.confirmButtonDisabled = !this.requestData["law_evl_conf_dt"];
       }
     },
