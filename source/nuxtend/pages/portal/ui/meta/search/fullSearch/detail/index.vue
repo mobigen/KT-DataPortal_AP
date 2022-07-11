@@ -558,11 +558,7 @@
           </article>
           <!-- // 파일데이터 -->
           <!-- 데이터 연관관계 -->
-          <article
-            id="articleDiagram"
-            ref="articleDiagram"
-            class="contents__detail"
-          >
+          <article class="contents__detail">
             <div class="heading-group">
               <h3 class="heading-group__title">데이터 연관관계</h3>
             </div>
@@ -575,7 +571,11 @@
           </article>
           <!-- // 데이터 연관관계 -->
           <!-- 활용사례 -->
-          <article class="contents__detail">
+          <article
+            id="articleDiagram"
+            ref="articleDiagram"
+            class="contents__detail"
+          >
             <div class="heading-group">
               <h3 class="heading-group__title">활용사례</h3>
             </div>
@@ -1085,7 +1085,7 @@ export default {
     },
 
     tabGotoClick(item, index, refName) {
-      this.tabClick(item.id);
+      // this.tabClick(item.id);
 
       var ele = this.$refs[refName];
       var scrollTop = ele.offsetTop - 52;
