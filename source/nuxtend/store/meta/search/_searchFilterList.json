@@ -27,7 +27,6 @@
     { "itemId": "c7", "itemName": "임시" }
   ],
   "provider": [
-    { "itemId": "d1", "itemName": "티켓팅 캠페인" },
     { "itemId": "d2", "itemName": "엑셀 다운로드" },
     { "itemId": "d3", "itemName": "시스템 연동" }
   ],
@@ -36,10 +35,11 @@
     { "itemId": "e2", "itemName": "File" }
   ],
   "dataSource": [
-    { "itemId": "f1", "itemName": "그룹사" },
-    { "itemId": "f2", "itemName": "공공 데이터" },
-    { "itemId": "f3", "itemName": "KDAP" },
-    { "itemId": "f4", "itemName": "BIDW" }
+    { "itemId": "f1", "itemName": "D-Ocean" },
+    { "itemId": "f2", "itemName": "그룹사" },
+    { "itemId": "f3", "itemName": "공공 데이터" },
+    { "itemId": "f4", "itemName": "KDAP" },
+    { "itemId": "f5", "itemName": "BIDW" }
   ],
   "kword": [
     { "itemId": "g1", "itemName": "EV" },
