@@ -51,8 +51,8 @@
                     <th scope="col">
                       <base-checkbox
                         :name="name"
-                        :checkboxId="checkboxId1"
-                        :class="checkboxClass"
+                        checkboxId="checkboxId1"
+                        class="checkboxClass"
                         title="전체선택"
                       >
                         <template v-slot:label>
@@ -74,8 +74,8 @@
                     <td>
                       <base-checkbox
                         :name="name"
-                        :checkboxId="checkboxId1"
-                        :class="checkboxClass"
+                        checkboxId="checkboxId1"
+                        class="checkboxClass"
                         title="행선택"
                       >
                         <template v-slot:label>
@@ -104,8 +104,8 @@
                     <td>
                       <base-checkbox
                         :name="name"
-                        :checkboxId="checkboxId1"
-                        :class="checkboxClass"
+                        checkboxId="checkboxId1"
+                        class="checkboxClass"
                         title="행선택"
                       >
                         <template v-slot:label>
@@ -131,8 +131,8 @@
                     <td>
                       <base-checkbox
                         :name="name"
-                        :checkboxId="checkboxId1"
-                        :class="checkboxClass"
+                        checkboxId="checkboxId1"
+                        class="checkboxClass"
                         title="행선택"
                       >
                         <template v-slot:label>
@@ -257,140 +257,23 @@
                 @columnAction=""
                 @keyAction=""
                 :value-type="{
-                  trt_sttus: 'badge'
+                  law_evl_conf_yn: 'valueMatch',
+                  trt_sttus: 'badge',
+                  use_tmscnt: 'stringFromat'
+                }"
+                :formatter="{
+                  law_evl_conf_yn: {
+                    Y: 'Y',
+                    N: ''
+                  },
+                  trt_sttus: {
+                    처리중: 'primary',
+                    활용중: 'positive',
+                    만료예정: 'negative'
+                  },
+                  use_tmscnt: '{0}회'
                 }"
               ></basic-table>
-              <!-- table : 신청내역 목록 -->
-              <!--              <table class="table table&#45;&#45;board">-->
-              <!--                <caption class="hidden">-->
-              <!--                  신청내역 목록 게시판-->
-              <!--                </caption>-->
-              <!--                <colgroup>-->
-              <!--                  <col style="width: 60px" />-->
-              <!--                  <col style="width: auto" />-->
-              <!--                  <col style="width: 90px" />-->
-              <!--                  <col style="width: 100px" />-->
-              <!--                  <col style="width: 100px" />-->
-              <!--                  <col style="width: 80px" />-->
-              <!--                  <col style="width: 100px" />-->
-              <!--                  <col style="width: 100px" />-->
-              <!--                </colgroup>-->
-              <!--                <thead>-->
-              <!--                  <tr>-->
-              <!--                    <th scope="col">-->
-              <!--                      <base-checkbox-->
-              <!--                        :name="name"-->
-              <!--                        :checkboxId="checkboxId1"-->
-              <!--                        :class="checkboxClass"-->
-              <!--                        title="전체선택"-->
-              <!--                      >-->
-              <!--                        <template v-slot:label>-->
-              <!--                          <slot name="label1"-->
-              <!--                            ><span class="hidden">선택</span></slot-->
-              <!--                          >-->
-              <!--                        </template>-->
-              <!--                      </base-checkbox>-->
-              <!--                    </th>-->
-              <!--                    <th scope="col">데이터명</th>-->
-              <!--                    <th scope="col">분류</th>-->
-              <!--                    <th scope="col">활용시작일</th>-->
-              <!--                    <th scope="col">만료일</th>-->
-              <!--                    <th scope="col">법률검토</th>-->
-              <!--                    <th scope="col">처리상태</th>-->
-              <!--                    <th scope="col">활용횟수</th>-->
-              <!--                  </tr>-->
-              <!--                </thead>-->
-              <!--                <tbody>-->
-              <!--                  <tr>-->
-              <!--                    <td>-->
-              <!--                      <base-checkbox-->
-              <!--                        :name="name"-->
-              <!--                        :checkboxId="checkboxId1"-->
-              <!--                        :class="checkboxClass"-->
-              <!--                        title="행선택"-->
-              <!--                      >-->
-              <!--                        <template v-slot:label>-->
-              <!--                          <slot name="label1"-->
-              <!--                            ><span class="hidden">선택</span></slot-->
-              <!--                          >-->
-              <!--                        </template>-->
-              <!--                      </base-checkbox>-->
-              <!--                    </td>-->
-              <!--                    <td class="text-left">-->
-              <!--                      CU2(SGI)_고객서비스 사용 일일 내역-->
-              <!--                    </td>-->
-              <!--                    <td>모바일</td>-->
-              <!--                    <td>2022-06-23</td>-->
-              <!--                    <td>2022-06-23</td>-->
-              <!--                    <td>Y</td>-->
-              <!--                    <td>-->
-              <!--                      <base-badge class="badge&#45;&#45;primary-outline">-->
-              <!--                        <span class="badge__label">처리중</span>-->
-              <!--                      </base-badge>-->
-              <!--                    </td>-->
-              <!--                    <td>1회</td>-->
-              <!--                  </tr>-->
-              <!--                  <tr>-->
-              <!--                    <td>-->
-              <!--                      <base-checkbox-->
-              <!--                        :name="name"-->
-              <!--                        :checkboxId="checkboxId1"-->
-              <!--                        :class="checkboxClass"-->
-              <!--                        title="행선택"-->
-              <!--                      >-->
-              <!--                        <template v-slot:label>-->
-              <!--                          <slot name="label1"-->
-              <!--                            ><span class="hidden">선택</span></slot-->
-              <!--                          >-->
-              <!--                        </template>-->
-              <!--                      </base-checkbox>-->
-              <!--                    </td>-->
-              <!--                    <td class="text-left">-->
-              <!--                      CU2(SGI)_고객서비스 사용 일일 내역-->
-              <!--                    </td>-->
-              <!--                    <td>모바일</td>-->
-              <!--                    <td>2022-06-23</td>-->
-              <!--                    <td>2022-06-23</td>-->
-              <!--                    <td>Y</td>-->
-              <!--                    <td>-->
-              <!--                      <base-badge class="badge&#45;&#45;primary-outline">-->
-              <!--                        <span class="badge__label">활용중</span>-->
-              <!--                      </base-badge>-->
-              <!--                    </td>-->
-              <!--                    <td>1회</td>-->
-              <!--                  </tr>-->
-              <!--                  <tr>-->
-              <!--                    <td>-->
-              <!--                      <base-checkbox-->
-              <!--                        :name="name"-->
-              <!--                        :checkboxId="checkboxId1"-->
-              <!--                        :class="checkboxClass"-->
-              <!--                        title="행선택"-->
-              <!--                      >-->
-              <!--                        <template v-slot:label>-->
-              <!--                          <slot name="label1"-->
-              <!--                            ><span class="hidden">선택</span></slot-->
-              <!--                          >-->
-              <!--                        </template>-->
-              <!--                      </base-checkbox>-->
-              <!--                    </td>-->
-              <!--                    <td class="text-left">-->
-              <!--                      CU2(SGI)_고객서비스 사용 일일 내역-->
-              <!--                    </td>-->
-              <!--                    <td>모바일</td>-->
-              <!--                    <td>2022-06-23</td>-->
-              <!--                    <td>2022-06-23</td>-->
-              <!--                    <td>Y</td>-->
-              <!--                    <td>-->
-              <!--                      <base-badge class="badge&#45;&#45;disabled-outline">-->
-              <!--                        <span class="badge__label">만료</span>-->
-              <!--                      </base-badge>-->
-              <!--                    </td>-->
-              <!--                    <td>1회</td>-->
-              <!--                  </tr>-->
-              <!--                </tbody>-->
-              <!--              </table>-->
-              <!-- // table -->
             </div>
             <group-pagination></group-pagination>
           </div>
@@ -525,7 +408,8 @@ export default {
     return {
       isPreview: false,
       isToggle: false,
-      checkboxId1: ""
+      checkboxId1: "",
+      date: "date"
     };
   },
   methods: {
@@ -551,6 +435,9 @@ export default {
         this.searchParam[paramKey] = paramValue;
       }
       this.restApiRequestedData(this.searchParam);
+    },
+    change() {
+      console.log("data changed");
     }
   },
   components: {

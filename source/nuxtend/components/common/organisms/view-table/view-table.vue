@@ -6,8 +6,12 @@
 
     <div class="table-wrap">
       <table class="formbox">
-        <colgroup v-for="c in colgroupArray">
-          <col :style="'width: ' + c" />
+        <colgroup>
+          <col
+            v-for="(c, colI) in colgroupArray"
+            :key="'colGroup_' + colI"
+            :style="'width: ' + c"
+          />
         </colgroup>
         <tbody>
           <template v-for="(h, i) in tableHeader">
