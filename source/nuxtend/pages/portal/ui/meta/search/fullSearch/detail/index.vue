@@ -297,7 +297,7 @@
                   :header-has-locale="false"
                   :view-header-list="sampleDataViewHeaderList"
                   rowKey="cust_pty_sbt_id"
-                  :colgroup-array="['150px', '230px', 'auto:span=11']"
+                  :colgroup-array="[]"
                   @buttonAction=""
                   @columnAction=""
                   @keyAction=""
@@ -1169,7 +1169,6 @@ export default {
   created() {
     this.bizDatasetId = this.$route.query.datasetId;
     this.getDetail(this.bizDatasetId);
-
 
     // 각 탭의 데이터를 전부 다 호출해준다.
     this.getDataQualityScore(this.bizDatasetId);
