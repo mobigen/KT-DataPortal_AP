@@ -224,7 +224,7 @@
               <!--탭 -->
               <group-tab
                 :tabList="tabList"
-                :useTabNum="true"
+                :useTabNum="false"
                 @tabClick="tabClick"
               ></group-tab>
               <!--//탭 -->
@@ -415,9 +415,9 @@ export default {
         { label: "다운로드순", option: "download" }
       ],
       tabList: [
-        { num: "(50)", title: "데이터컨텐츠" },
-        { num: "(184)", title: "원천데이터" },
-        { num: "(56)", title: "메타데이터" }
+        { num: "50", title: "데이터 콘텐츠" },
+        { num: "184", title: "데이터 자산" },
+        { num: "56", title: "데이터 메타" }
       ],
       selectCategoryList: [
         { key: "12", text: "12개씩" },
@@ -460,8 +460,10 @@ export default {
     search() {
       if (this.searchKeyword.trim() === "") {
         this.searchResultBox(false, false);
-        alert("값을 입력해주세요.");
-        return;
+        if (this.searchKeywordList.length === 0) {
+          alert("값을 입력해주세요.");
+          return;
+        }
       } else {
         this.searchResultBox(true, true);
       }
