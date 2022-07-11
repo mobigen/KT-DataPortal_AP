@@ -981,7 +981,7 @@ export default {
       });
     },
     tabGotoClick(item, index, refName) {
-      // this.tabClick(item.id);
+      this.tabSelected = item.id;
 
       var ele = this.$refs[refName];
       var scrollTop = ele.offsetTop - 52;
@@ -996,9 +996,8 @@ export default {
       }
     },
     tabClick(tabId) {
-      this.tabSelected = tabId;
+      // 데이터 상세정보
       if (tabId === this.CONSTANTS.DETAIL.CHART) {
-        // 데이터 상세정보
         this.getDataQualityScore(this.bizDatasetId);
       } else if (tabId === this.CONSTANTS.DETAIL.SAMPLE) {
         // 샘플 데이터
@@ -1019,7 +1018,6 @@ export default {
     // 각 탭의 데이터를 전부 다 호출해준다.
     this.getDataQualityScore(this.bizDatasetId);
     this.getSampleData(this.bizDatasetId);
-    // // 첫번째 tab을 클릭해준다.
     // this.tabClick(this.tabList[0].id);
   },
   mounted() {},
