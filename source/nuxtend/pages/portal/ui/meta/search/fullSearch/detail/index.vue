@@ -203,7 +203,11 @@
           </div>
           <!--//탭 -->
           <!-- 데이터 품질지표 -->
-          <article id="articleChart" ref="articleChart" class="contents__detail">
+          <article
+            id="articleChart"
+            ref="articleChart"
+            class="contents__detail"
+          >
             <div class="heading-group">
               <h3 class="heading-group__title">데이터 품질지표</h3>
             </div>
@@ -269,7 +273,11 @@
           </article>
           <!-- // 데이터 품질지표 -->
           <!-- 샘플 데이터 -->
-          <article id="articleSample" ref="articleSample" class="contents__detail">
+          <article
+            id="articleSample"
+            ref="articleSample"
+            class="contents__detail"
+          >
             <div class="heading-group">
               <h3 class="heading-group__title">샘플 데이터</h3>
               <div class="heading-group__options">
@@ -305,7 +313,8 @@
               <div class="heading-group__options">
                 <div class="heading-group__notice">
                   <p class="bullet bullet--refer">
-                    파일 데이터의 일부 내용을 미리보기로 제공합니다, 전체 내용이 필요한 경우 해당 파일을 다운로드 받으시기 바랍니다.
+                    파일 데이터의 일부 내용을 미리보기로 제공합니다, 전체 내용이
+                    필요한 경우 해당 파일을 다운로드 받으시기 바랍니다.
                   </p>
                 </div>
                 <base-button
@@ -323,7 +332,7 @@
                   <div class="filedata__item">
                     <p class="filedata__item-title">
                       <span class="ellipsis-end"
-                      >고객 서비스 사용 일일 내역</span
+                        >고객 서비스 사용 일일 내역</span
                       >
                     </p>
                     <base-button
@@ -352,128 +361,128 @@
                           데이터 상세내용
                         </caption>
                         <thead>
-                        <tr>
-                          <th scope="col">항목</th>
-                          <th scope="col">설명</th>
-                          <th scope="col">데이터타입</th>
-                          <th scope="col">데이터길이</th>
-                          <th scope="col">소수점</th>
-                          <th scope="col">PK</th>
-                          <th scope="col">PK POSITION</th>
-                          <th scope="col">NULL 여부</th>
-                          <th scope="col">코드여부</th>
-                          <th scope="col">DEFAULT</th>
-                        </tr>
+                          <tr>
+                            <th scope="col">항목</th>
+                            <th scope="col">설명</th>
+                            <th scope="col">데이터타입</th>
+                            <th scope="col">데이터길이</th>
+                            <th scope="col">소수점</th>
+                            <th scope="col">PK</th>
+                            <th scope="col">PK POSITION</th>
+                            <th scope="col">NULL 여부</th>
+                            <th scope="col">코드여부</th>
+                            <th scope="col">DEFAULT</th>
+                          </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                          <td>교통정보코드</td>
-                          <td>사업지구코드</td>
-                          <td>VARCHAR2</td>
-                          <td>6</td>
-                          <td>5</td>
-                          <td>Y</td>
-                          <td>1</td>
-                          <td>Y</td>
-                          <td>Y</td>
-                          <td>SYSDATE</td>
-                        </tr>
-                        <tr>
-                          <td>교통정보코드교통정보코드교통정보코드</td>
-                          <td>사업지구코드</td>
-                          <td>VARCHAR2</td>
-                          <td>6</td>
-                          <td>5</td>
-                          <td>Y</td>
-                          <td>1</td>
-                          <td>Y</td>
-                          <td>Y</td>
-                          <td>SYSDATE</td>
-                        </tr>
-                        <tr>
-                          <td>교통정보코드</td>
-                          <td>사업지구코드</td>
-                          <td>VARCHAR2</td>
-                          <td>6</td>
-                          <td>5</td>
-                          <td>Y</td>
-                          <td>1</td>
-                          <td>Y</td>
-                          <td>Y</td>
-                          <td>SYSDATE</td>
-                        </tr>
-                        <tr>
-                          <td>교통정보코드</td>
-                          <td>사업지구코드</td>
-                          <td>VARCHAR2</td>
-                          <td>6</td>
-                          <td>5</td>
-                          <td>Y</td>
-                          <td>1</td>
-                          <td>Y</td>
-                          <td>Y</td>
-                          <td>SYSDATE</td>
-                        </tr>
-                        <tr>
-                          <td>교통정보코드</td>
-                          <td>사업지구코드</td>
-                          <td>VARCHAR2</td>
-                          <td>6</td>
-                          <td>5</td>
-                          <td>Y</td>
-                          <td>1</td>
-                          <td>Y</td>
-                          <td>Y</td>
-                          <td>SYSDATE</td>
-                        </tr>
-                        <tr>
-                          <td>교통정보코드</td>
-                          <td>사업지구코드</td>
-                          <td>VARCHAR2</td>
-                          <td>6</td>
-                          <td>5</td>
-                          <td>Y</td>
-                          <td>1</td>
-                          <td>Y</td>
-                          <td>Y</td>
-                          <td>SYSDATE</td>
-                        </tr>
-                        <tr>
-                          <td>교통정보코드</td>
-                          <td>사업지구코드</td>
-                          <td>VARCHAR2</td>
-                          <td>6</td>
-                          <td>5</td>
-                          <td>Y</td>
-                          <td>1</td>
-                          <td>Y</td>
-                          <td>Y</td>
-                          <td>SYSDATE</td>
-                        </tr>
-                        <tr>
-                          <td>교통정보코드</td>
-                          <td>사업지구코드</td>
-                          <td>VARCHAR2</td>
-                          <td>6</td>
-                          <td>5</td>
-                          <td>Y</td>
-                          <td>1</td>
-                          <td>Y</td>
-                          <td>Y</td>
-                          <td>SYSDATE</td>
-                        </tr>
-                        <tr>
-                          <td>교통정보코드</td>
-                          <td>사업지구코드</td>
-                          <td>VARCHAR2</td>
-                          <td>6</td>
-                          <td>5</td>
-                          <td>Y</td>
-                          <td>1</td>
-                          <td>Y</td>
-                          <td>Y</td>
-                          <td>SYSDATE</td>
-                        </tr>
+                          <tr>
+                            <td>교통정보코드</td>
+                            <td>사업지구코드</td>
+                            <td>VARCHAR2</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td>Y</td>
+                            <td>1</td>
+                            <td>Y</td>
+                            <td>Y</td>
+                            <td>SYSDATE</td>
+                          </tr>
+                          <tr>
+                            <td>교통정보코드교통정보코드교통정보코드</td>
+                            <td>사업지구코드</td>
+                            <td>VARCHAR2</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td>Y</td>
+                            <td>1</td>
+                            <td>Y</td>
+                            <td>Y</td>
+                            <td>SYSDATE</td>
+                          </tr>
+                          <tr>
+                            <td>교통정보코드</td>
+                            <td>사업지구코드</td>
+                            <td>VARCHAR2</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td>Y</td>
+                            <td>1</td>
+                            <td>Y</td>
+                            <td>Y</td>
+                            <td>SYSDATE</td>
+                          </tr>
+                          <tr>
+                            <td>교통정보코드</td>
+                            <td>사업지구코드</td>
+                            <td>VARCHAR2</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td>Y</td>
+                            <td>1</td>
+                            <td>Y</td>
+                            <td>Y</td>
+                            <td>SYSDATE</td>
+                          </tr>
+                          <tr>
+                            <td>교통정보코드</td>
+                            <td>사업지구코드</td>
+                            <td>VARCHAR2</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td>Y</td>
+                            <td>1</td>
+                            <td>Y</td>
+                            <td>Y</td>
+                            <td>SYSDATE</td>
+                          </tr>
+                          <tr>
+                            <td>교통정보코드</td>
+                            <td>사업지구코드</td>
+                            <td>VARCHAR2</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td>Y</td>
+                            <td>1</td>
+                            <td>Y</td>
+                            <td>Y</td>
+                            <td>SYSDATE</td>
+                          </tr>
+                          <tr>
+                            <td>교통정보코드</td>
+                            <td>사업지구코드</td>
+                            <td>VARCHAR2</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td>Y</td>
+                            <td>1</td>
+                            <td>Y</td>
+                            <td>Y</td>
+                            <td>SYSDATE</td>
+                          </tr>
+                          <tr>
+                            <td>교통정보코드</td>
+                            <td>사업지구코드</td>
+                            <td>VARCHAR2</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td>Y</td>
+                            <td>1</td>
+                            <td>Y</td>
+                            <td>Y</td>
+                            <td>SYSDATE</td>
+                          </tr>
+                          <tr>
+                            <td>교통정보코드</td>
+                            <td>사업지구코드</td>
+                            <td>VARCHAR2</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td>Y</td>
+                            <td>1</td>
+                            <td>Y</td>
+                            <td>Y</td>
+                            <td>SYSDATE</td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>
@@ -484,7 +493,7 @@
                   <div class="filedata__item">
                     <p class="filedata__item-title">
                       <span class="ellipsis-end"
-                      >고객 서비스 사용 일일 내역</span
+                        >고객 서비스 사용 일일 내역</span
                       >
                     </p>
                     <base-button class="button--sm filedata__button-download">
@@ -500,7 +509,7 @@
                   <div class="filedata__item">
                     <p class="filedata__item-title">
                       <span class="ellipsis-end"
-                      >고객 서비스 사용 일일 내역</span
+                        >고객 서비스 사용 일일 내역</span
                       >
                     </p>
                     <base-button class="button--sm filedata__button-download">
@@ -516,7 +525,7 @@
                   <div class="filedata__item">
                     <p class="filedata__item-title">
                       <span class="ellipsis-end"
-                      >고객 서비스 사용 일일 내역</span
+                        >고객 서비스 사용 일일 내역</span
                       >
                     </p>
                     <base-button class="button--sm filedata__button-download">
@@ -532,7 +541,7 @@
                   <div class="filedata__item">
                     <p class="filedata__item-title">
                       <span class="ellipsis-end"
-                      >고객 서비스 사용 일일 내역</span
+                        >고객 서비스 사용 일일 내역</span
                       >
                     </p>
                     <base-button class="button--sm filedata__button-download">
@@ -549,7 +558,11 @@
           </article>
           <!-- // 파일데이터 -->
           <!-- 데이터 연관관계 -->
-          <article id="articleDiagram" ref="articleDiagram" class="contents__detail">
+          <article
+            id="articleDiagram"
+            ref="articleDiagram"
+            class="contents__detail"
+          >
             <div class="heading-group">
               <h3 class="heading-group__title">데이터 연관관계</h3>
             </div>
@@ -671,7 +684,11 @@
           </article>
           <!-- // 법률검토 및 규정안내 -->
           <!-- 데이터 문의 -->
-          <article id="articleInquiry" ref="articleInquiry" class="contents__detail">
+          <article
+            id="articleInquiry"
+            ref="articleInquiry"
+            class="contents__detail"
+          >
             <div class="heading-group">
               <h3 class="heading-group__title">데이터 문의</h3>
               <div class="heading-group__options">
@@ -686,54 +703,54 @@
             <div class="contents__detail-inquiry">
               <div class="table-wrap">
                 <table class="table table--board">
-                <caption class="hidden">
-                  번호, 제목, 등록일, 처리현황으로 구성된 데이터 문의 게시판
-                </caption>
-                <colgroup>
-                  <col style="width: 80px" />
-                  <col style="width: auto" />
-                  <col style="width: 120px" />
-                  <col style="width: 120px" />
-                </colgroup>
-                <thead>
-                <tr>
-                  <th scope="col">번호</th>
-                  <th scope="col">제목</th>
-                  <th scope="col">등록일</th>
-                  <th scope="col">처리현황</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>1000</td>
-                  <td class="text-left">
-                    <a href="" class="ellipsis-end"
-                    >데이터 활용 문의드립니다.</a
-                    >
-                    <svg-icon
-                      class="svg-icon"
-                      name="lock-locked"
-                      title="비밀글"
-                    ></svg-icon>
-                  </td>
-                  <td>2022-06-27</td>
-                  <td>
-                    <base-badge class="badge--primary-outline">
-                      <span class="badge__label">처리중</span>
-                    </base-badge>
-                  </td>
-                </tr>
-                <tr>
-                  <td>999</td>
-                  <td class="text-left">
-                    <a href="" class="ellipsis-end"
-                    >유즈케이스에 사용된 데이터를 구하고 싶습니다.</a
-                    >
-                  </td>
-                  <td>2022-06-27</td>
-                  <td>답변완료</td>
-                </tr>
-                </tbody>
+                  <caption class="hidden">
+                    번호, 제목, 등록일, 처리현황으로 구성된 데이터 문의 게시판
+                  </caption>
+                  <colgroup>
+                    <col style="width: 80px" />
+                    <col style="width: auto" />
+                    <col style="width: 120px" />
+                    <col style="width: 120px" />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col">번호</th>
+                      <th scope="col">제목</th>
+                      <th scope="col">등록일</th>
+                      <th scope="col">처리현황</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1000</td>
+                      <td class="text-left">
+                        <a href="" class="ellipsis-end"
+                          >데이터 활용 문의드립니다.</a
+                        >
+                        <svg-icon
+                          class="svg-icon"
+                          name="lock-locked"
+                          title="비밀글"
+                        ></svg-icon>
+                      </td>
+                      <td>2022-06-27</td>
+                      <td>
+                        <base-badge class="badge--primary-outline">
+                          <span class="badge__label">처리중</span>
+                        </base-badge>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>999</td>
+                      <td class="text-left">
+                        <a href="" class="ellipsis-end"
+                          >유즈케이스에 사용된 데이터를 구하고 싶습니다.</a
+                        >
+                      </td>
+                      <td>2022-06-27</td>
+                      <td>답변완료</td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -754,112 +771,115 @@
         </div>
       </div>
 
-    <!-- 데이터 활용 신청하기 Dialog -->
-    <Dialog
-      dialog-name="requestDialog"
-      :width="'970px'"
-      :height="'auto'"
-      :title="'데이터 활용 신청하기'"
-      confirmButtonText="신청"
-      :confirmButtonDisabled="confirmButtonDisabled"
-      @confirm="requestConfirmBtnClick"
-      @close="resetRequestData"
-    >
-      <div slot="body" class="modal__body">
-        <div class="table-wrap">
-        <!-- formbox -->
-        <table class="formbox">
-          <caption class="hidden">
-            데이터 활용 신청하기 게시판
-          </caption>
-          <colgroup>
-            <col style="width: 140px" />
-            <col style="width: auto" />
-          </colgroup>
-          <tbody>
-          <tr>
-            <th scope="row">데이터명</th>
-            <td>
-              <ul class="data-name-list">
-                <li>
-                  {{ dataNm }}
-                  <p
-                    class="txt-info color--danger"
-                    v-if="lawEvlConfYn === 'y'"
-                  >
-                    <strong class="required">필수</strong>법률검토 필요
-                  </p>
-                </li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">신청자<strong class="required">필수</strong></th>
-            <td>
-              <base-input id="inp-apyr" @input="setRequestData"></base-input>
-              <!--
+      <!-- 데이터 활용 신청하기 Dialog -->
+      <Dialog
+        dialog-name="requestDialog"
+        :width="'970px'"
+        :height="'auto'"
+        :title="'데이터 활용 신청하기'"
+        confirmButtonText="신청"
+        :confirmButtonDisabled="confirmButtonDisabled"
+        @confirm="requestConfirmBtnClick"
+        @close="resetRequestData"
+      >
+        <div slot="body" class="modal__body">
+          <div class="table-wrap">
+            <!-- formbox -->
+            <table class="formbox">
+              <caption class="hidden">
+                데이터 활용 신청하기 게시판
+              </caption>
+              <colgroup>
+                <col style="width: 140px" />
+                <col style="width: auto" />
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th scope="row">데이터명</th>
+                  <td>
+                    <ul class="data-name-list">
+                      <li>
+                        {{ dataNm }}
+                        <p
+                          class="txt-info color--danger"
+                          v-if="lawEvlConfYn === 'y'"
+                        >
+                          <strong class="required">필수</strong>법률검토 필요
+                        </p>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    신청자<strong class="required">필수</strong>
+                  </th>
+                  <td>
+                    <base-input
+                      id="inp-apyr"
+                      @input="setRequestData"
+                    ></base-input>
+                    <!--
               TODO: 임시로 신청자 입력하게 해놓음, 추후 수정
               {{ `${requestData.apyr}(${requestData.emp_num})` }}
               -->
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-              신청내용<strong class="required">필수</strong> <br />(활용목적)
-            </th>
-            <td>
-              <BaseTextarea
-                id="text-apy_sbst"
-                rows="6"
-                element-class="text-area--fixed scrollCustomize"
-                placeholder="데이터 신청 개요와 활용 목적을 입력하세요."
-                :useCheckByte="false"
-                @input="setRequestData"
-              ></BaseTextarea>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-              법률검토<strong class="required" v-if="lawEvlConfYn === 'y'"
-            >필수</strong
-            >
-            </th>
-            <td>
-              <div class="v-group">
-                <BaseTextarea
-                  id="text-law_evl_conf_dt"
-                  rows="6"
-                  element-class="text-area--fixed scrollCustomize"
-                  placeholder="법률검토 대상 데이터입니다. 법률검토 내용을 입력하거나 파일로첨부하세요. "
-                  :useCheckByte="false"
-                  @input="setRequestData"
-                ></BaseTextarea>
-                <GroupFileAttach> </GroupFileAttach>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-              기간설정<strong class="required">필수</strong>
-            </th>
-            <td>
-              <Date-picker
-                :range="true"
-                :endDate="requestData.end_date"
-                @change="setDatePicker"
-              />
-            </td>
-          </tr>
-          </tbody>
-        </table>
-        <!-- // formbox -->
-      </div>
-      </div>
-    </Dialog>
-    <!-- // Dialog -->
-
-
-
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    신청내용<strong class="required">필수</strong>
+                    <br />(활용목적)
+                  </th>
+                  <td>
+                    <BaseTextarea
+                      id="text-apy_sbst"
+                      rows="6"
+                      element-class="text-area--fixed scrollCustomize"
+                      placeholder="데이터 신청 개요와 활용 목적을 입력하세요."
+                      :useCheckByte="false"
+                      @input="setRequestData"
+                    ></BaseTextarea>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    법률검토<strong class="required" v-if="lawEvlConfYn === 'y'"
+                      >필수</strong
+                    >
+                  </th>
+                  <td>
+                    <div class="v-group">
+                      <BaseTextarea
+                        id="text-law_evl_conf_dt"
+                        rows="6"
+                        element-class="text-area--fixed scrollCustomize"
+                        placeholder="법률검토 대상 데이터입니다. 법률검토 내용을 입력하거나 파일로첨부하세요. "
+                        :useCheckByte="false"
+                        @input="setRequestData"
+                      ></BaseTextarea>
+                      <GroupFileAttach> </GroupFileAttach>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    기간설정<strong class="required">필수</strong>
+                  </th>
+                  <td>
+                    <Date-picker
+                      :range="true"
+                      :endDate="requestData.end_date"
+                      @change="setDatePicker"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- // formbox -->
+          </div>
+        </div>
+      </Dialog>
+      <!-- // Dialog -->
 
       <!-- Dialog : 오류신고  -->
       <Dialog
@@ -881,38 +901,42 @@
                 <col style="width: auto" />
               </colgroup>
               <tbody>
-              <tr>
-                <th scope="row">이름</th>
-                <td>홍길동</td>
-              </tr>
-              <tr>
-                <th scope="row">이메일</th>
-                <td>docean@mobigen.com</td>
-              </tr>
-              <tr>
-                <th scope="row">오류데이터명</th>
-                <td>정보 자동 노출</td>
-              </tr>
-              <tr>
-                <th scope="row">화면 URL</th>
-                <td>https://www.docean.com/portal/ui/meta/search/fullSearch/detail</td>
-              </tr>
-              <tr>
-                <th scope="row">오류 내용<strong class="required">필수</strong></th>
-                <td>
-                  <base-textarea
-                    :rows="10"
-                    useCheckByte="true"
-                    maxByte="4000"
-                  ></base-textarea>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">첨부파일</th>
-                <td>
-                  <group-file-attach></group-file-attach>
-                </td>
-              </tr>
+                <tr>
+                  <th scope="row">이름</th>
+                  <td>홍길동</td>
+                </tr>
+                <tr>
+                  <th scope="row">이메일</th>
+                  <td>docean@mobigen.com</td>
+                </tr>
+                <tr>
+                  <th scope="row">오류데이터명</th>
+                  <td>정보 자동 노출</td>
+                </tr>
+                <tr>
+                  <th scope="row">화면 URL</th>
+                  <td>
+                    https://www.docean.com/portal/ui/meta/search/fullSearch/detail
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    오류 내용<strong class="required">필수</strong>
+                  </th>
+                  <td>
+                    <base-textarea
+                      :rows="10"
+                      useCheckByte="true"
+                      maxByte="4000"
+                    ></base-textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">첨부파일</th>
+                  <td>
+                    <group-file-attach></group-file-attach>
+                  </td>
+                </tr>
               </tbody>
             </table>
             <!-- // formbox -->
@@ -927,249 +951,259 @@
 <i18n src="./index.json"></i18n>
 
 <script type="text/javascript">
-  import BaseBadge from "@component/common/atoms/base-badge/base-badge.vue";
-  import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox.vue";
-  import BaseRadio from "@component/common/atoms/base-radio/base-radio";
-  import BaseTag from "@component/common/atoms/base-tag/base-tag";
-  import BaseButton from "@component/common/atoms/base-button/base-button";
-  import BaseTextarea from "@component/common/atoms/base-textarea/base-textarea.vue";
-  import GroupBreadcrumb from "@component/common/molecules/group-breadcrumb/group-breadcrumb";
-  import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
-  import GroupFileAttach from "@component/common/molecules/group-file-attach/group-file-attach";
-  import Dialog from "@functional/dialog/dialog.vue";
-  import ViewTable from "@component/common/organisms/view-table/view-table";
-  import BaseInput from "@component/common/atoms/base-input/base-input";
-  import moment from "moment";
-  import DatePicker from "@functional/datepicker/date-picker.vue";
-  import { successAlert, errorAlert } from "@functional/alert/alert-default";
-  import BasicTable from "@component/common/organisms/basic-table/basic-table.vue";
-  import { mapActions, mapGetters } from "vuex";
-  export default {
-    name: "Index",
-    // async asyncData({ store, route }) {
-    //   let rowId = route.query.datasetId;
-    //   // TODO : asyncData 배포후에 동작 하는거 확인되면 아래 코드 사용
-    //   rowId = "01bfea44-5b42-41e7-9901-8fad6997969c";
-    //   await store.dispatch("meta/search/search/getDetail", rowId);
-    //   const detail = store.getters["meta/search/search/detail"];
-    //   return { detail };
-    // },
-    computed: {
-      ...mapGetters({
-        CONSTANTS: "defaults/constants/CONSTANTS"
-      }),
-      sampleData() {
-        const vuex = this.$store.getters["meta/search/search/sampleData"];
-        if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
-          const h = vuex.header;
-          this.sampleDataViewHeaderList = h.map((hEl) => {
-            return hEl.column_name;
-          });
-        } else {
-          return {
-            header: [],
-            false: []
-          };
-        }
-        return vuex;
-      },
-      detail() {
-        const vuex = this.$store.getters["meta/search/search/detail"];
-        if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
-          this.ctgry = vuex.body.ctgry.split(",").pop();
-          this.dataPrvDesk = vuex.body.data_prv_desk;
-          this.dataNm = vuex.body.data_nm;
-          this.dataDesc = vuex.body.data_desc;
-          this.ltstAmdDt = vuex.body.ltst_amd_dt;
-          this.regDate = vuex.body.reg_date;
-          // TODO: css 확인 위해 임시로 y로 설정
-          // this.lawEvlConfYn = vuex.body.law_evl_conf_yn;
-          this.lawEvlConfYn = "n";
-          this.myFavoriteData = "y";
-        }
-        return vuex;
-      },
-      dataQualityScore() {
-        const vuex = this.$store.getters["meta/search/search/dataQualityScore"];
-        if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
-          return vuex.body[0];
-        }
+import BaseBadge from "@component/common/atoms/base-badge/base-badge.vue";
+import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox.vue";
+import BaseRadio from "@component/common/atoms/base-radio/base-radio";
+import BaseTag from "@component/common/atoms/base-tag/base-tag";
+import BaseButton from "@component/common/atoms/base-button/base-button";
+import BaseTextarea from "@component/common/atoms/base-textarea/base-textarea.vue";
+import GroupBreadcrumb from "@component/common/molecules/group-breadcrumb/group-breadcrumb";
+import GroupPagination from "@component/common/molecules/group-pagination/group-pagination";
+import GroupFileAttach from "@component/common/molecules/group-file-attach/group-file-attach";
+import Dialog from "@functional/dialog/dialog.vue";
+import ViewTable from "@component/common/organisms/view-table/view-table";
+import BaseInput from "@component/common/atoms/base-input/base-input";
+import moment from "moment";
+import DatePicker from "@functional/datepicker/date-picker.vue";
+import { successAlert, errorAlert } from "@functional/alert/alert-default";
+import BasicTable from "@component/common/organisms/basic-table/basic-table.vue";
+import { mapActions, mapGetters } from "vuex";
+export default {
+  name: "Index",
+  // async asyncData({ store, route }) {
+  //   let rowId = route.query.datasetId;
+  //   // TODO : asyncData 배포후에 동작 하는거 확인되면 아래 코드 사용
+  //   rowId = "01bfea44-5b42-41e7-9901-8fad6997969c";
+  //   await store.dispatch("meta/search/search/getDetail", rowId);
+  //   const detail = store.getters["meta/search/search/detail"];
+  //   return { detail };
+  // },
+  computed: {
+    ...mapGetters({
+      CONSTANTS: "defaults/constants/CONSTANTS"
+    }),
+    sampleData() {
+      const vuex = this.$store.getters["meta/search/search/sampleData"];
+      if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+        const h = vuex.header;
+        this.sampleDataViewHeaderList = h.map((hEl) => {
+          return hEl.column_name;
+        });
+      } else {
         return {
           header: [],
           body: []
         };
       }
+      return vuex;
     },
-    data() {
+    detail() {
+      const vuex = this.$store.getters["meta/search/search/detail"];
+      if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+        this.ctgry = vuex.body.ctgry.split(",").pop();
+        this.dataPrvDesk = vuex.body.data_prv_desk;
+        this.dataNm = vuex.body.data_nm;
+        this.dataDesc = vuex.body.data_desc;
+        this.ltstAmdDt = vuex.body.ltst_amd_dt;
+        this.regDate = vuex.body.reg_date;
+        // TODO: css 확인 위해 임시로 y로 설정
+        // this.lawEvlConfYn = vuex.body.law_evl_conf_yn;
+        this.lawEvlConfYn = "n";
+        this.myFavoriteData = "y";
+      }
+      return vuex;
+    },
+    dataQualityScore() {
+      const vuex = this.$store.getters["meta/search/search/dataQualityScore"];
+      if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
+        return vuex.body[0];
+      }
       return {
-        isPreview: false,
-        tabList: [
-          {
-            id: "CHART",
-            ref: "articleChart"
-          },
-          {
-            id: "SAMPLE",
-            ref: "articleSample"
-          },
-          {
-            id: "DIAGRAM",
-            ref: "articleDiagram"
-          },
-          {
-            id: "RULE",
-            ref: "articleRule"
-          },
-          {
-            id: "INQUIRY",
-            ref: "articleInquiry"
-          }
-        ],
-        toggleButtonText: "test",
-        bizDatasetId: null,
-        ctgry: null,
-        dataPrvDesk: null,
-        dataNm: null,
-        dataDesc: null,
-        ltstAmdDt: null,
-        regDate: null,
-        requestData: {},
-        lawEvlConfYn: null,
-        confirmButtonDisabled: true,
-        myFavoriteData: null,
-        sampleDataViewHeaderList: [],
-        tabSelected: "CHART"
+        header: [],
+        body: []
       };
+    }
+  },
+  data() {
+    return {
+      isPreview: false,
+      tabList: [
+        {
+          id: "CHART",
+          ref: "articleChart"
+        },
+        {
+          id: "SAMPLE",
+          ref: "articleSample"
+        },
+        {
+          id: "DIAGRAM",
+          ref: "articleDiagram"
+        },
+        {
+          id: "RULE",
+          ref: "articleRule"
+        },
+        {
+          id: "INQUIRY",
+          ref: "articleInquiry"
+        }
+      ],
+      toggleButtonText: "test",
+      bizDatasetId: null,
+      ctgry: null,
+      dataPrvDesk: null,
+      dataNm: null,
+      dataDesc: null,
+      ltstAmdDt: null,
+      regDate: null,
+      requestData: {},
+      lawEvlConfYn: null,
+      confirmButtonDisabled: true,
+      myFavoriteData: null,
+      sampleDataViewHeaderList: [],
+      tabSelected: "CHART"
+    };
+  },
+  methods: {
+    ...mapActions("meta/search/search", ["getDetail", "setSearchKeyword"]),
+    ...mapActions("meta/search/search", [
+      "getSampleData",
+      "getDataQualityScore"
+    ]),
+    togglePreview: function () {
+      this.isPreview = !this.isPreview;
     },
-    methods: {
-      ...mapActions("meta/search/search", ["getDetail", "setSearchKeyword"]),
-      ...mapActions("meta/search/search", [
-        "getSampleData",
-        "getDataQualityScore"
-      ]),
-      togglePreview: function () {
-        this.isPreview = !this.isPreview;
-      },
-      onshowDialog(name) {
-        this.$modal.show(name);
-      },
-      tagClick(tagClickObj) {
-        this.setSearchKeyword(tagClickObj.itemName);
-        this.$router.push({
-          path: "/portal/ui/meta/search/fullSearch"
-        });
-      },
+    onshowDialog(name) {
+      this.$modal.show(name);
+    },
+    tagClick(tagClickObj) {
+      this.setSearchKeyword(tagClickObj.itemName);
+      this.$router.push({
+        path: "/portal/ui/meta/search/fullSearch"
+      });
+    },
 
-      tabGotoClick(item, index, refName) {
-        this.tabClick(item.id);
+    tabGotoClick(item, index, refName) {
+      this.tabClick(item.id);
 
-        var ele = this.$refs[refName];
-        var scrollTop = ele.offsetTop - 52;
-        window.scrollTo(0, scrollTop);
-      },
-      resetRequestData() {
-        this.requestData = {
-          biz_dataset_id: this.bizDatasetId,
-          apyr: "", // 신청자
-          emp_num: "20161665", //사원번호
-          apy_sbst: "", // 신청내용
-          law_evl_conf_dt: "", // 법률검토 내용
-          start_date: "", // 활용기간 시작일
-          end_date: moment().add(1, "Y").format() // 활용기간 종료일
-        };
-        this.confirmButtonDisabled = this.lawEvlConfYn === "y";
-      },
-      setRequestData({ id, input }) {
-        const key = id.split("-").pop();
-        this.requestData[key] = input;
-        // TODO: 법률검토 or 파일 입력 안하면 버튼 비활성화, 현재 법률검토만 확인함 추후 수정해야함
-        if (this.lawEvlConfYn === "y") {
-          this.confirmButtonDisabled = !this.requestData["law_evl_conf_dt"];
-        }
-      },
-      setDatePicker(e) {
-        this.requestData["start_date"] = e.at(0);
-        this.requestData["end_date"] = e.at(1);
-      },
-      requestConfirmBtnClick(name) {
-        // TODO: 신청자를 입력값으로 받기때문에 체크, 추후 삭제
-        if (!(this.requestData.apyr && this.requestData.apy_sbst)) {
-          errorAlert({ content: "필수 값들을 입력해주세요" });
-          return;
-        }
-        console.log(this.requestData);
-        // TODO: 일단 3개의 데이터만 보냄, 추후 수정
-        let data = {};
-        data.biz_dataset_id = this.requestData.biz_dataset_id;
-        data.apyr = this.requestData.apyr;
-        data.apy_sbst = this.requestData.apy_sbst;
-        this.$axios
-          .post(this.$config.ROUTE_API_META_PREFIX + "/insertUseBoardData", data)
-          .then((res) => {
-            if (res !== false) {
-              successAlert({
-                title: "데이터 활용 신청이 완료되었습니다.",
-                content:
-                  "활용신청하신 데이터는 마이페이지 > 내 활용내역에서 확인할 수 있습니다."
-              });
-              this.resetRequestData();
-              this.$modal.hide(name);
-            }
-          });
-      },
-      myFavoriteDataClick(id, checked) {
-        // TODO: myFavoriteData api 호출로 변경 시 수정
-        if (checked) {
-          this.myFavoriteData = "y";
-        } else {
-          this.myFavoriteData = "n";
-        }
-      },
-      tabClick(tabId) {
-        this.tabSelected = tabId;
-        if (tabId === this.CONSTANTS.DETAIL.CHART) {
-          // 데이터 상세정보
-          this.getDataQualityScore(this.bizDatasetId);
-        } else if (tabId === this.CONSTANTS.DETAIL.SAMPLE) {
-          // 샘플 데이터
-          this.getSampleData(this.bizDatasetId);
-        } else if (tabId === this.CONSTANTS.DETAIL.DIAGRAM) {
-          // 활용사례
-        } else if (tabId === this.CONSTANTS.DETAIL.RULE) {
-          // 법률검토 및 규정안내
-        } else if (tabId === this.CONSTANTS.DETAIL.INQUIRY) {
-          // 데이터 문의
-        }
+      var ele = this.$refs[refName];
+      var scrollTop = ele.offsetTop - 52;
+      window.scrollTo(0, scrollTop);
+    },
+    resetRequestData() {
+      this.requestData = {
+        biz_dataset_id: this.bizDatasetId,
+        apyr: "", // 신청자
+        emp_num: "20161665", //사원번호
+        apy_sbst: "", // 신청내용
+        law_evl_conf_dt: "", // 법률검토 내용
+        start_date: "", // 활용기간 시작일
+        end_date: moment().add(1, "Y").format() // 활용기간 종료일
+      };
+      this.confirmButtonDisabled = this.lawEvlConfYn === "y";
+    },
+    setRequestData({ id, input }) {
+      const key = id.split("-").pop();
+      this.requestData[key] = input;
+      // TODO: 법률검토 or 파일 입력 안하면 버튼 비활성화, 현재 법률검토만 확인함 추후 수정해야함
+      if (this.lawEvlConfYn === "y") {
+        this.confirmButtonDisabled = !this.requestData["law_evl_conf_dt"];
       }
     },
-    created() {
-      this.bizDatasetId = this.$route.query.datasetId;
-      this.getDetail(this.bizDatasetId);
-      // 첫번째 tab을 클릭해준다.
-      this.tabClick(this.tabList[0].id);
+    setDatePicker(e) {
+      this.requestData["start_date"] = e.at(0);
+      this.requestData["end_date"] = e.at(1);
     },
-    mounted() {
-      this.resetRequestData();
+    requestConfirmBtnClick(name) {
+      // TODO: 신청자를 입력값으로 받기때문에 체크, 추후 삭제
+      if (!(this.requestData.apyr && this.requestData.apy_sbst)) {
+        errorAlert({ content: "필수 값들을 입력해주세요" });
+        return;
+      }
+      console.log(this.requestData);
+      // TODO: 일단 3개의 데이터만 보냄, 추후 수정
+      let data = {};
+      data.biz_dataset_id = this.requestData.biz_dataset_id;
+      data.apyr = this.requestData.apyr;
+      data.apy_sbst = this.requestData.apy_sbst;
+      this.$axios
+        .post(this.$config.ROUTE_API_META_PREFIX + "/insertUseBoardData", data)
+        .then((res) => {
+          if (res !== false) {
+            successAlert({
+              title: "데이터 활용 신청이 완료되었습니다.",
+              content:
+                "활용신청하신 데이터는 마이페이지 > 내 활용내역에서 확인할 수 있습니다."
+            });
+            this.resetRequestData();
+            this.$modal.hide(name);
+          }
+        });
     },
-    components: {
-      BaseBadge,
-      BaseCheckbox,
-      BaseRadio,
-      BaseTag,
-      BaseButton,
-      BaseTextarea,
-      GroupBreadcrumb,
-      GroupPagination,
-      GroupFileAttach,
-      Dialog,
-      ViewTable,
-      BaseInput,
-      DatePicker,
-      BasicTable
+    myFavoriteDataClick(id, checked) {
+      // TODO: myFavoriteData api 호출로 변경 시 수정
+      if (checked) {
+        this.myFavoriteData = "y";
+      } else {
+        this.myFavoriteData = "n";
+      }
+    },
+    tabClick(tabId) {
+      this.tabSelected = tabId;
+      if (tabId === this.CONSTANTS.DETAIL.CHART) {
+        // 데이터 상세정보
+        this.getDataQualityScore(this.bizDatasetId);
+      } else if (tabId === this.CONSTANTS.DETAIL.SAMPLE) {
+        // 샘플 데이터
+        this.getSampleData(this.bizDatasetId);
+      } else if (tabId === this.CONSTANTS.DETAIL.DIAGRAM) {
+        // 활용사례
+      } else if (tabId === this.CONSTANTS.DETAIL.RULE) {
+        // 법률검토 및 규정안내
+      } else if (tabId === this.CONSTANTS.DETAIL.INQUIRY) {
+        // 데이터 문의
+      }
     }
-  };
+  },
+  created() {
+    this.bizDatasetId = this.$route.query.datasetId;
+    this.getDetail(this.bizDatasetId);
+
+
+    // 각 탭의 데이터를 전부 다 호출해준다.
+    this.getDataQualityScore(this.bizDatasetId);
+    this.getSampleData(this.bizDatasetId);
+    // // 첫번째 tab을 클릭해준다.
+    // this.tabClick(this.tabList[0].id);
+  },
+  mounted() {
+    this.resetRequestData();
+  },
+  components: {
+    BaseBadge,
+    BaseCheckbox,
+    BaseRadio,
+    BaseTag,
+    BaseButton,
+    BaseTextarea,
+    GroupBreadcrumb,
+    GroupPagination,
+    GroupFileAttach,
+    Dialog,
+    ViewTable,
+    BaseInput,
+    DatePicker,
+    BasicTable
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "./index.scss";
+@import "./index.scss";
+
+.chart__graph {
+  margin: auto !important;
+  font-size: 6em !important;
+}
 </style>
