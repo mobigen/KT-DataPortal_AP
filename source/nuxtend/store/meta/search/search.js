@@ -155,7 +155,7 @@ export const actions = {
   //     ? `${process.env.API_ROUTE_URL}${this.$config.ROUTE_API_META_PREFIX}` // SSR
   //     : `${this.$config.ROUTE_API_META_PREFIX}`; // CSR
   // },
-  getContents({ commit, rootGetters, dispatch, state }, params) {
+  async getContents({ commit, rootGetters, dispatch, state }, params) {
     let keywordObj = { keyword1: "", keyword2: "", keyword3: "" };
     params.searchKeywordList.forEach((el, index) => {
       keywordObj["keyword" + (index + 1)] = el;
@@ -182,7 +182,7 @@ export const actions = {
     const paramAPI =
       `?perPage=${paging.itemsPerPage}&curPage=${paging.page}` + keywordStr;
 
-    this.$axios
+    await this.$axios
       .get(this.$config.ROUTE_API_META_PREFIX + "/getBizMetaList" + paramAPI)
       .then((d) => {
         commit("setContents", d);
