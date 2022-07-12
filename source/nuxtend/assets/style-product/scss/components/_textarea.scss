@@ -4,7 +4,7 @@
 .text-area {
   @include font-size("14");
   @include font-family("sans");
-  padding: $spacing-xs;
+  padding: $spacing-sm;
   width: 100%;
   min-width: rem(120px);
   min-height: rem(40px);
@@ -56,7 +56,7 @@
 
   &::placeholder {
     @include font-weight("light");
-    color: $text-03;
+    color: $text-05;
   }
 }
 

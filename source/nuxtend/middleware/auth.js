@@ -30,7 +30,7 @@ export default async function ({
   error,
   redirect
 }) {
-  console.log("인증 route middleware 체크");
+  //console.log("인증 route middleware 체크");
   const fullPath = route.fullPath;
   const path = route.path;
   const query = route.query;
@@ -42,21 +42,11 @@ export default async function ({
   // 1. 인증 체크
   const checkUserUrl = $isUserRouteUrl(path);
   const checkAdminUrl = $isAdminRouteUrl(path);
-  console.log("path : ", path);
-  console.log("checkUserUrl : ", checkUserUrl);
-  console.log("checkAdminUrl : ", checkAdminUrl);
 
-  console.log(
-    "checkAuthorizationUrl(path, checkUserUrl, checkAdminUrl) : ",
-    checkAuthorizationUrl(path, checkUserUrl, checkAdminUrl)
-  );
   if (checkUserUrl) {
     // 사용자 URL
-    console.log("사용자 인증 체크");
     await store.dispatch("users/user/getAuthenticatedUser");
     const userInfo = await store.state.users.user.userInfo;
-    console.log("userInfo : ", userInfo);
-
     if (
       !checkAuthorizationUrl(path, checkUserUrl) &&
       (!userInfo || !userInfo.authenticated)

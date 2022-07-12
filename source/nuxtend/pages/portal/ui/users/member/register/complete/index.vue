@@ -23,7 +23,7 @@ export default {
   async beforeMount() {
     const userUuid = this.$route.query.userUuid;
     if (!userUuid) {
-      await errorAlert({ content: "비정상적인 접근입니다." });
+      await errorAlert("비정상적인 접근입니다.");
       this.onHome();
       return false;
     }

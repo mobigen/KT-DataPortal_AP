@@ -1,0 +1,80 @@
+/* 목록형 기본 그리드
+    ***************************************************************************/
+/* table */
+.table--board {
+  width: 100%;
+  background: $ui-02;
+  color: $ui-03;
+  border: 0;
+
+  tbody > tr > th,
+  tfoot > tr > th,
+  tbody > tr > td,
+  tfoot > tr > td {
+    padding: $spacing-xs $spacing-md;
+    border-bottom: 1px solid $ui-04;
+    height: rem(60px);
+  }
+
+  th, td {
+    padding: $spacing-xs 20px;
+    vertical-align: middle;
+  }
+
+  .tl {
+    text-align: left !important;
+  }
+
+  .data-label, .inner-mobile {
+    display: none;
+  }
+}
+
+.table--board thead {
+  tr {
+    height: rem(56px);
+  }
+
+  th {
+    position: relative;
+    border-bottom: 1px solid $text-01;
+    color: $text-01;
+  }
+
+  th:first-child:before {
+    content: none;
+  }
+
+  th:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: rem(20px);
+    width: rem(1px);
+    height: rem(14px);
+    background: $ui-01;
+  }
+}
+
+.table--board tbody {
+  td {
+    color: $text-02;
+    text-align: center;
+  }
+
+  .badge {
+    margin-left: $spacing-xs;
+  }
+
+  td a:hover,
+  td a:hover * {
+    color: $secondary;
+  }
+}
+
+.tableList--title {
+  text-align: left !important;
+  display: flex;
+  align-items: center;
+  color: $text-01;
+}

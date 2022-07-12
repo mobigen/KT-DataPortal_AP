@@ -42,7 +42,7 @@
     display: block;
   }
 
-  
+
 }
 
 // 데이터 요약 정보
@@ -63,7 +63,7 @@
     align-content: center;
     text-align: center;
     margin-right: $spacing-lg;
-    
+
     img {
       margin: 0 auto;
     }
@@ -97,7 +97,7 @@
       margin-top: $spacing-md;
       color: $text-02;
     }
-    
+
     .information__data-details {
       display: flex;
       flex-direction: column;
@@ -166,7 +166,7 @@
       width: 50%;
       display: flex;
       flex-direction: column;
-    } 
+    }
     .datainfo-download {
       flex-grow: 1;
       display: flex;
@@ -199,24 +199,8 @@
     }
   }
 }
-// 데이터 상세정보
-.contents__detail {
-  margin-top: rem(20px);
-  width: 100%;
-  position: relative;
 
-  h3 {
-    width: 100%;
-    height: rem(80px);
-    line-height: rem(80px);
-    border-bottom: 2px solid $primary;
-    color: $primary;
-    @include font-size("20");
-    @include font-weight("bold");
-    position: relative;
-  }
-}
-
+// 데이터 상세정보 - 외부 데이터
 .contents-outside__detail {
   margin-top: rem(20px);
   width: 100%;
@@ -244,7 +228,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    
+
 
     .badge--w-gray{
       height: rem(30px);
@@ -338,7 +322,7 @@
   border-top: 1px solid $field-border;
 }
 
-.formbox--col th:last-child, 
+.formbox--col th:last-child,
 .formbox--col td:last-child {
   border-right: none;
 }
@@ -568,7 +552,7 @@
     }
   }
 
-  
+
 
 }
 .filedata__content {
@@ -577,77 +561,16 @@
   overflow: auto;
   margin: 0 $spacing-md 0 $spacing-md;
   border-top: 1px solid $text-03;
-  display: none;  
+  display: none;
 }
 
 .open-filedata .filedata__content {
   display: block;
 }
 
-.contents__detail-used {
-  
-  li {
-    border-bottom: 1px solid $ui-04;
-    height: rem(60px);
-    display: flex;
-    align-items: center;
-  }
-}
-
-.used__badge {
-  flex-shrink: 0;
-}
-
-.used__title {
-  flex-shrink: 0;
-  width: rem(240px);
-  padding-left: $spacing-lg;
-  color: $text-01;
-  @include font-size("14");
-  @include font-weight("bold");
-}
-
-.used__description {
-  flex-grow: 1;
-  color: $text-02;
-  padding-left: rem(10px);
-  @include font-size("14");
-  @include font-weight("regular");
-}
-
-.used__date {
-  flex-shrink: 0;
-  width: rem(100px);
-  color: $text-03;
-  @include font-size("14");
-  @include font-weight("regular");
-}
-
-.used__button {
-  flex-shrink: 0;
-  width: rem(90px);
-  height: rem(32px);
-  line-height: rem(32px);
-  background: $ui-02;
-  border-radius: rem(5px);
-  border : 1px solid $ui-04;
-  color: $text-01;
-  @include font-size("14");
-  @include font-weight("regular");
-
-  &:hover {
-    border-color: $secondary;
-  }
-
-  &:active {
-    border-color: $secondary;
-    color: $secondary;
-  }
-}
-
 .contents__detail-recommend {
   width: 100%;
   position: relative;
 
-  
+
 }

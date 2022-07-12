@@ -82,16 +82,12 @@ export default {
     },
     async onAgree() {
       if (!this.isServiceTerms) {
-        await errorAlert({
-          content: "서비스이용약관동의여부에 동의하여 주시기 바랍니다."
-        });
+        await errorAlert("서비스이용약관동의여부에 동의하여 주시기 바랍니다.");
         this.$refs.isServiceTerms.focus();
         return false;
       }
       if (!this.isPrivacyTerms) {
-        await errorAlert({
-          content: "개인정보수집동의여부에 동의하여 주시기 바랍니다."
-        });
+        await errorAlert("개인정보수집동의여부에 동의하여 주시기 바랍니다.");
         this.$refs.isPrivacyTerms.focus();
         return false;
       }

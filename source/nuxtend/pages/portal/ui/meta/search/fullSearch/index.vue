@@ -50,7 +50,6 @@
             >'{{ item }}'
             <span
               v-if="searchKeywordList.length - 1 !== index"
-              style="color: black"
               >&</span
             >
           </strong>
@@ -189,7 +188,7 @@
           <group-pagination
             :paging-key="paginationKey"
             :paging-object="{
-              [CONSTANTS.PAGING.ITEMS_PER_PAGE]: 6,
+              [CONSTANTS.PAGING.ITEMS_PER_PAGE]: 5,
               [CONSTANTS.PAGING.VISIBLE_PAGES]: 3,
               [CONSTANTS.PAGING.PAGE]: 1
             }"
@@ -391,8 +390,7 @@ export default {
     },
     rescanFilterCheck({ bool }) {
       this.rescanFilterChecked = bool;
-
-      if (!bool && this.searchKeyword && this.searchKeywordList.length > 0) {
+      if (bool === false && this.searchKeyword === "") {
         this.searchKeywordList = [];
         this.searchKeyword = "";
         this.searchResultBox(false, false);

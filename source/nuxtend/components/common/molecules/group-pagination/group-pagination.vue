@@ -91,7 +91,7 @@
 <script type="text/javascript">
 import { mapActions } from "vuex";
 import BaseButton from "@common/atoms/base-button/base-button.vue";
-import BasicViewTable from "@component/aiPlatform/basic/basic-view-table";
+import BasicViewTable from "@common/atoms/basic-view-table";
 
 export default {
   name: "GroupPagination",

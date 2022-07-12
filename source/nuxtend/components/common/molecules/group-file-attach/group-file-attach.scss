@@ -113,6 +113,7 @@
 .file-attach-group {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .file-attach-group .file-attach-list {
@@ -190,7 +191,7 @@
 
 .attached-file__item {
   display: flex;
-  height: rem(24px);
+  height: auto;
   line-height: rem(24px);
 
   .svg-icon {
@@ -227,4 +228,15 @@
   @include font-weight("regular");
   @include font-size("12");
   color: $text-03;
+}
+
+.attached-file__item-thumbnail {
+  width: 100%;
+  margin: rem(4px) 0 rem(-4px) 0;
+
+  img {
+    width: rem(60px);
+    height: rem(40px);
+    border: 1px solid $ui-03;
+  }
 }

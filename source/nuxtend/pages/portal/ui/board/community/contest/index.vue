@@ -5,7 +5,7 @@
     <p>데이터를 활용한 새로운 아이디어 및 서비스 개발 경진대회 도전을 응원합니다.</p>
     전체 {{ totCnt }}건
     <basic-search-bar
-      :searchKeyword="searchKeyword"
+      :searchKeyword="srchKwd"
       @search="goSearch"
     ></basic-search-bar>
     <hr />
@@ -17,7 +17,7 @@
       :useSerialNum="true"
       serialNumText="번호"
       :tableButtonUse="false"
-      @columnAction="rowClick"
+      @columnAction="rowClicked"
     ></basic-table>
 
     <basic-pagination
@@ -35,30 +35,25 @@
 </template>
 
 <script>
-import BasicTable from "@component/aiPlatform/basic/basic-table";
-import BasicSearchBar from "@component/aiPlatform/basic/basic-search-bar";
-import BasicPagination from "@component/aiPlatform/basic/basic-pagination";
+import BasicTable from "@common/atoms/basic-table"
+import BasicSearchBar from "@common/atoms/basic-search-bar"
+import BasicPagination from "@common/atoms/basic-pagination"
 import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "contest-list",
-  components: {BasicTable, BasicSearchBar, BasicPagination},
   data() {
     return {
-      paginationKey: 'contestPaging',
-      searchKeyword: '',
+      paginationKey: "contestPaging",
+      srchKwd: "",
       totCnt: 0,
       rowsPerPage: 10,
       list: [],
       tableHeaderList: [
-        //{column_name : 'conteId'},
-        {column_name : 'conteTitle'},
-        {column_name : 'apyDate'},
-        // {column_name : 'apyStDate'},
-        // {column_name : 'apyFnsDate'},
-        {column_name : 'regDate'}
+        {column_name : "conteTitle"},
+        {column_name : "apyDate"},
+        {column_name : "regDate"}
       ],
-      //tableDataList: []
     }
   },
   computed: {
@@ -71,32 +66,19 @@ export default {
       return this.paging.contestPaging.page
     },
     query() {
-      return this.searchKeyword ?
-        { keyword: this.searchKeyword, page: this.currentPage } : { page: this.currentPage }
+      return this.srchKwd ?
+        { keyword: this.srchKwd, page: this.currentPage } : { page: this.currentPage }
     }
   },
-  beforeMount() {
-    this.searchKeyword = this.$route.query.keyword || ''
-  },
-  mounted() {
-    let page = Number(this.$route.query.page)
-    if(page) {
-      // 페이징 정보 갱신
-      this.setPage({
-        key:this.paginationKey,
-        page: page
-      })
-    }
-    this.getDataList()
-  },
+  components: {BasicTable, BasicSearchBar, BasicPagination},
   methods: {
     ...mapActions("module/pagination", ["setPage", "setTotalCount"]),
     goPage() {
-      this.getResult(this.searchKeyword, false)
+      this.getResult(this.srchKwd, false)
     },
     goSearch(keyword) {
-      this.searchKeyword = keyword
-      this.getResult(this.searchKeyword, true)
+      this.srchKwd = keyword
+      this.getResult(this.srchKwd, true)
     },
     getResult(keyword, reset) {
       if(reset) {
@@ -108,8 +90,7 @@ export default {
       this.$router.push({path: this.$route.path, query: this.query})
     },
     async getDataList() {
-      let res = await this.$axios.get(`${this.$config.ROUTE_API_BOARD_PREFIX}/contest/list?searchKeyword=${this.searchKeyword}&rowsPerPage=${this.rowsPerPage}
-      &startRow=${this.startRow}&currentPage=${this.currentPage}`)
+      let res = await this.$axios.get(`${this.$config.ROUTE_API_BOARD_PREFIX}/contest/list?searchKeyword=${this.srchKwd}&rowsPerPage=${this.rowsPerPage}&startRow=${this.startRow}&currentPage=${this.currentPage}`)
       //console.log(res)
       this.list = res.list
       this.totCnt = res.totCnt
@@ -118,9 +99,27 @@ export default {
         totalCount: this.totCnt
       })
     },
-    rowClick(key) {
-      this.$router.push({path: `/portal/ui/board/community/contest/view/${key}`, query: this.query})
+    rowClicked(key, data) {
+      if(data.dtlYn === "N") {
+        window.open(data.conteUrl,"_blank")
+      } else {
+        this.$router.push({path: `/portal/ui/board/community/contest/detail/${key}`, query: this.query})
+      }
     }
+  },
+  beforeMount() {
+    this.srchKwd = this.$route.query.keyword || ""
+  },
+  mounted() {
+    let page = Number(this.$route.query.page)
+    if(page) {
+      // 페이징 정보 갱신
+      this.setPage({
+        key:this.paginationKey,
+        page: page
+      })
+    }
+    this.getDataList()
   }
 }
 </script>

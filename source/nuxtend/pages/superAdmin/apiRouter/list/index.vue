@@ -50,9 +50,9 @@
 <i18n src="./index.json"></i18n>
 
 <script type="text/javascript">
-import BasicLabel from "@component/aiPlatform/basic/basic-label.vue";
-import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
-import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
+import BasicLabel from "@common/atoms/basic-label.vue";
+import BasicTable from "@common/atoms/basic-table.vue";
+import BasicButton from "@common/atoms/basic-button.vue";
 import BaseSelect from "@component/common/atoms/base-select/base-select";
 import { mapGetters } from "vuex";
 

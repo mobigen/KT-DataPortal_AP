@@ -2,11 +2,12 @@
   <div>
     <textarea
       type="text"
-      class="text-area text-area--fixed scrollCustomize"
       @input="input = $event.target.value"
-      :placeholder="placeholder"
+      class="text-area"
+      :class="elementClass"
       :value="value"
       :rows="rows"
+      :placeholder="placeholder"
       @keydown="$emit('keydown', $event)"
     ></textarea>
     <!-- 텍스트 길이(byte) 표시 -->
@@ -32,6 +33,10 @@ export default {
     placeholder: {
       type: String,
       required: false
+    },
+    elementClass: {
+      type: String,
+      default: ''
     },
     useCheckByte: {
       type: Boolean,

@@ -20,14 +20,14 @@ main {
 
 /* IE 스크롤바 */
 .scrollCustomize {
-  overflow:auto; 
-  scrollbar-arrow-color: #C2C2C2; 
+  overflow:auto;
+  scrollbar-arrow-color: #C2C2C2;
   scrollbar-base-color: #C2C2C2;
   scrollbar-Face-Color: #C2C2C2;
-  scrollbar-track-color: #F2F2F2; 
-  scrollbar-DarkShadow-Color: #C2C2C2; 
-  scrollbar-Shadow-Color: #C2C2C2; 
-  scrollbar-Highlight-Color: #C2C2C2; 
+  scrollbar-track-color: #F2F2F2;
+  scrollbar-DarkShadow-Color: #C2C2C2;
+  scrollbar-Shadow-Color: #C2C2C2;
+  scrollbar-Highlight-Color: #C2C2C2;
   scrollbar-3dLight-Color: #C2C2C2;
 }
 
@@ -36,15 +36,15 @@ main {
   width:6px;
 }
 .scrollCustomize::-webkit-scrollbar-button:start:decrement {
-  display:block; 
-  height:4px; 
+  display:block;
+  height:4px;
 }
 .scrollCustomize::-webkit-scrollbar-button:end:increment {
-  display:block; 
+  display:block;
   height:4px;
 }
 .scrollCustomize::-webkit-scrollbar-thumb {
-  border:none; 
+  border:none;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 }
@@ -59,28 +59,28 @@ main {
 
 .contents-subject {
   width: 100%;
-  padding: 0 0 $spacing-xl $spacing-xs ;
+  padding: 0 0 $spacing-md $spacing-xs ;
 }
 
 .subject {
-  position: relative;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
 
   .subject__title {
-    display: block; 
-    width: 100%; 
-    padding:rem(30px) 0 rem(20px) 0; 
+    width: 100%;
+    margin: rem(30px) 0 rem(20px) 0;
+    padding: 0;
     @include font-size("32");
     line-height: rem(32px);
-    color: $text-01; 
+    color: $text-01;
   }
-  
+
   .subject__desc {
     display: block;
-    padding:0 0 rem(30px) 0; 
+    padding:0 0 rem(30px) 0;
     @include font-size("18");
-    line-height: rem(18px); 
-    color: $text-03; 
+    line-height: rem(18px);
+    color: $text-03;
   }
 
 }
@@ -91,24 +91,25 @@ main {
   margin-top: $spacing-lg;
 
   .subject__title {
-    padding: 0; 
+    padding: 0;
     @include font-size("32");
     @include font-weight("regular");
     color: $text-01;
-    flex-shrink: 0;     
+    flex-shrink: 0;
   }
-  
+
   .subject__desc {
     padding: 0 0 0 $spacing-sm;
     height: rem(24px) ;
     @include font-size("14");
     color: $text-03;
-    flex-grow: 1;
+    flex-shrink: 0;
   }
 
   .subject__right {
-    flex-shrink: 0;
+    flex-grow: 1;
     color: $text-02;
+    text-align: right;
   }
 
 }
@@ -139,65 +140,112 @@ main {
 
 .contents-top__search {
   position: relative;
-  width: 800px;
+  width: rem(800px);
   margin: 0 auto;
-}
 
-.contents-top__search .text-input-group--lg {
-  input {
-    position: relative; 
-    width: 100%; 
-    height: rem(60px); 
-    line-height: rem(58px); 
-    padding: 0 0 0 rem(60px); 
-    outline: none; 
-    box-sizing: border-box; 
-    border: 1px solid $ui-04; 
-    border-radius: rem(30px); 
-    background: url(#{$img-path}/common/icon.png) no-repeat rem(5px) rem(-165px); 
+  .text-input-group--lg {
+    input {
+      position: relative;
+      width: 100%;
+      height: rem(60px);
+      line-height: rem(58px);
+      padding: 0 0 0 rem(60px);
+      outline: none;
+      box-sizing: border-box;
+      border: 1px solid $ui-04;
+      border-radius: rem(30px);
+      background: url(#{$img-path}/common/icon.png) no-repeat rem(5px) rem(-165px);
+      @include font-size("18");
+      color: $text-01;
+
+      &:hover {
+        border: 1px solid $secondary;
+      }
+      &:focus {
+        border: 2px solid $secondary;
+        background: url(#{$img-path}/common/icon.png) no-repeat rem(4px) rem(-166px);
+        box-shadow: none;
+      }
+    }
+  }
+
+  .text-input-group__clear-button {
+    margin-right: rem(90px);
+  }
+
+  .text-input-group__search-button {
+    position:absolute;
+    top:50%;
+    right: 0;
+    width: rem(120px);
+    height: rem(60px);
+    outline: none;
+    box-sizing: border-box;
+    border:none;
+    border-radius: rem(30px);
+    background: $secondary;
+    color: $ui-02;
+    @include font-weight("bold");
     @include font-size("18");
-    color: $text-01; 
-  
+
     &:hover {
-      border: 1px solid $secondary;
+      background: $hover-secondary;
     }
-    &:focus {
-      border: 2px solid $secondary;
-      background: url(#{$img-path}/common/icon.png) no-repeat rem(4px) rem(-166px);
-      box-shadow: none;
+
+    .svg-icon {
+      display: none;
     }
+
   }
 
-  
 }
 
-.contents-top__search .text-input-group__clear-button {
-  margin-right: rem(90px);
-}
+.board-top__search {
+  background: $ui-05;
+  border-radius: rem(10px);
+  padding: rem(20px);
+  width: 100%;
 
-.contents-top__search .text-input-group__search-button {
-  position:absolute; 
-  top:50%; 
-  right: 0; 
-  width: rem(120px); 
-  height: rem(60px); 
-  outline: none; 
-  box-sizing: border-box; 
-  border:none; 
-  border-radius: rem(30px); 
-  background: $secondary; 
-  color: $ui-02; 
-  @include font-weight("bold");
-  @include font-size("18");
-
-  &:hover {
-    background: $hover-secondary;
+  fieldset {
+    width: unset !important;
   }
 
-  .svg-icon {
-    display: none;
+  .text-input-group--lg {
+    display: flex;
+
+    .text-input {
+      width: rem(400px);
+      height: rem(40px);
+    }
   }
 
+  .text-input-group__clear-button {
+    margin-right: rem(28px);
+  }
+
+  .text-input-group__search-button {
+    position: unset;
+    transform: unset;
+    margin-left: $spacing-2xs;
+    height: rem(40px);
+    outline: none;
+    box-sizing: border-box;
+    border:none;
+    background: $secondary;
+    color: $ui-02;
+    @include font-weight("medium");
+    @include font-size("14");
+    padding: 0 rem(20px);
+
+    &:hover {
+      background: $hover-secondary;
+    }
+
+    .svg-icon {
+      display: none;
+    }
+
+  }
 }
 
 .search-input-field__filter {
@@ -212,24 +260,20 @@ main {
   justify-content: flex-start;
   width: 100%;
   max-width: rem(800px);
-  margin: 0 auto;
+  margin: 0 auto rem(60px);
 
   h4 {
     flex-shrink: 0;
-    padding: 0 rem(20px) 0 rem(30px); 
+    padding: 0 rem(20px) 0 rem(30px);
     @include font-size("12");
     @include font-weight("bold");
-    color: $text-03; 
+    color: $text-03;
     line-height: rem(30px);
   }
 
   .tags {
-    display: inline-block; 
+    display: inline-block;
     flex-grow:0;
-
-    a + a {
-      margin-left: rem(4px);
-    }
   }
 
 }
@@ -255,7 +299,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: $layout-md 0;
+  padding: 0 0 $layout-md 0;
   @include font-size("20");
   @include font-weight("medium");
   word-break: break-all;
@@ -263,6 +307,12 @@ main {
 
   strong {
     color: $secondary;
+  }
+
+  span {
+    color: $text-01;
+    @include font-weight("regular");
+    padding: 0 $spacing-2xs;
   }
 }
 
@@ -278,6 +328,7 @@ main {
     position: relative;
     width: rem(280px);
     height: 100%;
+    z-index: 1;
   }
 
   section {
@@ -287,6 +338,125 @@ main {
   }
 }
 
+// 데이터 상세정보
+.contents__detail {
+  margin-top: rem(20px);
+  width: 100%;
+  position: relative;
+
+  h3 {
+    width: 100%;
+    height: rem(80px);
+    line-height: rem(80px);
+    border-bottom: 2px solid $primary;
+    color: $primary;
+    @include font-size("20");
+    @include font-weight("bold");
+    position: relative;
+  }
+}
+
+.contents__board-wrap {
+  margin: 0;
+}
+
+.contents__detail-used {
+
+  li {
+    border-bottom: 1px solid $ui-04;
+    height: rem(60px);
+    display: flex;
+    align-items: center;
+  }
+}
+
+.used__badge {
+  flex-shrink: 0;
+}
+
+.used__title {
+  flex-shrink: 0;
+  width: rem(240px);
+  padding-left: $spacing-lg;
+  color: $text-01;
+  @include font-size("14");
+  @include font-weight("bold");
+}
+
+.used__description {
+  flex-grow: 1;
+  color: $text-02;
+  padding-left: rem(10px);
+  @include font-size("14");
+  @include font-weight("regular");
+}
+
+.used__date {
+  flex-shrink: 0;
+  width: rem(100px);
+  color: $text-03;
+  @include font-size("14");
+  @include font-weight("regular");
+}
+
+.used__button {
+  flex-shrink: 0;
+  width: rem(90px);
+  height: rem(32px);
+  line-height: rem(32px);
+  background: $ui-02;
+  border-radius: rem(5px);
+  border : 1px solid $ui-04;
+  color: $text-01;
+  @include font-size("14");
+  @include font-weight("regular");
+
+  &:hover {
+    border-color: $secondary;
+  }
+
+  &:active {
+    border-color: $secondary;
+    color: $secondary;
+  }
+}
+
+.contents__list {
+  position: relative;
+}
+
+.contents__list-head{
+  display: flex;
+  border-bottom: 2px solid $text-01;
+  margin-top: rem(20px);
+
+  h4 {
+    @include font-size("18");
+    @include font-weight("medium");
+    color: $text-01;
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: rem(12px);
+
+    span {
+      color: $secondary;
+      padding-left: rem(8px);
+    }
+  }
+
+  .list-head__options {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: rem(12px);
+  }
+
+  .list-head__options-sort {
+    margin: rem(6px) rem(8px) 0;
+  }
+
+}
 
 .contents__inner{
   width: rem(1280px);
@@ -348,6 +518,11 @@ main {
   margin-left: $spacing-sm;
 }
 
+// pagination
+.contents__pagination {
+  padding: rem(60px) 0 rem(20px);
+}
+
 // 페이지 하단 버튼 그룹
 .page__button {
   position: relative;
@@ -402,7 +577,7 @@ main {
 
 // 오류신고 Dialog
 .modal__body-head {
-  
+
   h3 {
     @include font-weight("regular");
     @include font-size("24");
@@ -466,8 +641,9 @@ main {
     @include font-size("14");
     color: $text-02;
     line-height: rem(18px);
-    width: rem(110px);  
-    word-break: break-all;  
+    width: rem(110px);
+    word-break: break-all;
+    padding: 0;
   }
 
   .item__detail {
@@ -489,7 +665,7 @@ main {
   @include font-size("12");
   @include font-weight("regular");
   color: $text-03;
-  
+
   strong {
     @include font-size("12");
     @include font-weight("bold");
@@ -505,11 +681,11 @@ main {
   margin-top: $spacing-sm;
 }
 
-//제공기관 모달
-.modal__provider {
+//보드형 모달
+.modal__board {
   margin: 0;
 }
-.modal__provider-title {
+.modal__board-title {
   display: flex;
   border-bottom: 1px solid $text-01;
   div {
@@ -517,39 +693,52 @@ main {
     height: rem(50px);
     line-height: rem(50px);
     position: relative;
+    color: $text-01;
+    @include font-weight("medium");
   }
   div + div {
     &::before {
       content: "";
       width: 1px;
       height: rem(12px);
-      background: $ui-05;
+      background: $ui-01;
       position: absolute;
-      top: rem(10px);
+      top: 50%;
       left: 0;
       -webkit-transform: translateY(-50%);
       transform: translateY(-50%);
     }
   }
 }
-.modal__provider-list {
+.modal__board-list {
   display: flex;
   border-bottom: 1px solid $ui-04;
   align-items: center;
   height: rem(50px);
 
+  div {
+    color: $text-02;
+    @include font-weight("regular");
+  }
+
   &:hover {
     background: $ui-05;
   }
 }
-.modal__provider-name {
+.modal__board-auto {
   flex-grow: 1;
   padding-left: rem(8px);
   text-align: left;
 }
-.modal__provider-badge {
+.modal__board-sm {
   flex-shrink: 0;
   width: rem(80px);
+  display: flex;
+  justify-content: center;
+}
+.modal__board-md {
+  flex-shrink: 0;
+  width: rem(150px);
   display: flex;
   justify-content: center;
 }
@@ -557,82 +746,267 @@ main {
 .modal__pagination {
   margin-top: rem(30px);
 }
-/*
-@include template-respond-to('breakpoint-lg') {
-  .contents ,
-  .contents-top__breadcrumb,
-  .contents-search-result,
-  .contents-top__search,
-  .contents__inner,
-  .contents__sort{
-    width: 100%;
+
+/* 등록페이지 style */
+.registraion__wrap {
+  position: relative;
+  width: 100%;
+  padding: $spacing-sm 0 $spacing-lg 0;
+  border-top: 2px solid $text-01;
+  border-bottom: 1px solid #abafba;
+}
+
+.registraion__list {
+  display: flex;
+  align-content: flex-start;
+  padding: $spacing-xs 0;
+}
+
+.item__title {
+  flex-shrink: 0;
+  @include font-weight("regular");
+  @include font-size("16");
+  color: $text-01;
+  line-height: rem(18px);
+  width: rem(160px);
+  padding-top: rem(10px);
+  word-break: break-all;
+  margin-left: $spacing-xs;
+}
+
+.item__detail {
+  flex-grow: 1;
+  @include font-weight("medium");
+  @include font-size("14");
+  color: $text-01;
+  line-height: rem(18px);
+  word-break: break-all;
+  display: flex;
+  flex-wrap: wrap;
+
+  .checkbox {
+    height: rem(36px);
+    padding-top: rem(6px);
+  }
+  .checkbox + * {
+    margin-left: $spacing-xl;
+  }
+
+}
+
+.item__length-short {
+  width: rem(180px);
+  margin-right: $spacing-xs;
+}
+
+.item__length-mid {
+  width: rem(400px);
+  margin-right: $spacing-xs;
+}
+
+.item__length-long {
+  width: rem(600px);
+  margin-right: $spacing-xs;
+}
+
+.item__length-wide {
+  width: rem(900px);
+}
+
+.cols {
+  display: flex;
+  flex-direction: column;
+}
+
+.authority {
+  border: 1px solid $text-05;
+  border-left: none;
+  border-right: none;
+  margin-top: $spacing-xl;
+  padding: $spacing-lg 0;
+}
+
+.item__analysisdata-attached {
+  align-items: flex-end;
+  width: rem(900px);
+}
+
+.datatype {
+  border-bottom: 1px solid $text-05;
+  padding: $spacing-lg 0 rem(36px) 0;
+}
+
+.item__datatype {
+  display: flex;
+  flex-direction: column;
+  width: rem(900px);
+
+  small {
+    margin : rem(12px) 0 rem(20px) 0;
+    color: $text-03;
+    @include font-weight("regular");
+    @include font-size("12");
   }
 }
 
-@include template-respond-to('breakpoint-md') {
-  .main {
-    padding-top: rem(60px);
-  }
+.item__datatype-attached {
+  margin-bottom: rem(12px);
 }
-*/
-/* 화면 너비 0 ~ 1210px 
-@media (max-width: 1210px) {
-  .main {
-    padding: rem(110px) rem(20px) 0 rem(20px);
+
+.item__datatype-buttongroup {
+  display: flex;
+  margin-bottom: rem(20px);
+
+  * + * {
+    margin-left: $spacing-sm;
   }
 
-  .search-input-field__search {
-    position: relative;
+  .button {
+    @include font-weight("bold");
   }
-  
-  .search-input-field__filter {
+}
+
+.editor-wrap {
+  position: relative;
+  flex-direction: column;
+  padding: $spacing-lg 0;
+
+  .item__title {
+    margin-bottom: rem(16px);
+  }
+
+  small {
     position: absolute;
-    top: rem(16px);
-    padding-right: rem(20px);
-    display: flex;
-    justify-content: end;
+    top: rem(32px);
+    left: rem(168px);
+    @include font-weight("regular");
+    @include font-size("12");
+    color: $text-03;
   }
-
 }
-*/
-/* 화면 너비 0 ~ 1024px 
-@media (max-width: 1024px) {
-  
-  .main {
-    padding: rem(70px) rem(20px) 0 rem(20px);
+
+.item__thumbnail-select {
+  margin-bottom: rem(12px);
+
+  h5 {
+    @include font-weight("regular");
+    @include font-size("14");
+    color: $text-02;
+    line-height: rem(40px);
+  }
+}
+
+.item__thumbnail-list {
+  display: flex;
+  flex-wrap: wrap;
+  width: rem(800px);
+
+  a {
+    width: rem(80px);
+    height: rem(80px);
+    border: 1px solid $ui-04;
+    border-radius: rem(5px);
+    margin: rem(12px) rem(12px) 0 0;
   }
 
-  .search-input-field__search {
-    position: relative;
-  }
-  
-  .search-input-field__filter {
-    position: absolute;
-    top: rem(16px);
-    padding-right: rem(20px);
-    display: flex;
-    justify-content: end;
+  a:hover {
+    border-color: $secondary;
   }
 
-  .contents aside {
-    display: none;
+  a:active {
+    border-color: $secondary;
+    background: $ui-05;
   }
 
-  .contents-top__search .contents-top__recommend {
-    margin-top: rem(50px);
-    display: flex;
-    justify-content: center;
+  img {
     width: 100%;
-  
-    h4 {
-      font-size: 0;
-      color: transparent;
-    }
+    height: auto;
+  }
+}
 
-    .tags .tag {
-      margin-bottom: rem(5px);
-    }
+.item__thumbnail-attach {
+  width: rem(600px);
+  margin: rem(12px) 0;
+}
+
+// 첨부된 파일 리스트
+.attached-file__title {
+  display: flex;
+  align-items: center;
+  height: rem(32px);
+
+  h5 {
+    flex-grow: 1;
+    @include font-weight("regular");
+    @include font-size("16");
+    color: $text-01;
+    line-height: rem(32px);
   }
 
+  small {
+    flex-shrink: 0;
+    @include font-weight("regular");
+    @include font-size("12");
+    color: $text-03;
+    height: 100%;
+    padding: $spacing-sm $spacing-xs 0 0;
+    margin: 0;
+  }
+
+  .button {
+    flex-shrink: 0;
+  }
 }
-*/
+
+.attached-file__list {
+  width: 100%;
+  max-height: rem(160px);
+  overflow: auto;
+  padding: $spacing-xs 0 $spacing-xs $spacing-sm;
+  border-radius: rem(5px);
+  border: 1px solid $hover-ui-accent;
+  margin-top: $spacing-2xs;
+}
+
+.attached-file__item {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  line-height: rem(24px);
+
+  .svg-icon {
+    width: rem(16px);
+    height: rem(16px);
+    fill: $secondary;
+
+    &:hover {
+      fill: $hover-secondary;
+    }
+    &:active {
+      fill: $active-secondary;
+    }
+  }
+}
+
+.attached-file__item-title {
+  flex-grow: 1;
+  @include font-weight("regular");
+  @include font-size("12");
+  color: $text-02;
+
+  .svg-icon {
+    width: rem(16px);
+    height: rem(16px);
+    fill: $text-05;
+  }
+}
+
+.attached-file__item-volume {
+  flex-shrink: 0;
+  width: rem(80px);
+  text-align: right;
+  padding-right: $spacing-xs;
+  @include font-weight("regular");
+  @include font-size("12");
+  color: $text-03;
+}

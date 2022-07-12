@@ -35,7 +35,6 @@ export default {
       // const user = await this.$getUser();
       // this.user = user;
       this.user = this.getUserInfo;
-      console.log("this.user : ", this.user);
     }
   }
 };

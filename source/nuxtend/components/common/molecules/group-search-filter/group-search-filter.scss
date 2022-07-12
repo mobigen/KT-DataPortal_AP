@@ -4,8 +4,8 @@
 
   .search-filter__button-reset {
     display: block;
-    margin: rem(12px) 0 0 rem(10px);
-    width: 220px;
+    margin: rem(12px) 0 rem(12px) rem(10px);
+    width: rem(220px);
     height: rem(30px);
     border: 1px solid $ui-04;
     border-radius: rem(5px);
@@ -50,8 +50,11 @@
 }
 
 .search-filter__body {
-  padding-right: rem(20px);
+  margin-right: $spacing-2xs;
+  padding-right: $spacing-md;
   position: relative;
+  max-height: 1200px;
+  overflow: auto;
 }
 
 
@@ -91,7 +94,7 @@
 .search-filter__last{
   margin-left: $spacing-lg;
   background: transparent;
-  
+
   li:last-child {
     padding-bottom: $spacing-2xs;
   }

@@ -42,10 +42,10 @@
 <i18n src="./index.json"></i18n>
 
 <script type="text/javascript">
-import BasicTable from "@component/aiPlatform/basic/basic-table";
-import BasicLabel from "@component/aiPlatform/basic/basic-label.vue";
+import BasicTable from "@common/atoms/basic-table";
+import BasicLabel from "@common/atoms/basic-label.vue";
 import BaseSelect from "@component/common/atoms/base-select/base-select";
-import BasicButton from "@component/aiPlatform/basic/basic-button";
+import BasicButton from "@common/atoms/basic-button";
 import { mapActions, mapGetters } from "vuex";
 import SearchInputField from "@component/common/organisms/search-input-field/search-input-field.vue";
 

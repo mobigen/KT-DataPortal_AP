@@ -56,7 +56,7 @@ export default function ({ $axios, $config, $cookies, store, redirect }) {
       if (errorMessage === null || errorMessage === "") {
         errorMessage = "여기에 시스템 에러 메세지를 넣어야 함";
       }
-      await errorAlert({ content: errorMessage });
+      await errorAlert(errorMessage);
       return Promise.resolve(false);
     }
     return data.data;
@@ -64,7 +64,7 @@ export default function ({ $axios, $config, $cookies, store, redirect }) {
 
   $axios.onError((error) => {
     hideLoader();
-    errorAlert({ content: error.message });
+    errorAlert(error.message);
     return Promise.resolve(false);
   });
 }

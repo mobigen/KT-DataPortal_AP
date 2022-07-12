@@ -108,9 +108,6 @@ export const state = () => ({
         REMOTE_CALL: "REMOTE CALL",
         MESSAGE_PASSING: "MESSAGE PASSING"
       }
-    },
-    POST: {
-      POST_ID: "biz_dataset_id"
     }
   })
 });

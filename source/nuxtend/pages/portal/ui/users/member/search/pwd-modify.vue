@@ -60,13 +60,13 @@ export default {
   methods: {
     async init() {
       const data = this.$cookies.get("pwdSearch");
-      console.log("data : ", data);
+      // console.log("data : ", data);
       if (data && data.userSeq) {
         this.user.userSeq = data.userSeq;
         this.$cookies.remove("pwdSearch");
         this.$cookies.set("pwdSearch", null, -1);
       } else {
-        await errorAlert({ content: "비정상적인 접근입니다." });
+        await errorAlert("비정상적인 접근입니다.");
         this.$router.push({
           path: `${this.$config.ROUTE_USERS_PREFIX}/member/search/pwd`
         });

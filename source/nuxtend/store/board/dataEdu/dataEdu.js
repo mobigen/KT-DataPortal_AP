@@ -1,7 +1,7 @@
 export const state = () =>({
   dataEduRes:{
     dataEduList: [],
-    dataCardInfo:[],
+    dataCardInfo: [],
     totCnt: 0,
   },
   dataEduDetailRes: {}
@@ -17,7 +17,7 @@ export const getters = {
 export const mutations = {
   setDataEduList(state, data) {
     state.dataEduRes = data;
-    console.log(data);
+    console.log('data: ', data);
     const tempData = new Array();
 
     state.dataEduRes.dataEduList.forEach(element=> {
@@ -31,11 +31,24 @@ export const mutations = {
       temp.date = element['eduRegDate'];
       temp.download = 0;
       temp.hit = element['searchCnt'];
+
+      if(element['titleImg']!=null) {
+        let binaryStr = atob(element['titleImg']);
+        let len = binaryStr.length;
+        let bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++){
+          bytes[i] = binaryStr.charCodeAt(i);
+        }
+
+        let blob = new Blob([bytes]);
+        temp.img = URL.createObjectURL(blob);
+      }
       tempData.push(temp);
     });
+
+    // URL.revokeObjectURL(tempImg);
       state.dataEduRes.dataCardInfo = tempData;
 
-      console.log(state.dataEduRes.dataCardInfo);
   },
   setDataEduDetail(state, data) {
     state.dataEduDetailRes = data;
@@ -46,7 +59,7 @@ export const actions ={
     console.log(params)
     const data = await this.$axios(`${this.$config.ROUTE_API_BOARD_PREFIX}/dataEdu/list`, {params});
     console.log(data)
-    commit("setDataEduList", data);
+    await commit("setDataEduList", data);
   },
   getDataEduDetail({commit}, params){
     this.$axios(`${this.$config.ROUTE_API_BOARD_PREFIX}/dataEdu/detail`,{params})

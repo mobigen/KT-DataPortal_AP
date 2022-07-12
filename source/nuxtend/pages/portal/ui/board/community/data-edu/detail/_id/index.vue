@@ -35,7 +35,7 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import BasicButton from "@component/aiPlatform/basic/basic-button";
+import BasicButton from "@common/atoms/basic-button";
 export default {
   components:{BasicButton},
   name: "dataEduDetail",

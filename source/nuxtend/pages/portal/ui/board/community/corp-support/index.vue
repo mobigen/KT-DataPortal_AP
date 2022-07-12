@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import BasicButton from "@component/aiPlatform/basic/basic-button";
+import BasicButton from "@common/atoms/basic-button"
 
 export default {
   name: "community-corp-support",
@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     goApply() {
-      this.$router.push({append: true, path: 'apply'})
+      this.$router.push({append: true, path: "register"})
     }
   }
 }

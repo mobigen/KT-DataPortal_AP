@@ -4,6 +4,35 @@
       <form action="">
         <fieldset>
           <legend class="hidden">검색 정보입력</legend>
+          <div class="search-input-field__select">
+            <!--셀렉트박스 : 검색조건 // 기본값 : 제목 + 내용 -->
+            <div class="select" :class="isSearchselectOpen ? 'select--open' : ''" @click="isSearchselectOpen = !isSearchselectOpen">
+              <div class="select-selector -md">
+                <button class="select-selector__button -md">
+                  <span class="select-selector__title">제목 + 내용</span>
+                  <svg-icon
+                    class="svg-icon select-selector__icon"
+                    name="chevron-down-medium"
+                    aria-hidden="true"
+                  ></svg-icon>
+                </button>
+              </div>
+              <div class="select-container">
+                <ul class="select-container__list">
+                  <li class="select-container__item">
+                    <button class="select-container__button -md" type="button">제목 + 내용</button>
+                  </li>
+                  <li class="select-container__item">
+                    <button class="select-container__button -md" type="button">제목</button>
+                  </li>
+                  <li class="select-container__item">
+                    <button class="select-container__button -md" type="button">내용</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- // 셀렉트박스 : 파일유형 -->
+          </div>
           <div class="search-input-field__search">
             <group-search
               :searchKeyword="searchKeyword"
@@ -50,7 +79,9 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      isSearchselectOpen: false
+    };
   },
   computed: {},
   components: { BaseCheckbox, BaseButton, GroupSearch },
