@@ -1,0 +1,114 @@
+.aside__provider {
+  position: relative;
+  width: rem(240px);
+  height: rem(240px);
+  padding: $layout-3xs 0;
+  border-top: 1px solid $ui-04;
+  margin-bottom: $spacing-md;
+  overflow: hidden;
+}
+
+.aside__provider-expand {
+  position: relative;
+  width: rem(240px);
+  padding: $layout-3xs 0;
+  border-top: 1px solid $ui-04;
+  margin-bottom: $spacing-md;
+  display: table;
+}
+
+.aside__button-down {
+  position: absolute;
+  top: rem(20px);
+  right: rem(10px);
+  background: transparent;
+
+  &:before {
+    content: "전체보기";
+    position: absolute;
+    right: rem(16px);
+    @include font-size("14");
+    @include font-weight("regular");
+    color: $text-02;
+  }
+
+  &:after {
+    content: "";
+    width: rem(7px);
+    height: rem(7px);
+    border-top: 2px solid $text-01;
+    border-right: 2px solid $text-01;
+    display: inline-block;
+    -webkit-transform: rotate(135deg) translateY(-50%);
+    transform: rotate(135deg) translateY(-50%);
+    transition: all .1s;
+    position: absolute;
+    top: rem(7px);
+    right: 0;
+    border-radius: 2px;
+  }
+
+  &:hover {
+    color: $secondary;
+  }
+}
+
+.aside__button-up {
+  position: absolute;
+  top: rem(20px);
+  right: rem(10px);
+  background: transparent;
+
+  &:before {
+    content: "접기";
+    position: absolute;
+    right: rem(16px);
+    @include font-size("14");
+    @include font-weight("regular");
+    color: $text-02;
+  }
+
+  &:after {
+    content: "";
+    width: rem(7px);
+    height: rem(7px);
+    border-top: 2px solid $text-01;
+    border-right: 2px solid $text-01;
+    display: inline-block;
+    -webkit-transform: rotate(-45deg) translateY(-50%);
+    transform: rotate(-45deg) translateY(-50%);
+    transition: all .1s;
+    position: absolute;
+    top: rem(17px);
+    right: rem(-6px);
+    border-radius: 2px;
+  }
+
+  &:hover {
+    color: $secondary;
+  }
+}
+
+.aside__type {
+  position: relative;
+  width: rem(240px);
+  padding: $layout-3xs 0;
+  border-top: 1px solid $ui-04;
+  margin-bottom: $spacing-md;
+}
+
+.aside__keyword {
+  position: relative;
+  width: rem(240px);
+  padding: $layout-3xs 0;
+  border-top: 1px solid $ui-04;
+  margin-bottom: $spacing-md;
+}
+
+.aside__title {
+  height: rem(52px);
+  @include font-size("18");
+  @include font-weight("bold");
+  padding-left: rem(5px);
+  line-height: rem(52px);
+}

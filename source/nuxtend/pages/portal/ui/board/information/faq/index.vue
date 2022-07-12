@@ -31,11 +31,11 @@
 </template>
 
 <script>
-import BasicTabMenu from "@component/aiPlatform/basic/basic-tab-menu";
-import NameTagList from "@component/aiPlatform/basic/name-tag-list";
+import BasicTabMenu from "@common/atoms/basic-tab-menu";
+import NameTagList from "@common/atoms/name-tag-list";
 import { mapActions,mapGetters} from "vuex";
-import BasicSearchBar from "@component/aiPlatform/basic/basic-search-bar";
-import BasicPagination from "@component/aiPlatform/basic/basic-pagination";
+import BasicSearchBar from "@common/atoms/basic-search-bar";
+import BasicPagination from "@common/atoms/basic-pagination";
 export default {
   name: "faq",
   components: {BasicPagination, BasicSearchBar, NameTagList, BasicTabMenu},

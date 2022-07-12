@@ -19,6 +19,15 @@
           @dataSharing="dataSharing"
           width="narrow"
         >
+          <template v-slot:header>
+            <div class="header">
+            <section>
+              <article class="contents__summary">
+                <img :id="ci" :src="cdata.img">
+              </article>
+            </section>
+            </div>
+          </template>
           <template v-slot:left-side><div></div></template>
           <template v-slot:right-side><div></div></template>
           <template v-slot:body-top>
@@ -29,34 +38,30 @@
                   :tagName="cdata.category"
                   previousText=""
                 ></basic-single-tag>
-                <basic-single-tag
-                  :tagName="cdata.dataLocation"
-                  previousText=""
-                ></basic-single-tag>
               </div>
 
-              <div>
-                <basic-icon>CSV</basic-icon>
-                <basic-button
-                  componentId=""
-                  buttonCss="icon-button"
-                  :underline="false"
-                  :hoverColor="false"
-                  @click="dataSharing(cdata.id)"
-                >
-                  <fa icon="share-nodes" />
-                </basic-button>
-                <basic-button
-                  componentId=""
-                  buttonCss="icon-button"
-                  :underline="false"
-                  :hoverColor="false"
-                  @click="dataOfInterest(cdata.id)"
-                  title="관심데이터 추가"
-                >
-                  <fa icon="bookmark" />
-                </basic-button>
-              </div>
+<!--              <div>-->
+<!--                <basic-icon>CSV</basic-icon>-->
+<!--                <basic-button-->
+<!--                  componentId=""-->
+<!--                  buttonCss="icon-button"-->
+<!--                  :underline="false"-->
+<!--                  :hoverColor="false"-->
+<!--                  @click="dataSharing(cdata.id)"-->
+<!--                >-->
+<!--                  <fa icon="share-nodes" />-->
+<!--                </basic-button>-->
+<!--                <basic-button-->
+<!--                  componentId=""-->
+<!--                  buttonCss="icon-button"-->
+<!--                  :underline="false"-->
+<!--                  :hoverColor="false"-->
+<!--                  @click="dataOfInterest(cdata.id)"-->
+<!--                  title="관심데이터 추가"-->
+<!--                >-->
+<!--                  <fa icon="bookmark" />-->
+<!--                </basic-button>-->
+<!--              </div>-->
             </div>
           </template>
           <template v-slot:body-bottom><div></div></template>
@@ -77,13 +82,13 @@
 </template>
 
 <script>
-import BasicTabMenu from "@component/aiPlatform/basic/basic-tab-menu";
-import BasicSearchBar from "@component/aiPlatform/basic/basic-search-bar";
-import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
-import BasicIcon from "@component/aiPlatform/basic/basic-icon.vue";
-import BasicSingleTag from "@component/aiPlatform/basic/basic-single-tag.vue";
-import BasicNameTag from "@component/aiPlatform/basic/basic-name-tag.vue";
-import BasicPagination from "@component/aiPlatform/basic/basic-pagination";
+import BasicTabMenu from "@common/atoms/basic-tab-menu";
+import BasicSearchBar from "@common/atoms/basic-search-bar";
+import BasicButton from "@common/atoms/basic-button.vue";
+import BasicIcon from "@common/atoms/basic-icon.vue";
+import BasicSingleTag from "@common/atoms/basic-single-tag.vue";
+import BasicNameTag from "@common/atoms/basic-name-tag.vue";
+import BasicPagination from "@common/atoms/basic-pagination";
 import {mapActions, mapGetters} from "vuex";
 
 
@@ -99,7 +104,9 @@ export default {
     BasicPagination
   },
   beforeMount() {
-    this.param.searchKeyword = this.$route.query.keyword || ''
+    // for (let i = 0; i < this.dataEduRes.dataCardInfo.length; i++) {
+    //   URL.revokeObjectURL(this.dataEduRes.dataCardInfo[i].img);
+    // }
   },
   mounted() {
     let page = Number(this.$route.query.page)
@@ -110,12 +117,12 @@ export default {
         key:this.paginationKey,
         page: page
       })
-
       this.param.page = page
+      this.param.searchKeyword = this.$route.query.keyword || ''
     }
-    this.getData(this.param);
+    this.getData();
   },
-  data(){
+  data() {
     return{
       paginationKey: 'eduPaging',
       param: {
@@ -177,16 +184,20 @@ export default {
       alert("데이터 공유하기/ 게시물ID: " + id);
     },
     nameTagClick(id) {
-      // alert(id)
-      let params = {eduId: id}
-      console.log('파람파람파람:', params)
-      this.$axios(`${this.$config.ROUTE_API_BOARD_PREFIX}/dataEdu/updateCnt`, {params})
-        .then(response => {})
+      console.log('id: ', id)
+      let params={
+        eduId:id
+      }
+      this.$axios(`${this.$config.API_BOARD_PREFIX}/dataEdu/updateCnt`,{ params })
+        .then(response => {
+          // console.log('cnt: ', response)
+        })
         .catch(error =>{})
       this.$router.push({path: `/portal/ui/board/community/data-edu/detail/${id}`, query: this.query})
     },
     async goPage(){
       this.param.page = this.paging[this.paginationKey].page
+      // this.$router.push({path: this.$route.path, query: this.query})
       await this.getData()
     }
   }

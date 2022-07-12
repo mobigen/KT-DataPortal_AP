@@ -16,7 +16,7 @@
           </span>
         </div>
         <div class="modal__head-close-button">
-          <button class="button button--link button--sm" @click="onClose">
+          <button class="button button--link button--xl" @click="onClose">
             <svg-icon name="close" class="svg-icon"></svg-icon>
           </button>
         </div>
@@ -27,11 +27,11 @@
       <slot name="foot">
         <div class="modal__foot">
           <div class="modal__foot-main-buttons">
-            <button class="button button--link button--lg" @click="onClose">
+            <button class="button button--tertiary button--lg" @click="onClose">
               <span class="button__text"> {{ cancelButtonText }} </span>
             </button>
             <button
-              class="button button--primary button--lg"
+              class="button button--secondary button--lg"
               :disabled="confirmButtonDisabled"
               @click="onConfirm"
             >

@@ -3,20 +3,26 @@
     <h1>회원가입 (등록폼)</h1>
     <div v-if="!getSocialUser">
       <form class="form login-form" @submit.self.prevent="">
-        <label for="userId">아이디 필수 *</label> :
+        <label for="email1">이메일 필수 *</label> :
         <input
           class="text-input"
           type="text"
-          id="userId"
-          v-model="user.userId"
-          ref="userId"
+          id="email1"
+          v-model="user.email1"
+          ref="email1"
           style="width: 200px"
-          maxlength="20"
-          required
+          :disabled="true"
         />
-        <button type="button" @click.self.prevent="onDuplicatedUserIdChk()">
-          중복체크
-        </button>
+        <span>@</span>
+        <input
+          class="text-input"
+          type="text"
+          id="email2"
+          v-model="user.email2"
+          ref="email2"
+          style="width: 200px"
+          :disabled="true"
+        />
         <br />
         <label for="userPassword">비밀번호 *</label> :
         <input
@@ -49,27 +55,6 @@
           ref="userNm"
           style="width: 200px"
           required
-        />
-        <br />
-        <label for="email1">이메일 필수 *</label> :
-        <input
-          class="text-input"
-          type="text"
-          id="email1"
-          v-model="user.email1"
-          ref="email1"
-          style="width: 200px"
-          :disabled="true"
-        />
-        <span>@</span>
-        <input
-          class="text-input"
-          type="text"
-          id="email2"
-          v-model="user.email2"
-          ref="email2"
-          style="width: 200px"
-          :disabled="true"
         />
         <br />
         <label for="moblphon1">연락처 필수 *</label> :
@@ -133,17 +118,6 @@
     </div>
     <div v-else>
       <form class="form login-form" @submit.prevent="">
-        <label for="userNm">이름*</label> :
-        <input
-          class="text-input"
-          type="text"
-          id="userNm"
-          v-model="user.userNm"
-          ref="userNm"
-          style="width: 200px"
-          :disabled="true"
-        />
-        <br />
         <label for="email1">이메일 필수 *</label> :
         <input
           class="text-input"
@@ -161,6 +135,17 @@
           id="email2"
           v-model="user.email2"
           ref="email2"
+          style="width: 200px"
+          :disabled="true"
+        />
+        <br />
+        <label for="userNm">이름*</label> :
+        <input
+          class="text-input"
+          type="text"
+          id="userNm"
+          v-model="user.userNm"
+          ref="userNm"
           style="width: 200px"
           :disabled="true"
         />
@@ -240,6 +225,7 @@ export default {
         userId: null,
         userPassword: null,
         confirmPassword: null,
+        encUserPassword: null,
         userNm: null,
         email: null,
         email1: null,
@@ -257,9 +243,6 @@ export default {
         serviceTermsYn: "N",
         publicDataYn: "N"
       },
-      isUserIdChk: false,
-      userIdMsg: false,
-      isEmailChk: false,
       isUserPasswordChk: false,
       userPasswordMsg: null,
       confirmPasswordMsg: null,
@@ -283,9 +266,6 @@ export default {
     ])
   },
   watch: {
-    "user.userId"(newVal) {
-      if (newVal) this.user.userId = this.chkEngNumInput(newVal);
-    },
     "user.moblphon1"(newVal) {
       if (newVal) this.user.moblphon1 = this.chkNumInput(newVal);
     },
@@ -340,7 +320,7 @@ export default {
         !this.getMemberRegisterInfo ||
         !this.getMemberRegisterInfo.isAgree
       ) {
-        await errorAlert({ content: "비정상적인 접근 입니다." });
+        await errorAlert("비정상적인 접근 입니다.");
 
         if (this.getPrevFullUrl) {
           this.$router.push({
@@ -354,72 +334,6 @@ export default {
 
         return false;
       }
-    },
-    async onDuplicatedUserIdChk() {
-      if (this.user.userId === null || this.user.userId === "") {
-        await errorAlert({ content: "아이디을 입력해주세요." });
-        this.$refs.userId.focus();
-        return false;
-      }
-      if (!this.chkUserId(this.user.userId)) {
-        await errorAlert({ content: "아이디 형식이 잘못되었습니다." });
-        this.$refs.userId.focus();
-        return false;
-      }
-
-      var params = {
-        userId: this.user.userId
-      };
-      const data = await this.isDupliacatedChk(params);
-      if (data === "Y") {
-        await errorAlert({ content: "이미 가입된 아이디 입니다." });
-        this.$refs.userId.focus();
-        this.isUserIdChk = false;
-      } else if (data === "N") {
-        await errorAlert({ content: "사용 가능한 아이디 입니다." });
-        this.isUserIdChk = true;
-      } else {
-        await errorAlert({ content: "아이디 중복체크 오류입니다." });
-        this.isUserIdChk = false;
-      }
-    },
-    async onDuplicatedEmailChk() {
-      let email = this.user.email1 + "@" + this.user.email2;
-      if (this.user.email1 == "" || this.user.email2 == "") {
-        await errorAlert({ content: "이메일을 입력해주세요." });
-        this.$refs.email1.focus();
-        return;
-      }
-      if (!this.chkEmail(email)) {
-        await errorAlert({ content: "이메일 형식이 잘못되었습니다." });
-        this.$refs.email1.focus();
-        return false;
-      }
-
-      var params = {
-        userId: email
-      };
-      const data = await this.isDupliacatedChk(params);
-      if (data === "Y") {
-        await errorAlert({ content: "이미 가입된 Email 입니다." });
-        this.$refs.email1.focus();
-        this.isEmailChk = false;
-      } else if (data === "N") {
-        await errorAlert({ content: "사용 가능한 Email 입니다." });
-        this.isEmailChk = true;
-      } else {
-        await errorAlert({ content: "이메일 중복체크 오류입니다." });
-        this.isEmailChk = false;
-      }
-    },
-    isDupliacatedChk(params) {
-      const config = {
-        params: params
-      };
-      return this.$axios.get(
-        `${this.$config.ROUTE_API_USERS_PREFIX}/auth/isDupliacatedChk`,
-        config
-      );
     },
     onSearchBlngOrg() {
       alert("소속기관 검색 팝업");
@@ -435,28 +349,13 @@ export default {
     },
     async onRegComplete() {
       if (!this.getSocialUser) {
-        if (this.user.userId === null || this.user.userId === "") {
-          await errorAlert({ content: "아이디을 입력해주세요." });
-          this.$refs.userId.focus();
-          return false;
-        }
-        if (!this.chkUserId(this.user.userId)) {
-          await errorAlert({ content: "아이디 형식이 잘못되었습니다." });
-          this.$refs.userId.focus();
-          return false;
-        }
-        if (!this.isUserIdChk) {
-          await errorAlert({ content: "아이디 중복 체크를 해주세요." });
-          this.$refs.userId.focus();
-          return false;
-        }
         if (this.user.userPassword == "") {
-          await errorAlert({ content: "비밀번호를 입력해주세요." });
+          await errorAlert("비밀번호를 입력해주세요.");
           this.$refs.userPassword.focus();
           return;
         }
         if (!this.chkPassword()) {
-          await errorAlert({ content: this.userPasswordMsg });
+          await errorAlert(this.userPasswordMsg);
           this.$refs.userPassword.focus();
           return;
         }
@@ -464,41 +363,36 @@ export default {
           this.user.confirmPassword === null ||
           this.user.confirmPassword === ""
         ) {
-          await errorAlert({ content: "비밀번호 확인을 입력해주세요." });
+          await errorAlert("비밀번호 확인을 입력해주세요.");
           this.$refs.confirmPassword.focus();
           return;
         }
         if (this.user.userPassword !== this.user.confirmPassword) {
-          await errorAlert({ content: "비밀번호가 일치하지 않습니다." });
+          await errorAlert("비밀번호가 일치하지 않습니다.");
           this.$refs.confirmPassword.focus();
           return;
         }
         if (this.user.userNm === null || this.user.userNm === "") {
-          await errorAlert({ content: "성명를 입력해주세요." });
+          await errorAlert("성명를 입력해주세요.");
           this.$refs.userNm.focus();
           return;
         }
         this.user.email = this.user.email1 + "@" + this.user.email2;
         if (this.user.email1 === null || this.user.email1 === "") {
-          await errorAlert({ content: "이메일을 입력해주세요." });
+          await errorAlert("이메일을 입력해주세요.");
           this.$refs.email1.focus();
           return false;
         }
         if (this.user.email2 === null || this.user.email2 === "") {
-          await errorAlert({ content: "이메일을 입력해주세요." });
+          await errorAlert("이메일을 입력해주세요.");
           this.$refs.email2.focus();
           return false;
         }
-        if (!this.chkEmail(this.user.email)) {
-          await errorAlert({ content: "이메일 형식이 잘못되었습니다." });
+        if (!this.$chkEmail(this.user.email)) {
+          await errorAlert("이메일 형식이 잘못되었습니다.");
           this.$refs.email1.focus();
           return false;
         }
-        // if (!this.isEmailChk) {
-        //   await errorAlert({content:"이메일 중북체크를 해주세요"});
-        //   this.$refs.email1.focus();
-        //   return false;
-        // }
       }
 
       this.user.moblphon =
@@ -508,30 +402,39 @@ export default {
         "-" +
         this.user.moblphon3;
       if (this.user.moblphon1 === null || this.user.moblphon1 === "") {
-        await errorAlert({ content: "연락처을 입력해주세요." });
+        await errorAlert("연락처을 입력해주세요.");
         this.$refs.moblphon1.focus();
         return false;
       }
       if (this.user.moblphon2 === null || this.user.moblphon2 === "") {
-        await errorAlert({ content: "연락처을 입력해주세요." });
+        await errorAlert("연락처을 입력해주세요.");
         this.$refs.moblphon2.focus();
         return false;
       }
       if (this.user.moblphon3 === null || this.user.moblphon3 === "") {
-        await errorAlert({ content: "연락처을 입력해주세요." });
+        await errorAlert("연락처을 입력해주세요.");
         this.$refs.moblphon3.focus();
         return false;
       }
       if (!this.chkTelNo(this.user.moblphon)) {
-        await errorAlert({ content: "연락처 형식이 잘못되었습니다." });
+        await errorAlert("연락처 형식이 잘못되었습니다.");
         this.$refs.moblphon1.focus();
         return false;
       }
       if (this.user.blngOrgNm === null || this.user.blngOrgNm === "") {
-        await errorAlert({ content: "소속기관을 입력해주세요." });
+        await errorAlert("소속기관을 입력해주세요.");
         this.$refs.blngOrgNm.focus();
         return false;
       }
+
+      // 비밀번호 RSA 암호화
+      let publicKey = await this.$getPublicKey();
+      if (!publicKey) return;
+      let encUserPassword = this.user.userPassword;
+      if (publicKey && publicKey !== "") {
+        encUserPassword = this.$encrypt(publicKey, this.user.userPassword);
+      }
+      this.user.encUserPassword = encUserPassword;
 
       let data;
       if (!this.getSocialUser) {
@@ -540,17 +443,15 @@ export default {
         data = await this.createSocialUser();
       }
 
-      console.log("createUser_data : ", data);
       if (data && data.userUuid) {
         this.$router.push({
           path: `${this.$config.ROUTE_USERS_PREFIX}/member/register/complete`,
           query: { userUuid: data.userUuid }
         });
       } else {
-        await errorAlert({
-          content:
-            "회원가입 중 오류입니다.시스템 사용자에게 문의하여 주시기 바랍니다."
-        });
+        await errorAlert(
+          "회원가입 중 오류입니다.시스템 사용자에게 문의하여 주시기 바랍니다."
+        );
       }
     },
     async createUser() {
@@ -570,26 +471,6 @@ export default {
       );
 
       return data;
-    },
-    chkUserId(userId) {
-      const reg_userId = /^[a-z0-9]{4,20}$/;
-      if (!reg_userId.test(userId)) {
-        this.isUserIdChk = false;
-        //   "영문소문자, 숫자를 모두 포함하여 4~20자로 입력해주세요.";
-        this.userIdMsg =
-          "영문소문자, 숫자를 모두 포함하여 4~20자로 입력해주세요.";
-        return false;
-      }
-      return true;
-    },
-    chkEmail(email) {
-      const reg_email =
-        /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-      if (!reg_email.test(email)) {
-        return false;
-      } else {
-        return true;
-      }
     },
     chkPassword() {
       const pw = this.user.userPassword;
@@ -635,8 +516,6 @@ export default {
     },
     chkNotHangulInput(val) {
       const reg = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-      console.log("val_2 : ", val);
-      console.log("reg.exec(val)_2 : ", reg.exec(val));
       if (reg.exec(val) !== null) {
         return val.slice(0, -1);
       } else {

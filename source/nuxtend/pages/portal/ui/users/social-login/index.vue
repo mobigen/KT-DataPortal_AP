@@ -25,91 +25,139 @@
 </template>
 <script type="text/javascript">
 import { mapGetters, mapActions } from "vuex";
-import { successAlert, errorAlert } from "@functional/alert/alert-default";
+import {
+  confirmAlert,
+  successAlert,
+  errorAlert
+} from "@functional/alert/alert-default";
 import Dialog from "@functional/dialog/dialog.vue";
 export default {
   name: "index",
+  components: { Dialog },
+  async asyncData({ params, query, req, res, error }) {
+    const socialLoginType = query.socialLoginType;
+    const oAuthAccessToken = query.oAuthAccessToken;
+    const accessToken = query.accessToken;
+    console.log("query : ", query);
+    console.log("socialLoginType_1 : ", socialLoginType);
+    console.log("oAuthAccessToken_1 : ", oAuthAccessToken);
+    console.log("accessToken_1 : ", accessToken);
+    return {
+      socialLoginType: socialLoginType,
+      oAuthAccessToken: oAuthAccessToken,
+      accessToken: accessToken
+    };
+  },
   data() {
     return {
+      socialLoginType: null,
       oAuthAccessToken: null,
+      accessToken: null,
       socialUser: null
     };
   },
-  beforeMount() {
+  async mounted() {
+    // asyncData 가 개발에서 오류라 SPA 방식으로 처리하게 수정
     let urlParams = new URLSearchParams(window.location.search);
+    this.socialLoginType = urlParams.get("socialLoginType");
     this.oAuthAccessToken = urlParams.get("oAuthAccessToken");
+    this.accessToken = urlParams.get("accessToken");
+
     if (this.oAuthAccessToken) {
       this.checkSocialMember();
+    } else {
+      await errorAlert("소셜 로그인 처리 중 오류입니다.");
+
+      if (this.getPrevFullUrl) {
+        await this.$router.push({ path: `${this.getPrevFullUrl}` });
+      } else {
+        await this.$router.push({
+          path: `${this.$config.USER_LOGIN_PAGE}`
+        });
+      }
+      return false;
     }
   },
   computed: {
     ...mapGetters("users/user", ["getPrevFullUrl"])
   },
   methods: {
-    ...mapActions("users/user", ["getAuthenticatedUser", "setPrevFullUrl"]),
-    // ...mapActions("users/user", ["setPrevFullUrl"]),
+    ...mapActions("users/user", ["getAuthenticatedUser"]),
     ...mapActions("users/memberRegster", ["setSocialUser", "clearSocialUser"]),
     async checkSocialMember() {
-      let accessToken;
-      let socialType = "";
-      if (this.getPrevFullUrl.indexOf(`${this.$config.USER_LOGIN_PAGE}`) > -1) {
-        socialType = "login";
+      if (this.accessToken === null || this.accessToken === "") {
+        this.socialUser = await this.getSocialUser();
+        this.showDialog("socialLoginGuide");
       } else {
-        socialType = "register";
-      }
-      const data = await this.socialLogin(socialType);
-      if (data) {
-        this.socialUser = data.socialUser;
-        accessToken = data.accessToken;
-      }
-      if (data === false) {
-        if (this.getPrevFullUrl) {
-          await this.$router.push({ path: `${this.getPrevFullUrl}` });
+        if (this.socialLoginType === "register") {
+          const params = {
+            title: "",
+            content: "해당 이메일로 가입된 회원이 존재합니다."
+          };
+          await successAlert(params);
+          await this.callbackSuccess();
         } else {
-          await this.$router.push({
-            path: `${this.$config.USER_LOGIN_PAGE}`
-          });
+          // 사용자 access-token 쿠키 생성
+          await this.$cookies.set(
+            this.$config.USER_ACCESS_TOKEN_NAME,
+            this.accessToken
+          );
+          // 사용자 정보 store 저장
+          await this.getAuthenticatedUser();
+          // 로그인 성공 후 페이지 이동
+          if (
+            this.getPrevFullUrl &&
+            this.getPrevFullUrl.indexOf(`${this.$config.USER_LOGIN_PAGE}`) < 0
+          ) {
+            await this.$router.push({ path: `${this.getPrevFullUrl}` });
+          } else {
+            await this.$router.push({
+              path: `${this.$config.USER_INDEX_PAGE}`
+            });
+          }
         }
-        return false;
-      }
-      if (accessToken) {
-        // 사용자 access-token 쿠키 생성
-        await this.$cookies.set(
-          this.$config.USER_ACCESS_TOKEN_NAME,
-          accessToken
-        );
-
-        // 사용자 정보 store 저장
-        await this.getAuthenticatedUser();
-        // 로그인 성공 후 페이지 이동
-        if (
-          this.getPrevFullUrl &&
-          this.getPrevFullUrl.indexOf(`${this.$config.USER_LOGIN_PAGE}`) < 0
-        ) {
-          await this.$router.push({ path: `${this.getPrevFullUrl}` });
-        } else {
-          await this.$router.push({ path: `${this.$config.USER_INDEX_PAGE}` });
-        }
-        // 이전 페이지 정보 store 삭제
-        this.setPrevFullUrl(null);
-      } else {
-        this.$modal.show("socialLoginGuide");
       }
     },
-    async socialLogin(socialType) {
+    async getSocialUser() {
       const config = {
         params: {
-          oAuthAccessToken: this.oAuthAccessToken,
-          socialType: socialType
+          oAuthAccessToken: this.oAuthAccessToken
         }
       };
 
       const data = await this.$axios.get(
-        `${this.$config.ROUTE_API_USERS_PREFIX}/auth/socialLogin`,
+        `${this.$config.ROUTE_API_USERS_PREFIX}/auth/socialUser`,
         config
       );
 
       return data;
+    },
+    async callbackSuccess() {
+      if (this.getPrevFullUrl) {
+        await this.$router.push({ path: `${this.getPrevFullUrl}` });
+      } else {
+        await this.$router.push({
+          path: `${this.$config.USER_LOGIN_PAGE}`
+        });
+      }
+    },
+    async alertCancel() {
+      if (this.getPrevFullUrl) {
+        await this.$router.push({ path: `${this.getPrevFullUrl}` });
+      } else {
+        await this.$router.push({
+          path: `${this.$config.USER_LOGIN_PAGE}`
+        });
+      }
+    },
+    async alertConfirm() {
+      if (this.getPrevFullUrl) {
+        await this.$router.push({ path: `${this.getPrevFullUrl}` });
+      } else {
+        await this.$router.push({
+          path: `${this.$config.USER_LOGIN_PAGE}`
+        });
+      }
     },
     async close(dialogName) {
       // SOCIAL 사용자 정보 CLEAR
@@ -136,6 +184,9 @@ export default {
         path: `${this.$config.ROUTE_USERS_PREFIX}/member/register/agree`,
         query: { userType: userType }
       });
+    },
+    showDialog(name) {
+      this.$modal.show(name);
     }
   }
 };

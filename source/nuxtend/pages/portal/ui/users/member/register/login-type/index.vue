@@ -44,8 +44,9 @@ export default {
         path: `${this.$config.ROUTE_USERS_PREFIX}/member/register/email-athn`
       });
     },
-    onSocialLogin(socialType) {
-      this.setPrevPage();
+    async onSocialLogin(socialType) {
+      await this.setPrevPage();
+      await this.$cookies.set("socialLoginType", "register");
 
       location.href =
         `${this.$config.API_USERS_PREFIX}/oauth2/authorization/` + socialType;

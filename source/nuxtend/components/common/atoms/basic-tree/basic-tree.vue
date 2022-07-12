@@ -1,5 +1,5 @@
 <template lang="html">
-  <div :class="pDepth <= 0 ? 'search-filter__next' : ''">
+  <div :class="pDepth <= 1 ? 'search-filter__next' : 'search-filter__last'">
     <!--
     TODO : 퍼블에 없는 DIV로 개발에 필요하여 추가
     -->
@@ -37,7 +37,7 @@
 </template>
 
 <script type="text/javascript">
-import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
+import BasicButton from "@common/atoms/basic-button.vue";
 import { mapActions, mapGetters } from "vuex";
 import BaseCheckbox from "@component/common/atoms/base-checkbox/base-checkbox";
 

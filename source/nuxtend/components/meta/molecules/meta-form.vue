@@ -22,9 +22,9 @@
         <base-radio
           v-for="(rd, ri) in metaTypeList"
           :key="'radio_metaName_' + ri"
-          :name="'radio-metaName-' + data['column_name']"
+          :name="rd['column_name']"
           :labelName="data['column_name']"
-          :radioId="'radio-' + rd['label']"
+          :radioId="'radio-metaName-0' + (i + 1)"
           :checked="ri === 0"
           :value="rd['value']"
           @checkValue="changeData"

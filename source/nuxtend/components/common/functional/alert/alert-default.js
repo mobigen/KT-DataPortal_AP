@@ -3,16 +3,6 @@ import AlertDefault from "./alert-default.vue";
 import i18nGenerator from "@/utility/i18n-generator";
 import messages from "./alert-default.json";
 
-function getLocale() {
-  let locale = null;
-  try {
-    locale = $nuxt.$options.i18n.locale;
-  } catch (e) {
-    console.error(e);
-  }
-  return locale;
-}
-
 /**
  * 기본적인 Alert 창의 원형
  * @param props
@@ -47,7 +37,10 @@ export default defaultAlert;
  * @returns {Promise<*>}
  */
 export const successAlert = (params) => {
-  const locale = getLocale();
+  let locale = null;
+  if (typeof $nuxt !== "undefined") {
+    locale = $nuxt.$options.i18n.locale;
+  }
   let i18n = i18nGenerator(locale, messages);
   let props = {
     title: params.title ? params.title : i18n.t("alert-success.title"),
@@ -75,16 +68,19 @@ export const successAlert = (params) => {
  * @param content
  * @returns {Promise<*>}
  */
-export const errorAlert = (params) => {
-  const locale = getLocale();
+export const errorAlert = (content) => {
+  let locale = null;
+  if (typeof $nuxt !== "undefined") {
+    locale = $nuxt.$options.i18n.locale;
+  }
   let i18n = i18nGenerator(locale, messages);
   let props = {
-    title: params.title ? params.title : i18n.t("alert-error.title"),
+    title: i18n.t("alert-error.title"),
     iconTheme: i18n.t("alert-error.icon-theme"),
     confirmButtonTheme: i18n.t("alert-error.confirm-button-theme"),
     confirmButtonText: i18n.t("alert-error.confirm-button-text"),
     type: i18n.t("alert-error.type"),
-    content: params.content,
+    content: content,
     width: "450"
   };
 
@@ -100,7 +96,10 @@ export const errorAlert = (params) => {
 };
 
 export const confirmAlert = (content, events) => {
-  const locale = getLocale();
+  let locale = null;
+  if (typeof $nuxt !== "undefined") {
+    locale = $nuxt.$options.i18n.locale;
+  }
   let i18n = i18nGenerator(locale, messages);
   let props = {
     title: i18n.t("alert.confirm"),

@@ -1,6 +1,11 @@
 <template lang="html">
   <div class="alert alert--default" :class="alertIconTheme" :style="{ width: width + 'px', height }">
     <div class="alert__body">
+      <div class="alert__close-button">
+        <button class="button button--link button--xl" @click="onClose">
+          <svg-icon name="close" class="svg-icon"></svg-icon>
+        </button>
+      </div>
       <svg-icon name="info-fill" class="alert__icon svg-icon" />
       <div class="alert__contents">
         <p class="alert__title">{{ title }}</p>
@@ -17,7 +22,7 @@
         >
           {{ cancelButtonText }}
         </button>
-        <button class="button button--primary button--lg" :class="alertConfirmButtonTheme" @click.stop="onClose">
+        <button class="button button--primary button--lg" :class="alertConfirmButtonTheme" @click.stop="onConfirm">
           {{ confirmButtonText }}
         </button>
       </div>
@@ -86,7 +91,7 @@ export default {
       return "button--" + this.cancelButtonTheme;
     },
     alertConfirmButtonTheme: function () {
-      return "button--" + this.confirmButtonTheme;
+      return "button--" + this.confirmButtonTheme;  
     }
   },
   methods: {
@@ -94,8 +99,11 @@ export default {
       this.$parent.$emit("cancel");
       this.$emit("close");
     },
-    onClose() {
+    onConfirm() {
       this.$parent.$emit("confirm");
+      this.$emit("close");
+    },
+    onClose() {
       this.$emit("close");
     }
   }

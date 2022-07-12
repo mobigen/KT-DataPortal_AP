@@ -4,16 +4,30 @@
     <li class="data-box" v-for="(item, index) in contents" :key="index">
       <a
         href="javascript:;"
-        @click="dataBoxClick(item[CONSTANTS.POST.POST_ID])"
+        @click="dataBoxClick(item.biz_dataset_id)"
         class="data-box__link"
       >
+        <!-- 썸네일 이미지 (썸네일형일때만 보임) -->
+        <div class="data-box__thumbnail">
+          <img src="@/assets/style-product/images/common/thumbnail_analysislist_horizontalbar.png" alt="썸네일이미지">
+        </div>
+        <!-- // 썸네일 이미지-->
+        <!-- 카테고리 아이콘 (있을때만 보임) -->
+        <div class="data-box__icon">
+          <img src="@/assets/style-product/images/common/icon_summary_accident.png" alt="관제/사고관련서비스">
+        </div>
+        <!-- // 카테고리 아이콘-->
         <div class="data-box__information">
           <div class="data-box__top-content">
             <div class="badges">
               <!-- 제공기관 로고 (카드형일때만 보임) -->
               <div class="badge--provider-logo">
                 <img
-                  v-if="item.logo"
+                  v-if="
+                    item.logo !== null &&
+                    item.logo !== undefined &&
+                    item.logo.length > 0
+                  "
                   :src="item.logo"
                   :alt="item.data_prv_desk"
                 />
@@ -23,29 +37,23 @@
               <base-badge class="badge--w-gray" v-if="item.data_type">
                 <span class="badge__label">{{ item.data_type }}</span>
               </base-badge>
-              <base-badge v-if="item.ctgry" class="badge--w-primary">
+              <base-badge class="badge--w-primary">
                 <span class="badge__label">{{
                   item.ctgry.split(",").pop()
                 }}</span>
               </base-badge>
-              <base-badge
-                v-if="item.data_prv_desk"
-                class="badge--w-primary badge--provider"
-              >
+              <base-badge class="badge--w-primary badge--provider">
                 <span class="badge__label">{{ item.data_prv_desk }}</span>
               </base-badge>
             </div>
             <div class="data-options" @click.stop>
               <base-checkbox
                 class="checkbox--favorite"
-                :name="'myFavoriteData' + item[CONSTANTS.POST.POST_ID]"
+                :name="'myFavoriteData' + item.biz_dataset_id"
                 :checkbox-id="
-                  'data-box__check-myfavoritedata' +
-                  item[CONSTANTS.POST.POST_ID]
+                  'data-box__check-myfavoritedata' + item.biz_dataset_id
                 "
-                :checked="
-                  myFavoriteDataList.includes(item[CONSTANTS.POST.POST_ID])
-                "
+                :checked="myFavoriteDataList.includes(item.biz_dataset_id)"
                 @changeData="myFavoriteDataClick"
               >
                 <template v-slot:label>관심데이터 추가</template>
@@ -54,7 +62,6 @@
           </div>
           <div class="data-box__content">
             <strong
-              v-if="item.data_nm"
               class="data-box__title"
               v-html="searchKeywordHighlight(item.data_nm)"
             >
@@ -62,7 +69,7 @@
             <!-- fileType 제거 -->
           </div>
           <div>
-            <p v-if="item.data_desc" class="data-box__description">
+            <p class="data-box__description">
               {{ item.data_desc }}
             </p>
           </div>
@@ -70,7 +77,6 @@
             <div class="data-box__details" @click.stop>
               <!-- tagList에만 버블링 이벤트 막는 방법 찾아서 수정필요 -->
               <basic-tag-list
-                v-if="item.kywrd"
                 :tagList="convertTagObj(item.kywrd)"
                 previousText="#"
                 :useCancelButton="false"
@@ -80,7 +86,7 @@
               <div class="data-box__details-group">
                 <dl>
                   <dt><span>수정일</span></dt>
-                  <dd v-if="item.list_amd_dt">{{ item.ltst_amd_dt }}</dd>
+                  <dd>{{ item.ltst_amd_dt }}</dd>
                   <dt><span>조회</span></dt>
                   <dd>1,222</dd>
                 </dl>
@@ -99,7 +105,6 @@ import BaseButton from "@common/atoms/base-button/base-button";
 import BaseTag from "@common/atoms/base-tag/base-tag.vue";
 import BaseCheckbox from "@common/atoms/base-checkbox/base-checkbox.vue";
 import BasicTagList from "@common/atoms/basic-tag-list/basic-tag-list";
-import { mapGetters } from "vuex";
 
 export default {
   name: "SearchList",
@@ -135,10 +140,7 @@ export default {
   computed: {
     contents: function () {
       return this.list;
-    },
-    ...mapGetters({
-      CONSTANTS: "defaults/constants/CONSTANTS"
-    })
+    }
   },
   components: { BaseBadge, BaseButton, BaseTag, BaseCheckbox, BasicTagList },
   watch: {},
@@ -181,6 +183,6 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "./search-list";
 </style>

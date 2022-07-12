@@ -113,6 +113,6 @@ export default {
 };
 </script>
 
-<style lang="scss">
-// @import ""
+<style lang="scss" scoped>
+@import "./checkbox-filter-list"
 </style>

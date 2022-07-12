@@ -38,8 +38,9 @@ export default {
         removeButtons: 'PasteFromWord',
 
         // The configuration of the editor.
-        filebrowserImageUploadUrl: `${this.$config.API_BOARD_PREFIX}/sftp?serviceType=CKEDITOR`,
-        filebrowserUploadUrl: `${this.$config.API_BOARD_PREFIX}/sftp?serviceType=CKEDITOR`,
+        // filebrowserImageUploadUrl: `${this.$config.ROUTE_API_BOARD_PREFIX}/sftp?serviceType=CKEDITOR`,
+        // filebrowserUploadUrl: `${this.$config.ROUTE_API_BOARD_PREFIX}/sftp?serviceType=CKEDITOR`,
+        filebrowserImageUploadUrl: `${this.$config.ROUTE_API_BOARD_PREFIX}/ckeditor?`,
 
         embed_provider:
           '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}',

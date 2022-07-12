@@ -11,6 +11,7 @@
 
       <div>LOGO, title Component</div>
 
+      <!-- basic-menu 삭제됨
       <div>
         <basic-menu
           :menuList="userMenuList"
@@ -21,6 +22,7 @@
         >
         </basic-menu>
       </div>
+-->
 
       <!-- menuComponent-->
       <basic-nav :menuList="menuList" />
@@ -29,9 +31,8 @@
 </template>
 
 <script>
-import BasicNav from "@/components/aiPlatform/basic/basic-nav.vue";
-import BasicMenu from "@/components/aiPlatform/basic/basic-menu.vue";
-import {mapGetters} from "vuex";
+import BasicNav from "@/components/common/atoms/basic-nav";
+import { mapGetters } from "vuex";
 
 export default {
   name: "layout-header",
@@ -87,7 +88,7 @@ export default {
         },
         {
           menuName: "커뮤니티",
-          url: "/portal/ui/board/community",
+          url: "/portal/ui/board/community/contest",
           children: [
             { menuName: "경진대회", url: "/portal/ui/board/community/contest" },
             {
@@ -106,7 +107,7 @@ export default {
           children: [
             {
               menuName: "공지사항",
-              url: "/portal/ui/board/information/notification"
+              url: "/portal/ui/board/information/notice"
             },
             { menuName: "FAQ", url: "/portal/ui/board/information/faq" },
             { menuName: "문의하기", url: "/portal/ui/board/information/qna" },
@@ -135,7 +136,7 @@ export default {
     };
   },
   props: {},
-  components: { BasicNav, BasicMenu },
+  components: { BasicNav },
   computed: {
     ...mapGetters("users/user", ["getUserInfo"])
   },
@@ -145,7 +146,6 @@ export default {
   created() {},
   async fetch() {},
   beforeMount() {
-    console.log("this.getUserInfo : ", this.getUserInfo);
     if (this.getUserInfo && this.getUserInfo.authenticated) {
       // 로그인 후
       this.userMenuList = [

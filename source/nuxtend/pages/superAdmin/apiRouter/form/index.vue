@@ -188,12 +188,12 @@
 <i18n src="./index.json"></i18n>
 
 <script type="text/javascript">
-import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
-import BasicLabel from "@/components/aiPlatform/basic/basic-label.vue";
-import BasicInput from "@/components/aiPlatform/basic/basic-input.vue";
+import BasicButton from "@common/atoms/basic-button.vue";
+import BasicLabel from "@common/atoms/basic-label.vue";
+import BasicInput from "@common/atoms/basic-input.vue";
 import BaseSelect from "@/components/common/atoms/base-select/base-select";
-import RadioButton from "@/components/aiPlatform/basic/radio-button.vue";
-import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
+import RadioButton from "@common/atoms/radio-button.vue";
+import BasicTable from "@common/atoms/basic-table.vue";
 import CheckboxFilterList from "@component/common/molecules/checkbox-filter-list/checkbox-filter-list.vue";
 import { mapGetters } from "vuex";
 import { successAlert, errorAlert } from "@functional/alert/alert-default";
@@ -362,7 +362,7 @@ export default {
 
         let msg = "param 값이 유효하지 않습니다.";
         msg += "<br> * 필수입력 : " + required.join(", ");
-        errorAlert({ content: msg });
+        errorAlert(msg);
         return;
       }
 
@@ -375,11 +375,11 @@ export default {
             me.apiObj = JSON.parse(JSON.stringify({}));
             me.apiParamObj = JSON.parse(JSON.stringify({}));
 
-            successAlert({ content: "저장되었습니다." });
+            successAlert("저장되었습니다.");
             me.$router.push({ path: "/superAdmin/apiRouter/list" });
           } else {
             const msg = "저장에 실패하였습니다. msg:" + d.data.errorMessage;
-            errorAlert({ content: msg });
+            errorAlert(msg);
           }
         });
     },
@@ -481,7 +481,7 @@ export default {
     addParamObj() {
       if (!this.isParamValid()) {
         const msg = "param 값이 유효하지 않습니다.";
-        errorAlert({ content: msg });
+        errorAlert(msg);
         return;
       }
 
@@ -495,7 +495,7 @@ export default {
       ) {
         const msg =
           "Param의 " + this.CONSTANTS.API_ROUTER.PARAM.NM + "이 중복됩니다.";
-        errorAlert({ content: msg });
+        errorAlert(msg);
         return;
       }
 

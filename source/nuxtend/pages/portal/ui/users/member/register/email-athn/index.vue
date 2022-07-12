@@ -99,17 +99,17 @@ export default {
     async onEmailAthnReq() {
       this.email = this.email1 + "@" + this.email2;
       if (!this.email1) {
-        await errorAlert({ content: "이메일을 입력해주세요." });
+        await errorAlert("이메일을 입력해주세요.");
         this.$refs.email1.focus();
         return false;
       }
       if (!this.email2) {
-        await errorAlert({ content: "이메일을 입력해주세요." });
+        await errorAlert("이메일을 입력해주세요.");
         this.$refs.email2.focus();
         return false;
       }
       if (!this.chkEmail(this.email)) {
-        await errorAlert({ content: "이메일 형식이 잘못되었습니다." });
+        await errorAlert("이메일 형식이 잘못되었습니다.");
         this.$refs.email1.focus();
         return false;
       }
@@ -120,10 +120,12 @@ export default {
       const data = await this.emailAthnSend(params);
 
       if (data && data.athnNo) {
-        await successAlert({
+        const params = {
+          title: "성공",
           content:
             "인증번호 이메일을 발송했읍니다.발송된 이메일을 확인해 주세요."
-        });
+        };
+        await successAlert(params);
 
         // 회원가입 이메일 인증정보
         const emailAthn = {
@@ -142,7 +144,7 @@ export default {
     },
     async onMemberJoin() {
       if (!this.athnNo) {
-        await errorAlert({ content: "인증번호을 입력해주세요." });
+        await errorAlert("인증번호을 입력해주세요.");
         this.$refs.athnNo.focus();
         return false;
       }

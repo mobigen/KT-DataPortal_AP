@@ -62,8 +62,8 @@
 <i18n src="./index.json"></i18n>
 
 <script type="text/javascript">
-import BasicButton from "@component/aiPlatform/basic/basic-button.vue";
-import BasicTable from "@component/aiPlatform/basic/basic-table.vue";
+import BasicButton from "@common/atoms/basic-button.vue";
+import BasicTable from "@common/atoms/basic-table.vue";
 import { mapGetters } from "vuex";
 import ViewTable from "@common/organisms/view-table/view-table";
 

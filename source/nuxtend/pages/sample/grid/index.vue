@@ -42,8 +42,8 @@
 
 <script type="text/javascript">
 import {mapActions, mapGetters} from "vuex";
-import BasicTable from "@component/aiPlatform/basic/basic-table";
-import BasicPagination from "@component/aiPlatform/basic/basic-pagination";
+import BasicTable from "@common/atoms/basic-table";
+import BasicPagination from "@common/atoms/basic-pagination";
 
 export default {
   name: "sample-grid-pagination",

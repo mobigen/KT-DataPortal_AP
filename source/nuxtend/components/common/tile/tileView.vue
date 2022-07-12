@@ -8,10 +8,15 @@
 </template>
 
 <script>
-import data from '@/pages/portal/ui/board/information/data.json'
-const d3 = require('d3')
+let d3;
+if(process.client){d3 = require('d3')}
 export default {
   name: "tileView",
+  props:{
+    data:{
+      required:true
+    }
+  },
   mounted() {
     function setTileView(data){
       const divInner = document.querySelector('#div_inner')
@@ -368,7 +373,7 @@ export default {
           return returnval
         })
     }
-    setTileView(data)
+    setTileView(this.data)
   }
 }
 </script>

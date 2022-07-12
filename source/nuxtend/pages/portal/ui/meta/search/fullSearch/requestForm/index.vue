@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="requestForm">
-    <basic-title title="요청 modal" subtitle=""></basic-title>
+    <div class="title">요청 modal</div>
 
     <div class="empNum-wrap">
       <basic-label forProperty="">사원번호</basic-label>
@@ -61,11 +61,10 @@
 </template>
 
 <script type="text/javascript">
-import textInput from "@component/aiPlatform/basic/text-input";
-import BasicTextarea from "@component/aiPlatform/basic/basic-textarea";
-import BasicTitle from "@component/aiPlatform/basic/basic-title";
-import BasicLabel from "@component/aiPlatform/basic/basic-label";
-import BasicButton from "@component/aiPlatform/basic/basic-button";
+import textInput from "@common/atoms/text-input";
+import BasicTextarea from "@common/atoms/basic-textarea";
+import BasicLabel from "@common/atoms/basic-label";
+import BasicButton from "@common/atoms/basic-button";
 
 export default {
   name: "app-search-full-request-form",
@@ -79,7 +78,7 @@ export default {
     };
   },
   computed: {},
-  components: { textInput, BasicTextarea, BasicTitle, BasicLabel, BasicButton },
+  components: { textInput, BasicTextarea, BasicLabel, BasicButton },
   watch: {},
   methods: {
     changeData({ label, input }) {
@@ -121,6 +120,10 @@ export default {
   margin: auto;
   border: solid 1px lightgray;
   padding: 25px;
+  .title {
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
   > div:not(:last-child) {
     margin-bottom: 15px;
   }

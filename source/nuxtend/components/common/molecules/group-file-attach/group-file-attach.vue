@@ -18,14 +18,19 @@
     <div class="attached-file__list scrollCustomize">
       <ul>
         <li class="attached-file__item">
+          <!--이미지첨부의 경우 썸네일 보이기-->
+          <div class="attached-file__item-thumbnail">
+            <img src="@/assets/style-product/images/common/thumbnail_analysisregist_linearea.png" alt="영역차트이미지">
+          </div>
           <div class="attached-file__item-title">
             <svg-icon name="file_katech" class="svg-icon"></svg-icon>
             GUI_Visual_Concept_0520.ppt
           </div>
           <div class="attached-file__item-volume">1,208KB</div>
-          <button class="button button--link button--sm">
+          <base-button class="button--link button--sm">
             <svg-icon name="close" class="svg-icon"></svg-icon>
-          </button>
+            <span class="hidden">첨부파일삭제</span>
+          </base-button>
         </li>
         <li class="attached-file__item">
           <div class="attached-file__item-title">
@@ -33,9 +38,10 @@
             한자연_Visual_Concept_0520.ppt
           </div>
           <div class="attached-file__item-volume">208KB</div>
-          <button class="button button--link button--sm">
+          <base-button class="button--link button--sm">
             <svg-icon name="close" class="svg-icon"></svg-icon>
-          </button>
+            <span class="hidden">첨부파일삭제</span>
+          </base-button>
         </li>
         <li class="attached-file__item">
           <div class="attached-file__item-title">
@@ -43,9 +49,10 @@
             데이터포털_Concept_0520.ppt
           </div>
           <div class="attached-file__item-volume">1,208KB</div>
-          <button class="button button--link button--sm">
+          <base-button class="button--link button--sm">
             <svg-icon name="close" class="svg-icon"></svg-icon>
-          </button>
+            <span class="hidden">첨부파일삭제</span>
+          </base-button>
         </li>
       </ul>
     </div>

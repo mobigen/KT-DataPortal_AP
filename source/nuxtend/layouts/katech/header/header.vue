@@ -202,9 +202,19 @@
                       >데이터 활용사례</NuxtLink
                     >
                   </li>
+<!--                  <li class="lnb__item">-->
+<!--                    <NuxtLink to="/portal/ui/analysis/visualization" class="lnb__link"-->
+<!--                      >데이터 분석 시각화</NuxtLink-->
+<!--                    >-->
+<!--                  </li>-->
                   <li class="lnb__item">
-                    <NuxtLink to="/portal/ui/analysis/visualization" class="lnb__link"
-                      >데이터 분석 시각화</NuxtLink
+                    <NuxtLink to="/portal/ui/analysis/utilize/visual-anals" class="lnb__link"
+                    >데이터 시각분석</NuxtLink
+                    >
+                  </li>
+                  <li class="lnb__item">
+                    <NuxtLink to="/portal/ui/analysis/utilize/code-show" class="lnb__link"
+                    >코드 뽐내기</NuxtLink
                     >
                   </li>
                   <li class="lnb__item">
@@ -238,6 +248,13 @@
                       >데이터 교육</NuxtLink
                     >
                   </li>
+                  <li class="lnb__item">
+                    <NuxtLink
+                        to="/portal/ui/board/community/corp-support"
+                        class="lnb__link"
+                    >기업지원</NuxtLink
+                    >
+                  </li>
                 </ul>
               </li>
               <li class="gnb__item" @mouseover="isLnbOpen = true">
@@ -269,16 +286,10 @@
                 </ul>
               </li>
               <li class="gnb__item" @mouseover="isLnbOpen = true">
-                <NuxtLink to="/katech/search" class="gnb__link"
+                <NuxtLink to="/portal/ui/board/my-page" class="gnb__link"
                   ><span>마이페이지</span></NuxtLink
                 >
                 <ul class="lnb">
-                  <!-- TODO : 데모용 메뉴 -->
-                  <li class="lnb__item">
-                    <NuxtLink to="/portal/ui/users/requested" class="lnb__link"
-                      >요청데이터</NuxtLink
-                    >
-                  </li>
                   <li class="lnb__item">
                     <NuxtLink to="/katech/search-map" class="lnb__link"
                       >마이디스크</NuxtLink
@@ -295,8 +306,8 @@
                     >
                   </li>
                   <li class="lnb__item">
-                    <NuxtLink to="/katech/search-keyword" class="lnb__link"
-                      >문의내역</NuxtLink
+                    <NuxtLink to="/portal/ui/board/my-page/my-article" class="lnb__link"
+                      >나의글</NuxtLink
                     >
                   </li>
                   <li class="lnb__item">
@@ -318,7 +329,7 @@
 <i18n src="./header.json"></i18n>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import BaseButton from "@common/atoms/base-button/base-button";
 import BaseInput from "@common/atoms/base-input/base-input";
 // import Locale from "@project/sample/locale/locale.vue";

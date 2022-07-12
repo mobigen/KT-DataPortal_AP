@@ -5,8 +5,8 @@
         <option
           v-for="(item, i) in codeList"
           :key="'code_'+i"
-          :value="item.codeId"
-        >{{ item.codeNm }}</option>
+          :value="item.code_id"
+        >{{ item.code_nm }}</option>
       </select>
     </div>
     <div v-if="type === 'checkbox'">
@@ -16,10 +16,10 @@
       >
         <input
           type="checkbox"
-          :value="item.codeId"
+          :value="item.code_id"
           v-model="selectedList"
           @change="onChanged"
-        /> {{ item.codeNm }}
+        /> {{ item.code_nm }}
       </span>
     </div>
     <div v-if="type === 'radio'">
@@ -29,10 +29,10 @@
       >
         <input
           type="radio"
-          :value="item.codeId"
+          :value="item.code_id"
           v-model="selected"
           @change="onChanged"
-        /> {{ item.codeNm }}
+        /> {{ item.code_nm }}
       </span>
     </div>
   </div>
@@ -70,15 +70,14 @@ export default {
       if(this.$props.dataList) {
         this.codeList = this.$props.dataList
       } else {
-        // 공통 코드 조회 API 개발 완료 후 수정 예정
-        let res = await this.$axios.get(`${this.$config.API_BOARD_PREFIX}/test/comCode/list`)
-        this.codeList = res;
+        let res = await this.$axios.get(`/route/api/sitemng/getCodeInfo?groupId=${this.$props.codeId}`)
+        this.codeList = res
       }
-
       // 첫번째 값으로 세팅
-      if(this.codeList.length > 0) {
-        if(this.$props.type === "checkbox") this.selectedList[0] = this.codeList[0].codeId
-        else this.selected = this.codeList[0].codeId
+      if(this.codeList) {
+        if(this.$props.type === "checkbox") this.selectedList[0] = this.codeList[0].code_id
+        else this.selected = this.codeList[0].code_id
+        this.onChanged()
       }
     },
     onChanged() {
