@@ -394,6 +394,7 @@
       :height="'auto'"
       :title="'데이터 활용 신청내역 상세 조회'"
       :confirmButtonDisabled="true"
+      :viewConfirmButton="false"
       cancelButtonText="확인"
     >
       <div slot="body" class="modal__body">

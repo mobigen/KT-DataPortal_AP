@@ -8,21 +8,20 @@
     :confirmButtonDisabled="confirmButtonDisabled"
     @confirm="requestConfirmBtnClick"
     @close="resetRequestData"
+    @open="dialogOpen"
   >
     <div slot="body" class="modal__body">
       <div class="table-wrap">
         <!-- formbox -->
         <table class="formbox">
-          <caption class="hidden">
-            데이터 활용 신청하기 게시판
-          </caption>
+          <caption class="hidden"></caption>
           <colgroup>
             <col style="width: 140px" />
             <col style="width: auto" />
           </colgroup>
           <tbody>
             <tr>
-              <th scope="row">데이터명</th>
+              <th scope="row">데이터명{{ data.law_evl_conf_yn }}</th>
               <td>
                 <ul class="data-name-list">
                   <li>
@@ -189,10 +188,10 @@ export default {
             this.$modal.hide(name);
           }
         });
+    },
+    dialogOpen() {
+      this.resetRequestData();
     }
-  },
-  mounted() {
-    this.resetRequestData();
   }
 };
 </script>
