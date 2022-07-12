@@ -18,7 +18,10 @@
           </span>
         </div>
         <div class="modal__head-close-button">
-          <base-button class="button--lg button--icon button--link" @click="onClose">
+          <base-button
+            class="button--lg button--icon button--link"
+            @click="onClose"
+          >
             <svg-icon name="close-large" class="svg-icon"></svg-icon>
             <span class="hidden">팝업창닫기</span>
           </base-button>
@@ -33,9 +36,12 @@
             <base-button class="button--lg" @click="onClose">
               <span class="button__text"> {{ cancelButtonText }} </span>
             </base-button>
-            <base-button class="button--lg button--primary" 
+            <base-button
+              class="button--lg button--primary"
+              v-if="viewConfirmButton"
               :disabled="confirmButtonDisabled"
-              @click="onConfirm">
+              @click="onConfirm"
+            >
               <span class="button__text"> {{ confirmButtonText }} </span>
             </base-button>
           </div>
@@ -51,7 +57,7 @@
 import BaseButton from "@common/atoms/base-button/base-button";
 
 export default {
-  name: "Dialog",  
+  name: "Dialog",
   components: {
     BaseButton
   },
@@ -90,6 +96,10 @@ export default {
     confirmButtonDisabled: {
       type: Boolean,
       default: false
+    },
+    viewConfirmButton: {
+      type: Boolean,
+      default: true
     }
   },
   mounted() {

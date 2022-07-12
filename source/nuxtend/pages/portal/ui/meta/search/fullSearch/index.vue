@@ -275,6 +275,7 @@
                     @dataBoxClick="dataBoxClick"
                     @keywordClick="dataBoxKeywordClick"
                     @myFavoriteDataClick="myFavoriteDataClick"
+                    @listButtonClick="listButtonClick"
                   ></search-list>
 
                   <!-- data-none : 검색된 데이터가 없는경우 -->
@@ -327,6 +328,14 @@
         </div>
       </div>
     </div>
+
+    <!-- 데이터 활용 신청하기 Dialog -->
+    <request-data-dialog
+      :name="requestDialog"
+      :data="requestDialogObj"
+    ></request-data-dialog>
+    <!-- // Dialog -->
+
     <!-- // contents-wrap -->
   </div>
 </template>
@@ -349,6 +358,8 @@ import SearchResultBox from "@common/atoms/search-result-box/search-result-box";
 import BasicOption from "@common/atoms/basic-option/basic-option";
 import CheckboxFilterList from "@common/molecules/checkbox-filter-list/checkbox-filter-list";
 import { mapActions, mapGetters } from "vuex";
+import RequestDataDialog from "@component/users/modal/requestDataDialog/requestDataDialog";
+
 export default {
   name: "Index",
   layout: "kt/kt",
@@ -379,7 +390,8 @@ export default {
     SearchInputField,
     SearchResultBox,
     BasicOption,
-    CheckboxFilterList
+    CheckboxFilterList,
+    RequestDataDialog
   },
   data() {
     return {
@@ -433,7 +445,9 @@ export default {
       myFavoriteDataList: [
         "01bfea44-5b42-41e7-9901-8fad6997969c",
         "2c4c3962-ab70-4f42-9681-71ecd7afbe4b"
-      ]
+      ],
+      requestDialog: "requestDialog",
+      requestDialogObj: {}
     };
   },
   methods: {
@@ -481,8 +495,8 @@ export default {
       this.searchKeywordList.push(this.searchKeyword);
       this.getGridData();
     },
-    getGridData() {
-      this.getContents({
+    async getGridData() {
+      await this.getContents({
         paginationKey: this.paginationKey,
         searchKeywordList: this.searchKeywordList
       });
@@ -566,6 +580,12 @@ export default {
         );
       }
       console.log(this.myFavoriteDataList);
+    },
+    listButtonClick(rowKey) {
+      this.requestDialogObj = this.contents.searchList.find((el) => {
+        return el["biz_dataset_id"] === rowKey;
+      });
+      this.$modal.show(this.requestDialog);
     }
   },
   mounted() {

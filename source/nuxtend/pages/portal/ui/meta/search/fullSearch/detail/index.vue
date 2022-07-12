@@ -995,21 +995,21 @@ export default {
         this.myFavoriteData = "n";
       }
     },
-    tabClick(tabId) {
-      // 데이터 상세정보
-      if (tabId === this.CONSTANTS.DETAIL.CHART) {
-        this.getDataQualityScore(this.bizDatasetId);
-      } else if (tabId === this.CONSTANTS.DETAIL.SAMPLE) {
-        // 샘플 데이터
-        this.getSampleData(this.bizDatasetId);
-      } else if (tabId === this.CONSTANTS.DETAIL.DIAGRAM) {
-        // 활용사례
-      } else if (tabId === this.CONSTANTS.DETAIL.RULE) {
-        // 법률검토 및 규정안내
-      } else if (tabId === this.CONSTANTS.DETAIL.INQUIRY) {
-        // 데이터 문의
-      }
-    }
+    // tabClick(tabId) {
+    //   if (tabId === this.CONSTANTS.DETAIL.CHART) {
+    //     // 데이터 상세정보
+    //     this.getDataQualityScore(this.bizDatasetId);
+    //   } else if (tabId === this.CONSTANTS.DETAIL.SAMPLE) {
+    //     // 샘플 데이터
+    //     this.getSampleData(this.bizDatasetId);
+    //   } else if (tabId === this.CONSTANTS.DETAIL.DIAGRAM) {
+    //     // 활용사례
+    //   } else if (tabId === this.CONSTANTS.DETAIL.RULE) {
+    //     // 법률검토 및 규정안내
+    //   } else if (tabId === this.CONSTANTS.DETAIL.INQUIRY) {
+    //     // 데이터 문의
+    //   }
+    // }
   },
   created() {
     this.bizDatasetId = this.$route.query.datasetId;
@@ -1018,6 +1018,7 @@ export default {
     // 각 탭의 데이터를 전부 다 호출해준다.
     this.getDataQualityScore(this.bizDatasetId);
     this.getSampleData(this.bizDatasetId);
+    // // 첫번째 tab을 클릭해준다.
     // this.tabClick(this.tabList[0].id);
   },
   mounted() {},
