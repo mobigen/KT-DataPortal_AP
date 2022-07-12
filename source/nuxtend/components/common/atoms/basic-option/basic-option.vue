@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="radios">
     <base-radio
+      disabled
       v-for="(data, i) in optionList"
       :key="'basic_option_' + i"
       :class="radioClass"

@@ -176,9 +176,11 @@
             <!-- board-head -->
             <div class="board-head">
               <!-- board-head__search : 게시물검색용 -->
+              <!--
               <div class="board-head__search">
                 <search-input-field></search-input-field>
               </div>
+              -->
               <div class="board-head__group">
                 <p class="total-number">
                   총<strong>{{ requestedTotalCount }}</strong
@@ -188,7 +190,7 @@
                   <div class="options-sort">
                     <span class="label">처리상태</span>
                     <!-- select -->
-                    <base-select class="select w-107">
+                    <base-select class="select w-107" :use-select-open="false">
                       <template v-slot:title>
                         <span class="select-selector__title">전체</span>
                       </template>
@@ -223,7 +225,7 @@
                       </template>
                     </base-select>
                   </div>
-                  <base-button class="button--md button--primary">
+                  <base-button class="button--md button--primary" disabled>
                     <svg-icon class="svg-icon" name="check"></svg-icon>
                     <span class="button__text">다시신청</span>
                   </base-button>
@@ -233,7 +235,7 @@
             <div class="board-body">
               <basic-table
                 component-id=""
-                :use-checkbox="true"
+                :use-checkbox="false"
                 :view-detail="requestedData"
                 :header-has-locale="true"
                 :view-header-list="[
@@ -247,7 +249,6 @@
                 ]"
                 rowKey="use_dataset_id"
                 :colgroup-array="[
-                  '60px',
                   'auto',
                   '90px',
                   '100px',
@@ -489,7 +490,7 @@ export default {
         this.$store.getters["users/requested/requested/requestedData"];
 
       if (Object.prototype.hasOwnProperty.call(vuex, "header")) {
-        this.requestedTotalCount = vuex.totalCount;
+        this.requestedTotalCount = vuex.totalcount;
       } else {
         return {
           header: [],

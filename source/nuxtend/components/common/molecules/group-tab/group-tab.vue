@@ -4,7 +4,7 @@
       <li
         class="tab__item"
         v-for="(item, index) in tabList"
-        :class="currentTab === index ? 'tab__item--selected' : ''"
+        :class="currentTab === item[codeKey] ? 'tab__item--selected' : ''"
         :key="index"
       >
         <button
@@ -12,12 +12,13 @@
           class="tab__button"
           role="tab"
           aria-selected="false"
-          @click="tabClick(item, index)"
+          @click="tabClick(item)"
+          :class="disabledCodeKeyList.includes(item[codeKey]) ? 'disabled' : ''"
         >
           <div class="tab__button-text">
-            {{ item.title }}
+            {{ item[nameKey] }}
             <template v-if="useTabNum">
-              <p class="tab__button-subtext">{{ item.num }}</p>
+              <p class="tab__button-subtext">{{ item[numKey] }}</p>
             </template>
           </div>
         </button>
@@ -33,27 +34,61 @@ export default {
   props: {
     tabList: {
       type: Array,
-      require: true
+      required: true
     },
     useTabNum: {
       type: Boolean,
-      require: false
+      required: false
+    },
+    nameKey: {
+      type: String,
+      default: "title",
+      required: false
+    },
+    codeKey: {
+      type: String,
+      default: "id",
+      required: false
+    },
+    numKey: {
+      type: String,
+      default: "num",
+      required: false
+    },
+    activeTab: {
+      type: String,
+      required: false
+    },
+    disabledCodeKeyList: {
+      type: String,
+      required: false,
+      default: () => {
+        return [];
+      }
     }
   },
   data() {
     return {
-      currentTab: 0
+      currentTab: ""
     };
   },
   methods: {
-    tabClick(tabObj, index) {
-      this.currentTab = index;
+    tabClick(tabObj) {
+      this.currentTab = tabObj[this.codeKey];
       this.$emit("tabClick", { tabObj });
     }
+  },
+  created() {
+    this.currentTab = this.activeTab;
   }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "group-tab";
+// 안쓰는 tab disabled 처리 위해 임시로 추가
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
 </style>

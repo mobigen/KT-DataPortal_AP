@@ -2,7 +2,7 @@
   <div
     class="select"
     role="select"
-    :class="isSelectOpen ? 'select--open' : ''"
+    :class="useSelectOpen && isSelectOpen ? 'select--open' : ''"
     @click="isSelectOpen = !isSelectOpen"
   >
     <div
@@ -94,6 +94,11 @@ export default {
       type: Boolean,
       require: false,
       default: false
+    },
+    useSelectOpen: {
+      type: Boolean,
+      require: false,
+      default: true
     }
   },
   watch: {
