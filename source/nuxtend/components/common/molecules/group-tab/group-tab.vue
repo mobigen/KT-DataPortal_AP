@@ -60,7 +60,7 @@ export default {
       required: false
     },
     disabledCodeKeyList: {
-      type: String,
+      type: Array,
       required: false,
       default: () => {
         return [];

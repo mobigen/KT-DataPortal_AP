@@ -48,12 +48,11 @@
             :searchResultSuccess="searchResultSuccess"
           >
             <template
-              v-if="searchKeywordList.length < 2"
+              v-if="searchKeywordList.length < 2 && searchKeyword !== ''"
               v-slot:resultSuccessTrueText
             >
               <p class="contents-search-result__text">
-                <mark>{{ searchKeyword }}</mark
-                >에 대한 검색결과, 총
+                <mark>'{{ searchKeyword }}'</mark> 검색결과, 총
                 <strong>{{ contents.totalcount }}</strong> 건 입니다.
               </p>
             </template>
@@ -70,7 +69,7 @@
                     >&
                   </span>
                 </mark>
-                검색 결과, 총 <strong>{{ contents.totalcount }}</strong> 건
+                검색결과, 총 <strong>{{ contents.totalcount }}</strong> 건
                 입니다.
               </span>
             </template>
@@ -479,11 +478,14 @@ export default {
     },
     search() {
       if (this.searchKeyword.trim() === "") {
-        this.searchResultBox(false, false);
-        if (this.searchKeywordList.length === 0) {
+        if (
+          this.searchKeywordList.length === 0 ||
+          (this.searchKeywordList.length > 0 && this.rescanFilterChecked)
+        ) {
           alert("값을 입력해주세요.");
           return;
         }
+        this.searchResultBox(false, false);
       } else {
         this.searchResultBox(true, true);
       }
@@ -498,7 +500,10 @@ export default {
       } else {
         this.searchKeywordList = [];
       }
-      this.searchKeywordList.push(this.searchKeyword);
+
+      if (this.searchKeyword) {
+        this.searchKeywordList.push(this.searchKeyword);
+      }
       this.getGridData();
     },
     async getGridData() {

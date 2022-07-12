@@ -2,14 +2,15 @@
   <input
     :type="type"
     class="text-input"
-    @input="$emit('input', { id: id, input: $event.target.value })"
+    @input="typing"
     @keydown="$emit('keydown', $event)"
     @keyup.enter="$emit('enterEvent')"
-    :value="inputData"
+    :value="input"
     :placeholder="placeholder"
     :disabled="disabled"
     :readonly="readonly"
   />
+  <!-- $emit('input', { id: id, input: $event.target.value }) -->
 </template>
 
 <script type="text/javascript">
@@ -46,14 +47,26 @@ export default {
     }
   },
   data() {
-    return {
-      data: null
-    };
+    return {};
   },
-  computed: {},
+  computed: {
+    input: {
+      get() {
+        this.$emit("input", { id: this.id, input: this.inputData });
+        return this.inputData;
+      },
+      set(newValue) {
+        this.$emit("input", { id: this.id, input: newValue });
+      }
+    }
+  },
   components: {},
   watch: {},
-  methods: {},
+  methods: {
+    typing(e) {
+      this.input = e.target.value;
+    }
+  },
   beforeCreate() {},
   mounted() {}
 };
