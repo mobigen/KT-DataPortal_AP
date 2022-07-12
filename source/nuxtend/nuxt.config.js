@@ -1,15 +1,35 @@
-import { resolve } from "path";
+import {resolve} from "path";
+
+//  logger 설정 --
 function _interopDefaultLegacy(e) {
   return e && typeof e === "object" && "default" in e ? e : { default: e };
 }
 const consola__default = /*#__PURE__*/ _interopDefaultLegacy(consola);
 const logger = consola__default["default"];
+// -- logger 설정
+
+function _routeAlias(route) {
+  if (route.path === undefined) {
+    return;
+  }
+
+  let alias =
+    route.path.length > 1 ? `${route.path}/index.html` : "/index.html";
+  route.alias = alias;
+
+  logger.info(route.path + "---------------");
+  for (var key in route) {
+    if (key !== "children") logger.info("----" + key + " [" + route[key] + "]");
+  }
+}
 
 export default {
   ssr: true,
+  // mode: "universal",
 
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
+  // target: "server",
 
   // generate
   generate: {
@@ -17,7 +37,6 @@ export default {
     crawler: true,
     routes: ["/"],
     dir: "../../../web/htdocs"
-    // dir: process.env.ENV_TYPE === "local" ? "../../../web/htdocs" : "../../../web2/htdocs"
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -35,7 +54,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["@/assets/main.scss"],
+  css: ["./assets/main.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -48,7 +67,14 @@ export default {
     "@/plugins/vue-js-modal.js"
   ],
 
-  components: ["~/components/common/functional"],
+  // components: ["~/components/common/functional"],
+  components:
+    process.env.NODE_ENV === "dev" || process.env.NODE_ENV === "prod"
+      ? true
+      : false,
+
+  // custom loading bar
+  loading: "~/components/common/functional/loader/loader.vue",
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -75,9 +101,9 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     // build, generate 속도 향샹
-    parallel: process.env.STORYBOOK_ENV === "storybook" ? false : true,
-    hardSource: process.env.STORYBOOK_ENV === "storybook" ? false : true,
-    cache: process.env.STORYBOOK_ENV === "storybook" ? false : true,
+    //parallel: process.env.STORYBOOK_ENV === "storybook" ? false : true,
+    //hardSource: process.env.STORYBOOK_ENV === "storybook" ? false : true,
+    //cache: process.env.STORYBOOK_ENV === "storybook" ? false : true,
     postcss: {
       preset: {
         features: {
@@ -85,8 +111,37 @@ export default {
         }
       }
     },
-    extend(config) {
-      config.resolve.alias["vue"] = "vue/dist/vue.common";
+    html: {
+      minify: {
+        minifyCSS:
+          process.env.ENV_TYPE === "dev" ||
+          process.env.ENV_TYPE === "dev.apache" ||
+          process.env.ENV_TYPE === "prod",
+        minifyJS:
+          process.env.ENV_TYPE === "dev" ||
+          process.env.ENV_TYPE === "dev.apache" ||
+          process.env.ENV_TYPE === "prod"
+      }
+    },
+    optimization: {
+      minimize:
+        process.env.ENV_TYPE === "dev" ||
+        process.env.ENV_TYPE === "dev.apache" ||
+        process.env.ENV_TYPE === "prod"
+    },
+    cssSourceMap:
+      process.env.ENV_TYPE === "dev" ||
+      process.env.ENV_TYPE === "dev.apache" ||
+      process.env.ENV_TYPE === "prod"
+    // extend(config) {
+    //   config.resolve.alias["vue"] = "vue/dist/vue.common";
+    // }
+  },
+
+  // nuxt webpack-optimizations
+  webpackOptimisations: {
+    features: {
+      imageFileLoader: false
     }
   },
 
@@ -99,7 +154,7 @@ export default {
 
   // options
   svgSprite: {
-    input: "./assets/style-core/images/icon"
+    input: "./assets/style-product/images/icon"
   },
 
   axios: {
@@ -107,26 +162,10 @@ export default {
     credentials: true,
     proxy:
       process.env.ENV_TYPE === "local" || process.env.ENV_TYPE === "dev.apache",
-    progress: false
-    // debug : true
+    progress: false,
+    debug: process.env.ENV_TYPE === "local"
   },
   proxy: [
-    // [
-    //   "/oauth2/authorization/",
-    //   {
-    //     target: process.env.API_USER_URL,
-    //     changeOrigin: true,
-    //     secure: false
-    //   }
-    // ],
-    // [
-    //   "/login/oauth2",
-    //   {
-    //     target: process.env.API_USER_URL,
-    //     changeOrigin: true,
-    //     secure: false
-    //   }
-    // ],
     [
       "/analysis/portal/api",
       {
@@ -168,6 +207,30 @@ export default {
       }
     ],
     [
+      "/route/analysis/portal/api",
+      {
+        target: process.env.API_ROUTE_URL,
+        changeOrigin: true,
+        secure: false
+      }
+    ],
+    [
+      "/route/board/portal/api",
+      {
+        target: process.env.API_ROUTE_URL,
+        changeOrigin: true,
+        secure: false
+      }
+    ],
+    [
+      "/route/api/sitemng",
+      {
+        target: process.env.API_ROUTE_URL,
+        changeOrigin: true,
+        secure: false
+      }
+    ],
+    [
       "/mgnt/api/apiRouter",
       {
         target: process.env.API_ROUTE_URL,
@@ -189,22 +252,20 @@ export default {
     vueI18nLoader: true
   },
 
-  // custom loading bar
-  loading: "~/components/common/functional/loader/loader.vue",
-
   // 미들웨어
   router: {
-    extendRoutes(routes, resolves) {
+    extendRoutes(routes) {
       logger.info(
         "## NuxtLink 처리: 정적 리소스에 대한 html 파일 대응을 위해 아래와 같이 alias 경로를 변경 합니다."
       );
       routes.forEach((route) => {
-        const alias =
-          route.path.length > 1 ? `${route.path}/index.html` : "/index.html";
-        route.alias = alias;
-        logger.info(route.path + "---------------");
-        for (var key in route) {
-          logger.info("----" + key + " [" + route[key] + "]");
+        _routeAlias(route);
+
+        // children url 처리
+        if (route.children !== undefined) {
+          route.children.forEach((child) => {
+            _routeAlias(child);
+          });
         }
       });
     },
@@ -259,7 +320,7 @@ export default {
 
   server: {
     host: process.env.SERVER_HOST,
-    port: process.env.SERVER_PORT,
-    listen: 82
+    port: process.env.SERVER_PORT
+    //listen: 82
   }
 };

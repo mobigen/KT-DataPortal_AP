@@ -1,12 +1,14 @@
 {
-  "name": "dataportal-nuxt",
+  "name": "dataportal-kt",
   "version": "1.0.0",
   "private": false,
   "scripts": {
-    "dev": "cross-env NODE_ENV=local node --max-old-space-size=8192 node_modules/nuxt/bin/nuxt.js dev --dotenv ./config/.env.local",
+    "dev:ejd": "cross-env NODE_ENV=local node --max-old-space-size=7096 node_modules/nuxt/bin/nuxt.js dev --dotenv ./config/.env.local.ejd",
+    "dev": "cross-env NODE_ENV=local node --max-old-space-size=5096 node_modules/nuxt/bin/nuxt.js dev --dotenv ./config/.env.local",
     "build": "cross-env NODE_ENV=local node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js build --dotenv ./config/.env.local",
     "start": "cross-env NODE_ENV=local node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js start --dotenv ./config/.env.local",
-    "generate": "cross-env NODE_ENV=local node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js generate --dotenv ./config/.env.local",
+    "generate": "cross-env NODE_ENV=local node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js generate --dotenv ./config/.env.local.apache",
+    "generate:apache": "cross-env NODE_ENV=local node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js generate --dotenv ./config/.env.local",
     "generate:dev.apache": "cross-env NODE_ENV=dev node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js generate --dotenv ./config/.env.dev.apache",
     "generate:dev": "cross-env NODE_ENV=dev node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js generate --dotenv ./config/.env.dev",
     "generate:prod": "cross-env NODE_ENV=prod node --max-old-space-size=4096 node_modules/nuxt/bin/nuxt.js generate --dotenv ./config/.env.prod",
@@ -50,6 +52,7 @@
     "webpack": "^4.46.0"
   },
   "devDependencies": {
+    "nuxt-webpack-optimisations": "^2.2.3",
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
     "sass-loader": "^10.2.1"
