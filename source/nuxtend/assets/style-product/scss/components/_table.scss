@@ -3,7 +3,6 @@
 // -------------------------
 .table {
   width: 100%;
-  border: 1px solid $ui-04;
 }
 
 .table caption {
@@ -100,7 +99,7 @@ th .button {
 // Status
 // -------------------------
 .table tr:hover > td {
-  background-color: $hover-row;
+  background-color: $ui-05;
 }
 
 .table .tr--selected td,

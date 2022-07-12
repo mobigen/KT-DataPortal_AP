@@ -1,4 +1,4 @@
-$img-path: '~@/assets/style-product/images' !default;
-$font-path: '~@/assets/style-product/fonts' !default;
+$img-path: '@/assets/style-product/images' !default;
+$font-path: '@/assets/style-product/fonts' !default;
 
 @import "./style-product/scss/product-index.scss";

@@ -12,6 +12,7 @@
   border-radius: rem(15px);
   background-color: $ui-01;
   color: $text-02;
+  margin-right: $spacing-2xs;
 
   &:hover:not(:disabled) {
     background-color: $hover-ui-accent;

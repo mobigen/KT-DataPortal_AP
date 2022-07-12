@@ -81,7 +81,7 @@
 }
 
 .modal__foot {
-  @include stable-padding($spacing-2xl, $spacing-sm);
+  padding: $spacing-xl $spacing-sm $spacing-xl $spacing-sm;
   display: flex;
   justify-content: center;
 }
