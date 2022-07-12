@@ -3,11 +3,19 @@
     <div class="breadcrumb__inner">
       <div class="breadcrumb__list">
         <a href="#" class="breadcrumb__item breadcrumb__item--home">홈</a>
-        <a href="#" class="breadcrumb__item" v-for="(item, index) in contents" :key="index">{{ item.title }}</a>
+        <a
+          href="#"
+          class="breadcrumb__item"
+          v-for="(item, index) in contents"
+          :key="index"
+          >{{ item.title }}</a
+        >
       </div>
       <!-- 페이지 공유 링크 : 상세정보페이지에서만 공유 링크 활성 -->
       <div class="breadcrumb__link">
-        <base-button class="breadcrumb__button-url">URL 복사</base-button>
+        <base-button class="breadcrumb__button-url" disabled
+          >URL 복사</base-button
+        >
       </div>
       <!-- // 페이지 공유 링크 -->
     </div>
@@ -37,18 +45,18 @@ export default {
       return this.list;
     }
   },
-  components: {BaseButton, BaseCheckbox},
+  components: { BaseButton, BaseCheckbox },
   watch: {},
   data() {
     return {
       isShareOpen: false
-    }
+    };
   },
   methods: {
     onClickItem(item) {
       this.$emit("select", item);
     },
-    toggleShare: function() {
+    toggleShare: function () {
       this.isShareOpen = !this.isShareOpen;
     }
   }

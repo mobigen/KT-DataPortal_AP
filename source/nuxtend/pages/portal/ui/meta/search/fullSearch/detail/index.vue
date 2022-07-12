@@ -85,7 +85,7 @@
                   <span class="button__text">바로활용</span>
                 </base-button>
 
-                <base-button class="button--primary-line">
+                <base-button class="button--primary-line" disabled>
                   <span class="button__text">담아두기</span>
                 </base-button>
                 <div class="favorite-cnt">
@@ -102,6 +102,7 @@
                         !(myFavoriteData === 'y')
                       )
                     "
+                    disabled
                   >
                     <svg-icon
                       class="svg-icon"
@@ -193,6 +194,7 @@
                   role="tab"
                   aria-selected="false"
                   @click="tabGotoClick(item, index, item.ref)"
+                  :class="disabledTabList.includes(item.id) ? 'disabled' : ''"
                 >
                   <div class="tab__button-text">
                     {{ $t("tab." + item.id) }}
@@ -281,7 +283,7 @@
             <div class="heading-group">
               <h3 class="heading-group__title">샘플 데이터</h3>
               <div class="heading-group__options">
-                <base-button class="button--primary">
+                <base-button class="button--primary" disabled>
                   <svg-icon class="svg-icon" name="search"></svg-icon>
                   <span class="button__text">상세보기</span>
                 </base-button>
@@ -320,6 +322,7 @@
                 <base-button
                   class="button button--primary"
                   title="전체다운로드"
+                  disabled
                 >
                   <svg-icon class="svg-icon" name="download"></svg-icon>
                   <span class="button__text">파일 전체 다운로드</span>
@@ -345,6 +348,7 @@
                     <base-button
                       class="button--sm filedata__button-download"
                       title="파일다운로드"
+                      disabled
                     >
                       <svg-icon
                         class="svg-icon"
@@ -496,7 +500,10 @@
                         >고객 서비스 사용 일일 내역</span
                       >
                     </p>
-                    <base-button class="button--sm filedata__button-download">
+                    <base-button
+                      class="button--sm filedata__button-download"
+                      disabled
+                    >
                       <svg-icon
                         class="svg-icon"
                         name="download-light"
@@ -512,7 +519,10 @@
                         >고객 서비스 사용 일일 내역</span
                       >
                     </p>
-                    <base-button class="button--sm filedata__button-download">
+                    <base-button
+                      class="button--sm filedata__button-download"
+                      disabled
+                    >
                       <svg-icon
                         class="svg-icon"
                         name="download-light"
@@ -528,7 +538,10 @@
                         >고객 서비스 사용 일일 내역</span
                       >
                     </p>
-                    <base-button class="button--sm filedata__button-download">
+                    <base-button
+                      class="button--sm filedata__button-download"
+                      disabled
+                    >
                       <svg-icon
                         class="svg-icon"
                         name="download-light"
@@ -544,7 +557,10 @@
                         >고객 서비스 사용 일일 내역</span
                       >
                     </p>
-                    <base-button class="button--sm filedata__button-download">
+                    <base-button
+                      class="button--sm filedata__button-download"
+                      disabled
+                    >
                       <svg-icon
                         class="svg-icon"
                         name="download-light"
@@ -590,7 +606,7 @@
                     KT 고객 대상 폐쇄형 커머스몰 개인화 추천 문자 마케팅
                   </p>
                   <p class="used__date">수정일 <b>2022-06-27</b></p>
-                  <base-button class="button--sm">
+                  <base-button class="button--sm" disabled>
                     <svg-icon class="svg-icon" name="external-link"></svg-icon>
                     <span class="button__text">바로가기</span>
                   </base-button>
@@ -604,7 +620,7 @@
                     KT 고객 대상 문자형 타겟 광고 마케팅
                   </p>
                   <p class="used__date">수정일 <b>2022-06-27</b></p>
-                  <base-button class="button--sm">
+                  <base-button class="button--sm" disabled>
                     <svg-icon class="svg-icon" name="external-link"></svg-icon>
                     <span class="button__text">바로가기</span>
                   </base-button>
@@ -618,7 +634,7 @@
                     알뜰폰 요금제 이탈 예상고객 대상 선제적 이탈 방어 활동
                   </p>
                   <p class="used__date">수정일 <b>2022-06-27</b></p>
-                  <base-button class="button--sm">
+                  <base-button class="button--sm" disabled>
                     <svg-icon class="svg-icon" name="external-link"></svg-icon>
                     <span class="button__text">바로가기</span>
                   </base-button>
@@ -632,7 +648,7 @@
                     통신 이용 이력정보를 기반으로 생성하는 개인 금융 신용점수
                   </p>
                   <p class="used__date">수정일 <b>2022-06-27</b></p>
-                  <base-button class="button--sm">
+                  <base-button class="button--sm" disabled>
                     <svg-icon class="svg-icon" name="external-link"></svg-icon>
                     <span class="button__text">바로가기</span>
                   </base-button>
@@ -646,7 +662,7 @@
                     기가지니 셋탑을 통해 수행되는 개인화 마케팅 추천 엔진
                   </p>
                   <p class="used__date">수정일 <b>2022-06-27</b></p>
-                  <base-button class="button--sm">
+                  <base-button class="button--sm" disabled>
                     <svg-icon class="svg-icon" name="external-link"></svg-icon>
                     <span class="button__text">바로가기</span>
                   </base-button>
@@ -695,6 +711,7 @@
                 <base-button
                   class="button--primary"
                   @click="onshowDialog('inquiryDialog')"
+                  disabled
                 >
                   <span class="button__text">문의하기</span>
                 </base-button>
@@ -764,6 +781,7 @@
             <base-button
               class="button--lg button--primary-line"
               @click="onshowDialog('errorDialog')"
+              disabled
             >
               <span class="button__text">데이터 오류신고</span>
             </base-button>
@@ -948,6 +966,7 @@ export default {
           ref: "articleInquiry"
         }
       ],
+      disabledTabList: ["DIAGRAM", "RULE", "INQUIRY"],
       toggleButtonText: "test",
       bizDatasetId: null,
       ctgry: null,
@@ -975,6 +994,8 @@ export default {
       this.$modal.show(name);
     },
     tagClick(tagClickObj) {
+      // 임시로 return 처리
+      return;
       this.setSearchKeyword(tagClickObj.itemName);
       this.$router.push({
         path: "/portal/ui/meta/search/fullSearch"
@@ -1046,5 +1067,11 @@ export default {
 .chart__graph {
   margin: auto !important;
   font-size: 6em !important;
+}
+
+// 안쓰는 tab disabled 처리 위해 임시로 추가
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 </style>

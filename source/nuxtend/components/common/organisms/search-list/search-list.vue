@@ -89,7 +89,7 @@
           >
             <span class="button__text">바로활용</span>
           </base-button>
-          <base-button class="button--primary-line">
+          <base-button class="button--primary-line" disabled>
             <span class="button__text">담아두기</span>
           </base-button>
           <div class="favorite-cnt">
@@ -106,6 +106,7 @@
                   myFavoriteDataList.includes(item[rowKey])
                 )
               "
+              disabled
             >
               <svg-icon
                 class="svg-icon"

@@ -225,6 +225,10 @@
               <group-tab
                 :tabList="tabList"
                 :useTabNum="false"
+                name-key="code_nm"
+                code-key="code_id"
+                active-tab="data_contents"
+                :disabledCodeKeyList="disabledCodeKeyList"
                 @tabClick="tabClick"
               ></group-tab>
               <!--//탭 -->
@@ -254,6 +258,7 @@
                       labelName="selectCategory"
                       :select-list="selectCategoryList"
                       :selected-key="selectedKey"
+                      :use-select-open="false"
                       @changeData="changeData"
                     >
                     </base-select>
@@ -427,9 +432,9 @@ export default {
         { label: "다운로드순", option: "download" }
       ],
       tabList: [
-        { num: "50", title: "데이터 콘텐츠" },
-        { num: "184", title: "데이터 자산" },
-        { num: "56", title: "데이터 메타" }
+        { num: "50", code_id: "data_contents", code_nm: "데이터 콘텐츠" },
+        { num: "184", code_id: "data_assets", code_nm: "데이터 자산" },
+        { num: "56", code_id: "data_meta", code_nm: "데이터 메타" }
       ],
       selectCategoryList: [
         { key: "12", text: "12개씩" },
@@ -446,6 +451,7 @@ export default {
         "01bfea44-5b42-41e7-9901-8fad6997969c",
         "2c4c3962-ab70-4f42-9681-71ecd7afbe4b"
       ],
+      disabledCodeKeyList: ["data_assets", "data_meta"],
       requestDialog: "requestDialog",
       requestDialogObj: {}
     };
