@@ -1,6 +1,6 @@
 <template>
-  <modal name="loader-modal" class="loading-page" :height="65" :width="65">
-    <div class="loader" role="alert" aria-live="assertive">
+  <modal name="loader-modal" class="loading-page" :height="96" :width="96">
+    <div class="loader loader--purple" role="alert" aria-live="assertive">
       <div class="loader__spinner"></div>
     </div>
   </modal>
@@ -37,6 +37,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "loader";
+<style lang="scss">
+@import "./loader.scss";
 </style>
