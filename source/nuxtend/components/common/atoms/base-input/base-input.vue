@@ -2,7 +2,7 @@
   <input
     :type="type"
     class="text-input"
-    @input="typing"
+    @input="input = $event.target.value"
     @keydown="$emit('keydown', $event)"
     @keyup.enter="$emit('enterEvent')"
     :value="input"
@@ -28,7 +28,8 @@ export default {
     },
     inputData: {
       type: [Number, String],
-      required: false
+      required: false,
+      default: ""
     },
     type: {
       type: String,
@@ -52,7 +53,9 @@ export default {
   computed: {
     input: {
       get() {
-        this.$emit("input", { id: this.id, input: this.inputData });
+        if (this.inputData) {
+          this.$emit("input", { id: this.id, input: this.inputData });
+        }
         return this.inputData;
       },
       set(newValue) {
