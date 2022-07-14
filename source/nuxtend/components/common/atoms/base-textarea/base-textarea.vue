@@ -3,10 +3,9 @@
     <textarea
       type="text"
       class="text-area"
-      
       :class="elementClass"
       @input="input = $event.target.value"
-      :value="value"
+      :value="input"
       :rows="rows"
       @keydown="$emit('keydown', $event)"
     ></textarea>

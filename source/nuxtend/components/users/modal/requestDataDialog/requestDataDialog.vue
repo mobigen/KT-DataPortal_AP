@@ -182,7 +182,7 @@ export default {
             successAlert({
               title: "데이터 활용 신청이 완료되었습니다.",
               content:
-                "활용신청하신 데이터는 마이페이지 > 내 활용내역에서 확인할 수 있습니다."
+                "활용신청하신 데이터는 마이페이지 > 내 활용내역에서 확인할 수 있습니다. </br> 상세 승인현황은 BPM에서 확인하실 수 있습니다."
             });
             this.resetRequestData();
             this.$modal.hide(name);

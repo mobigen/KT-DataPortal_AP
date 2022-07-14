@@ -316,7 +316,7 @@
               </div>
               <!-- // data-result -->
               <group-pagination
-                v-if="contents.totalcount !== 0"
+                v-show="contents.totalcount !== 0"
                 :paging-key="paginationKey"
                 :paging-object="{
                   [CONSTANTS.PAGING.ITEMS_PER_PAGE]: 5,
@@ -514,7 +514,7 @@ export default {
     },
     rescanFilterCheck({ bool }) {
       this.rescanFilterChecked = bool;
-      if (!bool && this.searchKeyword && this.searchKeywordList.length > 0) {
+      if (!bool && this.searchKeywordList.length > 0) {
         this.searchKeywordList = [];
         this.searchKeyword = "";
         this.searchResultBox(false, false);
