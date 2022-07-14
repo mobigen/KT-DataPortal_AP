@@ -269,7 +269,6 @@ export const actions = {
   },
   getSampleData({ commit }, rowId) {
     // TODO : TEST CODE
-    rowId = 1;
     this.$axios
       .get(
         this.$config.ROUTE_API_META_PREFIX +
@@ -287,8 +286,6 @@ export const actions = {
     commit("setRequireObj", _requireObject);
   },
   getDataQualityScore({ commit }, rowId) {
-    console.log(rowId);
-    rowId = 1;
     this.$axios
       .get(
         this.$config.ROUTE_API_META_PREFIX +
